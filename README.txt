@@ -6,4 +6,5 @@ TODO
     4) Add option to level down victim even if attacker is on grenade level
     5) Check and fix player stats
     6) Add sqlite and mysql support for top players stats
+    7) Start map voting on grenade level
 
