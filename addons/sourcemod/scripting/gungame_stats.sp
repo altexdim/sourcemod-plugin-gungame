@@ -92,6 +92,7 @@ public OnPluginStart()
 
 public OnMapStart()
 {
+    SaveProcess = false;
 	Top10Panel = CreateTop10Panel();
 }
 
