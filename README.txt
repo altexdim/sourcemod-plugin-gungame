@@ -7,4 +7,5 @@ TODO
     5) Check and fix player stats
     6) Add sqlite and mysql support for top players stats
     7) Start map voting on grenade level
+    8) Add random winner sound
 
