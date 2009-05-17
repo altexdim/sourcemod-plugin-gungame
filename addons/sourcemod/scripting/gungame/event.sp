@@ -501,11 +501,11 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             PlayerState[Killer] |= KNIFE_ELITE;
         }
 
-		if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
-		{
-			/* Bot can't win so just keep them at the last level */
-			return;
-		}
+        if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
+        {
+            /* Bot can't win so just keep them at the last level */
+            return;
+        }
 		
         new bool:Stop;
         level = UTIL_ChangeLevel(Killer, 1, Stop);
