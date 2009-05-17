@@ -2,6 +2,9 @@
 {
 	"Config"
 	{
+        /* Can steal level if victim is on the first level */
+        "CanStealFirstLevel" "0"
+        
         /* If intermission starts do calculate winner */
         "IntermissionCalcWinner" "1"
 
