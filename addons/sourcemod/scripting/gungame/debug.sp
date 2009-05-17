@@ -77,6 +77,7 @@ DisplayConfig(client)
 	TurboMode
 	IntermissionCalcWinner
 	CanStealFirstLevel
+	CanLevelDownOnGrenade
 	AutoFriendlyFire
 	MapStatus
 	ObjectiveBonus

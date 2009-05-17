@@ -375,7 +375,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
          */
         if(KnifePro && WeaponIndex == CSW_KNIFE && WeaponLevel != CSW_KNIFE)
         {
-            if(!KnifeProHE && WeaponLevel == CSW_HEGRENADE)
+            if(!KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade)
             {
                 return;
             }
@@ -399,12 +399,15 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
                     Ret = false;
 
-                    level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
-
-                    if(Ret)
+                    if ( KnifeProHE || WeaponLevel != CSW_HEGRENADE )
                     {
-                        return;
-                    }
+						level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
+
+						if(Ret)
+						{
+							return;
+						}
+					}
 
                     PrintToChatAll("%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
                         GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, vName);
@@ -416,24 +419,27 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
                     UTIL_PlaySound(Killer, Steal);
                     UTIL_PlaySound(Victim, Down);
-
-                    if(TurboMode)
+                    
+                    if ( KnifeProHE || WeaponLevel != CSW_HEGRENADE )
                     {
-                        UTIL_GiveNextWeapon(Killer, level);
-                    } else if(TripleLevelBonus && CurrentLevelPerRound[Killer] == 3) {
+						if(TurboMode)
+						{
+							UTIL_GiveNextWeapon(Killer, level);
+						} else if(TripleLevelBonus && CurrentLevelPerRound[Killer] == 3) {
 
-                        decl String:Name[MAX_NAME_SIZE];
-                        GetClientName(Killer, Name, sizeof(Name));
+							decl String:Name[MAX_NAME_SIZE];
+							GetClientName(Killer, Name, sizeof(Name));
 
-                        PrintToChatAll("%c[%cGunGame%c] %c%s %ctriple leveled!!!",
-                            GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
+							PrintToChatAll("%c[%cGunGame%c] %c%s %ctriple leveled!!!",
+								GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
 
-                        CreateTimer(10.0, RemoveBonus, Killer);
-                        UTIL_SetClientGodMode(Killer, 1);
-                        SetEntDataFloat(Killer, OffsetMovement, 1.5);
+							CreateTimer(10.0, RemoveBonus, Killer);
+							UTIL_SetClientGodMode(Killer, 1);
+							SetEntDataFloat(Killer, OffsetMovement, 1.5);
 
-                        EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
-                    }
+							EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
+						}
+					}
 
                 } else {
                     /* They are at level 1. Internally it is set at 0 for starting

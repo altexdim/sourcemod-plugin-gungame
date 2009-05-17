@@ -48,6 +48,7 @@ new MinKillsPerLevel = 1;
 new bool:TurboMode;
 new bool:IntermissionCalcWinner;
 new bool:CanStealFirstLevel;
+new bool:CanLevelDownOnGrenade;
 new bool:ObjectiveBonus;
 new bool:WorldspawnSuicide;
 new bool:NadeGlock;
