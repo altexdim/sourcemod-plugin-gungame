@@ -1,6 +1,6 @@
 TODO
 ----
-    1) Add option to disable calculate winner on intermission
+    + 1) Add option to disable calculate winner on intermission
     2) Add option to level up attacker even if victim on first level
     3) Add option to level down victim even if attacker is on grenade level
     + 4) Check and fix player stats
