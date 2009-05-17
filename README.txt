@@ -7,6 +7,7 @@ TODO
     + 5) Start map voting on level provided in config
     + 6) Add random winner sound
     + 7) Fixed bug win BotCanWin
+    + 8) Fixed JoinMessage config variable
 
 LATER TODO
 ----------
