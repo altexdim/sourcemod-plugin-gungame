@@ -2,6 +2,9 @@
 {
 	"Config"
 	{
+        /* Start voting if leader level is less maximum level by this value */
+        "VoteLevelLessWeaponCount" "1"
+        
         /* Can level down victim if killer is on the grenade level */
         "CanLevelDownOnGrenade" "0"
 
