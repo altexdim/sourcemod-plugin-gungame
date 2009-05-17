@@ -75,6 +75,7 @@ DisplayConfig(client)
 {
 	/*IsActive
 	TurboMode
+	IntermissionCalcWinner
 	AutoFriendlyFire
 	MapStatus
 	ObjectiveBonus

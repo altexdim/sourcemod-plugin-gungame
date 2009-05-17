@@ -78,7 +78,7 @@ OnEventShutdown()
 public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
 {
     /* Check if init is always false after the first call. */
-    if(!IsActive || IsIntermissionCalled)
+    if(!IsActive || IsIntermissionCalled || !IntermissionCalcWinner)
     {
         return;
     }
