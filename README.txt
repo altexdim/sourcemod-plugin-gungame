@@ -3,7 +3,7 @@ TODO
     + 1) Add option to disable calculate winner on intermission
     + 2) Add option to level up attacker even if victim on first level
     + 3) Add option to level down victim even if attacker is on grenade level
-    + 4) Check and fix player stats
+    + 4) Fix player stats saving on map end
     + 5) Start map voting on level provided in config
     + 6) Add random winner sound
     + 7) Fixed bug win BotCanWin
