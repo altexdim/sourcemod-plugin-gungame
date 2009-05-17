@@ -339,12 +339,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             return;
         }
 
-        if(!BotCanWin && WeaponIndex == WeaponOrderId[WeaponOrderCount] && IsFakeClient(Victim))
-        {
-            /* Bot can't win so just keep them at the last level */
-            return;
-        }
-
         new level = PlayerLevel[Killer], Weapons:WeaponLevel = WeaponOrderId[level];
 
         /**
@@ -401,6 +395,12 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
                     if ( KnifeProHE || WeaponLevel != CSW_HEGRENADE )
                     {
+						if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
+						{
+							/* Bot can't win so just keep them at the last level */
+							return;
+						}
+
 						level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
 
 						if(Ret)
@@ -501,6 +501,12 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             PlayerState[Killer] |= KNIFE_ELITE;
         }
 
+		if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
+		{
+			/* Bot can't win so just keep them at the last level */
+			return;
+		}
+		
         new bool:Stop;
         level = UTIL_ChangeLevel(Killer, 1, Stop);
 
