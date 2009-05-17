@@ -200,7 +200,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 					new songsfound = ExplodeString(value, ",", songs, 64, 64);
 					if ( songsfound > 1 )
 					{
-						new rand = GetRandomInt(0, songsfound - 1);
+						new rand = (RoundFloat(GetEngineTime()*1000000) + GetTime()) % songsfound;
 						strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);
 					}
 					else
