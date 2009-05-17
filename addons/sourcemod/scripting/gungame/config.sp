@@ -194,7 +194,24 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 			} else if(strcmp(key, "MultiKill", false) == 0) {
 				strcopy(EventSounds[MultiKill], sizeof(EventSounds[]), value);
 			} else if(strcmp(key, "Winner", false) == 0) {
-				strcopy(EventSounds[Winner], sizeof(EventSounds[]), value);
+				if (!StrEqual(value, "", false))
+				{
+					new String:songs[64][64];
+					new songsfound = ExplodeString(value, ",", songs, 64, 64);
+					if ( songsfound > 1 )
+					{
+						new rand = GetRandomInt(0, songsfound - 1);
+						strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);
+					}
+					else
+					{
+						strcopy(EventSounds[Winner], sizeof(EventSounds[]), value);
+					}
+				}
+				else
+				{
+					strcopy(EventSounds[Winner], sizeof(EventSounds[]), value);
+				}
 			}
 		}
 	}
