@@ -73,6 +73,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 				TurboMode = bool:StringToInt(value);
 			} else if(strcmp("IntermissionCalcWinner", key, false) == 0) {
 				IntermissionCalcWinner = bool:StringToInt(value);
+			} else if(strcmp("CanStealFirstLevel", key, false) == 0) {
+				CanStealFirstLevel = bool:StringToInt(value);
 			} else if(strcmp("AutoFriendlyFire", key, false) == 0) {
 				AutoFriendlyFire = bool:StringToInt(value);
 			} else if(strcmp("RemoveObjectives", key, false) == 0) {

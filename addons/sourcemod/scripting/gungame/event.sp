@@ -384,15 +384,18 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
             if(Level >= KnifeProMinLevel)
             {
-                if(Level)
+                if(Level || CanStealFirstLevel)
                 {
                     new bool:Ret;
-                    UTIL_ChangeLevel(Victim, -1, Ret, true, true);
-
-                    if(Ret)
+                    if ( Level )
                     {
-                        return;
-                    }
+						UTIL_ChangeLevel(Victim, -1, Ret, true, true);
+
+						if(Ret)
+						{
+							return;
+						}
+					}
 
                     Ret = false;
 
