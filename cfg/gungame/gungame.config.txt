@@ -2,6 +2,9 @@
 {
 	"Config"
 	{
+        /* If intermission starts do calculate winner */
+        "IntermissionCalcWinner" "1"
+
 		/* Enables/Disables GunGame Mod */
 		"Enabled" "1"
 
