@@ -5,7 +5,7 @@ TODO
     + 3) Add option to level down victim even if attacker is on grenade level
     + 4) Check and fix player stats
     + 5) Start map voting on level provided in config
-    6) Add random winner sound
+    + 6) Add random winner sound
 
 LATER TODO
 ----------

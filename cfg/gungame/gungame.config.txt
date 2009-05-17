@@ -144,6 +144,7 @@
 		"Triple" "gungame/smb_star.mp3"
 		"Autoff" "gungame/smb_warning2.mp3"
 		"MultiKill" "common/stuck1.wav"
+		/* Put each song filename in this list seperated by commas */
 		"Winner" "music/HL2_song15.mp3"
 	}
 }
