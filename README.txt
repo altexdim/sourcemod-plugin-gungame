@@ -13,6 +13,8 @@ Changelog
 		+ Added random winner sound
 		* Fixed bug win BotCanWin
 		* Fixed JoinMessage config variable
+		* Commented hookusermessage due to bug (server crash on plugin unload)
+		  So calculate winner on intermission is disabled.
 
 TODO
 ----
