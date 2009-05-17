@@ -73,6 +73,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 				TurboMode = bool:StringToInt(value);
 			} else if(strcmp("IntermissionCalcWinner", key, false) == 0) {
 				IntermissionCalcWinner = bool:StringToInt(value);
+			} else if(strcmp("VoteLevelLessWeaponCount", key, false) == 0) {
+				VoteLevelLessWeaponCount = StringToInt(value);
 			} else if(strcmp("CanLevelDownOnGrenade", key, false) == 0) {
 				CanLevelDownOnGrenade = bool:StringToInt(value);
 			} else if(strcmp("CanStealFirstLevel", key, false) == 0) {

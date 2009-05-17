@@ -245,7 +245,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 		return Level;
 	}
 
-	if(!IsVotingCalled && Level >= WeaponOrderCount - 1)
+	if(!IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount)
 	{
 		/* Call map voting */
 		IsVotingCalled = true;

@@ -78,6 +78,7 @@ DisplayConfig(client)
 	IntermissionCalcWinner
 	CanStealFirstLevel
 	CanLevelDownOnGrenade
+	VoteLevelLessWeaponCount
 	AutoFriendlyFire
 	MapStatus
 	ObjectiveBonus
