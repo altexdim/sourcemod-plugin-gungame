@@ -371,10 +371,9 @@ public Action:_CmdImport(client, args)
 	KvRewind(KvPlayer);
 	CloseHandle(KvGunGame);
 	KeyValuesToFile(KvPlayer, PlayerFile);
-	new maxslots = GetMaxClients( );
-
+	
 	/* Reload the players wins in memory */
-	for(new i = 0; i < maxslots; i++)
+	for(new i = 1; i <= MaxClients; i++)
 	{
 		if(IsClientConnected(i))
 		{
