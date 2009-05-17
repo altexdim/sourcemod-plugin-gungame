@@ -2,6 +2,9 @@
 {
 	"Config"
 	{
+        /* Can level down victim if killer is on the grenade level */
+        "CanLevelDownOnGrenade" "0"
+
         /* Can steal level if victim is on the first level */
         "CanStealFirstLevel" "0"
         
