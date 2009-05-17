@@ -202,7 +202,6 @@ Handle:CreateJoinMsgPanel()
 	DrawPanelText(faluco, "Type !commands to get a full list of gungame commands");
 
 	DrawPanelText(faluco, BLANK_SPACE);
-	SetPanelCurrentKey(faluco, 10);
 	DrawPanelItem(faluco, "Exit", ITEMDRAW_CONTROL);
 	return faluco;
 }

@@ -618,12 +618,15 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
              * Show join message.
              */
 
-            if(!JoinMsgPanel)
+            if ( JoinMessage )
             {
-                JoinMsgPanel = CreateJoinMsgPanel();
-            }
+				if ( !JoinMsgPanel )
+				{
+					JoinMsgPanel = CreateJoinMsgPanel();
+				}
 
-            SendPanelToClient(JoinMsgPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
+				SendPanelToClient(JoinMsgPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
+			}
         }
     }
 

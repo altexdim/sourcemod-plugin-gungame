@@ -71,6 +71,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 				InternalIsActive = bool:StringToInt(value);
 			} else if(strcmp("TurboMode", key, false) == 0) {
 				TurboMode = bool:StringToInt(value);
+			} else if(strcmp("JoinMessage", key, false) == 0) {
+				JoinMessage = bool:StringToInt(value);
 			} else if(strcmp("IntermissionCalcWinner", key, false) == 0) {
 				IntermissionCalcWinner = bool:StringToInt(value);
 			} else if(strcmp("VoteLevelLessWeaponCount", key, false) == 0) {

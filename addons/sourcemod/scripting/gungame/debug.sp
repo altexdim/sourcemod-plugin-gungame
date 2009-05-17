@@ -75,6 +75,7 @@ DisplayConfig(client)
 {
 	/*IsActive
 	TurboMode
+	JoinMessage
 	IntermissionCalcWinner
 	CanStealFirstLevel
 	CanLevelDownOnGrenade
