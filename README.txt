@@ -1,14 +1,18 @@
 Changelog
 ---------
-    + Added option to disable calculate winner on intermission
-    + Added option to level up attacker even if victim on first level
-    + Added option to level down victim even if attacker is on grenade level
-    * Fixed player stats saving on map end
-    + Start map voting on level provided in config
-    + Added random winner sound
-    * Fixed bug win BotCanWin
-    * Fixed JoinMessage config variable
-    * Fixed gg_import
+	Unofficial_2:
+		* Fixed gg_import
+		* Redesigned join message panel
+
+	Unofficial:
+		+ Added option to disable calculate winner on intermission
+		+ Added option to level up attacker even if victim on first level
+		+ Added option to level down victim even if attacker is on grenade level
+		* Fixed player stats saving on map end
+		+ Start map voting on level provided in config
+		+ Added random winner sound
+		* Fixed bug win BotCanWin
+		* Fixed JoinMessage config variable
 
 TODO
 ----
