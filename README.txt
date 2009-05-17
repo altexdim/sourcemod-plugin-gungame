@@ -8,6 +8,7 @@ Changelog
     + Added random winner sound
     * Fixed bug win BotCanWin
     * Fixed JoinMessage config variable
+    * Fixed gg_import
 
 TODO
 ----
