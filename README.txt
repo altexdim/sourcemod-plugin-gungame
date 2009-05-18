@@ -1,14 +1,12 @@
 Changelog
 ---------
-	Current:
-		* Write leaders to chat, not in hint
+	1.0.0.1.1:
+		* Version changed :)
+		* Write leaders to chat, not in hint box
 		* Disable second line on spawn to chat if custom kill per level = 1 (annoying line)
 		- Disable "congratulation" line (there is a sound)
-		+ Added line "is leading on level X"
+		+ Added line "is leading on level X" after leader gained next level
 		* Fixed possible bug for random winner sound
-
-	Unofficial_3 1.0.0.1.1:
-		* Version changed :)
 	
 	Unofficial_2:
 		* Fixed gg_import
