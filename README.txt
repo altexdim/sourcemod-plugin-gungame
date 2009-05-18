@@ -5,6 +5,7 @@ Changelog
 		* Disable second line on spawn to chat if custom kill per level = 1 (annoying line)
 		- Disable "congratulation" line (there is a sound)
 		+ Added line "is leading on level X"
+		* Fixed possible bug for random winner sound
 
 	Unofficial_3 1.0.0.1.1:
 		* Version changed :)
@@ -33,3 +34,7 @@ TODO
 	4) Fix gg_rebuild to recreate top10panel
 	5) Fix recreation of top10panel after first win when no top10.txt file found (KvGotoFirstSubKey(KvRank) returns false on empty file in LoadRank)
     6) Redesign all menus (0. Exit -> 1. Exit)
+	7) What is wrong with randon number generator? GetRandomInt(0,12) give one
+	   the same value on server start even i use SetRandomSeed().
+	8) And once again wrong top10.txt
+
