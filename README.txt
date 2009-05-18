@@ -44,4 +44,5 @@ TODO
 	* Colorize nick name on top left corner on gg win.
 	* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
 	* Fix bug with no message about leaders if stealing level
+	* Is CurrentLeader calculating on stealing level?
 
