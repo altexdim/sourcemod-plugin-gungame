@@ -1,5 +1,8 @@
 Changelog
 ---------
+	Unofficial_3 1.0.0.1.1:
+		* Version changed :)
+	
 	Unofficial_2:
 		* Fixed gg_import
 		* Redesigned join message panel
