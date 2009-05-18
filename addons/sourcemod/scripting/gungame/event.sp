@@ -520,7 +520,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             UTIL_GiveNextWeapon(Killer, level);
         }
 
-        PrintToChat(Killer, "%c[%cGunGame%c] You have gained a level, congratulations. ", GREEN, TEAMCOLOR, GREEN);
+        //PrintToChat(Killer, "%c[%cGunGame%c] You have gained a level, congratulations.", GREEN, TEAMCOLOR, GREEN);
 
         /* Find current leader if none is assigned. */
         new leader;
@@ -537,24 +537,27 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             Call_PushCell(leader);
             Call_Finish();
 
-            PrintHintTextToAll("[GunGame] %s has claimed the rank of leader.", kName);
+            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
         } else {
             leader = PlayerLevel[CurrentLeader];
         }
 
         /* don't continue if player is leader */
         if(!leader || Killer == CurrentLeader)
+        {
+	        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %d.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, level + 1);
             return;
-
+        }
+        
         if(level == leader)
         {
             /* Print to everyone if someone ties to the leader. */
-            PrintHintTextToAll("[GunGame] %s has tied with the leader", kName);
+	        PrintToChatAll("%c[%cGunGame%c] %c%s %chas tied with the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
 
         } else if(level < leader) {
 
             /* Print to only killer how many levels he is from the leader */
-            PrintHintText(Killer, "[GunGame] You are %d levels from the leader.", leader - level);
+	        PrintToChat(Killer, "%c[%cGunGame%c] You are %d levels from the leader.", GREEN, TEAMCOLOR, GREEN, leader - level);
 
         } else if (level > leader) {
 
@@ -563,7 +566,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             Call_PushCell(Killer); /* Change this to player level */
             Call_Finish();
 
-            PrintHintTextToAll("[GunGame] %s has claimed the rank of leader.", kName);
+            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
             CurrentLeader = Killer;
         }
     }
@@ -691,9 +694,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     PrintToChat(client, "%c[%cGunGame%c] You are on level %c%i %c:: %c%s",
         GREEN, TEAMCOLOR, GREEN, YELLOW, Level + 1, GREEN, YELLOW, WeaponName[WeapId][7]);
 
-    PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
-        GREEN, TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
-
+    if ( Custom > 1 )
+    {
+		PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
+			GREEN, TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
+	}
+	
     new pState = PlayerState[client];
 
     if(AutoFriendlyFire && (pState & GRENADE_LEVEL) && WeapId != CSW_HEGRENADE)
