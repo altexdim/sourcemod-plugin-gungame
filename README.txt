@@ -39,6 +39,7 @@ TODO
 	* What is wrong with randon number generator? GetRandomInt(0,12) give one
 	  the same value on server start even i use SetRandomSeed().
 	* And once again something wrong top10.txt, not correctly calculated after player win.
+	  Last winner saved to place 10 even it has less wins than 10-th player from top10.
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
 	* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
