@@ -37,4 +37,5 @@ TODO
 	7) What is wrong with randon number generator? GetRandomInt(0,12) give one
 	   the same value on server start even i use SetRandomSeed().
 	8) And once again wrong top10.txt
+	9) Colorize nick names in chat by team color
 
