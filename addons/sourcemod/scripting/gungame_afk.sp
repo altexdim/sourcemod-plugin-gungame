@@ -114,7 +114,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
 				/* Hope this works */
 				if(AfkAction & AFK_KICK)
 				{
-					KickClient(Victim, "[GunGame]Max afk deaths reached");
+					KickClient(Victim, "[GunGame] Max afk deaths reached");
 				} else {
 					HACK_SwitchTeam(Victim, TEAM_SPECTATOR);
 					PlayerSwitch[Victim] = true;

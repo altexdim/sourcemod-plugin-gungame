@@ -58,7 +58,6 @@ Handle:CreateTop10Panel()
 	}
 
 	DrawPanelText(Top10, BLANK_SPACE);
-	SetPanelCurrentKey(Top10, 10);
 	DrawPanelItem(Top10, "Exit", ITEMDRAW_CONTROL);
 	return Top10;
 }

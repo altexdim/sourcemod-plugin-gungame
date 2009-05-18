@@ -537,7 +537,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             Call_PushCell(leader);
             Call_Finish();
 
-            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
+            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
+            return;
         } else {
             leader = PlayerLevel[CurrentLeader];
         }
@@ -545,19 +546,19 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         /* don't continue if player is leader */
         if(!leader || Killer == CurrentLeader)
         {
-	        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %d.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, level + 1);
+	        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1);
             return;
         }
         
         if(level == leader)
         {
             /* Print to everyone if someone ties to the leader. */
-	        PrintToChatAll("%c[%cGunGame%c] %c%s %chas tied with the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
+	        PrintToChatAll("%c[%cGunGame%c] %c%s %chas tied with the leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
 
         } else if(level < leader) {
 
             /* Print to only killer how many levels he is from the leader */
-	        PrintToChat(Killer, "%c[%cGunGame%c] You are %d levels from the leader.", GREEN, TEAMCOLOR, GREEN, leader - level);
+	        PrintToChat(Killer, "%c[%cGunGame%c] You are %c%d %clevels from the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, leader - level, GREEN);
 
         } else if (level > leader) {
 
@@ -566,7 +567,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             Call_PushCell(Killer); /* Change this to player level */
             Call_Finish();
 
-            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN);
+            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
             CurrentLeader = Killer;
         }
     }

@@ -126,6 +126,7 @@ SaveRank()
 		/* Need to be at the top of the file to before writing */
 		KvRewind(KvRank);
 		KeyValuesToFile(KvRank, RankFile);
+		HasRank = true;
 	}
 }
 
@@ -291,6 +292,7 @@ public Action:_CmdRebuild(client, args)
 		SaveRank();
 
 		ReplyToCommand(client, "[GunGame] Top10 has been rebuilt from the player data file");
+		Top10Panel = CreateTop10Panel();
 	}
 	return Plugin_Handled;
 }

@@ -69,12 +69,13 @@ CreateLevelPanel(client)
 	decl String:Sombrero[128];
 	new Handle:LevelPanel = CreatePanel();
 	SetPanelTitle(LevelPanel, "[GunGame] Level Information");
-	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER);
+	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 
 	new Level = PlayerLevel[client], Weapons:WeapId = WeaponOrderId[Level], Custom = CustomKillPerLevel[WeapId];
 	Custom = (Custom) ? Custom : MinKillsPerLevel;
 
-	FormatEx(Sombrero, sizeof(Sombrero), "Level:\nYou are on level %d :: %s\nYou have made %d / %d of your required kills",
+	DrawPanelItem(LevelPanel, "Level:");
+	FormatEx(Sombrero, sizeof(Sombrero), "You are on level %d :: %s\nYou have made %d / %d of your required kills",
 		Level + 1, WeaponName[WeapId][7], CurrentKillsPerWeap[client], Custom);
 	DrawPanelText(LevelPanel, Sombrero);
 
@@ -83,15 +84,16 @@ CreateLevelPanel(client)
 		DrawPanelText(LevelPanel, "You are currently the leader");
 		DrawPanelText(LevelPanel, BLANK_SPACE);
 	} else {
-		DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER);
+		DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 	}
 
-	FormatEx(Sombrero, sizeof(Sombrero), "Wins:\nYou have won %d times", GG_GetClientWins(client));
+	DrawPanelItem(LevelPanel, "Wins:");
+	FormatEx(Sombrero, sizeof(Sombrero), "You have won %d times", GG_GetClientWins(client));
 	DrawPanelText(LevelPanel, Sombrero);
 
 	DrawPanelText(LevelPanel, BLANK_SPACE);
 
-	DrawPanelText(LevelPanel, "Leader:");
+	DrawPanelItem(LevelPanel, "Leader:");
 
 	if(CurrentLeader && IsClientInGame(CurrentLeader))
 	{
@@ -101,9 +103,21 @@ CreateLevelPanel(client)
 		{
 			decl String:Name[64];
 			GetClientName(CurrentLeader, Name, sizeof(Name));
-			FormatEx(Sombrero, sizeof(Sombrero), "The current leader is %s \nLeader level is %d", Name, level + 1);
-
+			FormatEx(Sombrero, sizeof(Sombrero), "The current leader is %s on level %d", Name, level + 1);
 			DrawPanelText(LevelPanel, Sombrero);
+			if ( CurrentLeader != client )
+			{
+				if (level == Level)
+				{
+					FormatEx(Sombrero, sizeof(Sombrero), "You have tied with the leader.");
+					DrawPanelText(LevelPanel, Sombrero);
+				}
+				else if (level > Level)
+				{
+					FormatEx(Sombrero, sizeof(Sombrero), "You are %d levels from the leader.", level - Level);
+					DrawPanelText(LevelPanel, Sombrero);
+				}
+			}
 		} else {
 			DrawPanelText(LevelPanel, "There is currently no leader");
 		}
@@ -111,8 +125,7 @@ CreateLevelPanel(client)
 		DrawPanelText(LevelPanel, "There is currently no leader");
 	}
 
-	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER);
-
+	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 	SetPanelCurrentKey(LevelPanel, 10);
 	DrawPanelItem(LevelPanel, "Exit", ITEMDRAW_CONTROL);
 
