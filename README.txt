@@ -1,5 +1,11 @@
 Changelog
 ---------
+	Current:
+		* Write leaders to chat, not in hint
+		* Disable second line on spawn to chat if custom kill per level = 1 (annoying line)
+		- Disable "congratulation" line (there is a sound)
+		+ Added line "is leading on level X"
+
 	Unofficial_3 1.0.0.1.1:
 		* Version changed :)
 	
@@ -27,7 +33,3 @@ TODO
 	4) Fix gg_rebuild to recreate top10panel
 	5) Fix recreation of top10panel after first win when no top10.txt file found (KvGotoFirstSubKey(KvRank) returns false on empty file in LoadRank)
     6) Redesign all menus (0. Exit -> 1. Exit)
-    * 7) Write leaders to chat, not in hint
-    * 8) Disable second line on spawn to chat if custom kill per level = 1 (annoying line)
-    * 9) Disable "congratulation" line (there is a sound)
-    + 9) Added line "is leading on level X"
