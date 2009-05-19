@@ -113,6 +113,7 @@ SaveRank()
 
 			if(c && KvJumpToKey(KvRank, Numbers[i], true))
 			{
+				HasRank = true;
 				KvSetNum(KvRank, "Wins", PlayerWins[--i]);
 				KvSetString(KvRank, "Authid", PlayerAuthid[i]);
 				KvSetString(KvRank, "Name", PlayerName[i++]);
@@ -126,7 +127,6 @@ SaveRank()
 		/* Need to be at the top of the file to before writing */
 		KvRewind(KvRank);
 		KeyValuesToFile(KvRank, RankFile);
-		HasRank = true;
 	}
 }
 
@@ -245,11 +245,13 @@ public Action:_CmdRebuild(client, args)
 			PlayerAuthid[i][0] = '\0';
 		}
 
+		new bool:recreate = false;
 		/* Close the original menu */
 		if(Top10Panel != INVALID_HANDLE)
 		{
 			CloseHandle(Top10Panel);
 			Top10Panel = INVALID_HANDLE;
+			recreate = true;
 		}
 
 		CloseHandle(KvRank);
@@ -292,7 +294,10 @@ public Action:_CmdRebuild(client, args)
 		SaveRank();
 
 		ReplyToCommand(client, "[GunGame] Top10 has been rebuilt from the player data file");
-		Top10Panel = CreateTop10Panel();
+		if ( recreate )
+		{
+			Top10Panel = CreateTop10Panel();
+		}
 	}
 	return Plugin_Handled;
 }
