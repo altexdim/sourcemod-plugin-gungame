@@ -389,6 +389,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 						{
 							return;
 						}
+						// FIXME: Need to recalculate CurrentLeader here!
 					}
 
                     Ret = false;
@@ -407,6 +408,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 						{
 							return;
 						}
+						// FIXME: Need to recalculate CurrentLeader here!
 					}
 
                     PrintToChatAll("%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
@@ -531,6 +533,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 return;
 
             leader = PlayerLevel[CurrentLeader];
+			// FIXME: Why leader here is 0?
 
             Call_StartForward(FwdLeader);
             Call_PushCell(CurrentLeader);
