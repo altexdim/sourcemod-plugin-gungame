@@ -400,6 +400,11 @@ public GG_OnShutdown(bool:Command)
 	}
 }
 
+/**
+ * FIXME: It should return CLIENT, not LEVEL
+ * It should return 0 if no leaders found.
+ * What it should return if multiple leaders found???
+ */
 FindLeader(bool:DisallowBot = false)
 {
 	new leader, current;
