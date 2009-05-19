@@ -43,7 +43,7 @@ TODO
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
 	* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
+	  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
 	* Fix bug with no message about leaders if stealing level
 	* Is CurrentLeader calculating on stealing level?
-	  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
 
