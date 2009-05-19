@@ -97,14 +97,17 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
             if(!CurrentLeader)
 			{
 				// FIXME: FindLeader returns LEVEL not CLIENT!
+				// FIXME: What if multiple leaders found?
                 CurrentLeader = FindLeader();
 			}
 
+			// FIXME: What if multiple leaders found?
             if(CurrentLeader)
             {
                 if(!BotCanWin && IsFakeClient(CurrentLeader))
                 {
 					// FIXME: FindLeader returns LEVEL not CLIENT!
+					// FIXME: What if multiple leaders found?
                     CurrentLeader = FindLeader(true);
 
                     /* No real player was found */
@@ -117,6 +120,7 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 
                 if(level > MinimumLevel)
                 {
+					// FIXME: What if multiple leaders found?
                     GameWinner = CurrentLeader;
                 }
 
