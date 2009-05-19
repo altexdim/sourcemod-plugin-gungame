@@ -47,4 +47,5 @@ TODO
 	* Fix bug with no message about leaders if stealing level
 	* Is CurrentLeader calculating on stealing level?
 	* What if multiple leaders found on intermission?
+	* Money are not removed on player kill, only on player spawn.
 
