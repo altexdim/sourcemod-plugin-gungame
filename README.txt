@@ -46,4 +46,5 @@ TODO
 	  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
 	* Fix bug with no message about leaders if stealing level
 	* Is CurrentLeader calculating on stealing level?
+	* What if multiple leaders found on intermission?
 
