@@ -95,12 +95,16 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
         {
             /* No decisive winner has completed the game. */
             if(!CurrentLeader)
+			{
+				// FIXME: FindLeader returns LEVEL not CLIENT!
                 CurrentLeader = FindLeader();
+			}
 
             if(CurrentLeader)
             {
                 if(!BotCanWin && IsFakeClient(CurrentLeader))
                 {
+					// FIXME: FindLeader returns LEVEL not CLIENT!
                     CurrentLeader = FindLeader(true);
 
                     /* No real player was found */
@@ -529,11 +533,19 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
         if(!CurrentLeader)
         {
+			// FIXME: FindLeader returns LEVEL not CLIENT!
             if(!(CurrentLeader = FindLeader()))
                 return;
 
             leader = PlayerLevel[CurrentLeader];
 			// FIXME: Why leader here is 0?
+			// UTIL_ChangeLevel on line 513 must set 
+			// PlayerLevel[Killer] to next value.
+			// UTIL_ChangeLevel is the only way to
+			// change PlayerLevel.
+			// Maybe FindLeader gives wrong result?
+			// FindLeader returns LEVEL value,
+			// not CLIENT!
 
             Call_StartForward(FwdLeader);
             Call_PushCell(CurrentLeader);
