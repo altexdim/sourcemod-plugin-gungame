@@ -48,4 +48,6 @@ TODO
 	* Is CurrentLeader calculating on stealing level?
 	* What if multiple leaders found on intermission?
 	* Money are not removed on player kill, only on player spawn.
+	* ChangeLevel and FindLeader should come together, because
+	  each ChangeLevel can change and the CurrentLeader.
 

@@ -407,33 +407,27 @@ public GG_OnShutdown(bool:Command)
  */
 FindLeader(bool:DisallowBot = false)
 {
-	new leader, current;
-	new maxslots = GetMaxClients( );
+	new leaderId      = 0;
+	new leaderLevel   = 0;
+	new currentLevel  = 0;
 
-	for(new i = 1; i <= maxslots; i++)
+	for (new i = 1; i <= MaxClients; i++)
 	{
-		if(DisallowBot && IsClientInGame(i) && IsFakeClient(i))
+		if ( DisallowBot && IsClientInGame(i) && IsFakeClient(i) )
 		{
 			continue;
 		}
 
-		current = PlayerLevel[i];
+		currentLevel = PlayerLevel[i];
 
-		if(!leader || current < leader)
+		if ( currentLevel > leaderLevel )
 		{
-			/**
-			 * The leader must has to have aleast a level greater than 1
-			 * Internally the level will start at 0 but externally it will be at level 1.
-			 */
-
-			if(current > 0)
-			{
-				leader = current;
-			}
+			leaderLevel = currentLevel;
+			leaderId = i;
 		}
 	}
 
-	return leader;
+	return leaderId;
 }
 
 /**
