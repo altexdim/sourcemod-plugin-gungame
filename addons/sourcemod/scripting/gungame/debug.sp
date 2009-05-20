@@ -37,71 +37,84 @@
 
 OnCreateDebug()
 {
-	RegConsoleCmd("display", _CmdDisplay);
-	RegConsoleCmd("set_level", _CmdSetLevel);
+    RegConsoleCmd("display", _CmdDisplay);
+    RegConsoleCmd("set_level", _CmdSetLevel);
 }
 
 public Action:_CmdSetLevel(client, args)
 {
-	decl String:Arg[10];
-	GetCmdArg(1, Arg, sizeof(Arg));
+    decl String:Arg[10];
+    GetCmdArg(1, Arg, sizeof(Arg));
 
-	UTIL_ChangeLevel(client, StringToInt(Arg));
-	return Plugin_Handled;
+    new oldLevel = PlayerLevel[client];
+    new newLevel = UTIL_ChangeLevel(client, StringToInt(Arg));
+    decl String:name[MAX_NAME_SIZE];
+    if ( client && IsClientConnected(client) && IsClientInGame(client) )
+    {
+        GetClientName(client, name, sizeof(name));
+    }
+    else
+    {
+        Format(name, sizeof(name), "[Client#%d]", client);
+    }
+    return name;
+    RecalculateLeader(client, oldLevel, newLevel, name);
+    
+    return Plugin_Handled;
 }
 
 public Action:_CmdDisplay(client, args)
 {
-	decl String:Args[64];
-	GetCmdArg(1, Args, sizeof(Args));
+    decl String:Args[64];
+    GetCmdArg(1, Args, sizeof(Args));
 
-	if(strcmp("weapons", Args) == 0)
-	{
-		//for(new i = 0; i <
-	} else if(strcmp("Config", Args) == 0) {
-		DisplayConfig(client);
-	} else if(strcmp("", Args) == 0) {
+    if(strcmp("weapons", Args) == 0)
+    {
+        //for(new i = 0; i <
+    } else if(strcmp("Config", Args) == 0) {
+        DisplayConfig(client);
+    } else if(strcmp("", Args) == 0) {
 
-	} else if(strcmp("", Args) == 0) {
+    } else if(strcmp("", Args) == 0) {
 
-	} else if(strcmp("", Args) == 0) {
+    } else if(strcmp("", Args) == 0) {
 
-	}
+    }
 
-	return Plugin_Handled;
+    return Plugin_Handled;
 }
 
 DisplayConfig(client)
 {
-	/*IsActive
-	TurboMode
-	JoinMessage
-	IntermissionCalcWinner
-	CanStealFirstLevel
-	CanLevelDownOnGrenade
-	VoteLevelLessWeaponCount
-	AutoFriendlyFire
-	MapStatus
-	ObjectiveBonus
-	WorldspawnSuicide
-	MaxLevelPerRound
-	MinKillsPerLevel
-	BotCanWin
-	KnifePro
-	KnifeElite
-	WarmupEnabled
-	Warmup_TimeLength
-	WarmupKnifeOnly
-	WarmupReset
-	AfkManagement
-	AfkDeaths
-	AfkAction
-	NadeSmoke
-	NadeGlock
-	NadeFlash
-	ExtraNade
-	Prune
-	WarmupStartup
-	TripleLevelBonus
-	Top10Handicap*/
+    /*IsActive
+    TurboMode
+    JoinMessage
+    IntermissionCalcWinner
+    CanStealFirstLevel
+    CanLevelDownOnGrenade
+    VoteLevelLessWeaponCount
+    AutoFriendlyFire
+    MapStatus
+    ObjectiveBonus
+    WorldspawnSuicide
+    MaxLevelPerRound
+    MinKillsPerLevel
+    BotCanWin
+    KnifePro
+    KnifeElite
+    WarmupEnabled
+    Warmup_TimeLength
+    WarmupKnifeOnly
+    WarmupReset
+    AfkManagement
+    AfkDeaths
+    AfkAction
+    NadeSmoke
+    NadeGlock
+    NadeFlash
+    ExtraNade
+    Prune
+    WarmupStartup
+    TripleLevelBonus
+    Top10Handicap*/
 }

@@ -201,7 +201,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
 	if(Level < 0)
 	{
-		Level = NULL;
+		Level = 0;
 	} else if(Level > WeaponOrderCount) {
 		Level = WeaponOrderCount;
 	}
@@ -253,8 +253,12 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 		Call_StartForward(FwdVoteStart);
 		Call_Finish();
 
+		return Level;
+	}
+	
 	/* WeaponOrder count is the last weapon. */
-	} else if(Level >= WeaponOrderCount) {
+	if ( Level >= WeaponOrderCount )
+	{
 
 		/* Winner Winner Winner. They won the prize of gaben plus a hat. */
 		decl String:Name[MAX_NAME_SIZE];

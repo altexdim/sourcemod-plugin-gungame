@@ -163,7 +163,7 @@ public Action:CmdReset(client, args)
 		/* Reset the game and start over */
 		for(new i = 1; i <= maxslots; i++)
 		{
-			PlayerLevel[i] = NULL;
+			PlayerLevel[i] = 0;
 		}
 
 		SetConVarInt(mp_restartgame, 1);

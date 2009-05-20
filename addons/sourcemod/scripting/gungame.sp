@@ -78,356 +78,432 @@
 
 public Plugin:myinfo =
 {
-	name = "GunGame:SM",
-	author = GUNGAME_AUTHOR,
-	description = "GunGame:SM for SourceMod",
-	version = GUNGAME_VERSION,
-	url = "http://www.hat-city.net/"
+    name = "GunGame:SM",
+    author = GUNGAME_AUTHOR,
+    description = "GunGame:SM for SourceMod",
+    version = GUNGAME_VERSION,
+    url = "http://www.hat-city.net/"
 };
 
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
-	RegPluginLibrary("gungame");
-	OnCreateNatives();
-	return true;
+    RegPluginLibrary("gungame");
+    OnCreateNatives();
+    return true;
 }
 
 public OnPluginStart()
 {
-	// ConVar
-	VGUIMenu = GetUserMessageId("VGUIMenu");
-	mp_friendlyfire = FindConVar("mp_friendlyfire");
-	mp_restartgame = FindConVar("mp_restartgame");
-	mp_chattime = FindConVar("mp_chattime");
+    // ConVar
+    VGUIMenu = GetUserMessageId("VGUIMenu");
+    mp_friendlyfire = FindConVar("mp_friendlyfire");
+    mp_restartgame = FindConVar("mp_restartgame");
+    mp_chattime = FindConVar("mp_chattime");
 
-	new Handle:Version = CreateConVar("sm_gungame_css_version", GUNGAME_VERSION,	"GunGame Version", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+    new Handle:Version = CreateConVar("sm_gungame_css_version", GUNGAME_VERSION,    "GunGame Version", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 
-	/* Just to make sure they it updates the convar version if they just had the plugin reload on map change */
-	SetConVarString(Version, GUNGAME_VERSION);
+    /* Just to make sure they it updates the convar version if they just had the plugin reload on map change */
+    SetConVarString(Version, GUNGAME_VERSION);
 
-	gungame_enabled = CreateConVar("gungame_enabled", "1", "Display if GunGame is enabled or disabled", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
+    gungame_enabled = CreateConVar("gungame_enabled", "1", "Display if GunGame is enabled or disabled", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 
-	/* Dynamic Forwards */
-	FwdDeath = CreateGlobalForward("GG_OnClientDeath", ET_Hook, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
-	FwdLevelChange = CreateGlobalForward("GG_OnClientLevelChange", ET_Hook, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
-	FwdPoint = CreateGlobalForward("GG_OnClientPointChange", ET_Hook, Param_Cell, Param_Cell, Param_Cell);
-	FwdLeader = CreateGlobalForward("GG_OnLeaderChange", ET_Ignore, Param_Cell, Param_Cell);
-	FwdWinner = CreateGlobalForward("GG_OnWinner", ET_Ignore, Param_Cell, Param_String);
-	FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
-	FwdStart = CreateGlobalForward("GG_OnStartup", ET_Ignore, Param_Cell);
-	FwdShutdown = CreateGlobalForward("GG_OnShutdown", ET_Ignore, Param_Cell);
+    /* Dynamic Forwards */
+    FwdDeath = CreateGlobalForward("GG_OnClientDeath", ET_Hook, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
+    FwdLevelChange = CreateGlobalForward("GG_OnClientLevelChange", ET_Hook, Param_Cell, Param_Cell, Param_Cell, Param_Cell);
+    FwdPoint = CreateGlobalForward("GG_OnClientPointChange", ET_Hook, Param_Cell, Param_Cell, Param_Cell);
+    FwdLeader = CreateGlobalForward("GG_OnLeaderChange", ET_Ignore, Param_Cell, Param_Cell);
+    FwdWinner = CreateGlobalForward("GG_OnWinner", ET_Ignore, Param_Cell, Param_String);
+    FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
+    FwdStart = CreateGlobalForward("GG_OnStartup", ET_Ignore, Param_Cell);
+    FwdShutdown = CreateGlobalForward("GG_OnShutdown", ET_Ignore, Param_Cell);
 
-	OnKeyValueStart();
-	OnOffsetStart();
-	OnCreateCommand();
-	OnHackStart();
+    OnKeyValueStart();
+    OnOffsetStart();
+    OnCreateCommand();
+    OnHackStart();
 
-	#if defined DEBUG
-	OnCreateDebug();
-	#endif
+    #if defined DEBUG
+    OnCreateDebug();
+    #endif
 }
 
 public OnPluginEnd()
 {
-	SetConVarInt(gungame_enabled, 0);
+    SetConVarInt(gungame_enabled, 0);
 }
 
 public OnMapStart()
 {
-	cssdm_enabled = FindConVar("cssdm_enabled");
+    cssdm_enabled = FindConVar("cssdm_enabled");
 }
 
 public OnMapEnd()
 {
-	/* Kill timer on map change if was in warmup round. */
-	if(WarmupTimer != INVALID_HANDLE)
-	{
-		KillTimer(WarmupTimer);
-		WarmupTimer = INVALID_HANDLE;
-	}
+    /* Kill timer on map change if was in warmup round. */
+    if(WarmupTimer != INVALID_HANDLE)
+    {
+        KillTimer(WarmupTimer);
+        WarmupTimer = INVALID_HANDLE;
+    }
 
-	if(CommandPanel != INVALID_HANDLE)
-	{
-		CloseHandle(CommandPanel);
-		CommandPanel = INVALID_HANDLE;
-	}
+    if(CommandPanel != INVALID_HANDLE)
+    {
+        CloseHandle(CommandPanel);
+        CommandPanel = INVALID_HANDLE;
+    }
 
-	if(RulesMenu != INVALID_HANDLE)
-	{
-		CloseHandle(RulesMenu);
-		RulesMenu = INVALID_HANDLE;
-	}
+    if(RulesMenu != INVALID_HANDLE)
+    {
+        CloseHandle(RulesMenu);
+        RulesMenu = INVALID_HANDLE;
+    }
 
-	if(JoinMsgPanel != INVALID_HANDLE)
-	{
-		CloseHandle(JoinMsgPanel);
-		JoinMsgPanel = INVALID_HANDLE;
-	}
+    if(JoinMsgPanel != INVALID_HANDLE)
+    {
+        CloseHandle(JoinMsgPanel);
+        JoinMsgPanel = INVALID_HANDLE;
+    }
 
-	/* Clear out data */
-	WarmupInitialized = false;
-	WarmupCounter = NULL;
-	MapStatus = NULL;
-	HostageEntInfo = NULL;
-	IsVotingCalled = false;
-	IsIntermissionCalled = false;
-	GameWinner = NULL;
-	TotalLevel = NULL;
-	CurrentLeader = NULL;
-	IsDmActive = false;
+    /* Clear out data */
+    WarmupInitialized = false;
+    WarmupCounter = NULL;
+    MapStatus = NULL;
+    HostageEntInfo = NULL;
+    IsVotingCalled = false;
+    IsIntermissionCalled = false;
+    GameWinner = NULL;
+    TotalLevel = NULL;
+    CurrentLeader = NULL;
+    IsDmActive = false;
 
-	for(new Sounds:i = Welcome; i < MaxSounds; i++)
-	{
-		EventSounds[i][0] = '\0';
-	}
+    for(new Sounds:i = Welcome; i < MaxSounds; i++)
+    {
+        EventSounds[i][0] = '\0';
+    }
 
-	if(IsObjectiveHooked)
-	{
-		if(MapStatus & OBJECTIVE_BOMB)
-		{
-			IsObjectiveHooked = false;
-			UnhookEvent("bomb_planted", _BombState);
-			UnhookEvent("bomb_defused", _BombState);
-			UnhookEvent("bomb_pickup", _BombPickup);
-		}
+    if(IsObjectiveHooked)
+    {
+        if(MapStatus & OBJECTIVE_BOMB)
+        {
+            IsObjectiveHooked = false;
+            UnhookEvent("bomb_planted", _BombState);
+            UnhookEvent("bomb_defused", _BombState);
+            UnhookEvent("bomb_pickup", _BombPickup);
+        }
 
-		if(MapStatus & OBJECTIVE_HOSTAGE)
-		{
-			IsObjectiveHooked = false;
-			UnhookEvent("hostage_killed", _HostageKilled);
-		}
-	}
+        if(MapStatus & OBJECTIVE_HOSTAGE)
+        {
+            IsObjectiveHooked = false;
+            UnhookEvent("hostage_killed", _HostageKilled);
+        }
+    }
 }
 
 StartWarmupRound()
 {
-	WarmupInitialized = true;
-	PrintToServer("[GunGame] Warmup round has started.");
-	PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+    WarmupInitialized = true;
+    PrintToServer("[GunGame] Warmup round has started.");
+    PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
 
-	/* Start Warmup round */
-	WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
+    /* Start Warmup round */
+    WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
 }
 
 
 /* End of Warmup */
 public Action:EndOfWarmup(Handle:timer)
 {
-	if(++WarmupCounter <= Warmup_TimeLength)
-	{
-		PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
-		return Plugin_Continue;
-	}
+    if(++WarmupCounter <= Warmup_TimeLength)
+    {
+        PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+        return Plugin_Continue;
+    }
 
-	WarmupTimer = INVALID_HANDLE;
-	WarmupEnabled = false;
+    WarmupTimer = INVALID_HANDLE;
+    WarmupEnabled = false;
 
-	/* Restart Game */
-	SetConVarInt(mp_restartgame, 1);
+    /* Restart Game */
+    SetConVarInt(mp_restartgame, 1);
 
-	PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, TEAMCOLOR, GREEN);
+    PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, TEAMCOLOR, GREEN);
 
-	if(WarmupReset)
-	{
-		new maxslots = GetMaxClients( );
-		TotalLevel = NULL;
+    if(WarmupReset)
+    {
+        new maxslots = GetMaxClients( );
+        TotalLevel = NULL;
 
-		for(new i = 1; i <= maxslots; i++)
-		{
-			PlayerLevel[i] = NULL;
-		}
-	}
-	return Plugin_Stop;
+        for(new i = 1; i <= maxslots; i++)
+        {
+            PlayerLevel[i] = 0;
+        }
+    }
+    return Plugin_Stop;
 }
 
 public OnClientPutinServer(client)
 {
-	TakeDamage[client] = FindDataMapOffs(client, "m_takedamage");
+    TakeDamage[client] = FindDataMapOffs(client, "m_takedamage");
 }
 
 public OnClientDisconnect(client)
 {
-	/* Clear current leader if player is leader */
-	if(CurrentLeader == client)
-	{
-		/* It will find another leader during player_death event*/
-		CurrentLeader = NULL;
-	}
+    /* Clear current leader if player is leader */
+    if(CurrentLeader == client)
+    {
+        /* It will find another leader during player_death event*/
+        CurrentLeader = NULL;
+    }
 
-	if(PlayerState[client] & GRENADE_LEVEL)
-	{
-		PlayerState[client] &= ~GRENADE_LEVEL;
+    if(PlayerState[client] & GRENADE_LEVEL)
+    {
+        PlayerState[client] &= ~GRENADE_LEVEL;
 
-		if(--PlayerOnGrenade < 1)
-		{
-			UTIL_ChangeFriendlyFire(false);
-		}
-	}
+        if(--PlayerOnGrenade < 1)
+        {
+            UTIL_ChangeFriendlyFire(false);
+        }
+    }
 
-	/* This does not take into account for steals. */
-	TotalLevel -= PlayerLevel[client];
+    /* This does not take into account for steals. */
+    TotalLevel -= PlayerLevel[client];
 
-	if(TotalLevel < 0)
-	{
-		TotalLevel = NULL;
-	}
+    if(TotalLevel < 0)
+    {
+        TotalLevel = NULL;
+    }
 
-	TakeDamage[client] = NULL;
-	PlayerLevel[client] = NULL;
-	CurrentKillsPerWeap[client] = NULL;
-	CurrentLevelPerRound[client] = NULL;
-	PlayerState[client] = NULL;
+    TakeDamage[client] = NULL;
+    PlayerLevel[client] = 0;
+    CurrentKillsPerWeap[client] = NULL;
+    CurrentLevelPerRound[client] = NULL;
+    PlayerState[client] = NULL;
 }
 
 public GG_OnStartup(bool:Command)
 {
-	if(!IsActive)
-	{
-		IsActive = true;
+    if(!IsActive)
+    {
+        IsActive = true;
 
-		OnEventStart();
+        OnEventStart();
 
-		if(Command)
-		{
-			new maxslots = GetMaxClients( );
+        if(Command)
+        {
+            new maxslots = GetMaxClients( );
 
-			for(new i = 1; i <= maxslots; i++)
-			{
-				if(IsClientInGame(i))
-				{
-					OnClientPutinServer(i);
-				}
-			}
-		}
-	}
+            for(new i = 1; i <= maxslots; i++)
+            {
+                if(IsClientInGame(i))
+                {
+                    OnClientPutinServer(i);
+                }
+            }
+        }
+    }
 
-	if(IsActive)
-	{
-		if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
-		{
-			StartWarmupRound();
-		}
+    if(IsActive)
+    {
+        if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
+        {
+            StartWarmupRound();
+        }
 
-		UTIL_FindMapObjective();
+        UTIL_FindMapObjective();
 
-		if(!IsObjectiveHooked)
-		{
-			if(MapStatus & OBJECTIVE_BOMB)
-			{
-				IsObjectiveHooked = true;
-				HookEvent("bomb_planted", _BombState);
-				HookEvent("bomb_defused", _BombState);
-				HookEvent("bomb_pickup", _BombPickup);
-			}
-	
-			if(MapStatus & OBJECTIVE_HOSTAGE)
-			{
-				IsObjectiveHooked = true;
-				HookEvent("hostage_killed", _HostageKilled);
-			}
-		}
+        if(!IsObjectiveHooked)
+        {
+            if(MapStatus & OBJECTIVE_BOMB)
+            {
+                IsObjectiveHooked = true;
+                HookEvent("bomb_planted", _BombState);
+                HookEvent("bomb_defused", _BombState);
+                HookEvent("bomb_pickup", _BombPickup);
+            }
+    
+            if(MapStatus & OBJECTIVE_HOSTAGE)
+            {
+                IsObjectiveHooked = true;
+                HookEvent("hostage_killed", _HostageKilled);
+            }
+        }
 
-		decl String:Hi[PLATFORM_MAX_PATH];
-		for(new Sounds:i = Welcome; i < MaxSounds; i++)
-		{
-			if(EventSounds[i][0])
-			{
-				/* Only precache the sound that goes through emitsound. */
-				if(i == Triple)
-				{
-					PrecacheSound(EventSounds[i]);
-				}
+        decl String:Hi[PLATFORM_MAX_PATH];
+        for(new Sounds:i = Welcome; i < MaxSounds; i++)
+        {
+            if(EventSounds[i][0])
+            {
+                /* Only precache the sound that goes through emitsound. */
+                if(i == Triple)
+                {
+                    PrecacheSound(EventSounds[i]);
+                }
 
-				Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
-				AddFileToDownloadsTable(Hi);
-			}
-		}
-	}
+                Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
+                AddFileToDownloadsTable(Hi);
+            }
+        }
+    }
 }
 
 public GG_OnShutdown(bool:Command)
 {
-	if(IsActive)
-	{
-		IsActive = false;
-		InternalIsActive = false;
-		WarmupInitialized = false;
-		WarmupCounter = NULL;
-		IsVotingCalled = false;
-		IsIntermissionCalled = false;
-		GameWinner = NULL;
-		TotalLevel = NULL;
-		CurrentLeader = NULL;
-		IsDmActive = false;
+    if(IsActive)
+    {
+        IsActive = false;
+        InternalIsActive = false;
+        WarmupInitialized = false;
+        WarmupCounter = NULL;
+        IsVotingCalled = false;
+        IsIntermissionCalled = false;
+        GameWinner = NULL;
+        TotalLevel = NULL;
+        CurrentLeader = NULL;
+        IsDmActive = false;
 
-		OnEventShutdown();
+        OnEventShutdown();
 
-		if(Command)
-		{
-			new maxslots = GetMaxClients( );
+        if(Command)
+        {
+            new maxslots = GetMaxClients( );
 
-			for(new i = 1; i <= maxslots; i++)
-			{
-				if(IsClientInGame(i))
-				{
-					OnClientDisconnect(i);
-				}
-			}
+            for(new i = 1; i <= maxslots; i++)
+            {
+                if(IsClientInGame(i))
+                {
+                    OnClientDisconnect(i);
+                }
+            }
 
-			if(WarmupTimer != INVALID_HANDLE)
-			{
-				KillTimer(WarmupTimer);
-				WarmupTimer = INVALID_HANDLE;
-			}
-		}
+            if(WarmupTimer != INVALID_HANDLE)
+            {
+                KillTimer(WarmupTimer);
+                WarmupTimer = INVALID_HANDLE;
+            }
+        }
 
-		if(IsObjectiveHooked)
-		{
-			if(MapStatus & OBJECTIVE_BOMB)
-			{
-				IsObjectiveHooked = false;
-				UnhookEvent("bomb_planted", _BombState);
-				UnhookEvent("bomb_defused", _BombState);
-				UnhookEvent("bomb_pickup", _BombPickup);
-			}
+        if(IsObjectiveHooked)
+        {
+            if(MapStatus & OBJECTIVE_BOMB)
+            {
+                IsObjectiveHooked = false;
+                UnhookEvent("bomb_planted", _BombState);
+                UnhookEvent("bomb_defused", _BombState);
+                UnhookEvent("bomb_pickup", _BombPickup);
+            }
 
-			if(MapStatus & OBJECTIVE_HOSTAGE)
-			{
-				IsObjectiveHooked = false;
-				UnhookEvent("hostage_killed", _HostageKilled);
-			}
-		}
-	}
+            if(MapStatus & OBJECTIVE_HOSTAGE)
+            {
+                IsObjectiveHooked = false;
+                UnhookEvent("hostage_killed", _HostageKilled);
+            }
+        }
+    }
 }
 
 /**
- * FIXME: It should return CLIENT, not LEVEL
- * It should return 0 if no leaders found.
- * What it should return if multiple leaders found???
+ * Return current leader client.
+ *
+ * Return 0 if no leaders found.
+ *
+ * @param bool DisallowBot
+ * @return int
  */
 FindLeader(bool:DisallowBot = false)
 {
-	new leaderId      = 0;
-	new leaderLevel   = 0;
-	new currentLevel  = 0;
+    new leaderId      = 0;
+    new leaderLevel   = 0;
+    new currentLevel  = 0;
 
-	for (new i = 1; i <= MaxClients; i++)
-	{
-		if ( DisallowBot && IsClientInGame(i) && IsFakeClient(i) )
-		{
-			continue;
-		}
+    for (new i = 1; i <= MaxClients; i++)
+    {
+        if ( DisallowBot && IsClientInGame(i) && IsFakeClient(i) )
+        {
+            continue;
+        }
 
-		currentLevel = PlayerLevel[i];
+        currentLevel = PlayerLevel[i];
 
-		if ( currentLevel > leaderLevel )
-		{
-			leaderLevel = currentLevel;
-			leaderId = i;
-		}
-	}
+        if ( currentLevel > leaderLevel )
+        {
+            leaderLevel = currentLevel;
+            leaderId = i;
+        }
+    }
 
-	return leaderId;
+    return leaderId;
+}
+
+/**
+ * Recalculate CurrentLeader and print messages.
+ *
+ * @param int client
+ * @param int oldLevel
+ * @param int newLevel
+ * @return void
+ */
+RecalculateLeader(client, oldLevel, newLevel, const String:name[])
+{
+    if ( newLevel == oldLevel )
+    {
+        return;
+    }
+    if ( newLevel < oldLevel )
+    {
+        if ( !CurrentLeader )
+        {
+            return;
+        }
+        if ( oldLevel < PlayerLevel[CurrentLeader] )
+        {
+            return;
+        }
+        new oldLeader = CurrentLeader;
+        CurrentLeader = FindLeader();
+        if ( CurrentLeader != oldLeader )
+        {
+            Call_StartForward(FwdLeader);
+            Call_PushCell(CurrentLeader);
+            Call_PushCell(newLevel);
+            Call_Finish();
+        }
+        return;
+    }
+    // newLevel > oldLevel
+    if ( !CurrentLeader )
+    {
+        CurrentLeader = client;
+        Call_StartForward(FwdLeader);
+        Call_PushCell(CurrentLeader);
+        Call_PushCell(newLevel);
+        Call_Finish();
+    }
+    if ( CurrentLeader == client )
+    {
+        // say leading on level X
+        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
+        return;
+    }
+    if ( newLevel < PlayerLevel[CurrentLeader] )
+    {
+        // say how much to the lead
+        PrintToChat(client, "%c[%cGunGame%c] You are %c%d %clevels behind the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, PlayerLevel[CurrentLeader]-newLevel, GREEN);
+        return;
+    }
+    // CurrentLeader != client
+    if ( newLevel > PlayerLevel[CurrentLeader] )
+    {
+        CurrentLeader = client;
+        Call_StartForward(FwdLeader);
+        Call_PushCell(CurrentLeader);
+        Call_PushCell(newLevel);
+        Call_Finish();
+        // say leading on level X
+        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
+        return;
+    }
+    // new level == leader level
+    // say tied to the lead on level X
+    PrintToChatAll("%c[%cGunGame%c] %c%s %cis tied with the leader on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
 }
 
 /**

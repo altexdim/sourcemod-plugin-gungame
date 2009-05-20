@@ -95,19 +95,19 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
         {
             /* No decisive winner has completed the game. */
             if(!CurrentLeader)
-			{
-				// FIXME: FindLeader returns LEVEL not CLIENT!
-				// FIXME: What if multiple leaders found?
+            {
+                // FIXME: FindLeader returns LEVEL not CLIENT!
+                // FIXME: What if multiple leaders found?
                 CurrentLeader = FindLeader();
-			}
+            }
 
-			// FIXME: What if multiple leaders found?
+            // FIXME: What if multiple leaders found?
             if(CurrentLeader)
             {
                 if(!BotCanWin && IsFakeClient(CurrentLeader))
                 {
-					// FIXME: FindLeader returns LEVEL not CLIENT!
-					// FIXME: What if multiple leaders found?
+                    // FIXME: FindLeader returns LEVEL not CLIENT!
+                    // FIXME: What if multiple leaders found?
                     CurrentLeader = FindLeader(true);
 
                     /* No real player was found */
@@ -120,7 +120,7 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 
                 if(level > MinimumLevel)
                 {
-					// FIXME: What if multiple leaders found?
+                    // FIXME: What if multiple leaders found?
                     GameWinner = CurrentLeader;
                 }
 
@@ -391,33 +391,34 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                     new bool:Ret;
                     if ( Level )
                     {
-						UTIL_ChangeLevel(Victim, -1, Ret, true, true);
+                        new newLevelVictim = UTIL_ChangeLevel(Victim, -1, Ret, true, true);
 
-						if(Ret)
-						{
-							return;
-						}
-						// FIXME: Need to recalculate CurrentLeader here!
-					}
+                        if(Ret)
+                        {
+                            return;
+                        }                        
+                        RecalculateLeader(Victim, Level, newLevelVictim, vName);
+                    }
 
                     Ret = false;
 
                     if ( KnifeProHE || WeaponLevel != CSW_HEGRENADE )
                     {
-						if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
-						{
-							/* Bot can't win so just keep them at the last level */
-							return;
-						}
+                        if ( !BotCanWin && IsFakeClient(Killer) && (level >= WeaponOrderCount - 1) )
+                        {
+                            /* Bot can't win so just keep them at the last level */
+                            return;
+                        }
 
-						level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
+                        new oldLevelKiller = level;
+                        level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
 
-						if(Ret)
-						{
-							return;
-						}
-						// FIXME: Need to recalculate CurrentLeader here!
-					}
+                        if(Ret)
+                        {
+                            return;
+                        }
+                        RecalculateLeader(Killer, oldLevelKiller, level, kName);
+                    }
 
                     PrintToChatAll("%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
                         GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, vName);
@@ -432,24 +433,24 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                     
                     if ( KnifeProHE || WeaponLevel != CSW_HEGRENADE )
                     {
-						if(TurboMode)
-						{
-							UTIL_GiveNextWeapon(Killer, level);
-						} else if(TripleLevelBonus && CurrentLevelPerRound[Killer] == 3) {
+                        if(TurboMode)
+                        {
+                            UTIL_GiveNextWeapon(Killer, level);
+                        } else if(TripleLevelBonus && CurrentLevelPerRound[Killer] == 3) {
 
-							decl String:Name[MAX_NAME_SIZE];
-							GetClientName(Killer, Name, sizeof(Name));
+                            decl String:Name[MAX_NAME_SIZE];
+                            GetClientName(Killer, Name, sizeof(Name));
 
-							PrintToChatAll("%c[%cGunGame%c] %c%s %ctriple leveled!!!",
-								GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
+                            PrintToChatAll("%c[%cGunGame%c] %c%s %ctriple leveled!!!",
+                                GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
 
-							CreateTimer(10.0, RemoveBonus, Killer);
-							UTIL_SetClientGodMode(Killer, 1);
-							SetEntDataFloat(Killer, OffsetMovement, 1.5);
+                            CreateTimer(10.0, RemoveBonus, Killer);
+                            UTIL_SetClientGodMode(Killer, 1);
+                            SetEntDataFloat(Killer, OffsetMovement, 1.5);
 
-							EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
-						}
-					}
+                            EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
+                        }
+                    }
 
                 } else {
                     /* They are at level 1. Internally it is set at 0 for starting
@@ -516,79 +517,22 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             /* Bot can't win so just keep them at the last level */
             return;
         }
-		
+        
         new bool:Stop;
+        new oldLevelKiller = level;
         level = UTIL_ChangeLevel(Killer, 1, Stop);
 
-        if(Stop || level >= WeaponOrderCount)
+        if ( Stop || level >= WeaponOrderCount )
         {
             return;
         }
+        RecalculateLeader(Killer, oldLevelKiller, level, kName);
 
         if(TurboMode)
         {
             UTIL_GiveNextWeapon(Killer, level);
         }
 
-        //PrintToChat(Killer, "%c[%cGunGame%c] You have gained a level, congratulations.", GREEN, TEAMCOLOR, GREEN);
-
-        /* Find current leader if none is assigned. */
-        new leader;
-
-        if(!CurrentLeader)
-        {
-			// FIXME: FindLeader returns LEVEL not CLIENT!
-            if(!(CurrentLeader = FindLeader()))
-                return;
-
-            leader = PlayerLevel[CurrentLeader];
-			// FIXME: Why leader here is 0?
-			// UTIL_ChangeLevel on line 513 must set 
-			// PlayerLevel[Killer] to next value.
-			// UTIL_ChangeLevel is the only way to
-			// change PlayerLevel.
-			// Maybe FindLeader gives wrong result?
-			// FindLeader returns LEVEL value,
-			// not CLIENT!
-
-            Call_StartForward(FwdLeader);
-            Call_PushCell(CurrentLeader);
-            Call_PushCell(leader);
-            Call_Finish();
-
-            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
-            return;
-        } else {
-            leader = PlayerLevel[CurrentLeader];
-        }
-
-        /* don't continue if player is leader */
-        if(!leader || Killer == CurrentLeader)
-        {
-	        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1);
-            return;
-        }
-        
-        if(level == leader)
-        {
-            /* Print to everyone if someone ties to the leader. */
-	        PrintToChatAll("%c[%cGunGame%c] %c%s %chas tied with the leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
-
-        } else if(level < leader) {
-
-            /* Print to only killer how many levels he is from the leader */
-	        PrintToChat(Killer, "%c[%cGunGame%c] You are %c%d %clevels from the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, leader - level, GREEN);
-
-        } else if (level > leader) {
-
-            Call_StartForward(FwdLeader);
-            Call_PushCell(Killer);
-            Call_PushCell(Killer); /* Change this to player level */
-            Call_Finish();
-
-            PrintToChatAll("%c[%cGunGame%c] %c%s %chas claimed the rank of leader on level %c%d%c.", GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, level + 1, GREEN);
-            CurrentLeader = Killer;
-        }
     }
 }
 
@@ -643,13 +587,13 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
             if ( JoinMessage )
             {
-				if ( !JoinMsgPanel )
-				{
-					JoinMsgPanel = CreateJoinMsgPanel();
-				}
+                if ( !JoinMsgPanel )
+                {
+                    JoinMsgPanel = CreateJoinMsgPanel();
+                }
 
-				SendPanelToClient(JoinMsgPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
-			}
+                SendPanelToClient(JoinMsgPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
+            }
         }
     }
 
@@ -716,10 +660,10 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( Custom > 1 )
     {
-		PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
-			GREEN, TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
-	}
-	
+        PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
+            GREEN, TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
+    }
+    
     new pState = PlayerState[client];
 
     if(AutoFriendlyFire && (pState & GRENADE_LEVEL) && WeapId != CSW_HEGRENADE)
@@ -819,7 +763,18 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             }
 
             /* Give them a level if give level for objective */
-            UTIL_ChangeLevel(client, ObjectiveBonus);
+            new oldLevel = PlayerLevel[client];
+            new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
+            decl String:cname[MAX_NAME_SIZE];
+            if ( client && IsClientConnected(client) && IsClientInGame(client) )
+            {
+                GetClientName(client, cname, sizeof(cname));
+            }
+            else
+            {
+                Format(cname, sizeof(cname), "[Client#%d]", client);
+            }
+            RecalculateLeader(client, oldLevel, newLevel, cname);
 
             PrintToChat(client, "%c[%cGunGame%c] You gained %c%d%c level by %s the bomb",
                 GREEN, TEAMCOLOR, GREEN, YELLOW, ObjectiveBonus, GREEN, (name[5] == 'p') ? "planting" : "defusing");
@@ -838,7 +793,10 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
             decl String:Name[MAX_NAME_SIZE];
             GetClientName(client, Name, sizeof(Name));
 
-            UTIL_ChangeLevel(client, -1);
+            new oldLevel = PlayerLevel[client];
+            new newLevel = UTIL_ChangeLevel(client, -1);
+            RecalculateLeader(client, oldLevel, newLevel, Name);
+            
             PrintToChatAll("%c[%cGunGame%c] %c%s%c has lost a level by killing a hostage",
                 GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
         }
@@ -850,7 +808,9 @@ stock ClientSuicide(client, const String:Name[])
     PrintToChatAll("%c[%cGunGame%c] %c%s%c has lost a level by suicided.",
         GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
 
-    UTIL_ChangeLevel(client, -1);
+    new oldLevel = PlayerLevel[client];
+    new newLevel = UTIL_ChangeLevel(client, -1);
+    RecalculateLeader(client, oldLevel, newLevel, Name);
 }
 
 public Action:RemoveBonus(Handle:timer, any:client)
