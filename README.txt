@@ -26,8 +26,8 @@ Changelog
 		- Disable "congratulation" line (there is a sound)
 		+ Added line "is leading on level X" after leader gained next level
 		* Fixed possible bug for random winner sound
-    	* Redesigned all menus where it is possible to change "0. Exit" to "1. Exit".
-    	  It's pretty much ergonomic button.
+		* Redesigned all menus where it is possible to change "0. Exit" to "1. Exit".
+		  It's pretty much ergonomic button.
 		* Fixed gg_rebuild to recreate top10panel. Now you do not need to wait for map end
 		  to see recreated top10 panel.
 		* Fixed HasRank value after SaveRank. Now you do not need to restart plugin 
@@ -52,8 +52,8 @@ Changelog
 
 TODO
 ----
-    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    + Add sqlite and mysql support for top players stats
+	* Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
+	+ Add sqlite and mysql support for top players stats
 	+ Add grenade warmup
 	* What is wrong with random number generator? GetRandomInt(0,12) give one
 	  the same value on server start even i use SetRandomSeed().
