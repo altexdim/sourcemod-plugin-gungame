@@ -137,18 +137,19 @@ ShowPlayerLevelMenu(client)
 {
 	new Handle:menu = CreateMenu(PlayerLevelHandler);
 	decl String:Key[100], String:Name[64];
-	new maxslots = GetMaxClients( );
 
 	SetMenuTitle(menu, "[GunGame] Players level information");
 
-	for(new i = 1; i <= maxslots; i++)
+	new first = true;
+	for(new i = 1; i <= MaxClients; i++)
 	{
 		if(IsClientInGame(i))
 		{
 			GetClientName(i, Name, sizeof(Name));
 			FormatEx(Key, sizeof(Key), "Level %d :: %d Wins :: %s", PlayerLevel[i] + 1, GG_GetClientWins(i), Name);
 
-			AddMenuItem(menu, BLANK, Key, ITEMDRAW_DISABLED);
+			AddMenuItem(menu, BLANK, Key, first?ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
+			first = false;
 		}
 	}
 

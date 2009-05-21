@@ -1,5 +1,8 @@
 Changelog
 ---------
+	Unofficial_5 1.0.0.1.3:
+		* Added exit button "1" to "!score" menu
+		
 	Unofficial_4 1.0.0.1.2:
 		* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
 		  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
