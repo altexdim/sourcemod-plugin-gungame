@@ -9,7 +9,7 @@ Changelog
 		
 	Unofficial_4 1.0.0.1.2:
 		* Fixed bug with no message about tied with the leader when leader on level 2 (first level gained)
-		  Fixed FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
+		  Fixed FindLeader to return CLIENT (it was returning LEVEL not CLIENT). (!!!)
 		* Fixed bug with no message about leaders if stealing level
 		* ChangeLevel and FindLeader should come together, because
 		  each ChangeLevel can change and the CurrentLeader.
@@ -53,12 +53,13 @@ TODO
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
     + Add sqlite and mysql support for top players stats
 	+ Add grenade warmup
-	* What is wrong with randon number generator? GetRandomInt(0,12) give one
+	* What is wrong with random number generator? GetRandomInt(0,12) give one
 	  the same value on server start even i use SetRandomSeed().
 	* And once again something wrong with top10.txt, not correctly calculated after player win.
 	  Last winner saved to place 10 even it has less wins than 10-th player from top10.(!!!)
 	  Temporary fix: insert gg_rebuild into server.cfg
 	* Colorize nick names in chat by red/blue color.
+	  Is it possible on CSS? (MessageSay2 or etc.)
 	* Colorize nick name on top left corner on gg win.
 	* Money are not removed on player kill, only on player spawn.
 	* Is there a sound if player is on last/nade level?
