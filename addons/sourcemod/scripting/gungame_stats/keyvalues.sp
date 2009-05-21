@@ -66,7 +66,7 @@ LoadRank()
 
 		while(RankOpen)
 		{
-			if(++b >= MAX_RANK)
+			if(++b > MAX_RANK)
 			{
 				break;
 			}

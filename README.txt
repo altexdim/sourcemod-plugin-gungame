@@ -6,6 +6,9 @@ Changelog
 		  showing messages to chat. Added UTIL_RecalculateLeader and it is called from 
 		  UTIL_ChangeLevel. Added PrintLeaderToChat. 
 		* Fixed recalculating leader on TK (GG_RemoveALevel)
+		* Fixed saving to top10.txt. The issue was that only 9 players was in !top10. 10-th player
+		  was never loaded, so on map end his rank was rewritten by the winner.
+		* Fixed warmup end right after round_restart (warmup was ending 1 second before round_restart).
 		
 	Unofficial_4 1.0.0.1.2:
 		* Fixed bug with no message about tied with the leader when leader on level 2 (first level gained)
@@ -15,7 +18,6 @@ Changelog
 		  each ChangeLevel can change and the CurrentLeader.
 		* Fixed CurrentLeader calculation on stealing level
 		* Fixed behaviour if multiple leaders found on intermission
-	
 	
 	Unofficial_3 1.0.0.1.1:
 		* Version changed :)
@@ -55,9 +57,6 @@ TODO
 	+ Add grenade warmup
 	* What is wrong with random number generator? GetRandomInt(0,12) give one
 	  the same value on server start even i use SetRandomSeed().
-	* And once again something wrong with top10.txt, not correctly calculated after player win.
-	  Last winner saved to place 10 even it has less wins than 10-th player from top10.(!!!)
-	  Temporary fix: insert gg_rebuild into server.cfg
 	* Colorize nick names in chat by red/blue color.
 	  Is it possible on CSS? (MessageSay2 or etc.)
 	* Colorize nick name on top left corner on gg win.
@@ -65,4 +64,3 @@ TODO
 	* Is there a sound if player is on last/nade level?
 	  Is it plays on player reaches this level?
 	  Is it plays on round start?
-

@@ -215,15 +215,21 @@ public Action:EndOfWarmup(Handle:timer)
 {
     if(++WarmupCounter <= Warmup_TimeLength)
     {
-        PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+    	if ( Warmup_TimeLength - WarmupCounter == 1 )
+    	{
+			/* Restart Game */
+			SetConVarInt(mp_restartgame, 1);
+		}
+
+    	if ( Warmup_TimeLength - WarmupCounter > 0 )
+    	{
+        	PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+        }
         return Plugin_Continue;
     }
 
     WarmupTimer = INVALID_HANDLE;
     WarmupEnabled = false;
-
-    /* Restart Game */
-    SetConVarInt(mp_restartgame, 1);
 
     PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, TEAMCOLOR, GREEN);
 
