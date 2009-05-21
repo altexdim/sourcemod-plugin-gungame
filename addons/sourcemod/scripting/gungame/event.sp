@@ -413,7 +413,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         {
                             return;
                         }                        
-                        RecalculateLeader(Victim, Level, newLevelVictim, vName);
+                        PrintLeaderToChat(Victim, Level, newLevelVictim, vName);
                     }
 
                     Ret = false;
@@ -433,7 +433,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         {
                             return;
                         }
-                        RecalculateLeader(Killer, oldLevelKiller, level, kName);
+                        PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
                     }
 
                     PrintToChatAll("%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
@@ -542,7 +542,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         {
             return;
         }
-        RecalculateLeader(Killer, oldLevelKiller, level, kName);
+        PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
 
         if(TurboMode)
         {
@@ -790,7 +790,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             {
                 Format(cname, sizeof(cname), "[Client#%d]", client);
             }
-            RecalculateLeader(client, oldLevel, newLevel, cname);
+            PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
             PrintToChat(client, "%c[%cGunGame%c] You gained %c%d%c level by %s the bomb",
                 GREEN, TEAMCOLOR, GREEN, YELLOW, ObjectiveBonus, GREEN, (name[5] == 'p') ? "planting" : "defusing");
@@ -811,7 +811,7 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
 
             new oldLevel = PlayerLevel[client];
             new newLevel = UTIL_ChangeLevel(client, -1);
-            RecalculateLeader(client, oldLevel, newLevel, Name);
+            PrintLeaderToChat(client, oldLevel, newLevel, Name);
             
             PrintToChatAll("%c[%cGunGame%c] %c%s%c has lost a level by killing a hostage",
                 GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
@@ -826,7 +826,7 @@ stock ClientSuicide(client, const String:Name[])
 
     new oldLevel = PlayerLevel[client];
     new newLevel = UTIL_ChangeLevel(client, -1);
-    RecalculateLeader(client, oldLevel, newLevel, Name);
+    PrintLeaderToChat(client, oldLevel, newLevel, Name);
 }
 
 public Action:RemoveBonus(Handle:timer, any:client)

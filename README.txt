@@ -2,11 +2,15 @@ Changelog
 ---------
 	Unofficial_5 1.0.0.1.3:
 		* Added exit button "1" to "!score" menu
+		* Code improved. Separated buisness logic about calculating leader from
+		  showing messages to chat. Added UTIL_RecalculateLeader and it is called from 
+		  UTIL_ChangeLevel. Added PrintLeaderToChat. 
+		* Fixed recalculating leader on TK (GG_RemoveALevel)
 		
 	Unofficial_4 1.0.0.1.2:
-		* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
-		  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
-		* Fix bug with no message about leaders if stealing level
+		* Fixed bug with no message about tied with the leader when leader on level 2 (first level gained)
+		  Fixed FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
+		* Fixed bug with no message about leaders if stealing level
 		* ChangeLevel and FindLeader should come together, because
 		  each ChangeLevel can change and the CurrentLeader.
 		* Fixed CurrentLeader calculation on stealing level
@@ -57,5 +61,4 @@ TODO
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
 	* Money are not removed on player kill, only on player spawn.
-	* Recalculate leader on TK (GG_RemoveALevel)
 

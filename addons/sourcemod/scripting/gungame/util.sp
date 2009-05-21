@@ -192,12 +192,81 @@ UTIL_SetClientGodMode(client, mode = 0)
 	SetEntData(client, TakeDamage[client], mode ? DAMAGE_YES : DAMAGE_NO, 1);
 }
 
+/**
+ * Recalculate CurrentLeader.
+ *
+ * @param int client
+ * @param int oldLevel
+ * @param int newLevel
+ * @return void
+ */
+UTIL_RecalculateLeader(client, oldLevel, newLevel)
+{
+    if ( newLevel == oldLevel )
+    {
+        return;
+    }
+    if ( newLevel < oldLevel )
+    {
+        if ( !CurrentLeader )
+        {
+            return;
+        }
+        if ( oldLevel < PlayerLevel[CurrentLeader] )
+        {
+            return;
+        }
+        new oldLeader = CurrentLeader;
+        CurrentLeader = FindLeader();
+        if ( CurrentLeader != oldLeader )
+        {
+            Call_StartForward(FwdLeader);
+            Call_PushCell(CurrentLeader);
+            Call_PushCell(newLevel);
+            Call_Finish();
+        }
+        return;
+    }
+    // newLevel > oldLevel
+    if ( !CurrentLeader )
+    {
+        CurrentLeader = client;
+        Call_StartForward(FwdLeader);
+        Call_PushCell(CurrentLeader);
+        Call_PushCell(newLevel);
+        Call_Finish();
+    }
+    if ( CurrentLeader == client )
+    {
+        // still leading
+        return;
+    }
+    // CurrentLeader != client
+    if ( newLevel < PlayerLevel[CurrentLeader] )
+    {
+        // not leading
+        return;
+    }
+    if ( newLevel > PlayerLevel[CurrentLeader] )
+    {
+        CurrentLeader = client;
+        Call_StartForward(FwdLeader);
+        Call_PushCell(CurrentLeader);
+        Call_PushCell(newLevel);
+        Call_Finish();
+        // start leading
+        return;
+    }
+    // new level == leader level
+    // tied to the lead
+}
+
 UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
 {
 	if(!difference || !IsActive)
 		return PlayerLevel[client];
 
-	new temp = PlayerLevel[client], Level = temp + difference;
+	new oldLevel = PlayerLevel[client], Level = oldLevel + difference;
 
 	if(Level < 0)
 	{
@@ -218,11 +287,12 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 	if(ret)
 	{
 		Return = true;
-		return (PlayerLevel[client] = temp);
+		return (PlayerLevel[client] = oldLevel);
 	}
 
 	PlayerLevel[client] = Level;
-
+	UTIL_RecalculateLeader(client, oldLevel, Level);
+	
 	if(!SuppressSound)
 	{
 		if(difference < 0)
