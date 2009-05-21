@@ -58,6 +58,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
 	{
 		/* Tk a player */
 		GG_RemoveALevel(Killer);
+		// TODO: Recalculate leader on TK
 
 		decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
 		GetClientName(Killer, kName, sizeof(kName));

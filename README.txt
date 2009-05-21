@@ -57,4 +57,5 @@ TODO
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
 	* Money are not removed on player kill, only on player spawn.
+	* Recalculate leader on TK (GG_RemoveALevel)
 
