@@ -2,7 +2,7 @@ Changelog
 ---------
 	Unofficial_5 1.0.0.1.3:
 		* Added exit button "1" to "!score" menu
-		* Code improved. Separated buisness logic about calculating leader from
+		* Code improved. Separated business logic about calculating leader from
 		  showing messages to chat. Added UTIL_RecalculateLeader and it is called from 
 		  UTIL_ChangeLevel. Added PrintLeaderToChat. 
 		* Fixed recalculating leader on TK (GG_RemoveALevel)
