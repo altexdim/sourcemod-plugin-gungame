@@ -1,5 +1,15 @@
 Changelog
 ---------
+	Unofficial_4 1.0.0.1.2:
+		* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
+		  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
+		* Fix bug with no message about leaders if stealing level
+		* ChangeLevel and FindLeader should come together, because
+		  each ChangeLevel can change and the CurrentLeader.
+		* Fixed CurrentLeader calculation on stealing level
+		* Fixed behaviour if multiple leaders found on intermission
+	
+	
 	Unofficial_3 1.0.0.1.1:
 		* Version changed :)
 		* Write leaders to chat, not in hint box
@@ -40,14 +50,8 @@ TODO
 	  the same value on server start even i use SetRandomSeed().
 	* And once again something wrong with top10.txt, not correctly calculated after player win.
 	  Last winner saved to place 10 even it has less wins than 10-th player from top10.(!!!)
+	  Temporary fix: insert gg_rebuild into server.cfg
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
-	* Fix bug with no message about tied with the leader when leader on level 2 (first level gained)
-	  Fix FindLeader to return CLIENT (now it returns LEVEL not CLIENT). (!!!)
-	* Fix bug with no message about leaders if stealing level
-	* Is CurrentLeader calculating on stealing level?
-	* What if multiple leaders found on intermission?
 	* Money are not removed on player kill, only on player spawn.
-	* ChangeLevel and FindLeader should come together, because
-	  each ChangeLevel can change and the CurrentLeader.
 

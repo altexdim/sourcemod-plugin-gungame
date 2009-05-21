@@ -202,6 +202,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 					new songsfound = ExplodeString(value, ",", songs, 64, 64);
 					if ( songsfound > 1 )
 					{
+					    // TODO: Implement valid rendom number generator
 						new Float:etime = GetEngineTime();
 						new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % songsfound;
 						strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);

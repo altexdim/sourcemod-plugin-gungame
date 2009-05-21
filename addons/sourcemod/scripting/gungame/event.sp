@@ -96,31 +96,47 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
             /* No decisive winner has completed the game. */
             if(!CurrentLeader)
             {
-                // FIXME: FindLeader returns LEVEL not CLIENT!
-                // FIXME: What if multiple leaders found?
                 CurrentLeader = FindLeader();
+                if ( !CurrentLeader )
+                {
+                    return;
+                }
+                new prevLeaderLevel = PlayerLevel[CurrentLeader];
+                PlayerLevel[CurrentLeader] = 0;
+                CurrentLeader = FindLeader();
+                if ( PlayerLevel[CurrentLeader] == prevLeaderLevel )
+                {
+                    // multiple leaders found
+                    return;
+                }
             }
 
-            // FIXME: What if multiple leaders found?
             if(CurrentLeader)
             {
                 if(!BotCanWin && IsFakeClient(CurrentLeader))
                 {
-                    // FIXME: FindLeader returns LEVEL not CLIENT!
-                    // FIXME: What if multiple leaders found?
                     CurrentLeader = FindLeader(true);
-
                     /* No real player was found */
-                    if(!CurrentLeader)
+                    if( !CurrentLeader )
                     {
                         return;
                     }
                 }
+                new prevLeader = CurrentLeader;
+                new prevLeaderLevel = PlayerLevel[CurrentLeader];
+                PlayerLevel[CurrentLeader] = 0;
+                CurrentLeader = FindLeader();
+                if( CurrentLeader && PlayerLevel[CurrentLeader] == prevLeaderLevel )
+                {
+                    // multiple leaders found
+                    return;
+                }
+                CurrentLeader = prevLeader;
+                PlayerLevel[CurrentLeader] = prevLeaderLevel;
                 new level = PlayerLevel[CurrentLeader];
 
                 if(level > MinimumLevel)
                 {
-                    // FIXME: What if multiple leaders found?
                     GameWinner = CurrentLeader;
                 }
 
