@@ -1,5 +1,8 @@
 Changelog
 ---------
+	Unofficial_6 1.0.0.1.4:
+		* Reverted changes about warmup. Need more think about.
+	
 	Unofficial_5 1.0.0.1.3:
 		* Added exit button "1" to "!score" menu
 		* Code improved. Separated business logic about calculating leader from
@@ -66,4 +69,5 @@ TODO
 	  Is it plays on round start?
 	* Check for automatic switching primary/secondary in turbo mode.
 	* Save levels on disconnect and restore on reconnect.
+	* Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
 	
