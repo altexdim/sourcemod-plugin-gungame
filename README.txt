@@ -61,4 +61,7 @@ TODO
 	* Colorize nick names in chat by red/blue color.
 	* Colorize nick name on top left corner on gg win.
 	* Money are not removed on player kill, only on player spawn.
+	* Is there a sound if player is on last/nade level?
+	  Is it plays on player reaches this level?
+	  Is it plays on round start?
 
