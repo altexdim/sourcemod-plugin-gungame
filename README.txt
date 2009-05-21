@@ -64,3 +64,5 @@ TODO
 	* Is there a sound if player is on last/nade level?
 	  Is it plays on player reaches this level?
 	  Is it plays on round start?
+	* Check for automatic switching primary/secondary in turbo mode.
+	
