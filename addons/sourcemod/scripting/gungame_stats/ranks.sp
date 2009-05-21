@@ -118,7 +118,7 @@ ShiftRanksUp(client, Wins, RankToReplace, const String:Auth[64])
 	while(--b >= RankToReplace)
 	{
 		/* Makes sure there a rank in the slot before shift up otherwise stop */
-		if((c = PlayerWins[b]) != -1)
+		if((c = PlayerWins[b]) != 0)
 		{
 			PlayerWins[b + 1] = c;
 			PlayerAuthid[b + 1] = PlayerAuthid[b];
@@ -132,3 +132,4 @@ ShiftRanksUp(client, Wins, RankToReplace, const String:Auth[64])
 
 	RankChange = true;
 }
+
