@@ -65,4 +65,5 @@ TODO
 	  Is it plays on player reaches this level?
 	  Is it plays on round start?
 	* Check for automatic switching primary/secondary in turbo mode.
+	* Save levels on disconnect and restore on reconnect.
 	
