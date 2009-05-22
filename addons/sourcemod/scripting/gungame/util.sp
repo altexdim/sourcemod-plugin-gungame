@@ -40,157 +40,157 @@
  */
 UTIL_FindMapObjective()
 {
-	new i = FindEntityByClassname(-1, "func_bomb_target");
-	new maxslots = GetMaxClients( );
-	
-	if(i > maxslots)
-	{
-		MapStatus |= OBJECTIVE_BOMB;
-	} else {
-		if((i = FindEntityByClassname(-1, "info_bomb_target")) > maxslots)
-		{
-			MapStatus |= OBJECTIVE_BOMB;
-		}
-	}
-	
-	if((i = FindEntityByClassname((i = 0), "hostage_entity")) > maxslots)
-	{
-		MapStatus |= OBJECTIVE_HOSTAGE;
-	}
-	
-	HostageEntInfo = FindEntityByClassname(-1, "cs_player_manager");
+    new i = FindEntityByClassname(-1, "func_bomb_target");
+    new maxslots = GetMaxClients( );
+    
+    if(i > maxslots)
+    {
+        MapStatus |= OBJECTIVE_BOMB;
+    } else {
+        if((i = FindEntityByClassname(-1, "info_bomb_target")) > maxslots)
+        {
+            MapStatus |= OBJECTIVE_BOMB;
+        }
+    }
+    
+    if((i = FindEntityByClassname((i = 0), "hostage_entity")) > maxslots)
+    {
+        MapStatus |= OBJECTIVE_HOSTAGE;
+    }
+    
+    HostageEntInfo = FindEntityByClassname(-1, "cs_player_manager");
 }
 
 stock UTIL_ConvertWeaponToIndex()
 {
-	for(new i, Weapons:b; i < WeaponOrderCount; i++)
-	{
-		/**
-		 * Found empty weapon name
-		 * Probably no more weapons since this one is empty.
-		 */
-		if(!WeaponOrderName[i][0])
-			break;
+    for(new i, Weapons:b; i < WeaponOrderCount; i++)
+    {
+        /**
+         * Found empty weapon name
+         * Probably no more weapons since this one is empty.
+         */
+        if(!WeaponOrderName[i][0])
+            break;
 
-		UTIL_StringToLower(WeaponOrderName[i]);
+        UTIL_StringToLower(WeaponOrderName[i]);
 
-		/* Future hash/tries or something lookup */
-		if(!(b = UTIL_GetWeaponIndex(WeaponOrderName[i])))
-		{
-			LogMessage("[GunGame] *** FATAL ERROR *** Weapon Order has an invalid entry :: name %s :: level %d", WeaponOrderName[i], i + 1);
-		}
+        /* Future hash/tries or something lookup */
+        if(!(b = UTIL_GetWeaponIndex(WeaponOrderName[i])))
+        {
+            LogMessage("[GunGame] *** FATAL ERROR *** Weapon Order has an invalid entry :: name %s :: level %d", WeaponOrderName[i], i + 1);
+        }
 
-		WeaponOrderId[i] = b;
-	}
+        WeaponOrderId[i] = b;
+    }
 }
 
 stock UTIL_PrintToClient(client, type, const String:szMsg[], any:...)
 {
-	if(client && IsFakeClient(client))
-	{
-		return;
-	}
+    if(client && IsFakeClient(client))
+    {
+        return;
+    }
 
-	decl String:Buffer[256];
-	VFormat(Buffer, sizeof(Buffer), szMsg, 4);
+    decl String:Buffer[256];
+    VFormat(Buffer, sizeof(Buffer), szMsg, 4);
 
-	Buffer[192] = '\0';
+    Buffer[192] = '\0';
 
-	new String:MsgType[] = "TextMsg";
-	new Handle:Chat = (!client) ? StartMessageAll(MsgType) : StartMessageOne(MsgType, client);
+    new String:MsgType[] = "TextMsg";
+    new Handle:Chat = (!client) ? StartMessageAll(MsgType) : StartMessageOne(MsgType, client);
 
-	if(Chat != INVALID_HANDLE)
-	{
-		BfWriteByte(Chat, type);
-		BfWriteString(Chat, Buffer);
-		EndMessage();
-	}
+    if(Chat != INVALID_HANDLE)
+    {
+        BfWriteByte(Chat, type);
+        BfWriteString(Chat, Buffer);
+        EndMessage();
+    }
 }
 
 UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
 {
-	if(client && IsFakeClient(client))
-	{
-		return;
-	}
+    if(client && IsFakeClient(client))
+    {
+        return;
+    }
 
-	decl String:Buffer[30];
-	VFormat(Buffer, sizeof(Buffer), source, 3);
+    decl String:Buffer[30];
+    VFormat(Buffer, sizeof(Buffer), source, 6);
 
-	new Handle:Msg = CreateKeyValues("msg");
+    new Handle:Msg = CreateKeyValues("msg");
 
-	if(Msg != INVALID_HANDLE)
-	{
-		KvSetString(Msg, "title", Buffer);
-		KvSetColor(Msg, "color", r, g, b, 255);
-		KvSetNum(Msg, "level", 0);
-		KvSetNum(Msg, "time", 20);
+    if(Msg != INVALID_HANDLE)
+    {
+        KvSetString(Msg, "title", Buffer);
+        KvSetColor(Msg, "color", r, g, b, 255);
+        KvSetNum(Msg, "level", 0);
+        KvSetNum(Msg, "time", 20);
 
-		if(client == 0)
-		{
-			new maxslots = GetMaxClients( );
+        if(client == 0)
+        {
+            new maxslots = GetMaxClients( );
 
-			for(new i = 1; i <= maxslots; i++)
-			{
-				if(IsClientInGame(i))
-				{
-					CreateDialog(i, Msg, DialogType_Msg);
-				}
-			}
-		} else {
-			CreateDialog(client, Msg, DialogType_Msg);
-		}
+            for(new i = 1; i <= maxslots; i++)
+            {
+                if(IsClientInGame(i))
+                {
+                    CreateDialog(i, Msg, DialogType_Msg);
+                }
+            }
+        } else {
+            CreateDialog(client, Msg, DialogType_Msg);
+        }
 
-		CloseHandle(Msg);
-	}
+        CloseHandle(Msg);
+    }
 }
 
 /* Weapon Index Lookup via KeyValue */
 /* Figure out hash table later for lookup table */
 Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
 {
-	new len;
+    new len;
 
-	if(strlen(Weapon) > 7)
-	{
-		/* Only check truncated weapon names */
-		len = (Weapon[6] == '_') ? 7 : 0;
-	}
+    if(strlen(Weapon) > 7)
+    {
+        /* Only check truncated weapon names */
+        len = (Weapon[6] == '_') ? 7 : 0;
+    }
 
-	if(WeaponOpen)
-	{
-		KvRewind(KvWeapon);
+    if(WeaponOpen)
+    {
+        KvRewind(KvWeapon);
 
-		if(KvJumpToKey(KvWeapon, Weapon[len]))
-		{
-			return Weapons:KvGetNum(KvWeapon, "index");
-		}
-	}
+        if(KvJumpToKey(KvWeapon, Weapon[len]))
+        {
+            return Weapons:KvGetNum(KvWeapon, "index");
+        }
+    }
 
-	return Weapons:0;
+    return Weapons:0;
 }
 
 stock UTIL_CopyC(String:Dest[], len, const String:Source[], ch)
 {
-	new i = -1;
-	while(++i < len && Source[i] && Source[i] != ch)
-	{
-		Dest[i] = Source[i];
-	}
+    new i = -1;
+    while(++i < len && Source[i] && Source[i] != ch)
+    {
+        Dest[i] = Source[i];
+    }
 }
 
 UTIL_ChangeFriendlyFire(bool:Status)
 {
-	new flags = GetConVarFlags(mp_friendlyfire);
+    new flags = GetConVarFlags(mp_friendlyfire);
 
-	SetConVarFlags(mp_friendlyfire, flags &= ~FCVAR_SPONLY|FCVAR_NOTIFY);
-	SetConVarInt(mp_friendlyfire, Status ? 1 : 0);
-	SetConVarFlags(mp_friendlyfire, flags);
+    SetConVarFlags(mp_friendlyfire, flags &= ~FCVAR_SPONLY|FCVAR_NOTIFY);
+    SetConVarInt(mp_friendlyfire, Status ? 1 : 0);
+    SetConVarFlags(mp_friendlyfire, flags);
 }
 
 UTIL_SetClientGodMode(client, mode = 0)
 {
-	SetEntData(client, TakeDamage[client], mode ? DAMAGE_YES : DAMAGE_NO, 1);
+    SetEntData(client, TakeDamage[client], mode ? DAMAGE_YES : DAMAGE_NO, 1);
 }
 
 /**
@@ -213,20 +213,21 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         {
             return;
         }
-        if ( oldLevel < PlayerLevel[CurrentLeader] )
+        if ( client == CurrentLeader )
         {
+            // was the leader
+            CurrentLeader = FindLeader();
+            if ( CurrentLeader != client )
+            {
+                Call_StartForward(FwdLeader);
+                Call_PushCell(CurrentLeader);
+                Call_PushCell(newLevel);
+                Call_Finish();
+                UTIL_PlaySoundForLeaderLevel();
+            }
             return;
         }
-        new oldLeader = CurrentLeader;
-        CurrentLeader = FindLeader();
-        if ( CurrentLeader != oldLeader )
-        {
-            Call_StartForward(FwdLeader);
-            Call_PushCell(CurrentLeader);
-            Call_PushCell(newLevel);
-            Call_Finish();
-        }
-		UTIL_PlaySoundForLeaderLevel();
+        // was not a leader
         return;
     }
     // newLevel > oldLevel
@@ -237,12 +238,13 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
         Call_Finish();
-		UTIL_PlaySoundForLeaderLevel();
-		return;
+        UTIL_PlaySoundForLeaderLevel();
+        return;
     }
     if ( CurrentLeader == client )
     {
         // still leading
+        UTIL_PlaySoundForLeaderLevel();
         return;
     }
     // CurrentLeader != client
@@ -259,7 +261,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_PushCell(newLevel);
         Call_Finish();
         // start leading
-		UTIL_PlaySoundForLeaderLevel();
+        UTIL_PlaySoundForLeaderLevel();
         return;
     }
     // new level == leader level
@@ -268,317 +270,325 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
 
 UTIL_PlaySoundForLeaderLevel()
 {
-	if ( !CurrentLeader )
-	{
-		return;
-	}
-	new Weapon:WeapId = WeaponOrderId[PlayerLevel[CurrentLeader]];
-	if ( WeapId == CSW_HEGRENADE )
-	{
-		UTIL_PlaySound(0, Nade);
-	}
-	else if ( WeapId == CSW_KNIFE )
-	{
-		UTIL_PlaySound(0, Knife);
-	}
+    if ( !CurrentLeader )
+    {
+        return;
+    }
+    new Weapons:WeapId = WeaponOrderId[PlayerLevel[CurrentLeader]];
+    if ( WeapId == CSW_HEGRENADE )
+    {
+        UTIL_PlaySound(0, Nade);
+        return;
+    }
+    if ( WeapId == CSW_KNIFE )
+    {
+        UTIL_PlaySound(0, Knife);
+        return;
+    }
 }
 
 UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
 {
-	if(!difference || !IsActive)
-		return PlayerLevel[client];
+    if ( !difference || !IsActive )
+    {
+        return PlayerLevel[client];
+    }
+    
+    new oldLevel = PlayerLevel[client], Level = oldLevel + difference;
 
-	new oldLevel = PlayerLevel[client], Level = oldLevel + difference;
+    if ( Level < 0 )
+    {
+        Level = 0;
+    }
+    else if ( Level > WeaponOrderCount )
+    {
+        Level = WeaponOrderCount;
+    }
 
-	if(Level < 0)
-	{
-		Level = 0;
-	} else if(Level > WeaponOrderCount) {
-		Level = WeaponOrderCount;
-	}
+    new ret;
 
-	new ret;
+    Call_StartForward(FwdLevelChange);
+    Call_PushCell(client);
+    Call_PushCell(Level);
+    Call_PushCell(difference);
+    Call_PushCell(KnifeSteal);
+    Call_Finish(ret);
 
-	Call_StartForward(FwdLevelChange);
-	Call_PushCell(client);
-	Call_PushCell(Level);
-	Call_PushCell(difference);
-	Call_PushCell(KnifeSteal);
-	Call_Finish(ret);
+    if ( ret )
+    {
+        Return = true;
+        return (PlayerLevel[client] = oldLevel);
+    }
 
-	if(ret)
-	{
-		Return = true;
-		return (PlayerLevel[client] = oldLevel);
-	}
+    PlayerLevel[client] = Level;
+    UTIL_RecalculateLeader(client, oldLevel, Level);
+    
+    if ( !SuppressSound )
+    {
+        if ( difference < 0 )
+        {
+            UTIL_PlaySound(client, Down);
+        }
+        else 
+        {
+            UTIL_PlaySound(client, Up);
+        }
+    }
 
-	PlayerLevel[client] = Level;
-	UTIL_RecalculateLeader(client, oldLevel, Level);
-	
-	if ( !SuppressSound )
-	{
-		if ( difference < 0 )
-		{
-			UTIL_PlaySound(client, Down);
-		}
-		else 
-		{
-			UTIL_PlaySound(client, Up);
-		}
-	}
+    TotalLevel += difference;
 
-	TotalLevel += difference;
+    if ( TotalLevel < 0 )
+    {
+        TotalLevel = NULL;
+    }
 
-	if(TotalLevel < 0)
-	{
-		TotalLevel = NULL;
-	}
+    if ( GameWinner )
+    {
+        return Level;
+    }
 
-	if(GameWinner)
-	{
-		return Level;
-	}
+    if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
+    {
+        /* Call map voting */
+        IsVotingCalled = true;
 
-	if(!IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount)
-	{
-		/* Call map voting */
-		IsVotingCalled = true;
+        Call_StartForward(FwdVoteStart);
+        Call_Finish();
 
-		Call_StartForward(FwdVoteStart);
-		Call_Finish();
+        return Level;
+    }
+    
+    /* WeaponOrder count is the last weapon. */
+    if ( Level >= WeaponOrderCount )
+    {
 
-		return Level;
-	}
-	
-	/* WeaponOrder count is the last weapon. */
-	if ( Level >= WeaponOrderCount )
-	{
+        /* Winner Winner Winner. They won the prize of gaben plus a hat. */
+        decl String:Name[MAX_NAME_SIZE];
+        GetClientName(client, Name, sizeof(Name));
 
-		/* Winner Winner Winner. They won the prize of gaben plus a hat. */
-		decl String:Name[MAX_NAME_SIZE];
-		GetClientName(client, Name, sizeof(Name));
-
-		new team = GetClientTeam(client);
-		new r = (team == TEAM_T ? 255 : 0);
-		new g = (team != TEAM_T && team != TEAM_CT) ? 255 : 0;
-		new b = (team == TEAM_CT ? 255 : 0);
+        new team = GetClientTeam(client);
+        new r = (team == TEAM_T ? 255 : 0);
+        new g = (team != TEAM_T && team != TEAM_CT) ? 255 : 0;
+        new b = (team == TEAM_CT ? 255 : 0);
         UTIL_PrintToUpperLeft(0, r, g, b, "[GunGame] %s has won.", Name);
 
-		Call_StartForward(FwdWinner);
-		Call_PushCell(client);
-		Call_PushString(WeaponName[WeaponOrderId[Level - 1]][7]);
-		Call_Finish();
+        Call_StartForward(FwdWinner);
+        Call_PushCell(client);
+        Call_PushString(WeaponName[WeaponOrderId[Level - 1]][7]);
+        Call_Finish();
 
-		IsIntermissionCalled = true;
-		GameWinner = client;
+        IsIntermissionCalled = true;
+        GameWinner = client;
 
-		UTIL_FreezeAllPlayer();
-		SetConVarInt(mp_chattime, 5);
-		CreateTimer(10.0, DelayMapChange);
-		UTIL_PlaySound(0, Winner);
-	}
+        UTIL_FreezeAllPlayer();
+        // FIXME: Why chattime is set here? It is in gungame.mapconfig.cfg
+        SetConVarInt(mp_chattime, 5);
+        CreateTimer(10.0, DelayMapChange);
+        UTIL_PlaySound(0, Winner);
+    }
 
-	return Level;
+    return Level;
 }
 
 public Action:DelayMapChange(Handle:Timer)
 {
-	/* Force intermission change map. */
-	#if 0
-	HACK_ForceGameEnd();
-	#endif
-	HACK_EndMultiplayerGame();
+    /* Force intermission change map. */
+    #if 0
+    HACK_ForceGameEnd();
+    #endif
+    HACK_EndMultiplayerGame();
 }
 
 UTIL_FreezeAllPlayer()
 {
-	new maxslots = GetMaxClients( );
+    new maxslots = GetMaxClients( );
 
-	for(new i = 1, b; i <= maxslots; i++)
-	{
-		if(IsClientInGame(i))
-		{
-			b = GetEntData(i, OffsetFlags)|FL_FROZEN;
-			SetEntData(i, OffsetFlags, b);
-		}
-	}
+    for(new i = 1, b; i <= maxslots; i++)
+    {
+        if(IsClientInGame(i))
+        {
+            b = GetEntData(i, OffsetFlags)|FL_FROZEN;
+            SetEntData(i, OffsetFlags, b);
+        }
+    }
 }
 
 /**
  * Force drop a weapon by a slot
  *
- * @param client		Player index.
- * @param slot			The player weapon slot. Look at enum Slots.
- * @param remove		Remove the weapon after drop
- * @return			Return entity index or -1 if not found
+ * @param client        Player index.
+ * @param slot            The player weapon slot. Look at enum Slots.
+ * @param remove        Remove the weapon after drop
+ * @return            Return entity index or -1 if not found
  */
 UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
 {
-	if(slot == Slot_Grenade)
-	{
-		ThrowError("You must use UTIL_FindGrenadeByName to drop a grenade");
-		return -1;
-	}
+    if(slot == Slot_Grenade)
+    {
+        ThrowError("You must use UTIL_FindGrenadeByName to drop a grenade");
+        return -1;
+    }
 
-	new ent = GetPlayerWeaponSlot(client, _:slot);
+    new ent = GetPlayerWeaponSlot(client, _:slot);
 
-	if(ent != -1)
-	{
-		HACK_CSWeaponDrop(client, ent);
+    if(ent != -1)
+    {
+        HACK_CSWeaponDrop(client, ent);
 
-		if(remove)
-		{
-			HACK_Remove(ent);
-			return -1;
-		}
+        if(remove)
+        {
+            HACK_Remove(ent);
+            return -1;
+        }
 
-		return ent;
-	}
+        return ent;
+    }
 
-	return -1;
+    return -1;
 }
 
 /**
- * @param client		Player index
- * @param remove		Remove weapon on drop
- * @param DropKnife		Allow knife drop
- * @param DropBomb		Allow bomb drop. Will only work after event bomb_pickup is called.
+ * @param client        Player index
+ * @param remove        Remove weapon on drop
+ * @param DropKnife        Allow knife drop
+ * @param DropBomb        Allow bomb drop. Will only work after event bomb_pickup is called.
  * @noreturn
  */
 UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, bool:DropBomb = false)
 {
-	for(new Slots:i = Slot_Primary, ent; i < Slot_None; i++)
-	{
-		if(i == Slot_Grenade)
-		{
-			UTIL_DropAllGrenades(client, remove);
-			continue;
-		}
+    for(new Slots:i = Slot_Primary, ent; i < Slot_None; i++)
+    {
+        if(i == Slot_Grenade)
+        {
+            UTIL_DropAllGrenades(client, remove);
+            continue;
+        }
 
-		ent = GetPlayerWeaponSlot(client, _:i);
+        ent = GetPlayerWeaponSlot(client, _:i);
 
-		if(ent != -1)
-		{
-			if(i == Slot_Knife && !DropKnife || i == Slot_C4 && !DropBomb)
-			{
-				continue;
-			}
+        if(ent != -1)
+        {
+            if(i == Slot_Knife && !DropKnife || i == Slot_C4 && !DropBomb)
+            {
+                continue;
+            }
 
-			HACK_CSWeaponDrop(client, ent);
+            HACK_CSWeaponDrop(client, ent);
 
-			if(remove)
-			{
-				HACK_Remove(ent);
-			}
-		}
-	}
+            if(remove)
+            {
+                HACK_Remove(ent);
+            }
+        }
+    }
 }
 
 /**
- * @client		Player index
- * @remove		Remove grenade on drop
+ * @client        Player index
+ * @remove        Remove grenade on drop
  * @noreturn
  */
 UTIL_DropAllGrenades(client, bool:remove = false)
 {
-	for(new i = 0, ent; i , i < 4; i++)
-	{
-		if((ent = GetPlayerWeaponSlot(client, _:Slot_Grenade)) == -1)
-		{
-			break;
-		}
+    for(new i = 0, ent; i , i < 4; i++)
+    {
+        if((ent = GetPlayerWeaponSlot(client, _:Slot_Grenade)) == -1)
+        {
+            break;
+        }
 
-		HACK_CSWeaponDrop(client, ent);
+        HACK_CSWeaponDrop(client, ent);
 
-		if(remove)
-		{
-			HACK_Remove(ent);
-		}
-	}
+        if(remove)
+        {
+            HACK_Remove(ent);
+        }
+    }
 }
 
 /**
  *
- * @param client	Player client
- * @param Grenade	Grenade weapon name. ie weapon_hegrenade
- * @param drop		Drop the grenade
- * @param remove	Removes the weapon from the world
+ * @param client    Player client
+ * @param Grenade    Grenade weapon name. ie weapon_hegrenade
+ * @param drop        Drop the grenade
+ * @param remove    Removes the weapon from the world
  *
- * @return		-1 if not found or you drop the grenade otherwise will return the Entity index.
+ * @return        -1 if not found or you drop the grenade otherwise will return the Entity index.
  */
 UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false)
 {
-	decl String:Class[64];
-	new maxslots = GetMaxClients( );
+    decl String:Class[64];
+    new maxslots = GetMaxClients( );
 
-	for(new i = 0, ent; i < 128; i += 4)
-	{
-		ent = GetEntDataEnt2(client, m_hMyWeapons + i);
+    for(new i = 0, ent; i < 128; i += 4)
+    {
+        ent = GetEntDataEnt2(client, m_hMyWeapons + i);
 
-		if(ent > maxslots && HACK_GetSlot(ent) == _:Slot_Grenade)
-		{
-			GetEdictClassname(ent, Class, sizeof(Class));
+        if(ent > maxslots && HACK_GetSlot(ent) == _:Slot_Grenade)
+        {
+            GetEdictClassname(ent, Class, sizeof(Class));
 
-			if(strcmp(Class, Grenade, false) == 0)
-			{
-				if(drop)
-				{
-					HACK_CSWeaponDrop(client, ent);
+            if(strcmp(Class, Grenade, false) == 0)
+            {
+                if(drop)
+                {
+                    HACK_CSWeaponDrop(client, ent);
 
-					if(remove)
-					{
-						HACK_Remove(ent);
-						return -1;
-					}
-				}
+                    if(remove)
+                    {
+                        HACK_Remove(ent);
+                        return -1;
+                    }
+                }
 
-				return ent;
-			}
-		}
-	}
+                return ent;
+            }
+        }
+    }
 
-	return -1;
+    return -1;
 }
 
 UTIL_GiveNextWeapon(client, level)
 {
-	CurrentLevelPerRound[client] = NULL;
+    CurrentLevelPerRound[client] = NULL;
 
-	new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
+    new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
 
-	if(slot != Slot_Grenade)
-	{
-		/* Drop old weapon first */
-		UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
-	}
+    if(slot != Slot_Grenade)
+    {
+        /* Drop old weapon first */
+        UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
+    }
 
-	/* Give new weapon */
-	GivePlayerItem(client, WeaponName[WeapId]);
-	FakeClientCommand(client, "use %s", WeaponName[WeapId]]);
+    /* Give new weapon */
+    GivePlayerItem(client, WeaponName[WeapId]);
+    //Add check that not knife and primary changes to secondary etc.
+    //FakeClientCommand(client, "use %s", WeaponName[WeapId]]);
 }
 
 UTIL_PlaySound(client, Sounds:type)
 {
-	if(client && !IsClientInGame(client))
-	{
-		return;
-	}
+    if(client && !IsClientInGame(client))
+    {
+        return;
+    }
 
-	if(EventSounds[type][0])
-	{
-		if(!client)
-		{
-			new maxslots = GetMaxClients( );
+    if(EventSounds[type][0])
+    {
+        if(!client)
+        {
+            new maxslots = GetMaxClients( );
 
-			for(new i = 1; i <= maxslots; i++)
-			{
-				if(IsClientInGame(i) && !IsFakeClient(i))
-				{
-					ClientCommand(i, "play %s", EventSounds[type]);
-				}
-			}
-		} else {
-			ClientCommand(client, "play %s", EventSounds[type]);
-		}
-	}
+            for(new i = 1; i <= maxslots; i++)
+            {
+                if(IsClientInGame(i) && !IsFakeClient(i))
+                {
+                    ClientCommand(i, "play %s", EventSounds[type]);
+                }
+            }
+        } else {
+            ClientCommand(client, "play %s", EventSounds[type]);
+        }
+    }
 }

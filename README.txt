@@ -1,5 +1,10 @@
 Changelog
 ---------
+	Unofficial_7 1.0.0.1.5:
+		* Fixed money remove on player kill.
+		* Colorized winner message.
+		+ Added sounds on last/nade level.
+	
 	Unofficial_6 1.0.0.1.4:
 		* Reverted changes about warmup. Need more think about.
 	
@@ -75,6 +80,7 @@ TODO
 
 			stock SayText2( client_index , author_index , const String:message[] ) {
 			    new Handle:buffer = StartMessageOne("SayText2", client_index);
+			    //new Handle:buffer = StartMessageAll("SayText2", client_index);
 			    if (buffer != INVALID_HANDLE) {
 			        BfWriteByte(buffer, author_index);
 			        BfWriteByte(buffer, true);
@@ -82,16 +88,8 @@ TODO
 			        EndMessage();
 			    }
 			}  
-	* Colorize winner message.
-	  (DONE, NEED CHECK)
-	* Money are not removed on player kill, only on player spawn.
-	  (DONE, NEED CHECK)
-	* Is there a sound if player is on last/nade level?
-	  Is it plays on player reaches this level?
-	  Is it plays on round start?
-	  (DONE, NEED CHECK)
 	* Check for automatic switching primary/secondary in turbo mode.
-	  (DONE, NEED CHECK)
+	  (DONE, NEED CHECK, NEED MORE THINK)
 	* Save levels on disconnect and restore on reconnect.
 	* Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
 	+ Add handycap option to give the lowest level to new connected player.
