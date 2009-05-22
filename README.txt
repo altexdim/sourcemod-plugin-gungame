@@ -67,7 +67,9 @@ TODO
 	* Is there a sound if player is on last/nade level?
 	  Is it plays on player reaches this level?
 	  Is it plays on round start?
+	  (DONE, NEED CHECK)
 	* Check for automatic switching primary/secondary in turbo mode.
+	  (DONE, NEED CHECK)
 	* Save levels on disconnect and restore on reconnect.
 	* Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
 	+ Add handycap option to give the lowest level to new connected player.

@@ -225,6 +225,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
             Call_PushCell(newLevel);
             Call_Finish();
         }
+		UTIL_PlaySoundForLeaderLevel();
         return;
     }
     // newLevel > oldLevel
@@ -235,6 +236,8 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
         Call_Finish();
+		UTIL_PlaySoundForLeaderLevel();
+		return;
     }
     if ( CurrentLeader == client )
     {
@@ -255,10 +258,28 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_PushCell(newLevel);
         Call_Finish();
         // start leading
+		UTIL_PlaySoundForLeaderLevel();
         return;
     }
     // new level == leader level
     // tied to the lead
+}
+
+UTIL_PlaySoundForLeaderLevel()
+{
+	if ( !CurrentLeader )
+	{
+		return;
+	}
+	new Weapon:WeapId = WeaponOrderId[PlayerLevel[CurrentLeader]];
+	if ( WeapId == CSW_HEGRENADE )
+	{
+		UTIL_PlaySound(0, Nade);
+	}
+	else if ( WeapId == CSW_KNIFE )
+	{
+		UTIL_PlaySound(0, Knife);
+	}
 }
 
 UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
@@ -293,12 +314,14 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 	PlayerLevel[client] = Level;
 	UTIL_RecalculateLeader(client, oldLevel, Level);
 	
-	if(!SuppressSound)
+	if ( !SuppressSound )
 	{
-		if(difference < 0)
+		if ( difference < 0 )
 		{
 			UTIL_PlaySound(client, Down);
-		} else {
+		}
+		else 
+		{
 			UTIL_PlaySound(client, Up);
 		}
 	}
@@ -526,6 +549,7 @@ UTIL_GiveNextWeapon(client, level)
 
 	/* Give new weapon */
 	GivePlayerItem(client, WeaponName[WeapId]);
+	FakeClientCommand(client, "use %s", WeaponName[WeapId]]);
 }
 
 UTIL_PlaySound(client, Sounds:type)

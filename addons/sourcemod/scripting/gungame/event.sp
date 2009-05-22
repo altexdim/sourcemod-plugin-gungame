@@ -257,6 +257,7 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
             {
                 StartWarmupRound();
             }
+			UTIL_PlaySoundForLeaderLevel();
         } else {
             /* Round has ended. */
             RoundStarted = false;
