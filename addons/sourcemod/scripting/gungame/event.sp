@@ -147,7 +147,11 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
                     if(IsClientInGame(GameWinner))
                     {
                         GetClientName(GameWinner, Name, sizeof(Name));
-                        UTIL_PrintToUpperLeft(0, "[GunGame] %s has won.", Name);
+						new team = GetClientTeam(client);
+						new r = (team == TEAM_T ? 255 : 0);
+						new g = (team != TEAM_T && team != TEAM_CT) ? 255 : 0;
+						new b = (team == TEAM_CT ? 255 : 0);
+                        UTIL_PrintToUpperLeft(0, r, g, b, "[GunGame] %s has won.", Name);
                     }
 
                     Call_StartForward(FwdWinner);
@@ -296,6 +300,11 @@ public Action:RemoveHostages(Handle:timer)
     }
 }
 
+public Action:DelayClearMoney(Handle:Timer, any:client)
+{
+		SetEntData(Killer, OffsetMoney, 0);
+}
+
 public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
     // Player has died.
@@ -305,7 +314,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
 
         /* Clear money off from the killer so they can't buy anything */
-        SetEntData(Killer, OffsetMoney, 0);
+		// KLUGE: It seems like player got money AFTER player_death
+		CreateTimer(0.1, DelayClearMoney, Killer);
 
         /* They change team at round end don't punish them. */
         if(!RoundStarted)

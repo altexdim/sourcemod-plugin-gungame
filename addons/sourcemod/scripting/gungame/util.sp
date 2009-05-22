@@ -107,7 +107,7 @@ stock UTIL_PrintToClient(client, type, const String:szMsg[], any:...)
 	}
 }
 
-UTIL_PrintToUpperLeft(client, const String:source[], any:...)
+UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
 {
 	if(client && IsFakeClient(client))
 	{
@@ -122,6 +122,7 @@ UTIL_PrintToUpperLeft(client, const String:source[], any:...)
 	if(Msg != INVALID_HANDLE)
 	{
 		KvSetString(Msg, "title", Buffer);
+		KvSetColor(Msg, "color", r, g, b, 255);
 		KvSetNum(Msg, "level", 0);
 		KvSetNum(Msg, "time", 20);
 
@@ -357,7 +358,11 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 		decl String:Name[MAX_NAME_SIZE];
 		GetClientName(client, Name, sizeof(Name));
 
-		UTIL_PrintToUpperLeft(0, "[GunGame] %s has won.", Name);
+		new team = GetClientTeam(client);
+		new r = (team == TEAM_T ? 255 : 0);
+		new g = (team != TEAM_T && team != TEAM_CT) ? 255 : 0;
+		new b = (team == TEAM_CT ? 255 : 0);
+        UTIL_PrintToUpperLeft(0, r, g, b, "[GunGame] %s has won.", Name);
 
 		Call_StartForward(FwdWinner);
 		Call_PushCell(client);

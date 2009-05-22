@@ -58,12 +58,34 @@ TODO
 	* Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
 	+ Add sqlite and mysql support for top players stats
 	+ Add grenade warmup
+	+ Add unlimited nades
 	* What is wrong with random number generator? GetRandomInt(0,12) give one
 	  the same value on server start even i use SetRandomSeed().
 	* Colorize nick names in chat by red/blue color.
-	  Is it possible on CSS? (MessageSay2 or etc.)
-	* Colorize nick name on top left corner on gg win.
+	  (SayText2 or etc.)
+	  http://forums.alliedmods.net/showthread.php?p=571160#post571160
+	  http://forums.alliedmods.net/showthread.php?t=87275&highlight=SayText2
+
+		Ex:
+			public Action:Command_Say(client, args) {
+			    new String:nm[255];
+			    Format(nm,sizeof(nm),"\x01This is \x04green \x01and this is \x03red, blue or grey");
+			    SayText2(client,client,nm);
+			}
+
+			stock SayText2( client_index , author_index , const String:message[] ) {
+			    new Handle:buffer = StartMessageOne("SayText2", client_index);
+			    if (buffer != INVALID_HANDLE) {
+			        BfWriteByte(buffer, author_index);
+			        BfWriteByte(buffer, true);
+			        BfWriteString(buffer, message);
+			        EndMessage();
+			    }
+			}  
+	* Colorize winner message.
+	  (DONE, NEED CHECK)
 	* Money are not removed on player kill, only on player spawn.
+	  (DONE, NEED CHECK)
 	* Is there a sound if player is on last/nade level?
 	  Is it plays on player reaches this level?
 	  Is it plays on round start?
