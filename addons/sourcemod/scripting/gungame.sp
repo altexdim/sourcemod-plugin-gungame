@@ -452,7 +452,10 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     if ( CurrentLeader == client )
     {
         // say leading on level X
-        PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
+        //PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
+        new String:msg[MAX_CHAT_SIZE];
+        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, YELLOW, GREEN, TEAMCOLOR, name, GREEN, YELLOW, newLevel + 1);
+		UTIL_SayText(0, client, msg);
         return;
     }
     // CurrentLeader != client

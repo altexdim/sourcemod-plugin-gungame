@@ -43,7 +43,7 @@
  * Maximum level in gungame.
  */
 #define GUNGAME_MAX_LEVEL            32
-
+										
 /**
  * This is the maximum allow time for a menu to be !rules, !weapons, !score, !level is display for.
  */
@@ -60,6 +60,7 @@ stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
 #define MAX_NAME_SIZE        64
+#define MAX_CHAT_SIZE        192
 
 #define YELLOW               0x01
 #define NAME_TEAMCOLOR       0x02
