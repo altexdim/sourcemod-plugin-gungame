@@ -390,7 +390,11 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         SetConVarInt(mp_chattime,5);
         if ( time < 5 )
         {
-        	time = 1.0;
+            time = 1.0;
+        }
+        else
+        {
+            time = time - 5;
         }
         CreateTimer(time, DelayMapChange);
         UTIL_PlaySound(0, Winner);
