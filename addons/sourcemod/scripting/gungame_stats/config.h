@@ -37,5 +37,5 @@
 
 new State:ConfigState = CONFIG_STATE_NONE;
 new Prune = 30;
-new bool:HandicapMode;
+new HandicapMode;
 new bool:Top10Handicap;

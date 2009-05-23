@@ -2,6 +2,7 @@ Changelog
 ---------
     Unofficial_8 1.0.0.1.6:
         * Fixed top left winner message size for long nicknames.
+        + Added handycap option to give the lowest level to new connected player.
         
     Unofficial_7 1.0.0.1.5:
         * Fixed money remove on player kill.
@@ -76,6 +77,5 @@ TODO
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
     * Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
-    + Add handycap option to give the lowest level to new connected player.
     * Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce)
     * Is alltalk activated after player win?

@@ -68,170 +68,170 @@
 
 public Plugin:myinfo =
 {
-	name = "GunGame:SM Stats",
-	author = GUNGAME_AUTHOR,
-	description = "Stats for GunGame:SM",
-	version = GUNGAME_VERSION,
-	url = "http://www.hat-city.net/"
+    name = "GunGame:SM Stats",
+    author = GUNGAME_AUTHOR,
+    description = "Stats for GunGame:SM",
+    version = GUNGAME_VERSION,
+    url = "http://www.hat-city.net/"
 };
 
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
-	CreateNative("GG_DisplayTop10", __DisplayTop10);
-	CreateNative("GG_GetClientWins", __GetPlayerWins);
-	return true;
+    CreateNative("GG_DisplayTop10", __DisplayTop10);
+    CreateNative("GG_GetClientWins", __GetPlayerWins);
+    return true;
 }
 
 public OnPluginStart()
 {
-	OnCreateKeyValues();
-	RegConsoleCmd("top10", _CmdTop10);
-	RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
-	RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
+    OnCreateKeyValues();
+    RegConsoleCmd("top10", _CmdTop10);
+    RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
+    RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
 }
 
 public OnMapStart()
 {
-	SaveProcess = false;
-	Top10Panel = CreateTop10Panel();
+    SaveProcess = false;
+    Top10Panel = CreateTop10Panel();
 }
 
 public OnMapEnd()
 {
-	if(!SaveProcess)
-	{
-		EndProcess();
-	}
+    if(!SaveProcess)
+    {
+        EndProcess();
+    }
 
-	if(Top10Panel != INVALID_HANDLE)
-	{
-		CloseHandle(Top10Panel);
-		Top10Panel = INVALID_HANDLE;
-	}
+    if(Top10Panel != INVALID_HANDLE)
+    {
+        CloseHandle(Top10Panel);
+        Top10Panel = INVALID_HANDLE;
+    }
 
 }
 
 public OnPluginEnd()
 {
-	if(!SaveProcess)
-	{
-		EndProcess();
-	}
+    if(!SaveProcess)
+    {
+        EndProcess();
+    }
 }
 
 public GG_OnStartup(bool:Command)
 {
-	if(!IsActive)
-	{
-		new maxslots = GetMaxClients( );
-		IsActive = true;
-		decl String:Auth[64];
-		for(new i = 1; i <= maxslots; i++)
-		{
-			if(IsClientInGame(i))
-			{
-				GetClientAuthString(i, Auth, sizeof(Auth));
-				OnClientAuthorized(i, Auth);
-			}
-		}
-	}
+    if(!IsActive)
+    {
+        new maxslots = GetMaxClients( );
+        IsActive = true;
+        decl String:Auth[64];
+        for(new i = 1; i <= maxslots; i++)
+        {
+            if(IsClientInGame(i))
+            {
+                GetClientAuthString(i, Auth, sizeof(Auth));
+                OnClientAuthorized(i, Auth);
+            }
+        }
+    }
 }
 
 public GG_OnShutdown()
 {
-	if(IsActive)
-	{
-		IsActive = false;
+    if(IsActive)
+    {
+        IsActive = false;
 
-		if(!SaveProcess)
-		{
-			EndProcess();
-		}
+        if(!SaveProcess)
+        {
+            EndProcess();
+        }
 
-		new maxslots = GetMaxClients( );
+        new maxslots = GetMaxClients( );
 
-		for(new i = 1; i <= maxslots; i++)
-		{
-			if(IsClientInGame(i))
-			{
-				OnClientDisconnect(i);
-			}
-		}
-	}
+        for(new i = 1; i <= maxslots; i++)
+        {
+            if(IsClientInGame(i))
+            {
+                OnClientDisconnect(i);
+            }
+        }
+    }
 }
 
 public __DisplayTop10(Handle:plugin, numParams)
 {
-	new client = GetNativeCell(1);
+    new client = GetNativeCell(1);
 
-	if(client < 1 || client > GetMaxClients())
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-	} else if(!IsClientInGame(client)) {
-		return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-	}
+    if(client < 1 || client > GetMaxClients())
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
 
-	if(Top10Panel != INVALID_HANDLE)
-	{
-		SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
-	}
-	return 1;
+    if(Top10Panel != INVALID_HANDLE)
+    {
+        SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
+    }
+    return 1;
 }
 
 public __GetPlayerWins(Handle:plugin, numParams)
 {
-	new client = GetNativeCell(1);
+    new client = GetNativeCell(1);
 
-	if(client < 1 || client > GetMaxClients())
-	{
-		return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-	} else if(!IsClientInGame(client)) {
-		return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-	}
+    if(client < 1 || client > GetMaxClients())
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
 
-	return PlayerWinsData[client];
+    return PlayerWinsData[client];
 }
 
 public OnClientAuthorized(client, const String:auth[])
 {
-	if(auth[0] == 'B')
-	{
-		if(HandicapMode)
-		{
-			GG_GiveAverageLevel(client);
-			return;
-		}
-	} else {
+    if(auth[0] == 'B')
+    {
+        if(HandicapMode)
+        {
+            GG_GiveHandicapLevel(client, HandicapMode);
+            return;
+        }
+    } else {
 
-		#if !defined SQL_SUPPORT
-		RetrieveKeyValues(client, auth);
-		#endif
+        #if !defined SQL_SUPPORT
+        RetrieveKeyValues(client, auth);
+        #endif
 
-		if(HandicapMode && (Top10Handicap || IsPlayerInTop10(auth) == -1))
-		{
-			GG_GiveAverageLevel(client);
-		}
-	}
+        if(HandicapMode && (Top10Handicap || IsPlayerInTop10(auth) == -1))
+        {
+            GG_GiveHandicapLevel(client, HandicapMode);
+        }
+    }
 }
 
 public OnClientDisconnect(client)
 {
-	PlayerWinsData[client] = NULL;
+    PlayerWinsData[client] = NULL;
 }
 
 public Action:_CmdTop10(client, args)
 {
-	if(IsActive && Top10Panel != INVALID_HANDLE)
-	{
-		SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
-	}
-	return Plugin_Handled;
+    if(IsActive && Top10Panel != INVALID_HANDLE)
+    {
+        SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
+    }
+    return Plugin_Handled;
 }
 
 EndProcess()
 {
-	SaveProcess = true;
+    SaveProcess = true;
 
-	SaveRank();
-	SavePlayerDataInfo();
+    SaveRank();
+    SavePlayerDataInfo();
 }

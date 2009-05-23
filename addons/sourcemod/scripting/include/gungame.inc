@@ -284,13 +284,17 @@ forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKille
 native GG_DisplayTop10(client);
 
 /**
- * Gives the client the average level of all players in the server.
+ * Gives the client the average/minimum level of all players in the server.
+ *
+ * Handicap mode: 
+ *    1 - Average level
+ *    2 - Minimum level
  *
  * @param client        Player index.
+ * @param mode          Handicap mode.
  * @noreturn
  */
-
-native GG_GiveAverageLevel(client);
+native GG_GiveHandicapLevel(client, mode);
 
 /**
  * Retrieves player current total wins
