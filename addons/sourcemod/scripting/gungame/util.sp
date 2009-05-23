@@ -114,7 +114,7 @@ UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
         return;
     }
 
-    decl String:Buffer[30];
+    decl String:Buffer[53];
     VFormat(Buffer, sizeof(Buffer), source, 6);
 
     new Handle:Msg = CreateKeyValues("msg");

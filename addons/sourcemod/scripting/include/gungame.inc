@@ -43,7 +43,7 @@
  * Maximum level in gungame.
  */
 #define GUNGAME_MAX_LEVEL            32
-										
+                                        
 /**
  * This is the maximum allow time for a menu to be !rules, !weapons, !score, !level is display for.
  */
@@ -55,7 +55,7 @@
 #define GUNGAME_ADMINFLAG         ADMFLAG_RCON
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat/Liam";
-stock const String:GUNGAME_VERSION[] = "1.0.0.1.5";
+stock const String:GUNGAME_VERSION[] = "1.0.0.1.6";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -90,7 +90,7 @@ stock const String:BLANK_SPACE[] = " ";
 
 // settings for m_takedamage
 #define DAMAGE_NO            0
-#define DAMAGE_EVENTS_ONLY   1		// Call damage functions, but don't modify health
+#define DAMAGE_EVENTS_ONLY   1      // Call damage functions, but don't modify health
 #define DAMAGE_YES           2
 #define DAMAGE_AIM           3
 
@@ -110,59 +110,59 @@ stock const String:BLANK_SPACE[] = " ";
 
 enum Slots
 {
-	Slot_Primary = 0,
-	Slot_Secondary,
-	Slot_Knife,
-	Slot_Grenade,
-	Slot_C4,
-	Slot_None /* Not used for anything but a marker for last slot*/
+    Slot_Primary = 0,
+    Slot_Secondary,
+    Slot_Knife,
+    Slot_Grenade,
+    Slot_C4,
+    Slot_None /* Not used for anything but a marker for last slot*/
 };
 
 enum Weapons
 {
-	CSW_KNIFE = 1,
-	// Secondary Weapon
-	CSW_USP,
-	CSW_GLOCK,
-	CSW_P228,
-	CSW_DEAGLE,
-	CSW_FIVESEVEN,
-	CSW_ELITE,
-	// Primary weapon
-	CSW_M3,
-	CSW_XM1014,
-	CSW_TMP,
-	CSW_MAC10,
-	CSW_MP5NAVY,
-	CSW_UMP45,
-	CSW_P90,
-	CSW_GALIL,
-	CSW_FAMAS,
-	CSW_AK47,
-	CSW_M4A1,
-	CSW_SG552,
-	CSW_AUG,
-	CSW_SCOUT,
-	CSW_SG550,
-	CSW_AWP,
-	CSW_G3SG1,
-	CSW_M249,
-	CSW_HEGRENADE,
-	CSW_FLASHBANG,
-	CSW_SMOKEGRENADE,
+    CSW_KNIFE = 1,
+    // Secondary Weapon
+    CSW_USP,
+    CSW_GLOCK,
+    CSW_P228,
+    CSW_DEAGLE,
+    CSW_FIVESEVEN,
+    CSW_ELITE,
+    // Primary weapon
+    CSW_M3,
+    CSW_XM1014,
+    CSW_TMP,
+    CSW_MAC10,
+    CSW_MP5NAVY,
+    CSW_UMP45,
+    CSW_P90,
+    CSW_GALIL,
+    CSW_FAMAS,
+    CSW_AK47,
+    CSW_M4A1,
+    CSW_SG552,
+    CSW_AUG,
+    CSW_SCOUT,
+    CSW_SG550,
+    CSW_AWP,
+    CSW_G3SG1,
+    CSW_M249,
+    CSW_HEGRENADE,
+    CSW_FLASHBANG,
+    CSW_SMOKEGRENADE,
 
-	// Do not delete line below
-	MAXWEAPON
+    // Do not delete line below
+    MAXWEAPON
 };
 
 enum State
 {
-	CONFIG_STATE_NONE,
-	CONFIG_STATE_CONFIG,
-	CONFIG_STATE_EQUIP,
-	CONFIG_STATE_KILLS,
-	CONFIG_STATE_SOUNDS,
-	CONFIG_STATE_SECONDARY_LIST
+    CONFIG_STATE_NONE,
+    CONFIG_STATE_CONFIG,
+    CONFIG_STATE_EQUIP,
+    CONFIG_STATE_KILLS,
+    CONFIG_STATE_SOUNDS,
+    CONFIG_STATE_SECONDARY_LIST
 }
 
 /**
@@ -172,7 +172,7 @@ enum State
 /**
  * Called when gungame is enabled
  *
- * @param Command		True if gungame was enabled by command.
+ * @param Command       True if gungame was enabled by command.
  * @noreturn
  */
 forward GG_OnStartup(bool:Command);
@@ -180,7 +180,7 @@ forward GG_OnStartup(bool:Command);
 /**
  * Called when gungame is disabled
  *
- * @param Command		True if gungame was disabled by command.
+ * @param Command       True if gungame was disabled by command.
  * @noreturn
  */
 forward GG_OnShutdown(bool:Command);
@@ -188,29 +188,29 @@ forward GG_OnShutdown(bool:Command);
 /**
  * Called when the player level changed
  *
- * @param client		Player index.
- * @param level		Player current level.
- * @param difference	The difference in the level change.
- * @param steal		true if it was a knife steal otherwise false
- * @return			Plugin_Handled; to stop the level change.
+ * @param client        Player index.
+ * @param level     Player current level.
+ * @param difference    The difference in the level change.
+ * @param steal     true if it was a knife steal otherwise false
+ * @return          Plugin_Handled; to stop the level change.
  */
 forward Action:GG_OnClientLevelChange(client, level, difference, bool:steal);
 
 /**
  * Called when the player point per level changed.
  *
- * @param client		Player index.
- * @param point		Player current point per level.
- * @param difference	The difference in point change.
- * @return			Plugin_Handled; to stop the level change.
+ * @param client        Player index.
+ * @param point     Player current point per level.
+ * @param difference    The difference in point change.
+ * @return          Plugin_Handled; to stop the level change.
  */
 forward Action:GG_OnClientPointChange(client, point, difference);
 
 /**
  * Called when a client won the game.
  *
- * @param client		Player index.
- * @param Weapon		The player weapon they won with.
+ * @param client        Player index.
+ * @param Weapon        The player weapon they won with.
  * @noreturn
  */
 forward GG_OnWinner(client, const String:Weapon[]);
@@ -218,8 +218,8 @@ forward GG_OnWinner(client, const String:Weapon[]);
 /**
  * Called when the leader change player.
  *
- * @param client		Player index.
- * @param level		The player current level
+ * @param client        Player index.
+ * @param level     The player current level
  * @noreturn
  */
 forward GG_OnLeaderChange(client, level);
@@ -227,7 +227,7 @@ forward GG_OnLeaderChange(client, level);
 /**
  * Called news section of the config reader changes
  *
- * @param NewSection		The news section of the config file.
+ * @param NewSection        The news section of the config file.
  * @noreturn
  */
 forward GG_ConfigNewSection(const String:name[]);
@@ -235,8 +235,8 @@ forward GG_ConfigNewSection(const String:name[]);
 /**
  * Called when the leader change player.
  *
- * @param Key			Key of cvar (Think of a better description)
- * @param Value		Value of setting
+ * @param Key           Key of cvar (Think of a better description)
+ * @param Value     Value of setting
  * @noreturn
  */
 forward GG_ConfigKeyValue(const String:key[], const String:value[]);
@@ -268,17 +268,17 @@ forward GG_OnStartMapVote();
 /**
  * Called when a player died.
  *
- * @param killer		Killer's index.
- * @param victim		Victim's index.
- * @param WeaponId		The weapon index the player was killed with.
- * @param TeamKilled	True if they were killed by a team mate.
+ * @param killer        Killer's index.
+ * @param victim        Victim's index.
+ * @param WeaponId      The weapon index the player was killed with.
+ * @param TeamKilled    True if they were killed by a team mate.
  */
 forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKilled);
 
 /**
  * Show the top10 to the client
  *
- * @param client		Player index.
+ * @param client        Player index.
  * @noreturn
  */
 native GG_DisplayTop10(client);
@@ -286,7 +286,7 @@ native GG_DisplayTop10(client);
 /**
  * Gives the client the average level of all players in the server.
  *
- * @param client		Player index.
+ * @param client        Player index.
  * @noreturn
  */
 
@@ -295,24 +295,24 @@ native GG_GiveAverageLevel(client);
 /**
  * Retrieves player current total wins
  *
- * @param client		Player index.
- * @return			Total player wins
+ * @param client        Player index.
+ * @return          Total player wins
  */
 native GG_GetClientWins(client);
 
 /**
  * Get the player current level.
  *
- * @param client		Player index
- * @return			The player current level.
+ * @param client        Player index
+ * @return          The player current level.
  */
 native GG_GetClientLevel(client);
 
 /**
  * Retrieves the client max level.
  *
- * @param client		Player index.
- * @param return		The client max level.
+ * @param client        Player index.
+ * @param return        The client max level.
  */
 native GG_GetClientMaxLevel(client);
 
@@ -320,8 +320,8 @@ native GG_GetClientMaxLevel(client);
  * Add a level to the player current level.
  * This does not tell the client that they have leveled.
  *
- * @param client		Player index.
- * @return 			The player current level.
+ * @param client        Player index.
+ * @return          The player current level.
  */
 native GG_AddALevel(client);
 
@@ -331,8 +331,8 @@ native GG_AddALevel(client);
  * This does not tell the client that they have lost a level.
  * This also obeys the max level per round.
  *
- * @param client		Player index.
- * @return 			The player current level.
+ * @param client        Player index.
+ * @return          The player current level.
  */
 native GG_RemoveALevel(client);
 
@@ -342,8 +342,8 @@ native GG_RemoveALevel(client);
  * This does not tell the client if they gain a point
  * nor does it tell the client that they leveled due to reaching the max point.
  *
- * @param client		Player index.
- * @return			The current player point per level or 0 if they leveled.
+ * @param client        Player index.
+ * @return          The current player point per level or 0 if they leveled.
  */
 native GG_AddAPoint(client);
 
@@ -353,32 +353,32 @@ native GG_AddAPoint(client);
  * This does not tell the client if they lost a point
  * nor does it tell the client that they lost a level.
  *
- * @param client		Player index.
- * @return			The current player point per level or GG_GetClientMaxPointLevel() - 1 if they lost a level.
+ * @param client        Player index.
+ * @return          The current player point per level or GG_GetClientMaxPointLevel() - 1 if they lost a level.
  */
 native GG_RemoveAPoint(client);
 
 /**
  * Retrieves the client current point per level.
  *
- * @param client		Player index.
- * @return			The current player point per level.
+ * @param client        Player index.
+ * @return          The current player point per level.
  */
 native GG_GetClientPointLevel(client);
 
 /**
  * Retrieves the client max point per level.
  *
- * @param client		Player index.
- * @return			The player max point per level.
+ * @param client        Player index.
+ * @return          The player max point per level.
  */
 native GG_GetClientMaxPointLevel(client);
 
 /**
  * Set the level weapon by weapon index.
  *
- * @param level		The weapon level
- * @param weapon		The weapon index
+ * @param level     The weapon level
+ * @param weapon        The weapon index
  * @noreturn
  */
 native GG_SetWeaponLevel(level, Weapons:weapon);
@@ -386,17 +386,17 @@ native GG_SetWeaponLevel(level, Weapons:weapon);
 /**
  * Set the level weapon by weapon name.
  *
- * @param level		The weapon level
- * @param weapon		The weapon name
+ * @param level     The weapon level
+ * @param weapon        The weapon name
  */
 native GG_SetWeaponLevelByName(level, const String:weapon[]);
 
 /**
  * Set the maximum level the player can achieve to win the game.
  *
- * @param level		The level
+ * @param level     The level
  * @noreturn
- * @error				If level is greater than the define maximum.
+ * @error               If level is greater than the define maximum.
  *
  */
 native GG_SetMaxLevel(level);
@@ -404,8 +404,8 @@ native GG_SetMaxLevel(level);
 /**
  * Retrieves the weapon index from weapon name.
  *
- * @param weapon		The short weapon name. ie awp, glock.
- * @return			0 if weapon is not found or the CSW_* weapon index.
+ * @param weapon        The short weapon name. ie awp, glock.
+ * @return          0 if weapon is not found or the CSW_* weapon index.
  */
 native Weapons:GG_GetWeaponIndex(const String:weapon[]);
 
@@ -413,7 +413,7 @@ native Weapons:GG_GetWeaponIndex(const String:weapon[]);
  * Retrieves if the game is commenced.
  *
  * @noparam
- * @return			Return true if game is commenced otherwise false.
+ * @return          Return true if game is commenced otherwise false.
  */
 native bool:GG_IsGameCommenced();
 
@@ -423,43 +423,43 @@ native bool:GG_IsGameCommenced();
 
 stock UTIL_StringToLower(String:Source[])
 {
-	new len = strlen(Source);
+    new len = strlen(Source);
 
-	for(new i = 0; i <= len; i++)
-	{
-		if(IsCharUpper(Source[i]))
-		{
-			Source[i] |= (1<<5);
-		}
-	}
+    for(new i = 0; i <= len; i++)
+    {
+        if(IsCharUpper(Source[i]))
+        {
+            Source[i] |= (1<<5);
+        }
+    }
 
-	return 1;
+    return 1;
 }
 
 stock UTIL_StringToUpper(String:Source[])
 {
-	new len = strlen(Source);
+    new len = strlen(Source);
 
-	/* Should this be i <= len */
-	for(new i = 0; i <= len; i++)
-	{
-		if(IsCharLower(Source[i]))
-		{
-			Source[i] &= ~(1<<5);
-		}
-	}
+    /* Should this be i <= len */
+    for(new i = 0; i <= len; i++)
+    {
+        if(IsCharLower(Source[i]))
+        {
+            Source[i] &= ~(1<<5);
+        }
+    }
 
-	return 1;
+    return 1;
 }
 
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame =
 {
-	name = "gungame",
-	file = "gungame.smx",
+    name = "gungame",
+    file = "gungame.smx",
 #if defined REQUIRE_PLUGIN
-	required = 1,
+    required = 1,
 #else
-	required = 0,
+    required = 0,
 #endif
 };
