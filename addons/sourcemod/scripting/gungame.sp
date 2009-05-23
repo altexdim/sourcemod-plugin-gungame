@@ -479,44 +479,17 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
  * BarTime probably used to show how long left till respawn.
  */
 
-/*Sucide by world spawn = -1 level (Done)
-Knife kills equal to a stolen level from the player. (DONE)
-After player kill or dies tell how far they are from the leader by levels (Done)
-Let them pick up weapons drop from other teams/player. (???)
-If someone is tied to the leader say so on player death (DONE)
-Say how many levels away from the leader or say who is tied to the leader (DONE).
-Set player money to 0 so they can't buy anything. (Done)
-Set player armor to 100 and set the helm (Done)
-Show their level to them and weapon on spawn. (Done)
-Seem to give level on warmup.
-Level calcuation is on spawn. Does not matter how many kills you get. You need aleast one kill with the weapon to go on.
-Weapon lookup? How can I figure out a fast loop. (Done)
-Multiple Kills mode ie .. MutlipleKillsPerLevel setting (Done)
-
+/*
 ToDo:
 Waiting for menu system for map voting when time is close to up or if they set mp_timelimit to 0.
-Only if winner it will change map but still will vote near probably MaxLevel - 2
 In the future when ability to call CBasePlayer::RoundRespawn DM GunGame
 In the future when ability to call ChangeTeam to Spectator.
 Wait for CBasePlayer?::GetWeaponSlot()
 Check byte size for SendProp Offset
 PHP website config maker.
-Show instructions on how to play the game.
-Handicap mode do not allow player in top setting. (Done)
-Allow handicap mode even if player in top10 setting. (Done)
-Triple Level Bonus
 
-Sounds ... ClientCommand still works on player with cl_restrict_server_command 1 (Done)
+A good option to add is possible a random weapon order generator.
 
-Nade Level options: (Done)
-glock with 50 bullets (Done)
-give flash (Done)
-give smoke (Done)
-give extra nade if killed with a weapon, (Done)
-A good option to add is possible a random weapon order generator. (Need todo)
-
-Top10 file (Done)
-Winner file (Done)
 */
 
 /**
