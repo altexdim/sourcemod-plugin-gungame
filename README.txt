@@ -77,4 +77,5 @@ TODO
     * Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
     + Add handycap option to give the lowest level to new connected player.
-    * Sometimes "!scores" shows wrong levels if it was many knife battles.
+    * Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce)
+    * Is alltalk activated after player win?
