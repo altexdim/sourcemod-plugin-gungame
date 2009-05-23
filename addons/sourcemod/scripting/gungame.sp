@@ -60,6 +60,7 @@
 #include "gungame/event.h"
 #include "gungame/hacks.h"
 #include "gungame/offset.h"
+#include "gungame/chat.h"
 
 #if defined DEBUG
 #include "gungame/debug.h"
@@ -75,6 +76,7 @@
 #include "gungame/util.sp"
 #include "gungame/event.sp"
 #include "gungame/commands.sp"
+#include "gungame/chat.sp"
 
 public Plugin:myinfo =
 {
@@ -94,6 +96,7 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
+    CHAT_DetectColorMsg();
     // ConVar
     VGUIMenu = GetUserMessageId("VGUIMenu");
     mp_friendlyfire = FindConVar("mp_friendlyfire");
@@ -225,7 +228,7 @@ public Action:EndOfWarmup(Handle:timer)
     /* Restart Game */
     SetConVarInt(mp_restartgame, 1);
 
-    PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, TEAMCOLOR, GREEN);
+    PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
 
     if(WarmupReset)
     {
@@ -452,22 +455,23 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     if ( CurrentLeader == client )
     {
         // say leading on level X
-        //PrintToChatAll("%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
         new String:msg[MAX_CHAT_SIZE];
-        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, YELLOW, GREEN, TEAMCOLOR, name, GREEN, YELLOW, newLevel + 1);
-		UTIL_SayText(0, client, msg);
+        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, name, GREEN, YELLOW, newLevel + 1);
+        CHAT_SayText(0, client, msg);
         return;
     }
     // CurrentLeader != client
     if ( newLevel < PlayerLevel[CurrentLeader] )
     {
         // say how much to the lead
-        PrintToChat(client, "%c[%cGunGame%c] You are %c%d %clevels behind the leader.", GREEN, TEAMCOLOR, GREEN, YELLOW, PlayerLevel[CurrentLeader]-newLevel, GREEN);
+        PrintToChat(client, "%c[%cGunGame%c] You are %c%d %clevels behind the leader.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, PlayerLevel[CurrentLeader]-newLevel, GREEN);
         return;
     }
     // new level == leader level
     // say tied to the lead on level X
-    PrintToChatAll("%c[%cGunGame%c] %c%s %cis tied with the leader on level %c%d.", GREEN, TEAMCOLOR, GREEN, YELLOW, name, GREEN, YELLOW, newLevel + 1);
+    new String:msg[MAX_CHAT_SIZE];
+    Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis tied with the leader on level %c%d.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, name, GREEN, YELLOW, newLevel + 1);
+    CHAT_SayText(0, client, msg);
 }
 
 /**

@@ -447,8 +447,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
                     }
 
-                    PrintToChatAll("%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
-                        GREEN, TEAMCOLOR, GREEN, YELLOW, kName, GREEN, YELLOW, vName);
+                    new String:msg[MAX_CHAT_SIZE];
+                    Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has stolen a level from %c%s",
+                        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, kName, GREEN, YELLOW, vName);
+                    CHAT_SayText(0, Killer, msg);
 
                     /* Need to reset CurrentKillsPerWeap[killer] to zero since they stole a level. */
                     /* Or reset on next round/spawn */
@@ -468,8 +470,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                             decl String:Name[MAX_NAME_SIZE];
                             GetClientName(Killer, Name, sizeof(Name));
 
-                            PrintToChatAll("%c[%cGunGame%c] %c%s %ctriple leveled!!!",
-                                GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
+                            new String:cmsg[MAX_CHAT_SIZE];
+                            Format(cmsg, sizeof(cmsg), "%c[%cGunGame%c] %c%s %ctriple leveled!!!",
+                                GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, Name, GREEN);
+                            CHAT_SayText(0, Killer, cmsg);
 
                             CreateTimer(10.0, RemoveBonus, Killer);
                             UTIL_SetClientGodMode(Killer, 1);
@@ -484,12 +488,16 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                      * Levels only can be stolen if victim is level greater than 1.
                      */
 
-                    PrintToChat(Killer, "%c[%cGunGame%c] %c%s%c has no levels to be stolen.",
-                        GREEN, TEAMCOLOR, GREEN, YELLOW, vName, GREEN);
+                    new String:msg[MAX_CHAT_SIZE];
+                    Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has no levels to be stolen.",
+                        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, vName, GREEN);
+                    CHAT_SayText(Killer, Victim, msg);
                 }
             } else {
-                PrintToChat(Killer, "%c[%cGunGame%c] %c%s%c is lower than the minimum knife stealing level. They must be aleast %c%d%c level before you can steal.",
-                        GREEN, TEAMCOLOR, GREEN, YELLOW, vName, GREEN, YELLOW, KnifeProMinLevel, GREEN);
+                new String:msg[MAX_CHAT_SIZE];
+                Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c is lower than the minimum knife stealing level. They must be aleast %c%d%c level before you can steal.",
+                        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, vName, GREEN, YELLOW, KnifeProMinLevel, GREEN);
+                CHAT_SayText(Killer, Victim, msg);
             }
 
             return;
@@ -522,7 +530,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             if(kills < temp)
             {
                 PrintToChat(Killer, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d%c /%c %d",
-                    GREEN, TEAMCOLOR, GREEN, YELLOW, MinKillsPerLevel, GREEN, YELLOW, kills, GREEN, YELLOW, temp);
+                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, MinKillsPerLevel, GREEN, YELLOW, kills, GREEN, YELLOW, temp);
 
                 UTIL_PlaySound(Killer, MultiKill);
                 return;
@@ -655,9 +663,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     {
         if(!WarmupInitialized)
         {
-            PrintToChat(client, "%c[%cGunGame%c] Warmup round has not started yet.", GREEN, TEAMCOLOR, GREEN);
+            PrintToChat(client, "%c[%cGunGame%c] Warmup round has not started yet.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
         } else {
-            PrintToChat(client, "%c[%cGunGame%c] Warmup round is in progress.", GREEN, TEAMCOLOR, GREEN);
+            PrintToChat(client, "%c[%cGunGame%c] Warmup round is in progress.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
         }
 
         if(WarmupKnifeOnly)
@@ -683,12 +691,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     Custom = (Custom) ? Custom : MinKillsPerLevel;
 
     PrintToChat(client, "%c[%cGunGame%c] You are on level %c%i %c:: %c%s",
-        GREEN, TEAMCOLOR, GREEN, YELLOW, Level + 1, GREEN, YELLOW, WeaponName[WeapId][7]);
+        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, Level + 1, GREEN, YELLOW, WeaponName[WeapId][7]);
 
     if ( Custom > 1 )
     {
         PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
-            GREEN, TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
+            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
     }
     
     new pState = PlayerState[client];
@@ -715,7 +723,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             PlayerState[client] |= GRENADE_LEVEL;
 
             UTIL_ChangeFriendlyFire(true);
-            PrintToChatAll("%c[%cGunGame%c] Friendly Fire has been enabled", GREEN, TEAMCOLOR, GREEN);
+            PrintToChatAll("%c[%cGunGame%c] Friendly Fire has been enabled", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
 
             UTIL_PlaySound(0, AutoFF);
         }
@@ -804,7 +812,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
             PrintToChat(client, "%c[%cGunGame%c] You gained %c%d%c level by %s the bomb",
-                GREEN, TEAMCOLOR, GREEN, YELLOW, ObjectiveBonus, GREEN, (name[5] == 'p') ? "planting" : "defusing");
+                GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, ObjectiveBonus, GREEN, (name[5] == 'p') ? "planting" : "defusing");
         }
     }
 }
@@ -824,16 +832,20 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
             new newLevel = UTIL_ChangeLevel(client, -1);
             PrintLeaderToChat(client, oldLevel, newLevel, Name);
             
-            PrintToChatAll("%c[%cGunGame%c] %c%s%c has lost a level by killing a hostage",
-                GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
+            new String:msg[MAX_CHAT_SIZE];
+            Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has lost a level by killing a hostage",
+                GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, Name, GREEN);
+            CHAT_SayText(0, client, msg);
         }
     }
 }
 
 stock ClientSuicide(client, const String:Name[])
 {
-    PrintToChatAll("%c[%cGunGame%c] %c%s%c has lost a level by suicided.",
-        GREEN, TEAMCOLOR, GREEN, YELLOW, Name, GREEN);
+    new String:msg[MAX_CHAT_SIZE];
+    Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has lost a level by suicided.",
+        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, Name, GREEN);
+    CHAT_SayText(0, client, msg);
 
     new oldLevel = PlayerLevel[client];
     new newLevel = UTIL_ChangeLevel(client, -1);

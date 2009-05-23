@@ -4,6 +4,12 @@ Changelog
 		* Fixed money remove on player kill.
 		* Colorized winner message.
 		+ Added sounds on last/nade level.
+		* Colorized nick names in chat by red/blue color.
+		* Fixed levels freezing on warmup if warmupreset is set.
+		* Fixed not to give weapon on warmup if warmupknifeonly is set in turbo mode.
+		* Fixed automatic switching to new given weapon in turbo mode.
+		* Fixed mp_chattime time.
+		+ Added "!score" button to "!level" panel.
 	
 	Unofficial_6 1.0.0.1.4:
 		* Reverted changes about warmup. Need more think about.
@@ -64,32 +70,7 @@ TODO
 	+ Add sqlite and mysql support for top players stats
 	+ Add grenade warmup
 	+ Add unlimited nades
-	* What is wrong with random number generator? GetRandomInt(0,12) give one
-	  the same value on server start even i use SetRandomSeed().
-	* Colorize nick names in chat by red/blue color.
-	  (SayText2 or etc.)
-	  http://forums.alliedmods.net/showthread.php?p=571160#post571160
-	  http://forums.alliedmods.net/showthread.php?t=87275&highlight=SayText2
-
-		Ex:
-			public Action:Command_Say(client, args) {
-			    new String:nm[255];
-			    Format(nm,sizeof(nm),"\x01This is \x04green \x01and this is \x03red, blue or grey");
-			    SayText2(client,client,nm);
-			}
-
-			stock SayText2( client_index , author_index , const String:message[] ) {
-			    new Handle:buffer = StartMessageOne("SayText2", client_index);
-			    //new Handle:buffer = StartMessageAll("SayText2", client_index);
-			    if (buffer != INVALID_HANDLE) {
-			        BfWriteByte(buffer, author_index);
-			        BfWriteByte(buffer, true);
-			        BfWriteString(buffer, message);
-			        EndMessage();
-			    }
-			}  
-	* Check for automatic switching primary/secondary in turbo mode.
-	  (DONE, NEED CHECK, NEED MORE THINK)
+	* Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
 	* Save levels on disconnect and restore on reconnect.
 	* Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
 	+ Add handycap option to give the lowest level to new connected player.

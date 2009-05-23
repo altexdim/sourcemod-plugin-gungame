@@ -59,6 +59,18 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
 	}
 }
 
+public ScoreCommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
+{
+	if (action == MenuAction_Select)
+	{
+		switch(param2)
+		{
+			case 4: /* !score */
+				ShowPlayerLevelMenu(client);
+		}
+	}
+}
+
 public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)
 {
 	/* Don't care what they pressed. */
@@ -68,27 +80,27 @@ CreateLevelPanel(client)
 {
 	decl String:Sombrero[128];
 	new Handle:LevelPanel = CreatePanel();
-	SetPanelTitle(LevelPanel, "[GunGame] Level Information");
+	SetPanelTitle(LevelPanel, "[GunGame] Level Information.");
 	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 
 	new Level = PlayerLevel[client], Weapons:WeapId = WeaponOrderId[Level], Custom = CustomKillPerLevel[WeapId];
 	Custom = (Custom) ? Custom : MinKillsPerLevel;
 
 	DrawPanelItem(LevelPanel, "Level:");
-	FormatEx(Sombrero, sizeof(Sombrero), "You are on level %d :: %s\nYou have made %d / %d of your required kills",
+	FormatEx(Sombrero, sizeof(Sombrero), "You are on level %d :: %s\nYou have made %d / %d of your required kills.",
 		Level + 1, WeaponName[WeapId][7], CurrentKillsPerWeap[client], Custom);
 	DrawPanelText(LevelPanel, Sombrero);
 
 	if(CurrentLeader == client)
 	{
-		DrawPanelText(LevelPanel, "You are currently the leader");
+		DrawPanelText(LevelPanel, "You are currently the leader.");
 		DrawPanelText(LevelPanel, BLANK_SPACE);
 	} else {
 		DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 	}
 
 	DrawPanelItem(LevelPanel, "Wins:");
-	FormatEx(Sombrero, sizeof(Sombrero), "You have won %d times", GG_GetClientWins(client));
+	FormatEx(Sombrero, sizeof(Sombrero), "You have won %d times.", GG_GetClientWins(client));
 	DrawPanelText(LevelPanel, Sombrero);
 
 	DrawPanelText(LevelPanel, BLANK_SPACE);
@@ -103,7 +115,7 @@ CreateLevelPanel(client)
 		{
 			decl String:Name[64];
 			GetClientName(CurrentLeader, Name, sizeof(Name));
-			FormatEx(Sombrero, sizeof(Sombrero), "The current leader is %s on level %d", Name, level + 1);
+			FormatEx(Sombrero, sizeof(Sombrero), "The current leader is %s on level %d.", Name, level + 1);
 			DrawPanelText(LevelPanel, Sombrero);
 			if ( CurrentLeader != client )
 			{
@@ -119,17 +131,22 @@ CreateLevelPanel(client)
 				}
 			}
 		} else {
-			DrawPanelText(LevelPanel, "There is currently no leader");
+			DrawPanelText(LevelPanel, "There is currently no leader.");
 		}
 	} else {
-		DrawPanelText(LevelPanel, "There is currently no leader");
+		DrawPanelText(LevelPanel, "There is currently no leader.");
 	}
 
+	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
+	SetPanelCurrentKey(LevelPanel, 4);
+	DrawPanelItem(LevelPanel, "Scores:", ITEMDRAW_CONTROL);
+	DrawPanelText(LevelPanel, "Press 4 to show scores.");
+	
 	DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 	SetPanelCurrentKey(LevelPanel, 10);
 	DrawPanelItem(LevelPanel, "Exit", ITEMDRAW_CONTROL);
 
-	SendPanelToClient(LevelPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
+	SendPanelToClient(LevelPanel, client, ScoreCommandPanelHandler, GUNGAME_MENU_TIME);
 	CloseHandle(LevelPanel);
 }
 

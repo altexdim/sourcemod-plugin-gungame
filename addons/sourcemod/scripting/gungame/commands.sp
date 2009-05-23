@@ -144,7 +144,7 @@ public Action:_CmdVersion(client, args)
 {
 	if(GetCmdReplySource() == SM_REPLY_TO_CHAT)
 	{
-		PrintToChat(client, "%c[%cGunGame%c] Please view your console for more information.", GREEN, TEAMCOLOR, GREEN);
+		PrintToChat(client, "%c[%cGunGame%c] Please view your console for more information.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
 	}
 
 	PrintToConsole(client, "Gun Game Information:\n   Version: %s\n   Author: %s", GUNGAME_VERSION, GUNGAME_AUTHOR);

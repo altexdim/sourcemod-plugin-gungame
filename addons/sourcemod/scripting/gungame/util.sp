@@ -289,6 +289,11 @@ UTIL_PlaySoundForLeaderLevel()
 
 UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
 {
+    if ( WarmupEnabled && WarmupReset )
+    {
+        return PlayerLevel[client];
+    }
+
     if ( !difference || !IsActive )
     {
         return PlayerLevel[client];
@@ -381,9 +386,13 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();
-        // FIXME: Why chattime is set here? It is in gungame.mapconfig.cfg
-        SetConVarInt(mp_chattime, 5);
-        CreateTimer(10.0, DelayMapChange);
+        new Float:time = GetConVarFloat(mp_chattime);
+        SetConVarInt(mp_chattime,5);
+        if ( time < 5 )
+        {
+        	time = 1.0;
+        }
+        CreateTimer(time, DelayMapChange);
         UTIL_PlaySound(0, Winner);
     }
 
@@ -551,6 +560,11 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
 
 UTIL_GiveNextWeapon(client, level)
 {
+    if ( WarmupEnabled && WarmupKnifeOnly )
+    {
+        return;
+    }
+
     CurrentLevelPerRound[client] = NULL;
 
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
@@ -563,8 +577,7 @@ UTIL_GiveNextWeapon(client, level)
 
     /* Give new weapon */
     GivePlayerItem(client, WeaponName[WeapId]);
-    //Add check that not knife and primary changes to secondary etc.
-    //FakeClientCommand(client, "use %s", WeaponName[WeapId]]);
+    FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
 
 UTIL_PlaySound(client, Sounds:type)
@@ -591,52 +604,4 @@ UTIL_PlaySound(client, Sounds:type)
             ClientCommand(client, "play %s", EventSounds[type]);
         }
     }
-}
-
-UTIL_SayText2(client, author, const String:message[])
-{
-    new Handle:buffer = StartMessageOne("SayText2", client);
-    if ( buffer != INVALID_HANDLE )
-    {
-        BfWriteByte(buffer, author);
-        BfWriteByte(buffer, true);
-        BfWriteString(buffer, message);
-        EndMessage();
-    }
-}  
-
-UTIL_SayText2ToAll(author, const String:message[])
-{
-    new Handle:buffer = StartMessageAll("SayText2");
-    if ( buffer != INVALID_HANDLE )
-    {
-        BfWriteByte(buffer, author);
-        BfWriteByte(buffer, true);
-        BfWriteString(buffer, message);
-        EndMessage();
-    }
-}  
-
-UTIL_SayText(client, author, const String:msg[])
-{
-	new isColorMsg = 0;
-	if ( !isColorMsg )
-	{
-		if ( client )
-		{
-			PrintToChat(client, msg);
-			return;
-		}
-		PrintToChatAll(msg);
-		return;
-	}
-	new String:cmsg[192] = "\x1";
-	StrCat(cmsg, sizeof(cmsg), msg);
-	if ( client )
-	{
-		UTIL_SayText2(client, author, cmsg);
-		return;
-	}
-	UTIL_SayText2ToAll(author, cmsg);
-	return;
 }
