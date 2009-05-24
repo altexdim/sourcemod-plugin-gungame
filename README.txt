@@ -75,7 +75,8 @@ TODO
     + Add grenade warmup
     + Add unlimited nades
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
-    * Save levels on disconnect and restore on reconnect.
+    + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
-    * Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce)
-    * Is alltalk activated after player win?
+    ? Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce, maybe all is ok)
+    + Add option no activate alltalk after player win.
+    + Add option to reload ammo on player kill.
