@@ -45,46 +45,46 @@ new const String:TIME[] = __TIME__;
 
 enum Sounds
 {
-	Welcome,
-	Knife,
-	Nade,
-	Steal,
-	Up,
-	Down,
-	Triple,
-	AutoFF,
-	MultiKill,
-	Winner,
-	MaxSounds
+    Welcome,
+    Knife,
+    Nade,
+    Steal,
+    Up,
+    Down,
+    Triple,
+    AutoFF,
+    MultiKill,
+    Winner,
+    MaxSounds
 }
 
 // Killable weapons
 new const String:WeaponName[MAXWEAPON][] =
 {
-	"",
-	"weapon_knife",
-	// Secondary Weapon
-	"weapon_usp", "weapon_glock", "weapon_p228", "weapon_deagle", "weapon_fiveseven", "weapon_elite",
-	// Primary weapon
-	"weapon_m3", "weapon_xm1014", "weapon_tmp", "weapon_mac10", "weapon_mp5navy", "weapon_ump45", "weapon_p90", "weapon_galil",
-	"weapon_famas", "weapon_ak47", "weapon_m4a1", "weapon_sg552", "weapon_aug", "weapon_scout", "weapon_sg550", "weapon_awp",
-	"weapon_g3sg1", "weapon_m249",
+    "",
+    "weapon_knife",
+    // Secondary Weapon
+    "weapon_usp", "weapon_glock", "weapon_p228", "weapon_deagle", "weapon_fiveseven", "weapon_elite",
+    // Primary weapon
+    "weapon_m3", "weapon_xm1014", "weapon_tmp", "weapon_mac10", "weapon_mp5navy", "weapon_ump45", "weapon_p90", "weapon_galil",
+    "weapon_famas", "weapon_ak47", "weapon_m4a1", "weapon_sg552", "weapon_aug", "weapon_scout", "weapon_sg550", "weapon_awp",
+    "weapon_g3sg1", "weapon_m249",
 
-	"weapon_hegrenade", "weapon_flashbang", "weapon_smokegrenade"
+    "weapon_hegrenade", "weapon_flashbang", "weapon_smokegrenade"
 };
 
 new const Slots:WeaponSlot[Weapons:MAXWEAPON] =
 {
-	Slots:NULL,
-	Slot_Knife,
-	// Secondary Weapon
-	Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary,	Slot_Secondary,
-	// Primary weapon
-	Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
-	Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
-	Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    Slots:NULL,
+    Slot_Knife,
+    // Secondary Weapon
+    Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary,
+    // Primary weapon
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
 
-	Slot_Grenade, Slot_Grenade, Slot_Grenade
+    Slot_Grenade, Slot_Grenade, Slot_Grenade
 };
 
 /**

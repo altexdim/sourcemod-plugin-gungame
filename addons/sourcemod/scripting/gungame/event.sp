@@ -160,6 +160,10 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
                     Call_Finish();
 
                     UTIL_PlaySound(0, Winner);
+                    if ( AlltalkOnWin )
+                    {
+                        ServerCommand("sv_alltalk 1");  
+                    }
                 }
             }
             /* else no leader was found so no winner. */

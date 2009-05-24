@@ -76,3 +76,4 @@ new bool:KnifeProHE = false;
 new bool:ObjectiveBonusWin = false;
 new bool:InternalIsActive = true;
 new bool:CommitSuicide = true;
+new bool:AlltalkOnWin = false;

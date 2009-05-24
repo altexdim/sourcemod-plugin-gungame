@@ -398,6 +398,10 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         }
         CreateTimer(time, DelayMapChange);
         UTIL_PlaySound(0, Winner);
+        if ( AlltalkOnWin )
+        {
+            ServerCommand("sv_alltalk 1");  
+        }
     }
 
     return Level;

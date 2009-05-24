@@ -2,6 +2,9 @@
 {
     "Config"
     {
+        /* Set sv_alltalk 1 after player win */
+        "AlltalkOnWin" "1"
+        
         /* Start voting if leader level is less maximum level by this value */
         "VoteLevelLessWeaponCount" "1"
         

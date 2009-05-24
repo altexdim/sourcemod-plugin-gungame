@@ -1,5 +1,7 @@
 Changelog
 ---------
+        + Added option no activate alltalk after player win.
+    
     Unofficial_8 1.0.0.1.6:
         * Fixed top left winner message size for long nicknames.
         + Added handycap option to give the lowest level to new connected player.
@@ -78,5 +80,8 @@ TODO
     + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
     ? Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce, maybe all is ok)
-    + Add option no activate alltalk after player win.
     + Add option to reload ammo on player kill.
+    * Fix for:
+        L 05/24/2009 - 19:48:22: [SM] Native "SetEntData" reported: Entity 9 is invalid
+        L 05/24/2009 - 19:48:22: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 05/24/2009 - 19:48:22: [SM]   [0]  Line 305, gungame/event.sp::DelayClearMoney()
