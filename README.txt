@@ -82,6 +82,11 @@ TODO
     ? Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce, maybe all is ok)
     + Add option to reload ammo on player kill.
     * Fix for:
+        ==== in sm logs ====
         L 05/24/2009 - 19:48:22: [SM] Native "SetEntData" reported: Entity 9 is invalid
         L 05/24/2009 - 19:48:22: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 05/24/2009 - 19:48:22: [SM]   [0]  Line 305, gungame/event.sp::DelayClearMoney()
+        ==== in srv logs ====
+        L 05/24/2009 - 19:48:22: World triggered "Round_Start"
+        L 05/24/2009 - 19:48:22: World triggered "Round_Start"
+        L 05/24/2009 - 19:48:22: " -=XXXX=-<158><STEAM_0:0:XXXX><>" disconnected (reason "Disconnect by user.")
