@@ -75,14 +75,14 @@ TODO
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
     + Add sqlite and mysql support for top players stats
     + Add grenade warmup
-    + Add unlimited nades
+    + (done, need check) Add unlimited nades
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
     + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
 	  I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    * Fix for:
+    * (done, need check) Fix for:
         ==== in sm error log ====
         L 05/24/2009 - 19:48:22: [SM] Native "SetEntData" reported: Entity 9 is invalid
         L 05/24/2009 - 19:48:22: [SM] Displaying call stack trace for plugin "gungame.smx":

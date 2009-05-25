@@ -308,7 +308,11 @@ public Action:RemoveHostages(Handle:timer)
 
 public Action:DelayClearMoney(Handle:Timer, any:client)
 {
-        SetEntData(client, OffsetMoney, 0);
+	if ( !IsClientInGame(client) )
+	{
+		return;
+	}
+    SetEntData(client, OffsetMoney, 0);
 }
 
 public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
