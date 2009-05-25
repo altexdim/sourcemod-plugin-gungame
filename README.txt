@@ -1,5 +1,6 @@
 Changelog
 ---------
+    Unofficial_9 1.0.0.1.7:
         + Added option no activate alltalk after player win.
         + Added grenade warmup.
         + Added unlimited nades.
