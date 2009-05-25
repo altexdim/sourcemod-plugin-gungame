@@ -44,7 +44,7 @@ OnEventStart()
     HookEvent("player_spawn", _PlayerSpawn);
     HookEvent("player_team", _PlayerTeam);
     HookEvent("item_pickup", _ItemPickup);
-	HookEvent("hegrenade_detonate",_HeExplode);
+    HookEvent("hegrenade_detonate",_HeExplode);
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //HookUserMessage(VGUIMenu, _VGuiMenu);
@@ -65,7 +65,7 @@ OnEventShutdown()
     UnhookEvent("player_spawn", _PlayerSpawn);
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
-	UnhookEvent("hegrenade_detonate",_HeExplode);
+    UnhookEvent("hegrenade_detonate",_HeExplode);
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //UnhookUserMessage(VGUIMenu, _VGuiMenu);
@@ -308,10 +308,10 @@ public Action:RemoveHostages(Handle:timer)
 
 public Action:DelayClearMoney(Handle:Timer, any:client)
 {
-	if ( !IsClientInGame(client) )
-	{
-		return;
-	}
+    if ( !client || !IsClientInGame(client) )
+    {
+        return;
+    }
     SetEntData(client, OffsetMoney, 0);
 }
 
@@ -669,17 +669,29 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* Something here is wrong */
-    if(WarmupEnabled)
+    if ( WarmupEnabled )
     {
-        if(!WarmupInitialized)
+        if ( !WarmupInitialized )
         {
             PrintToChat(client, "%c[%cGunGame%c] Warmup round has not started yet.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
-        } else {
+        }
+        else
+        {
             PrintToChat(client, "%c[%cGunGame%c] Warmup round is in progress.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
         }
 
-        if(WarmupKnifeOnly)
+        if ( WarmupNades )
+        {
+            GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
+
+            //Switch them back into hegrenade
+            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+        }
+        
+        if ( WarmupNades || WarmupKnifeOnly )
+        {
             return;
+        }
     }
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
@@ -878,23 +890,24 @@ public DM_Handler(Handle:convar, const String:oldValue[], const String:newValue[
 
 public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
 {
-	new client = GetClientOfUserId(GetEventInt(event, "userid"));
-	new level = PlayerLevel[client];
-	new Weapons:WeaponLevel = WeaponOrderId[level];
-	
-	if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
-	{
-		return;
-	}
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    new level = PlayerLevel[client];
+    new Weapons:WeaponLevel = WeaponOrderId[level];
+    
+    if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
+    {
+        return;
+    }
 
-	if ( UnlimitedNades && WeaponLevel == CSW_HEGRENADE )
-	{
-		/* Do not give them another nade if they already have one */
-		if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
-		{
-			GivePlayerItem(Client, WeaponName[CSW_HEGRENADE]);
-			// TODO: Switch to grenade?
-		}
-	}
+    if ( (UnlimitedNades && WeaponLevel == CSW_HEGRENADE) 
+        || (WarmupNades && WarmupEnabled) )
+    {
+        /* Do not give them another nade if they already have one */
+        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
+        {
+            GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
+            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+        }
+    }
 }
 

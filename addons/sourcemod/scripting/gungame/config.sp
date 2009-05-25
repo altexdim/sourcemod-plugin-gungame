@@ -129,6 +129,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 ExtraNade = bool:StringToInt(value);
             } else if(strcmp("UnlimitedNades", key, false) == 0) {
                 UnlimitedNades = bool:StringToInt(value);
+            } else if(strcmp("WarmupNades", key, false) == 0) {
+                WarmupNades = bool:StringToInt(value);
             } else if(strcmp("WarmupStartup", key, false) == 0) {
                 WarmupStartup = StringToInt(value);
             } else if(strcmp("TripleLevelBonus", key, false) == 0) {

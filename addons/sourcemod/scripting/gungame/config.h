@@ -58,6 +58,7 @@ new bool:NadeSmoke;
 new bool:NadeFlash;
 new bool:ExtraNade;
 new bool:UnlimitedNades;
+new bool:WarmupNades;
 new bool:KnifePro;
 new KnifeProMinLevel;
 new bool:KnifeElite;

@@ -114,6 +114,7 @@ DisplayConfig(client)
     NadeFlash
     ExtraNade
     UnlimitedNades
+    WarmupNades
     Prune
     WarmupStartup
     TripleLevelBonus
