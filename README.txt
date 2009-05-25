@@ -79,14 +79,16 @@ TODO
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
     + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
-    ? Sometimes "!scores" shows wrong levels if it was many knife battles. (can not reproduce, maybe all is ok)
+    * Sometimes "!scores" shows wrong levels if it was many knife battles.
+	  I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
     * Fix for:
-        ==== in sm logs ====
+        ==== in sm error log ====
         L 05/24/2009 - 19:48:22: [SM] Native "SetEntData" reported: Entity 9 is invalid
         L 05/24/2009 - 19:48:22: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 05/24/2009 - 19:48:22: [SM]   [0]  Line 305, gungame/event.sp::DelayClearMoney()
-        ==== in srv logs ====
+        ==== in srv log ====
         L 05/24/2009 - 19:48:22: World triggered "Round_Start"
         L 05/24/2009 - 19:48:22: World triggered "Round_Start"
         L 05/24/2009 - 19:48:22: " -=XXXX=-<158><STEAM_0:0:XXXX><>" disconnected (reason "Disconnect by user.")
+	

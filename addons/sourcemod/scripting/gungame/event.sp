@@ -44,6 +44,7 @@ OnEventStart()
     HookEvent("player_spawn", _PlayerSpawn);
     HookEvent("player_team", _PlayerTeam);
     HookEvent("item_pickup", _ItemPickup);
+	HookEvent("hegrenade_detonate",_HeExplode);
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //HookUserMessage(VGUIMenu, _VGuiMenu);
@@ -64,6 +65,7 @@ OnEventShutdown()
     UnhookEvent("player_spawn", _PlayerSpawn);
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
+	UnhookEvent("hegrenade_detonate",_HeExplode);
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //UnhookUserMessage(VGUIMenu, _VGuiMenu);
@@ -869,3 +871,26 @@ public DM_Handler(Handle:convar, const String:oldValue[], const String:newValue[
 {
     IsDmActive = (StringToInt(newValue) == 0) ? false : true;
 }
+
+public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	new client = GetClientOfUserId(GetEventInt(event, "userid"));
+	new level = PlayerLevel[client];
+	new Weapons:WeaponLevel = WeaponOrderId[level];
+	
+	if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
+	{
+		return;
+	}
+
+	if ( UnlimitedNades && WeaponLevel == CSW_HEGRENADE )
+	{
+		/* Do not give them another nade if they already have one */
+		if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
+		{
+			GivePlayerItem(Client, WeaponName[CSW_HEGRENADE]);
+			// TODO: Switch to grenade?
+		}
+	}
+}
+

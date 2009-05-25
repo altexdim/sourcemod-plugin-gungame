@@ -123,6 +123,9 @@
         /* Gives an extra hegrenade to the player if they get a kill */
         "ExtraNade" "0"
 
+        /* Gives unlimited hegrenades to the player if he is on nage level */
+        "UnlimitedNades" "0"
+
         /* Remove objectives from map. 0 = Disabled, 1 = BOMB, 2 = HOSTAGE, 3 = BOTH*/
         "RemoveObjectives" "0"
 

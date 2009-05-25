@@ -57,6 +57,7 @@ new bool:NadeGlock;
 new bool:NadeSmoke;
 new bool:NadeFlash;
 new bool:ExtraNade;
+new bool:UnlimitedNades;
 new bool:KnifePro;
 new KnifeProMinLevel;
 new bool:KnifeElite;

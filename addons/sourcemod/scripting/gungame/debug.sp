@@ -113,6 +113,7 @@ DisplayConfig(client)
     NadeGlock
     NadeFlash
     ExtraNade
+    UnlimitedNades
     Prune
     WarmupStartup
     TripleLevelBonus
