@@ -45,7 +45,8 @@ public GG_ConfigNewSection(const String:name[])
     {
         ConfigState = CONFIG_STATE_CONFIG;
     } else if(strcmp("WeaponOrder", name, false) == 0) {
-        ConfigState = CONFIG_STATE_EQUIP;
+		RandomWeaponOrder = false;
+		ConfigState = CONFIG_STATE_EQUIP;
     } else if(strcmp("MultipleKillsPerLevel", name, false) == 0) {
         ConfigReset = true;
         ConfigState = CONFIG_STATE_KILLS;
@@ -153,29 +154,51 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 
         case CONFIG_STATE_EQUIP:
         {
-            new Level = StringToInt(key);
-
-            if(1 <= Level <= GUNGAME_MAX_LEVEL)
-            {
-                strcopy(WeaponOrderName[Level - 1], sizeof(WeaponOrderName[]), value);
-                WeaponOrderCount = Level;
-            }
-
-            /*if(strcmp("RandomWeaponOrder", key, false) == 0)
+            if ( strcmp("RandomWeaponOrder", key, false) == 0 )
             {
                 // Setup random weapon order.
-            }*/
+				RandomWeaponOrder = true;
+				new switchLevel, switchWeaponName;
+				new Float:etime;
+				for (new i = 0; i < WeaponOrderCount; i++)
+				{
+                    etime = GetEngineTime() + GetRandomFloat();
+                    switchLevel = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % WeaponOrderCount;
+					RandomWeaponOrderMap[i] = switchLevel;
+					if ( switchLevel == i )
+					{
+						continue;
+					}
+					switchWeaponName = WeaponOrderName[switchLevel];
+					WeaponOrderName[switchLevel] = WeaponOrderName[i];
+					WeaponOrderName[i] = switchWeaponName;
+				}
+            }
+			else
+			{
+				new Level = StringToInt(key);
+
+				if ( 1 <= Level <= GUNGAME_MAX_LEVEL )
+				{
+					strcopy(WeaponOrderName[Level - 1], sizeof(WeaponOrderName[]), value);
+					WeaponOrderCount = Level;
+				}
+			}
         }
 
         case CONFIG_STATE_KILLS:
         {
-            new Level = StringToInt(key);
+            new Level = StringToInt(key)-1;
+			if ( RandomWeaponOrder ) 
+			{
+				Level = RandomWeaponOrderMap[Level];
+			}
 
-            if ( 1 <= Level <= GUNGAME_MAX_LEVEL )
+            if ( 0 <= Level < GUNGAME_MAX_LEVEL )
             {
-                if ( (CustomKillPerLevel[Level - 1] = StringToInt(value)) < 0 )
+                if ( (CustomKillPerLevel[Level] = StringToInt(value)) < 0 )
                 {
-                    CustomKillPerLevel[Level - 1] = NULL;
+                    CustomKillPerLevel[Level] = NULL;
                 }
             }
         }
@@ -208,7 +231,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                     new songsfound = ExplodeString(value, ",", songs, 64, 64);
                     if ( songsfound > 1 )
                     {
-                        // TODO: Implement valid rendom number generator
+                        // TODO: Implement valid random number generator
                         new Float:etime = GetEngineTime();
                         new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % songsfound;
                         strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);

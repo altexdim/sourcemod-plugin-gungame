@@ -98,6 +98,8 @@ new String:EventSounds[Sounds:MaxSounds][64];
 new Weapons:WeaponOrderId[GUNGAME_MAX_LEVEL];
 new String:WeaponOrderName[GUNGAME_MAX_LEVEL][24];
 new WeaponOrderCount;
+new RandomWeaponOrderMap[GUNGAME_MAX_LEVEL];
+new bool:RandomWeaponOrder;
 
 // ConVar Pointer
 new Handle:mp_friendlyfire = INVALID_HANDLE;

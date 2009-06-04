@@ -93,4 +93,6 @@ TODO
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
     * (Fixed. Need test.) Multiple kills does not work.
+    + (Added. Need test.) Add random weapon order option.
+	* (Fixed. Need test.) Multikill does not work with random weapon order.
     

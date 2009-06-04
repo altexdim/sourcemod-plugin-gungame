@@ -62,12 +62,8 @@
 		"22" "hegrenade"
 		"23" "knife"
 
-		/* Future option and not implemented yet */
-		"Override"
-		{
-			/* This will take the weapons in the WeaponOrder and randomize all the weapons oder.*/
-			"RandomWeapOrder" "1"
-		}
+		/* This will take the weapons in the WeaponOrder and randomize all the weapons order.*/
+		"RandomWeaponOrder" "0"
 	}
 
 	"MultipleKillsPerLevel"
