@@ -96,3 +96,8 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
+    * Fix error in error log:
+        L 06/04/2009 - 23:59:20: [SM] Native "GG_GiveHandicapLevel" reported: Client is not currently ingame [10]
+        L 06/04/2009 - 23:59:20: [SM] Displaying call stack trace for plugin "gungame_stats.smx":
+        L 06/04/2009 - 23:59:20: [SM]   [0]  Line 212, gungame_stats.sp::OnClientAuthorized()
+    
