@@ -325,6 +325,8 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         return (PlayerLevel[client] = oldLevel);
     }
 
+    // Client got new level
+    CurrentKillsPerWeap[client] = NULL;
     PlayerLevel[client] = Level;
     UTIL_RecalculateLeader(client, oldLevel, Level);
     

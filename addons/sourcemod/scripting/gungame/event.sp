@@ -462,9 +462,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, kName, GREEN, YELLOW, vName);
                     CHAT_SayText(0, Killer, msg);
 
-                    /* Need to reset CurrentKillsPerWeap[killer] to zero since they stole a level. */
-                    /* Or reset on next round/spawn */
-                    CurrentKillsPerWeap[Killer] = NULL;
                     CurrentLevelPerRound[Killer]++;
 
                     UTIL_PlaySound(Killer, Steal);
@@ -519,14 +516,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             return;
         }
 
-        new killsRequired = CustomKillPerLevel[level];
-        if ( !killsRequired )
-		{
-			killsRequired = MinKillsPerLevel;
-		}
+        new killsPerLevel = CustomKillPerLevel[level];
+        if ( !killsPerLevel )
+        {
+            killsPerLevel = MinKillsPerLevel;
+        }
         new kills = ++CurrentKillsPerWeap[Killer], Handled;
 
-        if ( kills <= killsRequired )
+        if ( kills <= killsPerLevel )
         {
             Call_StartForward(FwdPoint);
             Call_PushCell(Killer);
@@ -540,19 +537,16 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 return;
             }
 
-            if ( kills < killsRequired )
+            if ( kills < killsPerLevel )
             {
                 PrintToChat(Killer, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d%c /%c %d",
-                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsRequired - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsRequired);
+                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
 
                 UTIL_PlaySound(Killer, MultiKill);
                 return;
             }
-        } else {
-            return;
         }
 
-        CurrentKillsPerWeap[Killer] = NULL;
         CurrentLevelPerRound[Killer]++;
 
         if(KnifeElite)
@@ -711,17 +705,21 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    new Weapons:WeapId = WeaponOrderId[Level], Custom = CustomKillPerLevel[WeapId];
-
-    Custom = (Custom) ? Custom : MinKillsPerLevel;
+    new Weapons:WeapId = WeaponOrderId[Level], killsPerLevel = CustomKillPerLevel[Level];
+    
+    if ( !killsPerLevel )
+    {
+        killsPerLevel = MinKillsPerLevel;
+    }
 
     PrintToChat(client, "%c[%cGunGame%c] You are on level %c%i %c:: %c%s",
         GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, Level + 1, GREEN, YELLOW, WeaponName[WeapId][7]);
 
-    if ( Custom > 1 )
+    if ( killsPerLevel > 1 )
     {
+        new kills = CurrentKillsPerWeap[client];
         PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
-            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, Custom, GREEN, YELLOW, CurrentKillsPerWeap[client], GREEN, YELLOW, Custom);
+            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
     }
     
     new pState = PlayerState[client];

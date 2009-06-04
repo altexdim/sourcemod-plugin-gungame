@@ -1,5 +1,9 @@
 Changelog
 ---------
+    Unofficial_10 1.0.0.1.8:
+        * Fixed multiple kills.
+        + Added random weapon order option.
+        
     Unofficial_9 1.0.0.1.7:
         + Added option no activate alltalk after player win.
         + Added grenade warmup.
@@ -92,7 +96,3 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    * (Fixed. Need test.) Multiple kills does not work.
-    + (Added. Need test.) Add random weapon order option.
-	* (Fixed. Need test.) Multikill does not work with random weapon order.
-    

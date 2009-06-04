@@ -45,8 +45,8 @@ public GG_ConfigNewSection(const String:name[])
     {
         ConfigState = CONFIG_STATE_CONFIG;
     } else if(strcmp("WeaponOrder", name, false) == 0) {
-		RandomWeaponOrder = false;
-		ConfigState = CONFIG_STATE_EQUIP;
+        RandomWeaponOrder = false;
+        ConfigState = CONFIG_STATE_EQUIP;
     } else if(strcmp("MultipleKillsPerLevel", name, false) == 0) {
         ConfigReset = true;
         ConfigState = CONFIG_STATE_KILLS;
@@ -154,45 +154,59 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 
         case CONFIG_STATE_EQUIP:
         {
-            if ( strcmp("RandomWeaponOrder", key, false) == 0 )
+            if ( (strcmp("RandomWeaponOrder", key, false) == 0) && (StringToInt(value) == 1) )
             {
                 // Setup random weapon order.
-				RandomWeaponOrder = true;
-				new switchLevel, switchWeaponName;
-				new Float:etime;
-				for (new i = 0; i < WeaponOrderCount; i++)
-				{
+                RandomWeaponOrder = true;
+                new switchIndex, switchLevel, String:switchWeaponName[24];
+                new Float:etime;
+                for (new i = 0; i < WeaponOrderCount; i++)
+                {
+                    RandomWeaponOrderMap[i] = i;
+                }
+                for (new i = 0; i < WeaponOrderCount; i++)
+                {
                     etime = GetEngineTime() + GetRandomFloat();
-                    switchLevel = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % WeaponOrderCount;
-					RandomWeaponOrderMap[i] = switchLevel;
-					if ( switchLevel == i )
-					{
-						continue;
-					}
-					switchWeaponName = WeaponOrderName[switchLevel];
-					WeaponOrderName[switchLevel] = WeaponOrderName[i];
-					WeaponOrderName[i] = switchWeaponName;
-				}
+                    switchIndex = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % WeaponOrderCount;
+                    if ( switchIndex == i )
+                    {
+                        continue;
+                    }
+                    switchWeaponName = WeaponOrderName[switchIndex];
+                    WeaponOrderName[switchIndex] = WeaponOrderName[i];
+                    WeaponOrderName[i] = switchWeaponName;
+                    
+                    switchLevel = RandomWeaponOrderMap[switchIndex];
+                    RandomWeaponOrderMap[switchIndex] = RandomWeaponOrderMap[i];
+                    RandomWeaponOrderMap[i] = switchLevel;
+                }
             }
-			else
-			{
-				new Level = StringToInt(key);
+            else
+            {
+                new Level = StringToInt(key);
 
-				if ( 1 <= Level <= GUNGAME_MAX_LEVEL )
-				{
-					strcopy(WeaponOrderName[Level - 1], sizeof(WeaponOrderName[]), value);
-					WeaponOrderCount = Level;
-				}
-			}
+                if ( 1 <= Level <= GUNGAME_MAX_LEVEL )
+                {
+                    strcopy(WeaponOrderName[Level - 1], sizeof(WeaponOrderName[]), value);
+                    WeaponOrderCount = Level;
+                }
+            }
         }
 
         case CONFIG_STATE_KILLS:
         {
             new Level = StringToInt(key)-1;
-			if ( RandomWeaponOrder ) 
-			{
-				Level = RandomWeaponOrderMap[Level];
-			}
+            if ( RandomWeaponOrder ) 
+            {
+                for (new i = 0; i < WeaponOrderCount; i++)
+                {
+                    if ( RandomWeaponOrderMap[i] == Level )
+                    {
+                        Level = i;
+                        break;
+                    }
+                }
+            }
 
             if ( 0 <= Level < GUNGAME_MAX_LEVEL )
             {
