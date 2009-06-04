@@ -171,9 +171,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         {
             new Level = StringToInt(key);
 
-            if(1 < Level <= GUNGAME_MAX_LEVEL)
+            if ( 1 <= Level <= GUNGAME_MAX_LEVEL )
             {
-                if((CustomKillPerLevel[Level - 1] = StringToInt(value)) < 0)
+                if ( (CustomKillPerLevel[Level - 1] = StringToInt(value)) < 0 )
                 {
                     CustomKillPerLevel[Level - 1] = NULL;
                 }

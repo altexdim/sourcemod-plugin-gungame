@@ -519,11 +519,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             return;
         }
 
-        new temp = CustomKillPerLevel[WeaponIndex] ? CustomKillPerLevel[WeaponIndex] : MinKillsPerLevel,
-            kills = ++CurrentKillsPerWeap[Killer], Handled;
+        new killsRequired = CustomKillPerLevel[level];
+        if ( !killsRequired )
+		{
+			killsRequired = MinKillsPerLevel;
+		}
+        new kills = ++CurrentKillsPerWeap[Killer], Handled;
 
-        /* Need to look over this */
-        if(kills <= temp)
+        if ( kills <= killsRequired )
         {
             Call_StartForward(FwdPoint);
             Call_PushCell(Killer);
@@ -531,16 +534,16 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             Call_PushCell(1);
             Call_Finish(Handled);
 
-            if(Handled)
+            if ( Handled )
             {
-                CustomKillPerLevel[WeaponIndex]--;
+                CurrentKillsPerWeap[Killer]--;
                 return;
             }
 
-            if(kills < temp)
+            if ( kills < killsRequired )
             {
                 PrintToChat(Killer, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d%c /%c %d",
-                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, MinKillsPerLevel, GREEN, YELLOW, kills, GREEN, YELLOW, temp);
+                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsRequired - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsRequired);
 
                 UTIL_PlaySound(Killer, MultiKill);
                 return;
