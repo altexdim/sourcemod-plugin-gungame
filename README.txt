@@ -92,3 +92,5 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
+    * Multiple kills does not work.
+    
