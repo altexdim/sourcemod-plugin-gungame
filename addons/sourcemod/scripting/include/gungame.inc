@@ -54,7 +54,7 @@
  */
 #define GUNGAME_ADMINFLAG         ADMFLAG_RCON
 
-stock const String:GUNGAME_AUTHOR[] = "Otstrel.ru Team";
+stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team";
 stock const String:GUNGAME_VERSION[] = "1.0.0.1.8";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";

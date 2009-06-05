@@ -1,31 +1,31 @@
 Description
 -----------
     GunGame:SM is the gameplay plugin that makes you to
-	act with various guns and not only with your favorite
-	one. You should kill enemy with the current weapon to
-	get next weapon. You should kill enemies with all the
-	weapons to win the game.
+    act with various guns and not only with your favorite
+    one. You should kill enemy with the current weapon to
+    get next weapon. You should kill enemies with all the
+    weapons to win the game.
 
-	http://forums.alliedmods.net/showthread.php?t=93977
+    http://forums.alliedmods.net/showthread.php?t=93977
 
 Commands and Cvars
 ------------------
-    sm_gungame_css_version			- Gungame version.
-    gungame_enabled					- Display if gungame is enabled or disabled
+    sm_gungame_css_version          - Gungame version.
+    gungame_enabled                 - Display if gungame is enabled or disabled
 
-	gg_version						- Show gungame version information.
-	gg_status						- Show state of the current game.
-	gg_restart						- Restarts the whole game from the beginning.
-	gg_enable						- Turn on gungame and restart the game.
-	gg_disable						- Turn off gungame and restart the game.
-    gg_rebuild						- Rebuilds the top10 rank from the player data information.
-    gg_import						- Imports the winners file from es gungame.
+    gg_version                      - Show gungame version information.
+    gg_status                       - Show state of the current game.
+    gg_restart                      - Restarts the whole game from the beginning.
+    gg_enable                       - Turn on gungame and restart the game.
+    gg_disable                      - Turn off gungame and restart the game.
+    gg_rebuild                      - Rebuilds the top10 rank from the player data information.
+    gg_import                       - Imports the winners file from es gungame.
 
-	say !level						- Show your current level and who is winning.
-	say !weapons					- Show the weapon order.
-	say !score						- Show all player current scores.
-	say !top10						- Show the top 10 winners on the server.
-	say !rules						- Show the rules and how to play.
+    say !level                      - Show your current level and who is winning.
+    say !weapons                    - Show the weapon order.
+    say !score                      - Show all player current scores.
+    say !top10                      - Show the top 10 winners on the server.
+    say !rules                      - Show the rules and how to play.
 
 Requirements
 ------------
@@ -44,10 +44,10 @@ Installation
 Credits
 -------
 
-	* Thanks to Liam for GunGame:SM till version 1.0.0.1
-	  http://forums.alliedmods.net/showthread.php?t=80609
+    * Thanks to Liam for GunGame:SM till version 1.0.0.1
+      http://forums.alliedmods.net/showthread.php?t=80609
     * Original Idea and concepts of Gun Game was made by cagemonkey
-	  http://www.cagemonkey.org
+      http://www.cagemonkey.org
     * Original SourceMod code by Teame06
 
 Changelog
@@ -148,8 +148,3 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    * Fix error in error log:
-        L 06/04/2009 - 23:59:20: [SM] Native "GG_GiveHandicapLevel" reported: Client is not currently ingame [10]
-        L 06/04/2009 - 23:59:20: [SM] Displaying call stack trace for plugin "gungame_stats.smx":
-        L 06/04/2009 - 23:59:20: [SM]   [0]  Line 212, gungame_stats.sp::OnClientAuthorized()
-    
