@@ -6,6 +6,8 @@ Description
 	get next weapon. You should kill enemies with all the
 	weapons to win the game.
 
+	http://forums.alliedmods.net/showthread.php?t=93977
+
 Commands and Cvars
 ------------------
     sm_gungame_css_version			- Gungame version.
