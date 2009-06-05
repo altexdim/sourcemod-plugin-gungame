@@ -1,10 +1,60 @@
+Description
+-----------
+    GunGame:SM is the gameplay plugin that makes you to
+	act with various guns and not only with your favorite
+	one. You should kill enemy with the current weapon to
+	get next weapon. You should kill enemies with all the
+	weapons to win the game.
+
+Commands and Cvars
+------------------
+    sm_gungame_css_version			- Gungame version.
+    gungame_enabled					- Display if gungame is enabled or disabled
+
+	gg_version						- Show gungame version information.
+	gg_status						- Show state of the current game.
+	gg_restart						- Restarts the whole game from the beginning.
+	gg_enable						- Turn on gungame and restart the game.
+	gg_disable						- Turn off gungame and restart the game.
+    gg_rebuild						- Rebuilds the top10 rank from the player data information.
+    gg_import						- Imports the winners file from es gungame.
+
+	say !level						- Show your current level and who is winning.
+	say !weapons					- Show the weapon order.
+	say !score						- Show all player current scores.
+	say !top10						- Show the top 10 winners on the server.
+	say !rules						- Show the rules and how to play.
+
+Requirements
+------------
+    Counter-Strike: Source
+    SourceMod 1.2.0    
+
+Installation
+------------
+
+    * Install Metamod:Source.
+    * Install SourceMod.
+    * Upload the addons, sound, and cfg into your cstrike folder for CS:Source
+    * Config gungame.config.txt and gungame.equip.txt to your liking in cfg/gungame/
+    * Restart your server.
+
+Credits
+-------
+
+	* Thanks to Liam for GunGame:SM till version 1.0.0.1
+	  http://forums.alliedmods.net/showthread.php?t=80609
+    * Original Idea and concepts of Gun Game was made by cagemonkey
+	  http://www.cagemonkey.org
+    * Original SourceMod code by Teame06
+
 Changelog
 ---------
-    Unofficial_10 1.0.0.1.8:
+    1.0.0.1.8:
         * Fixed multiple kills.
         + Added random weapon order option.
         
-    Unofficial_9 1.0.0.1.7:
+    1.0.0.1.7:
         + Added option no activate alltalk after player win.
         + Added grenade warmup.
         + Added unlimited nades.
@@ -18,11 +68,11 @@ Changelog
             L 05/24/2009 - 19:48:22: World triggered "Round_Start"
             L 05/24/2009 - 19:48:22: " -=XXXX=-<158><STEAM_0:0:XXXX><>" disconnected (reason "Disconnect by user.")
     
-    Unofficial_8 1.0.0.1.6:
+    1.0.0.1.6:
         * Fixed top left winner message size for long nicknames.
         + Added handycap option to give the lowest level to new connected player.
         
-    Unofficial_7 1.0.0.1.5:
+    1.0.0.1.5:
         * Fixed money remove on player kill.
         * Colorized winner message.
         + Added sounds on last/nade level.
@@ -33,10 +83,10 @@ Changelog
         * Fixed mp_chattime time.
         + Added "!score" button to "!level" panel.
     
-    Unofficial_6 1.0.0.1.4:
+    1.0.0.1.4:
         * Reverted changes about warmup. Need more think about.
     
-    Unofficial_5 1.0.0.1.3:
+    1.0.0.1.3:
         * Added exit button "1" to "!score" menu
         * Code improved. Separated business logic about calculating leader from
           showing messages to chat. Added UTIL_RecalculateLeader and it is called from 
@@ -46,7 +96,7 @@ Changelog
           was never loaded, so on map end his rank was rewritten by the winner.
         * Fixed warmup end right after round_restart (warmup was ending 1 second before round_restart).
         
-    Unofficial_4 1.0.0.1.2:
+    1.0.0.1.2:
         * Fixed bug with no message about tied with the leader when leader on level 2 (first level gained)
           Fixed FindLeader to return CLIENT (it was returning LEVEL not CLIENT). (!!!)
         * Fixed bug with no message about leaders if stealing level
@@ -55,7 +105,7 @@ Changelog
         * Fixed CurrentLeader calculation on stealing level
         * Fixed behaviour if multiple leaders found on intermission
     
-    Unofficial_3 1.0.0.1.1:
+    1.0.0.1.1:
         * Version changed :)
         * Write leaders to chat, not in hint box
         * Disable second line on spawn to chat if custom kill per level = 1 (annoying line)
@@ -70,11 +120,11 @@ Changelog
           if there was no winners yet.
         * Redesigned "!level" panel.
     
-    Unofficial_2:
+    1.0.0.1 unofficial release 2:
         * Fixed gg_import
         * Redesigned join message panel
 
-    Unofficial:
+    1.0.0.1 unofficial release 1:
         + Added option to disable calculate winner on intermission
         + Added option to level up attacker even if victim on first level
         + Added option to level down victim even if attacker is on grenade level
