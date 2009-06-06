@@ -19,7 +19,7 @@ Commands and Cvars
     gg_enable                       - Turn on gungame and restart the game.
     gg_disable                      - Turn off gungame and restart the game.
     gg_rebuild                      - Rebuilds the top10 rank from the player data information.
-    gg_import                       - Imports the winners file from es gungame.
+    gg_import                       - Imports the winners file from es gungame3. File must be in data/gungame/es_gg_winners_db.txt.
 
     say !level                      - Show your current level and who is winning.
     say !weapons                    - Show the weapon order.
@@ -52,6 +52,8 @@ Credits
 
 Changelog
 ---------
+        * Extended plugin info: added new author and new url.
+
     1.0.0.1.8:
         * Fixed multiple kills.
         + Added random weapon order option.

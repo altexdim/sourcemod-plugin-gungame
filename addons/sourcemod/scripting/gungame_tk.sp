@@ -47,36 +47,36 @@
 
 public Plugin:myinfo =
 {
-	name = "GunGame:SM TK Management",
-	author = GUNGAME_AUTHOR,
-	description = "Team Killed Management System",
-	version = GUNGAME_VERSION,
-	url = "http://www.hat-city.net/"
+    name = "GunGame:SM TK Management",
+    author = GUNGAME_AUTHOR,
+    description = "Team Killed Management System",
+    version = GUNGAME_VERSION,
+    url = GUNGAME_URL
 };
 
 public OnPluginStart()
 {
-	CHAT_DetectColorMsg();
+    CHAT_DetectColorMsg();
 }
 
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
 {
-	if(TeamKilled)
-	{
-		/* Tk a player */
-		GG_RemoveALevel(Killer);
+    if(TeamKilled)
+    {
+        /* Tk a player */
+        GG_RemoveALevel(Killer);
 
-		decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
-		GetClientName(Killer, kName, sizeof(kName));
-		GetClientName(Victim, vName, sizeof(vName));
+        decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
+        GetClientName(Killer, kName, sizeof(kName));
+        GetClientName(Victim, vName, sizeof(vName));
 
-		new String:msg[MAX_CHAT_SIZE];
-		Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has lost a level due to team kill of %c%s%c.",
-			GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, kName, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, vName, GREEN);
-		CHAT_SayText(0, Killer, msg);
+        new String:msg[MAX_CHAT_SIZE];
+        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has lost a level due to team kill of %c%s%c.",
+            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, kName, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, vName, GREEN);
+        CHAT_SayText(0, Killer, msg);
 
 
-		return Plugin_Handled;
-	}
-	return Plugin_Continue;
+        return Plugin_Handled;
+    }
+    return Plugin_Continue;
 }

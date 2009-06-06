@@ -50,25 +50,25 @@
 
 public Plugin:myinfo =
 {
-	name = "GunGame:SM Winner Logger",
-	author = GUNGAME_AUTHOR,
-	description = "Logging of winner for external stats plugin",
-	version = GUNGAME_VERSION,
-	url = "http://www.hat-city.net/"
+    name = "GunGame:SM Winner Logger",
+    author = GUNGAME_AUTHOR,
+    description = "Logging of winner for external stats plugin",
+    version = GUNGAME_VERSION,
+    url = GUNGAME_URL
 };
 
 public GG_OnWinner(client, const String:Weapon[])
 {
-	decl String:Name[64], String:Auth[64];
+    decl String:Name[64], String:Auth[64];
 
-	GetClientName(client, Name, sizeof(Name));
-	GetClientAuthString(client, Auth, sizeof(Auth));
+    GetClientName(client, Name, sizeof(Name));
+    GetClientAuthString(client, Auth, sizeof(Auth));
 
-	new team = GetClientTeam(client), UserId = GetClientUserId(client);
+    new team = GetClientTeam(client), UserId = GetClientUserId(client);
 
 #if defined BACKWARD_COMPATIBILITY
-	LogToGame("\"%s<%d><%s><%s>\" triggered \"gg_win\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
+    LogToGame("\"%s<%d><%s><%s>\" triggered \"gg_win\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
 #else
-	LogToGame("\"%s<%d><%s><%s>\" triggered \"GunGame_Winner\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
+    LogToGame("\"%s<%d><%s><%s>\" triggered \"GunGame_Winner\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
 #endif
 }

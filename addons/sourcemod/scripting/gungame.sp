@@ -84,7 +84,7 @@ public Plugin:myinfo =
     author = GUNGAME_AUTHOR,
     description = "GunGame:SM for SourceMod",
     version = GUNGAME_VERSION,
-    url = "http://www.hat-city.net/"
+    url = GUNGAME_URL
 };
 
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
