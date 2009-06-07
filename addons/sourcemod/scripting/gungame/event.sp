@@ -539,9 +539,11 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
             if ( kills < killsPerLevel )
             {
-                PrintToChat(Killer, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d%c /%c %d",
-                    GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
-
+                if ( MultiKillChat )
+                {
+                    PrintToChat(Killer, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d%c /%c %d",
+                        GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
+                }
                 UTIL_PlaySound(Killer, MultiKill);
                 return;
             }
@@ -718,8 +720,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     if ( killsPerLevel > 1 )
     {
         new kills = CurrentKillsPerWeap[client];
-        PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
-            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
+        if ( MultiKillChat )
+        {
+            PrintToChat(client, "%c[%cGunGame%c] You need %c%d%c kills to advance to the next level :: Score: %c%d %c/%c %d",
+                GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
+        }
     }
     
     new pState = PlayerState[client];

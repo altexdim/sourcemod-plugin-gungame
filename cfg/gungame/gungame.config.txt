@@ -2,6 +2,9 @@
 {
     "Config"
     {
+        /* Show multikill hints in chat */
+        "MultiKillChat" "1"
+        
         /* Set sv_alltalk 1 after player win */
         "AlltalkOnWin" "1"
         

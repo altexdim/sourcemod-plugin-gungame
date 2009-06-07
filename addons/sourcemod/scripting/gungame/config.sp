@@ -74,6 +74,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 AlltalkOnWin = bool:StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("MultiKillChat", key, false) == 0) {
+                MultiKillChat = bool:StringToInt(value);
             } else if(strcmp("JoinMessage", key, false) == 0) {
                 JoinMessage = bool:StringToInt(value);
             } else if(strcmp("IntermissionCalcWinner", key, false) == 0) {

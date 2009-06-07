@@ -46,6 +46,7 @@ new MapStatus;
 new MaxLevelPerRound = 3;
 new MinKillsPerLevel = 1;
 new bool:TurboMode;
+new bool:MultiKillChat;
 new bool:JoinMessage;
 new bool:IntermissionCalcWinner;
 new bool:CanStealFirstLevel;
