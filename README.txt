@@ -20,7 +20,7 @@ Commands and Cvars
     gg_disable                      - Turn off gungame and restart the game.
     gg_rebuild                      - Rebuilds the top10 rank from the player data information.
     gg_import                       - Imports the winners file from es es gungame3. File must be in data/gungame/es_gg_winners_db.txt.
-                                      You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py
+                                      You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py.
 
     say !level                      - Show your current level and who is winning.
     say !weapons                    - Show the weapon order.
@@ -53,6 +53,7 @@ Credits
 
 Changelog
 ---------
+    1.0.0.1.9:
         * Extended plugin info: added new author and new url.
         + Added external converter for winners db file from es gg5 to gg3.
         + Added option to disable annoying chat messages if multikill enabled.
@@ -153,6 +154,7 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    + Make deathmatch work. I use this one for now with my patches.
+    + Make deathmatch work. I use folowing plugin for now.
+      http://forums.alliedmods.net/showthread.php?p=843745#post843745
       http://forums.alliedmods.net/showthread.php?t=87198
 
