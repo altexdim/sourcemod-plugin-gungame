@@ -45,7 +45,9 @@ new Handle:RemoveAmmo;
 new Handle:EndMultiplayerGame;
 new Handle:GetSlot;
 
-#if 0
+//#define HACKS 1  
+
+#if defined HACKS
 new Handle:SDKTools_GameConf;
 new Handle:_RemovePlayerItem;
 new Handle:GiveNamedItem;

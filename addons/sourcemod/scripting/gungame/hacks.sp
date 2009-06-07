@@ -37,243 +37,243 @@
 
 OnHackStart()
 {
-	GameConf = LoadGameConfigFile("gungame.games");
+    GameConf = LoadGameConfigFile("gungame.games");
 
-	CreateEndMultiplayerGame();
-	CreateRemoveHack();
-	CreateDropHack();
-	CreateGiveAmmoHack();
-	CreateGetAmmoTypeHack();
-	CreateRemoveAmmoHack();
-	CreateGetSlotHack();
+    CreateEndMultiplayerGame();
+    CreateRemoveHack();
+    CreateDropHack();
+    CreateGiveAmmoHack();
+    CreateGetAmmoTypeHack();
+    CreateRemoveAmmoHack();
+    CreateGetSlotHack();
 
-	#if 0
-	SDKTools_GameConf = LoadGameConfigFile("sdktools.games");
+    #if defined HACKS
+    SDKTools_GameConf = LoadGameConfigFile("sdktools.games");
 
-	CreateRemovePlayerItem();
-	CreateGiveNamedItem();
-	CreateHackWeapon_GetSlot();
-	CreateGameEndHack();
-	CreateRemoveAllAmmo();
-	CreateRespawnHack();
-	CreateDeleteHack();
-	CloseHandle(SDKTools_GameConf);
+    //CreateRemovePlayerItem();
+    //CreateGiveNamedItem();
+    //CreateHackWeapon_GetSlot();
+    //CreateGameEndHack();
+    //CreateRemoveAllAmmo();
+    CreateRespawnHack();
+    //CreateDeleteHack();
+    CloseHandle(SDKTools_GameConf);
 
-	RegConsoleCmd("run", CmdRun);
-	#endif
+    RegConsoleCmd("run", CmdRun);
+    #endif
 
-	CloseHandle(GameConf);
+    CloseHandle(GameConf);
 }
-#if 0
+#if defined HACKS
 public Action:CmdRun(client, args)
 {
-	new ent = GetPlayerWeaponSlot(client, _:Slot_Secondary);
+    new ent = GetPlayerWeaponSlot(client, _:Slot_Secondary);
 
-	if(ent != -1)
-	{
-		PrintToChat(client, "Found Glock");
+    if(ent != -1)
+    {
+        PrintToChat(client, "Found Glock");
 
-		new iAmmo = HACK_GetAmmoType(ent);
+        new iAmmo = HACK_GetAmmoType(ent);
 
-		if(iAmmo != -1)
-		{
-			PrintToChat(client, "Found AmmoType");
+        if(iAmmo != -1)
+        {
+            PrintToChat(client, "Found AmmoType");
 
-			HACK_RemoveAmmo(client, 70, iAmmo);
-		}
-	}
-	return Plugin_Handled;
+            HACK_RemoveAmmo(client, 70, iAmmo);
+        }
+    }
+    return Plugin_Handled;
 }
 
 CreateDeleteHack()
 {
-	StartPrepSDKCall(SDKCall_Entity);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "Delete");
-	Delete = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Entity);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "Delete");
+    Delete = EndPrepSDKCall();
 
-	if(Delete == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBaseCombatWeapon::Delete failed. Please contact the author");
-	}
+    if(Delete == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CBaseCombatWeapon::Delete failed. Please contact the author");
+    }
 }
 
 CreateRemovePlayerItem()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(SDKTools_GameConf, SDKConf_Virtual, "RemovePlayerItem");
-	PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
-	_RemovePlayerItem = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(SDKTools_GameConf, SDKConf_Virtual, "RemovePlayerItem");
+    PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
+    _RemovePlayerItem = EndPrepSDKCall();
 
-	if(_RemovePlayerItem == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBasePlayer::RemovePlayerItem failed. Please contact the author");
-	}
+    if(_RemovePlayerItem == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CBasePlayer::RemovePlayerItem failed. Please contact the author");
+    }
 }
 
 CreateRespawnHack()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RoundRespawn");
-	RoundRespawn = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RoundRespawn");
+    RoundRespawn = EndPrepSDKCall();
 }
 
 CreateRemoveAllAmmo()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RemoveAllAmmo");
-	RemoveAllAmmo = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RemoveAllAmmo");
+    RemoveAllAmmo = EndPrepSDKCall();
 }
 
 CreateHackWeapon_GetSlot()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "Weapon_GetSlot");
-	PrepSDKCall_SetReturnInfo(SDKType_CBaseEntity, SDKPass_Pointer);
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	Weapon_GetSlot = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "Weapon_GetSlot");
+    PrepSDKCall_SetReturnInfo(SDKType_CBaseEntity, SDKPass_Pointer);
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    Weapon_GetSlot = EndPrepSDKCall();
 
-	if(Weapon_GetSlot == INVALID_HANDLE)
-	{
-		SetFailState("Signature CBaseCombatCharacter::Weapon_GetSlot Failed. Please contact the author.");
-	}
+    if(Weapon_GetSlot == INVALID_HANDLE)
+    {
+        SetFailState("Signature CBaseCombatCharacter::Weapon_GetSlot Failed. Please contact the author.");
+    }
 }
 
 CreateGiveNamedItem()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "GiveNamedItem");
-	PrepSDKCall_SetReturnInfo(SDKType_CBaseEntity, SDKPass_Pointer);
-	PrepSDKCall_AddParameter(SDKType_String, SDKPass_Pointer);
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	GiveNamedItem = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "GiveNamedItem");
+    PrepSDKCall_SetReturnInfo(SDKType_CBaseEntity, SDKPass_Pointer);
+    PrepSDKCall_AddParameter(SDKType_String, SDKPass_Pointer);
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    GiveNamedItem = EndPrepSDKCall();
 
-	if(GiveNamedItem == INVALID_HANDLE)
-	{
-		SetFailState("Signature CBasePlayer::GiveNamedItem Failed. Please contact the author.");
-	}
+    if(GiveNamedItem == INVALID_HANDLE)
+    {
+        SetFailState("Signature CBasePlayer::GiveNamedItem Failed. Please contact the author.");
+    }
 }
 
 CreateGameEndHack()
 {
-	StartPrepSDKCall(SDKCall_Static);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "InputGameEnd");
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	InputGameEnd = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Static);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "InputGameEnd");
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    InputGameEnd = EndPrepSDKCall();
 
-	if(InputGameEnd == INVALID_HANDLE)
-	{
-		SetFailState("Signature CGameEnd::InputGameEnd Failed. Please contact the author.");
-	}
+    if(InputGameEnd == INVALID_HANDLE)
+    {
+        SetFailState("Signature CGameEnd::InputGameEnd Failed. Please contact the author.");
+    }
 }
 #endif
 
 CreateGetSlotHack()
 {
-	StartPrepSDKCall(SDKCall_Entity);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetSlot");
-	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
-	GetSlot = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Entity);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetSlot");
+    PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
+    GetSlot = EndPrepSDKCall();
 
-	if(GetSlot == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBaseCombatWeapon::GetSlot Failed. Please contact the author.");
-	}
+    if(GetSlot == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CBaseCombatWeapon::GetSlot Failed. Please contact the author.");
+    }
 }
 
 HACK_GetSlot(entity)
 {
-	return SDKCall(GetSlot, entity);
+    return SDKCall(GetSlot, entity);
 }
 
 CreateEndMultiplayerGame()
 {
-	StartPrepSDKCall(SDKCall_GameRules);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "EndMultiplayerGame");
-	EndMultiplayerGame = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_GameRules);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "EndMultiplayerGame");
+    EndMultiplayerGame = EndPrepSDKCall();
 
-	if(EndMultiplayerGame == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CGameRules::EndMultiplayerGame Failed. Please contact the author.");
-	}
+    if(EndMultiplayerGame == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CGameRules::EndMultiplayerGame Failed. Please contact the author.");
+    }
 }
 
 CreateRemoveAmmoHack()
 {
 
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RemoveAmmo");
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	RemoveAmmo = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "RemoveAmmo");
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    RemoveAmmo = EndPrepSDKCall();
 
-	if(RemoveAmmo == INVALID_HANDLE)
-	{
-		SetFailState("Signature CBaseCombatCharacter::RemoveAmmo Failed. Please contact the author.");
-	}
+    if(RemoveAmmo == INVALID_HANDLE)
+    {
+        SetFailState("Signature CBaseCombatCharacter::RemoveAmmo Failed. Please contact the author.");
+    }
 }
 
 HACK_RemoveAmmo(client, iCount, iAmmoIndex)
 {
-	SDKCall(RemoveAmmo, client, iCount, iAmmoIndex);
+    SDKCall(RemoveAmmo, client, iCount, iAmmoIndex);
 }
 
 CreateGetAmmoTypeHack()
 {
-	StartPrepSDKCall(SDKCall_Entity);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetPrimaryAmmoType");
-	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
-	GetAmmoType = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Entity);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetPrimaryAmmoType");
+    PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
+    GetAmmoType = EndPrepSDKCall();
 
-	if(GetAmmoType == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBaseCombatWeapon::GetPrimaryAmmoType Failed. Please contact the author.");
-	}
+    if(GetAmmoType == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CBaseCombatWeapon::GetPrimaryAmmoType Failed. Please contact the author.");
+    }
 }
 
 CreateGiveAmmoHack()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GiveAmmo");
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-	PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
-	GiveAmmo = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GiveAmmo");
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
+    PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
+    GiveAmmo = EndPrepSDKCall();
 
-	if(GiveAmmo == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBaseCombatCharacter::GiveAmmo Failed. Please contact the author.");
-	}
+    if(GiveAmmo == INVALID_HANDLE)
+    {
+        SetFailState("Virtual CBaseCombatCharacter::GiveAmmo Failed. Please contact the author.");
+    }
 }
 
 CreateRemoveHack()
 {
-	StartPrepSDKCall(SDKCall_Static);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "UTIL_Remove");
-	PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
-	UTILRemove = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Static);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "UTIL_Remove");
+    PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
+    UTILRemove = EndPrepSDKCall();
 
-	if(UTILRemove == INVALID_HANDLE)
-	{
-		SetFailState("Signature CBaseEntity::UTIL_Remove Failed. Please contact author");
-	}
+    if(UTILRemove == INVALID_HANDLE)
+    {
+        SetFailState("Signature CBaseEntity::UTIL_Remove Failed. Please contact author");
+    }
 }
 
 CreateDropHack()
 {
-	StartPrepSDKCall(SDKCall_Player);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "CSWeaponDrop");
-	PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
-	PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
-	PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
-	CSWeaponDrop = EndPrepSDKCall();
+    StartPrepSDKCall(SDKCall_Player);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "CSWeaponDrop");
+    PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
+    PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
+    PrepSDKCall_AddParameter(SDKType_Bool, SDKPass_Plain);
+    CSWeaponDrop = EndPrepSDKCall();
 
-	if(CSWeaponDrop == INVALID_HANDLE)
-	{
-		SetFailState("Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author.");
-	}
+    if(CSWeaponDrop == INVALID_HANDLE)
+    {
+        SetFailState("Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author.");
+    }
 }
 
-#if 0
+#if defined HACKS
 /**
  * Force the game to end and change map with intermission.
  *
@@ -282,91 +282,91 @@ CreateDropHack()
  */
 HACK_ForceGameEnd()
 {
-	SDKCall(InputGameEnd, 0);
+    SDKCall(InputGameEnd, 0);
 }
 
 /**
  * Give ammo to a client.
  *
- * @param client		player index
- * @param iCount		Ammo amount
- * @param iAmmoIndex	Ammo type index (use HACK_GetAmmoType() to get the ammo type)
- * @param bSuppressSound	Allow the ammo pickup sound or not
+ * @param client        player index
+ * @param iCount        Ammo amount
+ * @param iAmmoIndex    Ammo type index (use HACK_GetAmmoType() to get the ammo type)
+ * @param bSuppressSound    Allow the ammo pickup sound or not
  *
  * @noreturn
  *
  */
 HACK_GiveAmmo(client, iCount, iAmmoIndex, bool:bSuppressSound = false)
 {
-	SDKCall(GiveAmmo, client, iCount, iAmmoIndex, bSuppressSound);
+    SDKCall(GiveAmmo, client, iCount, iAmmoIndex, bSuppressSound);
 }
 
 
 HACK_GiveNamedItem(client, const String:item[])
 {
-	return SDKCall(GiveNamedItem, client, item, 0);
+    return SDKCall(GiveNamedItem, client, item, 0);
 }
 
 HACK_Weapon_GetSlot(client, slot)
 {
-	return SDKCall(Weapon_GetSlot, client, slot);
+    return SDKCall(Weapon_GetSlot, client, slot);
 }
 
 
 HACK_RemovePlayerItem(client, ent)
 {
-	SDKCall(_RemovePlayerItem, client, ent);
+    SDKCall(_RemovePlayerItem, client, ent);
 }
 
 HACK_Respawn(client)
 {
-	SDKCall(RoundRespawn, client);
+    SDKCall(RoundRespawn, client);
 }
 
 HACK_RemoveAllAmmo(client)
 {
-	SDKCall(RemoveAllAmmo, client);
+    SDKCall(RemoveAllAmmo, client);
 }
 
 HACK_Delete(ent)
 {
-	SDKCall(Delete, ent);
+    SDKCall(Delete, ent);
 }
 #endif
 
 /**
- *@param client		client index
- *@param weapon 		CBaseCombatWeapon entity index.
+ *@param client     client index
+ *@param weapon         CBaseCombatWeapon entity index.
  */
 HACK_CSWeaponDrop(client, weapon)
 {
-	SDKCall(CSWeaponDrop, client, weapon, true, false);
+    SDKCall(CSWeaponDrop, client, weapon, true, false);
 }
 
 /**
  * Removes from the world.
  *
- * @param entity 		entity index
+ * @param entity        entity index
  * @noreturn
  */
 HACK_Remove(entity)
 {
-	/* Just incase 0 get passed */
-	if(entity)
-	{
-		SDKCall(UTILRemove, entity);
-	}
+    /* Just incase 0 get passed */
+    if(entity)
+    {
+        SDKCall(UTILRemove, entity);
+    }
 }
 
 /**
  * Returns the ammo type for the weapon
  *
- * @param weapon		Weapon entity index
- * @return			Ammo Type index
+ * @param weapon        Weapon entity index
+ * @return          Ammo Type index
  */
 HACK_GetAmmoType(weapon)
 {
-	return SDKCall(GetAmmoType, weapon);
+    return SDKCall(GetAmmoType, weapon);
 }
 
 /**
@@ -377,5 +377,5 @@ HACK_GetAmmoType(weapon)
  */
 HACK_EndMultiplayerGame()
 {
-	SDKCall(EndMultiplayerGame);
+    SDKCall(EndMultiplayerGame);
 }
