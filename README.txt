@@ -8,6 +8,9 @@ Description
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
+	For deathmatch mode you will need sm_ggdm 1.4+ plugin
+	http://forums.alliedmods.net/showthread.php?t=87198
+
 Commands and Cvars
 ------------------
     sm_gungame_css_version          - Gungame version.
@@ -154,7 +157,4 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    + Make deathmatch work. I use folowing plugin for now.
-      http://forums.alliedmods.net/showthread.php?p=843745#post843745
-      http://forums.alliedmods.net/showthread.php?t=87198
 
