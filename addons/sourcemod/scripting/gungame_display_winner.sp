@@ -3,24 +3,22 @@
 #include <sourcemod>
 #include <gungame>
 
-#define PLUGIN_VERSION "1.0.0"
-
 new String:LastKill[MAXPLAYERS+1][32];
-new Hanlde:g_Cvar_Url;
+new Handle:g_Cvar_Url;
 
 public Plugin:myinfo =
 {
-	name = "GunGame Winner",
-	author = "bl4nk",
-	description = "Shows a MOTD window with the winner's information when the game is won",
-	version = PLUGIN_VERSION,
-	url = "http://forums.alliedmods.net"
+	name = "GunGame:SM Display Winner",
+	description = "Shows a MOTD window with the winner's information when the game is won.",
+    author = GUNGAME_AUTHOR,
+    version = GUNGAME_VERSION,
+    url = GUNGAME_URL
 };
 
 public OnPluginStart()
 {
     g_Cvar_Url = CreateConVar("sm_gungame_display_winner_url", "http://gungame5.com/gg5_win.php", "URL to display in MOTD window.");
-	HookEvent("player_death", Event_PlayerDeath);
+    HookEvent("player_death", Event_PlayerDeath);
 }
 
 public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
