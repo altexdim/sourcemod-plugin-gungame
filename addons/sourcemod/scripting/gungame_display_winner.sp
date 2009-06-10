@@ -6,6 +6,7 @@
 #define PLUGIN_VERSION "1.0.0"
 
 new String:LastKill[MAXPLAYERS+1][32];
+new Hanlde:g_Cvar_Url;
 
 public Plugin:myinfo =
 {
@@ -18,6 +19,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
+    g_Cvar_Url = CreateConVar("sm_gungame_display_winner_url", "http://gungame5.com/gg5_win.php", "URL to display in MOTD window.");
 	HookEvent("player_death", Event_PlayerDeath);
 }
 
@@ -37,8 +39,8 @@ public GG_OnWinner(client, const String:weapon[])
 	decl String:name[32], String:url[256];
 	GetClientName(client, name, sizeof(name));
 
-	Format(url, sizeof(url), "http://gungame5.com/gg5_win.php?winnerName=%s&loserName=%s&wins=%i&place=%s&totalPlaces=%s", name, LastKill[client], GG_GetClientWins(client), 0, 0);
-
+	GetConVarString(g_Cvar_Url, url, sizeof(url));
+	Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%s&totalPlaces=%s", url, name, LastKill[client], GG_GetClientWins(client), GG_GetPlayerPlaceInStat(client), GG_CountPlayersInStat());
 	for (new i = 1; i <= MaxClients; i++)
 	{
 		if (IsClientInGame(i))

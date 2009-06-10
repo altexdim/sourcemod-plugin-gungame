@@ -191,6 +191,73 @@ SavePlayerData(client)
 	}
 }
 
+CountPlayersInStat()
+{
+	if ( !PlayerOpen )
+	{
+		return 0;
+	}
+
+	/* Set back to root node position */
+	KvRewind(KvPlayer);
+
+	/* Go to first SubKey */
+	if(!KvGotoFirstSubKey(KvPlayer))
+	{
+		return 0;
+	}
+
+	new count = 0;
+	for(;;)
+	{
+		count++;
+		if ( !KvGotoNextKey(KvPlayer) )
+		{
+			break;
+		}
+	}
+
+	KvRewind(KvPlayer);
+
+	return count;
+}
+
+GetPlayerPlaceInStat(client)
+{
+	if ( !PlayerOpen )
+	{
+		return 0;
+	}
+
+	/* Set back to root node position */
+	KvRewind(KvPlayer);
+
+	/* Go to first SubKey */
+	if(!KvGotoFirstSubKey(KvPlayer))
+	{
+		return 0;
+	}
+
+	new wins = PlayerWinsData[client];
+	new count = 1;
+	// todo
+	for(;;)
+	{
+		if ( KvGetNum(KvPlayer, "wins") > wins)
+		{
+			count++;
+		}
+		if ( !KvGotoNextKey(KvPlayer) )
+		{
+			break;
+		}
+	}
+
+	KvRewind(KvPlayer);
+
+	return count;
+}
+
 PrunePlayerKeyValues()
 {
 	/* Set back to root node position */

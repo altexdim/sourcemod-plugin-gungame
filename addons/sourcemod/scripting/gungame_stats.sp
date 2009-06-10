@@ -79,6 +79,8 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
     CreateNative("GG_DisplayTop10", __DisplayTop10);
     CreateNative("GG_GetClientWins", __GetPlayerWins);
+    CreateNative("GG_CountPlayersInStat", __CountPlayersInStat);
+    CreateNative("GG_GetPlayerPlaceInStat", __GetPlayerPlaceInStat);
     return true;
 }
 
@@ -176,6 +178,25 @@ public __DisplayTop10(Handle:plugin, numParams)
         SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
     }
     return 1;
+}
+
+public __GetPlayerPlaceInStat(Handle:plugin, numParams)
+{
+    new client = GetNativeCell(1);
+
+    if(client < 1 || client > GetMaxClients())
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
+
+    return GetPlayerPlaceInStat(client);
+}
+
+public __CountPlayersInStat(Handle:plugin, numParams)
+{
+    return CountPlayersInStat();
 }
 
 public __GetPlayerWins(Handle:plugin, numParams)

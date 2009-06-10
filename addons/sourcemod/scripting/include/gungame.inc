@@ -298,10 +298,25 @@ native GG_DisplayTop10(client);
 native GG_GiveHandicapLevel(client, mode);
 
 /**
+ * Return current player's place in stat.
+ *
+ * @param client        Player index
+ * @return int
+ */
+native GG_GetPlayerPlaceInStat(client);
+
+/**
+ * Count number of winners in stat.
+ *
+ * @return int
+ */
+native GG_CountPlayersInStat();
+
+/**
  * Retrieves player current total wins
  *
- * @param client        Player index.
- * @return          Total player wins
+ * @param client        Player index
+ * @return int          Total player wins
  */
 native GG_GetClientWins(client);
 
