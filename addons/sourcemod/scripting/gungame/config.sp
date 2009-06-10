@@ -124,8 +124,24 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 WarmupReset = bool:StringToInt(value);
             } else if(strcmp("NadeSmoke", key, false) == 0) {
                 NadeSmoke = bool:StringToInt(value);
-            } else if(strcmp("NadeGlock", key, false) == 0) {
-                NadeGlock = bool:StringToInt(value);
+            } else if(strcmp("NadeBonus", key, false) == 0) {
+				if ( strcmp("", value, false) != 0 )
+				{
+					UTIL_StringToLower(value);
+				    new weaponId = UTIL_GetWeaponIndex(value);
+					if ( weaponId )
+					{
+						NadeBonus = WeaponName[weaponId];
+					}
+					else
+					{
+						NadeBonus = "";
+					}
+				}
+				else
+				{
+					NadeBonus = "";
+				}
             } else if(strcmp("NadeFlash", key, false) == 0) {
                 NadeFlash = bool:StringToInt(value);
             } else if(strcmp("ExtraNade", key, false) == 0) {

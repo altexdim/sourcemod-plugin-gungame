@@ -157,9 +157,10 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-	+ (need check) Add motd winner display.
-	+ (need check) Add option to winner display for the custom URL.
-	+ Missing option to give deagle or other weapon instead of glock when on nade level.
-	* NadeGlock must is now working on spawn, but it turbo is enabled it is
+	+ (done, need check) Add motd winner display.
+	+ (done, need check) Add option to winner display for the custom URL.
+	+ (done, need check) Missing option to give deagle or other weapon instead of glock when on nade level.
+	* (done, need check) NadeBonus is now working on spawn, but if turbo is enabled it is
 	  not working on player death.
-
+	* Fix not to give grenade after reaching next level after nade level with
+	  UnlimNades enabled.

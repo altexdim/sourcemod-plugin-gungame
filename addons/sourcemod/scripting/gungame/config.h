@@ -54,7 +54,7 @@ new bool:CanLevelDownOnGrenade;
 new VoteLevelLessWeaponCount;
 new bool:ObjectiveBonus;
 new bool:WorldspawnSuicide;
-new bool:NadeGlock;
+new String:NadeBonus[24];
 new bool:NadeSmoke;
 new bool:NadeFlash;
 new bool:ExtraNade;

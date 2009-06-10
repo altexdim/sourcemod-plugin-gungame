@@ -585,9 +585,43 @@ UTIL_GiveNextWeapon(client, level)
         UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
     }
 
+	if ( WeapId == CSW_HEGRENADE && NadeBodus )
+	{
+        new ent = GivePlayerItem(client, NadeBonus);
+        if(ent != -1)
+        {
+            new iAmmo = HACK_GetAmmoType(ent);
+
+            if(iAmmo != -1)
+            {
+                new Handle:Info = CreateDataPack();
+                WritePackCell(Info, client);
+                WritePackCell(Info, iAmmo);
+                ResetPack(Info);
+
+                CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+            }
+        }
+	}
+
     /* Give new weapon */
     GivePlayerItem(client, WeaponName[WeapId]);
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+}
+
+/**
+ * This function was created because of the dynamic pricing that was updated in the
+ * recent Source update. They are giving full ammo no matter if mp_dynamicpricing was 0 or 1.
+ * So I had to delay reseting the hegrenade with glock to 50 bullets by 0.2
+ */
+public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data)
+{
+    new client = ReadPackCell(data);
+
+    if(IsClientInGame(client))
+    {
+        HACK_RemoveAmmo(client, 90, ReadPackCell(data));
+    }
 }
 
 UTIL_PlaySound(client, Sounds:type)

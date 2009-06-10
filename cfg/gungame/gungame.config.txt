@@ -114,8 +114,14 @@
         /* Allow players to keep their levels after warmup otherwise it will reset to level 1 after warmup. */
         "ResetLevelAfterWarmup" "1"
 
-        /* This gives the player a glock with 50 bullets */
-        "NadeGlock" "0"
+        /**
+		 * This gives the player a weapon with 50 bullets on nade level.
+		 * Example:
+         *     "NadeBonus" "glock"  - gives glock 
+         *     "NadeBonus" "deagle" - gives deagle
+         *     "NadeBonus" ""       - feature disabled
+		 */
+        "NadeBonus" ""
 
         /* Gives a smoke grenade*/
         "NadeSmoke" "0"

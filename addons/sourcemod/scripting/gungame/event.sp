@@ -756,10 +756,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             UTIL_PlaySound(0, AutoFF);
         }
 
-        if(NadeGlock)
+        if (NadeBonus)
         {
-            new ent = GivePlayerItem(client, WeaponName[CSW_GLOCK]);
-
+            new ent = GivePlayerItem(client, NadeBonus);
             if(ent != -1)
             {
                 new iAmmo = HACK_GetAmmoType(ent);
@@ -771,7 +770,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
                     WritePackCell(Info, iAmmo);
                     ResetPack(Info);
 
-                    CreateTimer(0.1, DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+                    CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
                 }
             }
         }
@@ -794,21 +793,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     /* No reason to give them knife again.  */
     } else if(WeapId != CSW_KNIFE) {
         GivePlayerItem(client, WeaponName[WeapId]);
-    }
-}
-
-/**
- * This function was created because of the dynamic pricing that was updated in the
- * recent Source update. They are giving full ammo no matter if mp_dynamicpricing was 0 or 1.
- * So I had to delay reseting the hegrenade with glock to 50 bullets by 0.2
- */
-public Action:DelayAmmoRemove(Handle:timer, Handle:data)
-{
-    new client = ReadPackCell(data);
-
-    if(IsClientInGame(client))
-    {
-        HACK_RemoveAmmo(client, 90, ReadPackCell(data));
     }
 }
 
@@ -899,6 +883,8 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     new level = PlayerLevel[client];
     new Weapons:WeaponLevel = WeaponOrderId[level];
+	new String:weaponName[24];
+	weaponName = WeaponName[CSW_HEGRENADE];
     
     if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
     {
@@ -909,10 +895,10 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
         || (WarmupNades && WarmupEnabled) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
+        if ( UTIL_FindGrenadeByName(client, weaponName) == -1 )
         {
-            GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
-            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+            GivePlayerItem(client, weaponName);
+            FakeClientCommand(client, "use %s", weaponName);
         }
     }
 }
