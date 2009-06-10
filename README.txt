@@ -8,13 +8,14 @@ Description
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
-	For deathmatch mode you will need sm_ggdm 1.4+ plugin
-	http://forums.alliedmods.net/showthread.php?t=87198
+    For deathmatch mode you will need sm_ggdm 1.4+ plugin
+    http://forums.alliedmods.net/showthread.php?t=87198
 
 Commands and Cvars
 ------------------
     sm_gungame_css_version          - Gungame version.
-    gungame_enabled                 - Display if gungame is enabled or disabled
+    gungame_enabled                 - Display if gungame is enabled or disabled.
+    sm_gungame_display_winner_url   - URL to display in MOTD window for gungame winner.
 
     gg_version                      - Show gungame version information.
     gg_status                       - Show state of the current game.
@@ -47,7 +48,7 @@ Installation
 
 Credits
 -------
-	* Thanks to bl4nk for GunGame Display Winner plugin.
+    * Thanks to bl4nk for GunGame Display Winner plugin.
     * Thanks to Liam for GunGame:SM till version 1.0.0.1
       http://forums.alliedmods.net/showthread.php?t=80609
     * Original Idea and concepts of Gun Game was made by cagemonkey
@@ -56,6 +57,12 @@ Credits
 
 Changelog
 ---------
+    1.0.0.1.10:
+        + Added motd winner display.
+        + Added option to winner display for the custom URL.
+        + Added option to give deagle or other weapon instead of glock when on nade level.
+        * Fixed NadeBonus to work if turbo is enabled.
+      
     1.0.0.1.9:
         * Extended plugin info: added new author and new url.
         + Added external converter for winners db file from es gg5 to gg3.
@@ -157,10 +164,3 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-	+ (done, need check) Add motd winner display.
-	+ (done, need check) Add option to winner display for the custom URL.
-	+ (done, need check) Missing option to give deagle or other weapon instead of glock when on nade level.
-	* (done, need check) NadeBonus is now working on spawn, but if turbo is enabled it is
-	  not working on player death.
-	* Fix not to give grenade after reaching next level after nade level with
-	  UnlimNades enabled.

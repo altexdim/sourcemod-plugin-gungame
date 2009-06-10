@@ -402,7 +402,11 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         UTIL_PlaySound(0, Winner);
         if ( AlltalkOnWin )
         {
-            ServerCommand("sv_alltalk 1");  
+            new Handle:sv_alltalk = FindConVar("sv_alltalk");
+            if ( sv_alltalk != INVALID_HANDLE )
+            {
+                SetConVarInt(sv_alltalk,1);
+            }
         }
     }
 
@@ -585,9 +589,16 @@ UTIL_GiveNextWeapon(client, level)
         UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
     }
 
-	if ( WeapId == CSW_HEGRENADE && NadeBodus )
-	{
-        new ent = GivePlayerItem(client, NadeBonus);
+    if ( (WeapId == CSW_HEGRENADE) && NadeBonusWeaponId )
+    {
+        slot = WeaponSlot[NadeBonusWeaponId];
+        if ( slot != Slot_Grenade )
+        {
+            /* Drop old weapon first */
+            UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
+        }
+
+        new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
         if(ent != -1)
         {
             new iAmmo = HACK_GetAmmoType(ent);
@@ -602,7 +613,7 @@ UTIL_GiveNextWeapon(client, level)
                 CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
             }
         }
-	}
+    }
 
     /* Give new weapon */
     GivePlayerItem(client, WeaponName[WeapId]);

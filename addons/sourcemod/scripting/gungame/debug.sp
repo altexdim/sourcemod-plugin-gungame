@@ -110,7 +110,7 @@ DisplayConfig(client)
     AfkDeaths
     AfkAction
     NadeSmoke
-    NadeBonus
+    NadeBonusWeaponId
     NadeFlash
     ExtraNade
     UnlimitedNades

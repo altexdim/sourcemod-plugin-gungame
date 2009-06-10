@@ -164,7 +164,11 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
                     UTIL_PlaySound(0, Winner);
                     if ( AlltalkOnWin )
                     {
-                        ServerCommand("sv_alltalk 1");  
+                        new Handle:sv_alltalk = FindConVar("sv_alltalk");
+                        if ( sv_alltalk != INVALID_HANDLE )
+                        {
+                            SetConVarInt(sv_alltalk,1);
+                        }
                     }
                 }
             }
@@ -756,9 +760,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             UTIL_PlaySound(0, AutoFF);
         }
 
-        if (NadeBonus)
+        if ( NadeBonusWeaponId )
         {
-            new ent = GivePlayerItem(client, NadeBonus);
+            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
             if(ent != -1)
             {
                 new iAmmo = HACK_GetAmmoType(ent);
@@ -883,8 +887,8 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     new level = PlayerLevel[client];
     new Weapons:WeaponLevel = WeaponOrderId[level];
-	new String:weaponName[24];
-	weaponName = WeaponName[CSW_HEGRENADE];
+    new String:weaponName[24];
+    strcopy(weaponName, sizeof(weaponName), WeaponName[CSW_HEGRENADE]);
     
     if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
     {
