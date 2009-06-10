@@ -47,7 +47,7 @@ Installation
 
 Credits
 -------
-
+	* Thanks to bl4nk for GunGame Display Winner plugin.
     * Thanks to Liam for GunGame:SM till version 1.0.0.1
       http://forums.alliedmods.net/showthread.php?t=80609
     * Original Idea and concepts of Gun Game was made by cagemonkey
@@ -157,4 +157,9 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
+	+ Add motd winner display.
+	+ Add option to winner display for the custom URL.
+	+ Missing option to give deagle or other weapon instead of glock when on nade level.
+	* NadeGlock must is now working on spawn, but it turbo is enabled it is
+	  not working on player death.
 
