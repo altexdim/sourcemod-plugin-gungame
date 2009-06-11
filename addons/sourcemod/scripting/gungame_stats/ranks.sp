@@ -84,6 +84,7 @@ CheckRank(client, Wins)
 	{
 		if(Wins > PlayerWins[i])
 		{
+			RankChange = true;
 			/**
 			 * Winner Winner Winner
 			 * Let shift old ranks up.
@@ -129,7 +130,5 @@ ShiftRanksUp(client, Wins, RankToReplace, const String:Auth[64])
 	PlayerWins[RankToReplace] = Wins;
 	GetClientName(client, PlayerName[RankToReplace], sizeof(PlayerName[]));
 	PlayerAuthid[RankToReplace] = Auth;
-
-	RankChange = true;
 }
 
