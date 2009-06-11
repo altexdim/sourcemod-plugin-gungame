@@ -39,7 +39,6 @@ Requirements
 
 Installation
 ------------
-
     * Install Metamod:Source.
     * Install SourceMod.
     * Upload the addons, sound, and cfg into your cstrike folder for CS:Source
@@ -57,6 +56,10 @@ Credits
 
 Changelog
 ---------
+    1.0.0.1.11:
+        * Fixed top10 update on gungame win (it was not working if players have same wins).
+        * Fixed not to give additional grenade if player kills with grenade with ExtraNade on.
+    
     1.0.0.1.10:
         + Added motd winner display.
         + Added option to winner display for the custom URL.
@@ -164,9 +167,5 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    * Check top10 update on gungame win (it seems like it does not work with
-	  display winner plugin).
-    * Check if additional grenade was given after reaching last level with
-	  unlim nages on.
-	* Check what is IsDmActive for.
+    * Check what is IsDmActive for.
 

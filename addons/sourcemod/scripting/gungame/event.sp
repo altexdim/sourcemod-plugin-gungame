@@ -397,7 +397,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
          */
 
         /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-        if(ExtraNade && WeaponLevel == CSW_HEGRENADE)
+        if ( ExtraNade && WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
         {
             /* Do not give them another nade if they already have one */
             if(UTIL_FindGrenadeByName(Killer, WeaponName[CSW_HEGRENADE]) == -1)
