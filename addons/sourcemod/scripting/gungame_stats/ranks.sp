@@ -73,6 +73,7 @@ CheckRank(client, Wins)
 		if(location && Wins > PlayerWins[location - 1])
 		{
 			SwitchRanks(client, location - 1, location, Authid);
+			// FIXME: If switch ranks then where is PlayerWins updated?
 			return;
 		} /* Otherwise just update their wins because their rank has not change */
 
