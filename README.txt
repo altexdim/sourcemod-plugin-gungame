@@ -164,5 +164,9 @@ TODO
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug.
     + Add option to reload ammo on player kill.
-    * Check top10 update on gungame win.
-    
+    * Check top10 update on gungame win (it seems like it does not work with
+	  display winner plugin).
+    * Check if additional grenade was given after reaching last level with
+	  unlim nages on.
+	* Check what is IsDmActive for.
+

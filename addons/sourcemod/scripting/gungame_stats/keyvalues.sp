@@ -240,7 +240,6 @@ GetPlayerPlaceInStat(client)
 
 	new wins = PlayerWinsData[client];
 	new count = 1;
-	// todo
 	for(;;)
 	{
 		if ( KvGetNum(KvPlayer, "wins") > wins)
