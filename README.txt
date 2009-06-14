@@ -56,6 +56,8 @@ Credits
 
 Changelog
 ---------
+        * Fixed Handicap.
+        
     1.0.0.1.11:
         * Fixed top10 update on gungame win (it was not working if players have same wins).
         * Fixed not to give additional grenade if player kills with grenade with ExtraNade on.
@@ -165,7 +167,7 @@ TODO
     + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
-      I can not figure out algorythm to reproduce this bug.
+      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
     + Add option to reload ammo on player kill.
     * Check what is IsDmActive for.
 

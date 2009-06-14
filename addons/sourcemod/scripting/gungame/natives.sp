@@ -106,7 +106,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
     new client = GetNativeCell(1);
     new mode = GetNativeCell(2);
 
-    if(client < 1 || client > MaxClients)
+    if ( (client < 1) || (client > MaxClients) )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     }
@@ -115,33 +115,35 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
     {
         new Count = GetClientCount();
 
-        if(TotalLevel && Count)
+        if ( TotalLevel && Count )
         {
-            PlayerLevel[client] = TotalLevel / Count;
+            PlayerLevel[client] = RoundToFloor(TotalLevel / Count);
         }
         return 1;
     }
     if ( mode == 2 )
     {
-        // todo
-        new minimum = 0;
+        new minimum = -1;
         new level = 0;
-        for (new i = 1; i <= MaxClients; i++)
+        for ( new i = 1; i <= MaxClients; i++ )
         {
             if ( IsClientInGame(i) )
             {
-                level = PlayerLevel[i];
-                if ( !level || client == i )
+                if ( client == i )
                 {
                     continue;
                 }
-                if ( !minimum || level < minimum )
-                {
+                level = PlayerLevel[i];
+                if ( (minimum == -1) || (level < minimum) )
+                {                 
                     minimum = level;
                 }
             }
         }
-        PlayerLevel[client] = minimum;
+        if ( minimum != -1 ) 
+        {
+            PlayerLevel[client] = minimum;
+        }
         return 1;
     }
     return 1;
