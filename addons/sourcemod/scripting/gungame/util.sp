@@ -219,9 +219,6 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
             CurrentLeader = FindLeader();
             if ( CurrentLeader != client )
             {
-	// TODO: Is this forward realy needed?
-	// I think it must be removed to optimize 
-	// this function.
                 Call_StartForward(FwdLeader);
                 Call_PushCell(CurrentLeader);
                 Call_PushCell(newLevel);
@@ -237,9 +234,6 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     if ( !CurrentLeader )
     {
         CurrentLeader = client;
-	// TODO: Is this forward realy needed?
-	// I think it must be removed to optimize 
-	// this function.
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
@@ -262,9 +256,6 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     if ( newLevel > PlayerLevel[CurrentLeader] )
     {
         CurrentLeader = client;
-	// TODO: Is this forward realy needed?
-	// I think it must be removed to optimize 
-	// this function.
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
@@ -321,9 +312,6 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
     new ret;
 
-	// TODO: Is this forward realy needed?
-	// I think it must be removed to optimize 
-	// this function.
     Call_StartForward(FwdLevelChange);
     Call_PushCell(client);
     Call_PushCell(Level);
@@ -366,7 +354,6 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         return Level;
     }
 
-	// FIXME: If VoteLevelLessWeaponCount = 0 than player did not win!
     if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
     {
         /* Call map voting */
@@ -374,8 +361,6 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
         Call_StartForward(FwdVoteStart);
         Call_Finish();
-
-        return Level;
     }
     
     /* WeaponOrder count is the last weapon. */
@@ -401,22 +386,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();
-        new Float:time = GetConVarFloat(mp_chattime);
-        SetConVarInt(mp_chattime,5);
-        if ( time < 5 )
-        {
-            time = 1.0;
-        }
-        else
-        {
-            time = time - 5;
-        }
-		// TODO: Из-за этого происходит рестарт раунда, если команда победила. 
-		// И поэтому прекращается песня победителя.
-		// Может быть сразу включать смену карты (точнее сказать интермишн), 
-		// при этом мп_чаттайм проверять и
-		// если что делать минимум 10?
-        CreateTimer(time, DelayMapChange);
+        ForceMapChange();
         UTIL_PlaySound(0, Winner);
         if ( AlltalkOnWin )
         {
@@ -431,7 +401,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
     return Level;
 }
 
-public Action:DelayMapChange(Handle:Timer)
+ForceMapChange()
 {
     /* Force intermission change map. */
     #if 0

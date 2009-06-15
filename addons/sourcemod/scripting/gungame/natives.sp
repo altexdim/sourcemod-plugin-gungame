@@ -117,7 +117,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
 
         if ( TotalLevel && Count )
         {
-            PlayerLevel[client] = RoundToFloor(TotalLevel / Count);
+            PlayerLevel[client] = TotalLevel / Count;
         }
         return 1;
     }

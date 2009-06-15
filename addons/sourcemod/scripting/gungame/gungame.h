@@ -121,7 +121,6 @@ new Handle:WarmupTimer = INVALID_HANDLE;
 new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
 
 new TakeDamage[MAXPLAYERS + 1];
-new Handle:mp_chattime = INVALID_HANDLE;
 
 /* Work around for cssdm 2.0 because cssdm remove weapon exactly on weapon drop. */
 new bool:IsDmActive = false;

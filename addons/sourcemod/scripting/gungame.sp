@@ -101,8 +101,7 @@ public OnPluginStart()
     VGUIMenu = GetUserMessageId("VGUIMenu");
     mp_friendlyfire = FindConVar("mp_friendlyfire");
     mp_restartgame = FindConVar("mp_restartgame");
-    mp_chattime = FindConVar("mp_chattime");
-
+    
     new Handle:Version = CreateConVar("sm_gungame_css_version", GUNGAME_VERSION,    "GunGame Version", FCVAR_SPONLY|FCVAR_REPLICATED|FCVAR_NOTIFY);
 
     /* Just to make sure they it updates the convar version if they just had the plugin reload on map change */
