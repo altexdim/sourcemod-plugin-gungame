@@ -61,6 +61,7 @@ Changelog
         * Fixed to change player's level down when self killed with grenade if autofriendlyfire is disabled.
         * Fixed Handicap.
         * Fixed intermission to start right after player has won (no round start if team has won).
+        + Added examples to gungame.mapconfig.cfg.
         
     1.0.0.1.11:
         * Fixed top10 update on gungame win (it was not working if players have same wins).
