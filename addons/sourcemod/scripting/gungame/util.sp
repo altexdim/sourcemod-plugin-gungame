@@ -366,6 +366,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         return Level;
     }
 
+	// FIXME: If VoteLevelLessWeaponCount = 0 than player did not win!
     if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
     {
         /* Call map voting */
