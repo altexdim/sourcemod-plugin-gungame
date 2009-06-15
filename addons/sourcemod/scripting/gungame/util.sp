@@ -398,6 +398,11 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         {
             time = time - 5;
         }
+		// TODO: Из-за этого происходит рестарт раунда, если команда победила. 
+		// И поэтому прекращается песня победителя.
+		// Может быть сразу включать смену карты (точнее сказать интермишн), 
+		// при этом мп_чаттайм проверять и
+		// если что делать минимум 10?
         CreateTimer(time, DelayMapChange);
         UTIL_PlaySound(0, Winner);
         if ( AlltalkOnWin )
