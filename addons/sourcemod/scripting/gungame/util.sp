@@ -219,6 +219,9 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
             CurrentLeader = FindLeader();
             if ( CurrentLeader != client )
             {
+	// TODO: Is this forward realy needed?
+	// I think it must be removed to optimize 
+	// this function.
                 Call_StartForward(FwdLeader);
                 Call_PushCell(CurrentLeader);
                 Call_PushCell(newLevel);
@@ -234,6 +237,9 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     if ( !CurrentLeader )
     {
         CurrentLeader = client;
+	// TODO: Is this forward realy needed?
+	// I think it must be removed to optimize 
+	// this function.
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
@@ -256,6 +262,9 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     if ( newLevel > PlayerLevel[CurrentLeader] )
     {
         CurrentLeader = client;
+	// TODO: Is this forward realy needed?
+	// I think it must be removed to optimize 
+	// this function.
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
@@ -312,6 +321,9 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
     new ret;
 
+	// TODO: Is this forward realy needed?
+	// I think it must be removed to optimize 
+	// this function.
     Call_StartForward(FwdLevelChange);
     Call_PushCell(client);
     Call_PushCell(Level);
