@@ -529,6 +529,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
         if ( kills <= killsPerLevel )
         {
+			// TODO: Is this forward realy needed?
+			// I think it must be removed to optimize 
+			// this function.
             Call_StartForward(FwdPoint);
             Call_PushCell(Killer);
             Call_PushCell(kills);
