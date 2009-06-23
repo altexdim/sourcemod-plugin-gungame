@@ -56,6 +56,8 @@ Credits
 
 Changelog
 ---------
+        * Blue color is unreadable. Changed to light blue.
+        
     1.0.0.1.12:
         * Fixed if VoteLevelLessWeaponCount = 0 then player can not win from the first time.
         * Fixed to change player's level down when self killed with grenade if autofriendlyfire is disabled.

@@ -373,7 +373,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
         new team = GetClientTeam(client);
         new r = (team == TEAM_T ? 255 : 0);
-        new g = (team != TEAM_T && team != TEAM_CT) ? 255 : 0;
+        new g =  team == TEAM_CT ? 128 : (team == TEAM_T ? 0 : 255);
         new b = (team == TEAM_CT ? 255 : 0);
         UTIL_PrintToUpperLeft(0, r, g, b, "[GunGame] %s has won.", Name);
 
