@@ -24,7 +24,6 @@
         "Enabled" "1"
 
         /* Display a join message, popup giving players instructions on how to play */
-        /* When menus are implement it will be a pop otherwise they will have to look in console */
         "JoinMessage" "1"
 
         /* Give player -1 level if they kill themself by WorldSpawn Suicide */
@@ -77,7 +76,7 @@
         /* Turbo Mode */
         "TurboMode" "0"
 
-        /* Triple Level Bonus - Current not implmented*/
+        /* Triple Level Bonus */
         "TripleLevelBonus" "0"
 
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
