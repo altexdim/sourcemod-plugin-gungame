@@ -172,10 +172,16 @@ TODO
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
     + Add sqlite and mysql support for top players stats
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
-    + Save levels on disconnect and restore on reconnect.
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug. Maybe all is ok.
     + Add option to reload ammo on player kill.
     * Check what is IsDmActive for.
+    + Implement gg_handicap_update like in esgg5.
+    + Implement !give.
+      Is it realy needed?
+    + Implement !buylevel.
+      If implement this, it should be disable money removement and it is 
+      needed to remove buyzones instead.
+    + Save levels on disconnect and restore on reconnect like in esgg5.
 
