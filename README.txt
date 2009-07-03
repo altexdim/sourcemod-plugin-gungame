@@ -184,4 +184,8 @@ TODO
       If implement this, it should be disable money removement and it is 
       needed to remove buyzones instead.
     + Save levels on disconnect and restore on reconnect like in esgg5.
-
+    + the problem im having is when someone dies their gun drops
+      and someone else can pick it up and use it. i dont want that.
+      i want the gun to disappear or disable people from picking it up.
+      So add option to allow weapon removement on player death, or allow to
+      set IsDmActive from config.
