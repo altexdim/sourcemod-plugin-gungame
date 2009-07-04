@@ -184,6 +184,8 @@ TODO
       If implement this, it should be disable money removement and it is 
       needed to remove buyzones instead.
     + Save levels on disconnect and restore on reconnect like in esgg5.
+      Will be using tries for static cashe. Keys are steam_ids and values are
+      levels integers.
     * Bug report:
         I dont think that de Handicap works as it should :/
         On my server i set it to "1" that means it should give the AVG level, but.
