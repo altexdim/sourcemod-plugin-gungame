@@ -84,18 +84,5 @@ stock CHAT_SayText(client, author, const String:msg[])
 
 stock CHAT_DetectColorMsg()
 {
-    decl String:gameName[64];
-    GetGameFolderName(gameName, sizeof(gameName));
-
-    isColorMsg = false;
-    if ( StrEqual(gameName, "cstrike") )
-    {
-        isColorMsg = true;
-        return;
-    }
-    if ( StrEqual(gameName, "tf") )
-    {
-        isColorMsg = true;
-        return;
-    }
+    isColorMsg = GetUserMessageId("SayText2") != INVALID_MESSAGE_ID;
 }
