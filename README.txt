@@ -183,6 +183,51 @@ TODO
     + Implement !buylevel.
       If implement this, it should be disable money removement and it is 
       needed to remove buyzones instead.
+    * Disable money removement and it is needed to remove buyzones instead.
+        // -------------------------------------
+        // fixme: OnMapStart or OnRoundStart?
+        // OnRoundStart in ES GG 5, and DISABLE not remove.
+        public OnMapStart()
+        {
+            decl String:szClass[65];
+            for (new i = MaxClients; i <= GetMaxEntities(); i++)
+            {
+                if(IsValidEdict(i) && IsValidEntity(i))
+                {
+                    GetEdictClassname(i, szClass, sizeof(szClass));
+                    if(StrEqual("func_buyzone", szClass))
+                    {
+                        RemoveEdict(i);
+                    }
+                }
+            }
+        }
+        // -------------------------------------
+        // Another good idea is to use FindEntityByClassname
+        new index = -1;
+        while ((index = FindEntityByClassname(index, "weapon_m4a1")) != -1)
+            RemoveEdict(index);
+        // -------------------------------------
+        // And fix for it
+        new ent = -1;
+        new prev = 0;
+        while ((ent = FindEntityByClassname(ent, "weapon_m4a1")) != -1)
+        {
+            if (prev) RemoveEdict(prev);
+            prev = ent;
+        }
+        if (prev) RemoveEdict(prev);
+        // -------------------------------------
+        // And fix for it
+        new ent = -1;
+        new prev = -1;
+        while ((ent = FindEntityByClassname(ent, "weapon_m4a1")) > 0)
+        {
+            if (prev >0) RemoveEdict(prev);
+            prev = ent;
+        }
+        if (prev >0) RemoveEdict(prev);
+
     + Save levels on disconnect and restore on reconnect like in esgg5.
       Will be using tries for static cashe. Keys are steam_ids and values are
       levels integers.
