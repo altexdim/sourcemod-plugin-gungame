@@ -648,3 +648,15 @@ UTIL_PlaySound(client, Sounds:type)
         }
     }
 }
+
+UTIL_RemoveBuyZones()
+{
+    new index = -1;
+    new found = -1;
+    while ( (index = FindEntityByClassname(index, "func_buyzone")) > 0 )
+    {
+        if ( found > 0 ) RemoveEdict(found);
+        found = index;
+    }
+    if ( found > 0 ) RemoveEdict(found);
+}

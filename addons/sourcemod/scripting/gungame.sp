@@ -137,6 +137,7 @@ public OnPluginEnd()
 public OnMapStart()
 {
     cssdm_enabled = FindConVar("cssdm_enabled");
+    UTIL_RemoveBuyZones();
 }
 
 public OnMapEnd()

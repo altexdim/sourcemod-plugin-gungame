@@ -57,6 +57,7 @@ Credits
 Changelog
 ---------
         * Blue color is unreadable. Changed to light blue.
+        * Disabled money removement. Removed buyzones instead.
         
     1.0.0.1.12:
         * Fixed if VoteLevelLessWeaponCount = 0 then player can not win from the first time.
@@ -183,37 +184,6 @@ TODO
     + Implement !buylevel.
       If implement this, it should be disable money removement and it is 
       needed to remove buyzones instead.
-    * Disable money removement and it is needed to remove buyzones instead.
-        // -------------------------------------
-        // OnRoundStart if you want to disable (not remove).
-        public OnMapStart()
-        {
-            decl String:szClass[65];
-            for (new i = MaxClients; i <= GetMaxEntities(); i++)
-            {
-                if(IsValidEdict(i) && IsValidEntity(i))
-                {
-                    GetEdictClassname(i, szClass, sizeof(szClass));
-                    if(StrEqual("func_buyzone", szClass))
-                    {
-                        RemoveEdict(i);
-                    }
-                }
-            }
-        }
-        // -------------------------------------
-        // Another good idea is to use FindEntityByClassname
-        public OnMapStart()
-        {
-            new index = -1;
-            new found = -1;
-            while ( (index = FindEntityByClassname(index, "func_buyzone")) > 0 )
-            {
-                if ( found > 0 ) RemoveEdict(found);
-                found = index;
-            }
-            if ( found > 0 ) RemoveEdict(found);
-        }
     + Save levels on disconnect and restore on reconnect like in esgg5.
       Will be using tries for static cashe. Keys are steam_ids and values are
       levels integers.

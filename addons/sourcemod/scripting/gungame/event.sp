@@ -310,15 +310,6 @@ public Action:RemoveHostages(Handle:timer)
     }
 }
 
-public Action:DelayClearMoney(Handle:Timer, any:client)
-{
-    if ( !client || !IsClientInGame(client) )
-    {
-        return;
-    }
-    SetEntData(client, OffsetMoney, 0);
-}
-
 public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
     // Player has died.
@@ -326,10 +317,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     {
         new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
         new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
-
-        /* Clear money off from the killer so they can't buy anything */
-        // KLUGE: It seems like player got money AFTER player_death
-        CreateTimer(0.1, DelayClearMoney, Killer);
 
         /* They change team at round end don't punish them. */
         if(!RoundStarted)
@@ -611,9 +598,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     {
         PlayerState[client] &= ~KNIFE_ELITE;
     }
-
-    /* Set money to 0. */
-    SetEntData(client, OffsetMoney, 0);
 
     /* They are not alive don't proccess */
     if(!IsPlayerAlive(client))
