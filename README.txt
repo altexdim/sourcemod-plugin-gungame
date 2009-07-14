@@ -201,4 +201,7 @@ TODO
         set IsDmActive from config.
     * Move handicap code from gungame_stats.sp to gungame.sp.
     * Rename version variable
-    
+    * These function arent working:
+        - Handicap (givin neewly connected player teh avg level)
+        - Triplelevelbonus
+        - AFK manager (moving afk-s to spec)
