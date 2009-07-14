@@ -200,4 +200,5 @@ TODO
         So add option to allow weapon removement on player death, or allow to
         set IsDmActive from config.
     * Move handicap code from gungame_stats.sp to gungame.sp.
-        
+    * Rename version variable
+    
