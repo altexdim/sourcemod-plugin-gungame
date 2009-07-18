@@ -203,5 +203,18 @@ TODO
     * Rename version variable
     * These function arent working:
         - Handicap (givin neewly connected player teh avg level)
+            So people are playing on server let's say there are 6 players 
+            and all of them are on the same level ( just to keep simple 
+            the explain), let say level 10.
+            A 7th player joins the game.
+            He should start at level 10 after joining T or CT ,
+            BUT!!!! he starts at level 1 instead.
+            He wil only get the avg. level by using the "retry" 
+            reconnect consoloe command. After reconnectig the plugin 
+            works fine and the player get's the avg. level.
+
+            So to keep it simple, neewly connected players don't get 
+            the avg or min level, only after recconecting.
         - Triplelevelbonus
         - AFK manager (moving afk-s to spec)
+        
