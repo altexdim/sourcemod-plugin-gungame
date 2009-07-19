@@ -217,4 +217,5 @@ TODO
             the avg or min level, only after recconecting.
         - Triplelevelbonus
         - AFK manager (moving afk-s to spec)
-        
+    * Is there a way to put more nades on he level, like this one 
+      for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
