@@ -220,3 +220,8 @@ TODO
     * Is there a way to put more nades on he level, like this one 
       for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
     * Add elimination mode.
+    * Bug report
+        L 07/30/2009 - 06:55:41: [SM] Native "GetClientTeam" reported: Client index 0 is invalid
+        L 07/30/2009 - 06:55:41: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 07/30/2009 - 06:55:41: [SM]   [0]  Line 371, gungame/event.sp::_PlayerDeath()
+
