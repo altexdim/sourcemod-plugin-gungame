@@ -224,4 +224,14 @@ TODO
         L 07/30/2009 - 06:55:41: [SM] Native "GetClientTeam" reported: Client index 0 is invalid
         L 07/30/2009 - 06:55:41: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 07/30/2009 - 06:55:41: [SM]   [0]  Line 371, gungame/event.sp::_PlayerDeath()
+    * Feature request:
+        1) I want to run a random weapon order but *always* have knife 
+        and nade as the last two weapons. When I turn random weapon order 
+        on it mixes knife and nade into the mix. Is there a way to make 
+        knife and nade the last two weapons?
+    * Bug report:
+        2) I also like to require 2 kills per round. This works fine 
+        but with Knife Pro turned on, it still takes two knife kills to 
+        level up where it should only take one knife kill. Is there an 
+        option for this?
 
