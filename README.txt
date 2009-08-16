@@ -234,4 +234,7 @@ TODO
         but with Knife Pro turned on, it still takes two knife kills to 
         level up where it should only take one knife kill. Is there an 
         option for this?
+    * Bug report:
+        When set "NadeBonus" "deagle" in gungame.config.txt i get it only 
+        gives 7 bullets in the magnum and no reserve ammo.
 
