@@ -237,4 +237,6 @@ TODO
     * Bug report:
         When set "NadeBonus" "deagle" in gungame.config.txt i get it only 
         gives 7 bullets in the magnum and no reserve ammo.
-
+    + Add forwards for logging level up and level down.
+      Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
+      
