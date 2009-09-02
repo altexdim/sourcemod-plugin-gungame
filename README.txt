@@ -243,5 +243,6 @@ TODO
       For example player1 is on 8 place with 255 wins, player2 is on place 9
       with 254 wins. Than player 2 wins 2 times, and even so he has 255 wins 
       on top10 list. But in winners he has 256 wins.
-      
+    * Replace "play" with EmitSoundToClient for "nade-level" and
+      "knife-level" sounds.
      
