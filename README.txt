@@ -8,8 +8,11 @@ Description
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
-    For deathmatch mode you will need sm_ggdm 1.4+ plugin
+    For deathmatch mode you will need sm_ggdm 1.4+
     http://forums.alliedmods.net/showthread.php?t=87198
+
+    For elimination mode you will need sm_ggdm 1.5+
+    http://forums.alliedmods.net/showpost.php?p=926312&postcount=26
 
 Commands and Cvars
 ------------------
