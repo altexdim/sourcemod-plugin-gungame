@@ -248,4 +248,5 @@ TODO
       on top10 list. But in winners he has 256 wins.
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" sounds.
-     
+    + Add option to disable give defuse kits on player spawn.
+
