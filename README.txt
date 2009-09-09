@@ -61,6 +61,7 @@ Changelog
 ---------
         * Blue color is unreadable. Changed to light blue.
         * Disabled money removement. Removed buyzones instead.
+        * Fixed issue: map does not change after gungame winner.
         
     1.0.0.1.12:
         * Fixed if VoteLevelLessWeaponCount = 0 then player can not win from the first time.
