@@ -107,19 +107,18 @@ SaveRank()
 		/* Set at top of file */
 		KvRewind(KvRank);
 
-		for(new i = 1, c; i <= MAX_RANK; i++)
+		for(new i = 0, c; i < MAX_RANK; i++)
 		{
-			c = PlayerWins[i - 1];
+			c = PlayerWins[i];
 
-			if(c && KvJumpToKey(KvRank, Numbers[i], true))
+			if(c && KvJumpToKey(KvRank, Numbers[i+1], true))
 			{
 				HasRank = true;
-				KvSetNum(KvRank, "Wins", PlayerWins[--i]);
+				KvSetNum(KvRank, "Wins", PlayerWins[i]);
 				KvSetString(KvRank, "Authid", PlayerAuthid[i]);
-				KvSetString(KvRank, "Name", PlayerName[i++]);
+				KvSetString(KvRank, "Name", PlayerName[i]);
 
 				/* Need to aleast go back once */
-				/* Maybe this is not needed */
 				KvGoBack(KvRank);
 			}
 		}

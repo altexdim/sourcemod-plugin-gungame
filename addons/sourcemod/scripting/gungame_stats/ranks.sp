@@ -65,43 +65,36 @@ CheckRank(client, Wins)
 
 	new location = IsPlayerInTop10(Authid);
 
-	if(location != -1)
+    // if client is not present in top 10
+	for ( new i = 0; i < MAX_RANK; i++ )
 	{
-		RankChange = true;
-
-		/* If they are already in the rank 1 just update they rank otherwise check*/
-		if(location && Wins > PlayerWins[location - 1])
+		if ( Wins > PlayerWins[i] )
 		{
-			SwitchRanks(client, location - 1, location, Authid);
-			// FIXME: If switch ranks then where is PlayerWins updated?
-			return;
-		} /* Otherwise just update their wins because their rank has not change */
-
-		PlayerWins[location] = Wins;
-		return;
-	}
-
-	for(new i = 0; i < MAX_RANK; i++)
-	{
-		if(Wins > PlayerWins[i])
-		{
-			RankChange = true;
 			/**
 			 * Winner Winner Winner
-			 * Let shift old ranks up.
 			 */
-			ShiftRanksUp(client, Wins, i, Authid);
-			break;
+			RankChange = true;
+            if ( location != -1 ) // if client is present in top 10
+            {
+		        PlayerWins[location] = Wins;
+                if ( location != i )
+                {
+			        SwitchRanks(client, i, location, Authid);
+                }
+            }
+            else // if client is not present in top 10
+            {
+                // Let shift old ranks up.
+                ShiftRanksUp(client, Wins, i, Authid);
+            }
+			return;
 		}
 	}
 }
 
 SwitchRanks(client, New, Old, const String:Auth[64])
 {
-	decl TempWins, String:TempAuth[64];
-
-	TempWins = PlayerWins[Old];
-	TempAuth = PlayerAuthid[Old];
+	decl TempWins = PlayerWins[Old];
 
 	PlayerWins[Old] = PlayerWins[New];
 	PlayerName[Old] = PlayerName[New];
