@@ -355,7 +355,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
         new bool:TeamKill;
 
-        if(Victim != Killer && GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer))
+        if  (Killer && (Victim != Killer) && GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
         {
             /* Stop them from gaining a point or level by killing their team mate. */
             TeamKill = true;

@@ -174,36 +174,51 @@ Changelog
 TODO
 ----
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
+      -------------------------------------------------------------------------------------
     + Add sqlite and mysql support for top players stats
+      -------------------------------------------------------------------------------------
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+      -------------------------------------------------------------------------------------
     * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
+      -------------------------------------------------------------------------------------
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug. Maybe all is ok.
+      -------------------------------------------------------------------------------------
     + Add option to reload ammo on player kill.
+      -------------------------------------------------------------------------------------
     * Check what is IsDmActive for.
+      -------------------------------------------------------------------------------------
     + Implement gg_handicap_update like in esgg5.
+      -------------------------------------------------------------------------------------
     + Implement !give.
       Is it realy needed?
+      -------------------------------------------------------------------------------------
     + Implement !buylevel.
       If implement this, it should be disable money removement and it is 
       needed to remove buyzones instead.
+      -------------------------------------------------------------------------------------
     + Save levels on disconnect and restore on reconnect like in esgg5.
       Will be using tries for static cashe. Keys are steam_ids and values are
       levels integers.
+      -------------------------------------------------------------------------------------
     * Bug report:
         I dont think that de Handicap works as it should :/
         On my server i set it to "1" that means it should give the AVG level, but.
         If a players joins the server he/she always got the first weapon no matter
         what the AVG level is., but after he recconnect he get's the AVG level.
         So in shot newly connected players aren't getting the avg level.
+      -------------------------------------------------------------------------------------
     + Feature requst:
         the problem im having is when someone dies their gun drops
         and someone else can pick it up and use it. i dont want that.
         i want the gun to disappear or disable people from picking it up.
         So add option to allow weapon removement on player death, or allow to
         set IsDmActive from config.
+      -------------------------------------------------------------------------------------
     * Move handicap code from gungame_stats.sp to gungame.sp.
+      -------------------------------------------------------------------------------------
     * Rename version variable
+      -------------------------------------------------------------------------------------
     * These function arent working:
         - Handicap (givin neewly connected player teh avg level)
             So people are playing on server let's say there are 6 players 
@@ -220,34 +235,46 @@ TODO
             the avg or min level, only after recconecting.
         - Triplelevelbonus
         - AFK manager (moving afk-s to spec)
+      -------------------------------------------------------------------------------------
     * Is there a way to put more nades on he level, like this one 
       for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
-    * Add elimination mode.
-    * Bug report
+      -------------------------------------------------------------------------------------
+    * [DONE] Add elimination mode.
+      Elimination mode added to ggdm plugin.
+      -------------------------------------------------------------------------------------
+    * [DONE] Bug report
         L 07/30/2009 - 06:55:41: [SM] Native "GetClientTeam" reported: Client index 0 is invalid
         L 07/30/2009 - 06:55:41: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 07/30/2009 - 06:55:41: [SM]   [0]  Line 371, gungame/event.sp::_PlayerDeath()
+      -------------------------------------------------------------------------------------
     * Feature request:
         1) I want to run a random weapon order but *always* have knife 
         and nade as the last two weapons. When I turn random weapon order 
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
+      -------------------------------------------------------------------------------------
     * Bug report:
         2) I also like to require 2 kills per round. This works fine 
         but with Knife Pro turned on, it still takes two knife kills to 
         level up where it should only take one knife kill. Is there an 
         option for this?
+      -------------------------------------------------------------------------------------
     * Bug report:
         When set "NadeBonus" "deagle" in gungame.config.txt i get it only 
         gives 7 bullets in the magnum and no reserve ammo.
+      -------------------------------------------------------------------------------------
     + Add forwards for logging level up and level down.
       Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
+      -------------------------------------------------------------------------------------
     * [DONE] !top10 does not work corretly, when someone reaches someone's else place.
       For example player1 is on 8 place with 255 wins, player2 is on place 9
       with 254 wins. Than player 2 wins 2 times, and even so he has 255 wins 
       on top10 list. But in winners he has 256 wins.
+      -------------------------------------------------------------------------------------
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" sounds.
+      -------------------------------------------------------------------------------------
     + [IN PROGRESS] Add option to disable give defuse kits on player spawn.
       Check remove map objectives to disable defuse kits.
+      -------------------------------------------------------------------------------------
 
