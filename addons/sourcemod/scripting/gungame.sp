@@ -221,7 +221,8 @@ public Action:EndOfWarmup(Handle:timer)
     }
 
     WarmupTimer = INVALID_HANDLE;
-    WarmupEnabled = false;
+    //WarmupEnabled = false; // Delayed warmup ending
+    DisableWarmupOnRoundEnd = true;
 
     /* Restart Game */
     SetConVarInt(mp_restartgame, 1);

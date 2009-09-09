@@ -116,6 +116,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 KnifeElite = bool:StringToInt(value);
             } else if(strcmp("WarmupEnabled", key, false) == 0) {
                 WarmupEnabled = bool:StringToInt(value);
+                DisableWarmupOnRoundEnd = false;
             } else if(strcmp("WarmupTimeLength", key, false) == 0) {
                 Warmup_TimeLength = StringToInt(value);
             } else if(strcmp("WarmupKnifeOnly", key, false) == 0) {

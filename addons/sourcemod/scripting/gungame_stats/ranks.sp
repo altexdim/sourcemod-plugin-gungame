@@ -37,49 +37,49 @@
 
 public GG_OnWinner(client, const String:Weapon[])
 {
-	if(IsClientInGame(client) && !IsFakeClient(client))
-	{
-		CheckRank(client, ++PlayerWinsData[client]);
-	}
+    if(IsClientInGame(client) && !IsFakeClient(client))
+    {
+        CheckRank(client, ++PlayerWinsData[client]);
+    }
 }
 
 IsPlayerInTop10(const String:Auth[])
 {
-	for(new i = 0; i < MAX_RANK; i++)
-	{
-		if(strcmp(Auth, PlayerAuthid[i]) == 0)
-		{
-			return i;
-		}
-	}
+    for(new i = 0; i < MAX_RANK; i++)
+    {
+        if(strcmp(Auth, PlayerAuthid[i]) == 0)
+        {
+            return i;
+        }
+    }
 
-	return -1;
+    return -1;
 }
 
 CheckRank(client, Wins)
 {
-	SavePlayerData(client);
+    SavePlayerData(client);
 
-	decl String:Authid[64];
-	GetClientAuthString(client, Authid, sizeof(Authid));
+    decl String:Authid[64];
+    GetClientAuthString(client, Authid, sizeof(Authid));
 
-	new location = IsPlayerInTop10(Authid);
+    new location = IsPlayerInTop10(Authid);
 
     // if client is not present in top 10
-	for ( new i = 0; i < MAX_RANK; i++ )
-	{
-		if ( Wins > PlayerWins[i] )
-		{
-			/**
-			 * Winner Winner Winner
-			 */
-			RankChange = true;
+    for ( new i = 0; i < MAX_RANK; i++ )
+    {
+        if ( Wins > PlayerWins[i] )
+        {
+            /**
+             * Winner Winner Winner
+             */
+            RankChange = true;
             if ( location != -1 ) // if client is present in top 10
             {
-		        PlayerWins[location] = Wins;
+                PlayerWins[location] = Wins;
                 if ( location != i )
                 {
-			        SwitchRanks(client, i, location, Authid);
+                    SwitchRanks(client, i, location, Authid);
                 }
             }
             else // if client is not present in top 10
@@ -87,42 +87,42 @@ CheckRank(client, Wins)
                 // Let shift old ranks up.
                 ShiftRanksUp(client, Wins, i, Authid);
             }
-			return;
-		}
-	}
+            return;
+        }
+    }
 }
 
 SwitchRanks(client, New, Old, const String:Auth[64])
 {
-	decl TempWins = PlayerWins[Old];
+    new TempWins = PlayerWins[Old];
 
-	PlayerWins[Old] = PlayerWins[New];
-	PlayerName[Old] = PlayerName[New];
-	PlayerAuthid[Old] = PlayerAuthid[New];
+    PlayerWins[Old] = PlayerWins[New];
+    PlayerName[Old] = PlayerName[New];
+    PlayerAuthid[Old] = PlayerAuthid[New];
 
-	/* Update player name in the top10 */
-	GetClientName(client, PlayerName[New], sizeof(PlayerName[]));
-	PlayerWins[New] = TempWins;
-	PlayerAuthid[New] = Auth;
+    /* Update player name in the top10 */
+    GetClientName(client, PlayerName[New], sizeof(PlayerName[]));
+    PlayerWins[New] = TempWins;
+    PlayerAuthid[New] = Auth;
 }
 
 ShiftRanksUp(client, Wins, RankToReplace, const String:Auth[64])
 {
-	new b = MAX_RANK - 1, c;
+    new b = MAX_RANK - 1, c;
 
-	while(--b >= RankToReplace)
-	{
-		/* Makes sure there a rank in the slot before shift up otherwise stop */
-		if((c = PlayerWins[b]) != 0)
-		{
-			PlayerWins[b + 1] = c;
-			PlayerAuthid[b + 1] = PlayerAuthid[b];
-			PlayerName[b + 1] = PlayerName[b];
-		}
-	}
+    while(--b >= RankToReplace)
+    {
+        /* Makes sure there a rank in the slot before shift up otherwise stop */
+        if((c = PlayerWins[b]) != 0)
+        {
+            PlayerWins[b + 1] = c;
+            PlayerAuthid[b + 1] = PlayerAuthid[b];
+            PlayerName[b + 1] = PlayerName[b];
+        }
+    }
 
-	PlayerWins[RankToReplace] = Wins;
-	GetClientName(client, PlayerName[RankToReplace], sizeof(PlayerName[]));
-	PlayerAuthid[RankToReplace] = Auth;
+    PlayerWins[RankToReplace] = Wins;
+    GetClientName(client, PlayerName[RankToReplace], sizeof(PlayerName[]));
+    PlayerAuthid[RankToReplace] = Auth;
 }
 

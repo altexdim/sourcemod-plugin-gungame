@@ -646,26 +646,35 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     /* Something here is wrong */
     if ( WarmupEnabled )
     {
-        if ( !WarmupInitialized )
+        // Disable warmup
+        if ( DisableWarmupOnRoundEnd )
         {
-            PrintToChat(client, "%c[%cGunGame%c] Warmup round has not started yet.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
+            WarmupEnabled = false;
+            DisableWarmupOnRoundEnd = false;
         }
         else
         {
-            PrintToChat(client, "%c[%cGunGame%c] Warmup round is in progress.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
-        }
+            if ( !WarmupInitialized )
+            {
+                PrintToChat(client, "%c[%cGunGame%c] Warmup round has not started yet.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
+            }
+            else
+            {
+                PrintToChat(client, "%c[%cGunGame%c] Warmup round is in progress.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
+            }
 
-        if ( WarmupNades )
-        {
-            GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
+            if ( WarmupNades )
+            {
+                GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
 
-            //Switch them back into hegrenade
-            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
-        }
-        
-        if ( WarmupNades || WarmupKnifeOnly )
-        {
-            return;
+                //Switch them back into hegrenade
+                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+            }
+            
+            if ( WarmupNades || WarmupKnifeOnly )
+            {
+                return;
+            }
         }
     }
 

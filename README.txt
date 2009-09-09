@@ -179,7 +179,7 @@ TODO
       -------------------------------------------------------------------------------------
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
       -------------------------------------------------------------------------------------
-    * Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
+    * [DONE] Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
       -------------------------------------------------------------------------------------
     * Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug. Maybe all is ok.
@@ -275,7 +275,7 @@ TODO
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" sounds.
       -------------------------------------------------------------------------------------
-    + [IN PROGRESS] Add option to disable give defuse kits on player spawn.
+    + [DONE] Add option to disable give defuse kits on player spawn.
       Check remove map objectives to disable defuse kits.
       -------------------------------------------------------------------------------------
     * Change version to 1.0.1.1. Major, Minor, Feature, Bugfix
