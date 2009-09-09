@@ -277,4 +277,6 @@ TODO
     + [IN PROGRESS] Add option to disable give defuse kits on player spawn.
       Check remove map objectives to disable defuse kits.
       -------------------------------------------------------------------------------------
+    * Change version to 1.0.1.1. Major, Minor, Feature, Bugfix
+      -------------------------------------------------------------------------------------
 
