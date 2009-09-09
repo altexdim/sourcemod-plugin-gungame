@@ -105,7 +105,6 @@ new bool:RandomWeaponOrder;
 new Handle:mp_friendlyfire = INVALID_HANDLE;
 new Handle:mp_restartgame = INVALID_HANDLE;
 new Handle:gungame_enabled = INVALID_HANDLE;
-new Handle:cssdm_enabled = INVALID_HANDLE;
 
 /* Status forwards */
 new Handle:FwdLevelChange = INVALID_HANDLE;
@@ -122,8 +121,7 @@ new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
 
 new TakeDamage[MAXPLAYERS + 1];
 
-/* Work around for cssdm 2.0 because cssdm remove weapon exactly on weapon drop. */
-new bool:IsDmActive = false;
 new bool:IsActive = false;
 new bool:IsObjectiveHooked;
 new HostageEntInfo;
+

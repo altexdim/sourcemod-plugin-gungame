@@ -574,7 +574,7 @@ UTIL_GiveNextWeapon(client, level)
     if(slot != Slot_Grenade)
     {
         /* Drop old weapon first */
-        UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
+        UTIL_ForceDropWeaponBySlot(client, slot, true);
     }
 
     if ( (WeapId == CSW_HEGRENADE) && NadeBonusWeaponId )
@@ -583,7 +583,7 @@ UTIL_GiveNextWeapon(client, level)
         if ( slot != Slot_Grenade )
         {
             /* Drop old weapon first */
-            UTIL_ForceDropWeaponBySlot(client, slot, IsDmActive ? false : true);
+            UTIL_ForceDropWeaponBySlot(client, slot, true);
         }
 
         new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);

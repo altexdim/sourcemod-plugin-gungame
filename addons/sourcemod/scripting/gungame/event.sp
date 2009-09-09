@@ -48,12 +48,6 @@ OnEventStart()
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //HookUserMessage(VGUIMenu, _VGuiMenu);
-
-    if(cssdm_enabled != INVALID_HANDLE)
-    {
-        IsDmActive = bool:GetConVarInt(cssdm_enabled);
-        HookConVarChange(cssdm_enabled, DM_Handler);
-    }
 }
 
 OnEventShutdown()
@@ -69,12 +63,6 @@ OnEventShutdown()
 
     // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
     //UnhookUserMessage(VGUIMenu, _VGuiMenu);
-
-    if(cssdm_enabled != INVALID_HANDLE)
-    {
-        IsDmActive = false;
-        UnhookConVarChange(cssdm_enabled, DM_Handler);
-    }
 }
 
 public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
@@ -192,7 +180,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if(IsActive && MapStatus & OBJECTIVE_REMOVE_BOMB && !IsDmActive)
+    if(IsActive && MapStatus & OBJECTIVE_REMOVE_BOMB)
     {
         new client = GetClientOfUserId(GetEventInt(event, "userid"));
 
@@ -645,7 +633,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
-    UTIL_ForceDropAllWeapon(client, IsDmActive ? false : true);
+    UTIL_ForceDropAllWeapon(client, true);
 
     /* A check to make sure player always has a knife because some maps do not give the knife. */
     new knife = GetPlayerWeaponSlot(client, _:Slot_Knife);
@@ -859,11 +847,6 @@ public Action:RemoveBonus(Handle:timer, any:client)
         UTIL_SetClientGodMode(client, 0);
         SetEntDataFloat(client, OffsetMovement, 1.0);
     }
-}
-
-public DM_Handler(Handle:convar, const String:oldValue[], const String:newValue[])
-{
-    IsDmActive = (StringToInt(newValue) == 0) ? false : true;
 }
 
 public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)

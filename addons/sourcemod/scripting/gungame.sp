@@ -136,7 +136,6 @@ public OnPluginEnd()
 
 public OnMapStart()
 {
-    cssdm_enabled = FindConVar("cssdm_enabled");
     UTIL_RemoveBuyZones();
 }
 
@@ -177,7 +176,6 @@ public OnMapEnd()
     GameWinner = NULL;
     TotalLevel = NULL;
     CurrentLeader = NULL;
-    IsDmActive = false;
 
     for(new Sounds:i = Welcome; i < MaxSounds; i++)
     {
@@ -361,7 +359,6 @@ public GG_OnShutdown(bool:Command)
         GameWinner = NULL;
         TotalLevel = NULL;
         CurrentLeader = NULL;
-        IsDmActive = false;
 
         OnEventShutdown();
 
