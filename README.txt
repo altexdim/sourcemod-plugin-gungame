@@ -261,9 +261,12 @@ TODO
         level up where it should only take one knife kill. Is there an 
         option for this?
       -------------------------------------------------------------------------------------
-    * Bug report:
+    * [DONE] Bug report:
         When set "NadeBonus" "deagle" in gungame.config.txt i get it only 
         gives 7 bullets in the magnum and no reserve ammo.
+      This is not a bug! It's a feature.
+      -------------------------------------------------------------------------------------
+    + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
       -------------------------------------------------------------------------------------
     + Add forwards for logging level up and level down.
       Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
