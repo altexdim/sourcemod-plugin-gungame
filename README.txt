@@ -242,11 +242,12 @@ TODO
         gives 7 bullets in the magnum and no reserve ammo.
     + Add forwards for logging level up and level down.
       Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
-    * !top10 does not work corretly, when someone reaches someone's else place.
+    * [DONE] !top10 does not work corretly, when someone reaches someone's else place.
       For example player1 is on 8 place with 255 wins, player2 is on place 9
       with 254 wins. Than player 2 wins 2 times, and even so he has 255 wins 
       on top10 list. But in winners he has 256 wins.
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" sounds.
-    + Add option to disable give defuse kits on player spawn.
+    + [IN PROGRESS] Add option to disable give defuse kits on player spawn.
+      Check remove map objectives to disable defuse kits.
 
