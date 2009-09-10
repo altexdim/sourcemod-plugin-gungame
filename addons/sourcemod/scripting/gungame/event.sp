@@ -744,6 +744,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         if ( NadeBonusWeaponId )
         {
             new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
+            // Remove bonus weapon ammo! So player can not reload weapon!
             if(ent != -1)
             {
                 new iAmmo = HACK_GetAmmoType(ent);

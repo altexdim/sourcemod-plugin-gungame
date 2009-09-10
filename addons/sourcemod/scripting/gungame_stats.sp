@@ -213,6 +213,7 @@ public __GetPlayerWins(Handle:plugin, numParams)
     return PlayerWinsData[client];
 }
 
+// Handicap is here because of IsPlayerInTop10 is in stats part of plugin.
 public OnClientAuthorized(client, const String:auth[])
 {
     if(auth[0] == 'B')

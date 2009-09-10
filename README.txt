@@ -16,7 +16,7 @@ Description
 
 Commands and Cvars
 ------------------
-    sm_gungame_css_version          - Gungame version.
+    sm_gungamesm_version            - Gungame version.
     gungame_enabled                 - Display if gungame is enabled or disabled.
     sm_gungame_display_winner_url   - URL to display in MOTD window for gungame winner.
 
@@ -59,9 +59,28 @@ Credits
 
 Changelog
 ---------
+    1.0.1.1:
+        * Renamed cvar from sm_gungame_css_version to sm_gungamesm_version.
         * Blue color is unreadable. Changed to light blue.
         * Disabled money removement. Removed buyzones instead.
         * Fixed issue: map does not change after gungame winner.
+          Update your gungame.games.txt.
+        * Fixed warmup end right after round_restart (warmup was 
+          ending 1 second before round_restart).
+        - Removed CSSDM patch.
+        + Added elimination mode. Elimination mode added to ggdm plugin.
+          For elimination mode you will need sm_ggdm 1.5.1+
+          http://forums.alliedmods.net/showpost.php?p=927227&postcount=27
+          You should not update gungame plugin for that, only ggdm.
+        * Bug fixed:
+            L 07/30/2009 - 06:55:41: [SM] Native "GetClientTeam" reported: Client index 0 is invalid
+            L 07/30/2009 - 06:55:41: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 07/30/2009 - 06:55:41: [SM]   [0]  Line 371, gungame/event.sp::_PlayerDeath()
+        * Fixed top10 scoreboard.
+            !top10 was not working corretly, when someone reaches someone's else place.
+            For example player1 is on 8 place with 255 wins, player2 is on place 9
+            with 254 wins. Than player 2 wins 2 times, and even so he has 255 wins 
+            on top10 list. But in winners he has 256 wins.
         
     1.0.0.1.12:
         * Fixed if VoteLevelLessWeaponCount = 0 then player can not win from the first time.
@@ -174,30 +193,28 @@ Changelog
 
 TODO
 ----
+    + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
+      -------------------------------------------------------------------------------------
+    + Feature requst:
+        the problem im having is when someone dies their gun drops
+        and someone else can pick it up and use it. i dont want that.
+        i want the gun to disappear or disable people from picking it up.
+        So add option to allow weapon removement on player death.
+      -------------------------------------------------------------------------------------
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
       -------------------------------------------------------------------------------------
     + Add sqlite and mysql support for top players stats
       -------------------------------------------------------------------------------------
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
       -------------------------------------------------------------------------------------
-    * [DONE] Fix warmup end right after round_restart (warmup is ending 1 second before round_restart).
-      -------------------------------------------------------------------------------------
-    * Sometimes "!scores" shows wrong levels if it was many knife battles.
+    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug. Maybe all is ok.
       -------------------------------------------------------------------------------------
     + Add option to reload ammo on player kill.
       -------------------------------------------------------------------------------------
-    - [DONE] Check what is IsDmActive for.
-      Removed CSSDM patch.
-      -------------------------------------------------------------------------------------
     + Implement gg_handicap_update like in esgg5.
       -------------------------------------------------------------------------------------
-    + Implement !give.
-      Is it realy needed?
-      -------------------------------------------------------------------------------------
     + Implement !buylevel.
-      If implement this, it should be disable money removement and it is 
-      needed to remove buyzones instead.
       -------------------------------------------------------------------------------------
     + Save levels on disconnect and restore on reconnect like in esgg5.
       Will be using tries for static cashe. Keys are steam_ids and values are
@@ -209,18 +226,6 @@ TODO
         If a players joins the server he/she always got the first weapon no matter
         what the AVG level is., but after he recconnect he get's the AVG level.
         So in shot newly connected players aren't getting the avg level.
-      -------------------------------------------------------------------------------------
-    + Feature requst:
-        the problem im having is when someone dies their gun drops
-        and someone else can pick it up and use it. i dont want that.
-        i want the gun to disappear or disable people from picking it up.
-        So add option to allow weapon removement on player death, or allow to
-        set IsDmActive from config.
-      -------------------------------------------------------------------------------------
-    * Move handicap code from gungame_stats.sp to gungame.sp.
-      Why handicap is in stats?
-      -------------------------------------------------------------------------------------
-    * Rename version variable
       -------------------------------------------------------------------------------------
     * These function arent working:
         - Handicap (givin neewly connected player teh avg level)
@@ -242,47 +247,23 @@ TODO
     * Is there a way to put more nades on he level, like this one 
       for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
       -------------------------------------------------------------------------------------
-    * [DONE] Add elimination mode.
-      Elimination mode added to ggdm plugin.
-      -------------------------------------------------------------------------------------
-    * [DONE] Bug report
-        L 07/30/2009 - 06:55:41: [SM] Native "GetClientTeam" reported: Client index 0 is invalid
-        L 07/30/2009 - 06:55:41: [SM] Displaying call stack trace for plugin "gungame.smx":
-        L 07/30/2009 - 06:55:41: [SM]   [0]  Line 371, gungame/event.sp::_PlayerDeath()
-      -------------------------------------------------------------------------------------
     * Feature request:
         1) I want to run a random weapon order but *always* have knife 
         and nade as the last two weapons. When I turn random weapon order 
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
+        Add something like configurable random weapons groups.
       -------------------------------------------------------------------------------------
-    * Bug report:
+    * [UNAPPROVED] Bug report:
         2) I also like to require 2 kills per round. This works fine 
         but with Knife Pro turned on, it still takes two knife kills to 
         level up where it should only take one knife kill. Is there an 
         option for this?
       -------------------------------------------------------------------------------------
-    * [DONE] Bug report:
-        When set "NadeBonus" "deagle" in gungame.config.txt i get it only 
-        gives 7 bullets in the magnum and no reserve ammo.
-      This is not a bug! It's a feature.
-      -------------------------------------------------------------------------------------
-    + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
-      -------------------------------------------------------------------------------------
     + Add forwards for logging level up and level down.
       Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
       -------------------------------------------------------------------------------------
-    * [DONE] !top10 does not work corretly, when someone reaches someone's else place.
-      For example player1 is on 8 place with 255 wins, player2 is on place 9
-      with 254 wins. Than player 2 wins 2 times, and even so he has 255 wins 
-      on top10 list. But in winners he has 256 wins.
-      -------------------------------------------------------------------------------------
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" sounds.
-      -------------------------------------------------------------------------------------
-    + [DONE] Add option to disable give defuse kits on player spawn.
-      Check remove map objectives to disable defuse kits.
-      -------------------------------------------------------------------------------------
-    * Change version to 1.0.1.1. Major, Minor, Feature, Bugfix
       -------------------------------------------------------------------------------------
 

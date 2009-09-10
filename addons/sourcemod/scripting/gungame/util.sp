@@ -587,6 +587,7 @@ UTIL_GiveNextWeapon(client, level)
         }
 
         new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
+        // Remove bonus weapon ammo! So player can not reload weapon!
         if(ent != -1)
         {
             new iAmmo = HACK_GetAmmoType(ent);
