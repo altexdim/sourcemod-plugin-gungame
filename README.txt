@@ -8,11 +8,9 @@ Description
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
-    For deathmatch mode you will need sm_ggdm 1.4+
-    http://forums.alliedmods.net/showthread.php?t=87198
-
-    For elimination mode you will need sm_ggdm 1.5.1+
-    http://forums.alliedmods.net/showpost.php?p=927227&postcount=27
+    For deathmatch and elimination modes you will need 
+    sm_ggdm 1.5.1+
+    http://forums.alliedmods.net/showthread.php?t=103242
 
 Commands and Cvars
 ------------------
