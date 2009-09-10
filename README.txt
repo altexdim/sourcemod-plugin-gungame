@@ -38,7 +38,7 @@ Commands and Cvars
 Requirements
 ------------
     Counter-Strike: Source
-    SourceMod 1.2.0    
+    SourceMod 1.2.0+
 
 Installation
 ------------
@@ -64,7 +64,9 @@ Changelog
         * Blue color is unreadable. Changed to light blue.
         * Disabled money removement. Removed buyzones instead.
         * Fixed issue: map does not change after gungame winner.
-          Update your gungame.games.txt.
+          Update your gungame.games.txt only if you've updated
+          your steam engine to the latest version and map
+          does not change after somebody win.
         * Fixed warmup end right after round_restart (warmup was 
           ending 1 second before round_restart).
         - Removed CSSDM patch.
@@ -190,6 +192,9 @@ Changelog
         * Fixed JoinMessage config variable
         * Commented hookusermessage due to bug (server crash on plugin unload)
           So calculate winner on intermission is disabled.
+
+    1.0.0.1:
+        * Original Liam's version http://forums.alliedmods.net/showthread.php?t=80609
 
 TODO
 ----
