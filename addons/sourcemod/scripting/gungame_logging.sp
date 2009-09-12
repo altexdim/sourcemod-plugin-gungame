@@ -43,11 +43,6 @@
  * This is a plugin for hlstatx logging of the winner of the gungame current level.
  */
 
-/**
- * Uncomment this line below if you want the old logging of GunGame Winner.
- */
-//#define BACKWARD_COMPATIBILITY
-
 public Plugin:myinfo =
 {
     name = "GunGame:SM Winner Logger",
@@ -59,16 +54,37 @@ public Plugin:myinfo =
 
 public GG_OnWinner(client, const String:Weapon[])
 {
+    LogEventToGame("gg_win", client);
+}
+
+public Action:GG_OnClientLevelChange(client, level, difference, bool:steal)
+{
+    if ( !difference )
+    {
+        return;
+    }
+    if ( difference > 0 )
+    {
+        if ( steal )
+        {
+            LogEventToGame("gg_knife_steal", client);
+        }
+        LogEventToGame("gg_levelup", client);
+    }
+    else
+    {
+        LogEventToGame("gg_leveldown", client);
+    }
+}
+
+LogEventToGame(const String:event[], client)
+{
     decl String:Name[64], String:Auth[64];
 
     GetClientName(client, Name, sizeof(Name));
     GetClientAuthString(client, Auth, sizeof(Auth));
 
     new team = GetClientTeam(client), UserId = GetClientUserId(client);
-
-#if defined BACKWARD_COMPATIBILITY
-    LogToGame("\"%s<%d><%s><%s>\" triggered \"gg_win\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
-#else
-    LogToGame("\"%s<%d><%s><%s>\" triggered \"GunGame_Winner\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT");
-#endif
+    LogToGame("\"%s<%d><%s><%s>\" triggered \"%s\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT", event);
 }
+   

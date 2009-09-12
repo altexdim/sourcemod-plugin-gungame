@@ -196,6 +196,13 @@ Changelog
 
 TODO
 ----
+    + [DONE] There are forwards for logging level up and level down.
+      Added logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
+      -------------------------------------------------------------------------------------
+    + Save levels on disconnect and restore on reconnect like in esgg5.
+      Will be using tries for static cashe. Keys are steam_ids and values are
+      levels integers.
+      -------------------------------------------------------------------------------------
     + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
       -------------------------------------------------------------------------------------
     + Feature requst:
@@ -210,18 +217,11 @@ TODO
       -------------------------------------------------------------------------------------
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
       -------------------------------------------------------------------------------------
-    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
-      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
-      -------------------------------------------------------------------------------------
     + Add option to reload ammo on player kill.
       -------------------------------------------------------------------------------------
     + Implement gg_handicap_update like in esgg5.
       -------------------------------------------------------------------------------------
     + Implement !buylevel.
-      -------------------------------------------------------------------------------------
-    + Save levels on disconnect and restore on reconnect like in esgg5.
-      Will be using tries for static cashe. Keys are steam_ids and values are
-      levels integers.
       -------------------------------------------------------------------------------------
     * Bug report:
         I dont think that de Handicap works as it should :/
@@ -257,16 +257,16 @@ TODO
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
       -------------------------------------------------------------------------------------
+    * Replace "play" with EmitSoundToClient for "nade-level" and
+      "knife-level" sounds.
+      -------------------------------------------------------------------------------------
+    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
+      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
+      -------------------------------------------------------------------------------------
     * [UNAPPROVED] Bug report:
         2) I also like to require 2 kills per round. This works fine 
         but with Knife Pro turned on, it still takes two knife kills to 
         level up where it should only take one knife kill. Is there an 
         option for this?
-      -------------------------------------------------------------------------------------
-    + Add forwards for logging level up and level down.
-      Add logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
-      -------------------------------------------------------------------------------------
-    * Replace "play" with EmitSoundToClient for "nade-level" and
-      "knife-level" sounds.
       -------------------------------------------------------------------------------------
 
