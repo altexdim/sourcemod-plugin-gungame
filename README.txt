@@ -224,14 +224,14 @@ TODO
     + Implement !buylevel.
       -------------------------------------------------------------------------------------
     * Bug report:
-        I dont think that de Handicap works as it should :/
+        [UNAPPROVED] I dont think that de Handicap works as it should :/
         On my server i set it to "1" that means it should give the AVG level, but.
         If a players joins the server he/she always got the first weapon no matter
         what the AVG level is., but after he recconnect he get's the AVG level.
         So in shot newly connected players aren't getting the avg level.
       -------------------------------------------------------------------------------------
     * These function arent working:
-        - Handicap (givin neewly connected player teh avg level)
+        - [UNAPPROVED] Handicap (givin neewly connected player teh avg level)
             So people are playing on server let's say there are 6 players 
             and all of them are on the same level ( just to keep simple 
             the explain), let say level 10.
