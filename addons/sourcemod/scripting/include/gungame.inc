@@ -193,9 +193,10 @@ forward GG_OnShutdown(bool:Command);
  * @param level     Player current level.
  * @param difference    The difference in the level change.
  * @param steal     true if it was a knife steal otherwise false
+ * @param last      true if player reached last level.
  * @return          Plugin_Handled; to stop the level change.
  */
-forward Action:GG_OnClientLevelChange(client, level, difference, bool:steal);
+forward Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last);
 
 /**
  * Called when the player point per level changed.

@@ -57,6 +57,12 @@ Credits
 
 Changelog
 ---------
+        + Added gg_leader and gg_knife_level events to logger.
+          gg_leader event triggered when leader changed.
+          gg_knife_level event triggered when player reaches last level.
+        * Changed GG_OnClientLevelChange forward prototype. Added "last level"
+          param.
+
     1.0.1.1:
         * Renamed cvar from sm_gungame_css_version to sm_gungamesm_version.
         * Blue color is unreadable. Changed to light blue.
@@ -269,10 +275,11 @@ TODO
         level up where it should only take one knife kill. Is there an 
         option for this?
       -------------------------------------------------------------------------------------
-    * Bug report:
+    * [UNAPPROVED] Bug report:
         I found two bugs.
         - First, if the player has hegrenade, he's the last man standing in his team and 
           he suicides, he doesn't loose his level.
         - Second (maybe it's some problem w/ server), quite often when somebody makes a 
           knivekill, server just shuts down and i have to restart it.
         On the 1.0.0.1.12v the 2nd problem hasn't appeared, so I'm downgrading.
+
