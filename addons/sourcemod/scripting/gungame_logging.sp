@@ -59,7 +59,10 @@ public GG_OnWinner(client, const String:Weapon[])
 
 public GG_OnLeaderChange(client, level)
 {
-    LogEventToGame("gg_leader", client);
+    if ( client )
+    {
+        LogEventToGame("gg_leader", client);
+    }
 }
 
 public Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last)

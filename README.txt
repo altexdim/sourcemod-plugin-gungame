@@ -282,7 +282,7 @@ TODO
         - Second (maybe it's some problem w/ server), quite often when somebody makes a 
           knivekill, server just shuts down and i have to restart it.
         On the 1.0.0.1.12v the 2nd problem hasn't appeared, so I'm downgrading.
-    * Fix:
+    * [DONE] Fix:
         L 09/16/2009 - 13:26:45: [SM] Native "GetClientAuthString" reported: Client index 0 is invalid
         L 09/16/2009 - 13:26:45: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
         L 09/16/2009 - 13:26:45: [SM]   [0]  Line 94, gungame_logging.sp::LogEventToGame()
