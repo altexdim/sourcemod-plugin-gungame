@@ -287,3 +287,15 @@ TODO
         L 09/16/2009 - 13:26:45: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
         L 09/16/2009 - 13:26:45: [SM]   [0]  Line 94, gungame_logging.sp::LogEventToGame()
         L 09/16/2009 - 13:26:45: [SM]   [1]  Line 62, gungame_logging.sp::GG_OnLeaderChange()
+    * Fix:
+        L 09/16/2009 - 13:49:26: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:26: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:26: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:26: [SM]   [1]  Line 465, gungame/event.sp::_PlayerDeath()
+
+        L 09/16/2009 - 13:49:36: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:36: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:36: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:36: [SM]   [1]  Line 857, gungame/event.sp::RemoveBonus()
+      Comment: Realy dont understand how it is possible. Is it knife throw plugin installed?
+      Think about what to do if Killer == 0.
