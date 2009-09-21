@@ -301,3 +301,8 @@ TODO
       Think about what to do if Killer == 0.
     * AfkDeaths does not reset sometimes.
       Redone afk managenemt not to check weapon_fire every shot.
+    * Fix
+        L 08/31/2009 - 21:17:31: [SM] Native "UnhookEvent" reported: Game event "hostage_killed" has no active hook
+        L 08/31/2009 - 21:17:31: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
+        
