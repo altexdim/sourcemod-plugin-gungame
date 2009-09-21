@@ -299,3 +299,5 @@ TODO
         L 09/16/2009 - 13:49:36: [SM]   [1]  Line 857, gungame/event.sp::RemoveBonus()
       Comment: Realy dont understand how it is possible. Is it knife throw plugin installed?
       Think about what to do if Killer == 0.
+    * AfkDeaths does not reset sometimes.
+      Redone afk managenemt not to check weapon_fire every shot.
