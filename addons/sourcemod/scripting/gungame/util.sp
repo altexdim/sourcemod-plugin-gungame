@@ -190,7 +190,7 @@ UTIL_ChangeFriendlyFire(bool:Status)
 
 UTIL_SetClientGodMode(client, mode = 0)
 {
-    SetEntData(client, TakeDamage[client], mode ? DAMAGE_YES : DAMAGE_NO, 1);
+    SetEntProp(client, Prop_Data, "m_takedamage", mode ? DAMAGE_YES : DAMAGE_NO, 1);
 }
 
 /**

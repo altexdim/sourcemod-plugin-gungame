@@ -119,8 +119,6 @@ new Handle:FwdShutdown = INVALID_HANDLE;
 new Handle:WarmupTimer = INVALID_HANDLE;
 new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
 
-new TakeDamage[MAXPLAYERS + 1];
-
 new bool:IsActive = false;
 new bool:IsObjectiveHooked;
 new HostageEntInfo;

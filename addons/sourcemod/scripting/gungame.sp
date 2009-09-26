@@ -242,11 +242,6 @@ public Action:EndOfWarmup(Handle:timer)
     return Plugin_Stop;
 }
 
-public OnClientPutinServer(client)
-{
-    TakeDamage[client] = FindDataMapOffs(client, "m_takedamage");
-}
-
 public OnClientDisconnect(client)
 {
     /* Clear current leader if player is leader */
@@ -274,7 +269,6 @@ public OnClientDisconnect(client)
         TotalLevel = NULL;
     }
 
-    TakeDamage[client] = NULL;
     PlayerLevel[client] = 0;
     CurrentKillsPerWeap[client] = NULL;
     CurrentLevelPerRound[client] = NULL;
@@ -288,19 +282,6 @@ public GG_OnStartup(bool:Command)
         IsActive = true;
 
         OnEventStart();
-
-        if(Command)
-        {
-            new maxslots = GetMaxClients( );
-
-            for(new i = 1; i <= maxslots; i++)
-            {
-                if(IsClientInGame(i))
-                {
-                    OnClientPutinServer(i);
-                }
-            }
-        }
     }
 
     if(IsActive)
