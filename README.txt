@@ -305,4 +305,6 @@ TODO
         L 08/31/2009 - 21:17:31: [SM] Native "UnhookEvent" reported: Game event "hostage_killed" has no active hook
         L 08/31/2009 - 21:17:31: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
-        
+    + Add option to remove all weapons before giving next level weapon for
+      player if Turbo is enabled.
+
