@@ -307,4 +307,9 @@ TODO
         L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
     + Add option to remove all weapons before giving next level weapon for
       player if Turbo is enabled.
+    * Make removement buyzones on/off. So once gg is enabled than buyzones are
+      disabled, and when gg is disabled buyzones are enabled.
+      Maybe instead of removement buyzones just disable it to players on
+      spawn and when gg swithces enabled/disabled.
+    + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
 
