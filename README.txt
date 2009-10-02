@@ -312,4 +312,9 @@ TODO
       Maybe instead of removement buyzones just disable it to players on
       spawn and when gg swithces enabled/disabled.
     + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
+    + Add plugin that implement GG_OnLeaderChange and executes some server config
+      on predefined in separate config level. For reading config it uses
+      GG_OnKeyRead etc. It is needed for changing sm rtv threashold from 0.6
+      to 1.0.
+
 
