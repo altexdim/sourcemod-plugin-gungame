@@ -316,5 +316,10 @@ TODO
       on predefined in separate config level. For reading config it uses
       GG_OnKeyRead etc. It is needed for changing sm rtv threashold from 0.6
       to 1.0.
+    * Bug report:
+        L 10/07/2009 - 00:27:23: [SM] Native "GetClientTeam" reported: Client 1 is not in game
+        L 10/07/2009 - 00:27:23: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
+        L 10/07/2009 - 00:27:23: [SM]   [0]  Line 99, gungame_logging.sp::LogEventToGame()
+        L 10/07/2009 - 00:27:23: [SM]   [1]  Line 64, gungame_logging.sp::GG_OnLeaderChange()
 
-
+        
