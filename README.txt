@@ -321,5 +321,5 @@ TODO
         L 10/07/2009 - 00:27:23: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
         L 10/07/2009 - 00:27:23: [SM]   [0]  Line 99, gungame_logging.sp::LogEventToGame()
         L 10/07/2009 - 00:27:23: [SM]   [1]  Line 64, gungame_logging.sp::GG_OnLeaderChange()
-
+    * Feature request: move all texts to translation file.
         
