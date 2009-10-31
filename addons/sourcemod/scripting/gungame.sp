@@ -134,14 +134,6 @@ public OnPluginEnd()
     SetConVarInt(gungame_enabled, 0);
 }
 
-public OnMapStart()
-{
-    if ( IsActive )
-    {
-        UTIL_RemoveBuyZones();
-    }
-}
-
 public OnMapEnd()
 {
     /* Kill timer on map change if was in warmup round. */
@@ -289,6 +281,8 @@ public GG_OnStartup(bool:Command)
 
     if(IsActive)
     {
+        UTIL_RemoveBuyZones();
+        
         if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
         {
             StartWarmupRound();
