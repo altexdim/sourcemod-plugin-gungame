@@ -62,6 +62,9 @@ Changelog
           gg_knife_level event triggered when player reaches last level.
         * Changed GG_OnClientLevelChange forward prototype. Added "last level"
           param.
+        * Bugfix: 
+            One BIG bug, which, I think, wasn't mentioned here: gungame 1.0.1.1 
+            removes buysites. When it's disabled, it also removes.
 
     1.0.1.1:
         * Renamed cvar from sm_gungame_css_version to sm_gungamesm_version.

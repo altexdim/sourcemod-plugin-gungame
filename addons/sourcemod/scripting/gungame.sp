@@ -136,7 +136,10 @@ public OnPluginEnd()
 
 public OnMapStart()
 {
-    UTIL_RemoveBuyZones();
+    if ( IsActive )
+    {
+        UTIL_RemoveBuyZones();
+    }
 }
 
 public OnMapEnd()
