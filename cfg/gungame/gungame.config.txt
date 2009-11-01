@@ -114,12 +114,12 @@
         "ResetLevelAfterWarmup" "1"
 
         /**
-		 * This gives the player a weapon with 50 bullets on nade level.
-		 * Example:
+         * This gives the player a weapon with 50 bullets on nade level.
+         * Example:
          *     "NadeBonus" "glock"  - gives glock 
          *     "NadeBonus" "deagle" - gives deagle
          *     "NadeBonus" ""       - feature disabled
-		 */
+         */
         "NadeBonus" ""
 
         /* Gives a smoke grenade*/
@@ -150,7 +150,7 @@
          * the player win database get filled up. It can cause long map changes.
          * 0 = off otherwise the value is the number of days.
          */
-        "Prune"     "30"
+        "Prune"     "366"
     }
 
     "Sounds"
