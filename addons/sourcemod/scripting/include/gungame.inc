@@ -221,10 +221,11 @@ forward GG_OnWinner(client, const String:Weapon[]);
  * Called when the leader change player.
  *
  * @param client        Player index.
- * @param level     The player current level
+ * @param level         The player current level
+ * @param totalLevels   Total levels
  * @noreturn
  */
-forward GG_OnLeaderChange(client, level);
+forward GG_OnLeaderChange(client, level, totalLevels);
 
 /**
  * Called news section of the config reader changes

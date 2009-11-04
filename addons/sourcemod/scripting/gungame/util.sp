@@ -222,6 +222,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
                 Call_StartForward(FwdLeader);
                 Call_PushCell(CurrentLeader);
                 Call_PushCell(newLevel);
+                Call_PushCell(WeaponOrderCount);
                 Call_Finish();
                 UTIL_PlaySoundForLeaderLevel();
             }
@@ -237,6 +238,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
+        Call_PushCell(WeaponOrderCount);
         Call_Finish();
         UTIL_PlaySoundForLeaderLevel();
         return;
@@ -259,6 +261,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
         Call_StartForward(FwdLeader);
         Call_PushCell(CurrentLeader);
         Call_PushCell(newLevel);
+        Call_PushCell(WeaponOrderCount);
         Call_Finish();
         // start leading
         UTIL_PlaySoundForLeaderLevel();
