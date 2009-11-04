@@ -2,9 +2,9 @@ Description
 -----------
     GunGame:SM is the gameplay plugin that makes you to
     act with various guns and not only with your favorite
-    one. You should kill enemy with the current weapon to
-    get next weapon. You should kill enemies with all the
-    weapons to win the game.
+    one. On spawn you get one weapon. You should kill
+    enemy with the current weapon to get next weapon.
+    You should kill enemies with all the weapons to win the game.
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
