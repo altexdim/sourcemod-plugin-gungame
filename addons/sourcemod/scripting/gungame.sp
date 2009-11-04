@@ -96,6 +96,7 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
+    PlayerLevelsBeforeDisconnect = CreateTrie();
     CHAT_DetectColorMsg();
     // ConVar
     VGUIMenu = GetUserMessageId("VGUIMenu");
@@ -171,6 +172,7 @@ public OnMapEnd()
     GameWinner = NULL;
     TotalLevel = NULL;
     CurrentLeader = NULL;
+    ClearTrie(PlayerLevelsBeforeDisconnect);
 
     for(new Sounds:i = Welcome; i < MaxSounds; i++)
     {
@@ -264,6 +266,13 @@ public OnClientDisconnect(client)
         TotalLevel = NULL;
     }
 
+    if ( !IsFakeClient(client) )
+    {
+        decl String:steamid[64];
+        GetClientAuthString(client, steamid, sizeof(steamid));
+        SetTrieValue(PlayerLevelsBeforeDisconnect, steamid, PlayerLevel[client]);
+    }
+    
     PlayerLevel[client] = 0;
     CurrentKillsPerWeap[client] = NULL;
     CurrentLevelPerRound[client] = NULL;
@@ -338,7 +347,8 @@ public GG_OnShutdown(bool:Command)
         GameWinner = NULL;
         TotalLevel = NULL;
         CurrentLeader = NULL;
-
+        ClearTrie(PlayerLevelsBeforeDisconnect);
+        
         OnEventShutdown();
 
         if(Command)

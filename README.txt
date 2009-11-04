@@ -57,6 +57,8 @@ Credits
 
 Changelog
 ---------
+        + Restore level on player reconnect.
+      
     1.0.2.0:
         + There are forwards for logging level up and level down.
           Added logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
@@ -218,9 +220,6 @@ Changelog
 
 TODO
 ----
-    + Save levels on disconnect and restore on reconnect like in esgg5.
-      Will be using tries for static cashe. Keys are steam_ids and values are
-      levels integers.
     + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
     + Feature requst:
         the problem im having is when someone dies their gun drops

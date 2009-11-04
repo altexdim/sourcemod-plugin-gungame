@@ -122,4 +122,4 @@ new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
 new bool:IsActive = false;
 new bool:IsObjectiveHooked;
 new HostageEntInfo;
-
+new Handle:PlayerLevelsBeforeDisconnect = INVALID_HANDLE;
