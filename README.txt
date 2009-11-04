@@ -57,6 +57,19 @@ Credits
 
 Changelog
 ---------
+    1.0.2.0:
+        + There are forwards for logging level up and level down.
+          Added logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
+        * Fixed:
+            L 09/16/2009 - 13:26:45: [SM] Native "GetClientAuthString" reported: Client index 0 is invalid
+            L 09/16/2009 - 13:26:45: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
+            L 09/16/2009 - 13:26:45: [SM]   [0]  Line 94, gungame_logging.sp::LogEventToGame()
+            L 09/16/2009 - 13:26:45: [SM]   [1]  Line 62, gungame_logging.sp::GG_OnLeaderChange()
+        * Bugfix for:
+            L 10/07/2009 - 00:27:23: [SM] Native "GetClientTeam" reported: Client 1 is not in game
+            L 10/07/2009 - 00:27:23: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
+            L 10/07/2009 - 00:27:23: [SM]   [0]  Line 99, gungame_logging.sp::LogEventToGame()
+            L 10/07/2009 - 00:27:23: [SM]   [1]  Line 64, gungame_logging.sp::GG_OnLeaderChange()
         + Added gg_leader and gg_knife_level events to logger.
           gg_leader event triggered when leader changed.
           gg_knife_level event triggered when player reaches last level.
@@ -205,40 +218,88 @@ Changelog
 
 TODO
 ----
-    + [DONE] There are forwards for logging level up and level down.
-      Added logging for lvlup, lvldn, lvlsteal to gungame_logging.sp
-      -------------------------------------------------------------------------------------
     + Save levels on disconnect and restore on reconnect like in esgg5.
       Will be using tries for static cashe. Keys are steam_ids and values are
       levels integers.
-      -------------------------------------------------------------------------------------
     + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
-      -------------------------------------------------------------------------------------
     + Feature requst:
         the problem im having is when someone dies their gun drops
         and someone else can pick it up and use it. i dont want that.
         i want the gun to disappear or disable people from picking it up.
         So add option to allow weapon removement on player death.
-      -------------------------------------------------------------------------------------
-    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
-      -------------------------------------------------------------------------------------
-    + Add sqlite and mysql support for top players stats
-      -------------------------------------------------------------------------------------
-    * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
-      -------------------------------------------------------------------------------------
     + Add option to reload ammo on player kill.
-      -------------------------------------------------------------------------------------
     + Implement gg_handicap_update like in esgg5.
-      -------------------------------------------------------------------------------------
     + Implement !buylevel.
-      -------------------------------------------------------------------------------------
+    * These function arent working:
+        - Triplelevelbonus
+        - AFK manager (moving afk-s to spec)
+    * Is there a way to put more nades on he level, like this one 
+      for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
+    * Feature request:
+        1) I want to run a random weapon order but *always* have knife 
+        and nade as the last two weapons. When I turn random weapon order 
+        on it mixes knife and nade into the mix. Is there a way to make 
+        knife and nade the last two weapons?
+        Add something like configurable random weapons groups.
+    * Replace "play" with EmitSoundToClient for "nade-level" and
+      "knife-level" sounds.
+    * AfkDeaths does not reset sometimes.
+      Redone afk managenemt not to check weapon_fire every shot.
+    + Add option to remove all weapons before giving next level weapon for
+      player if Turbo is enabled.
+    * Make removement buyzones on/off. So once gg is enabled than buyzones are
+      disabled, and when gg is disabled buyzones are enabled.
+      Maybe instead of removement buyzones just disable it to players on
+      spawn and when gg swithces enabled/disabled.
+    + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
+    * Feature request: move all texts to translation file.
+    
+    ----====----==== High severity list ----====----====
+    
+    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    + Add sqlite and mysql support for top players stats
+    * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    
+    ----====----==== Low priority list ----====----====
+    
+    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
+      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
+    * [UNAPPROVED] Bug report:
+        2) I also like to require 2 kills per round. This works fine 
+        but with Knife Pro turned on, it still takes two knife kills to 
+        level up where it should only take one knife kill. Is there an 
+        option for this?
+    * [UNAPPROVED] Bug report:
+        I found two bugs.
+        - First, if the player has hegrenade, he's the last man standing in his team and 
+          he suicides, he doesn't loose his level.
+        - Second (maybe it's some problem w/ server), quite often when somebody makes a 
+          knivekill, server just shuts down and i have to restart it.
+        On the 1.0.0.1.12v the 2nd problem hasn't appeared, so I'm downgrading.
     * Bug report:
         [UNAPPROVED] I dont think that de Handicap works as it should :/
         On my server i set it to "1" that means it should give the AVG level, but.
         If a players joins the server he/she always got the first weapon no matter
         what the AVG level is., but after he recconnect he get's the AVG level.
         So in shot newly connected players aren't getting the avg level.
-      -------------------------------------------------------------------------------------
+    * Fix:
+        L 09/16/2009 - 13:49:26: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:26: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:26: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:26: [SM]   [1]  Line 465, gungame/event.sp::_PlayerDeath()
+
+        L 09/16/2009 - 13:49:36: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:36: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:36: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:36: [SM]   [1]  Line 857, gungame/event.sp::RemoveBonus()
+      Comment: Realy dont understand how it is possible. Is it knife throw plugin installed?
+      Think about what to do if Killer == 0.
+      I dont know how it is possible.
+    * Fix
+        L 08/31/2009 - 21:17:31: [SM] Native "UnhookEvent" reported: Game event "hostage_killed" has no active hook
+        L 08/31/2009 - 21:17:31: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
+      I dont know how it is possible.
     * These function arent working:
         - [UNAPPROVED] Handicap (givin neewly connected player teh avg level)
             So people are playing on server let's say there are 6 players 
@@ -253,76 +314,5 @@ TODO
 
             So to keep it simple, neewly connected players don't get 
             the avg or min level, only after recconecting.
-        - Triplelevelbonus
-        - AFK manager (moving afk-s to spec)
-      -------------------------------------------------------------------------------------
-    * Is there a way to put more nades on he level, like this one 
-      for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
-      -------------------------------------------------------------------------------------
-    * Feature request:
-        1) I want to run a random weapon order but *always* have knife 
-        and nade as the last two weapons. When I turn random weapon order 
-        on it mixes knife and nade into the mix. Is there a way to make 
-        knife and nade the last two weapons?
-        Add something like configurable random weapons groups.
-      -------------------------------------------------------------------------------------
-    * Replace "play" with EmitSoundToClient for "nade-level" and
-      "knife-level" sounds.
-      -------------------------------------------------------------------------------------
-    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
-      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
-      -------------------------------------------------------------------------------------
-    * [UNAPPROVED] Bug report:
-        2) I also like to require 2 kills per round. This works fine 
-        but with Knife Pro turned on, it still takes two knife kills to 
-        level up where it should only take one knife kill. Is there an 
-        option for this?
-      -------------------------------------------------------------------------------------
-    * [UNAPPROVED] Bug report:
-        I found two bugs.
-        - First, if the player has hegrenade, he's the last man standing in his team and 
-          he suicides, he doesn't loose his level.
-        - Second (maybe it's some problem w/ server), quite often when somebody makes a 
-          knivekill, server just shuts down and i have to restart it.
-        On the 1.0.0.1.12v the 2nd problem hasn't appeared, so I'm downgrading.
-    * [DONE] Fix:
-        L 09/16/2009 - 13:26:45: [SM] Native "GetClientAuthString" reported: Client index 0 is invalid
-        L 09/16/2009 - 13:26:45: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
-        L 09/16/2009 - 13:26:45: [SM]   [0]  Line 94, gungame_logging.sp::LogEventToGame()
-        L 09/16/2009 - 13:26:45: [SM]   [1]  Line 62, gungame_logging.sp::GG_OnLeaderChange()
-    * Fix:
-        L 09/16/2009 - 13:49:26: [SM] Native "SetEntData" reported: Offset 0 is invalid
-        L 09/16/2009 - 13:49:26: [SM] Displaying call stack trace for plugin "gungame.smx":
-        L 09/16/2009 - 13:49:26: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
-        L 09/16/2009 - 13:49:26: [SM]   [1]  Line 465, gungame/event.sp::_PlayerDeath()
 
-        L 09/16/2009 - 13:49:36: [SM] Native "SetEntData" reported: Offset 0 is invalid
-        L 09/16/2009 - 13:49:36: [SM] Displaying call stack trace for plugin "gungame.smx":
-        L 09/16/2009 - 13:49:36: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
-        L 09/16/2009 - 13:49:36: [SM]   [1]  Line 857, gungame/event.sp::RemoveBonus()
-      Comment: Realy dont understand how it is possible. Is it knife throw plugin installed?
-      Think about what to do if Killer == 0.
-    * AfkDeaths does not reset sometimes.
-      Redone afk managenemt not to check weapon_fire every shot.
-    * Fix
-        L 08/31/2009 - 21:17:31: [SM] Native "UnhookEvent" reported: Game event "hostage_killed" has no active hook
-        L 08/31/2009 - 21:17:31: [SM] Displaying call stack trace for plugin "gungame.smx":
-        L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
-    + Add option to remove all weapons before giving next level weapon for
-      player if Turbo is enabled.
-    * Make removement buyzones on/off. So once gg is enabled than buyzones are
-      disabled, and when gg is disabled buyzones are enabled.
-      Maybe instead of removement buyzones just disable it to players on
-      spawn and when gg swithces enabled/disabled.
-    + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
-    + Add plugin that implement GG_OnLeaderChange and executes some server config
-      on predefined in separate config level. For reading config it uses
-      GG_OnKeyRead etc. It is needed for changing sm rtv threashold from 0.6
-      to 1.0.
-    * Bug report:
-        L 10/07/2009 - 00:27:23: [SM] Native "GetClientTeam" reported: Client 1 is not in game
-        L 10/07/2009 - 00:27:23: [SM] Displaying call stack trace for plugin "gungame_logging.smx":
-        L 10/07/2009 - 00:27:23: [SM]   [0]  Line 99, gungame_logging.sp::LogEventToGame()
-        L 10/07/2009 - 00:27:23: [SM]   [1]  Line 64, gungame_logging.sp::GG_OnLeaderChange()
-    * Feature request: move all texts to translation file.
         
