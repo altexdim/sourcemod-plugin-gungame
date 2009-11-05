@@ -57,6 +57,7 @@ Credits
 
 Changelog
 ---------
+    1.0.3.0:
         + Restore level on player reconnect.
       
     1.0.2.0:
