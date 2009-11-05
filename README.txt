@@ -315,4 +315,16 @@ TODO
             So to keep it simple, neewly connected players don't get 
             the avg or min level, only after recconecting.
 
-        
+Issues
+-------
+    1) My server crashes right after someone wins the map
+    solution:
+    Update your gamedata/gungame.games.txt from gungame release 1.0.0.1.12
+    OR
+    Update your server binaries.
+
+    2) My server does not change map after someone wins the map
+    solution:
+    Update your gamedata/gungame.games.txt from latest gungame release
+
+    
