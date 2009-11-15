@@ -221,6 +221,9 @@ Changelog
 
 TODO
 ----
+    * Bug: 
+        When i kill a teammate, kill a enemy and then another enemy with the knife 
+        i triple level. But not always. Yet I couldn't figure it out why.
     + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
     + Feature requst:
         the problem im having is when someone dies their gun drops
