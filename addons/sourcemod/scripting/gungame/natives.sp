@@ -176,6 +176,7 @@ public __RemoveALevel(Handle:plugin, numParams)
 
     if(--CurrentLevelPerRound[client] < 0)
     {
+        // FIXME: this is a bug, why not setting CurrentLevelPerRound to zero?
         CurrentLevelPerRound[client] = MaxLevelPerRound - 1;
     }
     
