@@ -327,6 +327,12 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         if(CommitSuicide)
         {
             /* They killed themself by kill command*/
+            /*
+                We do not punish if AutoFriendlyFire is enabled and weapon is hegrenade.
+                But when we have hegrenade, friendlyfire is enabled even if AutoFriendlyFire is enabled.
+                TODO: Something strange in this logic.
+                P.S. AutoFriendlyFire - Enabled friendly fire automatically when a player reaches hegrenade level.
+            */
             if(Victim == Killer && (Weapon[0] == 'w' || !AutoFriendlyFire) )
             {
                 /* ie ... kill command */
