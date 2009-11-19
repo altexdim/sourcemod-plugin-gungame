@@ -221,7 +221,9 @@ Changelog
 
 TODO
 ----
-    + Feature requst:
+    + Feature request:
+        Is it possible to enable friendly fire earlier than on nade level
+    + Feature request:
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
     * Bug report:
