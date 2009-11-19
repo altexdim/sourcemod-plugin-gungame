@@ -221,6 +221,9 @@ Changelog
 
 TODO
 ----
+    + Feature requst:
+        If you kill yourself or a teammate you loose one level. I want set this 
+        to loose 2 levels, or 3, or...
     * Bug report:
         I dont level down at all, when i kill my self with a nade.
     * Bug: 
