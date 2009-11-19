@@ -221,6 +221,8 @@ Changelog
 
 TODO
 ----
+    * Bug report:
+        I dont level down at all, when i kill my self with a nade.
     * Bug: 
         When i kill a teammate, kill a enemy and then another enemy with the knife 
         i triple level. But not always. Yet I couldn't figure it out why.
@@ -245,7 +247,7 @@ TODO
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
     * Replace "play" with EmitSoundToClient for "nade-level" and
-      "knife-level" sounds.
+      "knife-level" and "triple-level" sounds (and maybe all sounds?).
     * AfkDeaths does not reset sometimes.
       Redone afk managenemt not to check weapon_fire every shot.
     + Add option to remove all weapons before giving next level weapon for
