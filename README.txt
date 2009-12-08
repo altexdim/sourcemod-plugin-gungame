@@ -223,21 +223,21 @@ TODO
 ----
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
-    + Feature request:
+    + [IN-PROGRESS] Feature request:
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
-    * [NEEDFAST] Bug report:
+    * [IN-PROGRESS] Bug report:
         I dont level down at all, when i kill my self with a nade.
     * Bug: 
         When i kill a teammate, kill a enemy and then another enemy with the knife 
         i triple level. But not always. Yet I couldn't figure it out why.
-    + [NEEDFAST] Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
+    + [NEED-FAST] Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
     + Feature requst:
         the problem im having is when someone dies their gun drops
         and someone else can pick it up and use it. i dont want that.
         i want the gun to disappear or disable people from picking it up.
         So add option to allow weapon removement on player death.
-    + [NEEDFAST] Add option to reload ammo on player kill.
+    + [NEED-FAST] Add option to reload ammo on player kill.
     + Implement gg_handicap_update like in esgg5.
     + Implement !buylevel.
     * These function arent working:
