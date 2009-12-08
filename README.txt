@@ -324,6 +324,11 @@ TODO
 
             So to keep it simple, neewly connected players don't get 
             the avg or min level, only after recconecting.
+    * When bot just added than it is assigning to team and spawning 
+      before it "entered the game". So he did not receive knife
+      and then gungame plugin add him knife. But then he disconnects
+      and respawning (after entren the game) but there is dropped
+      knife.
 
 Issues
 -------
