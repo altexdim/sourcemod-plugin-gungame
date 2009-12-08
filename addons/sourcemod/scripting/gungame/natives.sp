@@ -184,7 +184,7 @@ public __RemoveALevel(Handle:plugin, numParams)
 
     if(TurboMode)
     {
-        UTIL_GiveNextWeapon(client, level);
+        UTIL_GiveNextWeapon(client, level, -1);
     }
 
     return 1;
@@ -350,7 +350,7 @@ public __RemoveAPoint(Handle:plugin, numParams)
     /* They lost a level if turbo mode is enabled return them back to the previous weapon */
     if(TurboMode)
     {
-        UTIL_GiveNextWeapon(client, level);
+        UTIL_GiveNextWeapon(client, level, -1);
     }
 
     return killsPerLevel - 1;

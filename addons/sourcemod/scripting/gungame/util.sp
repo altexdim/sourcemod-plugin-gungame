@@ -564,7 +564,7 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
     return -1;
 }
 
-UTIL_GiveNextWeapon(client, level)
+UTIL_GiveNextWeapon(client, level, diff = 1)
 {
     if ( WarmupEnabled && WarmupKnifeOnly )
     {
@@ -574,40 +574,51 @@ UTIL_GiveNextWeapon(client, level)
     CurrentLevelPerRound[client] = NULL;
 
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
-
-    if(slot != Slot_Grenade)
+    if ( slot == Slot_Knife )
     {
-        /* Drop old weapon first */
-        UTIL_ForceDropWeaponBySlot(client, slot, true);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Primary, true);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
+        FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+        return;
     }
-
-    if ( (WeapId == CSW_HEGRENADE) && NadeBonusWeaponId )
+    if ( slot == Slot_Grenade )
     {
-        slot = WeaponSlot[NadeBonusWeaponId];
-        if ( slot != Slot_Grenade )
+        UTIL_ForceDropWeaponBySlot(client, Slot_Primary, true);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
+        if (NadeBonusWeaponId)
         {
-            /* Drop old weapon first */
-            UTIL_ForceDropWeaponBySlot(client, slot, true);
-        }
-
-        new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
-        // Remove bonus weapon ammo! So player can not reload weapon!
-        if(ent != -1)
-        {
-            new iAmmo = HACK_GetAmmoType(ent);
-
-            if(iAmmo != -1)
+            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
+            // Remove bonus weapon ammo! So player can not reload weapon!
+            if(ent != -1)
             {
-                new Handle:Info = CreateDataPack();
-                WritePackCell(Info, client);
-                WritePackCell(Info, iAmmo);
-                ResetPack(Info);
+                new iAmmo = HACK_GetAmmoType(ent);
 
-                CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+                if(iAmmo != -1)
+                {
+                    new Handle:Info = CreateDataPack();
+                    WritePackCell(Info, client);
+                    WritePackCell(Info, iAmmo);
+                    ResetPack(Info);
+
+                    CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+                }
             }
         }
     }
-
+    // slot == Slot_Primary || slot == Slot_Secondary 
+    else
+    {
+        UTIL_ForceDropWeaponBySlot(client, slot, true);
+        level = level - diff;
+        if ( level > 0 )
+        {
+            new Weapons:LastWeapId = WeaponOrderId[level-1], Slots:Lastslot = WeaponSlot[LastWeapId];
+            if ( (slot != Lastslot) && (Lastslot == Slot_Primary || Lastslot == Slot_Secondary) )
+            {
+                UTIL_ForceDropWeaponBySlot(client, Lastslot, true);
+            }
+        }
+    }
     /* Give new weapon */
     GivePlayerItem(client, WeaponName[WeapId]);
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);

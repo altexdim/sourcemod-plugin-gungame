@@ -226,18 +226,18 @@ TODO
     + Feature request:
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
-    * Bug report:
+    * [NEEDFAST] Bug report:
         I dont level down at all, when i kill my self with a nade.
     * Bug: 
         When i kill a teammate, kill a enemy and then another enemy with the knife 
         i triple level. But not always. Yet I couldn't figure it out why.
-    + Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
+    + [NEEDFAST] Add configuration variable for disable RemoveWeaponAmmo of NadeBonus weapon.
     + Feature requst:
         the problem im having is when someone dies their gun drops
         and someone else can pick it up and use it. i dont want that.
         i want the gun to disappear or disable people from picking it up.
         So add option to allow weapon removement on player death.
-    + Add option to reload ammo on player kill.
+    + [NEEDFAST] Add option to reload ammo on player kill.
     + Implement gg_handicap_update like in esgg5.
     + Implement !buylevel.
     * These function arent working:
@@ -255,7 +255,7 @@ TODO
       "knife-level" and "triple-level" sounds (and maybe all sounds?).
     * AfkDeaths does not reset sometimes.
       Redone afk managenemt not to check weapon_fire every shot.
-    + Add option to remove all weapons before giving next level weapon for
+    + [TESTING] Add option to remove all weapons before giving next level weapon for
       player if Turbo is enabled.
     * Make removement buyzones on/off. So once gg is enabled than buyzones are
       disabled, and when gg is disabled buyzones are enabled.
