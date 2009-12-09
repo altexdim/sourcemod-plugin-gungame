@@ -300,9 +300,6 @@ public Action:RemoveHostages(Handle:timer)
 
 public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    // TODO: Reload current weapon.
-    // SetEntProp(WeaponIndex, Prop_Send, "m_iClip1", AmmoCount);
-    
     // Player has died.
     if(IsActive)
     {
@@ -504,6 +501,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             return;
         }
 
+        // TODO: Reload current weapon.
+        // SetEntProp(WeaponIndex, Prop_Send, "m_iClip1", AmmoCount);
+    
         new killsPerLevel = CustomKillPerLevel[level];
         if ( !killsPerLevel )
         {
