@@ -501,6 +501,28 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             return;
         }
 
+
+        /*    
+        # Get weapon
+        weapon = event_var['weapon']
+        
+        # We will only reload weapons that the attacker is on the level for
+        if weapon != gungamelib.getPlayer(attacker).getWeapon():
+            return
+        
+        # Is a hegrenade or knife kill?
+        if weapon in ('hegrenade', 'knife'):
+            return
+        
+        # Set clip
+        playerHandle = es.getplayerhandle(attacker)
+        weaponInfo = ggweaponlib.getWeaponInfo(weapon)
+        for weaponIndex in es.createentitylist('weapon_' + weapon).keys():
+            if playerHandle == es.getindexprop(weaponIndex, 'CBaseEntity.m_hOwnerEntity'):
+                es.setindexprop(weaponIndex, 'CBaseCombatWeapon.LocalWeaponData.m_iClip1', weaponInfo.ammo)
+                break
+        */
+        
         // TODO: Reload current weapon.
         // SetEntProp(WeaponIndex, Prop_Send, "m_iClip1", AmmoCount);
     
