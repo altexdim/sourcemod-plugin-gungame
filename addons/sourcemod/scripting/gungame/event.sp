@@ -524,7 +524,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         */
         
         // TODO: Reload current weapon.
-        // SetEntProp(WeaponIndex, Prop_Send, "m_iClip1", AmmoCount);
+        // new ActiveWeaponIndex = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon"); 
+        // SetEntProp(ActiveWeaponIndex, Prop_Send, "m_iClip1", AmmoCount);
     
         new killsPerLevel = CustomKillPerLevel[level];
         if ( !killsPerLevel )
