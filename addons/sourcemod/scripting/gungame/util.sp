@@ -612,7 +612,7 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         level = level - diff;
         if ( level > 0 )
         {
-            new Weapons:LastWeapId = WeaponOrderId[level-1], Slots:Lastslot = WeaponSlot[LastWeapId];
+            new Weapons:LastWeapId = WeaponOrderId[level], Slots:Lastslot = WeaponSlot[LastWeapId];
             if ( (slot != Lastslot) && (Lastslot == Slot_Primary || Lastslot == Slot_Secondary) )
             {
                 UTIL_ForceDropWeaponBySlot(client, Lastslot, true);
