@@ -676,3 +676,15 @@ UTIL_RemoveBuyZones()
     }
     if ( found > 0 ) RemoveEdict(found);
 }
+
+UTIL_ReloadActiveWeapon(client, Weapons:WeaponId)
+{
+    new Slots:slot = WeaponSlot[WeaponId];
+    if ( (slot == Slot_Primary || slot == Slot_Secondary) )
+    {
+        SetEntProp(
+            GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon"), 
+            Prop_Send, "m_iClip1", WeaponAmmo[WeaponId]
+        );
+    }
+}

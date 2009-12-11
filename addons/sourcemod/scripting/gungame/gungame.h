@@ -87,6 +87,20 @@ new const Slots:WeaponSlot[Weapons:MAXWEAPON] =
     Slot_Grenade, Slot_Grenade, Slot_Grenade
 };
 
+new const WeaponAmmo[Weapons:MAXWEAPON] =
+{
+    0,
+    0,
+    // Secondary Weapon
+    12, 20, 13, 7, 20, 30,
+    // Primary weapon
+    8, 7, 30, 30, 30, 25, 50, 35,
+    25, 30, 30, 30, 30, 30, 30, 10,
+    20, 100,
+
+    1, 2, 1
+};
+
 /**
  * Minimum level to win on max timelimit reached.
  */
