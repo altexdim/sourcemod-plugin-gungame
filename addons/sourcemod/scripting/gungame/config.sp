@@ -72,6 +72,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 InternalIsActive = bool:StringToInt(value);
             } else if(strcmp("AlltalkOnWin", key, false) == 0) {
                 AlltalkOnWin = bool:StringToInt(value);
+            } else if(strcmp("RemoveBonusWeaponAmmo", key, false) == 0) {
+                RemoveBonusWeaponAmmo = bool:StringToInt(value);
+            } else if(strcmp("ReloadWeapon", key, false) == 0) {
+                ReloadWeapon = bool:StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
             } else if(strcmp("MultiKillChat", key, false) == 0) {

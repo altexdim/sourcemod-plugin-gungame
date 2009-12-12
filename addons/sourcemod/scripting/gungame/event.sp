@@ -301,55 +301,44 @@ public Action:RemoveHostages(Handle:timer)
 public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
     // Player has died.
-    if(IsActive)
+    if ( IsActive )
     {
         new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
         new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
 
         /* They change team at round end don't punish them. */
-        if(!RoundStarted)
+        if ( !RoundStarted )
+        {
             return;
-
+        }
+        
         decl String:Weapon[24], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
 
         GetEventString(event, "weapon", Weapon, sizeof(Weapon));
         GetClientName(Victim, vName, sizeof(vName));
         GetClientName(Killer, kName, sizeof(kName));
 
-
         /* Kill self with world spawn */
-        if(WorldspawnSuicide && Victim && !Killer)
+        if ( WorldspawnSuicide && Victim && !Killer )
         {
             ClientSuicide(Victim, vName);
             return;
         }
 
-        if(CommitSuicide)
+        /* They killed themself by kill command or by hegrenade */
+        if ( Victim == Killer ) 
         {
-            /* They killed themself by kill command*/
-            /*
-                We do not punish if AutoFriendlyFire is enabled and weapon is hegrenade.
-                But when we have hegrenade, friendlyfire is enabled even if AutoFriendlyFire is enabled.
-                TODO: Something strange in this logic.
-                P.S. AutoFriendlyFire - Enabled friendly fire automatically when a player reaches hegrenade level.
-            */
-            if(Victim == Killer && (Weapon[0] == 'w' || !AutoFriendlyFire) )
+            if ( CommitSuicide )
             {
                 /* ie ... kill command */
                 ClientSuicide(Victim, vName);
-                return;
             }
-        }
-
-        /* They killed themself with probably with grenade. Don't allow them to level up if so. */
-        if(Victim == Killer && Weapon[0] != 'w')
-        {
             return;
         }
 
         new bool:TeamKill;
 
-        if  (Killer && (Victim != Killer) && GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
+        if ( Killer && GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
         {
             /* Stop them from gaining a point or level by killing their team mate. */
             TeamKill = true;
@@ -364,7 +353,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         Call_PushCell(TeamKill);
         Call_Finish(ret);
 
-        if(ret || TeamKill)
+        if ( ret || TeamKill )
         {
             return;
         }
@@ -381,13 +370,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         if ( ExtraNade && WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
         {
             /* Do not give them another nade if they already have one */
-            if(UTIL_FindGrenadeByName(Killer, WeaponName[CSW_HEGRENADE]) == -1)
+            if ( UTIL_FindGrenadeByName(Killer, WeaponName[CSW_HEGRENADE]) == -1 )
             {
                 GivePlayerItem(Killer, WeaponName[CSW_HEGRENADE]);
             }
         }
 
-        if(MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound)
+        if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
         {
             return;
         }
@@ -397,25 +386,25 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
          * I wonder if not to allow them to skip level if they are on nade level
          * Steal level from other player.
          */
-        if(KnifePro && WeaponIndex == CSW_KNIFE && WeaponLevel != CSW_KNIFE)
+        if ( KnifePro && WeaponIndex == CSW_KNIFE && WeaponLevel != CSW_KNIFE )
         {
-            if(!KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade)
+            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade )
             {
                 return;
             }
 
             new Level = PlayerLevel[Victim];
 
-            if(Level >= KnifeProMinLevel)
+            if ( Level >= KnifeProMinLevel )
             {
-                if(Level || CanStealFirstLevel)
+                if ( Level || CanStealFirstLevel )
                 {
                     new bool:Ret;
                     if ( Level )
                     {
                         new newLevelVictim = UTIL_ChangeLevel(Victim, -1, Ret, true, true);
 
-                        if(Ret)
+                        if ( Ret )
                         {
                             return;
                         }                        
@@ -530,13 +519,17 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, killsPerLevel - kills, GREEN, YELLOW, kills, GREEN, YELLOW, killsPerLevel);
                 }
                 UTIL_PlaySound(Killer, MultiKill);
-                UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
+                if ( ReloadWeapon )
+                {
+                    UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
+                }
                 return;
             }
         }
         
+        
         // reload weapon
-        if ( !TurboMode )
+        if ( !TurboMode && ReloadWeapon )
         {
             UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
         }

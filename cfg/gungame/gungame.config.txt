@@ -2,6 +2,12 @@
 {
     "Config"
     {
+        /* Remove additional ammo in bonus weapon on the nade level */
+        "RemoveBonusWeaponAmmo" "1"
+        
+        /* Auto reload current level weapon on kill */
+        "ReloadWeapon" "1"
+        
         /* Show multikill hints in chat */
         "MultiKillChat" "1"
         

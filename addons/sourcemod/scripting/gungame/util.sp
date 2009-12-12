@@ -589,11 +589,11 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         {
             new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
             // Remove bonus weapon ammo! So player can not reload weapon!
-            if(ent != -1)
+            if ( (ent != -1) && RemoveBonusWeaponAmmo )
             {
                 new iAmmo = HACK_GetAmmoType(ent);
 
-                if(iAmmo != -1)
+                if ( iAmmo != -1 )
                 {
                     new Handle:Info = CreateDataPack();
                     WritePackCell(Info, client);

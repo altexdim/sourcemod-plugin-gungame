@@ -87,6 +87,8 @@ public Action:_CmdDisplay(client, args)
 DisplayConfig(client)
 {
     /*IsActive
+    RemoveBonusWeaponAmmo
+    ReloadWeapon
     TurboMode
     JoinMessage
     IntermissionCalcWinner

@@ -176,8 +176,7 @@ public __RemoveALevel(Handle:plugin, numParams)
 
     if(--CurrentLevelPerRound[client] < 0)
     {
-        // FIXME: this is a bug, why not setting CurrentLevelPerRound to zero?
-        CurrentLevelPerRound[client] = MaxLevelPerRound - 1;
+        CurrentLevelPerRound[client] = 0;
     }
     
     new level = UTIL_ChangeLevel(client, -1);
@@ -341,7 +340,7 @@ public __RemoveAPoint(Handle:plugin, numParams)
 
         if(--CurrentLevelPerRound[client] < 0)
         {
-            CurrentLevelPerRound[client] = MaxLevelPerRound - 1;
+            CurrentLevelPerRound[client] = 0;
         }
     }
 
