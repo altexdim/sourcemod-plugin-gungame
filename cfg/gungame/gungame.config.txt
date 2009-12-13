@@ -64,6 +64,7 @@
          * 0 - Disable
          * 1 - Avg level
          * 2 - Min level
+         * 3 - Min level (skip bots)
          */
         "HandicapMode" "0"
 

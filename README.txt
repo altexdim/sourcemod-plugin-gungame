@@ -57,6 +57,9 @@ Credits
 
 Changelog
 ---------
+        + Added handicap mode 3. It's like handicap mode 2 but skipping bots.
+            Usefull for dm servers with bots blocking round end.
+            
     1.0.4.0:
         * Fixed bug:
             I dont level down at all, when i kill my self with a nade.
@@ -234,8 +237,6 @@ Changelog
 
 TODO
 ----
-    + Add option to handicap function not to check bots for handicap mode == 2.
-        Usefull for dm servers with bots to block round end.
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:

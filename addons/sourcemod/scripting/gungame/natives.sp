@@ -120,7 +120,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
             PlayerLevel[client] = TotalLevel / Count;
         }
     }
-    else if ( mode == 2 )
+    else if ( mode == 2 || mode == 3 )
     {
         new minimum = -1;
         new level = 0;
@@ -128,7 +128,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         {
             if ( IsClientInGame(i) )
             {
-                if ( client == i )
+                if ( client == i || ( (mode == 3) && IsFakeClient(i) ) )
                 {
                     continue;
                 }
