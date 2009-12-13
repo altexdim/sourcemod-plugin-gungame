@@ -234,6 +234,8 @@ Changelog
 
 TODO
 ----
+    + Add option to handicap function not to check bots for handicap mode == 2.
+        Usefull for dm servers with bots to block round end.
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:
