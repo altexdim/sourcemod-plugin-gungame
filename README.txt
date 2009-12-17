@@ -8,9 +8,11 @@ Description
 
     http://forums.alliedmods.net/showthread.php?t=93977
 
-    For deathmatch and elimination modes you will need 
-    sm_ggdm 1.5.1+
-    http://forums.alliedmods.net/showthread.php?t=103242
+    Complementary plugins:
+        - deathmatch, elimination, spawn protection
+            sm_ggdm - http://forums.alliedmods.net/showthread.php?t=103242
+        - noblock
+            sm_noblock - http://forums.alliedmods.net/showthread.php?t=91617
 
 Commands and Cvars
 ------------------
