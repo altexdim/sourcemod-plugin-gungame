@@ -57,6 +57,10 @@ Credits
 
 Changelog
 ---------
+        * Fixed bug:
+            - its seems like there is a bug in the latest release with the two new cvars. I 
+            have the RemoveWeaponAmmo set to 0 and it works for one round and not the next 
+            round I have nade set to 2 kills required. 
         + Added handicap mode 3. It's like handicap mode 2 but skipping bots.
             Usefull for dm servers with bots blocking round end.
             
@@ -237,6 +241,23 @@ Changelog
 
 TODO
 ----
+    * Bug report:
+        - Also I have the other cvar that makes 
+        you loose a level if you nade your self set to off and players still loose a level 
+        if they nade them selves. Just a heads up.
+    * Think about this feature request:
+        I also would like to request that plugin could save level kills when level down. 
+        For example when there are 3 kill levels and you have already killed 2 and somebody 
+        knifes you. Instead of starting from 0 kills on previous level you could continue 
+        from 2 kill. Many people on my server are constantly complaining one this issue.
+
+        My opinion is it's not a good idea, because it you loose a level you are loosing a 
+        level, not just some points. And actualy some levels can be 2 points, for example, 
+        and some levels can be just 1 point, and some 5 points, so how plugin should 
+        calculate what exactly points it should save?
+    + Feature request:
+        - configurable warmup weapon by cvar, ticking sound and move timer to screen bottom
+        - event which fire when GG warmup is over (usefull to enable/disable some plugins)
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:
