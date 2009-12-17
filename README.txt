@@ -244,10 +244,42 @@ Changelog
 
 TODO
 ----
-    * Bug report:
-        - Also I have the other cvar that makes 
-        you loose a level if you nade your self set to off and players still loose a level 
-        if they nade them selves. Just a heads up.
+    ----====----==== High priority list ----====----====
+
+    + Feature request:
+        - killing somebody after round end (with nade for example) don't level you up
+
+        It's not normal. At least I don't have it in ES GG5 and it's better implemented 
+        there. It ruins all nade level. Are you playing GunGame much? Well, I do. And I 
+        know that very effective (and funny as well) way to kill somebody with nade is 
+        to act like kamikaze  . You may go to your victim as close as you can and then 
+        thow it under you (and victim). The opponent will probably kill you first but 
+        nade will kill him as well and you'll gain a knife level. When nobody left in 
+        your team, this don't work because looks like your plugin don't count anything 
+        after round_end event. On some maps it's hard to nade in a standard way. It's 
+        not working here and this really, REALLY sux. That's the second reason why I 
+        can't use your GG plugin now.
+
+        Add config variable to allow level up after round end.
+    + Feature requst:
+        Add config variable to strip dead players weapons so that their weapons can't be picked up.
+    + Feature request:
+        - move timer to screen bottom
+
+        Generally, look at ES GG5 warmup. This center caption about time which left disturbs 
+        a gameplay (use PrintHintText instead of PrintCenterText). 
+    + Feature request:
+        - ticking sound 
+
+        And it's nice to add some sound like ticking clock for the last warmup seconds.
+    + Feature request:
+        - event which fire when GG warmup is over (usefull to enable/disable some plugins)
+    * Replace "play" with EmitSoundToClient for "nade-level" and
+      "knife-level" and "triple-level" sounds (and maybe all sounds?).
+    * Feature request: move all texts to translation file.
+
+    ----====----==== Normal priority list ----====----====
+
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down. 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
@@ -259,18 +291,15 @@ TODO
         and some levels can be just 1 point, and some 5 points, so how plugin should 
         calculate what exactly points it should save?
     + Feature request:
-        - configurable warmup weapon by cvar, ticking sound and move timer to screen bottom
-        - event which fire when GG warmup is over (usefull to enable/disable some plugins)
+        - configurable warmup weapon by cvar
+
+        For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
+        (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
-    + Feature requst:
-        the problem im having is when someone dies their gun drops
-        and someone else can pick it up and use it. i dont want that.
-        i want the gun to disappear or disable people from picking it up.
-        So add option to allow weapon removement on player death.
     + Implement gg_handicap_update like in esgg5.
     + Implement !buylevel.
     * These function arent working:
@@ -284,8 +313,6 @@ TODO
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
-    * Replace "play" with EmitSoundToClient for "nade-level" and
-      "knife-level" and "triple-level" sounds (and maybe all sounds?).
     * AfkDeaths does not reset sometimes.
       Redone afk managenemt not to check weapon_fire every shot.
     * Make removement buyzones on/off. So once gg is enabled than buyzones are
@@ -293,7 +320,6 @@ TODO
       Maybe instead of removement buyzones just disable it to players on
       spawn and when gg swithces enabled/disabled.
     + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
-    * Feature request: move all texts to translation file.
     
     ----====----==== High severity list ----====----====
     
