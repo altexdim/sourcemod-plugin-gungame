@@ -57,6 +57,7 @@ Credits
 
 Changelog
 ---------
+    1.0.4.1:
         * Fixed bug:
             - its seems like there is a bug in the latest release with the two new cvars. I 
             have the RemoveWeaponAmmo set to 0 and it works for one round and not the next 
