@@ -247,6 +247,9 @@ TODO
     ----====----==== High priority list ----====----====
 
     + Feature request:
+        - Add a config variable that disables kicking/moving to specs afk players without
+            disabling afk management completely.
+    + Feature request:
         - killing somebody after round end (with nade for example) don't level you up
 
         It's not normal. At least I don't have it in ES GG5 and it's better implemented 
