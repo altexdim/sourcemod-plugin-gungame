@@ -280,6 +280,11 @@ TODO
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" and "triple-level" sounds (and maybe all sounds?).
     * Feature request: move all texts to translation file.
+    + Feature request:
+        - configurable warmup weapon by cvar
+
+        For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
+        (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
 
     ----====----==== Normal priority list ----====----====
 
@@ -293,11 +298,6 @@ TODO
         level, not just some points. And actualy some levels can be 2 points, for example, 
         and some levels can be just 1 point, and some 5 points, so how plugin should 
         calculate what exactly points it should save?
-    + Feature request:
-        - configurable warmup weapon by cvar
-
-        For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
-        (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:
