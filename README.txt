@@ -288,6 +288,14 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    + Add an option to level down not to one level, but to some points, calculating depends on how 
+        much points does exists on current and previous level. 
+        Example:
+        was - level 4, points 2 (miltikill 4)
+        after knifed - level 3, point 1 (multikill 2)
+        levelNew = levelOld - 1, 
+        pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
+    
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down. 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
