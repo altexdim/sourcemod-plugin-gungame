@@ -319,6 +319,19 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Move all panel texts to translation files.
+
+    * In the specs it says:
+            Quote:
+            gungame_stats.smx
+            * Stats
+            - Depends on gungame.smx, gungame_config.smx
+            - Optional plugin
+        It is not optional because gungame_stats is required to run gungame. Can you please 
+        fix it so it is optional. I believe only the gungame levelpanel depends on it for 'wins'.
+
+        It would be nice if handicap could be moved out of gungame_stats because you don't really 
+        need stats to run the handicap. I just do not want to run gungame_stats at all because I 
+        use hlstatsx. The extra processing for top10 etc is not necessary.    
     
     ----====----==== Normal priority list ----====----====
 
