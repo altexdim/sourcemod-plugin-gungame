@@ -33,6 +33,11 @@ gungame_config.smx
         - Independent
         - Mandatory plugin
         - Read all config files
+        - Can load different configs (*.config.txt, *.equip.txt) depending on map 
+            prefixes and map names in configs/gungame/maps.
+            gungame.config.txt will be read first before prefix map name.
+            Prefix map name will be executed first before map specfic map.
+            Then map specifc config files will be loaded.
         
 gungame_display_winner.smx
     * Display winner
