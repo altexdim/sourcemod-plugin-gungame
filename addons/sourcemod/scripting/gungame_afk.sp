@@ -1,8 +1,7 @@
 #include <sourcemod>
 #include <sdktools>
 #include <gungame>
-#include "gungame/chat.h"
-#include "gungame/chat.sp"
+#include <colors>
 
 new OffsetOrigin;
 new bool:AfkManagement;
@@ -29,7 +28,8 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-    CHAT_DetectColorMsg();
+    LoadTranslations("gungame_afk");
+    
     GameConf = LoadGameConfigFile("gungame.games");
     CreateSwitchTeam();
 
@@ -110,7 +110,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
         if ( PlayerAfk[Victim][0] == Origin[0] && PlayerAfk[Victim][1] == Origin[1] )
         {
             /* You killed an afk. */
-            PrintToChat(Killer, "%c[%cGunGame%c]%c You do not gain a level because you killed an afk.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW);
+            CPrintToChat(Killer, "%t", "You do not gain a level because you killed an afk");
 
             if ( AfkAction && (++PlayerAfkCount[Victim] > AfkDeaths) )
             {

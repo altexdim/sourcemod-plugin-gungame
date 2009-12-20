@@ -1,0 +1,101 @@
+"Phrases"
+{
+    "Warmup round seconds left"
+    {
+        "#format"    "{1:d}"
+        "en"         "Warmup round :: {1} seconds left"
+    }
+    "Warmup round has ended"
+    {
+        "en"         "{green}[{default}GunGame{green}] Warmup round has ended"
+    }
+    "You are levels behind leader"
+    {
+        "#format"    "{1:d}"
+        "en"         "{green}[{default}GunGame{green}] You are {default}{1} {green}levels behind the leader"
+    }
+    "Is leading on level"
+    {
+        "#format"    "{1:s},{2:d}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}is leading on level {default}{2}{green}"
+    }
+    "Is tied with the leader on level"
+    {
+        "#format"    "{1:s},{2:d}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}is tied with the leader on level {default}{2}{green}"
+    }
+    "GunGame has been enabled"
+    {
+        "en"         "{green}[{default}GunGame{green}] GunGame has been enabled"
+    }
+    "GunGame has been disabled"
+    {
+        "en"         "{green}[{default}GunGame{green}] GunGame has been disabled"
+    }
+    "Please view your console for more information"
+    {
+        "en"         "{green}[{default}GunGame{green}] Please view your console for more information"
+    }
+    "Has won"
+    {
+        "#format"    "{1:s}"
+        "en"         "[GunGame] {1} has won"
+    }
+    "You need kills to advance to the next level"
+    {
+        "#format"    "{1:d},{2:d},{3:d}"
+        "en"         "{green}[{default}GunGame{green}] You need {default}{1}{green} kills to advance to the next level :: Score: {default}{2}{green} /{default} {3}"
+    }    
+    "Warmup round has not started yet"
+    {
+        "en"         "{green}[{default}GunGame{green}] Warmup round has not started yet"
+    }
+    "Warmup round is in progress"
+    {
+        "en"         "{green}[{default}GunGame{green}] Warmup round is in progress"
+    }
+    "You are on level"
+    {
+        "#format"    "{1:d},{2:s}"
+        "en"         "{green}[{default}GunGame{green}] You are on level {default}{1} {green}:: {default}{2}"
+    }
+    "Friendly Fire has been enabled"
+    {
+        "en"         "{green}[{default}GunGame{green}] Friendly Fire has been enabled"
+    }
+    "You gained level by the bomb"
+    {
+        "#format"    "{1:d},{2:s}"
+        "en"         "{green}[{default}GunGame{green}] You gained {default}{1}{green} level by {2} the bomb"
+    }
+    "Has stolen a level from"
+    {
+        "#format"    "{1:s},{2:s}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has stolen a level from {default}{2}"
+    }
+    "Triple leveled"
+    {
+        "#format"    "{1:s},"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}triple leveled!!!"
+    }
+    "Has no levels to be stolen"
+    {
+        "#format"    "{1:s},"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}}{green} has no levels to be stolen"
+    }
+    "Is lower than the minimum knife stealing level"
+    {
+        "#format"    "{1:s},{2:d}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} is lower than the minimum knife stealing level. They must be at least {default}{2}{green} level before you can steal"
+    }
+    "Has lost a level by killing a hostage"
+    {
+        "#format"    "{1:s}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level by killing a hostage"
+    }
+    "Has lost a level by suicided"
+    {
+        "#format"    "{1:s}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level by suicided"
+    }
+}

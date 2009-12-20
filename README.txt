@@ -109,6 +109,8 @@ Installation
 
 Credits
 -------
+    * Thanks to exvel for sourcemod library Colors 1.0.2
+      http://forums.alliedmods.net/showthread.php?t=96831
     * Thanks to bl4nk for GunGame Display Winner plugin.
     * Thanks to Liam for GunGame:SM till version 1.0.0.1
       http://forums.alliedmods.net/showthread.php?t=80609
@@ -118,6 +120,18 @@ Credits
 
 Changelog
 ---------
+    1.0.5.0:
+        + Providing "AfkAction" = 0 in gungame.config.txt will disables kicking/moving
+            to specs afk players without disabling afk management completely.
+        + Added config variable to allow level up after round end - "AllowLevelUpAfterRoundEnd".
+        + Added config variable to strip dead players weapons so that their weapons can't 
+            be picked up - "StripDeadPlayersWeapon".
+        + Timer moved to hint box instead of screen center.
+        + Added ticking sound for the last 5 warmup seconds.
+        + Added global forward GG_OnWarmupEnd which fire when GG warmup is over.
+        * All "play" sounds replaced with EmitSound.
+        * All chat texts are moved to translation files.
+
     1.0.4.1:
         * Fixed bug:
             - its seems like there is a bug in the latest release with the two new cvars. I 
@@ -305,18 +319,8 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    + [DONE] Providing "AfkAction" = 0 in gungame.config.txt will disables kicking/moving
-        to specs afk players without disabling afk management completely.
-    + [DONE] Added config variable to allow level up after round end - "AllowLevelUpAfterRoundEnd".
-    + [DONE] Added config variable to strip dead players weapons so that their weapons can't 
-        be picked up - "StripDeadPlayersWeapon".
-    + [DONE] Timer moved to hint box instead of screen center.
-    + [DONE] Added ticking sound for the last 5 warmup seconds.
-    + [DONE] Added global forward GG_OnWarmupEnd which fire when GG warmup is over.
-    * Replace "play" with EmitSoundToClient for "nade-level" and
-      "knife-level" and "triple-level" sounds (and maybe all sounds?).
-    * Feature request: move all texts to translation file.
-
+    * Move all panel texts to translation files.
+    
     ----====----==== Normal priority list ----====----====
 
     + Feature request:

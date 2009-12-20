@@ -38,8 +38,7 @@
 #pragma semicolon 1
 #include <sourcemod>
 #include <gungame>
-#include "gungame/chat.h"
-#include "gungame/chat.sp"
+#include <colors>
 
 /**
  * This is a meant to make the tk optional where you lose a level by team killing another teammate.
@@ -56,7 +55,7 @@ public Plugin:myinfo =
 
 public OnPluginStart()
 {
-    CHAT_DetectColorMsg();
+    LoadTranslations("gungame_tk");
 }
 
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
@@ -70,11 +69,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
         GetClientName(Killer, kName, sizeof(kName));
         GetClientName(Victim, vName, sizeof(vName));
 
-        new String:msg[MAX_CHAT_SIZE];
-        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s%c has lost a level due to team kill of %c%s%c.",
-            GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, kName, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, vName, GREEN);
-        CHAT_SayText(0, Killer, msg);
-
+        CPrintToChatAllEx(Killer, "%t", "Has lost a level due to team kill", kName, vName);
 
         return Plugin_Handled;
     }

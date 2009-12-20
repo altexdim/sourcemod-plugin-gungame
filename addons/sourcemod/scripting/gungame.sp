@@ -46,6 +46,7 @@
  */
 #undef REQUIRE_PLUGIN
 #include <gungame>
+#include <colors>
 
 /**
  * Enable debug code
@@ -60,7 +61,6 @@
 #include "gungame/event.h"
 #include "gungame/hacks.h"
 #include "gungame/offset.h"
-#include "gungame/chat.h"
 
 #if defined DEBUG
 #include "gungame/debug.h"
@@ -76,7 +76,6 @@
 #include "gungame/util.sp"
 #include "gungame/event.sp"
 #include "gungame/commands.sp"
-#include "gungame/chat.sp"
 
 public Plugin:myinfo =
 {
@@ -96,8 +95,9 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
+    LoadTranslations("gungame");
     PlayerLevelsBeforeDisconnect = CreateTrie();
-    CHAT_DetectColorMsg();
+    
     // ConVar
     VGUIMenu = GetUserMessageId("VGUIMenu");
     mp_friendlyfire = FindConVar("mp_friendlyfire");
@@ -202,7 +202,7 @@ StartWarmupRound()
 {
     WarmupInitialized = true;
     PrintToServer("[GunGame] Warmup round has started.");
-    PrintHintTextToAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+    PrintHintTextToAll("%t", "Warmup round seconds left", Warmup_TimeLength - WarmupCounter);
 
     /* Start Warmup round */
     WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
@@ -218,7 +218,7 @@ public Action:EndOfWarmup(Handle:timer)
         {
             EmitSoundToAll(EventSounds[WarmupTimerSound]);
         }
-        PrintHintTextToAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+        PrintHintTextToAll("%t", "Warmup round seconds left", Warmup_TimeLength - WarmupCounter);
         return Plugin_Continue;
     }
 
@@ -229,7 +229,7 @@ public Action:EndOfWarmup(Handle:timer)
     /* Restart Game */
     SetConVarInt(mp_restartgame, 1);
 
-    PrintToChatAll("%c[%cGunGame%c] Warmup round has ended", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN);
+    CPrintToChatAll("%t", "Warmup round has ended");
 
     if(WarmupReset)
     {
@@ -330,12 +330,7 @@ public GG_OnStartup(bool:Command)
         {
             if(EventSounds[i][0])
             {
-                /* Only precache the sound that goes through emitsound. */
-                if ( i == Triple || i == WarmupTimerSound )
-                {
-                    PrecacheSound(EventSounds[i]);
-                }
-
+                PrecacheSound(EventSounds[i]);
                 Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
                 AddFileToDownloadsTable(Hi);
             }
@@ -450,23 +445,19 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     if ( CurrentLeader == client )
     {
         // say leading on level X
-        new String:msg[MAX_CHAT_SIZE];
-        Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis leading on level %c%d.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, name, GREEN, YELLOW, newLevel + 1);
-        CHAT_SayText(0, client, msg);
+        CPrintToChatAllEx(client, "%t", "Is leading on level", name, newLevel + 1);
         return;
     }
     // CurrentLeader != client
     if ( newLevel < PlayerLevel[CurrentLeader] )
     {
         // say how much to the lead
-        PrintToChat(client, "%c[%cGunGame%c] You are %c%d %clevels behind the leader.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW, PlayerLevel[CurrentLeader]-newLevel, GREEN);
+        CPrintToChat(client, "%t", "You are levels behind leader", PlayerLevel[CurrentLeader]-newLevel);
         return;
     }
     // new level == leader level
     // say tied to the lead on level X
-    new String:msg[MAX_CHAT_SIZE];
-    Format(msg, sizeof(msg), "%c[%cGunGame%c] %c%s %cis tied with the leader on level %c%d.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, isColorMsg ? TEAMCOLOR : YELLOW, name, GREEN, YELLOW, newLevel + 1);
-    CHAT_SayText(0, client, msg);
+    CPrintToChatAllEx(client, "%t", "Is tied with the leader on level", name, newLevel + 1);
 }
 
 /**

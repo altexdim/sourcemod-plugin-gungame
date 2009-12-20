@@ -1,0 +1,8 @@
+"Phrases"
+{
+    "Has lost a level due to team kill"
+    {
+        "#format"    "{1:s},{2:s}"
+        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level due to team kill of {teamcolor}{2}{green}"
+    }
+}

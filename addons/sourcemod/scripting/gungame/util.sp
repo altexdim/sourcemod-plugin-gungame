@@ -379,7 +379,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
         new r = (team == TEAM_T ? 255 : 0);
         new g =  team == TEAM_CT ? 128 : (team == TEAM_T ? 0 : 255);
         new b = (team == TEAM_CT ? 255 : 0);
-        UTIL_PrintToUpperLeft(0, r, g, b, "[GunGame] %s has won.", Name);
+        UTIL_PrintToUpperLeft(0, r, g, b, "%t", "Has won", Name);
 
         Call_StartForward(FwdWinner);
         Call_PushCell(client);
@@ -641,27 +641,18 @@ public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data)
 
 UTIL_PlaySound(client, Sounds:type)
 {
-    if(client && !IsClientInGame(client))
+    if ( !EventSounds[type][0] )
     {
         return;
     }
-
-    if(EventSounds[type][0])
+    if ( client && !IsClientInGame(client) )
     {
-        if(!client)
-        {
-            new maxslots = GetMaxClients( );
-
-            for(new i = 1; i <= maxslots; i++)
-            {
-                if(IsClientInGame(i) && !IsFakeClient(i))
-                {
-                    ClientCommand(i, "play %s", EventSounds[type]);
-                }
-            }
-        } else {
-            ClientCommand(client, "play %s", EventSounds[type]);
-        }
+        return;
+    }
+    if ( !client ) {
+        EmitSoundToAll(EventSounds[type]);
+    } else {
+        EmitSoundToClient(client, EventSounds[type]);
     }
 }
 
