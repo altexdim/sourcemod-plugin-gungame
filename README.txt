@@ -71,8 +71,7 @@ gungame_tk.smx
         - Depends on gungame.smx
         - Optional plugin
         - Level down team killer
-                                    
-            
+        
 Commands and Cvars
 ------------------
     sm_gungamesm_version            - Gungame version.
