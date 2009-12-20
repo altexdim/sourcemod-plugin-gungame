@@ -46,6 +46,8 @@ new MapStatus;
 new MaxLevelPerRound = 3;
 new MinKillsPerLevel = 1;
 new bool:TurboMode;
+new bool:StripDeadPlayersWeapon;
+new bool:AllowLevelUpAfterRoundEnd;
 new bool:RemoveBonusWeaponAmmo;
 new bool:ReloadWeapon;
 new bool:MultiKillChat;

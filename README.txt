@@ -305,48 +305,27 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    + Feature request:
-        - Add a config variable that disables kicking/moving to specs afk players without
-            disabling afk management completely.
-    + Feature request:
-        - killing somebody after round end (with nade for example) don't level you up
-
-        It's not normal. At least I don't have it in ES GG5 and it's better implemented 
-        there. It ruins all nade level. Are you playing GunGame much? Well, I do. And I 
-        know that very effective (and funny as well) way to kill somebody with nade is 
-        to act like kamikaze  . You may go to your victim as close as you can and then 
-        thow it under you (and victim). The opponent will probably kill you first but 
-        nade will kill him as well and you'll gain a knife level. When nobody left in 
-        your team, this don't work because looks like your plugin don't count anything 
-        after round_end event. On some maps it's hard to nade in a standard way. It's 
-        not working here and this really, REALLY sux. That's the second reason why I 
-        can't use your GG plugin now.
-
-        Add config variable to allow level up after round end.
-    + Feature requst:
-        Add config variable to strip dead players weapons so that their weapons can't be picked up.
-    + Feature request:
-        - move timer to screen bottom
-
-        Generally, look at ES GG5 warmup. This center caption about time which left disturbs 
-        a gameplay (use PrintHintText instead of PrintCenterText). 
-    + Feature request:
-        - ticking sound 
-
-        And it's nice to add some sound like ticking clock for the last warmup seconds.
-    + Feature request:
-        - event which fire when GG warmup is over (usefull to enable/disable some plugins)
+    + [DONE] Providing "AfkAction" = 0 in gungame.config.txt will disables kicking/moving
+        to specs afk players without disabling afk management completely.
+    + [DONE] Added config variable to allow level up after round end - "AllowLevelUpAfterRoundEnd".
+    + [DONE] Added config variable to strip dead players weapons so that their weapons can't 
+        be picked up - "StripDeadPlayersWeapon".
+    + [DONE] Timer moved to hint box instead of screen center.
+    + [DONE] Added ticking sound for the last 5 warmup seconds.
+    + [DONE] Added global forward GG_OnWarmupEnd which fire when GG warmup is over.
     * Replace "play" with EmitSoundToClient for "nade-level" and
       "knife-level" and "triple-level" sounds (and maybe all sounds?).
     * Feature request: move all texts to translation file.
+
+    ----====----==== Normal priority list ----====----====
+
     + Feature request:
         - configurable warmup weapon by cvar
 
         For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
         (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
-
-    ----====----==== Normal priority list ----====----====
-
+        
+        If enabled weapon reloading on kill then reload warmup weapon.
     + Add an option to level down not to one level, but to some points, calculating depends on how 
         much points does exists on current and previous level. 
         Example:

@@ -116,6 +116,7 @@ public OnPluginStart()
     FwdPoint = CreateGlobalForward("GG_OnClientPointChange", ET_Hook, Param_Cell, Param_Cell, Param_Cell);
     FwdLeader = CreateGlobalForward("GG_OnLeaderChange", ET_Ignore, Param_Cell, Param_Cell, Param_Cell);
     FwdWinner = CreateGlobalForward("GG_OnWinner", ET_Ignore, Param_Cell, Param_String);
+    FwdWarmupEnd = CreateGlobalForward("GG_OnWarmupEnd", ET_Ignore);
     FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
     FwdStart = CreateGlobalForward("GG_OnStartup", ET_Ignore, Param_Cell);
     FwdShutdown = CreateGlobalForward("GG_OnShutdown", ET_Ignore, Param_Cell);
@@ -201,7 +202,7 @@ StartWarmupRound()
 {
     WarmupInitialized = true;
     PrintToServer("[GunGame] Warmup round has started.");
-    PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+    PrintHintTextToAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
 
     /* Start Warmup round */
     WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
@@ -211,9 +212,13 @@ StartWarmupRound()
 /* End of Warmup */
 public Action:EndOfWarmup(Handle:timer)
 {
-    if(++WarmupCounter <= Warmup_TimeLength)
+    if ( ++WarmupCounter <= Warmup_TimeLength )
     {
-        PrintCenterTextAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
+        if ( Warmup_TimeLength - WarmupCounter < 5)
+        {
+            EmitSoundToAll(EventSounds[WarmupTimerSound]);
+        }
+        PrintHintTextToAll("Warmup round :: %d seconds left", Warmup_TimeLength - WarmupCounter);
         return Plugin_Continue;
     }
 
@@ -236,6 +241,10 @@ public Action:EndOfWarmup(Handle:timer)
             PlayerLevel[i] = 0;
         }
     }
+    
+    Call_StartForward(FwdWarmupEnd);
+    Call_Finish();
+        
     return Plugin_Stop;
 }
 
@@ -322,7 +331,7 @@ public GG_OnStartup(bool:Command)
             if(EventSounds[i][0])
             {
                 /* Only precache the sound that goes through emitsound. */
-                if(i == Triple)
+                if ( i == Triple || i == WarmupTimerSound )
                 {
                     PrecacheSound(EventSounds[i]);
                 }

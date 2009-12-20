@@ -218,6 +218,13 @@ forward Action:GG_OnClientPointChange(client, point, difference);
 forward GG_OnWinner(client, const String:Weapon[]);
 
 /**
+ * Called when warmup has ended.
+ *
+ * @noreturn
+ */
+forward GG_OnWarmupEnd();
+
+/**
  * Called when the leader change player.
  *
  * @param client        Player index.

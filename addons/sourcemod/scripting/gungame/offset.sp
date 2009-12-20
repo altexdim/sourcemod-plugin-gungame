@@ -37,84 +37,90 @@
 
 OnOffsetStart()
 {
-	decl String:Error[64];
-	OffsetFlags = FindSendPropOffs("CBasePlayer", "m_fFlags");
 
-	if(OffsetFlags == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetFlags [%d]. Please contact the author.", OffsetFlags);
-		SetFailState(Error);
-	}
+    decl String:Error[64];
+    
+    OffsetFlags = FindSendPropOffs("CBasePlayer", "m_fFlags");
+    if(OffsetFlags == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetFlags [%d]. Please contact the author.", OffsetFlags);
+        SetFailState(Error);
+    }
 
-	OffsetMovement = FindSendPropOffs("CBasePlayer", "m_flLaggedMovementValue");
+    OffsetMovement = FindSendPropOffs("CBasePlayer", "m_flLaggedMovementValue");
+    if(OffsetMovement == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetMovement [%d]. Please contact the author.", OffsetMovement);
+        SetFailState(Error);
+    }
 
-	if(OffsetMovement == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetMovement [%d]. Please contact the author.", OffsetMovement);
-		SetFailState(Error);
-	}
+    m_hMyWeapons = FindSendPropOffs("CBasePlayer", "m_hMyWeapons");
+    if(m_hMyWeapons == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR m_hMyWeapons [%d]. Please contact the author.", m_hMyWeapons);
+        SetFailState(Error);
+    }
 
-	m_hMyWeapons = FindSendPropOffs("CBasePlayer", "m_hMyWeapons");
+    OffsetWeaponParent = FindSendPropOffs("CBaseCombatWeapon", "m_hOwnerEntity");
+    if ( OffsetWeaponParent == INVALID_OFFSET )
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetWeaponParent [%d]. Please contact the author.", OffsetWeaponParent);
+        SetFailState(Error);
+    }
+    
+    FindCstrikeOffset();
 
-	if(m_hMyWeapons == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR m_hMyWeapons [%d]. Please contact the author.", m_hMyWeapons);
-		SetFailState(Error);
-	}
-
-	FindCstrikeOffset();
-
-	/**
-	 * More research need to be done for the other mods.
-	 * Golden:S might be good. Not sure of DoD:S
-	 * FindDoDOffset();
-	 * FindGSOffset();
-	 */
+    /**
+     * More research need to be done for the other mods.
+     * Golden:S might be good. Not sure of DoD:S
+     * FindDoDOffset();
+     * FindGSOffset();
+     */
 }
 
 FindCstrikeOffset()
 {
-	decl String:Error[64];
+    decl String:Error[64];
 
-	OffsetHostage = FindSendPropOffs("CCSPlayerResource", "m_iHostageEntityIDs");
+    OffsetHostage = FindSendPropOffs("CCSPlayerResource", "m_iHostageEntityIDs");
 
-	if(OffsetHostage == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetHostage [%d]. Please contact the author.", OffsetHostage);
-		SetFailState(Error);
-	}
+    if(OffsetHostage == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetHostage [%d]. Please contact the author.", OffsetHostage);
+        SetFailState(Error);
+    }
 
-	new String:CCSPlayer[] = "CCSPlayer";
-	//Offsets
-	OffsetMoney = FindSendPropOffs(CCSPlayer, "m_iAccount");
+    new String:CCSPlayer[] = "CCSPlayer";
+    //Offsets
+    OffsetMoney = FindSendPropOffs(CCSPlayer, "m_iAccount");
 
-	if(OffsetMoney == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetMoney [%d]. Please contact the author.", OffsetMoney);
-		SetFailState(Error);
-	}
+    if(OffsetMoney == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetMoney [%d]. Please contact the author.", OffsetMoney);
+        SetFailState(Error);
+    }
 
-	OffsetArmor = FindSendPropOffs(CCSPlayer, "m_ArmorValue");
+    OffsetArmor = FindSendPropOffs(CCSPlayer, "m_ArmorValue");
 
-	if(OffsetArmor == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetArmor [%d]. Please contact the author.", OffsetArmor);
-		SetFailState(Error);
-	}
+    if(OffsetArmor == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetArmor [%d]. Please contact the author.", OffsetArmor);
+        SetFailState(Error);
+    }
 
-	OffsetHelm = FindSendPropOffs(CCSPlayer, "m_bHasHelmet");
+    OffsetHelm = FindSendPropOffs(CCSPlayer, "m_bHasHelmet");
 
-	if(OffsetHelm == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetHelm [%d]. Please contact the author.", OffsetHelm);
-		SetFailState(Error);
-	}
+    if(OffsetHelm == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetHelm [%d]. Please contact the author.", OffsetHelm);
+        SetFailState(Error);
+    }
 
-	OffsetDefuser = FindSendPropOffs(CCSPlayer, "m_bHasDefuser");
+    OffsetDefuser = FindSendPropOffs(CCSPlayer, "m_bHasDefuser");
 
-	if(OffsetDefuser == INVALID_OFFSET)
-	{
-		FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetDefuser [%d]. Please contact the author.", OffsetDefuser);
-		SetFailState(Error);
-	}
+    if(OffsetDefuser == INVALID_OFFSET)
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetDefuser [%d]. Please contact the author.", OffsetDefuser);
+        SetFailState(Error);
+    }
 }

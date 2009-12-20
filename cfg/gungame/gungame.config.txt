@@ -2,6 +2,12 @@
 {
     "Config"
     {
+        /* Strip dead players weapon */
+        "StripDeadPlayersWeapon" "0"
+        
+        /* Allow level up after round end */
+        "AllowLevelUpAfterRoundEnd" "1"
+    
         /* Remove additional ammo in bonus weapon on the nade level */
         "RemoveBonusWeaponAmmo" "1"
         
@@ -46,7 +52,7 @@
 
         /**
          * What action to deal with the player when the maximum is reach?
-         * 1 = Kick, 2 = Move to spectate.
+         * 0 = Nothing, 1 = Kick, 2 = Move to spectate, 
          */
         "AfkAction" "1"
 
@@ -173,5 +179,6 @@
         "MultiKill" "common/stuck1.wav"
         /* Put each song filename in this list seperated by commas */
         "Winner" "music/HL2_song15.mp3"
+        "WarmupTimerSound" "ambient/tones/floor1.wav"
     }
 }

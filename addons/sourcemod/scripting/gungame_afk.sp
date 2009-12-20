@@ -101,32 +101,35 @@ public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast)
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
 {
     /* Afk management only checks after the player worldspawn/suicide checks */
-    if(AfkManagement)
+    if ( AfkManagement )
     {
         decl Float:Origin[3];
         GetEntDataVector(Victim, OffsetOrigin, Origin);
 
         /* Basically by the time you get here the player drop approx about 55-60 units. So checking z now here is invalid. */
-        if(PlayerAfk[Victim][0] == Origin[0] && PlayerAfk[Victim][1] == Origin[1])
+        if ( PlayerAfk[Victim][0] == Origin[0] && PlayerAfk[Victim][1] == Origin[1] )
         {
             /* You killed an afk. */
             PrintToChat(Killer, "%c[%cGunGame%c]%c You do not gain a level because you killed an afk.", GREEN, isColorMsg ? YELLOW : TEAMCOLOR, GREEN, YELLOW);
 
-            if(++PlayerAfkCount[Victim] > AfkDeaths)
+            if ( AfkAction && (++PlayerAfkCount[Victim] > AfkDeaths) )
             {
                 /* Hope this works */
-                if(AfkAction & AFK_KICK)
+                if ( AfkAction & AFK_KICK )
                 {
                     KickClient(Victim, "[GunGame] Max afk deaths reached");
-                } else {
+                }
+                else if ( AfkAction & AFK_SPECTATE )
+                {
                     HACK_SwitchTeam(Victim, TEAM_SPECTATOR);
                     PlayerSwitch[Victim] = true;
                 }
             }
 
             return Plugin_Handled;
-
-        } else {
+        }
+        else
+        {
             PlayerAfkCount[Victim] = NULL;
         }
     }

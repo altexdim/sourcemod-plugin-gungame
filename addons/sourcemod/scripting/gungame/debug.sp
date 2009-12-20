@@ -90,6 +90,7 @@ DisplayConfig(client)
     RemoveBonusWeaponAmmo
     ReloadWeapon
     TurboMode
+    AllowLevelUpAfterRoundEnd
     JoinMessage
     IntermissionCalcWinner
     CanStealFirstLevel

@@ -76,8 +76,12 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 RemoveBonusWeaponAmmo = bool:StringToInt(value);
             } else if(strcmp("ReloadWeapon", key, false) == 0) {
                 ReloadWeapon = bool:StringToInt(value);
+            } else if(strcmp("AllowLevelUpAfterRoundEnd", key, false) == 0) {
+                AllowLevelUpAfterRoundEnd = bool:StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("StripDeadPlayersWeapon", key, false) == 0) {
+                StripDeadPlayersWeapon = bool:StringToInt(value);
             } else if(strcmp("MultiKillChat", key, false) == 0) {
                 MultiKillChat = bool:StringToInt(value);
             } else if(strcmp("JoinMessage", key, false) == 0) {
@@ -236,8 +240,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 
         case CONFIG_STATE_SOUNDS:
         {
-            if(strcmp(key, "IntroSound", false) == 0)
-            {
+            if(strcmp(key, "IntroSound", false) == 0) {
                 strcopy(EventSounds[Welcome], sizeof(EventSounds[]), value);
             } else if(strcmp(key, "KnifeLevel", false) == 0) {
                 strcopy(EventSounds[Knife], sizeof(EventSounds[]), value);
@@ -255,6 +258,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 strcopy(EventSounds[AutoFF], sizeof(EventSounds[]), value);
             } else if(strcmp(key, "MultiKill", false) == 0) {
                 strcopy(EventSounds[MultiKill], sizeof(EventSounds[]), value);
+            } else if(strcmp(key, "WarmupTimerSound", false) == 0) {
+                strcopy(EventSounds[WarmupTimerSound], sizeof(EventSounds[]), value);
             } else if(strcmp(key, "Winner", false) == 0) {
                 if (!StrEqual(value, "", false))
                 {
