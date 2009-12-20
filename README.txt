@@ -410,4 +410,6 @@ Issues
     solution:
     Update your gamedata/gungame.games.txt from latest gungame release
 
-    
+    3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
+    https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
+ 
