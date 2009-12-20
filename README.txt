@@ -333,6 +333,11 @@ TODO
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
     
+    * What about saving some index or ID of weapon entity on actions when this entity changes and 
+        then just remove it on player death? It's only my first idea I don't know too much about 
+        it now. Oh, I think that all kinds of grenades should be excluded from the process. There 
+        are a lot of gg maps where authors put some extra nades and this will remove it.
+
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
