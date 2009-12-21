@@ -167,13 +167,33 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
 
 public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if(IsActive && KnifeElite)
+    if ( !IsActive )
     {
-        new client = GetClientOfUserId(GetEventInt(event, "userid"));
+        return;
+    }
 
-        if(client && PlayerState[client] & KNIFE_ELITE)
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+
+    if ( KnifeElite )
+    {
+        if ( client && PlayerState[client] & KNIFE_ELITE )
         {
             UTIL_ForceDropAllWeapon(client);
+        }
+    }
+
+    if ( StripDeadPlayersWeapon )
+    {
+        decl String:Weapon[24];
+        GetEventString(event, "item", Weapon, sizeof(Weapon));
+        new Weapons:WeapId = UTIL_GetWeaponIndex(Weapon);
+        if ( WeapId > 0 )
+        {
+            new Slots:slot = WeaponSlot[WeapId];
+            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+            {
+                g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
+            }
         }
     }
 }
@@ -306,22 +326,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     
-    if ( StripDeadPlayersWeapon )
-    {
-        new maxent = GetMaxEntities(), String:foundWeapon[64];
-        for ( new i = MaxClients; i < maxent; i++ )
-        {
-            if ( IsValidEdict(i) && IsValidEntity(i) && GetEntDataEnt2(i, OffsetWeaponParent) == -1 )
-            {
-                GetEdictClassname(i, foundWeapon, sizeof(foundWeapon));
-                if ( ( StrContains(foundWeapon, "weapon_") != -1 || StrContains(foundWeapon, "item_") != -1 ) )
-                {
-                    RemoveEdict(i);
-                }
-            }
-        }
-    }
-    
     /* They change team at round end don't punish them. */
     if ( !RoundStarted && !AllowLevelUpAfterRoundEnd )
     {
@@ -331,6 +335,20 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
     new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
 
+    if ( StripDeadPlayersWeapon )
+    {
+        new ent = g_ClientSlotEnt[Victim][Slot_Primary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            RemoveEdict(ent);
+        }
+        ent = g_ClientSlotEnt[Victim][Slot_Primary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            RemoveEdict(ent);
+        }
+    }
+    
     decl String:Weapon[24], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
 
     GetEventString(event, "weapon", Weapon, sizeof(Weapon));
@@ -583,6 +601,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
+    g_ClientSlotEnt[client][Slot_Primary] = -1;
+    g_ClientSlotEnt[client][Slot_Secondary] = -1;
+
     new team = GetClientTeam(client);
 
     if(team != TEAM_T && team != TEAM_CT)
@@ -750,7 +771,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
         if ( NadeBonusWeaponId )
         {
-            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
+            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]); // todo
+            new Slots:slot = WeaponSlot[NadeBonusWeaponId];
+            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+            {
+                g_ClientSlotEnt[client][slot] = ent;
+            }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) 
             {
@@ -785,7 +811,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* No reason to give them knife again.  */
     } else if(WeapId != CSW_KNIFE) {
-        GivePlayerItem(client, WeaponName[WeapId]);
+        new ent = GivePlayerItem(client, WeaponName[WeapId]); // todo
+        new Slots:slot = WeaponSlot[WeapId];
+        if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+        {
+            g_ClientSlotEnt[client][slot] = ent;
+        }
     }
 }
 

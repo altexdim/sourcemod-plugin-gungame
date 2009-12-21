@@ -449,6 +449,11 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
     if(ent != -1)
     {
         HACK_CSWeaponDrop(client, ent);
+        
+        if ( slot == Slot_Primary || slot == Slot_Secondary )
+        {
+            g_ClientSlotEnt[client][slot] = -1;
+        }
 
         if(remove)
         {
@@ -489,6 +494,11 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
             }
 
             HACK_CSWeaponDrop(client, ent);
+
+            if ( i == Slot_Primary || i == Slot_Secondary )
+            {
+                g_ClientSlotEnt[client][i] = -1;
+            }
 
             if(remove)
             {
@@ -587,7 +597,12 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
         if (NadeBonusWeaponId)
         {
-            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]);
+            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]); // todo
+            new Slots:slot = WeaponSlot[NadeBonusWeaponId];
+            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+            {
+                g_ClientSlotEnt[client][slot] = ent;
+            }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo )
             {
@@ -620,7 +635,12 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         }
     }
     /* Give new weapon */
-    GivePlayerItem(client, WeaponName[WeapId]);
+    new ent = GivePlayerItem(client, WeaponName[WeapId]); // todo
+    new Slots:slot = WeaponSlot[WeapId];
+    if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+    {
+        g_ClientSlotEnt[client][slot] = ent;
+    }
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
 
