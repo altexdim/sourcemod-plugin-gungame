@@ -187,7 +187,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
         decl String:Weapon[24];
         GetEventString(event, "item", Weapon, sizeof(Weapon));
         new Weapons:WeapId = UTIL_GetWeaponIndex(Weapon);
-        if ( WeapId > 0 )
+        if ( WeapId != Weapons:0 )
         {
             new Slots:slot = WeaponSlot[WeapId];
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
