@@ -287,10 +287,8 @@ public OnClientDisconnect(client)
     CurrentLevelPerRound[client] = NULL;
     PlayerState[client] = NULL;
     
-    LogError("!!!");
     if ( IsPlayerAlive(client) )
     {
-        LogError("===");
         UTIL_RemoveClientDroppedWeapons(client, true);
     }
 }

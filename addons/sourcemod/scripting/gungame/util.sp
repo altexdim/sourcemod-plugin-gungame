@@ -447,7 +447,6 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
     if ( slot == Slot_Primary || slot == Slot_Secondary )
     {
         g_ClientSlotEnt[client][slot] = -1;
-        LogError("CLEAR UTIL_ForceDropWeaponBySlot :: g_ClientSlotEnt[%i][%i] = -1", client, slot);
     }
 
     new ent = GetPlayerWeaponSlot(client, _:slot);
@@ -487,7 +486,6 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
         if ( i == Slot_Primary || i == Slot_Secondary )
         {
             g_ClientSlotEnt[client][i] = -1;
-            LogError("CLEAR UTIL_ForceDropAllWeapon :: g_ClientSlotEnt[%i][%i] = -1", client, i);
         }
 
         ent = GetPlayerWeaponSlot(client, _:i);
@@ -602,7 +600,6 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
             if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slotBonus] = ent;
-                LogError("UTIL_GiveNextWeapon :: g_ClientSlotEnt[%i][%i] = %i", client, slotBonus, ent);
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo )
@@ -640,7 +637,6 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     if ( slot == Slot_Primary || slot == Slot_Secondary ) 
     {
         g_ClientSlotEnt[client][slot] = ent;
-        LogError("UTIL_GiveNextWeapon :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
     }
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
@@ -716,13 +712,11 @@ UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
         new ent = g_ClientSlotEnt[client][Slot_Primary];
         if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
         {
-            LogError("UTIL_RemoveClientDroppedWeapons :: remove g_ClientSlotEnt[%i][%i] = %i", client, Slot_Primary, ent);
             RemoveEdict(ent);
         }
         ent = g_ClientSlotEnt[client][Slot_Secondary];
         if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
         {
-            LogError("UTIL_RemoveClientDroppedWeapons :: remove g_ClientSlotEnt[%i][%i] = %i", client, Slot_Secondary, ent);
             RemoveEdict(ent);
         }
 

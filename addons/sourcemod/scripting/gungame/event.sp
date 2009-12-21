@@ -193,7 +193,6 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
-                LogError("_ItemPickup (%s) :: g_ClientSlotEnt[%i][%i] = %i", Weapon, client, slot, g_ClientSlotEnt[client][slot]);
             }
         }
     }
@@ -761,7 +760,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slot] = ent;
-                LogError("_PlayerSpawn :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) 
@@ -802,7 +800,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         if ( slot == Slot_Primary || slot == Slot_Secondary ) 
         {
             g_ClientSlotEnt[client][slot] = ent;
-            LogError("_PlayerSpawn :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
         }
     }
 }
