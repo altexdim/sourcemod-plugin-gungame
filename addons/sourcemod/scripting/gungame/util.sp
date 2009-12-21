@@ -709,3 +709,24 @@ GivePlayerItemWrapper(client, const String:item[])
     return ent;
 }
 
+UTIL_RemoveClientDroppedWeapons(client)
+{
+    if ( StripDeadPlayersWeapon )
+    {
+        new ent = g_ClientSlotEnt[client][Slot_Primary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            LogError("UTIL_RemoveClientDroppedWeapons :: remove g_ClientSlotEnt[%i][%i] = %i", client, Slot_Primary, ent);
+            RemoveEdict(ent);
+        }
+        ent = g_ClientSlotEnt[client][Slot_Secondary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            LogError("UTIL_RemoveClientDroppedWeapons :: remove g_ClientSlotEnt[%i][%i] = %i", client, Slot_Secondary, ent);
+            RemoveEdict(ent);
+        }
+
+        g_ClientSlotEnt[client][Slot_Primary] = -1;
+        g_ClientSlotEnt[client][Slot_Secondary] = -1;
+    }
+}

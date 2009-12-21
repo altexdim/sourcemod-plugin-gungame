@@ -328,24 +328,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     }
     
     new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
-    if ( StripDeadPlayersWeapon )
-    {
-        new ent = g_ClientSlotEnt[Victim][Slot_Primary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
-        {
-            LogError("_PlayerDeath :: remove g_ClientSlotEnt[%i][%i] = %i", Victim, Slot_Primary, ent);
-            RemoveEdict(ent);
-        }
-        ent = g_ClientSlotEnt[Victim][Slot_Secondary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
-        {
-            LogError("_PlayerDeath :: remove g_ClientSlotEnt[%i][%i] = %i", Victim, Slot_Secondary, ent);
-            RemoveEdict(ent);
-        }
-
-        g_ClientSlotEnt[Victim][Slot_Primary] = -1;
-        g_ClientSlotEnt[Victim][Slot_Secondary] = -1;
-    }
+    UTIL_RemoveClientDroppedWeapons(Victim);
     
     /* They change team at round end don't punish them. */
     if ( !RoundStarted && !AllowLevelUpAfterRoundEnd )

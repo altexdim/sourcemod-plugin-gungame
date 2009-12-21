@@ -286,6 +286,8 @@ public OnClientDisconnect(client)
     CurrentKillsPerWeap[client] = NULL;
     CurrentLevelPerRound[client] = NULL;
     PlayerState[client] = NULL;
+    
+    UTIL_RemoveClientDroppedWeapons(client);
 }
 
 public GG_OnStartup(bool:Command)
