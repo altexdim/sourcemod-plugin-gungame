@@ -287,7 +287,12 @@ public OnClientDisconnect(client)
     CurrentLevelPerRound[client] = NULL;
     PlayerState[client] = NULL;
     
-    UTIL_RemoveClientDroppedWeapons(client);
+    LogError("!!!");
+    if ( IsPlayerAlive(client) )
+    {
+        LogError("===");
+        UTIL_RemoveClientDroppedWeapons(client, true);
+    }
 }
 
 public GG_OnStartup(bool:Command)
