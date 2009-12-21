@@ -339,6 +339,8 @@ TODO
         are a lot of gg maps where authors put some extra nades and this will remove it.
 
     * Rewrite weapon to index from keyvalue to trie array.
+    
+    * On disconnect remove dropped weapons too.
 
     ----====----==== Normal priority list ----====----====
 
