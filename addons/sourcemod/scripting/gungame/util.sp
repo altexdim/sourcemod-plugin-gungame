@@ -444,17 +444,17 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
         return -1;
     }
 
-    new ent = GetPlayerWeaponSlot(client, _:slot);
+    if ( slot == Slot_Primary || slot == Slot_Secondary )
+    {
+        g_ClientSlotEnt[client][slot] = -1;
+        LogError("CLEAR UTIL_ForceDropWeaponBySlot :: g_ClientSlotEnt[%i][%i] = -1", client, slot);
+    }
 
+    new ent = GetPlayerWeaponSlot(client, _:slot);
     if(ent != -1)
     {
         HACK_CSWeaponDrop(client, ent);
         
-        if ( slot == Slot_Primary || slot == Slot_Secondary )
-        {
-            g_ClientSlotEnt[client][slot] = -1;
-        }
-
         if(remove)
         {
             HACK_Remove(ent);
@@ -484,8 +484,13 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
             continue;
         }
 
-        ent = GetPlayerWeaponSlot(client, _:i);
+        if ( i == Slot_Primary || i == Slot_Secondary )
+        {
+            g_ClientSlotEnt[client][i] = -1;
+            LogError("CLEAR UTIL_ForceDropAllWeapon :: g_ClientSlotEnt[%i][%i] = -1", client, i);
+        }
 
+        ent = GetPlayerWeaponSlot(client, _:i);
         if(ent != -1)
         {
             if(i == Slot_Knife && !DropKnife || i == Slot_C4 && !DropBomb)
@@ -494,11 +499,6 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
             }
 
             HACK_CSWeaponDrop(client, ent);
-
-            if ( i == Slot_Primary || i == Slot_Secondary )
-            {
-                g_ClientSlotEnt[client][i] = -1;
-            }
 
             if(remove)
             {
@@ -597,11 +597,12 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
         if (NadeBonusWeaponId)
         {
-            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]); // todo
-            new Slots:slot = WeaponSlot[NadeBonusWeaponId];
-            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
+            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]); // todo
+            new Slots:slotBonus = WeaponSlot[NadeBonusWeaponId];
+            if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) 
             {
-                g_ClientSlotEnt[client][slot] = ent;
+                g_ClientSlotEnt[client][slotBonus] = ent;
+                LogError("UTIL_GiveNextWeapon :: g_ClientSlotEnt[%i][%i] = %i", client, slotBonus, ent);
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo )
@@ -635,11 +636,11 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         }
     }
     /* Give new weapon */
-    new ent = GivePlayerItem(client, WeaponName[WeapId]); // todo
-    new Slots:slot = WeaponSlot[WeapId];
+    new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]); // todo
     if ( slot == Slot_Primary || slot == Slot_Secondary ) 
     {
         g_ClientSlotEnt[client][slot] = ent;
+        LogError("UTIL_GiveNextWeapon :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
     }
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
@@ -699,3 +700,12 @@ UTIL_ReloadActiveWeapon(client, Weapons:WeaponId)
         );
     }
 }
+
+GivePlayerItemWrapper(client, const String:item[])
+{
+    g_IsInGiveCommand = true;
+    new ent = GivePlayerItem(client, item);
+    g_IsInGiveCommand = false;
+    return ent;
+}
+

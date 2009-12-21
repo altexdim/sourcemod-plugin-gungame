@@ -182,7 +182,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
-    if ( StripDeadPlayersWeapon )
+    if ( StripDeadPlayersWeapon && !g_IsInGiveCommand )
     {
         decl String:Weapon[24];
         GetEventString(event, "item", Weapon, sizeof(Weapon));
@@ -193,6 +193,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
+                LogError("_ItemPickup (%s) :: g_ClientSlotEnt[%i][%i] = %i", Weapon, client, slot, g_ClientSlotEnt[client][slot]);
             }
         }
     }
@@ -326,29 +327,33 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     
+    new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
+    if ( StripDeadPlayersWeapon )
+    {
+        new ent = g_ClientSlotEnt[Victim][Slot_Primary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            LogError("_PlayerDeath :: remove g_ClientSlotEnt[%i][%i] = %i", Victim, Slot_Primary, ent);
+            RemoveEdict(ent);
+        }
+        ent = g_ClientSlotEnt[Victim][Slot_Secondary];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
+        {
+            LogError("_PlayerDeath :: remove g_ClientSlotEnt[%i][%i] = %i", Victim, Slot_Secondary, ent);
+            RemoveEdict(ent);
+        }
+
+        g_ClientSlotEnt[Victim][Slot_Primary] = -1;
+        g_ClientSlotEnt[Victim][Slot_Secondary] = -1;
+    }
+    
     /* They change team at round end don't punish them. */
     if ( !RoundStarted && !AllowLevelUpAfterRoundEnd )
     {
         return;
     }
     
-    new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
     new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
-
-    if ( StripDeadPlayersWeapon )
-    {
-        new ent = g_ClientSlotEnt[Victim][Slot_Primary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
-        {
-            RemoveEdict(ent);
-        }
-        ent = g_ClientSlotEnt[Victim][Slot_Primary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && GetEntDataEnt2(ent, OffsetWeaponParent) == -1 )
-        {
-            RemoveEdict(ent);
-        }
-    }
-    
     decl String:Weapon[24], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
 
     GetEventString(event, "weapon", Weapon, sizeof(Weapon));
@@ -409,7 +414,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(Killer, WeaponName[CSW_HEGRENADE]) == -1 )
         {
-            GivePlayerItem(Killer, WeaponName[CSW_HEGRENADE]);
+            GivePlayerItemWrapper(Killer, WeaponName[CSW_HEGRENADE]);
         }
     }
 
@@ -601,9 +606,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    g_ClientSlotEnt[client][Slot_Primary] = -1;
-    g_ClientSlotEnt[client][Slot_Secondary] = -1;
-
     new team = GetClientTeam(client);
 
     if(team != TEAM_T && team != TEAM_CT)
@@ -670,7 +672,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     if(knife == -1)
     {
-        GivePlayerItem(client, "weapon_knife");
+        GivePlayerItemWrapper(client, "weapon_knife");
     }
 
     /* Something here is wrong */
@@ -695,7 +697,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
             if ( WarmupNades )
             {
-                GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
+                GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
 
                 //Switch them back into hegrenade
                 FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
@@ -771,11 +773,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
         if ( NadeBonusWeaponId )
         {
-            new ent = GivePlayerItem(client, WeaponName[NadeBonusWeaponId]); // todo
+            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]); // todo
             new Slots:slot = WeaponSlot[NadeBonusWeaponId];
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slot] = ent;
+                LogError("_PlayerSpawn :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) 
@@ -794,28 +797,29 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             }
         }
 
-        GivePlayerItem(client, WeaponName[CSW_HEGRENADE]);
+        GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
 
         //Switch them back into hegrenade
         FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
 
         if(NadeSmoke)
         {
-            GivePlayerItem(client, WeaponName[CSW_SMOKEGRENADE]);
+            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
         }
 
         if(NadeFlash)
         {
-            GivePlayerItem(client, WeaponName[CSW_FLASHBANG]);
+            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
         }
 
     /* No reason to give them knife again.  */
     } else if(WeapId != CSW_KNIFE) {
-        new ent = GivePlayerItem(client, WeaponName[WeapId]); // todo
+        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]); // todo
         new Slots:slot = WeaponSlot[WeapId];
         if ( slot == Slot_Primary || slot == Slot_Secondary ) 
         {
             g_ClientSlotEnt[client][slot] = ent;
+            LogError("_PlayerSpawn :: g_ClientSlotEnt[%i][%i] = %i", client, slot, ent);
         }
     }
 }
@@ -909,7 +913,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(client, weaponName) == -1 )
         {
-            GivePlayerItem(client, weaponName);
+            GivePlayerItemWrapper(client, weaponName);
             FakeClientCommand(client, "use %s", weaponName);
         }
     }

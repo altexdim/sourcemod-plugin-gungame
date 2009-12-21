@@ -139,3 +139,6 @@ new bool:IsActive = false;
 new bool:IsObjectiveHooked;
 new HostageEntInfo;
 new Handle:PlayerLevelsBeforeDisconnect = INVALID_HANDLE;
+new g_ClientSlotEnt[MAXPLAYERS+1][2];
+new g_IsInGiveCommand = false;
+
