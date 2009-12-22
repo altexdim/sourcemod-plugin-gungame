@@ -188,7 +188,6 @@ Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
         new Weapons:index;
         if ( GetTrieValue(TrieWeapon, Weapon[len], index) )
         {
-            LogError("UTIL_GetWeaponIndex(%s) = %i", Weapon[len], index);
             return index;
         }
     }
@@ -733,19 +732,16 @@ GivePlayerItemWrapper(client, const String:item[])
 
 UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
 {
-    LogError("UTIL_RemoveClientDroppedWeapons(%i)", client);
     if ( StripDeadPlayersWeapon )
     {
         new ent = g_ClientSlotEnt[client][Slot_Primary];
         if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
         {
-            LogError("... removed primary %i", ent);
             RemoveEdict(ent);
         }
         ent = g_ClientSlotEnt[client][Slot_Secondary];
         if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
         {
-            LogError("... removed secondary %i", ent);
             RemoveEdict(ent);
         }
 
