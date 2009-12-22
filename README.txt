@@ -461,16 +461,25 @@ TODO
 
 Issues
 -------
-    1) My server crashes right after someone wins the map
-    solution:
-    Update your gamedata/gungame.games.txt from gungame release 1.0.0.1.12
-    OR
-    Update your server binaries.
+    1) My server crashes right after someone wins the map.
+        a) Update your server binaries.
+        b) OR Update your gamedata/gungame.games.txt:
+            Replace:
+                "EndMultiplayerGame"
+                {
+                    "windows"       "102"
+                    "linux"     "103"
+                }
+            to:
+                "EndMultiplayerGame"
+                {
+                    "windows"       "101"
+                    "linux"     "102"
+                }
 
-    2) My server does not change map after someone wins the map
-    solution:
-    Update your gamedata/gungame.games.txt from latest gungame release
+    2) My server does not change map after someone wins the map.
+        a) Update your gamedata/gungame.games.txt from latest gungame release.
 
     3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
-    https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
+        a) https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
  
