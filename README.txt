@@ -18,7 +18,7 @@ Plugins
 -------
 gungame.smx
     * Main GunGame:SM plugin
-        - Depends on gungame_config.smx
+        - Depends on gungame_config.smx, gungame_stats.smx
         - Mandatory plugin
         - Provides almost all gungame functionality
         
