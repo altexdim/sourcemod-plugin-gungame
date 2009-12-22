@@ -119,6 +119,12 @@ Credits
 
 Changelog
 ---------
+    1.0.5.2:
+        * Fixed:
+            [SM] Native "IsPlayerAlive" reported: Client 10 is not in game
+            L 12/22/2009 - 15:27:41: [SM] Displaying call stack trace for plugin "gungame.smx": L 12/22/2009 - 15:27:41: [SM]
+            [0]  Line 290, E:\Download \sm_gungame-1.0.5.1\addons\sourcemod\scripting\gungame.sp::OnClientDisconnect()
+            
     1.0.5.1:
         * Strip weapons from dead players completely rewritten.
           Cpu usage optimization.

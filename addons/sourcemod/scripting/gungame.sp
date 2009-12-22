@@ -287,7 +287,7 @@ public OnClientDisconnect(client)
     CurrentLevelPerRound[client] = NULL;
     PlayerState[client] = NULL;
     
-    if ( IsPlayerAlive(client) )
+    if ( IsClientInGame(client) && IsPlayerAlive(client) )
     {
         UTIL_RemoveClientDroppedWeapons(client, true);
     }
