@@ -147,6 +147,7 @@ UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
 
 /* Weapon Index Lookup via KeyValue */
 /* Figure out hash table later for lookup table */
+/*
 Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
 {
     new len;
@@ -164,6 +165,30 @@ Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
         if(KvJumpToKey(KvWeapon, Weapon[len]))
         {
             return Weapons:KvGetNum(KvWeapon, "index");
+        }
+    }
+
+    return Weapons:0;
+}
+*/
+
+/* Weapon Index Lookup via Trie array */
+Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
+{
+    new len;
+
+    if ( strlen(Weapon) > 7 )
+    {
+        /* Only check truncated weapon names */
+        len = (Weapon[6] == '_') ? 7 : 0;
+    }
+
+    if ( WeaponOpen )
+    {
+        new Weapons:index;
+        if ( GetTrieValue(TrieWeapon, Weapon, index) )
+        {
+            return index;
         }
     }
 

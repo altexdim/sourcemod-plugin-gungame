@@ -332,7 +332,7 @@ TODO
         it now. Oh, I think that all kinds of grenades should be excluded from the process. There 
         are a lot of gg maps where authors put some extra nades and this will remove it.
 
-    * Rewrite weapon to index from keyvalue to trie array.
+    * [IN-PROGRESS] Rewrite weapon to index from keyvalue to trie array.
     
     ----====----==== Normal priority list ----====----====
 

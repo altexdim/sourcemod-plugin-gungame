@@ -76,7 +76,7 @@ OnKeyValueStart()
 	KvWeapon = CreateKeyValues("gg_WeaponInfo", BLANK, BLANK);
 	FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\weaponinfo.txt");
 
-	if(!FileExists(WeaponFile))
+	if ( !FileExists(WeaponFile) )
 	{
 		decl String:Error[PLATFORM_MAX_PATH + 64];
 		FormatEx(Error, sizeof(Error), "FATAL ERROR File does not exists [%s]", WeaponFile);
@@ -84,4 +84,43 @@ OnKeyValueStart()
 	}
 
 	WeaponOpen = FileToKeyValues(KvWeapon, WeaponFile);
+
+    if ( TrieWeapon == INVALID_HANDLE )
+    {
+        TrieWeapon = CreateTrie();
+    }
+    else
+    {
+        ClearTrie(TrieWeapon);
+    }
+    
+    if ( !WeaponOpen )
+    {
+        return;
+    }
+
+	KvRewind(KvWeapon);
+
+	if ( !KvGotoFirstSubKey(KvWeapon) )
+	{
+		return;
+	}
+
+    new String:WeaponName[24];
+    new Weapons:WeaponIndex;
+    while (true)
+    {
+        if ( !KvGetSectionName(KvWeapon, WeaponName, sizeof(WeaponName)) )
+        {
+            break;
+        }
+        WeaponIndex = Weapons:KvGetNum(KvPlayer, "index");
+        SetTrieValue(TrieWeapon, WeaponName, WeaponIndex);
+		if ( !KvGotoNextKey(KvWeapon) )
+		{
+			break;
+		}
+	}
+
+	KvRewind(KvWeapon);
 }
