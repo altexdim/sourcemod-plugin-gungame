@@ -119,6 +119,13 @@ Credits
 
 Changelog
 ---------
+    1.0.5.1:
+        * Strip weapons from dead players completely rewritten.
+          Cpu usage optimization.
+
+        * Weapon to index procedure rewritten from keyvalue to trie array. 
+          Cpu usage optimization.
+    
     1.0.5.0:
         + Providing "AfkAction" = 0 in gungame.config.txt will disables kicking/moving
             to specs afk players without disabling afk management completely.
@@ -326,13 +333,6 @@ TODO
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
-    
-    * [DONE] What about saving some index or ID of weapon entity on actions when this entity changes and 
-        then just remove it on player death? It's only my first idea I don't know too much about 
-        it now. Oh, I think that all kinds of grenades should be excluded from the process. There 
-        are a lot of gg maps where authors put some extra nades and this will remove it.
-
-    * [DONE] Rewrite weapon to index from keyvalue to trie array.
     
     ----====----==== Normal priority list ----====----====
 
