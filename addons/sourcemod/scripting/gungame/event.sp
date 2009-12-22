@@ -193,6 +193,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
+                LogError("_ItemPickup :: client = %i slot = %i weapon = %s ent = %i", client, slot, Weapon,  g_ClientSlotEnt[client][slot]);
             }
         }
     }
@@ -800,6 +801,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         if ( slot == Slot_Primary || slot == Slot_Secondary ) 
         {
             g_ClientSlotEnt[client][slot] = ent;
+            LogError("_Spawn :: client = %i slot = %i weapon = %s ent = %i", client, slot, WeaponName[WeapId], g_ClientSlotEnt[client][slot]);
         }
     }
 }

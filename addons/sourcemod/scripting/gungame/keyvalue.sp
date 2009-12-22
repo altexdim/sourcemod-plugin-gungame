@@ -72,18 +72,18 @@
 
 OnKeyValueStart()
 {
-	/* Make sure to use unique section name just incase someone else uses it */
-	KvWeapon = CreateKeyValues("gg_WeaponInfo", BLANK, BLANK);
-	FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\weaponinfo.txt");
+    /* Make sure to use unique section name just incase someone else uses it */
+    KvWeapon = CreateKeyValues("gg_WeaponInfo", BLANK, BLANK);
+    FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\weaponinfo.txt");
 
-	if ( !FileExists(WeaponFile) )
-	{
-		decl String:Error[PLATFORM_MAX_PATH + 64];
-		FormatEx(Error, sizeof(Error), "FATAL ERROR File does not exists [%s]", WeaponFile);
-		SetFailState(Error);
-	}
+    if ( !FileExists(WeaponFile) )
+    {
+        decl String:Error[PLATFORM_MAX_PATH + 64];
+        FormatEx(Error, sizeof(Error), "FATAL ERROR File does not exists [%s]", WeaponFile);
+        SetFailState(Error);
+    }
 
-	WeaponOpen = FileToKeyValues(KvWeapon, WeaponFile);
+    WeaponOpen = FileToKeyValues(KvWeapon, WeaponFile);
 
     if ( TrieWeapon == INVALID_HANDLE )
     {
@@ -99,28 +99,28 @@ OnKeyValueStart()
         return;
     }
 
-	KvRewind(KvWeapon);
+    KvRewind(KvWeapon);
 
-	if ( !KvGotoFirstSubKey(KvWeapon) )
-	{
-		return;
-	}
-
-    new String:WeaponName[24];
-    new Weapons:WeaponIndex;
-    while (true)
+    if ( !KvGotoFirstSubKey(KvWeapon) )
     {
-        if ( !KvGetSectionName(KvWeapon, WeaponName, sizeof(WeaponName)) )
+        return;
+    }
+
+    new String:name[24];
+    new Weapons:index;
+    for (;;)
+    {
+        if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) )
         {
             break;
         }
-        WeaponIndex = Weapons:KvGetNum(KvPlayer, "index");
-        SetTrieValue(TrieWeapon, WeaponName, WeaponIndex);
-		if ( !KvGotoNextKey(KvWeapon) )
-		{
-			break;
-		}
-	}
+        index = Weapons:KvGetNum(KvWeapon, "index");
+        SetTrieValue(TrieWeapon, name, index);
+        if ( !KvGotoNextKey(KvWeapon) )
+        {
+            break;
+        }
+    }
 
-	KvRewind(KvWeapon);
+    KvRewind(KvWeapon);
 }
