@@ -119,6 +119,14 @@ Credits
 
 Changelog
 ---------
+    1.0.5.4:
+        * Fixed bug: 
+            There is one little bug. I'm using Turbo mode on my server and when I kill somebody 
+            with awp then next weapon is a nade. So, I should get glock, flashbang, smokenade 
+            and hegrenade (i set it on config). But I'm getting only glock and nade. I have it 
+            all on next spawn but not in the same round I gained new level  . This happens every 
+            time to me when I get nade level before round end.
+
     1.0.5.3:
         * Fixed bug: If WorldspawnSuicide is 0 than player could level up with worldspawn.
 

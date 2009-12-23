@@ -642,6 +642,14 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
                 }
             }
         }
+        if ( NadeSmoke )
+        {
+            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+        }
+        if ( NadeFlash )
+        {
+            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+        }
     }
     // slot == Slot_Primary || slot == Slot_Secondary 
     else
