@@ -448,9 +448,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 }
             }
 
+            new bool:Stop;
             if ( VictimLevel )
             {
-                new bool:Stop;
                 UTIL_ChangeLevel(Victim, -1, Stop, true, true);
                 if ( Stop )
                 {
@@ -468,11 +468,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 return;
             }
 
-            new bool:Stop;
             new oldLevelKiller = level;
-            level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
+            level = UTIL_ChangeLevel(Killer, 1, Stop, true, true);
 
-            if ( Ret || GameWinner )
+            if ( Stop || GameWinner )
             {
                 return;
             }
