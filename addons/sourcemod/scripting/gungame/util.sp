@@ -317,12 +317,7 @@ UTIL_PlaySoundForLeaderLevel()
 
 UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
 {
-    if ( WarmupEnabled && WarmupReset )
-    {
-        return PlayerLevel[client];
-    }
-
-    if ( !difference || !IsActive )
+    if ( !difference || !IsActive || (WarmupEnabled && WarmupReset) )
     {
         return PlayerLevel[client];
     }
@@ -351,7 +346,14 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
     if ( ret )
     {
         Return = true;
-        return (PlayerLevel[client] = oldLevel);
+        return oldLevel;
+    }
+
+    if ( !BotCanWin && IsFakeClient(client) && (Level >= WeaponOrderCount) )
+    {
+        /* Bot can't win so just keep them at the last level */
+        Return = true;
+        return oldLevel;
     }
 
     // Client got new level
