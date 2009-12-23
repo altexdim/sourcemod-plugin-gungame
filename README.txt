@@ -119,6 +119,8 @@ Credits
 
 Changelog
 ---------
+        * Fixed bug: If WorldspawnSuicide is 0 than player could level up by worldspawn.
+
     1.0.5.2:
         * Fixed:
             [SM] Native "IsPlayerAlive" reported: Client 10 is not in game
@@ -342,6 +344,9 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    * Bug: If knife level is not last level it seems like victim can not loose it's level.
+    * Refactoring: Maybe move restore level on reconnect from handicap to somewhere else.
+      Maybe add config variable to enable/disable this function independently from handicap.
     + Feature request:
         - configurable warmup weapon by cvar
 

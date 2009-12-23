@@ -343,9 +343,12 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     GetClientName(Killer, kName, sizeof(kName));
 
     /* Kill self with world spawn */
-    if ( WorldspawnSuicide && Victim && !Killer )
+    if ( Victim && !Killer )
     {
-        ClientSuicide(Victim, vName);
+        if ( WorldspawnSuicide )
+        {
+            ClientSuicide(Victim, vName);
+        }
         return;
     }
 
@@ -360,9 +363,11 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
+    // Victim > 0 && Killer > 0
+
     new bool:TeamKill;
 
-    if ( Killer && GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
+    if ( GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
     {
         /* Stop them from gaining a point or level by killing their team mate. */
         TeamKill = true;
