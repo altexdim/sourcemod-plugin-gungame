@@ -352,7 +352,6 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
     if ( !BotCanWin && IsFakeClient(client) && (Level >= WeaponOrderCount) )
     {
         /* Bot can't win so just keep them at the last level */
-        Return = true;
         return oldLevel;
     }
 
