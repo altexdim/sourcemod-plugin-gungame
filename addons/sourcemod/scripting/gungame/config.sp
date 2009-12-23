@@ -78,6 +78,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 ReloadWeapon = bool:StringToInt(value);
             } else if(strcmp("AllowLevelUpAfterRoundEnd", key, false) == 0) {
                 AllowLevelUpAfterRoundEnd = bool:StringToInt(value);
+            } else if(strcmp("RestoreLevelOnReconnect", key, false) == 0) {
+                RestoreLevelOnReconnect = bool:StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
             } else if(strcmp("StripDeadPlayersWeapon", key, false) == 0) {

@@ -116,8 +116,12 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         new Count = GetClientCount();
 
         if ( TotalLevel && Count )
-        {
-            PlayerLevel[client] = TotalLevel / Count;
+        {   
+            new level = TotalLevel / Count;
+            if ( PlayerLevel[client] < level )
+            {
+                PlayerLevel[client] = level;
+            }
         }
     }
     else if ( mode == 2 || mode == 3 )
@@ -139,26 +143,12 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
                 }
             }
         }
-        if ( minimum != -1 ) 
+        if ( (minimum != -1) && (PlayerLevel[client] < minimum) ) 
         {
             PlayerLevel[client] = minimum;
         }
     }
     
-    if ( !IsFakeClient(client) )
-    {
-        decl String:steamid[64];
-        GetClientAuthString(client, steamid, sizeof(steamid));
-        new level = 0;
-        if ( GetTrieValue(PlayerLevelsBeforeDisconnect, steamid, level) )
-        {
-            if ( PlayerLevel[client] < level )
-            {
-                PlayerLevel[client] = level;
-            }
-        }
-    }
-
     return 1;
 }
 

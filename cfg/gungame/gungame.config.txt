@@ -2,6 +2,9 @@
 {
     "Config"
     {
+        /* Restore level on player reconnect */
+        "RestoreLevelOnReconnect" "1"
+
         /* Strip dead players weapon */
         "StripDeadPlayersWeapon" "0"
         

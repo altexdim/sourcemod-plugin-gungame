@@ -119,7 +119,11 @@ Credits
 
 Changelog
 ---------
-        * Fixed bug: If WorldspawnSuicide is 0 than player could level up by worldspawn.
+    1.0.5.3:
+        * Fixed bug: If WorldspawnSuicide is 0 than player could level up with worldspawn.
+
+        * Refactoring: Restore level on reconnect was moved from handicap and now is independent.
+          Added new config variable to enable/disable this function - RestoreLevelOnReconnect.
 
     1.0.5.2:
         * Fixed:
@@ -345,8 +349,6 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     * Bug: If knife level is not last level it seems like victim can not loose it's level.
-    * Refactoring: Maybe move restore level on reconnect from handicap to somewhere else.
-      Maybe add config variable to enable/disable this function independently from handicap.
     + Feature request:
         - configurable warmup weapon by cvar
 

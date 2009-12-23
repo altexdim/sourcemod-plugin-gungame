@@ -131,6 +131,25 @@ public OnPluginStart()
     #endif
 }
 
+public OnClientAuthorized(client, const String:auth[])
+{
+    if ( IsFakeClient(client) || !RestoreLevelOnReconnect )
+    {
+        return;
+    }
+
+    decl String:steamid[64];
+    GetClientAuthString(client, steamid, sizeof(steamid));
+    new level = 0;
+    if ( GetTrieValue(PlayerLevelsBeforeDisconnect, steamid, level) )
+    {
+        if ( PlayerLevel[client] < level )
+        {
+            PlayerLevel[client] = level;
+        }
+    }
+}
+
 public OnPluginEnd()
 {
     SetConVarInt(gungame_enabled, 0);
