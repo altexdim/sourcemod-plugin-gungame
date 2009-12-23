@@ -119,6 +119,9 @@ Credits
 
 Changelog
 ---------
+    1.0.5.5:
+        * Fixed bug: If knife level is not last level it seems like victim can not loose it's level.
+    
     1.0.5.4:
         * Fixed bug: 
             There is one little bug. I'm using Turbo mode on my server and when I kill somebody 
@@ -360,7 +363,6 @@ TODO
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 
         think about moving it to the hint box (like warmup timer) and add information about leader 
         level like "Leader level 24 :: awp"?
-    * [IN-PROGRESS] Bug: If knife level is not last level it seems like victim can not loose it's level.
     + Feature request:
         - configurable warmup weapon by cvar
 
