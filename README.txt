@@ -120,7 +120,8 @@ Credits
 Changelog
 ---------
     1.0.5.5:
-        * Fixed bug: If knife level is not last level it seems like victim can not loose it's level.
+        * Fixed bug: With knifepro enabled and the attacker on knife level, they do not steal 
+            levels from other players when they knife someone.
     
     1.0.5.4:
         * Fixed bug: 
