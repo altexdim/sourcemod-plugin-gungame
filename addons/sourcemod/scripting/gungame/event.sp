@@ -413,84 +413,97 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /**
      * Steal level from other player.
      */
-    if ( KnifePro && WeaponIndex == CSW_KNIFE && WeaponLevel != CSW_KNIFE )
+    if ( KnifePro && WeaponIndex == CSW_KNIFE )
     {
-        if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade )
+        new KnifeLevel = (WeaponLevel == CSW_KNIFE);
+        for (;;)
         {
-            return;
-        }
-
-        new VictimLevel = PlayerLevel[Victim];
-
-        if ( VictimLevel < KnifeProMinLevel )
-        {
-            CPrintToChatEx(Killer, Victim, "%t", "Is lower than the minimum knife stealing level", vName, KnifeProMinLevel);
-            return;
-        }
-
-        if ( !VictimLevel && !CanStealFirstLevel )
-        {
-            /* They are at level 1. Internally it is set at 0 for starting
-             * Levels only can be stolen if victim is level greater than 1.
-             */
-            CPrintToChatEx(Killer, Victim, "%t", "Has no levels to be stolen", vName);
-            return;
-        }
-
-        if ( VictimLevel )
-        {
-            new bool:Stop;
-            new newVictimLevel = UTIL_ChangeLevel(Victim, -1, Stop, true, true);
-            if ( newVictimLevel == VictimLevel || Stop)
+            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade )
             {
                 return;
             }
-            UTIL_PlaySound(Victim, Down);
-        }
 
-        if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
-        {
+            new VictimLevel = PlayerLevel[Victim];
+
+            if ( VictimLevel < KnifeProMinLevel )
+            {
+                CPrintToChatEx(Killer, Victim, "%t", "Is lower than the minimum knife stealing level", vName, KnifeProMinLevel);
+                if ( KnifeLevel ) {
+                    break;
+                } else {
+                    return;
+                }
+            }
+
+            if ( !VictimLevel && !CanStealFirstLevel )
+            {
+                /* They are at level 1. Internally it is set at 0 for starting
+                 * Levels only can be stolen if victim is level greater than 1.
+                 */
+                CPrintToChatEx(Killer, Victim, "%t", "Has no levels to be stolen", vName);
+                if ( KnifeLevel ) {
+                    break;
+                } else {
+                    return;
+                }
+            }
+
+            if ( VictimLevel )
+            {
+                new bool:Stop;
+                UTIL_ChangeLevel(Victim, -1, Stop, true, true);
+                if ( Stop )
+                {
+                    if ( KnifeLevel ) {
+                        break;
+                    } else {
+                        return;
+                    }
+                }
+                UTIL_PlaySound(Victim, Down);
+            }
+
+            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
+            {
+                return;
+            }
+
+            new bool:Stop;
+            new oldLevelKiller = level;
+            level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
+
+            if ( Ret || GameWinner )
+            {
+                return;
+            }
+
+            CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
+            PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
+            CurrentLevelPerRound[Killer]++;
+            UTIL_PlaySound(Killer, Steal);
+                   
+            if ( TurboMode )
+            {
+                UTIL_GiveNextWeapon(Killer, level);
+                return;
+            }
+
+            if ( TripleLevelBonus && CurrentLevelPerRound[Killer] == 3 )
+            {
+                decl String:Name[MAX_NAME_SIZE];
+                GetClientName(Killer, Name, sizeof(Name));
+
+                CPrintToChatAllEx(Killer, "%t", "Triple leveled", Name);
+
+                CreateTimer(10.0, RemoveBonus, Killer);
+                UTIL_SetClientGodMode(Killer, 1);
+                SetEntDataFloat(Killer, OffsetMovement, 1.5);
+
+                EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
+            }
+
             return;
         }
-
-        new bool:Stop;
-        new oldLevelKiller = level;
-        level = UTIL_ChangeLevel(Killer, 1, Ret, true, true);
-
-        if ( Ret || GameWinner )
-        {
-            return;
-        }
-
-        PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
-
-        CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
-        
-        CurrentLevelPerRound[Killer]++;
-
-        UTIL_PlaySound(Killer, Steal);
-               
-        if ( TurboMode )
-        {
-            UTIL_GiveNextWeapon(Killer, level);
-            return;
-        }
-
-        if ( TripleLevelBonus && CurrentLevelPerRound[Killer] == 3 )
-        {
-            decl String:Name[MAX_NAME_SIZE];
-            GetClientName(Killer, Name, sizeof(Name));
-
-            CPrintToChatAllEx(Killer, "%t", "Triple leveled", Name);
-
-            CreateTimer(10.0, RemoveBonus, Killer);
-            UTIL_SetClientGodMode(Killer, 1);
-            SetEntDataFloat(Killer, OffsetMovement, 1.5);
-
-            EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
-        }
-
-        return;
     }
 
     /* They didn't kill with the weapon required */
