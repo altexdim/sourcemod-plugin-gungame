@@ -543,7 +543,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         PlayerState[Killer] |= KNIFE_ELITE;
     }
 
-    new bool:Stop;
     new oldLevelKiller = level;
     level = UTIL_ChangeLevel(Killer, 1);
 
