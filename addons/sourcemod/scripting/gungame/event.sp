@@ -506,7 +506,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* They didn't kill with the weapon required */
-    if ( WeaponIndex != WeaponLevel)
+    if ( WeaponIndex != WeaponLevel )
     {
         return;
     }

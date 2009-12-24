@@ -11,11 +11,8 @@ new bool:IsActive;
 
 new Float:PlayerAfk[MAXPLAYERS + 1][3];
 new PlayerAfkCount[MAXPLAYERS + 1];
-new bool:PlayerSwitch[MAXPLAYERS + 1]
 
 new State:ConfigState;
-new Handle:GameConf;
-new Handle:SwitchTeam;
 
 public Plugin:myinfo =
 {
@@ -30,9 +27,6 @@ public OnPluginStart()
 {
     LoadTranslations("gungame_afk");
     
-    GameConf = LoadGameConfigFile("gungame.games");
-    CreateSwitchTeam();
-
     OffsetOrigin = FindSendPropOffs("CBaseEntity", "m_vecOrigin");
 
     if(OffsetOrigin == INVALID_OFFSET)
@@ -101,44 +95,44 @@ public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast)
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
 {
     /* Afk management only checks after the player worldspawn/suicide checks */
-    if ( AfkManagement )
+    if ( !AfkManagement )
     {
-        decl Float:Origin[3];
-        GetEntDataVector(Victim, OffsetOrigin, Origin);
-
-        /* Basically by the time you get here the player drop approx about 55-60 units. So checking z now here is invalid. */
-        if ( PlayerAfk[Victim][0] == Origin[0] && PlayerAfk[Victim][1] == Origin[1] )
-        {
-            /* You killed an afk. */
-            CPrintToChat(Killer, "%t", "You do not gain a level because you killed an afk");
-
-            if ( AfkAction && (++PlayerAfkCount[Victim] > AfkDeaths) )
-            {
-                /* Hope this works */
-                if ( AfkAction & AFK_KICK )
-                {
-                    KickClient(Victim, "[GunGame] Max afk deaths reached");
-                }
-                else if ( AfkAction & AFK_SPECTATE )
-                {
-                    HACK_SwitchTeam(Victim, TEAM_SPECTATOR);
-                    PlayerSwitch[Victim] = true;
-                }
-            }
-
-            return Plugin_Handled;
-        }
-        else
-        {
-            PlayerAfkCount[Victim] = NULL;
-        }
+        return Plugin_Continue;
     }
+
+    decl Float:Origin[3];
+    GetEntDataVector(Victim, OffsetOrigin, Origin);
+
+    /* Basically by the time you get here the player drop approx about 55-60 units. So checking z now here is invalid. */
+    if ( PlayerAfk[Victim][0] == Origin[0] && PlayerAfk[Victim][1] == Origin[1] )
+    {
+        /* You killed an afk. */
+        CPrintToChat(Killer, "%t", "You do not gain a level because you killed an afk");
+
+        if ( AfkAction && (++PlayerAfkCount[Victim] >= AfkDeaths) )
+        {
+            /* Hope this works */
+            if ( AfkAction & AFK_KICK )
+            {
+                KickClient(Victim, "[GunGame] Max afk deaths reached");
+            }
+            else if ( AfkAction & AFK_SPECTATE )
+            {
+                ChangeClientTeam(Victim, TEAM_SPECTATOR);         
+                PlayerAfkCount[Victim] = 0;
+            }
+        }
+
+        return Plugin_Handled;
+    }
+
+    PlayerAfkCount[Victim] = 0;
     return Plugin_Continue;
 }
 
 public GG_ConfigNewSection(const String:name[])
 {
-    if(strcmp("Config", name, false) == 0)
+    if ( strcmp("Config", name, false) == 0 )
     {
         ConfigState = CONFIG_STATE_CONFIG;
     }
@@ -146,9 +140,9 @@ public GG_ConfigNewSection(const String:name[])
 
 public GG_ConfigKeyValue(const String:key[], const String:value[])
 {
-    if(ConfigState == CONFIG_STATE_CONFIG)
+    if ( ConfigState == CONFIG_STATE_CONFIG )
     {
-        if(strcmp("AfkManagement", key, false) == 0) {
+        if ( strcmp("AfkManagement", key, false) == 0 ) {
             AfkManagement = bool:StringToInt(value);
         } else if(strcmp("AfkDeaths", key, false) == 0) {
             AfkDeaths = StringToInt(value);
@@ -163,20 +157,7 @@ public GG_ConfigParseEnd()
     ConfigState = CONFIG_STATE_NONE;
 }
 
-CreateSwitchTeam()
+public OnClientAuthorized(client, const String:auth[])
 {
-    StartPrepSDKCall(SDKCall_Player);
-    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "SwitchTeam");
-    PrepSDKCall_AddParameter(SDKType_PlainOldData, SDKPass_Plain);
-    SwitchTeam = EndPrepSDKCall();
-
-    if(SwitchTeam == INVALID_HANDLE)
-    {
-        SetFailState("Virtual SwitchTeam failed. Please contact the author.");
-    }
-}
-
-HACK_SwitchTeam(client, team)
-{
-    SDKCall(SwitchTeam, client, team);
+    PlayerAfkCount[client] = 0;
 }
