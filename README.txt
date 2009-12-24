@@ -119,6 +119,9 @@ Credits
 
 Changelog
 ---------
+        + Added russian translation.
+        + Added german translation. Thanks to tObIwAnKeNoBi.
+
     1.0.5.5:
         * Fixed bug: With knifepro enabled and the attacker on knife level, they do not steal 
             levels from other players when they knife someone.

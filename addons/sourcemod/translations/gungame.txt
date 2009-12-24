@@ -4,98 +4,140 @@
     {
         "#format"    "{1:d}"
         "en"         "Warmup round :: {1} seconds left"
+	"de"         "Warmup round :: {1} Sekunden verbleibend"
+        "ru"         "Разогрев :: {1} секунд осталось"
     }
     "Warmup round has ended"
     {
         "en"         "{green}[{default}GunGame{green}] Warmup round has ended"
+	"de"         "{green}[{default}GunGame{green}] Warmup Runde ist zu Ende"
+        "ru"         "{green}[{default}GunGame{green}] Разогрев закончен"
     }
     "You are levels behind leader"
     {
         "#format"    "{1:d}"
         "en"         "{green}[{default}GunGame{green}] You are {default}{1} {green}levels behind the leader"
+	"de"         "{green}[{default}GunGame{green}] Du bist {default}{1} {green}Level hinter dem Führenden"
+        "ru"         "{green}[{default}GunGame{green}] Вы на {default}{1} {green}уровней отстаёте от лидера"
     }
     "Is leading on level"
     {
         "#format"    "{1:s},{2:d}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}is leading on level {default}{2}{green}"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}führt mit Level {default}{2}{green}"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}лидирует на уровне {default}{2}{green}"
     }
     "Is tied with the leader on level"
     {
         "#format"    "{1:s},{2:d}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}is tied with the leader on level {default}{2}{green}"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}hat den Führenden auf Level {default}{2}{green} eingeholt"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}догнал лидера на уровне {default}{2}{green}"
     }
     "GunGame has been enabled"
     {
         "en"         "{green}[{default}GunGame{green}] GunGame has been enabled"
+	"de"         "{green}[{default}GunGame{green}] GunGame wurde eingeschaltet"
+        "ru"         "{green}[{default}GunGame{green}] GunGame включен"
     }
     "GunGame has been disabled"
     {
         "en"         "{green}[{default}GunGame{green}] GunGame has been disabled"
+	"de"         "{green}[{default}GunGame{green}] GunGame wurde abgeschaltet"
+        "ru"         "{green}[{default}GunGame{green}] GunGame выключен"
     }
     "Please view your console for more information"
     {
         "en"         "{green}[{default}GunGame{green}] Please view your console for more information"
+	"de"         "{green}[{default}GunGame{green}] Bitte schau in die Konsole für mehr Informationen"
+        "ru"         "{green}[{default}GunGame{green}] Дополнительная информация находится в консоле"
     }
     "Has won"
     {
         "#format"    "{1:s}"
         "en"         "[GunGame] {1} has won"
+	"de"         "[GunGame] {1} hat gewonnen"
+        "ru"         "[GunGame] {1} выиграл"
     }
     "You need kills to advance to the next level"
     {
         "#format"    "{1:d},{2:d},{3:d}"
         "en"         "{green}[{default}GunGame{green}] You need {default}{1}{green} kills to advance to the next level :: Score: {default}{2}{green} /{default} {3}"
+	"de"         "{green}[{default}GunGame{green}] Du brauchst {default}{1}{green} kills um das nächste Level zu erreichen :: Punkte: {default}{2}{green} /{default} {3}"
+        "ru"         "{green}[{default}GunGame{green}] Вам нужно {default}{1}{green} очков до следующего уровня :: Очки: {default}{2}{green} /{default} {3}"
     }    
     "Warmup round has not started yet"
     {
         "en"         "{green}[{default}GunGame{green}] Warmup round has not started yet"
+	"de"         "{green}[{default}GunGame{green}] Warmup Runde wurde nicht gestartet"
+        "ru"         "{green}[{default}GunGame{green}] Разогрев ещё не начинался"
     }
     "Warmup round is in progress"
     {
         "en"         "{green}[{default}GunGame{green}] Warmup round is in progress"
+	"de"         "{green}[{default}GunGame{green}] Warmup Runde läuft"
+        "ru"         "{green}[{default}GunGame{green}] Разогрев продолжается"
     }
     "You are on level"
     {
         "#format"    "{1:d},{2:s}"
         "en"         "{green}[{default}GunGame{green}] You are on level {default}{1} {green}:: {default}{2}"
+	"de"         "{green}[{default}GunGame{green}] Du bist auf Level {default}{1} {green}:: {default}{2}"
+        "ru"         "{green}[{default}GunGame{green}] Вы на уровне {default}{1} {green}:: {default}{2}"
     }
     "Friendly Fire has been enabled"
     {
         "en"         "{green}[{default}GunGame{green}] Friendly Fire has been enabled"
+	"de"         "{green}[{default}GunGame{green}] Friendly Fire wurde eingeschaltet"
+        "ru"         "{green}[{default}GunGame{green}] Включен режим Friendly Fire"
     }
     "You gained level by the bomb"
     {
         "#format"    "{1:d},{2:s}"
         "en"         "{green}[{default}GunGame{green}] You gained {default}{1}{green} level by {2} the bomb"
+	"de"         "{green}[{default}GunGame{green}] Du gewinnst {default}{1}{green} Level fürs {2} der Bombe"
+        "ru"         "{green}[{default}GunGame{green}] Вы получили {default}{1}{green} уровень за {2} бомбы"
     }
     "Has stolen a level from"
     {
         "#format"    "{1:s},{2:s}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has stolen a level from {default}{2}"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} hat einen Level von {default}{2} gestohlen"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} украл уровень у {default}{2}"
     }
     "Triple leveled"
     {
         "#format"    "{1:s},"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}triple leveled!!!"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}triple leveled!!!"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1} {green}набрал три уровня!!!"
     }
     "Has no levels to be stolen"
     {
         "#format"    "{1:s},"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}}{green} has no levels to be stolen"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}}{green} hat keinen Level gestohlen"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}}{green} на самом первом уровне"
     }
     "Is lower than the minimum knife stealing level"
     {
         "#format"    "{1:s},{2:d}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} is lower than the minimum knife stealing level. They must be at least {default}{2}{green} level before you can steal"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} hat ein zu geringes Level. Er muss mind. Level {default}{2}{green} haben, bevor Du eins stehlen kannst"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} находится ниже уровня, с которого можно украсть. Он должен быть хотя бы на {default}{2}{green} уровне"
     }
     "Has lost a level by killing a hostage"
     {
         "#format"    "{1:s}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level by killing a hostage"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} hat einen Level verloren, wegen Tötung einer Geisel"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} потерял уровень за убийство заложника"
     }
     "Has lost a level by suicided"
     {
         "#format"    "{1:s}"
         "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level by suicided"
+	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} hat einen Level wegen Selbstmord verloren"
+        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} самоликвидировался и потерял уровень"
     }
 }
