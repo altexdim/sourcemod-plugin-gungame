@@ -120,8 +120,24 @@ Credits
 
 Changelog
 ---------
+    1.0.5.6:
         + Added russian translation.
         + Added german translation. Thanks to tObIwAnKeNoBi.
+        * Fixed bug:
+            Players do not triple level. Fast speed, sound etc - when they get 3 levels.
+        * Fixed bug:
+            when I have "WarmupStartup" "1" and each team has a player then new round starts with info 
+            in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round 
+            is in progress". It is ok in next round.
+        * Fixed bug:
+            plugin require one extra AFK death than set in config file i.e. 
+            "AfkDeaths" "2" - requires 3 AFK deaths before an action
+        * Fixed bug:
+            AFK deaths counter is not cleared after AFK kick (maybe also when it 
+            moves to spectators). When you got AFK kick, rejoin and get one more AFK 
+            death then plugin kicks instantly no matter what is in "AfkDeaths".
+        * Fixed bug:
+            AFK action moving to spectators don't work
 
     1.0.5.5:
         * Fixed bug: With knifepro enabled and the attacker on knife level, they do not steal 
@@ -362,22 +378,6 @@ TODO
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
 
-    * Bug report    
-        [IN-PROGRESS] * Players do not triple level. Fast speed, sound etc - when they get 3 levels.
-
-    * Bug report
-       1. [IN-PROGRESS] * when I have "WarmupStartup" "1" and each team has a player then new round starts with info 
-            in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round 
-            is in progress". It is ok in next round.
-
-       2. AFK management bugs:
-        [IN-PROGRESS] * plugin require one extra AFK death than set in config file i.e. 
-            "AfkDeaths" "2" - requires 3 AFK deaths before an action
-        [IN-PROGRESS] * AFK deaths counter is not cleared after AFK kick (maybe also when it 
-            moves to spectators). When you got AFK kick, rejoin and get one more AFK 
-            death then plugin kicks instantly no matter what is in "AfkDeaths".
-        [IN-PROGRESS] * AFK action moving to spectators don't work
-        
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
