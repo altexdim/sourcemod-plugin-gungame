@@ -366,9 +366,11 @@ TODO
         [IN-PROGRESS] * Players do not triple level. Fast speed, sound etc - when they get 3 levels.
 
     * Bug report
-       1.  when I have "WarmupStartup" "1" and each team has a player then new round starts with info in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round is in progress". It is ok in next round.
-       2. AFK management bugs:
+       1.  when I have "WarmupStartup" "1" and each team has a player then new round starts with info 
+            in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round 
+            is in progress". It is ok in next round.
 
+       2. AFK management bugs:
         [IN-PROGRESS] * plugin require one extra AFK death than set in config file i.e. 
             "AfkDeaths" "2" - requires 3 AFK deaths before an action
         [IN-PROGRESS] * AFK deaths counter is not cleared after AFK kick (maybe also when it 
