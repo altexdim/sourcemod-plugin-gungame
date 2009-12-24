@@ -278,6 +278,7 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
             if(WarmupStartup & GAME_START && WarmupEnabled && !WarmupInitialized && GameCommenced)
             {
                 StartWarmupRound();
+                SetConVarInt(mp_restartgame, 1);
             }
             UTIL_PlaySoundForLeaderLevel();
         } else {
