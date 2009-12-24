@@ -108,6 +108,7 @@ Installation
 
 Credits
 -------
+    * Thanks to tObIwAnKeNoBi for german translation.
     * Thanks to exvel for sourcemod library Colors 1.0.2
       http://forums.alliedmods.net/showthread.php?t=96831
     * Thanks to bl4nk for GunGame Display Winner plugin.
