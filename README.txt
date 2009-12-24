@@ -357,7 +357,24 @@ TODO
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
-    
+
+    * Bug report    
+        Players do not triple level. Fast speed, sound etc - when they get 3 levels.
+
+        On the normal priority fix list:
+
+        * These function arent working:
+        - Triplelevelbonus
+        - AFK manager (moving afk-s to spec) 
+
+    * Bug report
+       1.  when I have "WarmupStartup" "1" and each team has a player then new round starts with info in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round is in progress". It is ok in next round.
+       2. AFK management bugs:
+
+        * plugin require one extra AFK death than set in config file i.e. "AfkDeaths" "2" - requires 3 AFK deaths before an action
+        * AFK deaths counter is not cleared after AFK kick (maybe also when it moves to spectators). When you got AFK kick, rejoin and get one more AFK death then plugin kicks instantly no matter what is in "AfkDeaths".
+        * AFK action moving to spectators don't work
+        
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
