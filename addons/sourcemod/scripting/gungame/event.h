@@ -57,5 +57,6 @@ new CustomKillPerLevel[GUNGAME_MAX_LEVEL];
 new PlayerLevel[MAXPLAYERS + 1];
 new CurrentKillsPerWeap[MAXPLAYERS + 1];
 new CurrentLevelPerRound[MAXPLAYERS + 1];
+new CurrentLevelPerRoundTriple[MAXPLAYERS + 1];
 new CurrentLeader;
 new GameWinner;

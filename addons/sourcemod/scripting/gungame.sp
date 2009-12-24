@@ -303,7 +303,8 @@ public OnClientDisconnect(client)
     
     PlayerLevel[client] = 0;
     CurrentKillsPerWeap[client] = NULL;
-    CurrentLevelPerRound[client] = NULL;
+    CurrentLevelPerRound[client] = 0;
+    CurrentLevelPerRoundTriple[client] = 0;
     PlayerState[client] = NULL;
     
     if ( IsClientInGame(client) && IsPlayerAlive(client) )

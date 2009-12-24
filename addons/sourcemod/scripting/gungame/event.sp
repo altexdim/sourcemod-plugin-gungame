@@ -448,11 +448,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 }
             }
 
-            new bool:Stop;
             if ( VictimLevel )
             {
-                UTIL_ChangeLevel(Victim, -1, Stop, true, true);
-                if ( Stop )
+                new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
+                if ( ChangedLevel == VictimLevel )
                 {
                     if ( KnifeLevel ) {
                         break;
@@ -460,7 +459,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         return;
                     }
                 }
-                UTIL_PlaySound(Victim, Down);
             }
 
             if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
@@ -469,9 +467,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             }
 
             new oldLevelKiller = level;
-            level = UTIL_ChangeLevel(Killer, 1, Stop, true, true);
+            level = UTIL_ChangeLevel(Killer, 1, true);
 
-            if ( Stop || GameWinner )
+            if ( oldLevelKiller == level || GameWinner )
             {
                 return;
             }
@@ -479,27 +477,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
             CurrentLevelPerRound[Killer]++;
-            UTIL_PlaySound(Killer, Steal);
                    
             if ( TurboMode )
             {
                 UTIL_GiveNextWeapon(Killer, level);
-                return;
             }
 
-            if ( TripleLevelBonus && CurrentLevelPerRound[Killer] == 3 )
-            {
-                decl String:Name[MAX_NAME_SIZE];
-                GetClientName(Killer, Name, sizeof(Name));
-
-                CPrintToChatAllEx(Killer, "%t", "Triple leveled", Name);
-
-                CreateTimer(10.0, RemoveBonus, Killer);
-                UTIL_SetClientGodMode(Killer, 1);
-                SetEntDataFloat(Killer, OffsetMovement, 1.5);
-
-                EmitSoundToAll(EventSounds[Triple], Killer, SNDCHAN_BODY);
-            }
+            CheckForTripleLevel(Killer);
 
             return;
         }
@@ -553,8 +537,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
     }
     
-    CurrentLevelPerRound[Killer]++;
-
     if ( KnifeElite )
     {
         PlayerState[Killer] |= KNIFE_ELITE;
@@ -562,18 +544,23 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     new bool:Stop;
     new oldLevelKiller = level;
-    level = UTIL_ChangeLevel(Killer, 1, Stop);
+    level = UTIL_ChangeLevel(Killer, 1);
 
-    if ( Stop || GameWinner )
+    if ( oldLevelKiller == level || GameWinner )
     {
         return;
     }
+
+    CurrentLevelPerRound[Killer]++;
+
     PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
 
     if ( TurboMode )
     {
         UTIL_GiveNextWeapon(Killer, level);
     }
+
+    CheckForTripleLevel(Killer);
 }
 
 // Player has spawned
@@ -639,7 +626,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     /* Set user with helm. */
     SetEntData(client, OffsetHelm, 1);
 
-    CurrentLevelPerRound[client] = NULL;
+    CurrentLevelPerRound[client] = 0;
+    CurrentLevelPerRoundTriple[client] = 0;
 
     if(team == TEAM_CT)
     {
@@ -823,6 +811,10 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             /* Give them a level if give level for objective */
             new oldLevel = PlayerLevel[client];
             new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
+            if ( newLevel == oldLevel) 
+            {
+                return;
+            }
             decl String:cname[MAX_NAME_SIZE];
             if ( client && IsClientConnected(client) && IsClientInGame(client) )
             {
@@ -852,6 +844,10 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
 
             new oldLevel = PlayerLevel[client];
             new newLevel = UTIL_ChangeLevel(client, -1);
+            if ( oldLevel == newLevel )
+            {
+                return;
+            }
             PrintLeaderToChat(client, oldLevel, newLevel, Name);
             
             CPrintToChatAllEx(client, "%t", "Has lost a level by killing a hostage", Name);
@@ -870,6 +866,7 @@ stock ClientSuicide(client, const String:Name[])
 
 public Action:RemoveBonus(Handle:timer, any:client)
 {
+    CurrentLevelPerRoundTriple[client] = 0;
     if(IsClientInGame(client) && IsPlayerAlive(client))
     {
         UTIL_SetClientGodMode(client, 0);
@@ -902,3 +899,20 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
+CheckForTripleLevel(client)
+{
+    CurrentLevelPerRoundTriple[client]++;
+    if ( TripleLevelBonus && CurrentLevelPerRoundTriple[client] == 3 )
+    {
+        decl String:Name[MAX_NAME_SIZE];
+        GetClientName(client, Name, sizeof(Name));
+
+        CPrintToChatAllEx(client, "%t", "Triple leveled", Name);
+
+        CreateTimer(10.0, RemoveBonus, client);
+        UTIL_SetClientGodMode(client, 1);
+        SetEntDataFloat(client, OffsetMovement, 1.5);
+
+        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_BODY);
+    }
+}

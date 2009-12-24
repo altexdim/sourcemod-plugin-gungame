@@ -168,8 +168,14 @@ public __RemoveALevel(Handle:plugin, numParams)
     {
         CurrentLevelPerRound[client] = 0;
     }
+    CurrentLevelPerRoundTriple[client] = 0;
     
+    new oldLevel = PlayerLevel[client];
     new level = UTIL_ChangeLevel(client, -1);
+    if ( level == oldLevel )
+    {
+        return 0;
+    }
 
     if(TurboMode)
     {
@@ -196,14 +202,22 @@ public __AddALevel(Handle:plugin, numParams)
     {
         return 0;
     }
-
+    
     CurrentLevelPerRound[client]++;
+
+    new oldLevel = PlayerLevel[client];
     new level = UTIL_ChangeLevel(client, 1);
+    if ( level == oldLevel )
+    {
+        return 0;
+    }
 
     if(TurboMode)
     {
         UTIL_GiveNextWeapon(client, level);
     }
+
+    CheckForTripleLevel(client);
 
     return level;
 }
@@ -292,12 +306,20 @@ public __AddAPoint(Handle:plugin, numParams)
     }
 
     CurrentLevelPerRound[client]++;
+
+    new oldLevel = PlayerLevel[client];
     level = UTIL_ChangeLevel(client, 1);
+    if ( level == oldLevel )
+    {
+        return 0;
+    }
 
     if(TurboMode)
     {
         UTIL_GiveNextWeapon(client, level);
     }
+
+    CheckForTripleLevel(client);
 
     return 0;
 }
@@ -332,9 +354,15 @@ public __RemoveAPoint(Handle:plugin, numParams)
         {
             CurrentLevelPerRound[client] = 0;
         }
+        CurrentLevelPerRoundTriple[client] = 0;
     }
 
+    new oldLevel = PlayerLevel[client];
     level = UTIL_ChangeLevel(client, -1);
+    if ( oldLevel == level )
+    {
+        return 0;
+    }
 
     /* They lost a level if turbo mode is enabled return them back to the previous weapon */
     if(TurboMode)

@@ -363,12 +363,7 @@ TODO
         use hlstatsx. The extra processing for top10 etc is not necessary.    
 
     * Bug report    
-        Players do not triple level. Fast speed, sound etc - when they get 3 levels.
-
-        On the normal priority fix list:
-
-        * These function arent working:
-        - Triplelevelbonus
+        [IN-PROGRESS] * Players do not triple level. Fast speed, sound etc - when they get 3 levels.
 
     * Bug report
        1.  when I have "WarmupStartup" "1" and each team has a player then new round starts with info in chat "[GunGame] Warmup round has not started yet" when should be "[GunGame] Warmup round is in progress". It is ok in next round.

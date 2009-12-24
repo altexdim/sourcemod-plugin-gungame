@@ -315,7 +315,7 @@ UTIL_PlaySoundForLeaderLevel()
     }
 }
 
-UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = false, bool:SuppressSound = false)
+UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 {
     if ( !difference || !IsActive || (WarmupEnabled && WarmupReset) )
     {
@@ -345,7 +345,7 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
 
     if ( ret )
     {
-        Return = true;
+        PlayerLevel[client] = oldLevel;
         return oldLevel;
     }
 
@@ -360,16 +360,13 @@ UTIL_ChangeLevel(client, difference, &bool:Return = false, bool:KnifeSteal = fal
     PlayerLevel[client] = Level;
     UTIL_RecalculateLeader(client, oldLevel, Level);
     
-    if ( !SuppressSound )
+    if ( difference < 0 )
     {
-        if ( difference < 0 )
-        {
-            UTIL_PlaySound(client, Down);
-        }
-        else 
-        {
-            UTIL_PlaySound(client, Up);
-        }
+        UTIL_PlaySound(client, Down);
+    }
+    else 
+    {
+        UTIL_PlaySound(client, Up);
     }
 
     TotalLevel += difference;
@@ -604,8 +601,6 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     {
         return;
     }
-
-    CurrentLevelPerRound[client] = NULL;
 
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     if ( slot == Slot_Knife )

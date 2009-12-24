@@ -47,7 +47,12 @@ public Action:_CmdSetLevel(client, args)
     GetCmdArg(1, Arg, sizeof(Arg));
 
     new oldLevel = PlayerLevel[client];
-    new newLevel = UTIL_ChangeLevel(client, StringToInt(Arg));
+    new setLevel = StringToInt(Arg)-1;
+    if ( setLevel < 0 || setLevel >= WeaponOrderCount )
+    {
+        setLevel = 0;
+    }
+    new newLevel = UTIL_ChangeLevel(client, setLevel - oldLevel); // todo: need to test this
     decl String:name[MAX_NAME_SIZE];
     if ( client && IsClientConnected(client) && IsClientInGame(client) )
     {
