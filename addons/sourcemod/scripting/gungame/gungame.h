@@ -105,7 +105,8 @@ new const WeaponAmmo[Weapons:MAXWEAPON] =
 /**
  * Minimum level to win on max timelimit reached.
  */
-new MinimumLevel;
+// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+// new MinimumLevel;
 
 new String:EventSounds[Sounds:MaxSounds][64];
 
@@ -133,7 +134,8 @@ new Handle:FwdStart = INVALID_HANDLE;
 new Handle:FwdShutdown = INVALID_HANDLE;
 
 new Handle:WarmupTimer = INVALID_HANDLE;
-new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
+// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+//new UserMsg:VGUIMenu = INVALID_MESSAGE_ID;
 
 new bool:IsActive = false;
 new bool:IsObjectiveHooked;

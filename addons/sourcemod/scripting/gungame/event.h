@@ -38,7 +38,8 @@
 new PlayerState[MAXPLAYERS + 1];
 new PlayerOnGrenade;
 
-new bool:IsIntermissionCalled;
+// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+// new bool:IsIntermissionCalled;
 
 /**
  * Caching information to see if there aleast a player on each team

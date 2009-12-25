@@ -88,8 +88,11 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 MultiKillChat = bool:StringToInt(value);
             } else if(strcmp("JoinMessage", key, false) == 0) {
                 JoinMessage = bool:StringToInt(value);
+            // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+            /*
             } else if(strcmp("IntermissionCalcWinner", key, false) == 0) {
                 IntermissionCalcWinner = bool:StringToInt(value);
+            */
             } else if(strcmp("VoteLevelLessWeaponCount", key, false) == 0) {
                 VoteLevelLessWeaponCount = StringToInt(value);
             } else if(strcmp("CanLevelDownOnGrenade", key, false) == 0) {
@@ -306,7 +309,8 @@ public GG_ConfigEnd()
 
     UTIL_ConvertWeaponToIndex();
 
-    MinimumLevel = WeaponOrderCount / 2;
+    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    // MinimumLevel = WeaponOrderCount / 2;
     WeaponLevelPages = (WeaponOrderCount / 7);
 
     if((WeaponOrderCount - (WeaponLevelPages * 7)) != 0)

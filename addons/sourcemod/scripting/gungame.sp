@@ -99,7 +99,8 @@ public OnPluginStart()
     PlayerLevelsBeforeDisconnect = CreateTrie();
     
     // ConVar
-    VGUIMenu = GetUserMessageId("VGUIMenu");
+    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    // VGUIMenu = GetUserMessageId("VGUIMenu");
     mp_friendlyfire = FindConVar("mp_friendlyfire");
     mp_restartgame = FindConVar("mp_restartgame");
     
@@ -148,6 +149,15 @@ public OnClientAuthorized(client, const String:auth[])
             PlayerLevel[client] = level;
         }
     }
+    
+    if ( CurrentLeader && (PlayerLevel[client] > PlayerLevel[CurrentLeader]) )
+    {
+        CurrentLeader = client;
+        UTIL_PlaySoundForLeaderLevel();
+        decl String:name[MAX_NAME_SIZE];
+        GetClientName(client, name, sizeof(name));
+        PrintLeaderToChat(client, 0, PlayerLevel[client], name);
+    }
 }
 
 public OnPluginEnd()
@@ -188,7 +198,8 @@ public OnMapEnd()
     MapStatus = NULL;
     HostageEntInfo = NULL;
     IsVotingCalled = false;
-    IsIntermissionCalled = false;
+    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    // IsIntermissionCalled = false;
     GameWinner = NULL;
     TotalLevel = NULL;
     CurrentLeader = NULL;
@@ -372,7 +383,8 @@ public GG_OnShutdown(bool:Command)
         WarmupInitialized = false;
         WarmupCounter = NULL;
         IsVotingCalled = false;
-        IsIntermissionCalled = false;
+        // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+        // IsIntermissionCalled = false;
         GameWinner = NULL;
         TotalLevel = NULL;
         CurrentLeader = NULL;

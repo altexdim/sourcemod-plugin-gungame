@@ -52,7 +52,8 @@ new bool:RemoveBonusWeaponAmmo;
 new bool:ReloadWeapon;
 new bool:MultiKillChat;
 new bool:JoinMessage;
-new bool:IntermissionCalcWinner;
+// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+// new bool:IntermissionCalcWinner;
 new bool:CanStealFirstLevel;
 new bool:CanLevelDownOnGrenade;
 new VoteLevelLessWeaponCount;

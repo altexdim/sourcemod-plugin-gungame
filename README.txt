@@ -120,6 +120,8 @@ Credits
 
 Changelog
 ---------
+        * Fixed: recalculate leader if restored level is greater than leader level.
+        
     1.0.5.9:
         * Fix for 1.0.5.8 and 1.0.5.7: gungame does not work at all. I forgot to remove very last hack.
 

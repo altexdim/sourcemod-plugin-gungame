@@ -406,7 +406,8 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         Call_PushString(WeaponName[WeaponOrderId[Level - 1]][7]);
         Call_Finish();
 
-        IsIntermissionCalled = true;
+        // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+        // IsIntermissionCalled = true;
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();

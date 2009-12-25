@@ -65,9 +65,11 @@ OnEventShutdown()
     //UnhookUserMessage(VGUIMenu, _VGuiMenu);
 }
 
+// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+/*
 public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
 {
-    /* Check if init is always false after the first call. */
+    // Check if init is always false after the first call.
     if(!IsActive || IsIntermissionCalled || !IntermissionCalcWinner)
     {
         return;
@@ -80,10 +82,10 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
     {
         IsIntermissionCalled =  true;
 
-        /* Do intermission calculation if a winner wasn't declared by completing the weapon order. */
+        // Do intermission calculation if a winner wasn't declared by completing the weapon order.
         if(!GameWinner)
         {
-            /* No decisive winner has completed the game. */
+            // No decisive winner has completed the game.
             if(!CurrentLeader)
             {
                 CurrentLeader = FindLeader();
@@ -106,7 +108,7 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
                 if(!BotCanWin && IsFakeClient(CurrentLeader))
                 {
                     CurrentLeader = FindLeader(true);
-                    /* No real player was found */
+                    // No real player was found
                     if( !CurrentLeader )
                     {
                         return;
@@ -160,10 +162,11 @@ public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, 
                     }
                 }
             }
-            /* else no leader was found so no winner. */
+            // else no leader was found so no winner.
         }
     }
 }
+*/
 
 public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
