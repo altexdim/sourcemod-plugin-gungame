@@ -521,6 +521,14 @@ TODO
       and then gungame plugin add him knife. But then he disconnects
       and respawning (after entren the game) but there is dropped
       knife.
+      
+    * Another great way to remove weapons on player death:
+        new ent = -1
+        if ((ent = FindEntityByClassname(ent, "game_weapon_manager")) > -1)
+        {
+            SetVariantString("maxpieces 0");
+            AcceptEntityInput(ent, "AddOutput");
+        }      
 
 Issues
 -------
