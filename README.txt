@@ -399,6 +399,10 @@ TODO
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
 
+    * Finally i got this minor bug when a player reach triple level, the triple level sound (default 
+        one) stop playing after 1 sec, i'm not sure if it comes from my server or your new version, 
+        any suggestion much appraciated. (Running turbo mod with respawn)        
+        
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
