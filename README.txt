@@ -120,6 +120,14 @@ Credits
 
 Changelog
 ---------
+    1.0.5.7:
+        * Fixed bug:
+            Miltilevel with knife does not work if knifepro enabled.
+    
+        * Improvement:
+            I'm getting info in chat during warmup "[GunGame] You are on level 1 :: glock". 
+            I think that player level info shouldn't appear when I have "ResetLevelAfterWarmup" "1".
+
     1.0.5.6:
         + Added russian translation.
         + Added german translation. Thanks to tObIwAnKeNoBi.
@@ -378,27 +386,6 @@ TODO
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
 
-    * Miltilevel with knife does not work if knifepro enabled.
-    
-    * Bug report:
-        /* Knife only during warmup otherwise allow them to use the default weapon*/
-        "WarmupKnifeOnly" "0"
-
-        When I have it and "WarmupNades" "1" I still don't get default weapon (only knife and 
-        nade). With "WarmupNades" "0" it works as expected but I can't get nade with default warmup weapon.
-
-        With working "WarmupKnifeOnly" "0" I'm getting info in chat during warmup "
-        [GunGame] You are on level 1 :: glock". I think that player level info shouldn't appear when 
-        I have "ResetLevelAfterWarmup" "1".
-
-        Plugin removes all weapons without parent on first warmup kill. After warmup it don't remove 
-        it, only death players weapons (if enabled in config). Please disable entities remove in 
-        warmup because it's unnecessary and removes extra weapons given by map's creator.
-
-        @EDIT: I think it's a good idea to remove weapons when you have "WarmupKnifeOnly" "0" 
-        but it should remove all weapons on round start, not after first kill because you can 
-        still get some gun and this supposes to be knife only then.    
-        
     ----====----==== Normal priority list ----====----====
 
     + Feature request:

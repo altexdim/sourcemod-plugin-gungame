@@ -460,6 +460,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         return;
                     }
                 }
+
+                CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
+            }
+
+            if ( KnifeLevel )
+            {
+                break;
             }
 
             if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
@@ -475,7 +482,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 return;
             }
 
-            CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
             CurrentLevelPerRound[Killer]++;
                    
@@ -704,7 +710,10 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         killsPerLevel = MinKillsPerLevel;
     }
 
-    CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
+    if ( !WarmupEnabled || !WarmupReset )
+    {
+        CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
+    }
 
     if ( killsPerLevel > 1 )
     {
