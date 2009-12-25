@@ -603,7 +603,7 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     }
     if ( slot == Slot_Grenade )
     {
-        UTIL_ForceDropWeaponBySlot(client, Slot_Primary;
+        UTIL_ForceDropWeaponBySlot(client, Slot_Primary);
         UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
         if (NadeBonusWeaponId)
         {
