@@ -120,6 +120,7 @@ Credits
 
 Changelog
 ---------
+    1.0.5.8:
         - Removed unused hacks.
 
     1.0.5.7:
