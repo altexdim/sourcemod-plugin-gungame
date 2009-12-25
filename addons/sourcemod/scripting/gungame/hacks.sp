@@ -40,7 +40,6 @@ OnHackStart()
     GameConf = LoadGameConfigFile("gungame.games");
 
     CreateEndMultiplayerGame();
-    CreateRemoveHack();
     CreateDropHack();
     CreateGetAmmoTypeHack();
     CreateRemoveAmmoHack();
@@ -109,19 +108,6 @@ CreateGetAmmoTypeHack()
     if(GetAmmoType == INVALID_HANDLE)
     {
         SetFailState("Virtual CBaseCombatWeapon::GetPrimaryAmmoType Failed. Please contact the author.");
-    }
-}
-
-CreateRemoveHack()
-{
-    StartPrepSDKCall(SDKCall_Static);
-    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "UTIL_Remove");
-    PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
-    UTILRemove = EndPrepSDKCall();
-
-    if(UTILRemove == INVALID_HANDLE)
-    {
-        SetFailState("Signature CBaseEntity::UTIL_Remove Failed. Please contact author");
     }
 }
 

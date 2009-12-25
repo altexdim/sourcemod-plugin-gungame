@@ -120,6 +120,9 @@ Credits
 
 Changelog
 ---------
+    1.0.5.9:
+        * Fix for 1.0.5.8 and 1.0.5.7: gungame does not work at all. I forgot to remove very last hack.
+
     1.0.5.8:
         - Removed unused hacks.
 

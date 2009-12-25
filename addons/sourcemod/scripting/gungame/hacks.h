@@ -38,7 +38,6 @@
 new Handle:GameConf;
 
 new Handle:CSWeaponDrop;
-new Handle:UTILRemove;
 new Handle:GetAmmoType;
 new Handle:RemoveAmmo;
 new Handle:EndMultiplayerGame;
