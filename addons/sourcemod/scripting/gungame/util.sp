@@ -480,8 +480,16 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
         // HACK_CSWeaponDrop(client, ent);
         
         // I believe that it is more correct than using HACK_CSWeaponDrop
-        RemovePlayerItem(client, ent);
-        RemoveEdict(ent);
+        if ( slot == Slot_C4 )
+        {
+            HACK_CSWeaponDrop(client, ent);
+            HACK_Remove(ent);
+        }
+        else
+        {
+            RemovePlayerItem(client, ent);
+            RemoveEdict(ent);
+        }
         return -1;
     }
 

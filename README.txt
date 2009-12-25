@@ -120,6 +120,9 @@ Credits
 
 Changelog
 ---------
+    1.0.5.12:
+        * Fixed: server crash when removing C4 (with remove map objectives enabled).
+    
     1.0.5.11:
         * Fixed: not level down for suicide after round end.
         * Improvement: weapon removement improved.

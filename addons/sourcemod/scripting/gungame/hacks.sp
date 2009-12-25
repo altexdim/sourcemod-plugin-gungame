@@ -44,7 +44,8 @@ OnHackStart()
     CreateGetAmmoTypeHack();
     CreateRemoveAmmoHack();
     CreateGetSlotHack();
-
+    CreateRemoveHack();
+    
     CloseHandle(GameConf);
 }
 
@@ -156,3 +157,32 @@ HACK_EndMultiplayerGame()
 {
     SDKCall(EndMultiplayerGame);
 }
+
+CreateRemoveHack()
+{
+    StartPrepSDKCall(SDKCall_Static);
+    PrepSDKCall_SetFromConf(GameConf, SDKConf_Signature, "UTIL_Remove");
+    PrepSDKCall_AddParameter(SDKType_CBaseEntity, SDKPass_Pointer);
+    UTILRemove = EndPrepSDKCall();
+
+    if(UTILRemove == INVALID_HANDLE)
+    {
+        SetFailState("Signature CBaseEntity::UTIL_Remove Failed. Please contact author");
+    }
+}
+
+/**
+ * Removes from the world.
+ *
+ * @param entity        entity index
+ * @noreturn
+ */
+HACK_Remove(entity)
+{
+    /* Just incase 0 get passed */
+    if(entity)
+    {
+        SDKCall(UTILRemove, entity);
+    }
+}
+
