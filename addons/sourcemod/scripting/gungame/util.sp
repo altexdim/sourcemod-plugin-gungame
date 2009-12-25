@@ -471,7 +471,13 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
     new ent = GetPlayerWeaponSlot(client, _:slot);
     if ( ent > 0 )
     {
-        //HACK_CSWeaponDrop(client, ent);
+        // TODO: test and find out which is correct method
+        // native bool:RemovePlayerItem(client, item);
+        // or removeedict ?
+
+        // TODO: find out is HACK_CSWeaponDrop needed here
+        HACK_CSWeaponDrop(client, ent);
+
         RemoveEdict(ent);
         return -1;
     }
