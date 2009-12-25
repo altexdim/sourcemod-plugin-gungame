@@ -150,21 +150,6 @@ HACK_CSWeaponDrop(client, weapon)
 }
 
 /**
- * Removes from the world.
- *
- * @param entity        entity index
- * @noreturn
- */
-HACK_Remove(entity)
-{
-    /* Just incase 0 get passed */
-    if(entity)
-    {
-        SDKCall(UTILRemove, entity);
-    }
-}
-
-/**
  * Returns the ammo type for the weapon
  *
  * @param weapon        Weapon entity index
