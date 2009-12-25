@@ -39,21 +39,8 @@ new Handle:GameConf;
 
 new Handle:CSWeaponDrop;
 new Handle:UTILRemove;
-new Handle:GiveAmmo;
 new Handle:GetAmmoType;
 new Handle:RemoveAmmo;
 new Handle:EndMultiplayerGame;
 new Handle:GetSlot;
 
-//#define HACKS 1  
-
-#if defined HACKS
-new Handle:SDKTools_GameConf;
-new Handle:_RemovePlayerItem;
-new Handle:GiveNamedItem;
-new Handle:Weapon_GetSlot;
-new Handle:InputGameEnd;
-new Handle:RemoveAllAmmo;
-new Handle:RoundRespawn;
-new Handle:Delete;
-#endif

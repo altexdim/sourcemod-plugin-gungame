@@ -491,28 +491,9 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
  */
 
 /*
-ToDo:
-Waiting for menu system for map voting when time is close to up or if they set mp_timelimit to 0.
-In the future when ability to call CBasePlayer::RoundRespawn DM GunGame
-In the future when ability to call ChangeTeam to Spectator.
+old todo:
 Wait for CBasePlayer?::GetWeaponSlot()
 Check byte size for SendProp Offset
-PHP website config maker.
-
-A good option to add is possible a random weapon order generator.
-
 */
 
-/**
- * Hint messages are in the middle bottom of the screen.
- * PRINT_CENTER is in the middle alittle bit above middle.
- */
-
 /* I wonder sending game_end or round_end with nextlevel cvar will force map to change? */
-
-
-/**
- * Info from Welder about logging the win for HLStatsX
- * L 05/14/2007 - 10:46:54: player triggered gg_win
- */
-

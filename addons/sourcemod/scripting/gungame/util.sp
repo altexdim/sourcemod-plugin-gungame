@@ -35,9 +35,6 @@
  * Another person who I would like to thank is OneEyed.
  */
 
-/**
- * ToDo: Faluco make FindEntityByClassname
- */
 UTIL_FindMapObjective()
 {
     new i = FindEntityByClassname(-1, "func_bomb_target");
@@ -473,13 +470,13 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
     }
 
     new ent = GetPlayerWeaponSlot(client, _:slot);
-    if(ent != -1)
+    if ( ent > 0 )
     {
         HACK_CSWeaponDrop(client, ent);
         
-        if(remove)
+        if ( remove )
         {
-            HACK_Remove(ent);
+            RemoveEdict(ent);
             return -1;
         }
 
@@ -512,7 +509,7 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
         }
 
         ent = GetPlayerWeaponSlot(client, _:i);
-        if(ent != -1)
+        if ( ent > 0 )
         {
             if(i == Slot_Knife && !DropKnife || i == Slot_C4 && !DropBomb)
             {
@@ -521,9 +518,9 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
 
             HACK_CSWeaponDrop(client, ent);
 
-            if(remove)
+            if ( remove )
             {
-                HACK_Remove(ent);
+                RemoveEdict(ent);
             }
         }
     }
@@ -538,16 +535,17 @@ UTIL_DropAllGrenades(client, bool:remove = false)
 {
     for(new i = 0, ent; i , i < 4; i++)
     {
-        if((ent = GetPlayerWeaponSlot(client, _:Slot_Grenade)) == -1)
+        ent = GetPlayerWeaponSlot(client, _:Slot_Grenade);
+        if ( ent < 1 )
         {
             break;
         }
 
         HACK_CSWeaponDrop(client, ent);
 
-        if(remove)
+        if ( remove )
         {
-            HACK_Remove(ent);
+            RemoveEdict(ent);
         }
     }
 }
@@ -582,7 +580,7 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
 
                     if(remove)
                     {
-                        HACK_Remove(ent);
+                        RemoveEdict(ent);
                         return -1;
                     }
                 }
@@ -616,7 +614,7 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
         if (NadeBonusWeaponId)
         {
-            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]); // todo
+            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
             new Slots:slotBonus = WeaponSlot[NadeBonusWeaponId];
             if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) 
             {
@@ -662,7 +660,7 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
         }
     }
     /* Give new weapon */
-    new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]); // todo
+    new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
     if ( slot == Slot_Primary || slot == Slot_Secondary ) 
     {
         g_ClientSlotEnt[client][slot] = ent;

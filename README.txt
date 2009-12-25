@@ -120,6 +120,8 @@ Credits
 
 Changelog
 ---------
+        - Removed unused hacks.
+
     1.0.5.7:
         * Fixed bug:
             Miltilevel with knife does not work if knifepro enabled.

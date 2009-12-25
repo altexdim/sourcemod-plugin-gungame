@@ -307,9 +307,9 @@ public Action:RemoveHostages(Handle:timer)
             // Will this return 0 if there is no hostage id in the store? from m_iHostageEntityIDs
             edict = GetEntData(HostageEntInfo, OffsetHostage + (i * 4));
 
-            if(edict && IsValidEntity(edict))
+            if( (edict > 0) && IsValidEntity(edict) )
             {
-                HACK_Remove(edict);
+                RemoveEdict(edict);
                 SetEntData(HostageEntInfo, OffsetHostage + (i * 4), 0, _, true);
 
             } else {
@@ -755,7 +755,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
         if ( NadeBonusWeaponId )
         {
-            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]); // todo
+            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
             new Slots:slot = WeaponSlot[NadeBonusWeaponId];
             if ( slot == Slot_Primary || slot == Slot_Secondary ) 
             {
@@ -795,7 +795,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* No reason to give them knife again.  */
     } else if(WeapId != CSW_KNIFE) {
-        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]); // todo
+        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
         new Slots:slot = WeaponSlot[WeapId];
         if ( slot == Slot_Primary || slot == Slot_Secondary ) 
         {
