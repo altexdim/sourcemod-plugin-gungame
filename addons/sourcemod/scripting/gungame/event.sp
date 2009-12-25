@@ -206,7 +206,7 @@ public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast)
 
         if(client)
         {
-            UTIL_ForceDropWeaponBySlot(client, Slot_C4, true);
+            UTIL_ForceDropWeaponBySlot(client, Slot_C4);
         }
     }
 }

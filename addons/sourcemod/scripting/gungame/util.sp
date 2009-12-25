@@ -453,10 +453,9 @@ UTIL_FreezeAllPlayer()
  *
  * @param client        Player index.
  * @param slot            The player weapon slot. Look at enum Slots.
- * @param remove        Remove the weapon after drop
  * @return            Return entity index or -1 if not found
  */
-UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
+UTIL_ForceDropWeaponBySlot(client, Slots:slot)
 {
     if(slot == Slot_Grenade)
     {
@@ -472,15 +471,9 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot, bool:remove = false)
     new ent = GetPlayerWeaponSlot(client, _:slot);
     if ( ent > 0 )
     {
-        HACK_CSWeaponDrop(client, ent);
-        
-        if ( remove )
-        {
-            RemoveEdict(ent);
-            return -1;
-        }
-
-        return ent;
+        //HACK_CSWeaponDrop(client, ent);
+        RemoveEdict(ent);
+        return -1;
     }
 
     return -1;
@@ -603,15 +596,15 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     if ( slot == Slot_Knife )
     {
-        UTIL_ForceDropWeaponBySlot(client, Slot_Primary, true);
-        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Primary);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
         FakeClientCommand(client, "use %s", WeaponName[WeapId]);
         return;
     }
     if ( slot == Slot_Grenade )
     {
-        UTIL_ForceDropWeaponBySlot(client, Slot_Primary, true);
-        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary, true);
+        UTIL_ForceDropWeaponBySlot(client, Slot_Primary;
+        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
         if (NadeBonusWeaponId)
         {
             new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
@@ -648,14 +641,14 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     // slot == Slot_Primary || slot == Slot_Secondary 
     else
     {
-        UTIL_ForceDropWeaponBySlot(client, slot, true);
+        UTIL_ForceDropWeaponBySlot(client, slot);
         level = level - diff;
         if ( level > 0 )
         {
             new Weapons:LastWeapId = WeaponOrderId[level], Slots:Lastslot = WeaponSlot[LastWeapId];
             if ( (slot != Lastslot) && (Lastslot == Slot_Primary || Lastslot == Slot_Secondary) )
             {
-                UTIL_ForceDropWeaponBySlot(client, Lastslot, true);
+                UTIL_ForceDropWeaponBySlot(client, Lastslot);
             }
         }
     }

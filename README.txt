@@ -543,4 +543,3 @@ Issues
 
     3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
         a) https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
- 
