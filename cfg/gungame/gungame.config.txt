@@ -154,7 +154,9 @@
         /* Gives unlimited hegrenades to the player if he is on nage level */
         "UnlimitedNades" "0"
 
-        /* Gives unlimited hegrenades to the player if warmup is enabled */
+        /* Gives unlimited hegrenades to the player if warmup is enabled.
+           It should be named WarmupNadesAndKnifeOnly because it gives only knife and nades.
+        */
         "WarmupNades" "0"
 
         /* Remove objectives from map. 0 = Disabled, 1 = BOMB, 2 = HOSTAGE, 3 = BOTH*/
