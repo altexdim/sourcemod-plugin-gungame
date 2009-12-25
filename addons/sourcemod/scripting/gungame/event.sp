@@ -349,7 +349,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /* Kill self with world spawn */
     if ( Victim && !Killer )
     {
-        if ( WorldspawnSuicide )
+        if ( RoundStarted && WorldspawnSuicide )
         {
             ClientSuicide(Victim, vName);
         }

@@ -477,8 +477,10 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
         // or removeedict ?
 
         // TODO: find out is HACK_CSWeaponDrop needed here
-        HACK_CSWeaponDrop(client, ent);
-
+        // HACK_CSWeaponDrop(client, ent);
+        
+        // I believe that it is more correct than using HACK_CSWeaponDrop
+        RemovePlayerItem(client, ent);
         RemoveEdict(ent);
         return -1;
     }
@@ -516,11 +518,14 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
                 continue;
             }
 
-            HACK_CSWeaponDrop(client, ent);
-
             if ( remove )
             {
+                RemovePlayerItem(client, ent);
                 RemoveEdict(ent);
+            }
+            else
+            {
+                HACK_CSWeaponDrop(client, ent);
             }
         }
     }
@@ -541,11 +546,14 @@ UTIL_DropAllGrenades(client, bool:remove = false)
             break;
         }
 
-        HACK_CSWeaponDrop(client, ent);
-
         if ( remove )
         {
+            RemovePlayerItem(client, ent);
             RemoveEdict(ent);
+        }
+        else
+        {
+            HACK_CSWeaponDrop(client, ent);
         }
     }
 }
@@ -576,12 +584,15 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
             {
                 if(drop)
                 {
-                    HACK_CSWeaponDrop(client, ent);
-
-                    if(remove)
+                    if ( remove )
                     {
+                        RemovePlayerItem(client, ent);
                         RemoveEdict(ent);
                         return -1;
+                    }
+                    else
+                    {
+                        HACK_CSWeaponDrop(client, ent);
                     }
                 }
 
