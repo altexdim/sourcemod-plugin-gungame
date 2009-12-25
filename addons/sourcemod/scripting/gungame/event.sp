@@ -925,6 +925,6 @@ CheckForTripleLevel(client)
         UTIL_SetClientGodMode(client, 1);
         SetEntDataFloat(client, OffsetMovement, 1.5);
 
-        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_BODY);
+        EmitSoundToAll(EventSounds[Triple], client);
     }
 }
