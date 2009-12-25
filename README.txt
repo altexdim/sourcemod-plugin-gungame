@@ -120,6 +120,7 @@ Credits
 
 Changelog
 ---------
+    1.0.5.10:
         * Fixed: recalculate leader if restored level is greater than leader level.
         
     1.0.5.9:
