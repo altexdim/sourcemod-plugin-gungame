@@ -122,6 +122,7 @@ Changelog
 ---------
     1.0.5.12:
         * Fixed: server crash when removing C4 (with remove map objectives enabled).
+        * Fixed: When you steal level with knife you don't hear steal sound but level up sound.
     
     1.0.5.11:
         * Fixed: not level down for suicide after round end.

@@ -363,7 +363,14 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     }
     else 
     {
-        UTIL_PlaySound(client, Up);
+        if ( KnifeSteal )
+        {
+            UTIL_PlaySound(client, Steal);
+        }
+        else
+        {
+            UTIL_PlaySound(client, Up);
+        }
     }
 
     TotalLevel += difference;
