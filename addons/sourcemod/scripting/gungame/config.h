@@ -50,3 +50,4 @@ new bool:InternalIsActive = true;
 new bool:CommitSuicide = true;
 new bool:AlltalkOnWin = false;
 new bool:RestoreLevelOnReconnect;
+new bool:TripleLevelBonusGodMode;

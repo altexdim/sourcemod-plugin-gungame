@@ -95,6 +95,9 @@
         /* Triple Level Bonus */
         "TripleLevelBonus" "0"
 
+        /* Enable God Mode when triple leveled */
+        "TripleLevelBonusGodMode" "1"
+
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
         "KnifePro" "0"
 

@@ -823,7 +823,11 @@ public Action:RemoveBonus(Handle:timer, any:client)
     CurrentLevelPerRoundTriple[client] = 0;
     if(IsClientInGame(client) && IsPlayerAlive(client))
     {
-        UTIL_SetClientGodMode(client, 0);
+        SetEntityGravity(client, 1.0);
+        if ( TripleLevelBonusGodMode )
+        {
+            UTIL_SetClientGodMode(client, 0);
+        }
         SetEntDataFloat(client, OffsetMovement, 1.0);
     }
 }
@@ -864,7 +868,11 @@ CheckForTripleLevel(client)
         CPrintToChatAllEx(client, "%t", "Triple leveled", Name);
 
         CreateTimer(10.0, RemoveBonus, client);
-        UTIL_SetClientGodMode(client, 1);
+        SetEntityGravity(client, 0.5);
+        if ( TripleLevelBonusGodMode )
+        {
+            UTIL_SetClientGodMode(client, 1);
+        }
         SetEntDataFloat(client, OffsetMovement, 1.5);
 
         EmitSoundToAll(EventSounds[Triple], client);

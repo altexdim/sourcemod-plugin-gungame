@@ -125,6 +125,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 WarmupStartup = StringToInt(value);
             } else if(strcmp("TripleLevelBonus", key, false) == 0) {
                 TripleLevelBonus = bool:StringToInt(value);
+            } else if(strcmp("TripleLevelBonusGodMode", key, false) == 0) {
+                TripleLevelBonusGodMode = bool:StringToInt(value);
             } else if(strcmp("ObjectiveBonusWin", key, false) == 0) {
                 ObjectiveBonusWin = bool:StringToInt(value);
             } else if(strcmp("KnifeProHE", key, false) == 0) {
