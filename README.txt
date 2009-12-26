@@ -445,6 +445,9 @@ TODO
         cmdFormat += 'es_xfire %s env_spark AddOutput "traillength 3"; ' % attacker
         cmdFormat += 'es_xfire %s env_spark StartSpark' % attacker
         es.server.queuecmd(cmdFormat)
+        # Stop effect
+        es.server.queuecmd('es_xfire %s env_spark StopSpark' % userid)
+        es.server.queuecmd('es_xfire %s env_spark Kill' % userid)
     * Feature request:
         Add gravity boost the player on bonus.
         Add config variable to enabled/disable it.
