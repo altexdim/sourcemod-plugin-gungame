@@ -397,18 +397,23 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Move all panel texts to translation files.
-
     * gungame_stats is not optional because gungame_stats is required to run gungame. Can you please 
         fix it so it is optional. I believe only the gungame levelpanel depends on it for 'wins'.
 
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
-        
     * Bug report: Well i'm running a respawn/turbo server and it seems ff stays turned on even 
         if player is no longer on nade level. I'm running some tests and it seems the ff warning 
         is displayed when a player does reach nade even if another player is already on nade level 
         sometimes.
+    * Bug report: when somebody reaches knife level then you don't hear nade level sound (but this 
+        is ok, isn't it?); however, when somebody else reaches knife level then you don't hear next 
+        knife level sound and I think it's bad because this is usually last level and everybody 
+        should now that next knifer is among them
+    * Bug report: after nade kill you get knife instantly, on next spawn knife is not your default 
+        weapon and you have to switch to it manually; it would be nice to have it on spawn as 
+        primary weapon ;)
 
     ----====----==== Normal priority list ----====----====
 
