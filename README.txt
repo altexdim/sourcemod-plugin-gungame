@@ -419,7 +419,10 @@ TODO
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
-
+    * I noticed this on respawn servers, the FF is not enabled directly when a player reach nade 
+        level, but only if he dies and respawns. (So if he doesnt die, the game can end without 
+        ff being enabled.
+    
     ----====----==== Normal priority list ----====----====
 
     * Feature request:
