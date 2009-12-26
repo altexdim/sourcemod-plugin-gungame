@@ -120,6 +120,14 @@ Credits
 
 Changelog
 ---------
+        * Fixed:
+            L 12/26/2009 - 20:41:35: [SM] Plugin encountered error 25: Call was aborted
+            L 12/26/2009 - 20:41:35: [SM] Native "ThrowError" reported: Client 3 is not in game
+            L 12/26/2009 - 20:41:35: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 12/26/2009 - 20:41:35: [SM]   [0]  Line 150, C:\css-server\server\cstrike\addons\sourcemod\scripting\include\colors.inc::CPrintToChatAllEx()
+            L 12/26/2009 - 20:41:35: [SM]   [1]  Line 499, gungame.sp::PrintLeaderToChat()
+            L 12/26/2009 - 20:41:35: [SM]   [2]  Line 158, gungame.sp::OnClientAuthorized()
+
     1.0.5.13:
         * Fixed:
             Bug report: Well i'm running a respawn/turbo server and it seems ff stays turned on even 

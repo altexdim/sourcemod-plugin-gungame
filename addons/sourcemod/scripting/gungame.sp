@@ -114,12 +114,6 @@ public OnClientAuthorized(client, const String:auth[])
     }
     
     UTIL_RecalculateLeader(client, 0, level);
-    if ( CurrentLeader && (level == PlayerLevel[CurrentLeader]) ) 
-    {
-        decl String:name[MAX_NAME_SIZE];
-        GetClientName(client, name, sizeof(name));
-        PrintLeaderToChat(client, 0, level, name);
-    }
 }
 
 public OnPluginEnd()
