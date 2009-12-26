@@ -291,6 +291,7 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     }
     // new level == leader level
     // tied to the lead
+    UTIL_PlaySoundForLeaderLevel();
 }
 
 UTIL_PlaySoundForLeaderLevel()

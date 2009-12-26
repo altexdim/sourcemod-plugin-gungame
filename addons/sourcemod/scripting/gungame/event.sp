@@ -684,6 +684,10 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
                 //Switch them back into hegrenade
                 FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
             }
+            else if ( WarmupKnifeOnly )
+            {
+                FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+            }
             
             if ( WarmupNades || WarmupKnifeOnly )
             {
@@ -729,31 +733,29 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     
     new pState = PlayerState[client];
 
-    if(AutoFriendlyFire && (pState & GRENADE_LEVEL) && WeapId != CSW_HEGRENADE)
+    if ( AutoFriendlyFire && (pState & GRENADE_LEVEL) && (WeapId != CSW_HEGRENADE) )
     {
         PlayerState[client] &= ~GRENADE_LEVEL;
 
-        if(--PlayerOnGrenade < 1)
+        if ( --PlayerOnGrenade < 1 )
         {
             UTIL_ChangeFriendlyFire(false);
         }
     }
 
-    if(WeapId == CSW_HEGRENADE)
+    if ( WeapId == CSW_HEGRENADE )
     {
-        if(AutoFriendlyFire && !GetConVarInt(mp_friendlyfire))
+        if ( AutoFriendlyFire && !(pState & GRENADE_LEVEL) )
         {
-            if(!(pState & GRENADE_LEVEL))
-            {
-                PlayerOnGrenade++;
-            }
-
+            PlayerOnGrenade++;
             PlayerState[client] |= GRENADE_LEVEL;
-
-            UTIL_ChangeFriendlyFire(true);
-            CPrintToChatAll("%t", "Friendly Fire has been enabled");
-
-            UTIL_PlaySound(0, AutoFF);
+                
+            if ( !GetConVarInt(mp_friendlyfire) )
+            {
+                UTIL_ChangeFriendlyFire(true);
+                CPrintToChatAll("%t", "Friendly Fire has been enabled");
+                UTIL_PlaySound(0, AutoFF);
+            }
         }
 
         if ( NadeBonusWeaponId )
@@ -783,15 +785,12 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
         GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
 
-        //Switch them back into hegrenade
-        FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
-
-        if(NadeSmoke)
+        if ( NadeSmoke )
         {
             GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
         }
 
-        if(NadeFlash)
+        if ( NadeFlash )
         {
             GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
         }
@@ -805,6 +804,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             g_ClientSlotEnt[client][slot] = ent;
         }
     }
+    
+    FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)

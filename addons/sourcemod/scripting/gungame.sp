@@ -150,13 +150,12 @@ public OnClientAuthorized(client, const String:auth[])
         }
     }
     
-    if ( CurrentLeader && (PlayerLevel[client] > PlayerLevel[CurrentLeader]) )
+    UTIL_RecalculateLeader(client, 0, level);
+    if ( CurrentLeader && (level == PlayerLevel[CurrentLeader]) ) 
     {
-        CurrentLeader = client;
-        UTIL_PlaySoundForLeaderLevel();
         decl String:name[MAX_NAME_SIZE];
         GetClientName(client, name, sizeof(name));
-        PrintLeaderToChat(client, 0, PlayerLevel[client], name);
+        PrintLeaderToChat(client, 0, level, name);
     }
 }
 
@@ -281,17 +280,20 @@ public Action:EndOfWarmup(Handle:timer)
 public OnClientDisconnect(client)
 {
     /* Clear current leader if player is leader */
-    if(CurrentLeader == client)
+    if ( CurrentLeader == client )
     {
-        /* It will find another leader during player_death event*/
-        CurrentLeader = NULL;
+        UTIL_RecalculateLeader(client, PlayerLevel[client], 0);
+        if ( CurrentLeader == client )
+        {
+            CurrentLeader = 0;
+        }
     }
 
-    if(PlayerState[client] & GRENADE_LEVEL)
+    if ( AutoFriendlyFire && (PlayerState[client] & GRENADE_LEVEL) )
     {
         PlayerState[client] &= ~GRENADE_LEVEL;
 
-        if(--PlayerOnGrenade < 1)
+        if ( --PlayerOnGrenade < 1 )
         {
             UTIL_ChangeFriendlyFire(false);
         }
