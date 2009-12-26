@@ -442,8 +442,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
             new oldLevelKiller = level;
             level = UTIL_ChangeLevel(Killer, 1, true);
-
-            if ( oldLevelKiller == level || GameWinner )
+            if ( oldLevelKiller == level )
             {
                 return;
             }
@@ -517,8 +516,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     new oldLevelKiller = level;
     level = UTIL_ChangeLevel(Killer, 1);
-
-    if ( oldLevelKiller == level || GameWinner )
+    if ( oldLevelKiller == level )
     {
         return;
     }
@@ -787,7 +785,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             /* Give them a level if give level for objective */
             new oldLevel = PlayerLevel[client];
             new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
-            if ( newLevel == oldLevel) 
+            if ( newLevel == oldLevel )
             {
                 return;
             }

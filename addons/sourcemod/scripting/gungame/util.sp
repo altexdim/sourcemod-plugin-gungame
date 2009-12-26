@@ -278,7 +278,7 @@ UTIL_PlaySoundForLeaderLevel()
 
 UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 {
-    if ( !difference || !IsActive || (WarmupEnabled && WarmupReset) )
+    if ( !difference || !IsActive || (WarmupEnabled && WarmupReset) || GameWinner )
     {
         return PlayerLevel[client];
     }
@@ -344,11 +344,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         TotalLevel = NULL;
     }
 
-    if ( GameWinner )
-    {
-        return Level;
-    }
-
     if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
     {
         /* Call map voting */
@@ -361,7 +356,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     /* WeaponOrder count is the last weapon. */
     if ( Level >= WeaponOrderCount )
     {
-
         /* Winner Winner Winner. They won the prize of gaben plus a hat. */
         decl String:Name[MAX_NAME_SIZE];
         GetClientName(client, Name, sizeof(Name));
