@@ -13,6 +13,26 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    * Feature requests: I have few suggestions:
+        * In warmup when you have "ResetLevelAfterWarmup" "1" and you don't level up, there 
+            is an info in chat "[GunGame] Player has lost a level by suicided" or any other 
+            about losing a level (i.e. tk). I think it's unnecessary since you can't gain 
+            or loss any level in this warmup mode.
+        * It would be nice to have information about leader weapon in chat message 
+            "[GunGame] Player is leading on level 10", like "[GunGame] Player is leading 
+            on level 10 :: xm1014"
+        * Add info about player's weapon in !scores and !level panels. It's hard to remember 
+            what weapon is on which level, so it might be a good idea to add such info 
+            together with level number. Now you have to know it first or check with !weapons 
+            command.
+        * !top10 panel looks ugly to me . What about
+              1. Player :: 100 wins
+          instead of
+              1. Player - Wins 100
+        * Browsable winners list would be a nice feature. You can replace !top10 with !top 
+            and make it browsable.
+        * New !leader command, which should show current leader(s) level, weapon and list 
+            of players on leader level in a panel.
     * Feature request:
         Add config variable to enabled/disable god mode on triple level.
     * Feature request:
