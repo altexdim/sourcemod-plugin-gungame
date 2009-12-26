@@ -19,7 +19,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team, bl4nk";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru, http://forums.alliedmods.net";
-stock const String:GUNGAME_VERSION[] = "1.0.5.13";
+stock const String:GUNGAME_VERSION[] = "1.0.5.14";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -142,7 +142,7 @@ enum State
 forward GG_OnStartup(bool:Command);
 
 /**
- * Called when gungame is disabled
+ * Called when gungame is disabled.
  *
  * @param Command       True if gungame was disabled by command.
  * @noreturn
@@ -150,16 +150,17 @@ forward GG_OnStartup(bool:Command);
 forward GG_OnShutdown(bool:Command);
 
 /**
- * Called when the player level changed
+ * Called when the player level changed.
  *
  * @param client        Player index.
  * @param level     Player current level.
  * @param difference    The difference in the level change.
  * @param steal     true if it was a knife steal otherwise false
  * @param last      true if player reached last level.
+ * @param knife     true if player reached knife level.
  * @return          Plugin_Handled; to stop the level change.
  */
-forward Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last);
+forward Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last, bool:knife);
 
 /**
  * Called when the player point per level changed.
@@ -179,6 +180,14 @@ forward Action:GG_OnClientPointChange(client, point, difference);
  * @noreturn
  */
 forward GG_OnWinner(client, const String:Weapon[]);
+
+/**
+ * Called when a client triple leveled.
+ *
+ * @param client        Player index.
+ * @noreturn
+ */
+forward GG_OnTripleLevel(client);
 
 /**
  * Called when warmup has ended.

@@ -1,9 +1,9 @@
 Changelog
 ---------
-        * [IN-PROGRESS] Improvement:
-            It would be nice if you could log triple levels just like level_up, level_down etc. Could 
-            you please add it to gungame_logging.
-            Add global forward with triple level event.
+    1.0.5.14:
+        + Add global forward with triple level event.
+        + Added "gg_triple_level" log event.
+        + Added "gg_last_level" log event.
         * Fixed:
             Bug report: I noticed this on respawn servers, the FF is not enabled directly when a player reach nade 
             level, but only if he dies and respawns. (So if he doesnt die, the game can end without 

@@ -89,6 +89,7 @@ new Handle:gungame_enabled = INVALID_HANDLE;
 new Handle:FwdLevelChange = INVALID_HANDLE;
 new Handle:FwdWarmupEnd = INVALID_HANDLE;
 new Handle:FwdWinner = INVALID_HANDLE;
+new Handle:FwdTripleLevel = INVALID_HANDLE;
 new Handle:FwdLeader = INVALID_HANDLE;
 new Handle:FwdVoteStart = INVALID_HANDLE;
 new Handle:FwdDeath = INVALID_HANDLE;

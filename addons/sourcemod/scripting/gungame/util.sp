@@ -302,6 +302,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     Call_PushCell(difference);
     Call_PushCell(KnifeSteal);
     Call_PushCell(Level == (WeaponOrderCount - 1));
+    Call_PushCell(CSW_KNIFE == WeaponOrderId[Level]);
     Call_Finish(ret);
 
     if ( ret )

@@ -865,5 +865,9 @@ CheckForTripleLevel(client)
         SetEntDataFloat(client, OffsetMovement, 1.5);
 
         EmitSoundToAll(EventSounds[Triple], client);
+        
+        Call_StartForward(FwdTripleLevel);
+        Call_PushCell(client);
+        Call_Finish();
     }
 }

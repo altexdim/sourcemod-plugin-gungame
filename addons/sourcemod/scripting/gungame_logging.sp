@@ -20,6 +20,11 @@ public GG_OnWinner(client, const String:Weapon[])
     LogEventToGame("gg_win", client);
 }
 
+public GG_OnTripleLevel(client)
+{
+    LogEventToGame("gg_triple_level", client);
+}
+
 public GG_OnLeaderChange(client, level, totalLevels)
 {
     if ( client && IsClientInGame(client) )
@@ -28,7 +33,7 @@ public GG_OnLeaderChange(client, level, totalLevels)
     }
 }
 
-public Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last)
+public Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool:last, bool:knife)
 {
     if ( !difference )
     {
@@ -36,12 +41,16 @@ public Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool
     }
     if ( difference > 0 )
     {
+        LogEventToGame("gg_levelup", client);
         if ( steal )
         {
             LogEventToGame("gg_knife_steal", client);
         }
-        LogEventToGame("gg_levelup", client);
         if ( last )
+        {
+            LogEventToGame("gg_last_level", client);
+        }
+        if ( knife )
         {
             LogEventToGame("gg_knife_level", client);
         }
