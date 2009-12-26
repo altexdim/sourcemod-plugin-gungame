@@ -428,6 +428,7 @@ TODO
     * Feature request:
         It would be nice if you could log triple levels just like level_up, level_down etc. Could 
         you please add it to gungame_logging.
+        Add global forward with triple level event.
     * Feature request:
         Add config variable to enabled/disable god mode on triple level.
     * Feature request:
