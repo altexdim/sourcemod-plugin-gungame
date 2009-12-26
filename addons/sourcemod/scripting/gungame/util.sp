@@ -577,6 +577,38 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
     return -1;
 }
 
+UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
+{
+    if ( !AutoFriendlyFire )
+    {
+        return;
+    }
+    new pState = PlayerState[client];
+    if ( (pState & GRENADE_LEVEL) && (WeapId != CSW_HEGRENADE) )
+    {
+        PlayerState[client] &= ~GRENADE_LEVEL;
+
+        if ( --PlayerOnGrenade < 1 )
+        {
+            UTIL_ChangeFriendlyFire(false);
+        }
+        return;
+    }
+    if ( !(pState & GRENADE_LEVEL) && (WeapId == CSW_HEGRENADE) )
+    {
+        PlayerOnGrenade++;
+        PlayerState[client] |= GRENADE_LEVEL;
+            
+        if ( !GetConVarInt(mp_friendlyfire) )
+        {
+            UTIL_ChangeFriendlyFire(true);
+            CPrintToChatAll("%t", "Friendly Fire has been enabled");
+            UTIL_PlaySound(0, AutoFF);
+        }
+        return;
+    }
+}
+
 UTIL_GiveNextWeapon(client, level, diff = 1)
 {
     if ( WarmupEnabled && WarmupKnifeOnly )
@@ -585,6 +617,9 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     }
 
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
+    
+    UTIL_CheckForFriendlyFire(client, WeapId);
+    
     if ( slot == Slot_Knife )
     {
         UTIL_ForceDropWeaponBySlot(client, Slot_Primary);

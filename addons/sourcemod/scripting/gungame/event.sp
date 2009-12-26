@@ -691,34 +691,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             CPrintToChat(client, "%t", "You need kills to advance to the next level", killsPerLevel - kills, kills, killsPerLevel);
         }
     }
-    
-    new pState = PlayerState[client];
 
-    if ( AutoFriendlyFire && (pState & GRENADE_LEVEL) && (WeapId != CSW_HEGRENADE) )
-    {
-        PlayerState[client] &= ~GRENADE_LEVEL;
-
-        if ( --PlayerOnGrenade < 1 )
-        {
-            UTIL_ChangeFriendlyFire(false);
-        }
-    }
+    UTIL_CheckForFriendlyFire(client, WeapId);
 
     if ( WeapId == CSW_HEGRENADE )
     {
-        if ( AutoFriendlyFire && !(pState & GRENADE_LEVEL) )
-        {
-            PlayerOnGrenade++;
-            PlayerState[client] |= GRENADE_LEVEL;
-                
-            if ( !GetConVarInt(mp_friendlyfire) )
-            {
-                UTIL_ChangeFriendlyFire(true);
-                CPrintToChatAll("%t", "Friendly Fire has been enabled");
-                UTIL_PlaySound(0, AutoFF);
-            }
-        }
-
         if ( NadeBonusWeaponId )
         {
             new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);

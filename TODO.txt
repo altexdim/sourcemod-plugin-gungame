@@ -1,0 +1,158 @@
+TODO
+----
+    ----====----==== High priority list ----====----====
+
+    * Move all panel texts to translation files.
+    * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
+        Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
+        it for 'wins'.
+
+        It would be nice if handicap could be moved out of gungame_stats because you don't really 
+        need stats to run the handicap. I just do not want to run gungame_stats at all because I 
+        use hlstatsx. The extra processing for top10 etc is not necessary.    
+    
+    ----====----==== Normal priority list ----====----====
+
+    * Feature request:
+        Add config variable to enabled/disable god mode on triple level.
+    * Feature request:
+        Add config variable to enabled/disable speed boost on triple level.
+    * Feature request:
+        Add visual effects to the player on bonus like blink golden effect and sparks.
+        Add config variable to enabled/disable it.
+        # Effect to player
+        cmdFormat = 'es_xgive %s env_spark; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark SetParent !activator; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "spawnflags 896"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "angles -90 0 0"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "magnitude 8"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "traillength 3"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark StartSpark' % attacker
+        es.server.queuecmd(cmdFormat)
+        # Stop effect
+        es.server.queuecmd('es_xfire %s env_spark StopSpark' % userid)
+        es.server.queuecmd('es_xfire %s env_spark Kill' % userid)
+    * Feature request:
+        Add gravity boost the player on bonus.
+        Add config variable to enabled/disable it.
+        # es Gravity
+        es.server.queuecmd('es_xfire %s !self "gravity 400"' % attacker)
+        # sm Gravity
+        SetEntityGravity(client, 400);
+    + Feature request:
+        I also have an idea about round start message like "You are on level 1 :: glock". What do you 
+        think about moving it to the hint box (like warmup timer) and add information about leader 
+        level like "Leader level 24 :: awp"?
+    + Feature request:
+        - configurable warmup weapon by cvar
+
+        For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
+        (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
+        
+        If enabled weapon reloading on kill then reload warmup weapon.
+    * Think about this feature request:
+        I also would like to request that plugin could save level kills when level down. 
+        For example when there are 3 kill levels and you have already killed 2 and somebody 
+        knifes you. Instead of starting from 0 kills on previous level you could continue 
+        from 2 kill. Many people on my server are constantly complaining one this issue.
+
+        Example:
+        was - level 4, points 2 (miltikill 4)
+        after knifed - level 3, point 1 (multikill 2)
+        levelNew = levelOld - 1, 
+        pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
+    + Feature request:
+        Is it possible to enable friendly fire earlier than on nade level
+    + Feature request:
+        If you kill yourself or a teammate you loose one level. I want set this 
+        to loose 2 levels, or 3, or...
+    + Implement gg_handicap_update like in esgg5.
+    * Is there a way to put more nades on he level, like this one 
+      for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
+    * Feature request:
+        1) I want to run a random weapon order but *always* have knife 
+        and nade as the last two weapons. When I turn random weapon order 
+        on it mixes knife and nade into the mix. Is there a way to make 
+        knife and nade the last two weapons?
+        Add something like configurable random weapons groups.
+    * Make removement buyzones on/off. So once gg is enabled than buyzones are
+      disabled, and when gg is disabled buyzones are enabled.
+      Maybe instead of removement buyzones just disable it to players on
+      spawn and when gg swithces enabled/disabled.
+    + Add winners menu - https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
+    
+    ----====----==== High severity list ----====----====
+    
+    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    + Add sqlite and mysql support for top players stats
+    * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    
+    ----====----==== Low priority list ----====----====
+    
+    + Implement !buylevel.
+    * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
+      I can not figure out algorythm to reproduce this bug. Maybe all is ok.
+    * [UNAPPROVED] Bug report:
+        2) I also like to require 2 kills per round. This works fine 
+        but with Knife Pro turned on, it still takes two knife kills to 
+        level up where it should only take one knife kill. Is there an 
+        option for this?
+    * [UNAPPROVED] Bug report:
+        I found two bugs.
+        - First, if the player has hegrenade, he's the last man standing in his team and 
+          he suicides, he doesn't loose his level.
+        - Second (maybe it's some problem w/ server), quite often when somebody makes a 
+          knivekill, server just shuts down and i have to restart it.
+        On the 1.0.0.1.12v the 2nd problem hasn't appeared, so I'm downgrading.
+    * Bug report:
+        [UNAPPROVED] I dont think that de Handicap works as it should :/
+        On my server i set it to "1" that means it should give the AVG level, but.
+        If a players joins the server he/she always got the first weapon no matter
+        what the AVG level is., but after he recconnect he get's the AVG level.
+        So in shot newly connected players aren't getting the avg level.
+    * Fix:
+        L 09/16/2009 - 13:49:26: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:26: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:26: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:26: [SM]   [1]  Line 465, gungame/event.sp::_PlayerDeath()
+
+        L 09/16/2009 - 13:49:36: [SM] Native "SetEntData" reported: Offset 0 is invalid
+        L 09/16/2009 - 13:49:36: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 09/16/2009 - 13:49:36: [SM]   [0]  Line 193, gungame/util.sp::UTIL_SetClientGodMode()
+        L 09/16/2009 - 13:49:36: [SM]   [1]  Line 857, gungame/event.sp::RemoveBonus()
+      Comment: Realy dont understand how it is possible. Is it knife throw plugin installed?
+      Think about what to do if Killer == 0.
+      I dont know how it is possible.
+    * Fix
+        L 08/31/2009 - 21:17:31: [SM] Native "UnhookEvent" reported: Game event "hostage_killed" has no active hook
+        L 08/31/2009 - 21:17:31: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 08/31/2009 - 21:17:31: [SM]   [0]  Line 399, gungame.sp::GG_OnShutdown()
+      I dont know how it is possible.
+    * These function arent working:
+        - [UNAPPROVED] Handicap (givin neewly connected player teh avg level)
+            So people are playing on server let's say there are 6 players 
+            and all of them are on the same level ( just to keep simple 
+            the explain), let say level 10.
+            A 7th player joins the game.
+            He should start at level 10 after joining T or CT ,
+            BUT!!!! he starts at level 1 instead.
+            He wil only get the avg. level by using the "retry" 
+            reconnect consoloe command. After reconnectig the plugin 
+            works fine and the player get's the avg. level.
+
+            So to keep it simple, neewly connected players don't get 
+            the avg or min level, only after recconecting.
+    * When bot just added than it is assigning to team and spawning 
+      before it "entered the game". So he did not receive knife
+      and then gungame plugin add him knife. But then he disconnects
+      and respawning (after entren the game) but there is dropped
+      knife.
+      
+    * Another great way to remove weapons on player death:
+        new ent = -1
+        if ((ent = FindEntityByClassname(ent, "game_weapon_manager")) > -1)
+        {
+            SetVariantString("maxpieces 0");
+            AcceptEntityInput(ent, "AddOutput");
+        }      
+
