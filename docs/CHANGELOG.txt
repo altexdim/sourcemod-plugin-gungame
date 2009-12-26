@@ -1,7 +1,7 @@
 Changelog
 ---------
     1.0.5.14:
-        + Add global forward with triple level event.
+        + Added global forward with triple level event.
         + Added "gg_triple_level" log event.
         + Added "gg_last_level" log event.
         * Fixed:
