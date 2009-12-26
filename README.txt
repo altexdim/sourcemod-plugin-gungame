@@ -125,7 +125,7 @@ Changelog
         * Fixed: When you steal level with knife you don't hear steal sound but level up sound.
     
     1.0.5.11:
-        * Fixed: not level down for suicide after round end.
+        * Fixed: Players should not level down for suicide after round end.
         * Improvement: weapon removement improved.
         * Fixed bug: When a player reach triple level, the triple level sound (default 
             one) stop playing after 1 sec.
@@ -404,6 +404,11 @@ TODO
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
+        
+    * Bug report: Well i'm running a respawn/turbo server and it seems ff stays turned on even 
+        if player is no longer on nade level. I'm running some tests and it seems the ff warning 
+        is displayed when a player does reach nade even if another player is already on nade level 
+        sometimes.
 
     ----====----==== Normal priority list ----====----====
 
