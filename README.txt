@@ -432,9 +432,20 @@ TODO
     * Feature request:
         Add visual effects to the player on bonus like blink golden effect and sparks.
         Add config variable to enabled/disable it.
+        # Effect to player
+        cmdFormat = 'es_xgive %s env_spark; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark SetParent !activator; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "spawnflags 896"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "angles -90 0 0"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "magnitude 8"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark AddOutput "traillength 3"; ' % attacker
+        cmdFormat += 'es_xfire %s env_spark StartSpark' % attacker
+        es.server.queuecmd(cmdFormat)
     * Feature request:
         Add gravity boost the player on bonus.
         Add config variable to enabled/disable it.
+        # Gravity
+        es.server.queuecmd('es_xfire %s !self "gravity 400"' % attacker)
     + Feature request:
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 
         think about moving it to the hint box (like warmup timer) and add information about leader 
