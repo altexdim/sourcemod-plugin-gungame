@@ -118,8 +118,16 @@ Credits
       http://www.cagemonkey.org
     * Original SourceMod code by Teame06
 
+Changelog
+---------
+    * For full changelog see docs/CHANGELOG.txt
+        
+TODO
+----
+    * For full todo list see docs/TODO.txt
+
 Issues
--------
+------
     1) My server crashes right after someone wins the map.
         a) Update your server binaries.
         b) OR Update your gamedata/gungame.games.txt:
@@ -141,3 +149,4 @@ Issues
 
     3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
         a) https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
+
