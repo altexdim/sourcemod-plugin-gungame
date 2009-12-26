@@ -1,5 +1,11 @@
 Changelog
 ---------
+        * Improvement: 
+            In warmup when you have "ResetLevelAfterWarmup" "1" and you don't level up, there 
+            is an info in chat "[GunGame] Player has lost a level by suicided" or any other 
+            about losing a level (i.e. tk). I think it's unnecessary since you can't gain 
+            or loss any level in this warmup mode.
+            
     1.0.5.14:
         + Added global forward with triple level event.
         + Added "gg_triple_level" log event.

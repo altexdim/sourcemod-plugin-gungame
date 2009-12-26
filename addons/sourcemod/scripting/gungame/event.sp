@@ -806,12 +806,15 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
-stock ClientSuicide(client, const String:Name[])
+ClientSuicide(client, const String:Name[])
 {
-    CPrintToChatAllEx(client, "%t", "Has lost a level by suicided", Name);
-
     new oldLevel = PlayerLevel[client];
     new newLevel = UTIL_ChangeLevel(client, -1);
+    if ( oldLevel == newLevel )
+    {
+        return;
+    }
+    CPrintToChatAllEx(client, "%t", "Has lost a level by suicided", Name);
     PrintLeaderToChat(client, oldLevel, newLevel, Name);
 }
 
