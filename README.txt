@@ -422,6 +422,16 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Feature request:
+        Add config variable to enabled/disable god mode on triple level.
+    * Feature request:
+        Add config variable to enabled/disable speed boost on triple level.
+    * Feature request:
+        Add visual effects to the player on bonus like blink golden effect and sparks.
+        Add config variable to enabled/disable it.
+    * Feature request:
+        Add gravity boost the player on bonus.
+        Add config variable to enabled/disable it.
     + Feature request:
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 
         think about moving it to the hint box (like warmup timer) and add information about leader 
@@ -433,34 +443,23 @@ TODO
         (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
         
         If enabled weapon reloading on kill then reload warmup weapon.
-    + Add an option to level down not to one level, but to some points, calculating depends on how 
-        much points does exists on current and previous level. 
-        Example:
-        was - level 4, points 2 (miltikill 4)
-        after knifed - level 3, point 1 (multikill 2)
-        levelNew = levelOld - 1, 
-        pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
-    
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down. 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
         knifes you. Instead of starting from 0 kills on previous level you could continue 
         from 2 kill. Many people on my server are constantly complaining one this issue.
 
-        My opinion is it's not a good idea, because it you loose a level you are loosing a 
-        level, not just some points. And actualy some levels can be 2 points, for example, 
-        and some levels can be just 1 point, and some 5 points, so how plugin should 
-        calculate what exactly points it should save?
+        Example:
+        was - level 4, points 2 (miltikill 4)
+        after knifed - level 3, point 1 (multikill 2)
+        levelNew = levelOld - 1, 
+        pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
     + Feature request:
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
     + Implement gg_handicap_update like in esgg5.
-    + Implement !buylevel.
-    * These function arent working:
-        - Triplelevelbonus
-        - AFK manager (moving afk-s to spec)
     * Is there a way to put more nades on he level, like this one 
       for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
     * Feature request:
@@ -469,8 +468,6 @@ TODO
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
-    * AfkDeaths does not reset sometimes.
-      Redone afk managenemt not to check weapon_fire every shot.
     * Make removement buyzones on/off. So once gg is enabled than buyzones are
       disabled, and when gg is disabled buyzones are enabled.
       Maybe instead of removement buyzones just disable it to players on
@@ -485,6 +482,7 @@ TODO
     
     ----====----==== Low priority list ----====----====
     
+    + Implement !buylevel.
     * [UNAPPROVED] Sometimes "!scores" shows wrong levels if it was many knife battles.
       I can not figure out algorythm to reproduce this bug. Maybe all is ok.
     * [UNAPPROVED] Bug report:
