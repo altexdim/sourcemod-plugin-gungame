@@ -444,8 +444,10 @@ TODO
     * Feature request:
         Add gravity boost the player on bonus.
         Add config variable to enabled/disable it.
-        # Gravity
+        # es Gravity
         es.server.queuecmd('es_xfire %s !self "gravity 400"' % attacker)
+        # sm Gravity
+        SetEntityGravity(client, 400);
     + Feature request:
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 
         think about moving it to the hint box (like warmup timer) and add information about leader 
