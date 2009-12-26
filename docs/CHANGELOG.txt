@@ -6,9 +6,9 @@ Changelog
             is an info in chat "[GunGame] Player has lost a level by suicided" or any other 
             about losing a level (i.e. tk). I think it's unnecessary since you can't gain 
             or loss any level in this warmup mode.
-        * Added config variable to enabled/disable god mode on 
+        + Added config variable to enabled/disable god mode on 
             triple level - "TripleLevelBonusGodMode".
-        * Added gravity boost to the player on bonus.
+        + Added gravity boost to the player on bonus.
             
     1.0.5.14:
         + Added global forward with triple level event.
