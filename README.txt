@@ -121,15 +121,18 @@ Credits
 Changelog
 ---------
     1.0.5.13:
-        * [FIXED] Bug report: Well i'm running a respawn/turbo server and it seems ff stays turned on even 
+        * Fixed:
+            Bug report: Well i'm running a respawn/turbo server and it seems ff stays turned on even 
             if player is no longer on nade level. I'm running some tests and it seems the ff warning 
             is displayed when a player does reach nade even if another player is already on nade level 
             sometimes.
-        * [FIXED] Bug report: when somebody reaches knife level then you don't hear nade level sound (but this 
+        * Fixed:
+            Bug report: when somebody reaches knife level then you don't hear nade level sound (but this 
             is ok, isn't it?); however, when somebody else reaches knife level then you don't hear next 
             knife level sound and I think it's bad because this is usually last level and everybody 
             should now that next knifer is among them
-        * [FIXED] Bug report: after nade kill you get knife instantly, on next spawn knife is not your default 
+        * Fixed:
+            Bug report: after nade kill you get knife instantly, on next spawn knife is not your default 
             weapon and you have to switch to it manually; it would be nice to have it on spawn as 
             primary weapon ;)
             
