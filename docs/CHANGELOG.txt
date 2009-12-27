@@ -1,5 +1,12 @@
 Changelog
 ---------
+    1.0.5.16:
+        * Fixed:
+            Bug report: after win, winner levels up and gets a level greater than max level defined 
+            in equip file (there is an info about it in chat). I think that you should block 
+            leveling after win.
+        + Added native: GG_GetLevelWeaponName.
+
     1.0.5.15:
         * Improvement: 
             In warmup when you have "ResetLevelAfterWarmup" "1" and you don't level up, there 

@@ -320,7 +320,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     // Client got new level
     CurrentKillsPerWeap[client] = NULL;
     PlayerLevel[client] = Level;
-    UTIL_RecalculateLeader(client, oldLevel, Level);
     
     if ( difference < 0 )
     {
@@ -387,7 +386,9 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
                 SetConVarInt(sv_alltalk,1);
             }
         }
+        return oldLevel;
     }
+    UTIL_RecalculateLeader(client, oldLevel, Level);
 
     return Level;
 }

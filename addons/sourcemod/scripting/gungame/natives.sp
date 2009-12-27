@@ -15,6 +15,7 @@ OnCreateNatives()
     CreateNative("GG_SetWeaponLevelByName", __SetWeaponLevelByName);
     CreateNative("GG_GetWeaponIndex", __GetWeaponIndex);
     CreateNative("GG_IsGameCommenced", __IsGameCommenced);
+    CreateNative("GG_GetLevelWeaponName", __GetLevelWeaponName);
 }
 
 public __IsGameCommenced(Handle:plugin, numParams)
@@ -410,5 +411,21 @@ public __SetWeaponLevelByName(Handle:plugin, numParams)
     strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), WeaponName[weap]);
     WeaponOrderId[level - 1] = weap;
 
+    return 1;
+}
+
+public __GetLevelWeaponName(Handle:plugin, numParams)
+{
+    new level       = GetNativeCell(1);
+    new size        = GetNativeCell(3);
+    if ( level < 1 || level > GUNGAME_MAX_LEVEL)
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Level out of range [%d]", level);
+    }
+    if( !WeaponOrderName[level-1][0] )
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Level %d does not have a weapon set", level);
+    }
+    SetNativeString(2, WeaponOrderName[level-1], size, false);
     return 1;
 }

@@ -19,7 +19,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team, bl4nk";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru, http://forums.alliedmods.net";
-stock const String:GUNGAME_VERSION[] = "1.0.5.15";
+stock const String:GUNGAME_VERSION[] = "1.0.5.16";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -153,7 +153,7 @@ forward GG_OnShutdown(bool:Command);
  * Called when the player level changed.
  *
  * @param client        Player index.
- * @param level     Player current level.
+ * @param level     Player current level (starting from 0). 
  * @param difference    The difference in the level change.
  * @param steal     true if it was a knife steal otherwise false
  * @param last      true if player reached last level.
@@ -200,7 +200,7 @@ forward GG_OnWarmupEnd();
  * Called when the leader change player.
  *
  * @param client        Player index.
- * @param level         The player current level
+ * @param level         The player current level (starting from 0).
  * @param totalLevels   Total levels
  * @noreturn
  */
@@ -305,7 +305,7 @@ native GG_GetClientWins(client);
  * Get the player current level.
  *
  * @param client        Player index
- * @return          The player current level.
+ * @return          The player current level (starting from 1).
  */
 native GG_GetClientLevel(client);
 
@@ -313,7 +313,7 @@ native GG_GetClientLevel(client);
  * Retrieves the client max level.
  *
  * @param client        Player index.
- * @param return        The client max level.
+ * @param return        The client max level (starting from 1).
  */
 native GG_GetClientMaxLevel(client);
 
@@ -378,7 +378,7 @@ native GG_GetClientMaxPointLevel(client);
 /**
  * Set the level weapon by weapon index.
  *
- * @param level     The weapon level
+ * @param level     The weapon level (starting from 1)
  * @param weapon        The weapon index
  * @noreturn
  */
@@ -387,7 +387,7 @@ native GG_SetWeaponLevel(level, Weapons:weapon);
 /**
  * Set the level weapon by weapon name.
  *
- * @param level     The weapon level
+ * @param level     The weapon level (starting from 1)
  * @param weapon        The weapon name
  */
 native GG_SetWeaponLevelByName(level, const String:weapon[]);
@@ -395,7 +395,7 @@ native GG_SetWeaponLevelByName(level, const String:weapon[]);
 /**
  * Set the maximum level the player can achieve to win the game.
  *
- * @param level     The level
+ * @param level     The level (starting from 1)
  * @noreturn
  * @error               If level is greater than the define maximum.
  *
@@ -417,6 +417,16 @@ native Weapons:GG_GetWeaponIndex(const String:weapon[]);
  * @return          Return true if game is commenced otherwise false.
  */
 native bool:GG_IsGameCommenced();
+
+/**
+ * Get weapon name from level.
+ *
+ * @param level         The current level (starting from 1).
+ * @param weapon        The weapon name to get.
+ * @param maxlength     Max length of weapon String.
+ * @noreturn
+ */
+native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
 
 /**
  * Stocks
