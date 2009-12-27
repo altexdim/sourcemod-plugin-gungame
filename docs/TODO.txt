@@ -3,6 +3,9 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Move all panel texts to translation files.
+    
+    ----====----==== Normal priority list ----====----====
+
     * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
         Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
         it for 'wins'.
@@ -10,9 +13,6 @@ TODO
         It would be nice if handicap could be moved out of gungame_stats because you don't really 
         need stats to run the handicap. I just do not want to run gungame_stats at all because I 
         use hlstatsx. The extra processing for top10 etc is not necessary.    
-    
-    ----====----==== Normal priority list ----====----====
-
     * Feature requests: I have few suggestions:
         * It would be nice to have information about leader weapon in chat message 
             "[GunGame] Player is leading on level 10", like "[GunGame] Player is leading 
@@ -152,7 +152,6 @@ TODO
       and then gungame plugin add him knife. But then he disconnects
       and respawning (after entren the game) but there is dropped
       knife.
-      
     * Another great way to remove weapons on player death:
         new ent = -1
         if ((ent = FindEntityByClassname(ent, "game_weapon_manager")) > -1)

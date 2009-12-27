@@ -432,7 +432,15 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
             if ( KnifeLevel )
             {
-                break;
+                new killsPerLevel = CustomKillPerLevel[level];
+                if ( !killsPerLevel )
+                {
+                    killsPerLevel = MinKillsPerLevel;
+                }
+                if ( killsPerLevel > 1 )
+                {
+                    break;
+                }
             }
 
             if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
@@ -472,37 +480,41 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     {
         killsPerLevel = MinKillsPerLevel;
     }
-    new kills = ++CurrentKillsPerWeap[Killer], Handled;
-
-    if ( kills <= killsPerLevel )
+    
+    if ( killsPerLevel > 1 )
     {
-        Call_StartForward(FwdPoint);
-        Call_PushCell(Killer);
-        Call_PushCell(kills);
-        Call_PushCell(1);
-        Call_Finish(Handled);
+        new kills = ++CurrentKillsPerWeap[Killer], Handled;
 
-        if ( Handled )
+        if ( kills <= killsPerLevel )
         {
-            CurrentKillsPerWeap[Killer]--;
-            return;
-        }
+            Call_StartForward(FwdPoint);
+            Call_PushCell(Killer);
+            Call_PushCell(kills);
+            Call_PushCell(1);
+            Call_Finish(Handled);
 
-        if ( kills < killsPerLevel )
-        {
-            if ( MultiKillChat )
+            if ( Handled )
             {
-                CPrintToChat(Killer, "%t", "You need kills to advance to the next level", killsPerLevel - kills, kills, killsPerLevel);
+                CurrentKillsPerWeap[Killer]--;
+                return;
             }
-            UTIL_PlaySound(Killer, MultiKill);
-            if ( ReloadWeapon )
+
+            if ( kills < killsPerLevel )
             {
-                UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
+                if ( MultiKillChat )
+                {
+                    CPrintToChat(Killer, "%t", "You need kills to advance to the next level", killsPerLevel - kills, kills, killsPerLevel);
+                }
+                UTIL_PlaySound(Killer, MultiKill);
+                if ( ReloadWeapon )
+                {
+                    UTIL_ReloadActiveWeapon(Killer, WeaponLevel);
+                }
+                return;
             }
-            return;
         }
     }
-    
+        
     // reload weapon
     if ( !TurboMode && ReloadWeapon )
     {

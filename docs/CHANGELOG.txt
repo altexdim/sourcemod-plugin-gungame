@@ -1,5 +1,9 @@
 Changelog
 ---------
+        * Some minor improvments.
+            * Cpu usage reduced if kills per level is 1.
+            * If kills per level is 1 than trigger event knife_steal on knife level.
+
     1.0.5.16:
         * Fixed:
             Bug report: after win, winner levels up and gets a level greater than max level defined 
