@@ -3,8 +3,8 @@
     "Has lost a level due to team kill"
     {
         "#format"    "{1:s},{2:s}"
-        "en"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} has lost a level due to team kill of {teamcolor}{2}{green}"
-	"de"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} hat für den Teamkill an {teamcolor}{2}{green} einen Level verloren"
-        "ru"         "{green}[{default}GunGame{green}] {teamcolor}{1}{green} потерял уровень за убийство {teamcolor}{2}{green} из своей команды"
+        "en"         "{teamcolor}{1}{green} has lost a level due to team kill of {teamcolor}{2}{green}"
+	"de"         "{teamcolor}{1}{green} hat für den Teamkill an {teamcolor}{2}{green} einen Level verloren"
+        "ru"         "{teamcolor}{1}{green} потерял уровень за убийство {teamcolor}{2}{green} из своей команды"
     }
 }
