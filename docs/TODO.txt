@@ -160,4 +160,5 @@ TODO
             SetVariantString("maxpieces 0");
             AcceptEntityInput(ent, "AddOutput");
         }      
+    * Feature request: It would be nice if the chat triggers where hidden from chat. (!level, !rules, etc)
 
