@@ -4,6 +4,11 @@ TODO
 
     * Move all panel texts to translation files.
     
+    * Reporting 2 bugs :
+        * Triple bonus sound keeps playing on death/respawn
+        * FF warning is displayed again even if a player is already on nade level (last fix seems 
+            to not be working)
+
     ----====----==== Normal priority list ----====----====
 
     * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
