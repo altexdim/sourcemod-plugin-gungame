@@ -3,6 +3,7 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Move all panel texts to translation files.
+    + Add team change check and do not level down if player changed team.
     
     ----====----==== Normal priority list ----====----====
 
