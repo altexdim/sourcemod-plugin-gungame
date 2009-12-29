@@ -334,7 +334,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     if ( Victim == Killer ) 
     {
         /* (Weapon is event weapon name, can be 'world' or 'hegrenade' etc) */
-        if ( CommitSuicide && ( RoundStarted || /* weapon is not 'world' (ie not kill command) */ Weapon[0] != 'w') && (!g_teamChange[client]) )
+        if ( CommitSuicide && ( RoundStarted || /* weapon is not 'world' (ie not kill command) */ Weapon[0] != 'w') && (!g_teamChange[Victim]) )
         {
             ClientSuicide(Victim, vName);
         }
