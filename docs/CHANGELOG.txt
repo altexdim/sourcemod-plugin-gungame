@@ -1,8 +1,12 @@
 Changelog
 ---------
-        * Some minor improvments.
-            * Cpu usage reduced if kills per level is 1.
-            * If kills per level is 1 than trigger event knife_steal on knife level.
+    1.0.5.17:
+        * Fixed:
+            Bug report: Triple bonus sound keeps playing on death/respawn
+        + Added team change check and do not level down if player changed team.
+        * Some minor improvments:
+            Cpu usage reduced if kills per level is 1.
+            If kills per level is 1 than trigger event knife_steal on knife level.
 
     1.0.5.16:
         * Fixed:

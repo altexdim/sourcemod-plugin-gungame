@@ -24,6 +24,7 @@
 #include "gungame/event.h"
 #include "gungame/hacks.h"
 #include "gungame/offset.h"
+#include "gungame/util.h"
 
 #if defined DEBUG
 #include "gungame/debug.h"
@@ -260,7 +261,7 @@ public OnClientDisconnect(client)
     /* This does not take into account for steals. */
     TotalLevel -= PlayerLevel[client];
 
-    if(TotalLevel < 0)
+    if ( TotalLevel < 0 )
     {
         TotalLevel = NULL;
     }
@@ -281,6 +282,7 @@ public OnClientDisconnect(client)
     if ( IsClientInGame(client) && IsPlayerAlive(client) )
     {
         UTIL_RemoveClientDroppedWeapons(client, true);
+        UTIL_StopTripleEffects(client);
     }
 }
 

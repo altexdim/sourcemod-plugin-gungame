@@ -217,9 +217,8 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    if ( !client || disconnect || (oldTeam < 2) || (newTeam < 2) )
+    if ( !client || disconnect || (oldTeam < 2) || (newTeam < 2) || !IsPlayerAlive(client) )
     {
-        g_teamChange[client] = false;
         return;
     }
     g_teamChange[client] = true;
@@ -306,6 +305,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     
     new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
     UTIL_RemoveClientDroppedWeapons(Victim);
+    UTIL_StopTripleEffects(Victim);
     
     /* They change team at round end don't punish them. */
     if ( !RoundStarted && !AllowLevelUpAfterRoundEnd )
@@ -570,7 +570,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     {
         return;
     }
-
+    
+    g_teamChange[client] = false;
+    
     new team = GetClientTeam(client);
 
     if(team != TEAM_T && team != TEAM_CT)
@@ -841,20 +843,6 @@ ClientSuicide(client, const String:Name[])
     PrintLeaderToChat(client, oldLevel, newLevel, Name);
 }
 
-public Action:RemoveBonus(Handle:timer, any:client)
-{
-    CurrentLevelPerRoundTriple[client] = 0;
-    if(IsClientInGame(client) && IsPlayerAlive(client))
-    {
-        SetEntityGravity(client, 1.0);
-        if ( TripleLevelBonusGodMode )
-        {
-            UTIL_SetClientGodMode(client, 0);
-        }
-        SetEntDataFloat(client, OffsetMovement, 1.0);
-    }
-}
-
 public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
@@ -890,18 +878,21 @@ CheckForTripleLevel(client)
 
         CPrintToChatAllEx(client, "%t", "Triple leveled", Name);
 
+        UTIL_StartTripleEffects(client);
         CreateTimer(10.0, RemoveBonus, client);
-        SetEntityGravity(client, 0.5);
-        if ( TripleLevelBonusGodMode )
-        {
-            UTIL_SetClientGodMode(client, 1);
-        }
-        SetEntDataFloat(client, OffsetMovement, 1.5);
 
-        EmitSoundToAll(EventSounds[Triple], client);
-        
         Call_StartForward(FwdTripleLevel);
         Call_PushCell(client);
         Call_Finish();
     }
 }
+
+public Action:RemoveBonus(Handle:timer, any:client)
+{
+    CurrentLevelPerRoundTriple[client] = 0;
+    if ( IsClientInGame(client) )
+    {
+        UTIL_StopTripleEffects(client);
+    }
+}
+

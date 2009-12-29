@@ -772,3 +772,35 @@ UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
         g_ClientSlotEnt[client][Slot_Secondary] = -1;
     }
 }
+
+UTIL_StartTripleEffects(client)
+{
+    if ( g_tripleEffects[client] )
+    {
+        return;
+    }
+    g_tripleEffects[client] = 1;
+    SetEntityGravity(client, 0.5);
+    if ( TripleLevelBonusGodMode )
+    {
+        UTIL_SetClientGodMode(client, 1);
+    }
+    SetEntDataFloat(client, OffsetMovement, 1.5);
+    EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+}
+
+UTIL_StopTripleEffects(client)
+{
+    if ( !g_tripleEffects[client] )
+    {
+        return;
+    }
+    g_tripleEffects[client] = 0;
+    SetEntityGravity(client, 1.0);
+    if ( TripleLevelBonusGodMode )
+    {
+        UTIL_SetClientGodMode(client, 0);
+    }
+    SetEntDataFloat(client, OffsetMovement, 1.0);
+    EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+}

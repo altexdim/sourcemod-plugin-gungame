@@ -3,11 +3,9 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Move all panel texts to translation files.
-    + Add team change check and do not level down if player changed team.
     
     ----====----==== Normal priority list ----====----====
 
-    * Bug report: Triple bonus sound keeps playing on death/respawn
     * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
         Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
         it for 'wins'.
@@ -33,19 +31,6 @@ TODO
             of players on leader level in a panel.
     * Feature request:
         Add visual effects to the player on bonus like blink golden effect and sparks.
-        Add config variable to enabled/disable it.
-        # Effect to player
-        cmdFormat = 'es_xgive %s env_spark; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark SetParent !activator; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark AddOutput "spawnflags 896"; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark AddOutput "angles -90 0 0"; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark AddOutput "magnitude 8"; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark AddOutput "traillength 3"; ' % attacker
-        cmdFormat += 'es_xfire %s env_spark StartSpark' % attacker
-        es.server.queuecmd(cmdFormat)
-        # Stop effect
-        es.server.queuecmd('es_xfire %s env_spark StopSpark' % userid)
-        es.server.queuecmd('es_xfire %s env_spark Kill' % userid)
     + Feature request:
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 
         think about moving it to the hint box (like warmup timer) and add information about leader 
