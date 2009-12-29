@@ -179,7 +179,10 @@ public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    switch(GetEventInt(event, "oldteam"))
+    new oldTeam         = GetEventInt(event, "oldteam");
+    new newTeam         = GetEventInt(event, "team");
+    new bool:disconnect = GetEventBool(event, "disconnect");
+    switch ( oldTeam )
     {
         case TEAM_T:
         {
@@ -192,9 +195,9 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* Player disconnected and didn't join a new team */
-    if(!GetEventBool(event, "disconnect"))
+    if ( !disconnect )
     {
-        switch(GetEventInt(event, "team"))
+        switch ( newTeam )
         {
             case TEAM_T:
             {
@@ -208,10 +211,18 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* If one of the counts goes to 0 that means game is not commenced any more */
-    if(!CTcount || !Tcount)
+    if ( !CTcount || !Tcount )
     {
         GameCommenced = false;
     }
+
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    if ( !client || disconnect || (oldTeam < 2) || (newTeam < 2) )
+    {
+        g_teamChange[client] = false;
+        return;
+    }
+    g_teamChange[client] = true;
 }
 
 public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
@@ -323,7 +334,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     if ( Victim == Killer ) 
     {
         /* (Weapon is event weapon name, can be 'world' or 'hegrenade' etc) */
-        if ( CommitSuicide && ( RoundStarted || /* weapon is not 'world' (ie not kill command) */ Weapon[0] != 'w') )
+        if ( CommitSuicide && ( RoundStarted || /* weapon is not 'world' (ie not kill command) */ Weapon[0] != 'w') && (!g_teamChange[client]) )
         {
             ClientSuicide(Victim, vName);
         }

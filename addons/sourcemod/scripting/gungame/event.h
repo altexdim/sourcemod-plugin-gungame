@@ -24,3 +24,4 @@ new CurrentLevelPerRound[MAXPLAYERS + 1];
 new CurrentLevelPerRoundTriple[MAXPLAYERS + 1];
 new CurrentLeader;
 new GameWinner;
+new bool:g_teamChange[MAXPLAYERS + 1];
