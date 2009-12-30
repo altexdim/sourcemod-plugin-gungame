@@ -1,5 +1,6 @@
 Changelog
 ---------
+    1.0.5.18:
         * Fixed: 
             Bug report: I'm not sure if this has already been mentioned, but it seems name changes 
             don't apply to !top10. So your gungame rank would always be stored with the name you 
