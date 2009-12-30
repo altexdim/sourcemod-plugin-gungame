@@ -44,6 +44,11 @@ CheckRank(client, Wins)
                 {
                     SwitchRanks(client, i, location, Authid);
                 }
+                else
+                {
+                    /* Update player name in the top10 */
+                    GetClientName(client, PlayerName[location], sizeof(PlayerName[]));
+                }
             }
             else // if client is not present in top 10
             {
