@@ -49,6 +49,8 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
+    LoadTranslations("gungame_stats");
+
     OnCreateKeyValues();
     RegConsoleCmd("top10", _CmdTop10);
     RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");

@@ -190,12 +190,13 @@ StartWarmupRound()
 {
     WarmupInitialized = true;
     PrintToServer("[GunGame] Warmup round has started.");
-    PrintHintTextToAll("%t", "Warmup round seconds left", Warmup_TimeLength - WarmupCounter);
+    decl String:text[64];
+    FormatLanguageNumberText(text, sizeof(text), Warmup_TimeLength - WarmupCounter, "seconds left");
+    PrintHintTextToAll("%t", "Warmup round seconds left", text);
 
     /* Start Warmup round */
     WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
 }
-
 
 /* End of Warmup */
 public Action:EndOfWarmup(Handle:timer)
@@ -451,7 +452,9 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     if ( newLevel < PlayerLevel[CurrentLeader] )
     {
         // say how much to the lead
-        CPrintToChat(client, "%t", "You are levels behind leader", PlayerLevel[CurrentLeader]-newLevel);
+        decl String:text[64];
+        FormatLanguageNumberText(text, sizeof(text), PlayerLevel[CurrentLeader]-newLevel, "levels");
+        CPrintToChat(client, "%t", "You are levels behind leader", text);
         return;
     }
     // new level == leader level

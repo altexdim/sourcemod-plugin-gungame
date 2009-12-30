@@ -1,0 +1,20 @@
+"Phrases"
+{
+	"Top10Panel: [GunGame] Top10"
+	{
+		"en"	"[GunGame] Top10"
+	}
+	"Top10Panel: There are currently no players in the top10"
+	{
+		"en"	"There are currently no players in the top10"
+	}
+	"Top10Panel: Place Name Wins"
+	{
+		"#format"	"{1:d},{2:s},{3:i}"
+		"en"	"{1}. {2} :: {3} Wins"
+	}
+	"Panel: Exit"
+	{
+		"en"	"Exit"
+	}
+}

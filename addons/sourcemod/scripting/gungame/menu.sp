@@ -41,9 +41,11 @@ public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)
 
 CreateLevelPanel(client)
 {
-    decl String:Sombrero[128];
+    decl String:text[128];
+
     new Handle:LevelPanel = CreatePanel();
-    SetPanelTitle(LevelPanel, "[GunGame] Level Information.");
+    Format(text, sizeof(text), "%t", "LevelPanel: Level Information");
+    SetPanelTitle(LevelPanel, text);
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 
     new Level = PlayerLevel[client], Weapons:WeapId = WeaponOrderId[Level], killsPerLevel = CustomKillPerLevel[Level];
@@ -52,26 +54,33 @@ CreateLevelPanel(client)
         killsPerLevel = MinKillsPerLevel;
     }
 
-    DrawPanelItem(LevelPanel, "Level:");
-    FormatEx(Sombrero, sizeof(Sombrero), "You are on level %d :: %s\nYou have made %d / %d of your required kills.",
+    Format(text, sizeof(text), "%t", "LevelPanel: Level");
+    DrawPanelItem(LevelPanel, text);
+    Format(text, sizeof(text), "%t", "LevelPanel: You are on level",
         Level + 1, WeaponName[WeapId][7], CurrentKillsPerWeap[client], killsPerLevel);
-    DrawPanelText(LevelPanel, Sombrero);
+    DrawPanelText(LevelPanel, text);
 
-    if(CurrentLeader == client)
+    if ( CurrentLeader == client )
     {
-        DrawPanelText(LevelPanel, "You are currently the leader.");
+        Format(text, sizeof(text), "%t", "LevelPanel: You are currently the leader");
+        DrawPanelText(LevelPanel, text);
         DrawPanelText(LevelPanel, BLANK_SPACE);
     } else {
         DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
     }
 
-    DrawPanelItem(LevelPanel, "Wins:");
-    FormatEx(Sombrero, sizeof(Sombrero), "You have won %d times.", GG_GetClientWins(client));
-    DrawPanelText(LevelPanel, Sombrero);
+    Format(text, sizeof(text), "%t", "LevelPanel: Wins");
+    DrawPanelItem(LevelPanel, text);
+
+    decl String:subtext[64];
+    FormatLanguageNumberText(subtext, sizeof(subtext), GG_GetClientWins(client), "times");
+    Format(text, sizeof(text), "%t", "LevelPanel: You have won times", subtext);
+    DrawPanelText(LevelPanel, text);
 
     DrawPanelText(LevelPanel, BLANK_SPACE);
 
-    DrawPanelItem(LevelPanel, "Leader:");
+    Format(text, sizeof(text), "%t", "LevelPanel: Leader");
+    DrawPanelItem(LevelPanel, text);
 
     if(CurrentLeader && IsClientInGame(CurrentLeader))
     {
@@ -81,36 +90,44 @@ CreateLevelPanel(client)
         {
             decl String:Name[64];
             GetClientName(CurrentLeader, Name, sizeof(Name));
-            FormatEx(Sombrero, sizeof(Sombrero), "The current leader is %s on level %d.", Name, level + 1);
-            DrawPanelText(LevelPanel, Sombrero);
+            Format(text, sizeof(text), "%t", "LevelPanel: The current leader is on level", Name, level + 1);
+            DrawPanelText(LevelPanel, text);
             if ( CurrentLeader != client )
             {
                 if (level == Level)
                 {
-                    FormatEx(Sombrero, sizeof(Sombrero), "You have tied with the leader.");
-                    DrawPanelText(LevelPanel, Sombrero);
+                    Format(text, sizeof(text), "%t", "LevelPanel: You have tied with the leader");
+                    DrawPanelText(LevelPanel, text);
                 }
                 else if (level > Level)
                 {
-                    FormatEx(Sombrero, sizeof(Sombrero), "You are %d levels from the leader.", level - Level);
-                    DrawPanelText(LevelPanel, Sombrero);
+                    decl String:subtext[64];
+                    FormatLanguageNumberText(subtext, sizeof(subtext), level - Level, "levels");
+                    CRemoveTags(subtext, sizeof(subtext));
+                    Format(text, sizeof(text), "%t", "LevelPanel: You are levels from the leader", subtext);
+                    DrawPanelText(LevelPanel, text);
                 }
             }
         } else {
-            DrawPanelText(LevelPanel, "There is currently no leader.");
+            Format(text, sizeof(text), "%t", "LevelPanel: There is currently no leader");
+            DrawPanelText(LevelPanel, text);
         }
     } else {
-        DrawPanelText(LevelPanel, "There is currently no leader.");
+        Format(text, sizeof(text), "%t", "LevelPanel: There is currently no leader");
+        DrawPanelText(LevelPanel, text);
     }
 
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
     SetPanelCurrentKey(LevelPanel, 4);
-    DrawPanelItem(LevelPanel, "Scores:", ITEMDRAW_CONTROL);
-    DrawPanelText(LevelPanel, "Press 4 to show scores.");
+    Format(text, sizeof(text), "%t", "LevelPanel: Scores");
+    DrawPanelItem(LevelPanel, text, ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "LevelPanel: Press 4 to show scores");
+    DrawPanelText(LevelPanel, text);
     
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
     SetPanelCurrentKey(LevelPanel, 10);
-    DrawPanelItem(LevelPanel, "Exit", ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Exit");
+    DrawPanelItem(LevelPanel, text, ITEMDRAW_CONTROL);
 
     SendPanelToClient(LevelPanel, client, ScoreCommandPanelHandler, GUNGAME_MENU_TIME);
     CloseHandle(LevelPanel);
@@ -118,10 +135,13 @@ CreateLevelPanel(client)
 
 ShowPlayerLevelMenu(client)
 {
-    new Handle:menu = CreateMenu(PlayerLevelHandler);
-    decl String:Key[100], String:Name[64];
+    decl String:text[128];
 
-    SetMenuTitle(menu, "[GunGame] Players level information");
+    new Handle:menu = CreateMenu(PlayerLevelHandler);
+    decl String:Name[64];
+
+    Format(text, sizeof(text), "%t", "PlayersLevelPanel: Players level information");
+    SetMenuTitle(menu, text);
 
     new first = true;
     for(new i = 1; i <= MaxClients; i++)
@@ -129,9 +149,8 @@ ShowPlayerLevelMenu(client)
         if(IsClientInGame(i))
         {
             GetClientName(i, Name, sizeof(Name));
-            FormatEx(Key, sizeof(Key), "Level %d :: %d Wins :: %s", PlayerLevel[i] + 1, GG_GetClientWins(i), Name);
-
-            AddMenuItem(menu, BLANK, Key, first?ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
+            Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Wins Name", PlayerLevel[i] + 1, GG_GetClientWins(i), Name);
+            AddMenuItem(menu, BLANK, text, first?ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
             first = false;
         }
     }
@@ -153,38 +172,45 @@ public PlayerLevelHandler(Handle:menu, MenuAction:action, param1, param2)
 /* Move into a real menu */
 Handle:CreateJoinMsgPanel()
 {
+    decl String:text[128];
     new Handle:faluco = CreatePanel(), Count;
 
-    SetPanelTitle(faluco, "This server is running the GunGame:SM");
+    Format(text, sizeof(text), "%t", "JoinPanel: This server is running the GunGame:SM");
+    SetPanelTitle(faluco, text);
     DrawPanelText(faluco, BLANK_SPACE);
 
     if(BotCanWin)
     {
-        DrawPanelText(faluco, "Bots can win the game is ENABLED!!");
+        Format(text, sizeof(text), "%t", "JoinPanel: Bots can win the game is ENABLED!!");
+        DrawPanelText(faluco, text);
         Count++;
     }
 
     if(TurboMode)
     {
-        DrawPanelText(faluco, "Turbo Mode is ENABLED!!");
+        Format(text, sizeof(text), "%t", "JoinPanel: Turbo Mode is ENABLED!!");
+        DrawPanelText(faluco, text);
         Count++;
     }
 
     if(KnifePro)
     {
-        DrawPanelText(faluco, "Knife Pro is ENABLED!!");
+        Format(text, sizeof(text), "%t", "JoinPanel: Knife Pro is ENABLED!!");
+        DrawPanelText(faluco, text);
         Count++;
     }
 
     if(KnifeElite)
     {
-        DrawPanelText(faluco, "Knife Elite is ENABLED!!");
+        Format(text, sizeof(text), "%t", "JoinPanel: Knife Elite is ENABLED!!");
+        DrawPanelText(faluco, text);
         Count++;
     }
 
     if(MinKillsPerLevel > 1)
     {
-        DrawPanelText(faluco, "Multikill Mode is ENABLED!!");
+        Format(text, sizeof(text), "%t", "JoinPanel: Multikill Mode is ENABLED!!");
+        DrawPanelText(faluco, text);
         Count++;
     }
 
@@ -193,30 +219,43 @@ Handle:CreateJoinMsgPanel()
         DrawPanelText(faluco, BLANK_SPACE);
     }
 
-    DrawPanelText(faluco, "Type !rules for instructions on how to play");
-    DrawPanelText(faluco, "Type !level to get your level info and who is leading");
-    DrawPanelText(faluco, "Type !score to get a list of all players scores and winnings.");
-    DrawPanelText(faluco, "Type !commands to get a full list of gungame commands");
+    Format(text, sizeof(text), "%t", "JoinPanel: Type !rules for instructions on how to play");
+    DrawPanelText(faluco, text);
+    Format(text, sizeof(text), "%t", "JoinPanel: Type !level to get your level info and who is leading");
+    DrawPanelText(faluco, text);
+    Format(text, sizeof(text), "%t", "JoinPanel: Type !score to get a list of all players scores and winnings");
+    DrawPanelText(faluco, text);
+    Format(text, sizeof(text), "%t", "JoinPanel: Type !commands to get a full list of gungame commands");
+    DrawPanelText(faluco, text);
 
     DrawPanelText(faluco, BLANK_SPACE);
-    DrawPanelItem(faluco, "Exit", ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Exit");
+    DrawPanelItem(faluco, text, ITEMDRAW_CONTROL);
     return faluco;
 }
 
 Handle:CreateCommandPanel()
 {
+    decl String:text[128];
     new Handle:Ham = CreatePanel();
-    SetPanelTitle(Ham, "[GunGame] Command list information");
+    Format(text, sizeof(text), "%t", "CommandPanel: [GunGame] Command list information");
+    SetPanelTitle(Ham, text);
     DrawPanelText(Ham, BLANK_SPACE);
-    DrawPanelItem(Ham, "!level to see your current level and who is winning.");
-    DrawPanelItem(Ham, "!weapons to see the weapon order.");
-    DrawPanelItem(Ham, "!score to see all player current scores.");
-    DrawPanelItem(Ham, "!top10 to see the top 10 winners on the server.");
-    DrawPanelItem(Ham, "!rules to see the rules and how to play.\n");
+    Format(text, sizeof(text), "%t", "CommandPanel: !level to see your current level and who is winning");
+    DrawPanelItem(Ham, text);
+    Format(text, sizeof(text), "%t", "CommandPanel: !weapons to see the weapon order");
+    DrawPanelItem(Ham, text);
+    Format(text, sizeof(text), "%t", "CommandPanel: !score to see all player current scores");
+    DrawPanelItem(Ham, text);
+    Format(text, sizeof(text), "%t", "CommandPanel: !top10 to see the top 10 winners on the server");
+    DrawPanelItem(Ham, text);
+    Format(text, sizeof(text), "%t", "CommandPanel: !rules to see the rules and how to play");
+    DrawPanelItem(Ham, text);
     DrawPanelItem(Ham, BLANK, ITEMDRAW_SPACER);
 
     SetPanelCurrentKey(Ham, 10);
-    DrawPanelItem(Ham, "Exit");
+    Format(text, sizeof(text), "%t", "Panel: Exit");
+    DrawPanelItem(Ham, text);
 
     return Ham;
 }
@@ -229,27 +268,31 @@ ShowWeaponLevelPanel(client)
 
 DisplayWeaponLevelPanel(client)
 {
-    decl String:Key[64];
+    decl String:text[128];
     new Handle:Ham = CreatePanel(), i = ClientOnPage[client] * 7, end = i + 7;
 
-    SetPanelTitle(Ham, "[GunGame] Weapon Levels");
+    Format(text, sizeof(text), "%t", "WeaponLevelPanel: [GunGame] Weapon Levels");
+    SetPanelTitle(Ham, text);
     DrawPanelText(Ham, BLANK_SPACE);
 
     for(; i < end; i++)
     {
         if(i < WeaponOrderCount)
         {
-            FormatEx(Key, sizeof(Key), "%d. %s", i + 1, WeaponName[WeaponOrderId[i]][7]);
-            DrawPanelText(Ham, Key);
+            Format(text, sizeof(text), "%t", "WeaponLevelPanel: Order Weapon", i + 1, WeaponName[WeaponOrderId[i]][7]);
+            DrawPanelText(Ham, text);
         }
     }
 
     DrawPanelText(Ham, BLANK_SPACE);
     SetPanelCurrentKey(Ham, 8);
 
-    DrawPanelItem(Ham, "Back", ITEMDRAW_CONTROL);
-    DrawPanelItem(Ham, "Next", ITEMDRAW_CONTROL);
-    DrawPanelItem(Ham, "Exit", ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Back");
+    DrawPanelItem(Ham, text, ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Next");
+    DrawPanelItem(Ham, text, ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Exit");
+    DrawPanelItem(Ham, text, ITEMDRAW_CONTROL);
 
     SendPanelToClient(Ham, client, WeaponMenuHandler, GUNGAME_MENU_TIME);
     CloseHandle(Ham);
@@ -285,6 +328,7 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
 
 Handle:CreateRulesMenu()
 {
+    decl String:text[128];
     new Handle:menu = CreateMenu(EmptyHandler);
 
     if(menu == INVALID_HANDLE)
@@ -293,14 +337,14 @@ Handle:CreateRulesMenu()
     }
 
     SetMenuPagination(menu, 6);
-    SetMenuTitle(menu, "[GunGame] Rules information");
+    Format(text, sizeof(text), "%t", "RulesPanel: [GunGame] Rules information");
+    SetMenuTitle(menu, text);
 
-    decl String:Rules[128];
-    FormatEx(Rules, sizeof(Rules), "You must get %d kills with your current weapon to level up", MinKillsPerLevel);
-    AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", MinKillsPerLevel);
+    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
-    FormatEx(Rules, sizeof(Rules), "If you get a kill with a weapon out of order. It does not count towards your level");
-    AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level");
+    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
     /**
      * How to propertly explain Custom Weapon Level to the player?
@@ -310,48 +354,48 @@ Handle:CreateRulesMenu()
 
     if(ObjectiveBonus)
     {
-        FormatEx(Rules, sizeof(Rules), "You can gain %d level by PLANTING or DEFUSING the bomb", ObjectiveBonus);
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", ObjectiveBonus);
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
     if(AutoFriendlyFire)
     {
-        FormatEx(Rules, sizeof(Rules), "Friendly Fire is automatically turned ON when someone reaches GRENADE level");
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level");
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
     if(MaxLevelPerRound > 1)
     {
-        FormatEx(Rules, sizeof(Rules), "You CAN gained more than one level per round");
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: You CAN gained more than one level per round");
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
     if(KnifePro)
     {
-        FormatEx(Rules, sizeof(Rules), "You can steal a level from an opponent by knifing them");
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: You can steal a level from an opponent by knifing them");
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
     if(KnifeElite)
     {
-        FormatEx(Rules, sizeof(Rules), "After you levelup, you will only have a knife until the next round starts");
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: After you levelup, you will only have a knife until the next round starts");
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
     if(TurboMode)
     {
-        FormatEx(Rules, sizeof(Rules), "You will receive your next weapon immediately when you level up");
-        AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+        Format(text, sizeof(text), "%t", "RulesPanel: You will receive your next weapon immediately when you level up");
+        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 
-    FormatEx(Rules, sizeof(Rules), "If you commit suicide you will lose a level");
-    AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "RulesPanel: If you commit suicide you will lose a level");
+    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
-    FormatEx(Rules, sizeof(Rules), "There is a grace period at the end of each round to allow players to switch teams");
-    AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "RulesPanel: There is a grace period at the end of each round to allow players to switch teams");
+    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
-    FormatEx(Rules, sizeof(Rules), "Type !commands to see the list of gungame commands.");
-    AddMenuItem(menu, BLANK, Rules, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "RulesPanel: Type !commands to see the list of gungame commands");
+    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
     return menu;
 }

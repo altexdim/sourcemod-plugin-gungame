@@ -514,7 +514,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             {
                 if ( MultiKillChat )
                 {
-                    CPrintToChat(Killer, "%t", "You need kills to advance to the next level", killsPerLevel - kills, kills, killsPerLevel);
+                    decl String:text[64];
+                    FormatLanguageNumberText(text, sizeof(text), killsPerLevel - kills, "points");
+                    CPrintToChat(Killer, "%t", "You need kills to advance to the next level", text, kills, killsPerLevel);
                 }
                 UTIL_PlaySound(Killer, MultiKill);
                 if ( ReloadWeapon )
@@ -802,7 +804,16 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             }
             PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
-            CPrintToChat(client, "%t", "You gained level by the bomb", ObjectiveBonus, (name[5] == 'p') ? "planting" : "defusing");
+            decl String:text[64];
+            FormatLanguageNumberText(text, sizeof(text), ObjectiveBonus, "levels");
+            if ( name[5] == 'p' )
+            {
+                CPrintToChat(client, "%t", "You gained level by planting the bomb", text);
+            }
+            else
+            {
+                CPrintToChat(client, "%t", "You gained level by defusing the bomb", text);
+            }
         }
     }
 }
