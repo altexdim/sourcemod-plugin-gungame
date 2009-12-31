@@ -31,14 +31,14 @@
 #include "gungame/debug.sp"
 #endif
 
+#include "gungame/util.sp"
 #include "gungame/natives.sp"
 #include "gungame/offset.sp"
 #include "gungame/hacks.sp"
-#include "gungame/menu.sp"
 #include "gungame/config.sp"
 #include "gungame/keyvalue.sp"
-#include "gungame/util.sp"
 #include "gungame/event.sp"
+#include "gungame/menu.sp"
 #include "gungame/commands.sp"
 
 public Plugin:myinfo =
@@ -166,75 +166,6 @@ public OnMapEnd()
             UnhookEvent("hostage_killed", _HostageKilled);
         }
     }
-}
-
-StartWarmupRound()
-{
-    WarmupInitialized = true;
-    PrintToServer("[GunGame] Warmup round has started.");
-    decl String:subtext[64];
-    new maxClients = GetMaxClients();
-    for ( new i = 1; i <= maxClients; i++ )
-    {
-        if ( IsClientInGame(i) )
-        {
-            SetGlobalTransTarget(i);
-            FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
-            PrintHintText(i, "%t", "Warmup round seconds left", subtext);
-        }
-    }
-
-    /* Start Warmup round */
-    WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
-}
-
-/* End of Warmup */
-public Action:EndOfWarmup(Handle:timer)
-{
-    if ( ++WarmupCounter <= Warmup_TimeLength )
-    {
-        if ( Warmup_TimeLength - WarmupCounter < 5)
-        {
-            EmitSoundToAll(EventSounds[WarmupTimerSound]);
-        }
-        decl String:subtext[64];
-        new maxClients = GetMaxClients();
-        for ( new i = 1; i <= maxClients; i++ )
-        {
-            if ( IsClientInGame(i) )
-            {
-                SetGlobalTransTarget(i);
-                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
-                PrintHintText(i, "%t", "Warmup round seconds left", subtext);
-            }
-        }
-        return Plugin_Continue;
-    }
-
-    WarmupTimer = INVALID_HANDLE;
-    //WarmupEnabled = false; // Delayed warmup ending
-    DisableWarmupOnRoundEnd = true;
-
-    /* Restart Game */
-    SetConVarInt(mp_restartgame, 1);
-
-    CPrintToChatAll("%t", "Warmup round has ended");
-
-    if(WarmupReset)
-    {
-        new maxslots = GetMaxClients( );
-        TotalLevel = NULL;
-
-        for(new i = 1; i <= maxslots; i++)
-        {
-            PlayerLevel[i] = 0;
-        }
-    }
-    
-    Call_StartForward(FwdWarmupEnd);
-    Call_Finish();
-        
-    return Plugin_Stop;
 }
 
 public OnClientDisconnect(client)
@@ -394,39 +325,6 @@ public GG_OnShutdown(bool:Command)
 }
 
 /**
- * Return current leader client.
- *
- * Return 0 if no leaders found.
- *
- * @param bool DisallowBot
- * @return int
- */
-FindLeader(bool:DisallowBot = false)
-{
-    new leaderId      = 0;
-    new leaderLevel   = 0;
-    new currentLevel  = 0;
-
-    for (new i = 1; i <= MaxClients; i++)
-    {
-        if ( DisallowBot && IsClientInGame(i) && IsFakeClient(i) )
-        {
-            continue;
-        }
-
-        currentLevel = PlayerLevel[i];
-
-        if ( currentLevel > leaderLevel )
-        {
-            leaderLevel = currentLevel;
-            leaderId = i;
-        }
-    }
-
-    return leaderId;
-}
-
-/**
  * Print messages to chat about leaders.
  *
  * @param int client
@@ -460,6 +358,75 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     // new level == leader level
     // say tied to the lead on level X
     CPrintToChatAllEx(client, "%t", "Is tied with the leader on level", name, newLevel + 1);
+}
+
+StartWarmupRound()
+{
+    WarmupInitialized = true;
+    PrintToServer("[GunGame] Warmup round has started.");
+    decl String:subtext[64];
+    new maxClients = GetMaxClients();
+    for ( new i = 1; i <= maxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            SetGlobalTransTarget(i);
+            FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
+            PrintHintText(i, "%t", "Warmup round seconds left", subtext);
+        }
+    }
+
+    /* Start Warmup round */
+    WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
+}
+
+/* End of Warmup */
+public Action:EndOfWarmup(Handle:timer)
+{
+    if ( ++WarmupCounter <= Warmup_TimeLength )
+    {
+        if ( Warmup_TimeLength - WarmupCounter < 5)
+        {
+            EmitSoundToAll(EventSounds[WarmupTimerSound]);
+        }
+        decl String:subtext[64];
+        new maxClients = GetMaxClients();
+        for ( new i = 1; i <= maxClients; i++ )
+        {
+            if ( IsClientInGame(i) )
+            {
+                SetGlobalTransTarget(i);
+                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
+                PrintHintText(i, "%t", "Warmup round seconds left", subtext);
+            }
+        }
+        return Plugin_Continue;
+    }
+
+    WarmupTimer = INVALID_HANDLE;
+    //WarmupEnabled = false; // Delayed warmup ending
+    DisableWarmupOnRoundEnd = true;
+
+    /* Restart Game */
+    SetConVarInt(mp_restartgame, 1);
+
+    CPrintToChatAll("%t", "Warmup round has ended");
+
+    if(WarmupReset)
+    {
+        new maxslots = GetMaxClients( );
+        TotalLevel = NULL;
+
+        for(new i = 1; i <= maxslots; i++)
+        {
+            PlayerLevel[i] = 0;
+        }
+    }
+    
+    Call_StartForward(FwdWarmupEnd);
+    Call_Finish();
+        
+    return Plugin_Stop;
 }
 
 /**

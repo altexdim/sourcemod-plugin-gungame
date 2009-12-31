@@ -876,31 +876,3 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
-CheckForTripleLevel(client)
-{
-    CurrentLevelPerRoundTriple[client]++;
-    if ( TripleLevelBonus && CurrentLevelPerRoundTriple[client] == 3 )
-    {
-        decl String:Name[MAX_NAME_SIZE];
-        GetClientName(client, Name, sizeof(Name));
-
-        CPrintToChatAllEx(client, "%t", "Triple leveled", Name);
-
-        UTIL_StartTripleEffects(client);
-        CreateTimer(10.0, RemoveBonus, client);
-
-        Call_StartForward(FwdTripleLevel);
-        Call_PushCell(client);
-        Call_Finish();
-    }
-}
-
-public Action:RemoveBonus(Handle:timer, any:client)
-{
-    CurrentLevelPerRoundTriple[client] = 0;
-    if ( IsClientInGame(client) )
-    {
-        UTIL_StopTripleEffects(client);
-    }
-}
-

@@ -473,58 +473,64 @@
 	"RulesPanel: You must get kills with your current weapon to level up"
 	{
 		"#format"	"{1:s}"
-		"en"	"You must get {1} with your current weapon to level up"
-		"ru"	"Вам нужно набрать {1} с вашим текущим оружием до следующего уровня"
+		"en"	"You must get {1} with your current weapon to level up."
+		"ru"	"Вам нужно набрать {1} с вашим текущим оружием до следующего уровня."
 	}
 	"RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level"
 	{
-		"en"	"If you get a kill with a weapon out of order, it does not count towards your level"
-		"ru"	"Очки, набранные из других оружий, не засчитываются"
+		"en"	"If you get a kill with a weapon out of order, it does not count towards your level."
+		"ru"	"Очки, набранные из других оружий, не засчитываются."
 	}
 	"RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb"
 	{
 		"#format"	"{1:s}"
-		"en"	"You can gain {1} by PLANTING or DEFUSING the bomb"
-		"ru"	"Вы можете получить {1} за УСТАНОВКУ или ОБЕЗВРЕЖИВАНИЕ бомбы"
+		"en"	"You can gain {1} by PLANTING or DEFUSING the bomb."
+		"ru"	"Вы можете получить {1} за УСТАНОВКУ или ОБЕЗВРЕЖИВАНИЕ бомбы."
 	}
 	"RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level"
 	{
-		"en"	"Friendly Fire is automatically turned ON when someone reaches GRENADE level"
-		"ru"	"Режим Friendly Fire автоматически ВКЛЮЧАЕТСЯ, когда кто-либо доходит до ГРАНАТЫ"
+		"en"	"Friendly Fire is automatically turned ON when someone reaches GRENADE level."
+		"ru"	"Режим Friendly Fire автоматически ВКЛЮЧАЕТСЯ, когда кто-либо доходит до ГРАНАТЫ."
 	}
 	"RulesPanel: You CAN gained more than one level per round"
 	{
-		"en"	"You CAN gained more than one level per round"
-		"ru"	"Вы МОЖЕТЕ подняться больше, чем на один уровень за раунд"
+		"en"	"You CAN gain more than one level per round."
+		"ru"	"Вы МОЖЕТЕ подняться больше, чем на один уровень за раунд."
 	}
 	"RulesPanel: You can steal a level from an opponent by knifing them"
 	{
-		"en"	"You can steal a level from an opponent by knifing them"
-		"ru"	"Вы можете украсть уровень с помощью ножа"
+		"en"	"You can steal a level from an opponent by knifing them."
+		"ru"	"Вы можете украсть уровень с помощью ножа."
 	}
 	"RulesPanel: After you levelup, you will only have a knife until the next round starts"
 	{
-		"en"	"After you levelup, you will only have a knife until the next round starts"
-		"ru"	"После прохождения каждого уровня вы у вас будет оставаться только нож до следующего раунда"
+		"en"	"After you levelup, you will only have a knife until the next round starts."
+		"ru"	"После прохождения каждого уровня вы у вас будет оставаться только нож."
 	}
 	"RulesPanel: You will receive your next weapon immediately when you level up"
 	{
-		"en"	"You will receive your next weapon immediately when you level up"
-		"ru"	"Вы получите следующее оружие сразу же после прохождения уровня"
+		"en"	"You will receive your next weapon immediately when you level up."
+		"ru"	"Вы получите следующее оружие сразу же после прохождения уровня."
 	}
 	"RulesPanel: If you commit suicide you will lose a level"
 	{
-		"en"	"If you commit suicide you will lose a level"
-		"ru"	"При самоликвидации вы потеряете уровень"
+		"en"	"If you commit suicide you will lose a level."
+		"ru"	"При самоликвидации вы потеряете уровень."
 	}
 	"RulesPanel: There is a grace period at the end of each round to allow players to switch teams"
 	{
-		"en"	"There is a grace period at the end of each round to allow players to switch teams"
-		"ru"	"Вы можете сменить команду в любое время. После конца каждого раунда вы не теряете уровень за самоубийства"
+		"en"	"There is a grace period at the end of each round to allow players to switch teams."
+		"ru"	"Вы можете сменить команду в любое время, вы не потеряете уровень."
 	}
 	"RulesPanel: Type !commands to see the list of gungame commands"
 	{
 		"en"	"Type !commands to see the list of gungame commands."
 		"ru"	"Напишите !commands для просмотра списка команд."
+	}
+	"RulesPanel: Page"
+	{
+		"#format"	"{1:d},{2:d}"
+		"en"	"Page {1} / {2}"
+		"ru"	"Страница {1} / {2}"
 	}
 }

@@ -271,7 +271,7 @@ ShowCommandPanel(client)
 
 ShowWeaponLevelPanel(client)
 {
-    ClientOnPage[client] = NULL;
+    ClientOnPage[client] = 0;
     DisplayWeaponLevelPanel(client);
 }
 
@@ -327,7 +327,7 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
             {
                 if(++ClientOnPage[param1] >= WeaponLevelPages)
                 {
-                    ClientOnPage[param1] = NULL;
+                    ClientOnPage[param1] = 0;
                 }
 
                 DisplayWeaponLevelPanel(param1);
@@ -338,27 +338,73 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
 
 ShowRulesMenu(client)
 {
+    ClientOnPage[client] = 0;
+    DisplayRulesMenu(client);
+}
+
+public RulesMenuHandler(Handle:menu, MenuAction:action, param1, param2)
+{
+    if(action == MenuAction_Select)
+    {
+        switch(param2)
+        {
+            case 8:
+            {
+                --ClientOnPage[param1];
+                DisplayRulesMenu(param1);
+            }
+            case 9:
+            {
+                ++ClientOnPage[param1];
+                DisplayRulesMenu(param1);
+            }
+        }
+    }
+}
+
+DisplayRulesMenu(client)
+{
     SetGlobalTransTarget(client);
     decl String:text[256];
     decl String:subtext[64];
-    new Handle:menu = CreateMenu(EmptyHandler);
-
-    if(menu == INVALID_HANDLE)
-    {
-        return;
-    }
-
-    SetMenuPagination(menu, 6);
+    
+    new Handle:menu = CreatePanel();
     Format(text, sizeof(text), "%t", "RulesPanel: [GunGame] Rules information");
-    SetMenuTitle(menu, text);
+    SetPanelTitle(menu, text);
+    DrawPanelText(menu, BLANK_SPACE);
 
-    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), MinKillsPerLevel, "points");
-    CRemoveTags(subtext, sizeof(subtext));
-    Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", subtext);
-    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+    new itemsCount = 5;
+    if ( ObjectiveBonus )       itemsCount++;
+    if ( AutoFriendlyFire )     itemsCount++;
+    if ( MaxLevelPerRound > 1 ) itemsCount++;
+    if ( KnifePro )             itemsCount++;
+    if ( KnifeElite )           itemsCount++;
+    if ( TurboMode )            itemsCount++;
 
-    Format(text, sizeof(text), "%t", "RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level");
-    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+    new itemsOnPage = 3;
+    new pagesCount  = (itemsCount - 1)/itemsOnPage + 1;
+    
+    if ( ClientOnPage[client] < 0 )             ClientOnPage[client] = pagesCount - 1;
+    if ( ClientOnPage[client] >= pagesCount )   ClientOnPage[client] = 0;
+    new itemStart   = ClientOnPage[client] * itemsOnPage + 1;
+    new itemEnd     = itemStart + itemsOnPage - 1;
+        
+    Format(text, sizeof(text), "%t", "RulesPanel: Page", ClientOnPage[client] + 1, pagesCount);
+    DrawPanelText(menu, text);
+    DrawPanelText(menu, BLANK_SPACE);
+    
+    new item = 0;
+    if ( (++item >= itemStart) && (itemEnd <= itemEnd) ) {
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), MinKillsPerLevel, "points");
+        CRemoveTags(subtext, sizeof(subtext));
+        Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", subtext);
+        DrawPanelText(menu, text);
+    }
+            
+    if ( (++item >= itemStart) && (itemEnd <= itemEnd) ) {
+        Format(text, sizeof(text), "%t", "RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level");
+        DrawPanelText(menu, text);
+    }
 
     /**
      * How to propertly explain Custom Weapon Level to the player?
@@ -366,52 +412,64 @@ ShowRulesMenu(client)
      * To wordy? Bad Sentence? Think of a shorter and clearer sentence.
      */
 
-    if(ObjectiveBonus)
-    {
+    if ( ObjectiveBonus && (++item >= itemStart) && (item <= itemEnd) ) {
         FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
+        CRemoveTags(subtext, sizeof(subtext));
         Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", subtext);
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
     }
 
-    if(AutoFriendlyFire)
-    {
+    if ( AutoFriendlyFire && (++item >= itemStart) && (item <= itemEnd) ) {
         Format(text, sizeof(text), "%t", "RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
     }
-
-    if(MaxLevelPerRound > 1)
-    {
+    
+    if ( (MaxLevelPerRound > 1) && (++item >= itemStart) && (item <= itemEnd) ) {
         Format(text, sizeof(text), "%t", "RulesPanel: You CAN gained more than one level per round");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
     }
 
-    if(KnifePro)
-    {
+    if ( KnifePro && (++item >= itemStart) && (item <= itemEnd) ) {
         Format(text, sizeof(text), "%t", "RulesPanel: You can steal a level from an opponent by knifing them");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
     }
 
-    if(KnifeElite)
-    {
+    if ( KnifeElite && (++item >= itemStart) && (item <= itemEnd) ) {
         Format(text, sizeof(text), "%t", "RulesPanel: After you levelup, you will only have a knife until the next round starts");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
     }
 
-    if(TurboMode)
-    {
+    if ( TurboMode && (++item >= itemStart) && (item <= itemEnd) ) {
         Format(text, sizeof(text), "%t", "RulesPanel: You will receive your next weapon immediately when you level up");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        DrawPanelText(menu, text);
+    }
+    
+    if ( (++item >= itemStart) && (item <= itemEnd) ) {
+        Format(text, sizeof(text), "%t", "RulesPanel: If you commit suicide you will lose a level");
+        DrawPanelText(menu, text);
     }
 
-    Format(text, sizeof(text), "%t", "RulesPanel: If you commit suicide you will lose a level");
-    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+    if ( (++item >= itemStart) && (item <= itemEnd) ) {
+        Format(text, sizeof(text), "%t", "RulesPanel: There is a grace period at the end of each round to allow players to switch teams");
+        DrawPanelText(menu, text);
+    }
 
-    Format(text, sizeof(text), "%t", "RulesPanel: There is a grace period at the end of each round to allow players to switch teams");
-    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+    if ( (++item >= itemStart) && (item <= itemEnd) ) {
+        Format(text, sizeof(text), "%t", "RulesPanel: Type !commands to see the list of gungame commands");
+        DrawPanelText(menu, text);
+    }
+    
+    DrawPanelText(menu, BLANK_SPACE);
+    SetPanelCurrentKey(menu, 8);
 
-    Format(text, sizeof(text), "%t", "RulesPanel: Type !commands to see the list of gungame commands");
-    AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+    Format(text, sizeof(text), "%t", "Panel: Back");
+    DrawPanelItem(menu, text, ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Next");
+    DrawPanelItem(menu, text, ITEMDRAW_CONTROL);
+    Format(text, sizeof(text), "%t", "Panel: Exit");
+    DrawPanelItem(menu, text, ITEMDRAW_CONTROL);
 
-    DisplayMenu(menu, client, GUNGAME_MENU_TIME);
+    SendPanelToClient(menu, client, RulesMenuHandler, GUNGAME_MENU_TIME);
     CloseHandle(menu);
 }
+
