@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Updated german translation.
+
     1.0.5.19:
         * All panel texts moved to translation files.
         
