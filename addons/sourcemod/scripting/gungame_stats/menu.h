@@ -1,1 +1,0 @@
-new Handle:Top10Panel = INVALID_HANDLE;

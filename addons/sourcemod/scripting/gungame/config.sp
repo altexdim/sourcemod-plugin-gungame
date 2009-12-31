@@ -283,10 +283,6 @@ public GG_ConfigEnd()
         WeaponLevelPages++;
     }
 
-    JoinMsgPanel = CreateJoinMsgPanel();
-    RulesMenu = CreateRulesMenu();
-    CommandPanel = CreateCommandPanel();
-
     if(InternalIsActive)
     {
         SetConVarInt(gungame_enabled, 1);

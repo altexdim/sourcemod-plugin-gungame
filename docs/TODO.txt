@@ -2,8 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    * Move all panel texts to translation files.
-        
     ----====----==== Normal priority list ----====----====
 
     * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
@@ -81,6 +79,7 @@ TODO
         already done it myself. I'm using here playersdata.txt file. Maybe you want to add 
         these commands to your plugin? Feel free to do that  . 
         https://forums.alliedmods.net/showpost.php?p=1035684&postcount=579
+    * !rules panel texts does not fit into panel if UTF-8.
         
     ----====----==== High severity list ----====----====
     

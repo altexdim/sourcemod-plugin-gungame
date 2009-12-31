@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.0.5.19:
+        * All panel texts moved to translation files.
+        
     1.0.5.18:
         * Fixed: 
             Bug report: I'm not sure if this has already been mentioned, but it seems name changes 

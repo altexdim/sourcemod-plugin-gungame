@@ -377,12 +377,12 @@
 	"JoinPanel: This server is running the GunGame:SM"
 	{
 		"en"	"This server is running the GunGame:SM"
-		"ru"	"На этом сервере работает GunGame:SM"
+		"ru"	"Этот сервер работает в режиме GunGame"
 	}
 	"JoinPanel: Bots can win the game is ENABLED!!"
 	{
 		"en"	"Bots can win the game is ENABLED!!"
-		"ru"	"Ботам выигрывать игру РАЗРЕШЕНО!!"
+		"ru"	"Боты МОГУТ выигрывать игру!!"
 	}
 	"JoinPanel: Turbo Mode is ENABLED!!"
 	{
@@ -407,22 +407,22 @@
 	"JoinPanel: Type !rules for instructions on how to play"
 	{
 		"en"	"Type !rules for instructions on how to play"
-		"ru"	"Напишите !rules для информации об игре"
+		"ru"	"!rules - правила игры"
 	}
 	"JoinPanel: Type !level to get your level info and who is leading"
 	{
 		"en"	"Type !level to get your level info and who is leading"
-		"ru"	"Напишите !level для информации о вашем уровне и лидере"
+		"ru"	"!level - ваш уровень и кто лидер"
 	}
 	"JoinPanel: Type !score to get a list of all players scores and winnings"
 	{
 		"en"	"Type !score to get a list of all players scores and winnings"
-		"ru"	"Напишите !score для информации об уровне игроков и их победах"
+		"ru"	"!score - уровни игроков и их победы"
 	}
 	"JoinPanel: Type !commands to get a full list of gungame commands"
 	{
 		"en"	"Type !commands to get a full list of gungame commands"
-		"ru"	"Напишите !commands для информации о доступных командах"
+		"ru"	"!commands - список команд"
 	}
 	"CommandPanel: [GunGame] Command list information"
 	{

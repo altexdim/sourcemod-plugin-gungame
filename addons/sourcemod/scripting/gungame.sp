@@ -132,24 +132,6 @@ public OnMapEnd()
         WarmupTimer = INVALID_HANDLE;
     }
 
-    if(CommandPanel != INVALID_HANDLE)
-    {
-        CloseHandle(CommandPanel);
-        CommandPanel = INVALID_HANDLE;
-    }
-
-    if(RulesMenu != INVALID_HANDLE)
-    {
-        CloseHandle(RulesMenu);
-        RulesMenu = INVALID_HANDLE;
-    }
-
-    if(JoinMsgPanel != INVALID_HANDLE)
-    {
-        CloseHandle(JoinMsgPanel);
-        JoinMsgPanel = INVALID_HANDLE;
-    }
-
     /* Clear out data */
     WarmupInitialized = false;
     WarmupCounter = NULL;
@@ -191,8 +173,16 @@ StartWarmupRound()
     WarmupInitialized = true;
     PrintToServer("[GunGame] Warmup round has started.");
     decl String:subtext[64];
-    FormatLanguageNumberText(subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
-    PrintHintTextToAll("%t", "Warmup round seconds left", subtext);
+    new maxClients = GetMaxClients();
+    for ( new i = 1; i <= maxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            SetGlobalTransTarget(i);
+            FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
+            PrintHintText(i, "%t", "Warmup round seconds left", subtext);
+        }
+    }
 
     /* Start Warmup round */
     WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
@@ -208,8 +198,16 @@ public Action:EndOfWarmup(Handle:timer)
             EmitSoundToAll(EventSounds[WarmupTimerSound]);
         }
         decl String:subtext[64];
-        FormatLanguageNumberText(subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
-        PrintHintTextToAll("%t", "Warmup round seconds left", subtext);
+        new maxClients = GetMaxClients();
+        for ( new i = 1; i <= maxClients; i++ )
+        {
+            if ( IsClientInGame(i) )
+            {
+                SetGlobalTransTarget(i);
+                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), Warmup_TimeLength - WarmupCounter, "seconds left");
+                PrintHintText(i, "%t", "Warmup round seconds left", subtext);
+            }
+        }
         return Plugin_Continue;
     }
 
@@ -455,7 +453,7 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     {
         // say how much to the lead
         decl String:subtext[64];
-        FormatLanguageNumberText(subtext, sizeof(subtext), PlayerLevel[CurrentLeader]-newLevel, "levels");
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), PlayerLevel[CurrentLeader]-newLevel, "levels");
         CPrintToChat(client, "%t", "You are levels behind leader", subtext);
         return;
     }

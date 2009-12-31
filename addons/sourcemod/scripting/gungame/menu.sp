@@ -17,7 +17,7 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
             case 4: /* !top10 */
                 GG_DisplayTop10(client);
             case 5: /* !rules */
-                DisplayMenu(RulesMenu, client, GUNGAME_MENU_TIME);
+                ShowRulesMenu(client);
         }
     }
 }
@@ -42,7 +42,7 @@ public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)
 CreateLevelPanel(client)
 {
     SetGlobalTransTarget(client);
-    decl String:text[128];
+    decl String:text[256];
     decl String:subtext[64];
 
     new Handle:LevelPanel = CreatePanel();
@@ -74,7 +74,7 @@ CreateLevelPanel(client)
     Format(text, sizeof(text), "%t", "LevelPanel: Wins");
     DrawPanelItem(LevelPanel, text);
 
-    FormatLanguageNumberText(subtext, sizeof(subtext), GG_GetClientWins(client), "times");
+    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), GG_GetClientWins(client), "times");
     Format(text, sizeof(text), "%t", "LevelPanel: You have won times", subtext);
     DrawPanelText(LevelPanel, text);
 
@@ -102,7 +102,7 @@ CreateLevelPanel(client)
                 }
                 else if (level > Level)
                 {
-                    FormatLanguageNumberText(subtext, sizeof(subtext), level - Level, "levels");
+                    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), level - Level, "levels");
                     CRemoveTags(subtext, sizeof(subtext));
                     Format(text, sizeof(text), "%t", "LevelPanel: You are levels from the leader", subtext);
                     DrawPanelText(LevelPanel, text);
@@ -136,7 +136,7 @@ CreateLevelPanel(client)
 ShowPlayerLevelMenu(client)
 {
     SetGlobalTransTarget(client);
-    decl String:text[128];
+    decl String:text[256];
     decl String:subtext[64];
 
     new Handle:menu = CreateMenu(PlayerLevelHandler);
@@ -172,10 +172,12 @@ public PlayerLevelHandler(Handle:menu, MenuAction:action, param1, param2)
     }
 }
 
+
 /* Move into a real menu */
-Handle:CreateJoinMsgPanel()
+ShowJoinMsgPanel(client)
 {
-    decl String:text[128];
+    SetGlobalTransTarget(client);
+    decl String:text[256];
     new Handle:faluco = CreatePanel(), Count;
 
     Format(text, sizeof(text), "%t", "JoinPanel: This server is running the GunGame:SM");
@@ -234,12 +236,15 @@ Handle:CreateJoinMsgPanel()
     DrawPanelText(faluco, BLANK_SPACE);
     Format(text, sizeof(text), "%t", "Panel: Exit");
     DrawPanelItem(faluco, text, ITEMDRAW_CONTROL);
-    return faluco;
+    
+    SendPanelToClient(faluco, client, EmptyHandler, GUNGAME_MENU_TIME);
+    CloseHandle(faluco);
 }
 
-Handle:CreateCommandPanel()
+ShowCommandPanel(client)
 {
-    decl String:text[128];
+    SetGlobalTransTarget(client);
+    decl String:text[256];
     new Handle:Ham = CreatePanel();
     Format(text, sizeof(text), "%t", "CommandPanel: [GunGame] Command list information");
     SetPanelTitle(Ham, text);
@@ -260,7 +265,8 @@ Handle:CreateCommandPanel()
     Format(text, sizeof(text), "%t", "Panel: Exit");
     DrawPanelItem(Ham, text);
 
-    return Ham;
+    SendPanelToClient(Ham, client, CommandPanelHandler, GUNGAME_MENU_TIME);
+    CloseHandle(Ham);
 }
 
 ShowWeaponLevelPanel(client)
@@ -272,7 +278,7 @@ ShowWeaponLevelPanel(client)
 DisplayWeaponLevelPanel(client)
 {
     SetGlobalTransTarget(client);
-    decl String:text[128];
+    decl String:text[256];
     new Handle:Ham = CreatePanel(), i = ClientOnPage[client] * 7, end = i + 7;
 
     Format(text, sizeof(text), "%t", "WeaponLevelPanel: [GunGame] Weapon Levels");
@@ -330,22 +336,23 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
     }
 }
 
-Handle:CreateRulesMenu()
+ShowRulesMenu(client)
 {
-    decl String:text[128];
+    SetGlobalTransTarget(client);
+    decl String:text[256];
     decl String:subtext[64];
     new Handle:menu = CreateMenu(EmptyHandler);
 
     if(menu == INVALID_HANDLE)
     {
-        return INVALID_HANDLE;
+        return;
     }
 
     SetMenuPagination(menu, 6);
     Format(text, sizeof(text), "%t", "RulesPanel: [GunGame] Rules information");
     SetMenuTitle(menu, text);
 
-    FormatLanguageNumberText(subtext, sizeof(subtext), MinKillsPerLevel, "points");
+    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), MinKillsPerLevel, "points");
     CRemoveTags(subtext, sizeof(subtext));
     Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", subtext);
     AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
@@ -361,7 +368,7 @@ Handle:CreateRulesMenu()
 
     if(ObjectiveBonus)
     {
-        FormatLanguageNumberText(subtext, sizeof(subtext), ObjectiveBonus, "levels");
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
         Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", subtext);
         AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
@@ -405,5 +412,6 @@ Handle:CreateRulesMenu()
     Format(text, sizeof(text), "%t", "RulesPanel: Type !commands to see the list of gungame commands");
     AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
-    return menu;
+    DisplayMenu(menu, client, GUNGAME_MENU_TIME);
+    CloseHandle(menu);
 }

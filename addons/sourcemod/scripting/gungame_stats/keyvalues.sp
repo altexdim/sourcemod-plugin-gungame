@@ -273,15 +273,6 @@ public Action:_CmdRebuild(client, args)
             PlayerAuthid[i][0] = '\0';
         }
 
-        new bool:recreate = false;
-        /* Close the original menu */
-        if(Top10Panel != INVALID_HANDLE)
-        {
-            CloseHandle(Top10Panel);
-            Top10Panel = INVALID_HANDLE;
-            recreate = true;
-        }
-
         CloseHandle(KvRank);
         KvRank = INVALID_HANDLE;
         RankOpen = false;
@@ -322,10 +313,6 @@ public Action:_CmdRebuild(client, args)
         SaveRank();
 
         ReplyToCommand(client, "[GunGame] Top10 has been rebuilt from the player data file");
-        if ( recreate )
-        {
-            Top10Panel = CreateTop10Panel();
-        }
     }
     return Plugin_Handled;
 }

@@ -1,5 +1,7 @@
-FormatLanguageNumberText(String:text[], size, number, const String:tplName[])
+
+FormatLanguageNumberTextEx(client, String:text[], size, number, const String:tplName[])
 {
+    SetGlobalTransTarget(client);
     decl String:tpl[64];
     new num10 = number % 10;
     new num100 = number % 100;

@@ -515,7 +515,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 if ( MultiKillChat )
                 {
                     decl String:subtext[64];
-                    FormatLanguageNumberText(subtext, sizeof(subtext), killsPerLevel - kills, "points");
+                    FormatLanguageNumberTextEx(Killer, subtext, sizeof(subtext), killsPerLevel - kills, "points");
                     CPrintToChat(Killer, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
                 }
                 UTIL_PlaySound(Killer, MultiKill);
@@ -608,12 +608,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
             if ( JoinMessage )
             {
-                if ( !JoinMsgPanel )
-                {
-                    JoinMsgPanel = CreateJoinMsgPanel();
-                }
-
-                SendPanelToClient(JoinMsgPanel, client, EmptyHandler, GUNGAME_MENU_TIME);
+                ShowJoinMsgPanel(client);
             }
         }
     }
@@ -716,7 +711,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         if ( MultiKillChat )
         {
             decl String:subtext[64];
-            FormatLanguageNumberText(subtext, sizeof(subtext), killsPerLevel - kills, "points");
+            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
             CPrintToChat(client, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
         }
     }
@@ -807,7 +802,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
             PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
             decl String:subtext[64];
-            FormatLanguageNumberText(subtext, sizeof(subtext), ObjectiveBonus, "levels");
+            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
             if ( name[5] == 'p' )
             {
                 CPrintToChat(client, "%t", "You gained level by planting the bomb", subtext);

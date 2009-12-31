@@ -1,6 +1,7 @@
-Handle:CreateTop10Panel()
+ShowTop10Panel(client)
 {
-    decl String:text[128];
+    SetGlobalTransTarget(client);
+    decl String:text[256];
 
     new Handle:Top10 = CreatePanel();
 
@@ -18,7 +19,7 @@ Handle:CreateTop10Panel()
         {
             if(PlayerWins[i])
             {
-                FormatLanguageNumberText(subtext, sizeof(subtext), PlayerWins[i], "wins");
+                FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), PlayerWins[i], "wins");
                 Format(text, sizeof(text), "%t", "Top10Panel: Place Name Wins", i + 1, PlayerName[i], subtext);
                 DrawPanelText(Top10, text);
             }
@@ -28,7 +29,8 @@ Handle:CreateTop10Panel()
     DrawPanelText(Top10, BLANK_SPACE);
     Format(text, sizeof(text), "%t", "Panel: Exit");
     DrawPanelItem(Top10, text, ITEMDRAW_CONTROL);
-    return Top10;
+    SendPanelToClient(Top10, client, EmptyHandler, GUNGAME_MENU_TIME);
+    CloseHandle(Top10);
 }
 
 public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)

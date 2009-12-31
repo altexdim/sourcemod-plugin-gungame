@@ -71,7 +71,7 @@ public Action:_CmdRules(client, args)
 {
     if(IsActive)
     {
-        DisplayMenu(RulesMenu, client, GUNGAME_MENU_TIME);
+        ShowRulesMenu(client);
     }
     return Plugin_Handled;
 }
@@ -98,7 +98,7 @@ public Action:_CmdCommand(client, args)
 {
     if(IsActive)
     {
-        SendPanelToClient(CommandPanel, client, CommandPanelHandler, GUNGAME_MENU_TIME);
+        ShowCommandPanel(client);
     }
     return Plugin_Handled;
 }

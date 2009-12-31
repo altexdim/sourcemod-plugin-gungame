@@ -61,7 +61,6 @@ public OnPluginStart()
 public OnMapStart()
 {
     SaveProcess = false;
-    Top10Panel = CreateTop10Panel();
 }
 
 public OnMapEnd()
@@ -70,13 +69,6 @@ public OnMapEnd()
     {
         EndProcess();
     }
-
-    if(Top10Panel != INVALID_HANDLE)
-    {
-        CloseHandle(Top10Panel);
-        Top10Panel = INVALID_HANDLE;
-    }
-
 }
 
 public OnPluginEnd()
@@ -139,10 +131,7 @@ public __DisplayTop10(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    if(Top10Panel != INVALID_HANDLE)
-    {
-        SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
-    }
+    ShowTop10Panel(client);
     return 1;
 }
 
@@ -209,9 +198,9 @@ public OnClientDisconnect(client)
 
 public Action:_CmdTop10(client, args)
 {
-    if(IsActive && Top10Panel != INVALID_HANDLE)
+    if(IsActive)
     {
-        SendPanelToClient(Top10Panel, client, EmptyHandler, GUNGAME_MENU_TIME);
+        ShowTop10Panel(client);
     }
     return Plugin_Handled;
 }
