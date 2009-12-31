@@ -3,18 +3,46 @@
 	"Top10Panel: [GunGame] Top10"
 	{
 		"en"	"[GunGame] Top10"
+		"ru"	"[GunGame] Топ-10"
 	}
 	"Top10Panel: There are currently no players in the top10"
 	{
 		"en"	"There are currently no players in the top10"
+		"ru"	"Нет игроков в Топ-10"
 	}
 	"Top10Panel: Place Name Wins"
 	{
-		"#format"	"{1:d},{2:s},{3:i}"
-		"en"	"{1}. {2} :: {3} Wins"
+		"#format"	"{1:d},{2:s},{3:s}"
+		"en"	"{1}. {2} :: {3}"
+		"ru"	"{1}. {2} :: {3}"
 	}
+		"1>wins"
+		{
+		        "#format"    "{1:d}"
+			"en"	"{1} Win"
+			"ru"	"{1} победа"
+		}
+		"x1>wins"
+		{
+		        "#format"    "{1:d}"
+			"en"	"{1} Wins"
+			"ru"	"{1} победа"
+		}
+		"x2-x4>wins"
+		{
+		        "#format"    "{1:d}"
+			"en"	"{1} Wins"
+			"ru"	"{1} победы"
+		}
+		"x5-x20>wins"
+		{
+		        "#format"    "{1:d}"
+			"en"	"{1} Wins"
+			"ru"	"{1} побед"
+		}
 	"Panel: Exit"
 	{
 		"en"	"Exit"
+		"ru"	"Выход"
 	}
 }

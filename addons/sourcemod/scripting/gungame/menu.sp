@@ -41,7 +41,9 @@ public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)
 
 CreateLevelPanel(client)
 {
+    SetGlobalTransTarget(client);
     decl String:text[128];
+    decl String:subtext[64];
 
     new Handle:LevelPanel = CreatePanel();
     Format(text, sizeof(text), "%t", "LevelPanel: Level Information");
@@ -72,7 +74,6 @@ CreateLevelPanel(client)
     Format(text, sizeof(text), "%t", "LevelPanel: Wins");
     DrawPanelItem(LevelPanel, text);
 
-    decl String:subtext[64];
     FormatLanguageNumberText(subtext, sizeof(subtext), GG_GetClientWins(client), "times");
     Format(text, sizeof(text), "%t", "LevelPanel: You have won times", subtext);
     DrawPanelText(LevelPanel, text);
@@ -101,7 +102,6 @@ CreateLevelPanel(client)
                 }
                 else if (level > Level)
                 {
-                    decl String:subtext[64];
                     FormatLanguageNumberText(subtext, sizeof(subtext), level - Level, "levels");
                     CRemoveTags(subtext, sizeof(subtext));
                     Format(text, sizeof(text), "%t", "LevelPanel: You are levels from the leader", subtext);
@@ -135,7 +135,9 @@ CreateLevelPanel(client)
 
 ShowPlayerLevelMenu(client)
 {
+    SetGlobalTransTarget(client);
     decl String:text[128];
+    decl String:subtext[64];
 
     new Handle:menu = CreateMenu(PlayerLevelHandler);
     decl String:Name[64];
@@ -149,7 +151,8 @@ ShowPlayerLevelMenu(client)
         if(IsClientInGame(i))
         {
             GetClientName(i, Name, sizeof(Name));
-            Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Wins Name", PlayerLevel[i] + 1, GG_GetClientWins(i), Name);
+            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), GG_GetClientWins(i), "wins");
+            Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Wins Name", PlayerLevel[i] + 1, subtext, Name);
             AddMenuItem(menu, BLANK, text, first?ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
             first = false;
         }
@@ -268,6 +271,7 @@ ShowWeaponLevelPanel(client)
 
 DisplayWeaponLevelPanel(client)
 {
+    SetGlobalTransTarget(client);
     decl String:text[128];
     new Handle:Ham = CreatePanel(), i = ClientOnPage[client] * 7, end = i + 7;
 
@@ -329,6 +333,7 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
 Handle:CreateRulesMenu()
 {
     decl String:text[128];
+    decl String:subtext[64];
     new Handle:menu = CreateMenu(EmptyHandler);
 
     if(menu == INVALID_HANDLE)
@@ -340,7 +345,9 @@ Handle:CreateRulesMenu()
     Format(text, sizeof(text), "%t", "RulesPanel: [GunGame] Rules information");
     SetMenuTitle(menu, text);
 
-    Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", MinKillsPerLevel);
+    FormatLanguageNumberText(subtext, sizeof(subtext), MinKillsPerLevel, "points");
+    CRemoveTags(subtext, sizeof(subtext));
+    Format(text, sizeof(text), "%t", "RulesPanel: You must get kills with your current weapon to level up", subtext);
     AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
 
     Format(text, sizeof(text), "%t", "RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level");
@@ -354,7 +361,8 @@ Handle:CreateRulesMenu()
 
     if(ObjectiveBonus)
     {
-        Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", ObjectiveBonus);
+        FormatLanguageNumberText(subtext, sizeof(subtext), ObjectiveBonus, "levels");
+        Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", subtext);
         AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
     }
 

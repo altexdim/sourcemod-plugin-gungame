@@ -13,11 +13,13 @@ Handle:CreateTop10Panel()
         Format(text, sizeof(text), "%t", "Top10Panel: There are currently no players in the top10");
         DrawPanelText(Top10, text);
     } else {
+        decl String:subtext[64];
         for(new i = 0; i < MAX_RANK; i++)
         {
             if(PlayerWins[i])
             {
-                Format(text, sizeof(text), "%t", "Top10Panel: Place Name Wins", i + 1, PlayerName[i], PlayerWins[i]);
+                FormatLanguageNumberText(subtext, sizeof(subtext), PlayerWins[i], "wins");
+                Format(text, sizeof(text), "%t", "Top10Panel: Place Name Wins", i + 1, PlayerName[i], subtext);
                 DrawPanelText(Top10, text);
             }
         }

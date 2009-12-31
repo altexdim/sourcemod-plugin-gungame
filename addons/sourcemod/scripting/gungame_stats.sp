@@ -28,6 +28,7 @@
 #include "gungame_stats/menu.sp"
 #include "gungame_stats/config.sp"
 #include "gungame_stats/keyvalues.sp"
+#include "gungame_stats/util.sp"
 
 public Plugin:myinfo =
 {
