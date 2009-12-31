@@ -149,11 +149,11 @@ Issues
         a) Update your gamedata/gungame.games.txt from latest gungame release.
 
     3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
-        a) https://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
+        a) http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
 
 3-rd party plugins
 ------------------
     * Winners menu:
-        https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
+        http://forums.alliedmods.net/showpost.php?p=949442&postcount=255
     * Advanced stats:
-        https://forums.alliedmods.net/showpost.php?p=1035684&postcount=579
+        http://forums.alliedmods.net/showpost.php?p=1036934&postcount=594
