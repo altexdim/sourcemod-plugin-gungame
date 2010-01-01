@@ -1,5 +1,9 @@
 Changelog
 ---------
+        * Fixed bug:
+            Bug report: When multikill is enabled, and pnifepro is enabled
+            then kills per level does not reset for player if he is killed with 
+            knife when he is on the first level.
         * Updated german translation.
 
     1.0.5.19:

@@ -440,6 +440,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
                 CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             }
+            else
+            {
+                CurrentKillsPerWeap[Victim] = 0;
+            }
 
             if ( KnifeLevel )
             {
