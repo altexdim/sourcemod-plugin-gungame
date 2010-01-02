@@ -429,6 +429,14 @@ native bool:GG_IsGameCommenced();
 native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
 
 /**
+ * Get player's place in top 10.
+ *
+ * @param auth          Steam id.
+ * @return              Player place in top 10 (from 0 to 9), -1 if not found.
+ */
+native GG_GetPlayerPlaceInTop10(const String:auth[]);
+
+/**
  * Stocks
  */
 

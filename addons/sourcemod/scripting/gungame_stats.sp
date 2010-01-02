@@ -29,6 +29,7 @@
 #include "gungame_stats/config.sp"
 #include "gungame_stats/keyvalues.sp"
 #include "gungame_stats/util.sp"
+#include "gungame_stats/natives.sp"
 
 public Plugin:myinfo =
 {
@@ -41,10 +42,7 @@ public Plugin:myinfo =
 
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
-    CreateNative("GG_DisplayTop10", __DisplayTop10);
-    CreateNative("GG_GetClientWins", __GetPlayerWins);
-    CreateNative("GG_CountPlayersInStat", __CountPlayersInStat);
-    CreateNative("GG_GetPlayerPlaceInStat", __GetPlayerPlaceInStat);
+    OnCreateNatives();
     return true;
 }
 
@@ -56,6 +54,16 @@ public OnPluginStart()
     RegConsoleCmd("top10", _CmdTop10);
     RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
     RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
+}
+
+public OnClientAuthorized(client, const String:auth[])
+{
+    if ( auth[0] != 'B' )
+    {
+        #if !defined SQL_SUPPORT
+        RetrieveKeyValues(client, auth);
+        #endif
+    }
 }
 
 public OnMapStart()
@@ -81,14 +89,14 @@ public OnPluginEnd()
 
 public GG_OnStartup(bool:Command)
 {
-    if(!IsActive)
+    if ( !IsActive )
     {
-        new maxslots = GetMaxClients( );
         IsActive = true;
+        new maxslots = GetMaxClients( );
         decl String:Auth[64];
         for(new i = 1; i <= maxslots; i++)
         {
-            if(IsClientInGame(i))
+            if ( IsClientInGame(i) )
             {
                 GetClientAuthString(i, Auth, sizeof(Auth));
                 OnClientAuthorized(i, Auth);
@@ -116,77 +124,6 @@ public GG_OnShutdown()
             {
                 OnClientDisconnect(i);
             }
-        }
-    }
-}
-
-public __DisplayTop10(Handle:plugin, numParams)
-{
-    new client = GetNativeCell(1);
-
-    if(client < 1 || client > GetMaxClients())
-    {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-    }
-
-    ShowTop10Panel(client);
-    return 1;
-}
-
-public __GetPlayerPlaceInStat(Handle:plugin, numParams)
-{
-    new client = GetNativeCell(1);
-
-    if(client < 1 || client > GetMaxClients())
-    {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-    }
-
-    return GetPlayerPlaceInStat(client);
-}
-
-public __CountPlayersInStat(Handle:plugin, numParams)
-{
-    return CountPlayersInStat();
-}
-
-public __GetPlayerWins(Handle:plugin, numParams)
-{
-    new client = GetNativeCell(1);
-
-    if(client < 1 || client > GetMaxClients())
-    {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-    }
-
-    return PlayerWinsData[client];
-}
-
-// Handicap is here because of IsPlayerInTop10 is in stats part of plugin.
-public OnClientAuthorized(client, const String:auth[])
-{
-    if(auth[0] == 'B')
-    {
-        if(HandicapMode)
-        {
-            GG_GiveHandicapLevel(client, HandicapMode);
-            return;
-        }
-    } else {
-
-        #if !defined SQL_SUPPORT
-        RetrieveKeyValues(client, auth);
-        #endif
-
-        if(HandicapMode && (Top10Handicap || IsPlayerInTop10(auth) == -1))
-        {
-            GG_GiveHandicapLevel(client, HandicapMode);
         }
     }
 }

@@ -13,10 +13,6 @@ public GG_ConfigKeyValue(const String:Key[], const String:Value[])
         if(strcmp(Key, "Prune", false) == 0)
         {
             Prune = StringToInt(Value);
-        } else if(strcmp("HandicapMode", Key, false) == 0) {
-            HandicapMode = StringToInt(Value);
-        } else if(strcmp("Top10Handicap", Key, false) == 0) {
-            Top10Handicap = bool:StringToInt(Value);
         }
     }
 }

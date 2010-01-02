@@ -116,6 +116,19 @@ public OnClientAuthorized(client, const String:auth[])
     }
     
     UTIL_RecalculateLeader(client, 0, level);
+
+    if ( auth[0] == 'B' )
+    {
+        if ( HandicapMode )
+        {
+            GG_GiveHandicapLevel(client, HandicapMode);
+        }
+    } else {
+        if ( HandicapMode && ( Top10Handicap || (GG_GetPlayerPlaceInTop10(auth) == -1) ) )
+        {
+            GG_GiveHandicapLevel(client, HandicapMode);
+        }
+    }
 }
 
 public OnPluginEnd()

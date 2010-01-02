@@ -6,7 +6,7 @@ public GG_OnWinner(client, const String:Weapon[])
     }
 }
 
-IsPlayerInTop10(const String:Auth[])
+GetPlayerPlaceInTop10(const String:Auth[])
 {
     for(new i = 0; i < MAX_RANK; i++)
     {
@@ -26,7 +26,7 @@ CheckRank(client, Wins)
     decl String:Authid[64];
     GetClientAuthString(client, Authid, sizeof(Authid));
 
-    new location = IsPlayerInTop10(Authid);
+    new location = GetPlayerPlaceInTop10(Authid);
 
     // if client is not present in top 10
     for ( new i = 0; i < MAX_RANK; i++ )

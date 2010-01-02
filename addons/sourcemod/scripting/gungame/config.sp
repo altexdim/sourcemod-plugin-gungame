@@ -140,9 +140,13 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("CommitSuicide", key, false) == 0) {
                 CommitSuicide = bool:StringToInt(value);
+            } else if(strcmp("HandicapMode", key, false) == 0) {
+                HandicapMode = StringToInt(value);
+            } else if(strcmp("Top10Handicap", key, false) == 0) {
+                Top10Handicap = bool:StringToInt(value);
             }
         }
-
+        
         case CONFIG_STATE_EQUIP:
         {
             if ( (strcmp("RandomWeaponOrder", key, false) == 0) && (StringToInt(value) == 1) )

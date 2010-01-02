@@ -51,3 +51,5 @@ new bool:CommitSuicide = true;
 new bool:AlltalkOnWin = false;
 new bool:RestoreLevelOnReconnect;
 new bool:TripleLevelBonusGodMode;
+new HandicapMode;
+new bool:Top10Handicap;
