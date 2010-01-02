@@ -4,13 +4,6 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
-    * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
-        Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
-        it for 'wins'.
-
-        It would be nice if handicap could be moved out of gungame_stats because you don't really 
-        need stats to run the handicap. I just do not want to run gungame_stats at all because I 
-        use hlstatsx. The extra processing for top10 etc is not necessary.    
     * Feature requests: I have few suggestions:
         * It would be nice to have information about leader weapon in chat message 
             "[GunGame] Player is leading on level 10", like "[GunGame] Player is leading 
@@ -19,10 +12,6 @@ TODO
             what weapon is on which level, so it might be a good idea to add such info 
             together with level number. Now you have to know it first or check with !weapons 
             command.
-        * !top10 panel looks ugly to me . What about
-              1. Player :: 100 wins
-          instead of
-              1. Player - Wins 100
         * Browsable winners list would be a nice feature. You can replace !top10 with !top 
             and make it browsable.
         * New !leader command, which should show current leader(s) level, weapon and list 
@@ -85,6 +74,13 @@ TODO
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
     + Add sqlite and mysql support for top players stats
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
+        Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
+        it for 'wins'.
+
+        It would be nice if handicap could be moved out of gungame_stats because you don't really 
+        need stats to run the handicap. I just do not want to run gungame_stats at all because I 
+        use hlstatsx. The extra processing for top10 etc is not necessary.    
     
     ----====----==== Low priority list ----====----====
     
