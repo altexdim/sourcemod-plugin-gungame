@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.0.6.0:
+        * Handicap moved from gungame_stats to gungame plugin.
+        + Added config variable "StatsEnabled" to make gungame_stats optional.
         * Fixed bug:
             Bug report: When multikill is enabled, and pnifepro is enabled
             then kills per level does not reset for player if he is killed with 

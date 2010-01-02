@@ -52,7 +52,7 @@ Plugins
 -------
     gungame.smx
         * Main GunGame:SM plugin
-            - Depends on gungame_config.smx, gungame_stats.smx
+            - Depends on gungame_config.smx
             - Mandatory plugin
             - Provides almost all gungame functionality
             
@@ -96,7 +96,7 @@ Plugins
     gungame_stats.smx
         * Stats
             - Depends on gungame.smx, gungame_config.smx
-            - Mandatory plugin
+            - Optional plugin
             - Displays top10 panel
             - Stores players wins data and top10 data
             - Sets handicap level for the new connected players

@@ -15,7 +15,16 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
             case 3: /* !score */
                 ShowPlayerLevelMenu(client);
             case 4: /* !top10 */
-                GG_DisplayTop10(client);
+            {
+                if ( StatsEnabled ) 
+                {
+                    GG_DisplayTop10(client); /* HINT: gungame_stats */
+                }
+                else
+                {
+                    CPrintToChat(client, "%t", "GunGame Stats is disabled");
+                }
+            }
             case 5: /* !rules */
                 ShowRulesMenu(client);
         }
@@ -74,8 +83,19 @@ CreateLevelPanel(client)
     Format(text, sizeof(text), "%t", "LevelPanel: Wins");
     DrawPanelItem(LevelPanel, text);
 
-    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), GG_GetClientWins(client), "times");
-    Format(text, sizeof(text), "%t", "LevelPanel: You have won times", subtext);
+    if ( StatsEnabled )
+    {
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), 
+            GG_GetClientWins(client), /* HINT: gungame_stats */
+            "times"
+        );
+        Format(text, sizeof(text), "%t", "LevelPanel: You have won times", subtext);
+    }
+    else
+    {
+        Format(text, sizeof(text), "%t", "GunGame Stats is disabled");
+        CRemoveTags(text, sizeof(text));
+    }
     DrawPanelText(LevelPanel, text);
 
     DrawPanelText(LevelPanel, BLANK_SPACE);
@@ -146,19 +166,29 @@ ShowPlayerLevelMenu(client)
     SetMenuTitle(menu, text);
 
     new first = true;
-    for(new i = 1; i <= MaxClients; i++)
+    for ( new i = 1; i <= MaxClients; i++ )
     {
-        if(IsClientInGame(i))
+        if ( IsClientInGame(i) )
         {
             GetClientName(i, Name, sizeof(Name));
-            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), GG_GetClientWins(i), "wins");
-            Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Wins Name", PlayerLevel[i] + 1, subtext, Name);
+            if ( StatsEnabled )
+            {
+                FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), 
+                    GG_GetClientWins(i), /* HINT: gungame_stats */
+                    "wins"
+                );
+                Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Wins Name", PlayerLevel[i] + 1, subtext, Name);
+            }
+            else
+            {
+                Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Name", PlayerLevel[i] + 1, Name);
+            }
             AddMenuItem(menu, BLANK, text, first?ITEMDRAW_DEFAULT:ITEMDRAW_DISABLED);
             first = false;
         }
     }
 
-    if(menu != INVALID_HANDLE)
+    if ( menu != INVALID_HANDLE )
     {
         DisplayMenu(menu, client, GUNGAME_MENU_TIME);
     }

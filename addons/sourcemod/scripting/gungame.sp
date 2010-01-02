@@ -124,7 +124,9 @@ public OnClientAuthorized(client, const String:auth[])
             GG_GiveHandicapLevel(client, HandicapMode);
         }
     } else {
-        if ( HandicapMode && ( Top10Handicap || (GG_GetPlayerPlaceInTop10(auth) == -1) ) )
+        if ( HandicapMode && ( Top10Handicap 
+            || !StatsEnabled || (GG_GetPlayerPlaceInTop10(auth) == -1) /* HINT: gungame_stats */
+        ) )
         {
             GG_GiveHandicapLevel(client, HandicapMode);
         }

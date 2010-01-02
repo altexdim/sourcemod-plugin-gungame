@@ -53,3 +53,4 @@ new bool:RestoreLevelOnReconnect;
 new bool:TripleLevelBonusGodMode;
 new HandicapMode;
 new bool:Top10Handicap;
+new bool:StatsEnabled;

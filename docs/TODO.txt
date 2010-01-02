@@ -74,13 +74,6 @@ TODO
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
     + Add sqlite and mysql support for top players stats
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
-    * Improvement: gungame_stats is not optional because gungame_stats is required to run gungame. 
-        Can you please fix it so it is optional. I believe only the gungame levelpanel depends on 
-        it for 'wins'.
-
-        It would be nice if handicap could be moved out of gungame_stats because you don't really 
-        need stats to run the handicap. I just do not want to run gungame_stats at all because I 
-        use hlstatsx. The extra processing for top10 etc is not necessary.    
     
     ----====----==== Low priority list ----====----====
     

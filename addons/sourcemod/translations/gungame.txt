@@ -1,5 +1,10 @@
 "Phrases"
 {
+    "GunGame Stats is disabled"
+    {
+		"en"		 "{lightgreen}GunGame stats is disabled"
+		"ru"		 "{lightgreen}Статистика GunGame отключена"
+    }
 	"Warmup round seconds left"
 	{
 		"#format"	"{1:s}"
@@ -365,6 +370,13 @@
 		"ru"	"[GunGame] Уровни игроков"
 		"de"	"[GunGame] Spieler Level Information"
 	}
+    "PlayersLevelPanel: Level Name"
+    {
+		"#format"	"{1:d},{2:s}"
+		"en"	"Level {1} :: {2}"
+		"ru"	"Уровень {1} :: {2}"
+		"de"	"Level {1} :: {2}"
+    }
 	"PlayersLevelPanel: Level Wins Name"
 	{
 		"#format"	"{1:d},{2:s},{3:s}"

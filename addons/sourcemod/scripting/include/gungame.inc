@@ -19,7 +19,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team, bl4nk";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru, http://forums.alliedmods.net";
-stock const String:GUNGAME_VERSION[] = "1.0.5.19";
+stock const String:GUNGAME_VERSION[] = "1.0.6.0";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -263,7 +263,7 @@ forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKille
  * @param client        Player index.
  * @noreturn
  */
-native GG_DisplayTop10(client);
+native GG_DisplayTop10(client); /* HINT: gungame_stats */
 
 /**
  * Gives the client the average/minimum level of all players in the server.
@@ -284,14 +284,14 @@ native GG_GiveHandicapLevel(client, mode);
  * @param client        Player index
  * @return int
  */
-native GG_GetPlayerPlaceInStat(client);
+native GG_GetPlayerPlaceInStat(client); /* HINT: gungame_stats */
 
 /**
  * Count number of winners in stat.
  *
  * @return int
  */
-native GG_CountPlayersInStat();
+native GG_CountPlayersInStat(); /* HINT: gungame_stats */
 
 /**
  * Retrieves player current total wins
@@ -299,7 +299,7 @@ native GG_CountPlayersInStat();
  * @param client        Player index
  * @return int          Total player wins
  */
-native GG_GetClientWins(client);
+native GG_GetClientWins(client); /* HINT: gungame_stats */
 
 /**
  * Get the player current level.
@@ -434,7 +434,7 @@ native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
  * @param auth          Steam id.
  * @return              Player place in top 10 (from 0 to 9), -1 if not found.
  */
-native GG_GetPlayerPlaceInTop10(const String:auth[]);
+native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
 
 /**
  * Stocks

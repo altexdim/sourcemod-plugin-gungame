@@ -45,7 +45,14 @@ public Action:ShowMotd(Handle:timer, any:client)
 {
     decl String:url[256];
     GetConVarString(g_Cvar_Url, url, sizeof(url));
-    Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", url, WinnerName, LastKill[client], GG_GetClientWins(client), GG_GetPlayerPlaceInStat(client), GG_CountPlayersInStat());
+    Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
+        url, 
+        WinnerName, 
+        LastKill[client], 
+        GG_GetClientWins(client), /* HINT: gungame_stats */
+        GG_GetPlayerPlaceInStat(client), /* HINT: gungame_stats */
+        GG_CountPlayersInStat() /* HINT: gungame_stats */
+    );
     for (new i = 1; i <= MaxClients; i++)
     {
         if (IsClientInGame(i))

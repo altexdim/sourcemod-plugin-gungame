@@ -176,6 +176,9 @@
          * 0 = off otherwise the value is the number of days.
          */
         "Prune"     "366"
+        
+        /* Do you want to use GunGame Stats plugin? */
+        "StatsEnabled" "1"
     }
 
     "Sounds"
