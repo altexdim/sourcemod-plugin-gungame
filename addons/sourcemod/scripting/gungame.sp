@@ -104,10 +104,8 @@ public OnClientAuthorized(client, const String:auth[])
         return;
     }
 
-    decl String:steamid[64];
-    GetClientAuthString(client, steamid, sizeof(steamid));
     new level = 0;
-    if ( GetTrieValue(PlayerLevelsBeforeDisconnect, steamid, level) )
+    if ( GetTrieValue(PlayerLevelsBeforeDisconnect, auth, level) )
     {
         if ( PlayerLevel[client] < level )
         {
