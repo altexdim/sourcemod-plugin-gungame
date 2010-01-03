@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.0.6.1:
+        - Removed config variable "StatsEnabled". It's now detecting automaticaly.
+        * gungame.inc and gungame_stats.inc are been splitted into independent libraries.
+    
     1.0.6.0:
         * Handicap moved from gungame_stats to gungame plugin.
         + Added config variable "StatsEnabled" to make gungame_stats optional.

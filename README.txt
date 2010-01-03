@@ -52,7 +52,7 @@ Plugins
 -------
     gungame.smx
         * Main GunGame:SM plugin
-            - Depends on gungame_config.smx
+            - Depends on gungame_config.smx, gungame_stats.smx (optional)
             - Mandatory plugin
             - Provides almost all gungame functionality
             
@@ -64,7 +64,7 @@ Plugins
             
     gungame_config.smx
         * Config Reader
-            - Independent
+            - Depends on gungame.smx
             - Mandatory plugin
             - Read all config files
             - Can load different configs (*.config.txt, *.equip.txt) depending on map 
