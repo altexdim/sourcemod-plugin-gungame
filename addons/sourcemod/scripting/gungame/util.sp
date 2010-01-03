@@ -884,3 +884,39 @@ public Action:RemoveBonus(Handle:timer, any:client)
         UTIL_StopTripleEffects(client);
     }
 }
+
+/**
+ * Stocks
+ */
+
+stock UTIL_StringToLower(String:Source[])
+{
+    new len = strlen(Source);
+
+    for(new i = 0; i <= len; i++)
+    {
+        if(IsCharUpper(Source[i]))
+        {
+            Source[i] |= (1<<5);
+        }
+    }
+
+    return 1;
+}
+
+stock UTIL_StringToUpper(String:Source[])
+{
+    new len = strlen(Source);
+
+    /* Should this be i <= len */
+    for(new i = 0; i <= len; i++)
+    {
+        if(IsCharLower(Source[i]))
+        {
+            Source[i] &= ~(1<<5);
+        }
+    }
+
+    return 1;
+}
+

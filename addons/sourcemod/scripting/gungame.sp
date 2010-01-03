@@ -5,7 +5,7 @@
 #include <colors>
 #include <gungame>
 #undef REQUIRE_PLUGIN
-#include <gungame_st>
+#include <gungame_stats>
 
 /**
  * Enable debug code
@@ -56,7 +56,7 @@ public OnLibraryAdded(const String:name[])
 {
     if ( StrEqual(name, "gungame_st") )
     {
-        StatsEnabled = false;
+        StatsEnabled = true;
     }
 }
 

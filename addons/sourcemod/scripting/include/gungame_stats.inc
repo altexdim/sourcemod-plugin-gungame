@@ -50,7 +50,7 @@ native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
 public SharedPlugin:__pl_gungame_st =
 {
     name = "gungame_st",
-    file = "gungame_st.smx",
+    file = "gungame_stats.smx",
 #if defined REQUIRE_PLUGIN
     required = 1,
 #else

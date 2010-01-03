@@ -24,7 +24,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team, bl4nk";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru, http://forums.alliedmods.net";
-stock const String:GUNGAME_VERSION[] = "1.0.6.0";
+stock const String:GUNGAME_VERSION[] = "1.0.6.1";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -401,41 +401,6 @@ native bool:GG_IsGameCommenced();
  * @noreturn
  */
 native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
-
-/**
- * Stocks
- */
-
-stock UTIL_StringToLower(String:Source[])
-{
-    new len = strlen(Source);
-
-    for(new i = 0; i <= len; i++)
-    {
-        if(IsCharUpper(Source[i]))
-        {
-            Source[i] |= (1<<5);
-        }
-    }
-
-    return 1;
-}
-
-stock UTIL_StringToUpper(String:Source[])
-{
-    new len = strlen(Source);
-
-    /* Should this be i <= len */
-    for(new i = 0; i <= len; i++)
-    {
-        if(IsCharLower(Source[i]))
-        {
-            Source[i] &= ~(1<<5);
-        }
-    }
-
-    return 1;
-}
 
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame =
