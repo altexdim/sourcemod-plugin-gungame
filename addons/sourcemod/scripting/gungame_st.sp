@@ -1,6 +1,7 @@
 #pragma semicolon 1
 #include <sourcemod>
 #include <gungame>
+#include <gungame_st>
 
 /**
  * UnComment and recompile the plugin to support sql stats
@@ -42,6 +43,7 @@ public Plugin:myinfo =
 
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
+    RegPluginLibrary("gungame_st");
     OnCreateNatives();
     return true;
 }

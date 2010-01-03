@@ -2,18 +2,13 @@
 #include <sourcemod>
 #include <sdktools>
 
-/**
- * So the plugin won't search for the library gungame
- * but since I keep all the const in the same file too.
- * Since it requires the const.
- */
-#undef REQUIRE_PLUGIN
-#include <gungame>
 #include <colors>
+#include <gungame>
+#undef REQUIRE_PLUGIN
+#include <gungame_st>
 
 /**
  * Enable debug code
- * This is only meant for the author.
  */
 //#define DEBUG
 
@@ -57,8 +52,25 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
     return true;
 }
 
+public OnLibraryAdded(const String:name[])
+{
+    if ( StrEqual(name, "gungame_st") )
+    {
+        StatsEnabled = false;
+    }
+}
+
+public OnLibraryRemoved(const String:name[])
+{
+    if ( StrEqual(name, "gungame_st") )
+    {
+        StatsEnabled = false;
+    }
+}
+
 public OnPluginStart()
 {
+    StatsEnabled = LibraryExists("gungame_st");
     LoadTranslations("gungame");
     PlayerLevelsBeforeDisconnect = CreateTrie();
     

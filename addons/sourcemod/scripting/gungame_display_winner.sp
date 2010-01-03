@@ -2,6 +2,7 @@
 
 #include <sourcemod>
 #include <gungame>
+#include <gungame_st>
 
 new String:LastKill[MAXPLAYERS+1][32];
 new Handle:g_Cvar_Url;

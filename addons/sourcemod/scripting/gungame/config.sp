@@ -144,8 +144,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 HandicapMode = StringToInt(value);
             } else if(strcmp("Top10Handicap", key, false) == 0) {
                 Top10Handicap = bool:StringToInt(value);
-            } else if(strcmp("StatsEnabled", key, false) == 0) {
-                StatsEnabled = bool:StringToInt(value);
             }
         }
         

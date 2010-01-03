@@ -1,3 +1,8 @@
+#if defined _gungame_natives_included_
+  #endinput
+#endif
+#define _gungame_natives_included_
+
 /**
  * Const
  */
@@ -258,14 +263,6 @@ forward GG_OnStartMapVote();
 forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKilled);
 
 /**
- * Show the top10 to the client
- *
- * @param client        Player index.
- * @noreturn
- */
-native GG_DisplayTop10(client); /* HINT: gungame_stats */
-
-/**
  * Gives the client the average/minimum level of all players in the server.
  *
  * Handicap mode: 
@@ -277,29 +274,6 @@ native GG_DisplayTop10(client); /* HINT: gungame_stats */
  * @noreturn
  */
 native GG_GiveHandicapLevel(client, mode);
-
-/**
- * Return current player's place in stat.
- *
- * @param client        Player index
- * @return int
- */
-native GG_GetPlayerPlaceInStat(client); /* HINT: gungame_stats */
-
-/**
- * Count number of winners in stat.
- *
- * @return int
- */
-native GG_CountPlayersInStat(); /* HINT: gungame_stats */
-
-/**
- * Retrieves player current total wins
- *
- * @param client        Player index
- * @return int          Total player wins
- */
-native GG_GetClientWins(client); /* HINT: gungame_stats */
 
 /**
  * Get the player current level.
@@ -427,14 +401,6 @@ native bool:GG_IsGameCommenced();
  * @noreturn
  */
 native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
-
-/**
- * Get player's place in top 10.
- *
- * @param auth          Steam id.
- * @return              Player place in top 10 (from 0 to 9), -1 if not found.
- */
-native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
 
 /**
  * Stocks
