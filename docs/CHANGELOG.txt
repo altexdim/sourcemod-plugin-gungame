@@ -1,5 +1,10 @@
 Changelog
 ---------
+    1.0.6.2:
+        * Fixed bug:
+            When player is on a first level and multikill is enabled then if he lost level
+            with knife or by siucided he should loose all multikill points.
+    
     1.0.6.1:
         - Removed config variable "StatsEnabled". It's now detecting automaticaly.
         * gungame.inc and gungame_stats.inc are been splitted into independent libraries.

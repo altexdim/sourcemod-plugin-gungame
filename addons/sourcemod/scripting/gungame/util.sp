@@ -318,7 +318,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     }
 
     // Client got new level
-    CurrentKillsPerWeap[client] = NULL;
+    CurrentKillsPerWeap[client] = 0;
     PlayerLevel[client] = Level;
     
     if ( difference < 0 )
@@ -337,11 +337,11 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         }
     }
 
-    TotalLevel += difference;
+    TotalLevel += Level - oldLevel;
 
     if ( TotalLevel < 0 )
     {
-        TotalLevel = NULL;
+        TotalLevel = 0;
     }
 
     if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )

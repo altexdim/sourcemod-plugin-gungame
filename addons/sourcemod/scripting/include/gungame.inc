@@ -24,7 +24,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team, bl4nk";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru, http://forums.alliedmods.net";
-stock const String:GUNGAME_VERSION[] = "1.0.6.1";
+stock const String:GUNGAME_VERSION[] = "1.0.6.2";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
