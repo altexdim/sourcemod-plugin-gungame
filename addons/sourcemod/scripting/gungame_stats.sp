@@ -1,7 +1,10 @@
 #pragma semicolon 1
+
 #include <sourcemod>
+#include <gungame_const>
 #include <gungame>
 #include <gungame_stats>
+#include <gungame_config>
 
 /**
  * UnComment and recompile the plugin to support sql stats

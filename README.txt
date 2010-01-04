@@ -56,15 +56,9 @@ Plugins
             - Mandatory plugin
             - Provides almost all gungame functionality
             
-    gungame_afk.smx
-        * Afk Management System
-            - Depends on gungame_config.smx, gungame.smx
-            - Optional plugin
-            - Detect afk players, kick them if needed, do not allow level up on afk players
-            
     gungame_config.smx
         * Config Reader
-            - Depends on gungame.smx
+            - No dependencies
             - Mandatory plugin
             - Read all config files
             - Can load different configs (*.config.txt, *.equip.txt) depending on map 
@@ -72,27 +66,7 @@ Plugins
                 gungame.config.txt will be read first before prefix map name.
                 Prefix map name will be executed first before map specfic map.
                 Then map specifc config files will be loaded.
-            
-    gungame_display_winner.smx
-        * Display winner
-            - Depends on gungame.smx, gungame_stats.smx
-            - Optional plugin
-            - When someone wins it shows MOTD window with external URL displaing some info about winner.
-            
-    gungame_logging.smx
-        * Logging events
-            - Depends on gungame.smx
-            - Optional plugin
-            - Logs events: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
-              gg_knife_level, gg_triple_level, gg_last_level
-                                      
-    gungame_mapvoting.smx
-        * Map voting
-            - Depends on gungame.smx
-            - Optional plugin
-            - Starts the map voting for the next map when someone reaches particular level
-              by executing cfg/gungame/gungame.mapvote.cfg
-                                      
+                
     gungame_stats.smx
         * Stats
             - Depends on gungame.smx, gungame_config.smx
@@ -100,12 +74,39 @@ Plugins
             - Displays top10 panel
             - Stores players wins data and top10 data
             - Sets handicap level for the new connected players
+                
+    gungame_afk.smx
+        * Afk Management System
+            - Depends on gungame_config.smx, gungame.smx
+            - Optional plugin
+            - Detect afk players, kick them if needed, do not allow level up on afk players
+            
+    gungame_mapvoting.smx
+        * Map voting
+            - Depends on gungame.smx
+            - Optional plugin
+            - Starts the map voting for the next map when someone reaches particular level
+              by executing cfg/gungame/gungame.mapvote.cfg
+                                      
+    gungame_logging.smx
+        * Logging events
+            - Depends on gungame.smx
+            - Optional plugin
+            - Logs events: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
+              gg_knife_level, gg_triple_level, gg_last_level
                                       
     gungame_tk.smx
         * TeamKill Management System
             - Depends on gungame.smx
             - Optional plugin
             - Level down team killer
+            
+    gungame_display_winner.smx
+        * Display winner
+            - Depends on gungame.smx, gungame_stats.smx
+            - Optional plugin
+            - When someone wins it shows MOTD window with external URL displaing some info 
+                about winner.
             
 Credits
 -------

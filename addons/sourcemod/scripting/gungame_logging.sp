@@ -1,5 +1,7 @@
 #pragma semicolon 1
+
 #include <sourcemod>
+#include <gungame_const>
 #include <gungame>
 
 /**

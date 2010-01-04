@@ -1,6 +1,10 @@
+#pragma semicolon 1
+
 #include <sourcemod>
 #include <sdktools>
+#include <gungame_const>
 #include <gungame>
+#include <gungame_config>
 #include <colors>
 
 new OffsetOrigin;

@@ -1,9 +1,12 @@
 #pragma semicolon 1
+
 #include <sourcemod>
 #include <sdktools>
 
 #include <colors>
+#include <gungame_const>
 #include <gungame>
+#include <gungame_config>
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
 

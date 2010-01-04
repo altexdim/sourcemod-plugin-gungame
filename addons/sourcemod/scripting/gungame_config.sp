@@ -1,6 +1,8 @@
 #pragma semicolon 1
+
 #include <sourcemod>
-#include <gungame>
+#include <gungame_const>
+#include <gungame_config>
 
 /**
  * Do map specific config
@@ -35,6 +37,12 @@ new Handle:FwdConfigNewSection = INVALID_HANDLE;
 new Handle:FwdConfigKeyValue = INVALID_HANDLE;
 new Handle:FwdConfigParseEnd = INVALID_HANDLE;
 new Handle:FwdConfigEnd = INVALID_HANDLE;
+
+public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
+{
+    RegPluginLibrary("gungame_cfg");
+    return true;
+}
 
 public OnPluginStart()
 {

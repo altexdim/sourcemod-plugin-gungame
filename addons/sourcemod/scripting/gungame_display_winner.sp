@@ -1,6 +1,7 @@
 #pragma semicolon 1
 
 #include <sourcemod>
+#include <gungame_const>
 #include <gungame>
 #include <gungame_stats>
 
@@ -12,9 +13,9 @@ public Plugin:myinfo =
 {
     name = "GunGame:SM Display Winner",
     description = "Shows a MOTD window with the winner's information when the game is won.",
-    author = GUNGAME_AUTHOR,
+    author = "bl4nk",
     version = GUNGAME_VERSION,
-    url = GUNGAME_URL
+    url = "http://forums.alliedmods.net"
 };
 
 public OnPluginStart()

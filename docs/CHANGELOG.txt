@@ -1,5 +1,12 @@
 Changelog
 ---------
+    1.0.6.3:
+        * Refactoring:
+            gungame_config.smx is now independent from gungame.smx.
+            gungame.inc has been splitted into gungame_const.inc with constants,
+                gungame_config.inc with gungame_config global forwards and 
+                gungame.inc with gungame global forwards and natives.
+    
     1.0.6.2:
         * Fixed bug:
             When player is on a first level and multikill is enabled then if he lost level
