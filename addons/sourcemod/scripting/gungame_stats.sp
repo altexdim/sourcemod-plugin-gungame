@@ -65,9 +65,7 @@ public OnClientAuthorized(client, const String:auth[])
 {
     if ( auth[0] != 'B' )
     {
-        #if !defined SQL_SUPPORT
         RetrieveKeyValues(client, auth);
-        #endif
     }
 }
 

@@ -92,23 +92,9 @@ SaveRank()
     }
 }
 
-#if !defined SQL_SUPPORT
-SavePlayerDataInfo()
-{
-    /* Since pruning does save the file after it done check don't need to do it twice. */
-    if(Prune)
-    {
-        PrunePlayerKeyValues();
-    } else {
-        KvRewind(KvPlayer);
-        KeyValuesToFile(KvPlayer, PlayerFile);
-    }
-
-    PlayerOpen = true;
-}
-
 RetrieveKeyValues(client, const String:auth[])
 {
+    #if !defined SQL_SUPPORT
     if(PlayerOpen)
     {
         KvRewind(KvPlayer);
@@ -125,6 +111,22 @@ RetrieveKeyValues(client, const String:auth[])
             KvSetNum(KvPlayer, "TimeStamp", GetTime());
         }
     }
+    #endif
+}
+
+#if !defined SQL_SUPPORT
+SavePlayerDataInfo()
+{
+    /* Since pruning does save the file after it done check don't need to do it twice. */
+    if(Prune)
+    {
+        PrunePlayerKeyValues();
+    } else {
+        KvRewind(KvPlayer);
+        KeyValuesToFile(KvPlayer, PlayerFile);
+    }
+
+    PlayerOpen = true;
 }
 
 SavePlayerData(client)
