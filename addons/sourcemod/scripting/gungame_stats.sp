@@ -9,8 +9,8 @@
 /**
  * UnComment and recompile the plugin to support sql stats
  */
-//#define SQL_SUPPORT
-
+//#define MYSQL_SUPPORT
+//#define SQLITE_SUPPORT
 
 #include "gungame_stats/gungame_stats.h"
 #include "gungame_stats/keyvalues.h"
@@ -18,14 +18,13 @@
 #include "gungame_stats/menu.h"
 #include "gungame_stats/ranks.h"
 
-#if defined SQL_SUPPORT /* Todo */
-  #if defined SQL_LITE
-    //#include "gungame_stats/sqlite.h"
-    //#include "gungame_stats/sqlite.sp"
-  #else
+#if defined MYSQL_SUPPORT
     //#include "gungame_stats/mysql.h"
     //#include "gungame_stats/mysql.sp"
-  #endif
+#endif
+#if defined SQLITE_SUPPORT
+    //#include "gungame_stats/sqlite.h"
+    //#include "gungame_stats/sqlite.sp"
 #endif
 
 #include "gungame_stats/ranks.sp"
