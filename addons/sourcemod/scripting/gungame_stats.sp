@@ -9,6 +9,7 @@
 /**
  * UnComment and recompile the plugin to support sql stats
  */
+//#define SQL_SUPPORT
 //#define MYSQL_SUPPORT
 //#define SQLITE_SUPPORT
 
