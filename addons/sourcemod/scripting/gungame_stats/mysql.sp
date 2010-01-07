@@ -443,7 +443,7 @@ public Action:_CmdImportDb(client, args)
         }
     }
 
-    ReplyToCommand(client, "[GunGame] Import of es player data completed. Please run gg_rebuild to update the top10.");
+    ReplyToCommand(client, "[GunGame] Import of player data completed. Please run gg_rebuild to update the top10.");
 
     return Plugin_Handled;
 }
