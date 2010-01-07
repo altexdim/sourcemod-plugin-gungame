@@ -78,18 +78,12 @@ public OnMapStart()
 
 public OnMapEnd()
 {
-    if(!SaveProcess)
-    {
-        EndProcess();
-    }
+    EndProcess();
 }
 
 public OnPluginEnd()
 {
-    if(!SaveProcess)
-    {
-        EndProcess();
-    }
+    EndProcess();
 }
 
 public GG_OnStartup(bool:Command)
@@ -116,10 +110,7 @@ public GG_OnShutdown()
     {
         IsActive = false;
 
-        if(!SaveProcess)
-        {
-            EndProcess();
-        }
+        EndProcess();
 
         new maxslots = GetMaxClients( );
 
@@ -135,7 +126,7 @@ public GG_OnShutdown()
 
 public OnClientDisconnect(client)
 {
-    PlayerWinsData[client] = NULL;
+    PlayerWinsData[client] = 0;
 }
 
 public Action:_CmdTop10(client, args)
@@ -149,6 +140,11 @@ public Action:_CmdTop10(client, args)
 
 EndProcess()
 {
+    if ( SaveProcess )
+    {
+        return;
+    }
+    
     SaveProcess = true;
 
     SaveRank();
