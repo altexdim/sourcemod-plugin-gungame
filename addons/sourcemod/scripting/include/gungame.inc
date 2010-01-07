@@ -238,6 +238,14 @@ native bool:GG_IsGameCommenced();
  */
 native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
 
+/**
+ * Retrieves if warmup is in progress.
+ *
+ * @noparam
+ * @return          Return true if warmup is in progress otherwise false.
+ */
+native bool:GG_IsWarmupInProgress();
+
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame =
 {

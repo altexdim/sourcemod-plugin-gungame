@@ -7,31 +7,34 @@
 #include <gungame_config>
 
 /**
- * UnComment and recompile the plugin to support sql stats
+ * Uncomment and recompile the plugin to support sql stats.
+ * Only one database type is supported at the same time.
  */
-//#define SQL_SUPPORT
+#define SQL_SUPPORT
+#define SQLITE_SUPPORT
 //#define MYSQL_SUPPORT
-//#define SQLITE_SUPPORT
 
 #include "gungame_stats/gungame_stats.h"
-#include "gungame_stats/keyvalues.h"
 #include "gungame_stats/config.h"
 #include "gungame_stats/menu.h"
 #include "gungame_stats/ranks.h"
 
 #if defined MYSQL_SUPPORT
-    //#include "gungame_stats/mysql.h"
-    //#include "gungame_stats/mysql.sp"
+    #include "gungame_stats/mysql.h"
+    #include "gungame_stats/mysql.sp"
 #endif
 #if defined SQLITE_SUPPORT
-    //#include "gungame_stats/sqlite.h"
-    //#include "gungame_stats/sqlite.sp"
+    #include "gungame_stats/sqlite.h"
+    #include "gungame_stats/sqlite.sp"
+#endif
+#if !defined SQL_SUPPORT
+    #include "gungame_stats/keyvalues.h"
+    #include "gungame_stats/keyvalues.sp"
 #endif
 
 #include "gungame_stats/ranks.sp"
 #include "gungame_stats/menu.sp"
 #include "gungame_stats/config.sp"
-#include "gungame_stats/keyvalues.sp"
 #include "gungame_stats/util.sp"
 #include "gungame_stats/natives.sp"
 
@@ -59,14 +62,15 @@ public OnPluginStart()
     RegConsoleCmd("top10", _CmdTop10);
     RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
     RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
+    #if defined SQL_SUPPORT
+        RegAdminCmd("gg_reset", _CmdReset, GUNGAME_ADMINFLAG, "Reset all gungame stats.");
+        RegAdminCmd("gg_importdb", _CmdImportDb, GUNGAME_ADMINFLAG, "Imports the winners from gungame players data file into database.");
+    #endif
 }
 
 public OnClientAuthorized(client, const String:auth[])
 {
-    if ( auth[0] != 'B' )
-    {
-        RetrieveKeyValues(client, auth);
-    }
+    RetrieveKeyValues(client, auth);
 }
 
 public OnMapStart()
@@ -89,11 +93,10 @@ public GG_OnStartup(bool:Command)
     if ( !IsActive )
     {
         IsActive = true;
-        new maxslots = GetMaxClients( );
         decl String:Auth[64];
-        for(new i = 1; i <= maxslots; i++)
+        for(new i = 1; i <= MaxClients; i++)
         {
-            if ( IsClientInGame(i) )
+            if ( IsClientAuthorized(i) )
             {
                 GetClientAuthString(i, Auth, sizeof(Auth));
                 OnClientAuthorized(i, Auth);
@@ -110,11 +113,9 @@ public GG_OnShutdown()
 
         EndProcess();
 
-        new maxslots = GetMaxClients( );
-
-        for(new i = 1; i <= maxslots; i++)
+        for(new i = 1; i <= MaxClients; i++)
         {
-            if(IsClientInGame(i))
+            if ( IsClientInGame(i) )
             {
                 OnClientDisconnect(i);
             }
@@ -145,6 +146,8 @@ EndProcess()
     
     SaveProcess = true;
 
-    SaveRank();
+    #if !defined SQL_SUPPORT
+        SaveRank();
+    #endif
     SavePlayerDataInfo();
 }

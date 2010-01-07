@@ -1,6 +1,8 @@
 #define MAX_RANK         10 /* DO NOT CHANGE THE DEFINE MAX_RANK */
 
-new bool:RankChange;
+#if !defined SQL_SUPPORT
+    new bool:RankChange;
+#endif
 new bool:HasRank;
 
 /* Top10 ranks */

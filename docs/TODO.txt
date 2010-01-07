@@ -72,7 +72,6 @@ TODO
     ----====----==== High severity list ----====----====
     
     * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    + Add sqlite and mysql support for top players stats
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
     
     ----====----==== Low priority list ----====----====

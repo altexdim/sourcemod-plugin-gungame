@@ -28,6 +28,8 @@ Commands and Cvars
     gg_rebuild                      - Rebuilds the top10 rank from the player data information.
     gg_import                       - Imports the winners file from es es gungame3. File must be in data/gungame/es_gg_winners_db.txt.
                                       You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py.
+    gg_reset                        - Reset all gungame stats. (only if sql stats enabled)
+    gg_importdb                     - Imports the winners from gungame players data file into database. (only if sql stats enabled)
 
     say !level                      - Show your current level and who is winning.
     say !weapons                    - Show the weapon order.

@@ -1,5 +1,15 @@
 Changelog
 ---------
+    1.0.7.0:
+        + Added sqlite and mysql support for players stats. Sqlite support is enabled by default.
+            To enable mysql support or disable any sql support you need to recompile gungame_stats plugin.
+            To import your current player wins data you need to run "rcon gg_importdb" and "rcon gg_rebuild".
+        + Added native GG_IsWarmupInProgress().
+        * Fixed (last similar fix was not working correctly):
+            Bug report: after win, winner levels up and gets a level greater than max level defined 
+            in equip file (there is an info about it in chat). I think that you should block 
+            leveling after win.
+    
     1.0.6.3:
         * Refactoring:
             gungame_config.smx is now independent from gungame.smx.

@@ -1,11 +1,9 @@
 OnCreateKeyValues()
 {
-    #if !defined SQL_SUPPORT
     /* Make sure to use unique section name just incase someone else uses it */
     KvPlayer = CreateKeyValues("gg_PlayerData", BLANK, BLANK);
     BuildPath(Path_SM, PlayerFile, sizeof(PlayerFile), "data/gungame/playerdata.txt");
     PlayerOpen = FileToKeyValues(KvPlayer, PlayerFile);
-    #endif
 
     KvRank = CreateKeyValues("gg_Top10", BLANK, BLANK);
     BuildPath(Path_SM, RankFile, sizeof(RankFile), "data/gungame/top10.txt");
@@ -94,7 +92,10 @@ SaveRank()
 
 RetrieveKeyValues(client, const String:auth[])
 {
-    #if !defined SQL_SUPPORT
+    if ( auth[0] == 'B' )
+    {
+        return;
+    }
     if(PlayerOpen)
     {
         KvRewind(KvPlayer);
@@ -111,10 +112,8 @@ RetrieveKeyValues(client, const String:auth[])
             KvSetNum(KvPlayer, "TimeStamp", GetTime());
         }
     }
-    #endif
 }
 
-#if !defined SQL_SUPPORT
 SavePlayerDataInfo()
 {
     /* Since pruning does save the file after it done check don't need to do it twice. */
@@ -251,7 +250,6 @@ PrunePlayerKeyValues()
     KvRewind(KvPlayer);
     KeyValuesToFile(KvPlayer, PlayerFile);
 }
-#endif
 
 public Action:_CmdRebuild(client, args)
 {

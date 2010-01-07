@@ -386,6 +386,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
                 SetConVarInt(sv_alltalk,1);
             }
         }
+        PlayerLevel[client] = oldLevel;
         return oldLevel;
     }
     UTIL_RecalculateLeader(client, oldLevel, Level);
