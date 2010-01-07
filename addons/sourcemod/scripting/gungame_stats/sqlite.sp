@@ -567,7 +567,7 @@ LoadRank()
         SQL_UnlockDatabase(g_DbConnection);
         new i = 0;
         HasRank = bool:SQL_GetRowCount(result);
-        if ( SQL_FetchRow(result) )
+        while ( SQL_FetchRow(result) )
         {
             PlayerWins[i] = SQL_FetchInt(result, 1);
             SQL_FetchString(result, 2, PlayerName[i], sizeof(PlayerName[]));
