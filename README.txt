@@ -35,6 +35,7 @@ Commands and Cvars
     say !weapons                    - Show the weapon order.
     say !score                      - Show all player current scores.
     say !top10                      - Show the top 10 winners on the server.
+    say !leader                     - Show current leaders.
     say !rules                      - Show the rules and how to play.
 
 Requirements

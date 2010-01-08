@@ -310,10 +310,10 @@
 	}
 	"LevelPanel: The current leader is on level"
 	{
-		"#format"	"{1:s},{2:d}"
-		"en"	"The current leader is {1} on level {2}."
-		"ru"	"Текущий лидер {1} на уровне {2}."
-		"de"	"Der aktuell Führende ist {1} mit Level {2}."
+		"#format"	"{1:s},{2:d},{3:s}"
+		"en"	"The current leader is {1} on level {2} :: {3}."
+		"ru"	"Текущий лидер {1} на уровне {2} :: {3}."
+		"de"	"Der aktuell Führende ist {1} mit Level {2} :: {3}."
 	}
 	"LevelPanel: You have tied with the leader"
 	{
@@ -366,23 +366,23 @@
 	}
 	"PlayersLevelPanel: Players level information"
 	{
-		"en"	"[GunGame] Players level information"
-		"ru"	"[GunGame] Уровни игроков"
-		"de"	"[GunGame] Spieler Level Information"
+		"en"	"[GunGame] Players level information\n "
+		"ru"	"[GunGame] Уровни игроков\n "
+		"de"	"[GunGame] Spieler Level Information\n "
 	}
     "PlayersLevelPanel: Level Name"
     {
-		"#format"	"{1:d},{2:s}"
-		"en"	"Level {1} :: {2}"
-		"ru"	"Уровень {1} :: {2}"
-		"de"	"Level {1} :: {2}"
+		"#format"	"{1:d},{2:s},{3:s}"
+		"en"	"Level {1} :: {3} :: {2}"
+		"ru"	"Уровень {1} :: {3} :: {2}"
+		"de"	"Level {1} :: {3} :: {2}"
     }
 	"PlayersLevelPanel: Level Wins Name"
 	{
-		"#format"	"{1:d},{2:s},{3:s}"
-		"en"	"Level {1} :: {2} :: {3}"
-		"ru"	"Уровень {1} :: {2} :: {3}"
-		"de"	"Level {1} :: {2} :: {3}"
+		"#format"	"{1:d},{2:s},{3:s},{4:s}"
+		"en"	"Level {1} :: {4} :: {2} :: {3}"
+		"ru"	"Уровень {1} :: {4} :: {2} :: {3}"
+		"de"	"Level {1} :: {4} :: {2} :: {3}"
 	}
 	"1>wins"
 	{
@@ -502,6 +502,11 @@
 		"ru"	"!top10 - смотреть Топ-10 победителей."
 		"de"	"!top10 um die Top10 Spieler dieses Servers zu sehen."
 	}
+    "CommandPanel: !leader to see current leaders"
+    {
+		"en"	"!leader to show current leaders."
+		"ru"	"!leader - смотреть лидеров."
+    }
 	"CommandPanel: !rules to see the rules and how to play"
 	{
 		"en"	"!rules to see the rules and how to play.\n"
@@ -602,4 +607,14 @@
 		"ru"	"Страница {1} / {2}"
 		"de"	"Seite {1} / {2}"
 	}
+    "LeaderMenu: Leaders"
+    {
+		"en"	"[GunGame] Leaders\n "
+		"ru"	"[GunGame] Лидеры\n "
+    }
+    "LeaderMenu: No leaders"
+    {
+		"en"	"There is currently no leader."
+		"ru"	"Сейчас лидеров нет."
+    }
 }

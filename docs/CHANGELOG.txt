@@ -1,5 +1,13 @@
 Changelog
 ---------
+    1.0.7.1:
+        + Added shortcuts: 
+            You can access !leader menu from !level panel by pressing 3.
+            You can access !top10 menu from !level panel by pressing 2.
+        + Added new !leader command, which should show list of players on leader level in a panel.
+        * Fixed minor translation bugs in menu panels.
+        + Added info about player's weapon in !scores and !level panels.
+            
     1.0.7.0:
         + Added sqlite and mysql support for players stats. Sqlite support is enabled by default.
             To enable mysql support or disable any sql support you need to recompile gungame_stats plugin.

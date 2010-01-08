@@ -6,6 +6,7 @@ OnCreateCommand()
     RegConsoleCmd("score", _CmdScore);
     RegConsoleCmd("weapons", _CmdWeapons);
     RegConsoleCmd("commands", _CmdCommand);
+    RegConsoleCmd("leader", _CmdLeader);
 
     RegConsoleCmd("gg_version", _CmdVersion);
     RegConsoleCmd("gg_status", _CmdStatus);
@@ -60,9 +61,18 @@ public Action:_CmdDisable(client, args)
 
 public Action:_CmdLevel(client, args)
 {
-    if(IsActive)
+    if ( IsActive )
     {
         CreateLevelPanel(client);
+    }
+    return Plugin_Handled;
+}
+
+public Action:_CmdLeader(client, args)
+{
+    if ( IsActive )
+    {
+        ShowLeaderMenu(client);
     }
     return Plugin_Handled;
 }
