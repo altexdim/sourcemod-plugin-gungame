@@ -19,7 +19,12 @@ SqlConnect()
     
     new String:ident[16];
     SQL_ReadDriver(g_DbConnection, ident, sizeof(ident));
+    #if defined MYSQL_SUPPORT
     if ( strcmp(ident, "mysql", false) != 0 )
+    #endif
+    #if defined SQLITE_SUPPORT
+    if ( strcmp(ident, "sqlite", false) != 0 )
+    #endif
     {
         CloseHandle(g_DbConnection);
         g_DbConnection = INVALID_HANDLE;
@@ -57,6 +62,28 @@ SqlConnect()
             SQL_UnlockDatabase(g_DbConnection);
             return;
         }
+        #if defined SQLITE_SUPPORT
+            #if defined SQL_DEBUG
+                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1);
+            #endif
+            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1) )
+            {
+                SQL_GetError(g_DbConnection, error, sizeof(error));
+                LogError("Could not create players table index 1 (error: %s)", error);
+                SQL_UnlockDatabase(g_DbConnection);
+                return;
+            }
+            #if defined SQL_DEBUG
+                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2);
+            #endif
+            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2) )
+            {
+                SQL_GetError(g_DbConnection, error, sizeof(error));
+                LogError("Could not create players table index 2 (error: %s)", error);
+                SQL_UnlockDatabase(g_DbConnection);
+                return;
+            }
+        #endif
     }
     SQL_UnlockDatabase(g_DbConnection);
 }
@@ -100,8 +127,20 @@ SavePlayerData(client)
 }
 
 // non-threaded
-// only for display_winner
 GetPlayerPlaceInStat(client)
+{
+    // get from cache
+    if ( !PlayerWinsData[client] || PlayerPlaceData[client] )
+    {
+        return PlayerPlaceData[client];
+    }
+    // get from database
+    PlayerPlaceData[client] = GetPlayerPlace(client);
+    return PlayerPlaceData[client];
+}
+
+// non-threaded
+GetPlayerPlace(client)
 {
     decl String:query[1024];
     Format(query, sizeof(query), g_sql_getPlayerPlaceByWins, PlayerWinsData[client]);
@@ -129,9 +168,13 @@ GetPlayerPlaceInStat(client)
     }
 }
 
-// non-threaded
-// only for display_winner
 CountPlayersInStat()
+{
+    return TotalWinners;
+}
+
+// non-threaded
+CountWinners()
 {
     SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
@@ -214,7 +257,12 @@ public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:
 SavePlayerDataInfo()
 {
     decl String:query[1024];
-    Format(query, sizeof(query), g_sql_prunePlayers, Prune);
+    #if defined MYSQL_SUPPORT
+        Format(query, sizeof(query), g_sql_prunePlayers, Prune);
+    #endif
+    #if defined SQLITE_SUPPORT
+        Format(query, sizeof(query), g_sql_prunePlayers, GetTime() - Prune*86400);
+    #endif
     SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
@@ -481,6 +529,28 @@ public Action:_CmdReset(client, args)
         ReplyToCommand(client, "[GunGame] Error reseting stats.");
         return Plugin_Handled;
     }
+    #if defined SQLITE_SUPPORT
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1);
+        #endif
+        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1) )
+        {
+            SQL_GetError(g_DbConnection, error, sizeof(error));
+            LogError("Could not create players table index 1 (error: %s)", error);
+            SQL_UnlockDatabase(g_DbConnection);
+            return Plugin_Handled;
+        }
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2);
+        #endif
+        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2) )
+        {
+            SQL_GetError(g_DbConnection, error, sizeof(error));
+            LogError("Could not create players table index 2 (error: %s)", error);
+            SQL_UnlockDatabase(g_DbConnection);
+            return Plugin_Handled;
+        }
+    #endif
     SQL_UnlockDatabase(g_DbConnection);
     ReplyToCommand(client, "[GunGame] Stats has been reseted.");
     
@@ -488,10 +558,12 @@ public Action:_CmdReset(client, args)
     for (new i = 1; i <= MAXPLAYERS; i++)
     {
         PlayerWinsData[i] = 0;
+        PlayerPlaceData[i] = 0;
     }
     
     // reset top 10 data
     HasRank = false;
+    TotalWinners = 0;
     for (new i = 0; i < MAX_RANK; i++)
     {
         PlayerWins[i] = 0;
@@ -508,6 +580,7 @@ LoadRank()
     {
         PlayerWins[i] = 0;
     }
+    TotalWinners = CountWinners();
     
     decl String:query[1024];
     Format(query, sizeof(query), g_sql_getTop10Players, 10, 0);
@@ -537,3 +610,64 @@ LoadRank()
         CloseHandle(result);
     }
 }
+
+// threaded
+ShowRank(client)
+{
+    new wins = PlayerWinsData[client];
+    if ( !wins || PlayerPlaceData[client] )
+    {
+        ShowRankInChat(client);
+        return;
+    }
+    
+    decl String:query[1024];
+    Format(query, sizeof(query), g_sql_getPlayerPlaceByWins, wins);
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] %s", query);
+    #endif
+    SQL_TQuery(g_DbConnection, T_ShowRank, query, client);
+}
+
+public T_ShowRank(Handle:owner, Handle:result, const String:error[], any:client)
+{
+    /* Make sure the client didn't disconnect while the thread was running */
+    if ( !IsClientConnected(client) )
+    {
+        return;
+    }
+    if ( result == INVALID_HANDLE )
+    {
+        LogError("Failed to retrieve player place by wins (error: %s)", error);
+        return;
+    }
+    if ( SQL_FetchRow(result) )
+    {
+        PlayerPlaceData[client] = SQL_FetchInt(result, 0) + 1;
+        ShowRankInChat(client);
+    }
+}
+
+ShowRankInChat(client)
+{
+    decl String:name[MAX_NAME_SIZE];
+    GetClientName(client, name, sizeof(name));
+    if ( !PlayerPlaceData[client] )
+    {
+        CPrintToChatAllEx(client, "%t", "Rank: not ranked", name);
+    }
+    else
+    {
+        for ( new i = 1; i <= MaxClients; i++ )
+        {
+            if ( IsClientInGame(i) && !IsFakeClient(i) )
+            {
+                decl String:subtext[64];
+                SetGlobalTransTarget(i);
+                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), PlayerWinsData[client], "with wins");
+                CPrintToChatEx(i, client, "%t", "Rank: rank", name, PlayerPlaceData[client], subtext, TotalWinners);
+            }
+        }
+    }
+}
+

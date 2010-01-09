@@ -26,7 +26,7 @@ GetPlayerPlaceInTop10(const String:Auth[])
 #if !defined SQL_SUPPORT
 CheckRank(client)
 {
-    Wins = PlayerWinsData[client];
+    new Wins = PlayerWinsData[client];
     decl String:Authid[64];
     GetClientAuthString(client, Authid, sizeof(Authid));
 

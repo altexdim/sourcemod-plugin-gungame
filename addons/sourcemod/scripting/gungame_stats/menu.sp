@@ -9,7 +9,7 @@ ShowTop10Panel(client)
     SetPanelTitle(Top10, text);
     DrawPanelText(Top10, BLANK_SPACE);
 
-    if(!HasRank)
+    if ( !HasRank )
     {
         Format(text, sizeof(text), "%t", "Top10Panel: There are currently no players in the top10");
         DrawPanelText(Top10, text);
@@ -37,3 +37,4 @@ public EmptyHandler(Handle:menu, MenuAction:action, param1, param2)
 {
     /* Don't care what they pressed. */
 }
+

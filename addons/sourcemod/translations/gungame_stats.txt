@@ -53,4 +53,40 @@
         "ru"    "Выход"
 		"de"    "Ausgang"
     }
+    "Rank: not ranked"
+    {
+        "#format"    "{1:s}"
+        "en"    "{teamcolor}{1} {green}has no wins yet"
+        "ru"    "{teamcolor}{1} {green}ещё не имеет побед"
+    }
+    "Rank: rank"
+    {
+        "#format"    "{1:s},{2:d},{3:s},{4:d}"
+        "en"    "{teamcolor}{1} {green}is on {default}{2} {green}place from {default}{4} {green}with {3}"
+        "ru"    "{teamcolor}{1} {green}занимает {default}{2} {green}место из {default}{4} {green}с {3}"
+    }
+        "1>with wins"
+        {
+                "#format"    "{1:d}"
+            "en"    "{default}{1} {green}win"
+            "ru"    "{default}{1} {green}победой"
+        }
+        "x1>with wins"
+        {
+                "#format"    "{1:d}"
+            "en"    "{default}{1} {green}wins"
+            "ru"    "{default}{1} {green}победой"
+        }
+        "x2-x4>with wins"
+        {
+                "#format"    "{1:d}"
+            "en"    "{default}{1} {green}wins"
+            "ru"    "{default}{1} {green}победами"
+        }
+        "x5-x20>with wins"
+        {
+                "#format"    "{1:d}"
+            "en"    "{default}{1} {green}wins"
+            "ru"    "{default}{1} {green}победами"
+        }
 }

@@ -1,3 +1,5 @@
+// Deprecated: stats is now implemented in sql
+
 /* Contains the top 10 data */
 new String:RankFile[PLATFORM_MAX_PATH];
 new Handle:KvRank = INVALID_HANDLE;

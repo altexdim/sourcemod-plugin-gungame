@@ -8,12 +8,20 @@
  */
 
 /**
- * Show the top10 to the client
+ * Show the top10 to the client.
  *
  * @param client        Player index.
  * @noreturn
  */
 native GG_DisplayTop10(client); /* HINT: gungame_stats */
+
+/**
+ * Show the client's rank in chat.
+ *
+ * @param client        Player index.
+ * @noreturn
+ */
+native GG_ShowRank(client); /* HINT: gungame_stats */
 
 /**
  * Return current player's place in stat.
@@ -31,7 +39,7 @@ native GG_GetPlayerPlaceInStat(client); /* HINT: gungame_stats */
 native GG_CountPlayersInStat(); /* HINT: gungame_stats */
 
 /**
- * Retrieves player current total wins
+ * Retrieves player current total wins.
  *
  * @param client        Player index
  * @return int          Total player wins
@@ -61,6 +69,7 @@ public SharedPlugin:__pl_gungame_st =
 public __pl_gungame_st_SetNTVOptional()
 {
     MarkNativeAsOptional("GG_DisplayTop10");
+    MarkNativeAsOptional("GG_ShowRank");
     MarkNativeAsOptional("GG_GetPlayerPlaceInStat");
     MarkNativeAsOptional("GG_CountPlayersInStat");
     MarkNativeAsOptional("GG_GetClientWins");

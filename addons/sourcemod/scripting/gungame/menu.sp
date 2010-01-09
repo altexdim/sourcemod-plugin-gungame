@@ -27,7 +27,18 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
             }
             case 5: /* !leader */
                 ShowLeaderMenu(client);
-            case 6: /* !rules */
+            case 6: /* !rank */
+            {
+                if ( StatsEnabled ) 
+                {
+                    GG_ShowRank(client); /* HINT: gungame_stats */
+                }
+                else
+                {
+                    CPrintToChat(client, "%t", "GunGame Stats is disabled");
+                }
+            }
+            case 7: /* !rules */
                 ShowRulesMenu(client);
         }
     }
@@ -114,11 +125,11 @@ CreateLevelPanel(client)
     Format(text, sizeof(text), "%t", "LevelPanel: Leader");
     DrawPanelItem(LevelPanel, text);
 
-    if(CurrentLeader && IsClientInGame(CurrentLeader))
+    if ( CurrentLeader && IsClientInGame(CurrentLeader) )
     {
         new level = PlayerLevel[CurrentLeader];
 
-        if(level)
+        if ( level )
         {
             decl String:Name[64];
             GetClientName(CurrentLeader, Name, sizeof(Name));
@@ -126,12 +137,12 @@ CreateLevelPanel(client)
             DrawPanelText(LevelPanel, text);
             if ( CurrentLeader != client )
             {
-                if (level == Level)
+                if ( level == Level )
                 {
                     Format(text, sizeof(text), "%t", "LevelPanel: You have tied with the leader");
                     DrawPanelText(LevelPanel, text);
                 }
-                else if (level > Level)
+                else if ( level > Level )
                 {
                     FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), level - Level, "levels");
                     CRemoveTags(subtext, sizeof(subtext));
@@ -177,6 +188,7 @@ ShowPlayerLevelMenu(client)
     SetMenuTitle(menu, text);
     SetGlobalTransTarget(client);
 
+    new counter = -1;
     for ( new i = 1; i <= MaxClients; i++ )
     {
         if ( IsClientInGame(i) )
@@ -194,7 +206,7 @@ ShowPlayerLevelMenu(client)
             {
                 Format(text, sizeof(text), "%t", "PlayersLevelPanel: Level Name", PlayerLevel[i] + 1, Name, WeaponOrderName[PlayerLevel[i]]);
             }
-            AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+            AddMenuItem(menu, BLANK, text, ++counter%7? ITEMDRAW_DISABLED: ITEMDRAW_DEFAULT);
         }
     }
 
@@ -213,6 +225,7 @@ ShowLeaderMenu(client)
     SetMenuTitle(menu, text);
     SetGlobalTransTarget(client);
 
+    new counter = -1;
     if ( CurrentLeader )
     {
         new level = PlayerLevel[CurrentLeader];
@@ -221,14 +234,14 @@ ShowLeaderMenu(client)
             if ( IsClientInGame(i) && PlayerLevel[i] == level )
             {
                 GetClientName(i, Name, sizeof(Name));
-                AddMenuItem(menu, BLANK, Name, ITEMDRAW_DISABLED);
+                AddMenuItem(menu, BLANK, Name, ++counter%7? ITEMDRAW_DISABLED: ITEMDRAW_DEFAULT);
             }
         }
     }
     else
     {
         Format(text, sizeof(text), "%t", "LeaderMenu: No leaders");
-        AddMenuItem(menu, BLANK, text, ITEMDRAW_DISABLED);
+        AddMenuItem(menu, BLANK, text, ++counter%7? ITEMDRAW_DISABLED: ITEMDRAW_DEFAULT);
     }
         
     DisplayMenu(menu, client, GUNGAME_MENU_TIME);
@@ -328,6 +341,8 @@ ShowCommandPanel(client)
     Format(text, sizeof(text), "%t", "CommandPanel: !top10 to see the top 10 winners on the server");
     DrawPanelItem(Ham, text);
     Format(text, sizeof(text), "%t", "CommandPanel: !leader to see current leaders");
+    DrawPanelItem(Ham, text);
+    Format(text, sizeof(text), "%t", "CommandPanel: !rank to see your place in stats");
     DrawPanelItem(Ham, text);
     Format(text, sizeof(text), "%t", "CommandPanel: !rules to see the rules and how to play");
     DrawPanelItem(Ham, text);

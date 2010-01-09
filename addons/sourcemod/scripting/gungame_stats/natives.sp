@@ -5,6 +5,7 @@ OnCreateNatives()
     CreateNative("GG_CountPlayersInStat", __CountPlayersInStat);
     CreateNative("GG_GetPlayerPlaceInStat", __GetPlayerPlaceInStat);
     CreateNative("GG_GetPlayerPlaceInTop10", __GetPlayerPlaceInTop10);
+    CreateNative("GG_ShowRank", __ShowRank);
 }
 
 public __DisplayTop10(Handle:plugin, numParams)
@@ -19,6 +20,21 @@ public __DisplayTop10(Handle:plugin, numParams)
     }
 
     ShowTop10Panel(client);
+    return 1;
+}
+
+public __ShowRank(Handle:plugin, numParams)
+{
+    new client = GetNativeCell(1);
+
+    if(client < 1 || client > GetMaxClients())
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
+
+    ShowRank(client);
     return 1;
 }
 

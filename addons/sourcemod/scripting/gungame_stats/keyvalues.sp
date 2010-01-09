@@ -1,3 +1,5 @@
+// Deprecated: stats is now implemented in sql
+
 OnCreateKeyValues()
 {
     /* Make sure to use unique section name just incase someone else uses it */
@@ -407,4 +409,9 @@ public Action:_CmdImport(client, args)
     ReplyToCommand(client, "[GunGame] Import of es player data completed. Please run gg_rebuild to update the top10.");
 
     return Plugin_Handled;
+}
+
+ShowRank(client)
+{
+    // only if sql support enabled
 }

@@ -1,9 +1,13 @@
 Changelog
 ---------
+    1.0.7.2:
+        + Added !rank command to show player's current place in stats.
+        * Menus !leader and !score optimized to be more ergonomic and closing by pressing "1" on all pages.
+        
     1.0.7.1:
         + Added shortcuts: 
-            You can access !leader menu from !level panel by pressing 3.
-            You can access !top10 menu from !level panel by pressing 2.
+            You can access !leader menu from !level panel by pressing "3".
+            You can access !top10 menu from !level panel by pressing "2".
         + Added new !leader command, which should show list of players on leader level in a panel.
         * Fixed minor translation bugs in menu panels.
         + Added info about player's weapon in !scores and !level panels.

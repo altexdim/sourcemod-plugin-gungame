@@ -480,38 +480,43 @@
 	}
 	"CommandPanel: !level to see your current level and who is winning"
 	{
-		"en"	"!level to see your current level and who is winning."
-		"ru"	"!level - смотреть свой уровень и кто лидирует."
-		"de"	"!level um dein aktuelles Level zu sehen und wer aktuell gewinnt."
+		"en"	"!level to see your current level and who is winning"
+		"ru"	"!level - ваш уровень и кто лидирует"
+		"de"	"!level um dein aktuelles Level zu sehen und wer aktuell gewinnt"
 	}
 	"CommandPanel: !weapons to see the weapon order"
 	{
-		"en"	"!weapons to see the weapon order."
-		"ru"	"!weapons - смотреть порядок оружия."
-		"de"	"!weapons um die Waffenreihenfolge zu sehen."
+		"en"	"!weapons to see the weapon order"
+		"ru"	"!weapons - порядок оружия"
+		"de"	"!weapons um die Waffenreihenfolge zu sehen"
 	}
 	"CommandPanel: !score to see all player current scores"
 	{
-		"en"	"!score to see all player current scores."
-		"ru"	"!score - смотреть текущие очки игроков."
-		"de"	"!score um die Punkte aller Spieler zu sehen."
+		"en"	"!score to see all player current scores"
+		"ru"	"!score - текущие очки игроков"
+		"de"	"!score um die Punkte aller Spieler zu sehen"
 	}
 	"CommandPanel: !top10 to see the top 10 winners on the server"
 	{
-		"en"	"!top10 to see the top 10 winners on the server."
-		"ru"	"!top10 - смотреть Топ-10 победителей."
-		"de"	"!top10 um die Top10 Spieler dieses Servers zu sehen."
+		"en"	"!top10 to see the top 10 winners on the server"
+		"ru"	"!top10 - Топ-10 победителей"
+		"de"	"!top10 um die Top10 Spieler dieses Servers zu sehen"
 	}
     "CommandPanel: !leader to see current leaders"
     {
-		"en"	"!leader to show current leaders."
-		"ru"	"!leader - смотреть лидеров."
+		"en"	"!leader to show current leaders"
+		"ru"	"!leader - лидеры"
     }
+	"CommandPanel: !rank to see your place in stats"
+	{
+		"en"	"!rank to see your place in stats"
+		"ru"	"!rank - ваше место в статистике"
+	}
 	"CommandPanel: !rules to see the rules and how to play"
 	{
-		"en"	"!rules to see the rules and how to play.\n"
-		"ru"	"!rules - смотреть правила игры.\n"
-		"de"	"!rules um die Regeln zu sehen und wie man hier spielt.\n"
+		"en"	"!rules to see the rules and how to play"
+		"ru"	"!rules - правила игры"
+		"de"	"!rules um die Regeln zu sehen und wie man hier spielt"
 	}
 	"WeaponLevelPanel: [GunGame] Weapon Levels"
 	{

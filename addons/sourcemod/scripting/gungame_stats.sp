@@ -5,6 +5,7 @@
 #include <gungame>
 #include <gungame_stats>
 #include <gungame_config>
+#include <colors>
 
 /**
  * Uncomment and recompile the plugin to support sql stats.
@@ -19,13 +20,9 @@
 #include "gungame_stats/menu.h"
 #include "gungame_stats/ranks.h"
 
-#if defined MYSQL_SUPPORT
-    #include "gungame_stats/mysql.h"
-    #include "gungame_stats/mysql.sp"
-#endif
-#if defined SQLITE_SUPPORT
-    #include "gungame_stats/sqlite.h"
-    #include "gungame_stats/sqlite.sp"
+#if defined SQL_SUPPORT
+    #include "gungame_stats/sql.h"
+    #include "gungame_stats/sql.sp"
 #endif
 #if !defined SQL_SUPPORT
     #include "gungame_stats/keyvalues.h"
@@ -60,6 +57,9 @@ public OnPluginStart()
 
     OnCreateKeyValues();
     RegConsoleCmd("top10", _CmdTop10);
+    #if defined SQL_SUPPORT
+        RegConsoleCmd("rank", _CmdRank);
+    #endif
     RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
     RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
     #if defined SQL_SUPPORT
@@ -126,16 +126,30 @@ public GG_OnShutdown()
 public OnClientDisconnect(client)
 {
     PlayerWinsData[client] = 0;
+    #if defined SQL_SUPPORT
+        PlayerPlaceData[client] = 0;
+    #endif
 }
 
 public Action:_CmdTop10(client, args)
 {
-    if(IsActive)
+    if ( IsActive )
     {
         ShowTop10Panel(client);
     }
     return Plugin_Handled;
 }
+
+#if defined SQL_SUPPORT
+public Action:_CmdRank(client, args)
+{
+    if ( IsActive )
+    {
+        ShowRank(client);
+    }
+    return Plugin_Handled;
+}
+#endif
 
 EndProcess()
 {
