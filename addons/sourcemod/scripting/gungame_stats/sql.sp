@@ -88,7 +88,7 @@ SqlConnect()
     SQL_UnlockDatabase(g_DbConnection);
 }
 
-// non-threaded
+// threaded
 SavePlayerData(client)
 {
     new wins = PlayerWinsData[client];
@@ -110,17 +110,20 @@ SavePlayerData(client)
         
     decl String:query[1024];
     Format(query, sizeof(query), wins == 1 ? g_sql_insertPlayer : g_sql_updatePlayerByAuth, wins, name, auth);
-    SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
-    if ( !SQL_FastQuery(g_DbConnection, query ) )
+    SQL_TQuery(g_DbConnection, T_SavePlayerData, query);
+}
+
+// threaded
+public T_SavePlayerData(Handle:owner, Handle:result, const String:error[], any:data)
+{
+    if ( result == INVALID_HANDLE )
     {
-        new String:error[255];
-        SQL_GetError(g_DbConnection, error, sizeof(error));
         LogError("Failed to save player data (error: %s)", error);
+        return;
     }
-    SQL_UnlockDatabase(g_DbConnection);
 
     // Reload top10 data after winner has beed updated in the database
     LoadRank();
@@ -156,16 +159,15 @@ GetPlayerPlace(client)
         LogError("Failed get player place in stats (error: %s)", error);
         SQL_UnlockDatabase(g_DbConnection);
         return 0;
-    } else {
-        SQL_UnlockDatabase(g_DbConnection);
-        new place;
-        if ( SQL_FetchRow(result) )
-        {
-            place = SQL_FetchInt(result, 0) + 1;
-        }
-        CloseHandle(result);
-        return place;
     }
+    SQL_UnlockDatabase(g_DbConnection);
+    new place;
+    if ( SQL_FetchRow(result) )
+    {
+        place = SQL_FetchInt(result, 0) + 1;
+    }
+    CloseHandle(result);
+    return place;
 }
 
 CountPlayersInStat()
@@ -173,31 +175,28 @@ CountPlayersInStat()
     return TotalWinners;
 }
 
-// non-threaded
+// threaded
 CountWinners()
 {
-    SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", g_sql_getPlayersCount);
     #endif
-    new Handle:result = SQL_Query(g_DbConnection, g_sql_getPlayersCount);
+    SQL_TQuery(g_DbConnection, T_CountWinners, g_sql_getPlayersCount);
+}
+
+public T_CountWinners(Handle:owner, Handle:result, const String:error[], any:data)
+{
     if ( result == INVALID_HANDLE )
     {
-        new String:error[255];
-        SQL_GetError(g_DbConnection, error, sizeof(error));
         LogError("Failed to count players in stat (error: %s)", error);
-        SQL_UnlockDatabase(g_DbConnection);
-        return 0;
-    } else {
-        SQL_UnlockDatabase(g_DbConnection);
-        new count;
-        if ( SQL_FetchRow(result) )
-        {
-            count = SQL_FetchInt(result, 0);
-        }
-        CloseHandle(result);
-        return count;
+        return;
     }
+    new count = 0;
+    if ( SQL_FetchRow(result) )
+    {
+        count = SQL_FetchInt(result, 0);
+    }
+    TotalWinners = count;
 }
 
 // threaded
@@ -215,7 +214,6 @@ RetrieveKeyValues(client, const String:auth[])
     SQL_TQuery(g_DbConnection, T_RetrieveKeyValues, query, client);
 }
 
-// threaded
 public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], any:client)
 {
     /* Make sure the client didn't disconnect while the thread was running */
@@ -243,7 +241,6 @@ public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], an
     }
 }
 
-// threaded
 public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:data)
 {
     if ( result == INVALID_HANDLE )
@@ -254,6 +251,7 @@ public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:
     // reqest was successfull
 }
 
+// threaded
 SavePlayerDataInfo()
 {
     decl String:query[1024];
@@ -263,19 +261,19 @@ SavePlayerDataInfo()
     #if defined SQLITE_SUPPORT
         Format(query, sizeof(query), g_sql_prunePlayers, GetTime() - Prune*86400);
     #endif
-    SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
-    if ( !SQL_FastQuery(g_DbConnection, query) )
+    SQL_TQuery(g_DbConnection, T_SavePlayerDataInfo, query);
+}
+
+public T_SavePlayerDataInfo(Handle:owner, Handle:result, const String:error[], any:data)
+{
+    if ( result == INVALID_HANDLE )
     {
-        new String:error[255];
-        SQL_GetError(g_DbConnection, error, sizeof(error));
         LogError("Could not prune players (error: %s)", error);
-        SQL_UnlockDatabase(g_DbConnection);
         return;
     }
-    SQL_UnlockDatabase(g_DbConnection);
 }
 
 OnCreateKeyValues()
@@ -283,7 +281,7 @@ OnCreateKeyValues()
     SqlConnect();
     LoadRank();
 }
-
+// non-threaded
 public Action:_CmdImport(client, args)
 {
     decl String:EsFile[PLATFORM_MAX_PATH];
@@ -334,19 +332,18 @@ public Action:_CmdImport(client, args)
             ReplyToCommand(client, "[GunGame] Import finished with sql error");
             CloseHandle(KvGunGame);
             return Plugin_Handled;
-        } else {
-            SQL_UnlockDatabase(g_DbConnection);
-            if ( SQL_FetchRow(result) )
-            {
-                Wins = SQL_FetchInt(result, 1);
-                SQL_FetchString(result, 2, Name, sizeof(Name));
-            }
-            else
-            {
-                Wins = 0;
-            }
-            CloseHandle(result);
         }
+        SQL_UnlockDatabase(g_DbConnection);
+        if ( SQL_FetchRow(result) )
+        {
+            Wins = SQL_FetchInt(result, 1);
+            SQL_FetchString(result, 2, Name, sizeof(Name));
+        }
+        else
+        {
+            Wins = 0;
+        }
+        CloseHandle(result);
         
         if ( Wins ) {
             Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, Name, Auth);
@@ -390,6 +387,7 @@ public Action:_CmdImport(client, args)
     return Plugin_Handled;
 }
 
+// non-threaded
 public Action:_CmdImportDb(client, args)
 {
     decl String:File[PLATFORM_MAX_PATH];
@@ -440,19 +438,18 @@ public Action:_CmdImportDb(client, args)
             ReplyToCommand(client, "[GunGame] Import finished with sql error");
             CloseHandle(KvGunGame);
             return Plugin_Handled;
-        } else {
-            SQL_UnlockDatabase(g_DbConnection);
-            if ( SQL_FetchRow(result) )
-            {
-                Wins = SQL_FetchInt(result, 1);
-                SQL_FetchString(result, 2, Name, sizeof(Name));
-            }
-            else
-            {
-                Wins = 0;
-            }
-            CloseHandle(result);
         }
+        SQL_UnlockDatabase(g_DbConnection);
+        if ( SQL_FetchRow(result) )
+        {
+            Wins = SQL_FetchInt(result, 1);
+            SQL_FetchString(result, 2, Name, sizeof(Name));
+        }
+        else
+        {
+            Wins = 0;
+        }
+        CloseHandle(result);
         
         if ( Wins ) {
             Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, Name, Auth);
@@ -496,6 +493,7 @@ public Action:_CmdImportDb(client, args)
     return Plugin_Handled;
 }
 
+// threaded
 public Action:_CmdRebuild(client, args)
 {
     LoadRank();
@@ -503,6 +501,7 @@ public Action:_CmdRebuild(client, args)
     return Plugin_Handled;
 }
 
+// non-threaded
 public Action:_CmdReset(client, args)
 {
     decl String:error[256];
@@ -572,42 +571,48 @@ public Action:_CmdReset(client, args)
     return Plugin_Handled;
 }
 
+// threaded
 LoadRank()
 {
     // reset top 10 data
     HasRank = false;
+    TotalWinners = 0;
     for (new i = 0; i < MAX_RANK; i++)
     {
         PlayerWins[i] = 0;
     }
-    TotalWinners = CountWinners();
     
+    CountWinners();
+    LoadTop10Data();
+}
+
+// threaded
+LoadTop10Data()
+{
     decl String:query[1024];
     Format(query, sizeof(query), g_sql_getTop10Players, 10, 0);
-    SQL_LockDatabase(g_DbConnection);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
-    new Handle:result = SQL_Query(g_DbConnection, query);
+    SQL_TQuery(g_DbConnection, T_LoadTop10Data, query);
+}
+
+public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:data)
+{
     if ( result == INVALID_HANDLE )
     {
-        decl String:error[256];
-        SQL_GetError(g_DbConnection, error, sizeof(error));
         LogError("Failed to load rank data (error: %s)", error);
-        SQL_UnlockDatabase(g_DbConnection);
         return;
-    } else {
-        SQL_UnlockDatabase(g_DbConnection);
-        new i = 0;
-        HasRank = bool:SQL_GetRowCount(result);
-        while ( SQL_FetchRow(result) )
-        {
-            PlayerWins[i] = SQL_FetchInt(result, 1);
-            SQL_FetchString(result, 2, PlayerName[i], sizeof(PlayerName[]));
-            SQL_FetchString(result, 3, PlayerAuthid[i], sizeof(PlayerAuthid[]));
-            i++;
-        }
-        CloseHandle(result);
+    }
+    
+    new i = 0;
+    HasRank = bool:SQL_GetRowCount(result);
+    while ( SQL_FetchRow(result) )
+    {
+        PlayerWins[i] = SQL_FetchInt(result, 1);
+        SQL_FetchString(result, 2, PlayerName[i], sizeof(PlayerName[]));
+        SQL_FetchString(result, 3, PlayerAuthid[i], sizeof(PlayerAuthid[]));
+        i++;
     }
 }
 
