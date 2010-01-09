@@ -622,4 +622,10 @@
 		"en"	"There is currently no leader."
 		"ru"	"Сейчас лидеров нет."
     }
+    "LeaderMenu: Leader level and weapon"
+    {
+		"#format"	"{1:d},{2:s}"
+		"en"	"\nCurrent leader is on level {1} :: {2}\n \nLeaders:"
+		"ru"	"\nЛидер находится на уровне {1} :: {2}\n \nЛидеры:"
+    }
 }

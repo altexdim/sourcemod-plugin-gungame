@@ -221,7 +221,11 @@ ShowLeaderMenu(client)
     new Handle:menu = CreateMenu(EmptyMenuHandler);
     decl String:Name[64];
 
-    Format(text, sizeof(text), "%t", "LeaderMenu: Leaders");
+    if ( CurrentLeader ) {
+        Format(text, sizeof(text), "%t%t", "LeaderMenu: Leaders", "LeaderMenu: Leader level and weapon", PlayerLevel[CurrentLeader] + 1, WeaponOrderName[PlayerLevel[CurrentLeader]]);
+    } else {
+        Format(text, sizeof(text), "%t", "LeaderMenu: Leaders");
+    }
     SetMenuTitle(menu, text);
     SetGlobalTransTarget(client);
 
