@@ -4,6 +4,7 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    + Add !rank command to show player's current place in stats.
     * Feature request:
         Browsable winners list would be a nice feature. You can replace !top10 with !top 
         and make it browsable.
