@@ -1,6 +1,6 @@
 OnCreateNatives()
 {
-    CreateNative("GG_DisplayTop10", __DisplayTop10);
+    CreateNative("GG_DisplayTop", __DisplayTop);
     CreateNative("GG_GetClientWins", __GetPlayerWins);
     CreateNative("GG_CountPlayersInStat", __CountPlayersInStat);
     CreateNative("GG_GetPlayerPlaceInStat", __GetPlayerPlaceInStat);
@@ -8,7 +8,7 @@ OnCreateNatives()
     CreateNative("GG_ShowRank", __ShowRank);
 }
 
-public __DisplayTop10(Handle:plugin, numParams)
+public __DisplayTop(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
 
@@ -19,7 +19,7 @@ public __DisplayTop10(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    ShowTop10Panel(client);
+    ShowTopMenu(client);
     return 1;
 }
 

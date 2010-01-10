@@ -28,5 +28,5 @@ new String:g_sql_prunePlayers[]         = "DELETE FROM gungame_playerdata WHERE 
 #if defined SQLITE_SUPPORT
 new String:g_sql_prunePlayers[]         = "DELETE FROM gungame_playerdata WHERE timestamp < %i;";
 #endif
-new String:g_sql_getTop10Players[]      = "SELECT id, wins, name, authid FROM gungame_playerdata ORDER by wins desc LIMIT %i OFFSET %i;";
+new String:g_sql_getTopPlayers[]      = "SELECT id, wins, name, authid FROM gungame_playerdata ORDER by wins desc, id LIMIT %i OFFSET %i;";
 

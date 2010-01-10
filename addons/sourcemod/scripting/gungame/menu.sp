@@ -18,7 +18,7 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
             {
                 if ( StatsEnabled ) 
                 {
-                    GG_DisplayTop10(client); /* HINT: gungame_stats */
+                    GG_DisplayTop(client); /* HINT: gungame_stats */
                 }
                 else
                 {
@@ -54,7 +54,7 @@ public ScoreCommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
             {
                 if ( StatsEnabled ) 
                 {
-                    GG_DisplayTop10(client); /* HINT: gungame_stats */
+                    GG_DisplayTop(client); /* HINT: gungame_stats */
                 }
             }
             case 3: /* !leader */

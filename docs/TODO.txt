@@ -5,9 +5,6 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     * Feature request:
-        Browsable winners list would be a nice feature. You can replace !top10 with !top 
-        and make it browsable.
-    * Feature request:
         Add visual effects to the player on bonus like blink golden effect and sparks.
     + Feature request:
         I also have an idea about round start message like "You are on level 1 :: glock". What do you 

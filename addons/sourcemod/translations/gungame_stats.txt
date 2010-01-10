@@ -1,24 +1,5 @@
 "Phrases"
 {
-    "Top10Panel: [GunGame] Top10"
-    {
-        "en"    "[GunGame] Top10"
-        "ru"    "[GunGame] Топ-10"
-		"de"    "[GunGame] Top10"
-    }
-    "Top10Panel: There are currently no players in the top10"
-    {
-        "en"    "There are currently no players in the top10"
-        "ru"    "Нет игроков в Топ-10"
-		"de"    "Aktuell ist kein Spieler in den Top10"
-    }
-    "Top10Panel: Place Name Wins"
-    {
-        "#format"   "{1:d},{2:s},{3:s}"
-        "en"    "{1}. {2} :: {3}"
-        "ru"    "{1}. {2} :: {3}"
-		"de"    "{1}. {2} :: {3}"
-    }
         "1>wins"
         {
                 "#format"    "{1:d}"
@@ -47,12 +28,6 @@
             "ru"    "{1} побед"
 			"de"    "{1} Wins"
         }
-    "Panel: Exit"
-    {
-        "en"    "Exit"
-        "ru"    "Выход"
-		"de"    "Ausgang"
-    }
     "Rank: not ranked"
     {
         "#format"    "{1:s}"
@@ -89,4 +64,61 @@
             "en"    "{default}{1} {green}wins"
             "ru"    "{default}{1} {green}победами"
         }
+	"Panel: Page"
+	{
+		"#format"	"{1:d},{2:d}"
+		"en"	"Page {1} / {2}"
+		"ru"	"Страница {1} / {2}"
+		"de"	"Seite {1} / {2}"
+	}
+	"Panel: Back"
+	{
+		"en"	"Back"
+		"ru"	"Назад"
+		"de"	"Zurück"
+	}
+	"Panel: Next"
+	{
+		"en"	"Next"
+		"ru"	"Вперёд"
+		"de"	"Vor"
+	}
+    "Panel: Exit"
+    {
+        "en"    "Exit"
+        "ru"    "Выход"
+		"de"    "Ausgang"
+    }
+    "TopPanel: There are currently no players in the top"
+    {
+        "en"    "There are currently no players in the top"
+        "ru"    "Нет игроков в Топ"
+		"de"    "Aktuell ist kein Spieler in den Top"
+    }
+    "TopPanel: Top short"
+    {
+        "en"    "[GunGame] Top"
+        "ru"    "[GunGame] Топ"
+		"de"    "[GunGame] Top"
+    }
+    "TopPanel: Top"
+    {
+		"#format"	"{1:d},{2:d},{3:d}"
+        "en"    "[GunGame] Top {1}-{2} from {3}"
+        "ru"    "[GunGame] Топ {1}-{2} из {3}"
+    }
+    "TopPanel: Name Wins"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "{1} :: {2}"
+        "ru"    "{1} :: {2}"
+		"de"    "{1} :: {2}"
+    }
+    "TopPanel: Place Name Wins"
+    {
+        "#format"   "{1:d},{2:s},{3:s}"
+        "en"    "{1}. {2} :: {3}"
+        "ru"    "{1}. {2} :: {3}"
+		"de"    "{1}. {2} :: {3}"
+    }
 }

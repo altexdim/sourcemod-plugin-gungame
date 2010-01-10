@@ -496,11 +496,11 @@
 		"ru"	"!score - текущие очки игроков"
 		"de"	"!score um die Punkte aller Spieler zu sehen"
 	}
-	"CommandPanel: !top10 to see the top 10 winners on the server"
+	"CommandPanel: !top to see the top winners on the server"
 	{
-		"en"	"!top10 to see the top 10 winners on the server"
-		"ru"	"!top10 - Топ-10 победителей"
-		"de"	"!top10 um die Top10 Spieler dieses Servers zu sehen"
+		"en"	"!top to see the top winners on the server"
+		"ru"	"!top - Топ победителей"
+		"de"	"!top um die Top Spieler dieses Servers zu sehen"
 	}
     "CommandPanel: !leader to see current leaders"
     {

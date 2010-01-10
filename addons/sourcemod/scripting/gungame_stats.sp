@@ -14,6 +14,7 @@
 #define SQL_SUPPORT
 #define SQLITE_SUPPORT
 //#define MYSQL_SUPPORT
+//#define SQL_DEBUG
 
 #include "gungame_stats/gungame_stats.h"
 #include "gungame_stats/config.h"
@@ -56,7 +57,8 @@ public OnPluginStart()
     LoadTranslations("gungame_stats");
 
     OnCreateKeyValues();
-    RegConsoleCmd("top10", _CmdTop10);
+    RegConsoleCmd("top10", _CmdTop);
+    RegConsoleCmd("top", _CmdTop);
     #if defined SQL_SUPPORT
         RegConsoleCmd("rank", _CmdRank);
     #endif
@@ -131,11 +133,11 @@ public OnClientDisconnect(client)
     #endif
 }
 
-public Action:_CmdTop10(client, args)
+public Action:_CmdTop(client, args)
 {
     if ( IsActive )
     {
-        ShowTop10Panel(client);
+        ShowTopMenu(client);
     }
     return Plugin_Handled;
 }

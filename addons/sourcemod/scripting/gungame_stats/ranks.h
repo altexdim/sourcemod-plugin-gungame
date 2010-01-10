@@ -2,8 +2,8 @@
 
 #if !defined SQL_SUPPORT
     new bool:RankChange;
+    new bool:HasRank;
 #endif
-new bool:HasRank;
 
 /* Top10 ranks */
 new String:PlayerAuthid[MAX_RANK][64];

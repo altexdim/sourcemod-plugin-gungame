@@ -1,5 +1,3 @@
-//#define SQL_DEBUG
-
 // non-threaded
 SqlConnect()
 {
@@ -561,7 +559,6 @@ public Action:_CmdReset(client, args)
     }
     
     // reset top 10 data
-    HasRank = false;
     TotalWinners = 0;
     for (new i = 0; i < MAX_RANK; i++)
     {
@@ -575,7 +572,6 @@ public Action:_CmdReset(client, args)
 LoadRank()
 {
     // reset top 10 data
-    HasRank = false;
     TotalWinners = 0;
     for (new i = 0; i < MAX_RANK; i++)
     {
@@ -590,7 +586,7 @@ LoadRank()
 LoadTop10Data()
 {
     decl String:query[1024];
-    Format(query, sizeof(query), g_sql_getTop10Players, 10, 0);
+    Format(query, sizeof(query), g_sql_getTopPlayers, 10, 0);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
@@ -606,7 +602,6 @@ public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:da
     }
     
     new i = 0;
-    HasRank = bool:SQL_GetRowCount(result);
     while ( SQL_FetchRow(result) )
     {
         PlayerWins[i] = SQL_FetchInt(result, 1);

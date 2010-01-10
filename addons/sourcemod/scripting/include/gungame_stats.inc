@@ -8,12 +8,12 @@
  */
 
 /**
- * Show the top10 to the client.
+ * Show the top to the client.
  *
  * @param client        Player index.
  * @noreturn
  */
-native GG_DisplayTop10(client); /* HINT: gungame_stats */
+native GG_DisplayTop(client); /* HINT: gungame_stats */
 
 /**
  * Show the client's rank in chat.
@@ -68,7 +68,7 @@ public SharedPlugin:__pl_gungame_st =
 
 public __pl_gungame_st_SetNTVOptional()
 {
-    MarkNativeAsOptional("GG_DisplayTop10");
+    MarkNativeAsOptional("GG_DisplayTop");
     MarkNativeAsOptional("GG_ShowRank");
     MarkNativeAsOptional("GG_GetPlayerPlaceInStat");
     MarkNativeAsOptional("GG_CountPlayersInStat");

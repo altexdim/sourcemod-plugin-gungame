@@ -34,7 +34,7 @@ Commands and Cvars
     say !level                      - Show your current level and who is winning.
     say !weapons                    - Show the weapon order.
     say !score                      - Show all player current scores.
-    say !top10                      - Show the top 10 winners on the server.
+    say !top                        - Show the top winners on the server.
     say !leader                     - Show current leaders.
     say !rank                       - Show your current place in stats. (only if sql stats enabled)
     say !rules                      - Show the rules and how to play.
