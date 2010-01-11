@@ -279,6 +279,7 @@ OnCreateKeyValues()
     SqlConnect();
     LoadRank();
 }
+
 // non-threaded
 public Action:_CmdImport(client, args)
 {
@@ -573,9 +574,13 @@ LoadRank()
 {
     // reset top 10 data
     TotalWinners = 0;
-    for (new i = 0; i < MAX_RANK; i++)
+    for ( new i = 0; i < MAX_RANK; i++ )
     {
         PlayerWins[i] = 0;
+    }
+    for ( new i = 1; i <= MAXPLAYERS; i++ )
+    {
+        PlayerPlaceData[i] = 0;
     }
     
     CountWinners();
