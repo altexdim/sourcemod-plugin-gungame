@@ -1,5 +1,10 @@
 Changelog
 ---------
+    1.0.7.6:
+        * Fixed bug:
+            Bug report: When player moves to spec by afk plugin then his gun does not removes.
+            Added weapon and triple bonus removement on player swith team to spec.
+        
     1.0.7.5:
         + Added browsable winners list and replaced top10 list. !top and !top10 are now the same commands.
         

@@ -217,6 +217,11 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    if ( client && !disconnect && (oldTeam >= 2) && (newTeam < 2) && IsClientInGame(client) && IsPlayerAlive(client) )
+    {
+        UTIL_RemoveClientDroppedWeapons(client, true);
+        UTIL_StopTripleEffects(client);
+    }
     if ( !client || disconnect || (oldTeam < 2) || (newTeam < 2) || !IsPlayerAlive(client) )
     {
         return;
