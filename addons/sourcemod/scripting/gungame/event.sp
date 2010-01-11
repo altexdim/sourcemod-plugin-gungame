@@ -645,7 +645,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         GivePlayerItemWrapper(client, "weapon_knife");
     }
 
-    /* Something here is wrong */
+    /* Many years ago something here was wrong */
     if ( WarmupEnabled )
     {
         // Disable warmup

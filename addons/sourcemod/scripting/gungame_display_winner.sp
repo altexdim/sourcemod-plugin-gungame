@@ -4,10 +4,11 @@
 #include <gungame_const>
 #include <gungame>
 #include <gungame_stats>
+#include <url>
 
-new String:g_looserName[MAXPLAYERS+1][32];
+new String:g_looserName[MAXPLAYERS+1][MAX_NAME_SIZE];
 new Handle:g_Cvar_Url;
-new String:g_winnerName[32];
+new String:g_winnerName[MAX_NAME_SIZE];
 new bool:g_showMotdOnRankUpdate = false;
 new g_winner;
 
@@ -54,10 +55,14 @@ public GG_OnLoadRank()
 
     decl String:url[256];
     GetConVarString(g_Cvar_Url, url, sizeof(url));
+    decl String:winnerNameUrlEncoded[sizeof(g_winnerName)*3+1];
+    decl String:looserNameUrlEncoded[sizeof(g_looserName[])*3+1];
+    url_encode(g_winnerName, sizeof(g_winnerName), winnerNameUrlEncoded, sizeof(winnerNameUrlEncoded));
+    url_encode(g_looserName[g_winner], sizeof(g_looserName[]), looserNameUrlEncoded, sizeof(looserNameUrlEncoded));
     Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
         url, 
-        g_winnerName, 
-        g_looserName[g_winner], 
+        winnerNameUrlEncoded, 
+        looserNameUrlEncoded, 
         GG_GetClientWins(g_winner),         /* HINT: gungame_stats */
         GG_GetPlayerPlaceInStat(g_winner),  /* HINT: gungame_stats */
         GG_CountPlayersInStat()             /* HINT: gungame_stats */

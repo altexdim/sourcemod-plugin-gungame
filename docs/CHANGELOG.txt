@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.0.7.8:
+        * Fixed: Url encode player names in gungame_display_winner in the url.
+        * Fixed: Do not show info about loosing level on tk on warmup.
+        
     1.0.7.7:
         * Fixed: gungame_display_winner must show motd only after database has been updated.
         * Fixed: when player switches team do not level down him, but when he selects the same

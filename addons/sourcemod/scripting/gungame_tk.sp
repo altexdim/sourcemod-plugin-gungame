@@ -25,22 +25,22 @@ public OnPluginStart()
 
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
 {
-    if ( TeamKilled )
+    if ( !TeamKilled )
     {
-        /* Tk a player */
-        if ( !GG_RemoveALevel(Killer) )
-        {
-            return Plugin_Continue;
-        }
-
-        decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
-        GetClientName(Killer, kName, sizeof(kName));
-        GetClientName(Victim, vName, sizeof(vName));
-
-        CPrintToChatAllEx(Killer, "%t", "Has lost a level due to team kill", kName, vName);
-
-        return Plugin_Handled;
+        return Plugin_Continue;
+    }
+    /* Tk a player */
+    if ( !GG_RemoveALevel(Killer) )
+    {
+        return Plugin_Continue;
     }
 
-    return Plugin_Continue;
+    decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
+    GetClientName(Killer, kName, sizeof(kName));
+    GetClientName(Victim, vName, sizeof(vName));
+
+    CPrintToChatAllEx(Killer, "%t", "Has lost a level due to team kill", kName, vName);
+
+    return Plugin_Handled;
 }
+
