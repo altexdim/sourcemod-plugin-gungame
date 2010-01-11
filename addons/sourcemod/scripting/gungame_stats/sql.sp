@@ -174,30 +174,6 @@ CountPlayersInStat()
 }
 
 // threaded
-CountWinners()
-{
-    #if defined SQL_DEBUG
-        LogError("[DEBUG-SQL] %s", g_sql_getPlayersCount);
-    #endif
-    SQL_TQuery(g_DbConnection, T_CountWinners, g_sql_getPlayersCount);
-}
-
-public T_CountWinners(Handle:owner, Handle:result, const String:error[], any:data)
-{
-    if ( result == INVALID_HANDLE )
-    {
-        LogError("Failed to count players in stat (error: %s)", error);
-        return;
-    }
-    new count = 0;
-    if ( SQL_FetchRow(result) )
-    {
-        count = SQL_FetchInt(result, 0);
-    }
-    TotalWinners = count;
-}
-
-// threaded
 RetrieveKeyValues(client, const String:auth[])
 {
     if ( auth[0] == 'B' )
@@ -584,6 +560,31 @@ LoadRank()
     }
     
     CountWinners();
+}
+
+// threaded
+CountWinners()
+{
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] %s", g_sql_getPlayersCount);
+    #endif
+    SQL_TQuery(g_DbConnection, T_CountWinners, g_sql_getPlayersCount);
+}
+
+public T_CountWinners(Handle:owner, Handle:result, const String:error[], any:data)
+{
+    if ( result == INVALID_HANDLE )
+    {
+        LogError("Failed to count players in stat (error: %s)", error);
+        return;
+    }
+    new count = 0;
+    if ( SQL_FetchRow(result) )
+    {
+        count = SQL_FetchInt(result, 0);
+    }
+    TotalWinners = count;
+
     LoadTop10Data();
 }
 
@@ -614,6 +615,8 @@ public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:da
         SQL_FetchString(result, 3, PlayerAuthid[i], sizeof(PlayerAuthid[]));
         i++;
     }
+
+    // TODO: rank is loaded, make global forward
 }
 
 // threaded
@@ -649,8 +652,8 @@ public T_ShowRank(Handle:owner, Handle:result, const String:error[], any:client)
     if ( SQL_FetchRow(result) )
     {
         PlayerPlaceData[client] = SQL_FetchInt(result, 0) + 1;
-        ShowRankInChat(client);
     }
+    ShowRankInChat(client);
 }
 
 ShowRankInChat(client)

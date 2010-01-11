@@ -5,6 +5,8 @@ TODO
     * gungame_display_winner must be synced with new winner update, but winner 
         update is threaded, so it is needed to add global forward when 
         display_winner can be shown.
+    * Add check for player when he switches team and if he do not change team
+        then count it as suicide.
 
     ----====----==== Normal priority list ----====----====
 
