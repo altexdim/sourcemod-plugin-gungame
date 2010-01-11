@@ -35,6 +35,10 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
 public GG_OnWinner(client, const String:weapon[])
 {
+    if ( IsFakeClient(client) )
+    {
+        return;
+    }
     GetClientName(client, g_winnerName, sizeof(g_winnerName));
     g_showMotdOnRankUpdate = true;
     g_winner = client;
