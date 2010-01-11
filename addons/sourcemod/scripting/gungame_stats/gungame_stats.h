@@ -13,3 +13,5 @@ new bool:IsActive;
     new TotalWinners = 0;
 #endif
 
+new Handle:FwdLoadRank = INVALID_HANDLE;
+

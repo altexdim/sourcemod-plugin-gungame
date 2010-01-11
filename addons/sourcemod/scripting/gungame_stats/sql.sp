@@ -616,7 +616,8 @@ public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:da
         i++;
     }
 
-    // TODO: rank is loaded, make global forward
+    Call_StartForward(FwdLoadRank);
+    Call_Finish();
 }
 
 // threaded

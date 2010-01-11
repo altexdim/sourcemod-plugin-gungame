@@ -54,9 +54,10 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
+    FwdLoadRank = CreateGlobalForward("GG_OnLoadRank", ET_Ignore);
     LoadTranslations("gungame_stats");
-
     OnCreateKeyValues();
+
     RegConsoleCmd("top10", _CmdTop);
     RegConsoleCmd("top", _CmdTop);
     #if defined SQL_SUPPORT

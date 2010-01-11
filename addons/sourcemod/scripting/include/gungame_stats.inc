@@ -54,6 +54,14 @@ native GG_GetClientWins(client); /* HINT: gungame_stats */
  */
 native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
 
+/**
+ * Called when rank loaded.
+ *
+ * @noparam
+ * @noreturn
+ */
+forward GG_OnLoadRank();
+
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame_st =
 {

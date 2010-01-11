@@ -2,10 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    * gungame_display_winner must be synced with new winner update, but winner 
-        update is threaded, so it is needed to add global forward when 
-        display_winner can be shown.
-
     ----====----==== Normal priority list ----====----====
 
     * Feature request: 

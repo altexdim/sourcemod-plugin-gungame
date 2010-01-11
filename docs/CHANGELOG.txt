@@ -1,7 +1,8 @@
 Changelog
 ---------
-        * Add check for player when he switches team and if he do not change team
-            then count it as suicide.
+        * Fixed: gungame_display_winner must show motd only after database has been updated.
+        * Fixed: when player switches team do not level down him, but when he selects the same
+            team he must loose his level.
 
     1.0.7.6:
         * Fixed bug:

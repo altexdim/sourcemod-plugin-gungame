@@ -5,9 +5,11 @@
 #include <gungame>
 #include <gungame_stats>
 
-new String:LastKill[MAXPLAYERS+1][32];
+new String:g_looserName[32];
 new Handle:g_Cvar_Url;
-new String:WinnerName[32];
+new String:g_winnerName[32];
+new bool:g_showMotdOnRankUpdate = false;
+new g_winner;
 
 public Plugin:myinfo =
 {
@@ -28,36 +30,32 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new victim = GetClientOfUserId(GetEventInt(event, "userid"));
     new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-
-    decl String:victimName[32];
-    GetClientName(victim, victimName, sizeof(victimName));
-
-    LastKill[attacker] = victimName;
+    GetClientName(victim, g_looserName, sizeof(g_looserName));
 }
 
 public GG_OnWinner(client, const String:weapon[])
 {
-    GetClientName(client, WinnerName, sizeof(WinnerName));
-    // KLUGE: GG_OnWinner recalculates winners wins and place.
-    // So ShowMotd must be called after that.
-    CreateTimer(0.1, ShowMotd, client);
+    GetClientName(client, g_winnerName, sizeof(g_winnerName));
+    g_showMotdOnRankUpdate = true;
+    g_winner = client;
 }
 
-public Action:ShowMotd(Handle:timer, any:client)
+public Action:GG_OnLoadRank()
 {
+    g_showMotdOnRankUpdate = false;
     decl String:url[256];
     GetConVarString(g_Cvar_Url, url, sizeof(url));
     Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
         url, 
-        WinnerName, 
-        LastKill[client], 
-        GG_GetClientWins(client), /* HINT: gungame_stats */
-        GG_GetPlayerPlaceInStat(client), /* HINT: gungame_stats */
-        GG_CountPlayersInStat() /* HINT: gungame_stats */
+        g_winnerName, 
+        g_looserName, 
+        GG_GetClientWins(g_winner),         /* HINT: gungame_stats */
+        GG_GetPlayerPlaceInStat(g_winner),  /* HINT: gungame_stats */
+        GG_CountPlayersInStat()             /* HINT: gungame_stats */
     );
-    for (new i = 1; i <= MaxClients; i++)
+    for ( new i = 1; i <= MaxClients; i++ )
     {
-        if (IsClientInGame(i))
+        if ( IsClientInGame(i) )
         {
             ShowMOTDPanel(i, "", url, MOTDPANEL_TYPE_URL);
         }
