@@ -5,7 +5,7 @@
 #include <gungame>
 #include <gungame_stats>
 
-new String:g_looserName[32];
+new String:g_looserName[MAXPLAYERS+1][32];
 new Handle:g_Cvar_Url;
 new String:g_winnerName[32];
 new bool:g_showMotdOnRankUpdate = false;
@@ -30,7 +30,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new victim = GetClientOfUserId(GetEventInt(event, "userid"));
     new attacker = GetClientOfUserId(GetEventInt(event, "attacker"));
-    GetClientName(victim, g_looserName, sizeof(g_looserName));
+    GetClientName(victim, g_looserName[attacker], sizeof(g_looserName[]));
 }
 
 public GG_OnWinner(client, const String:weapon[])
@@ -48,7 +48,7 @@ public Action:GG_OnLoadRank()
     Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
         url, 
         g_winnerName, 
-        g_looserName, 
+        g_looserName[g_winner], 
         GG_GetClientWins(g_winner),         /* HINT: gungame_stats */
         GG_GetPlayerPlaceInStat(g_winner),  /* HINT: gungame_stats */
         GG_CountPlayersInStat()             /* HINT: gungame_stats */
@@ -61,3 +61,4 @@ public Action:GG_OnLoadRank()
         }
     }
 }
+
