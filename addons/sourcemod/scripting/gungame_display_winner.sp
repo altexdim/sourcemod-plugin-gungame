@@ -40,9 +40,14 @@ public GG_OnWinner(client, const String:weapon[])
     g_winner = client;
 }
 
-public Action:GG_OnLoadRank()
+public GG_OnLoadRank()
 {
+    if ( !g_showMotdOnRankUpdate )
+    {
+        return;
+    }
     g_showMotdOnRankUpdate = false;
+
     decl String:url[256];
     GetConVarString(g_Cvar_Url, url, sizeof(url));
     Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
