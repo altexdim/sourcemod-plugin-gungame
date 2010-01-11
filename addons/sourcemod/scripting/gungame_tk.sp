@@ -25,10 +25,13 @@ public OnPluginStart()
 
 public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
 {
-    if(TeamKilled)
+    if ( TeamKilled )
     {
         /* Tk a player */
-        GG_RemoveALevel(Killer);
+        if ( !GG_RemoveALevel(Killer) )
+        {
+            return Plugin_Continue;
+        }
 
         decl String:kName[MAX_NAME_SIZE], String:vName[MAX_NAME_SIZE];
         GetClientName(Killer, kName, sizeof(kName));
@@ -38,5 +41,6 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
 
         return Plugin_Handled;
     }
+
     return Plugin_Continue;
 }

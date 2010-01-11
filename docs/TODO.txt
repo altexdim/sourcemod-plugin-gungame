@@ -4,6 +4,17 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * About gungame_display_winner. I saw the code and winner name is directly 
+        added to the url without proper url encoding. That means for example 
+        that every '+' is changed to space etc.
+    * In warmup when you have "ResetLevelAfterWarmup" "1" and using only one 
+        weapon there is still info about leveling. I'm not wrong - it's losing 
+        level after team kill. I think we don't need any infos in this warmup mode.
+    * I have random warmup weapon on my server but I've requested this feature. 
+        I did it through change of first level weapon and after round end it 
+        switches to glock (that's bad but for me is ok). I'm sure that you know 
+        how to do this and probably much more better but here is the code, maybe 
+        it will be useful.
     * Feature request: 
         Можешь создать дополнительные аддоны как в GG5 от ES типа выделение цветом 
         игрока на уровне нож и бонусы на ноже!И ещё рандом всех звуков!
