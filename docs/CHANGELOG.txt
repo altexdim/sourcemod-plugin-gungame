@@ -1,5 +1,8 @@
 Changelog
 ---------
+        * Add check for player when he switches team and if he do not change team
+            then count it as suicide.
+
     1.0.7.6:
         * Fixed bug:
             Bug report: When player moves to spec by afk plugin then his gun does not removes.
