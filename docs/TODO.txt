@@ -4,6 +4,9 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Feature request: 
+        Можешь создать дополнительные аддоны как в GG5 от ES типа выделение цветом 
+        игрока на уровне нож и бонусы на ноже!И ещё рандом всех звуков!
     * Feature request:
         Add visual effects to the player on bonus like blink golden effect and sparks.
     + Feature request:
