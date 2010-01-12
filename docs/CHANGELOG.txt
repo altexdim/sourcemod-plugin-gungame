@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Refactoring of player_spawn hook.
+        
     1.0.7.8:
         * Fixed: Url encode player names in gungame_display_winner in the url.
         * Fixed: Do not show info about loosing level on tk on warmup.
