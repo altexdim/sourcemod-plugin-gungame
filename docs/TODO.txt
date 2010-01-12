@@ -64,6 +64,19 @@ TODO
         already done it myself. I'm using here playersdata.txt file. Maybe you want to add 
         these commands to your plugin? Feel free to do that  . 
         https://forums.alliedmods.net/showpost.php?p=1035684&postcount=579
+    * Think about new features:
+        I have few ideas, maybe you will fins some of them useful:
+        * split gungame.config.txt to few parts; each optional plugin should have own 
+            config file like gungame.config.txt , gungame.config.afk.txt, 
+            gungame.config.stats.txt, gungame.config.sounds.txt etc.; I think it 
+            will be easier to configure plugin for new users and adding (maybe in 
+            the future) more option to optional plugins won't affect main config or 
+            or other optional plugins configs
+        * move sm_gungame_display_winner_url to config file instead of creating convar
+        * merge gungame_display_winner with gungame_stats (since it requires gungame_stats 
+            and there is not too much code)
+        * create some options for gungame_stats like showing MOTD panel, display rank to 
+            all or to player only, show winner in chat, show player rank on win in chat etc.
         
     ----====----==== High severity list ----====----====
     

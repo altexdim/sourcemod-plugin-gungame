@@ -566,14 +566,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 // Player has spawned
 public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if(!IsActive)
+    if ( !IsActive )
     {
         return;
     }
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
 
-    if(!client)
+    if ( !client )
     {
         return;
     }
@@ -582,24 +582,24 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     
     new team = GetClientTeam(client);
 
-    if(team != TEAM_T && team != TEAM_CT)
+    if ( team != TEAM_T && team != TEAM_CT )
     {
         return;
     }
 
     /* Reset Knife Elite state */
-    if(KnifeElite)
+    if ( KnifeElite )
     {
         PlayerState[client] &= ~KNIFE_ELITE;
     }
 
     /* They are not alive don't proccess */
-    if(!IsPlayerAlive(client))
+    if ( !IsPlayerAlive(client) )
     {
         return;
     }
 
-    if(!(PlayerState[client] & FIRST_JOIN))
+    if ( !(PlayerState[client] & FIRST_JOIN) )
     {
         PlayerState[client] |= FIRST_JOIN;
 
@@ -626,9 +626,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     CurrentLevelPerRound[client] = 0;
     CurrentLevelPerRoundTriple[client] = 0;
 
-    if(team == TEAM_CT)
+    if ( team == TEAM_CT )
     {
-        if(MapStatus & OBJECTIVE_BOMB && !(MapStatus & OBJECTIVE_REMOVE_BOMB))
+        if ( MapStatus & OBJECTIVE_BOMB && !(MapStatus & OBJECTIVE_REMOVE_BOMB) )
         {
             // Give them a defuser if objective is not removed
             SetEntData(client, OffsetDefuser, 1);
@@ -639,8 +639,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* A check to make sure player always has a knife because some maps do not give the knife. */
     new knife = GetPlayerWeaponSlot(client, _:Slot_Knife);
-
-    if(knife == -1)
+    if ( knife == -1 )
     {
         GivePlayerItemWrapper(client, "weapon_knife");
     }
@@ -665,19 +664,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
                 CPrintToChat(client, "%t", "Warmup round is in progress");
             }
 
-            if ( WarmupNades )
-            {
-                GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
-
-                //Switch them back into hegrenade
-                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
-            }
-            else if ( WarmupKnifeOnly )
-            {
-                FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
-            }
-            
-            if ( WarmupNades || WarmupKnifeOnly )
+            if ( UTIL_GiveWarmUpWeapon(client) )
             {
                 return;
             }
@@ -685,7 +672,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
-    if(GameWinner)
+    if ( GameWinner )
     {
         new flags = GetEntData(client, OffsetFlags) | FL_FROZEN;
         SetEntData(client, OffsetFlags, flags);
@@ -693,7 +680,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     new Level = PlayerLevel[client];
 
-    if(Level >= WeaponOrderCount)
+    if ( Level >= WeaponOrderCount )
     {
         return;
     }
@@ -721,58 +708,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
-    UTIL_CheckForFriendlyFire(client, WeapId);
-
-    if ( WeapId == CSW_HEGRENADE )
-    {
-        if ( NadeBonusWeaponId )
-        {
-            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
-            new Slots:slot = WeaponSlot[NadeBonusWeaponId];
-            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
-            {
-                g_ClientSlotEnt[client][slot] = ent;
-            }
-            // Remove bonus weapon ammo! So player can not reload weapon!
-            if ( (ent != -1) && RemoveBonusWeaponAmmo ) 
-            {
-                new iAmmo = HACK_GetAmmoType(ent);
-
-                if(iAmmo != -1)
-                {
-                    new Handle:Info = CreateDataPack();
-                    WritePackCell(Info, client);
-                    WritePackCell(Info, iAmmo);
-                    ResetPack(Info);
-
-                    CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
-                }
-            }
-        }
-
-        GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
-
-        if ( NadeSmoke )
-        {
-            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
-        }
-
-        if ( NadeFlash )
-        {
-            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
-        }
-
-    /* No reason to give them knife again.  */
-    } else if(WeapId != CSW_KNIFE) {
-        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
-        new Slots:slot = WeaponSlot[WeapId];
-        if ( slot == Slot_Primary || slot == Slot_Secondary ) 
-        {
-            g_ClientSlotEnt[client][slot] = ent;
-        }
-    }
-    
-    FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+    UTIL_GiveNextWeapon(client, Level, false);
 }
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)

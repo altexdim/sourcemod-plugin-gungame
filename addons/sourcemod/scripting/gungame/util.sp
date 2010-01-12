@@ -612,7 +612,7 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, diff = 1)
+UTIL_GiveNextWeapon(client, level, bool:drop = true)
 {
     if ( WarmupEnabled && WarmupKnifeOnly )
     {
@@ -622,19 +622,16 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     
     UTIL_CheckForFriendlyFire(client, WeapId);
-    
-    if ( slot == Slot_Knife )
+
+    if ( drop )
     {
         UTIL_ForceDropWeaponBySlot(client, Slot_Primary);
         UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
-        FakeClientCommand(client, "use %s", WeaponName[WeapId]);
-        return;
     }
+
     if ( slot == Slot_Grenade )
     {
-        UTIL_ForceDropWeaponBySlot(client, Slot_Primary);
-        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
-        if (NadeBonusWeaponId)
+        if ( NadeBonusWeaponId )
         {
             new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
             new Slots:slotBonus = WeaponSlot[NadeBonusWeaponId];
@@ -667,25 +664,15 @@ UTIL_GiveNextWeapon(client, level, diff = 1)
             GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
         }
     }
+    if ( slot != Slot_Knife )
     // slot == Slot_Primary || slot == Slot_Secondary 
-    else
     {
-        UTIL_ForceDropWeaponBySlot(client, slot);
-        level = level - diff;
-        if ( level > 0 )
+        /* Give new weapon */
+        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
+        if ( slot == Slot_Primary || slot == Slot_Secondary ) 
         {
-            new Weapons:LastWeapId = WeaponOrderId[level], Slots:Lastslot = WeaponSlot[LastWeapId];
-            if ( (slot != Lastslot) && (Lastslot == Slot_Primary || Lastslot == Slot_Secondary) )
-            {
-                UTIL_ForceDropWeaponBySlot(client, Lastslot);
-            }
+            g_ClientSlotEnt[client][slot] = ent;
         }
-    }
-    /* Give new weapon */
-    new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
-    if ( slot == Slot_Primary || slot == Slot_Secondary ) 
-    {
-        g_ClientSlotEnt[client][slot] = ent;
     }
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
@@ -916,6 +903,22 @@ stock UTIL_StringToUpper(String:Source[])
         {
             Source[i] &= ~(1<<5);
         }
+    }
+
+    return 1;
+}
+
+UTIL_GiveWarmUpWeapon(client)
+{
+    if ( !WarmupNades && !WarmupKnifeOnly ) {
+        return 0;
+    }
+
+    if ( WarmupNades ) {
+        GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+        FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+    } else if ( WarmupKnifeOnly ) {
+        FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
     }
 
     return 1;
