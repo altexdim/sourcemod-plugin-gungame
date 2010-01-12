@@ -10,7 +10,7 @@
 /**
  * Maximum level in gungame.
  */
-#define GUNGAME_MAX_LEVEL            32
+#define GUNGAME_MAX_LEVEL            64
                                         
 /**
  * This is the maximum allow time for a menu to be !rules, !weapons, !score, !level is display for.
