@@ -1,5 +1,8 @@
 Changelog
 ---------
+        + Added config variable "UnlimitedNadesIfOne" for the next feature:
+            If in one team there is just one player then enable UnlimitedNades.
+            When it will be more then one player on both teams, turn this option back.
         * If enabled weapon reloading on kill then reload warmup weapon.
         + FFA config variable added into config file.
         + WarmupRandomWeaponMode config variable added into config file.

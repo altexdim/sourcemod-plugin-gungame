@@ -4,9 +4,6 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
-    + Add config variable for the next feature:
-        If in one team there is just one player then enable UnlimitedNades.
-        When it will be more then one player on both teams, turn this option back.
     * Feature request: 
         Need features from es gg 5:
         * Add bonuses (flash, smoke) on knife level.

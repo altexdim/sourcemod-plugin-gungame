@@ -795,24 +795,24 @@ ClientSuicide(client, const String:Name[])
 public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    new level = PlayerLevel[client];
-    new Weapons:WeaponLevel = WeaponOrderId[level];
-    new String:weaponName[24];
-    strcopy(weaponName, sizeof(weaponName), WeaponName[CSW_HEGRENADE]);
-    
     if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
     {
         return;
     }
 
-    if ( (UnlimitedNades && WeaponLevel == CSW_HEGRENADE) 
-        || (WarmupNades && WarmupEnabled) )
+    if ( ( WarmupNades && WarmupEnabled )
+         || (  ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE )
+               && ( UnlimitedNades 
+                    || ( UnlimitedNadesIfOne && (Tcount == 1 || CTcount == 1) )
+                  )
+            )
+       )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, weaponName) == -1 )
+        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
         {
-            GivePlayerItemWrapper(client, weaponName);
-            FakeClientCommand(client, "use %s", weaponName);
+            GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
         }
     }
 }

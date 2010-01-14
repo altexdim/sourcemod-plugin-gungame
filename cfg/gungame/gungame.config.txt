@@ -197,6 +197,14 @@
          * 1 - Enabled
          */
         "FFA" "0"
+
+        /**
+         * If only one player left in one team then turn UnlimitedNades on.
+         * 
+         * After it will be more then one player in both team
+         * UnlimitedNades will be turned back to off.
+         */
+        "UnlimitedNadesIfOne" "0"
     }
 
     "Sounds"
