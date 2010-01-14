@@ -950,3 +950,16 @@ UTIL_GetRandomInt(start, end)
     return rand + start;
 }
 
+UTIL_GiveExtraNade(client)
+{
+    /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
+    if ( ExtraNade )
+    {
+        /* Do not give them another nade if they already have one */
+        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
+        {
+            GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+        }
+    }
+}
+

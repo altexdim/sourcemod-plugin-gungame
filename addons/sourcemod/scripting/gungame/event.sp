@@ -374,13 +374,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // FIXME: If KnifePro && KnifeProHE are enabled then we give extra grenade here, but it is a bug
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-    if ( ExtraNade && WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
+    if ( WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
     {
-        /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(Killer, WeaponName[CSW_HEGRENADE]) == -1 )
-        {
-            GivePlayerItemWrapper(Killer, WeaponName[CSW_HEGRENADE]);
-        }
+        UTIL_GiveExtraNade(Killer);
     }
 
     if ( WarmupEnabled && WarmupReset )
