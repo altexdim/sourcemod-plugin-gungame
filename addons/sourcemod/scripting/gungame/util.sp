@@ -910,10 +910,6 @@ stock UTIL_StringToUpper(String:Source[])
 
 UTIL_GiveWarmUpWeapon(client)
 {
-    if ( !WarmupNades && !WarmupKnifeOnly ) {
-        return 0;
-    }
-
     if ( WarmupRandomWeaponMode )
     {   
         if ( WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2 )
@@ -939,6 +935,7 @@ UTIL_GiveWarmUpWeapon(client)
         FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
         return 1;
     }
+    return 0;
 }
 
 UTIL_GetRandomInt(start, end)
