@@ -1,5 +1,6 @@
 Changelog
 ---------
+    1.0.7.9:
         + Added config variable "UnlimitedNadesIfOne" for the next feature:
             If in one team there is just one player then enable UnlimitedNades.
             When it will be more then one player on both teams, turn this option back.

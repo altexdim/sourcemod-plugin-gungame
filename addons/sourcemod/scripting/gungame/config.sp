@@ -43,6 +43,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 AllowLevelUpAfterRoundEnd = bool:StringToInt(value);
             } else if(strcmp("RestoreLevelOnReconnect", key, false) == 0) {
                 RestoreLevelOnReconnect = bool:StringToInt(value);
+            } else if(strcmp("FFA", key, false) == 0) {
+                FFA = StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
             } else if(strcmp("UnlimitedNadesIfOne", key, false) == 0) {
@@ -159,7 +161,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 // Setup random weapon order.
                 RandomWeaponOrder = true;
                 new switchIndex, switchLevel, String:switchWeaponName[24];
-                new Float:etime;
                 for (new i = 0; i < WeaponOrderCount; i++)
                 {
                     RandomWeaponOrderMap[i] = i;

@@ -57,4 +57,5 @@ new bool:StatsEnabled;
 new WarmupRandomWeaponMode = 0;
 new WarmupRandomWeaponLevel = 0;
 new UnlimitedNadesIfOne = 0;
+new FFA = 0;
 
