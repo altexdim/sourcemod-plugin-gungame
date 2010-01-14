@@ -47,8 +47,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 FFA = StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
-            } else if(strcmp("UnlimitedNadesIfOne", key, false) == 0) {
-                UnlimitedNadesIfOne = bool:StringToInt(value);
+            } else if(strcmp("UnlimitedNadesMinPlayers", key, false) == 0) {
+                UnlimitedNadesMinPlayers = bool:StringToInt(value);
             } else if(strcmp("WarmupRandomWeaponMode", key, false) == 0) {
                 WarmupRandomWeaponMode = bool:StringToInt(value);
                 WarmupRandomWeaponLevel = -1;

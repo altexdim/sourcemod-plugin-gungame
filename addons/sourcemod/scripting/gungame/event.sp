@@ -210,6 +210,11 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
+    if ( UnlimitedNadesMinPlayers )
+    {
+        UnlimitedNades = ( Tcount <= UnlimitedNadesMinPlayers || CTcount <= UnlimitedNadesMinPlayers );
+    }
+
     /* If one of the counts goes to 0 that means game is not commenced any more */
     if ( !CTcount || !Tcount )
     {
@@ -801,12 +806,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     if ( ( WarmupNades && WarmupEnabled )
-         || (  ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE )
-               && ( UnlimitedNades 
-                    || ( UnlimitedNadesIfOne && (Tcount == 1 || CTcount == 1) )
-                  )
-            )
-       )
+         || ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE && UnlimitedNades ) )
     {
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )

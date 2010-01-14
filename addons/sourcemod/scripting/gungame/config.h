@@ -56,6 +56,6 @@ new bool:Top10Handicap;
 new bool:StatsEnabled;
 new WarmupRandomWeaponMode = 0;
 new WarmupRandomWeaponLevel = 0;
-new UnlimitedNadesIfOne = 0;
+new UnlimitedNadesMinPlayers = 0;
 new FFA = 0;
 

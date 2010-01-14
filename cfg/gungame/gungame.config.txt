@@ -199,12 +199,16 @@
         "FFA" "0"
 
         /**
-         * If only one player left in one team then turn UnlimitedNades on.
-         * 
-         * After it will be more then one player in both team
-         * UnlimitedNades will be turned back to off.
+         * Enable UnlimitedNades depending on the number of players in team.
+         *
+         * If UnlimitedNades is off and the number of players in one team less or 
+         * equal to UnlimitedNadesMinPlayers then enable UnlimitedNades.
+         * When it will be more players on both teams, turn UnlimitedNades back to off.
+         *
+         * 0 - Disable
+         * 1 and above - Minimum number of players in each team for UnlimitedNames to be on.
          */
-        "UnlimitedNadesIfOne" "0"
+        "UnlimitedNadesMinPlayers" "0"
     }
 
     "Sounds"
