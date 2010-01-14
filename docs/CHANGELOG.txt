@@ -1,14 +1,8 @@
 Changelog
 ---------
-        * Is there any wya to turn off the feature where you loose a level for 
-            killing a team mate? I am setting up the new CSSM and using the new 
-            FFA mode and when you kill a teammate you lose a level when you 
-            should gain a level. It would be nice if that wasnt the case.
-        * I have random warmup weapon on my server but I've requested this feature. 
-            I did it through change of first level weapon and after round end it 
-            switches to glock (that's bad but for me is ok). I'm sure that you know 
-            how to do this and probably much more better but here is the code, maybe 
-            it will be useful.
+        * If enabled weapon reloading on kill then reload warmup weapon.
+        + FFA config variable added into config file.
+        + WarmupRandomWeaponMode config variable added into config file.
         * Refactoring of player_spawn hook.
         
     1.0.7.8:
