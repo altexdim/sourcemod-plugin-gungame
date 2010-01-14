@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.0.7.11:
+        * Fixed UnlimitedNadesMinPlayers for player numbers more then "1".
+        
     1.0.7.10:
         + Added config variable "NumberOfNades" to set custom number of nades for the nade level.
           
