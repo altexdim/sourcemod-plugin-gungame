@@ -4,6 +4,9 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Bug report:
+        I was wondering if there was an option to only level up when the bomb has exploded,
+        not immediately on plant.
     * Feature request: 
         Need features from es gg 5:
         * Add bonuses (flash, smoke) on knife level.
