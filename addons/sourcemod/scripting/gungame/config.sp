@@ -166,7 +166,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
                 for (new i = 0; i < WeaponOrderCount; i++)
                 {
-                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount);
+                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount-1);
                     if ( switchIndex == i )
                     {
                         continue;
@@ -245,8 +245,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                     new songsfound = ExplodeString(value, ",", songs, 64, 64);
                     if ( songsfound > 1 )
                     {
-                        new rand = UTIL_GetRandomInt(0, songsfound);
-                        strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);
+                        strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[UTIL_GetRandomInt(0, songsfound-1)]);
                     }
                     else
                     {
