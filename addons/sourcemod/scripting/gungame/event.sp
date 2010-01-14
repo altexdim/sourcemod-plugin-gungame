@@ -266,9 +266,14 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
             /* Round has ended. */
             RoundStarted = false;
 
-            if(GetEventInt(event, "reason") == 16)
+            if ( GetEventInt(event, "reason") == 16 )
             {
                 GameCommenced = true;
+            }
+
+            if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
+            {
+                WarmupRandomWeaponLevel = -1;
             }
         }
     }
@@ -348,13 +353,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // Victim > 0 && Killer > 0
 
-    new bool:TeamKill;
-
-    if ( GetConVarInt(mp_friendlyfire) && GetClientTeam(Victim) == GetClientTeam(Killer) )
-    {
-        /* Stop them from gaining a point or level by killing their team mate. */
-        TeamKill = true;
-    }
+    new bool:TeamKill = GetClientTeam(Victim) == GetClientTeam(Killer);
+    new bool:ForwardTeamKill = !FFA && GetConVarInt(mp_friendlyfire) && TeamKill;
 
     new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon), ret;
 
@@ -362,7 +362,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     Call_PushCell(Killer);
     Call_PushCell(Victim);
     Call_PushCell(WeaponIndex);
-    Call_PushCell(TeamKill);
+    Call_PushCell(ForwardTeamKill);
     Call_Finish(ret);
 
     if ( ret || TeamKill )
@@ -372,12 +372,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     new level = PlayerLevel[Killer], Weapons:WeaponLevel = WeaponOrderId[level];
 
-    /**
-     * How to deal with with giving them more nades if KnifePro is enabled?
-     * Because they will steal a level and the WeapoderOrderId will be off.
-     * So it won't give them another nade.
-     */
-
+    // FIXME: If KnifePro && KnifeProHE are enabled then we give extra grenade here, but it is a bug
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( ExtraNade && WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
     {
@@ -386,6 +381,15 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         {
             GivePlayerItemWrapper(Killer, WeaponName[CSW_HEGRENADE]);
         }
+    }
+
+    if ( WarmupEnabled && WarmupReset )
+    {
+        if ( ReloadWeapon )
+        {
+            UTIL_ReloadActiveWeapon(Killer, WeaponIndex);
+        }
+        return;
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )

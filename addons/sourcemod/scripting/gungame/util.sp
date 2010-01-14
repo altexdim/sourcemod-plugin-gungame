@@ -614,7 +614,7 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
 
 UTIL_GiveNextWeapon(client, level, bool:drop = true)
 {
-    if ( WarmupEnabled && WarmupKnifeOnly )
+    if ( WarmupEnabled && (WarmupKnifeOnly || WarmupNades) )
     {
         return;
     }
@@ -914,13 +914,39 @@ UTIL_GiveWarmUpWeapon(client)
         return 0;
     }
 
+    if ( WarmupRandomWeaponMode )
+    {   
+        if ( WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2 )
+        {
+            if ( WarmupRandomWeaponLevel == -1 )
+            {
+                WarmupRandomWeaponLevel = UTIL_GetRandomInt(0, WeaponOrderCount-1);
+            }
+            UTIL_GiveNextWeapon(client, WarmupRandomWeaponLevel, false);
+        }
+        else if ( WarmupRandomWeaponMode == 3 )
+        {
+            UTIL_GiveNextWeapon(client, UTIL_GetRandomInt(0, WeaponOrderCount-1), false);
+        }
+        return 1;
+    }
     if ( WarmupNades ) {
         GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
         FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
-    } else if ( WarmupKnifeOnly ) {
-        FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+        return 1;
     }
+    if ( WarmupKnifeOnly ) {
+        FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+        return 1;
+    }
+}
 
-    return 1;
+UTIL_GetRandomInt(start, end)
+{
+    // TODO: Improve random number generation algorithm after 
+    // fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    new Float:etime = GetEngineTime() + GetRandomFloat();
+    new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % (end - start + 1);
+    return rand + start;
 }
 

@@ -45,6 +45,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 RestoreLevelOnReconnect = bool:StringToInt(value);
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("WarmupRandomWeaponMode", key, false) == 0) {
+                WarmupRandomWeaponMode = bool:StringToInt(value);
+                WarmupRandomWeaponLevel = -1;
             } else if(strcmp("StripDeadPlayersWeapon", key, false) == 0) {
                 StripDeadPlayersWeapon = bool:StringToInt(value);
             } else if(strcmp("MultiKillChat", key, false) == 0) {
@@ -161,8 +164,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
                 for (new i = 0; i < WeaponOrderCount; i++)
                 {
-                    etime = GetEngineTime() + GetRandomFloat();
-                    switchIndex = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % WeaponOrderCount;
+                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount);
                     if ( switchIndex == i )
                     {
                         continue;
@@ -241,9 +243,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                     new songsfound = ExplodeString(value, ",", songs, 64, 64);
                     if ( songsfound > 1 )
                     {
-                        // TODO: Implement valid random number generator
-                        new Float:etime = GetEngineTime();
-                        new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % songsfound;
+                        new rand = UTIL_GetRandomInt(0, songsfound);
                         strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[rand]);
                     }
                     else

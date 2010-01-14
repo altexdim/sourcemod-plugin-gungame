@@ -176,6 +176,27 @@
          * 0 = off otherwise the value is the number of days.
          */
         "Prune"     "366"
+
+        /**
+         * Give random weapon on warmup.
+         *
+         * 0 - Disable
+         * 1 - Random weapon every map
+         * 2 - Random weapon every round
+         * 3 - Random weapon every spawn
+         */
+        "WarmupRandomWeaponMode" "0"
+
+        /** 
+         * FFA DM mode.
+         *
+         * If you are using CSS:DM with FFA mode enabled, 
+         * then you should set this variable to "1".
+         *
+         * 0 - Disabled
+         * 1 - Enabled
+         */
+        "FFA" "0"
     }
 
     "Sounds"

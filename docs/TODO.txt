@@ -4,15 +4,6 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
-    * Is there any wya to turn off the feature where you loose a level for 
-        killing a team mate? I am setting up the new CSSM and using the new 
-        FFA mode and when you kill a teammate you lose a level when you 
-        should gain a level. It would be nice if that wasnt the case.
-    * I have random warmup weapon on my server but I've requested this feature. 
-        I did it through change of first level weapon and after round end it 
-        switches to glock (that's bad but for me is ok). I'm sure that you know 
-        how to do this and probably much more better but here is the code, maybe 
-        it will be useful.
     * Feature request: 
         Можешь создать дополнительные аддоны как в GG5 от ES типа выделение цветом 
         игрока на уровне нож и бонусы на ноже!И ещё рандом всех звуков!
@@ -23,11 +14,6 @@ TODO
         think about moving it to the hint box (like warmup timer) and add information about leader 
         level like "Leader level 24 :: awp"?
     + Feature request:
-        - configurable warmup weapon by cvar
-
-        For example I've wrote very simple plugin which randomize warmup weapon in ES GG5 
-        (by changing gg_warmup_weapon value). You should add such cvar as well, it's useful. 
-        
         If enabled weapon reloading on kill then reload warmup weapon.
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down. 
@@ -54,20 +40,11 @@ TODO
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
-    * Make removement buyzones on/off. So once gg is enabled than buyzones are
-      disabled, and when gg is disabled buyzones are enabled.
-      Maybe instead of removement buyzones just disable it to players on
-      spawn and when gg swithces enabled/disabled.
     + Add winners menu:
         Also could you incorporate the attached code into your next release?
         The menu idea is from GG5's Winner Menu 
         (http://addons.eventscripts.com/addons/view/gg_winner_menu)
         https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
-    + Review code and include it in plugin (advanced stats):
-        Hey altex, I've requested few stats features: !leader and !top command once. I've 
-        already done it myself. I'm using here playersdata.txt file. Maybe you want to add 
-        these commands to your plugin? Feel free to do that  . 
-        https://forums.alliedmods.net/showpost.php?p=1035684&postcount=579
     * Think about new features:
         I have few ideas, maybe you will fins some of them useful:
         * split gungame.config.txt to few parts; each optional plugin should have own 
@@ -99,4 +76,10 @@ TODO
         It would be nice to have information about leader weapon in chat message 
         "[GunGame] Player is leading on level 10", like "[GunGame] Player is leading 
         on level 10 :: xm1014"
+    * Make removement buyzones on/off. So once gg is enabled than buyzones are
+      disabled, and when gg is disabled buyzones are enabled.
+      Maybe instead of removement buyzones just disable it to players on
+      spawn and when gg swithces enabled/disabled.
+    * If KnifePro && KnifeProHE && ExtraNade are enabled then we give extra grenade 
+      on knife kill and leveling up player, but it is a bug.
         

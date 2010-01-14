@@ -54,3 +54,5 @@ new bool:TripleLevelBonusGodMode;
 new HandicapMode;
 new bool:Top10Handicap;
 new bool:StatsEnabled;
+new WarmupRandomWeaponMode = 0;
+new WarmupRandomWeaponLevel = 0;
