@@ -631,6 +631,10 @@ UTIL_GiveNextWeapon(client, level, bool:drop = true)
 
     if ( slot == Slot_Grenade )
     {
+        if ( NumberOfNades )
+        {
+            g_NumberOfNades[client] = NumberOfNades - 1;
+        }
         if ( NadeBonusWeaponId )
         {
             new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
@@ -665,7 +669,6 @@ UTIL_GiveNextWeapon(client, level, bool:drop = true)
         }
     }
     if ( slot != Slot_Knife )
-    // slot == Slot_Primary || slot == Slot_Secondary 
     {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);

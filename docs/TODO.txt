@@ -35,8 +35,6 @@ TODO
         If you kill yourself or a teammate you loose one level. I want set this 
         to loose 2 levels, or 3, or...
     + Implement gg_handicap_update like in esgg5.
-    * Is there a way to put more nades on he level, like this one 
-      for GunGame5? http://forums.gungame5.com/viewtopic.php?f=17&t=265        
     * Feature request:
         1) I want to run a random weapon order but *always* have knife 
         and nade as the last two weapons. When I turn random weapon order 

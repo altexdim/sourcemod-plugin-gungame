@@ -58,4 +58,6 @@ new WarmupRandomWeaponMode = 0;
 new WarmupRandomWeaponLevel = 0;
 new UnlimitedNadesMinPlayers = 0;
 new FFA = 0;
+new NumberOfNades = 0;
+
 

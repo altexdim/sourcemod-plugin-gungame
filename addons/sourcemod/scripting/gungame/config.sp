@@ -45,6 +45,12 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 RestoreLevelOnReconnect = bool:StringToInt(value);
             } else if(strcmp("FFA", key, false) == 0) {
                 FFA = StringToInt(value);
+            } else if(strcmp("NumberOfNades", key, false) == 0) {
+                NumberOfNades = StringToInt(value);
+                if ( NumberOfNades && (NumberOfNades < 2) )
+                {
+                    NumberOfNades = 0;
+                }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
             } else if(strcmp("UnlimitedNadesMinPlayers", key, false) == 0) {

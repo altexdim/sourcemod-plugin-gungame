@@ -209,6 +209,14 @@
          * 1 and above - Minimum number of players in each team for UnlimitedNames to be on.
          */
         "UnlimitedNadesMinPlayers" "0"
+        
+        /**
+         * Number of nades on the nade level.
+         *
+         * This option is disabled 
+         * if less then 2.
+         */
+        "NumberOfNades" "0"
     }
 
     "Sounds"

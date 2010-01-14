@@ -806,11 +806,17 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     if ( ( WarmupNades && WarmupEnabled )
-         || ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE && UnlimitedNades ) )
+         || ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE 
+            && ( UnlimitedNades 
+               || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
         {
+            if ( NumberOfNades )
+            {
+                g_NumberOfNades[client]--;
+            }
             GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
             FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
         }
