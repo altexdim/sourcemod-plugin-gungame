@@ -359,15 +359,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     // Victim > 0 && Killer > 0
 
     new bool:TeamKill = (!FFA) && (GetClientTeam(Victim) == GetClientTeam(Killer));
-    new bool:ForwardTeamKill = TeamKill && GetConVarInt(mp_friendlyfire);
-
     new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon), ret;
 
     Call_StartForward(FwdDeath);
     Call_PushCell(Killer);
     Call_PushCell(Victim);
     Call_PushCell(WeaponIndex);
-    Call_PushCell(ForwardTeamKill);
+    Call_PushCell(TeamKill && GetConVarInt(mp_friendlyfire));
     Call_Finish(ret);
 
     if ( ret || TeamKill )
