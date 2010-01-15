@@ -162,3 +162,6 @@ Issues
         http://forums.alliedmods.net/showpost.php?p=949442&postcount=255
     * Advanced stats:
         http://forums.alliedmods.net/showpost.php?p=1036934&postcount=594
+    * say !give
+        https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701
+
