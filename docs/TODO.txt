@@ -5,6 +5,11 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     * Feature request:
+        What about a config option for player armor?
+        0 = no armor
+        1 = kevlar only
+        2 = kevlar + helmet 
+    * Feature request:
         Add triple level bonus speed and gravity config variables to set custom values.
     * Feature request:
         I was wondering if there was an option to only level up when the bomb has exploded,
