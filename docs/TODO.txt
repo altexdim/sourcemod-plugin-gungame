@@ -3,7 +3,7 @@ TODO
     ----====----==== High priority list ----====----====
 
     ----====----==== Normal priority list ----====----====
-
+    
     * Feature request:
         What about a config option for player armor?
         0 = no armor

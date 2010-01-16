@@ -1,5 +1,12 @@
 Changelog
 ---------
+        * Fixed:
+            L 01/16/2010 - 11:47:21: [SM] Plugin encountered error 4: Invalid parameter or parameter type
+            L 01/16/2010 - 11:47:21: [SM] Native "Format" reported: Language phrase "CommandPanel: !top10 to see the top 10 winners on the server" not found
+            L 01/16/2010 - 11:47:21: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 01/16/2010 - 11:47:21: [SM]   [0]  Line 345, gungame/menu.sp::ShowCommandPanel()
+            L 01/16/2010 - 11:47:21: [SM]   [1]  Line 111, gungame/commands.sp::_CmdCommand()
+        
     1.0.7.12:
         * Fixed FFA
         
