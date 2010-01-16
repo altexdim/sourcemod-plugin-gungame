@@ -342,7 +342,7 @@ ShowCommandPanel(client)
     DrawPanelItem(Ham, text);
     Format(text, sizeof(text), "%t", "CommandPanel: !score to see all player current scores");
     DrawPanelItem(Ham, text);
-    Format(text, sizeof(text), "%t", "CommandPanel: !top10 to see the top 10 winners on the server");
+    Format(text, sizeof(text), "%t", "CommandPanel: !top to see the top winners on the server");
     DrawPanelItem(Ham, text);
     Format(text, sizeof(text), "%t", "CommandPanel: !leader to see current leaders");
     DrawPanelItem(Ham, text);
