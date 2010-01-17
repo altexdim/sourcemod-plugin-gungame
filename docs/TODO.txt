@@ -5,6 +5,8 @@ TODO
     ----====----==== Normal priority list ----====----====
     
     * Feature request:
+        I'm talking about config option to subtract specified number of levels from level given by handicap. 
+    * Feature request:
         What about a config option for player armor?
         0 = no armor
         1 = kevlar only
