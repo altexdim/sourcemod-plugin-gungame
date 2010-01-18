@@ -4,7 +4,7 @@ enum DbType
     DbTypeMysql,
     DbTypePgsql,
     MaxDbTypes
-}
+};
 
 new DbType:g_DbType;
 new Handle:g_DbConnection = INVALID_HANDLE;
@@ -20,21 +20,20 @@ new const String:g_sql_createPlayerTableIndex1[DbType:MaxDbTypes][]  =
     "CREATE INDEX wins ON gungame_playerdata(wins);",
     "",
     "CREATE INDEX gg_playerdata_wins ON gungame_playerdata(wins);"
-}
+};
 new const String:g_sql_createPlayerTableIndex2[DbType:MaxDbTypes][]  =
 {
     "CREATE INDEX authid ON gungame_playerdata(authid);",
     "",
     "CREATE INDEX gg_playerdata_authid ON gungame_playerdata(authid);"
-}
-
-new const String:g_sql_dropPlayerTable[]      = "DROP TABLE IF EXISTS gungame_playerdata;";
+};
 new const String:g_sql_checkTableExists[DbType:MaxDbTypes][]    =
 {
     "SELECT name FROM sqlite_master WHERE name = 'gungame_playerdata';",
     "SHOW TABLES like 'gungame_playerdata';",
     "SELECT table_name FROM information_schema.tables WHERE table_name = 'gungame_playerdata';"
-}
+};
+new const String:g_sql_dropPlayerTable[]      = "DROP TABLE IF EXISTS gungame_playerdata;";
 
 new const String:g_sql_insertPlayer[]         = "INSERT INTO gungame_playerdata (wins, name, timestamp, authid) VALUES (%i, \"%s\", current_timestamp, \"%s\");";
 new const String:g_sql_updatePlayerByAuth[]   = "UPDATE gungame_playerdata SET wins = %i, name = \"%s\", timestamp = current_timestamp WHERE authid = \"%s\";";
@@ -42,11 +41,12 @@ new const String:g_sql_getPlayerPlaceByWins[] = "SELECT count(*) FROM gungame_pl
 new const String:g_sql_getPlayersCount[]      = "SELECT count(*) FROM gungame_playerdata;";
 new const String:g_sql_getPlayerByAuth[]      = "SELECT id, wins, name FROM gungame_playerdata WHERE authid = \"%s\";";
 new const String:g_sql_updatePlayerTsById[]   = "UPDATE gungame_playerdata SET timestamp = current_timestamp WHERE id = %i;";
+new const String:g_sql_getTopPlayers[]        = "SELECT id, wins, name, authid FROM gungame_playerdata ORDER by wins desc, id LIMIT %i OFFSET %i;";
+
 new const String:g_sql_prunePlayers[DbType:MaxDbTypes][]    =
 {
     "DELETE FROM gungame_playerdata WHERE timestamp < %i;",
     "DELETE FROM gungame_playerdata WHERE timestamp < current_timestamp - interval %i day;",
     "DELETE FROM gungame_playerdata WHERE timestamp < current_timestamp - interval '%i day';"
-}
-new const String:g_sql_getTopPlayers[]      = "SELECT id, wins, name, authid FROM gungame_playerdata ORDER by wins desc, id LIMIT %i OFFSET %i;";
+};
 

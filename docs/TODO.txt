@@ -60,7 +60,7 @@ TODO
         (http://addons.eventscripts.com/addons/view/gg_winner_menu)
         https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
     * Think about new features:
-        I have few ideas, maybe you will fins some of them useful:
+        I have few ideas, maybe you will find some of them useful:
         * split gungame.config.txt to few parts; each optional plugin should have own 
             config file like gungame.config.txt , gungame.config.afk.txt, 
             gungame.config.stats.txt, gungame.config.sounds.txt etc.; I think it 

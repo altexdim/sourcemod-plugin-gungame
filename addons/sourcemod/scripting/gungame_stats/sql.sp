@@ -7,11 +7,11 @@ SqlConnect()
     }
     
     decl String:error[256];
-	if ( SQL_CheckConfig("gungame") ) {
+    if ( SQL_CheckConfig("gungame") ) {
         g_DbConnection = SQL_Connect("gungame", false, error, sizeof(error));
-	} else {
+    } else {
         g_DbConnection = SQL_Connect("storage-local", false, error, sizeof(error));
-	}
+    }
     
     if ( g_DbConnection == INVALID_HANDLE )
     {
@@ -21,26 +21,26 @@ SqlConnect()
     
     new String:ident[16];
     SQL_ReadDriver(g_DbConnection, ident, sizeof(ident));
-	if ( strcmp(ident, "sqlite") == 0 ) {
+    if ( strcmp(ident, "sqlite") == 0 ) {
         g_DbType = DbTypeSqlite;
-	} else if ( strcmp(ident, "mysql") == 0 ) {
+    } else if ( strcmp(ident, "mysql") == 0 ) {
         g_DbType = DbTypeMysql;
-	} else if ( strcmp(ident, "pgsql") == 0 ) {
+    } else if ( strcmp(ident, "pgsql") == 0 ) {
         g_DbType = DbTypePgsql;
-	} else {
+    } else {
         CloseHandle(g_DbConnection);
         g_DbConnection = INVALID_HANDLE;
         SetFailState("Unknown db type (%s)", ident);
         return;
-	}
+    }
     
     SQL_LockDatabase(g_DbConnection);
     
     new bool:tableExists = false;
     #if defined SQL_DEBUG
-        LogError("[DEBUG-SQL] %s", g_sql_checkTableExists);
+        LogError("[DEBUG-SQL] %s", g_sql_checkTableExists[g_DbType]);
     #endif
-    new Handle:result = SQL_Query(g_DbConnection, g_sql_checkTableExists);
+    new Handle:result = SQL_Query(g_DbConnection, g_sql_checkTableExists[g_DbType]);
     if ( result == INVALID_HANDLE )
     {
         SQL_GetError(g_DbConnection, error, sizeof(error));
@@ -55,9 +55,9 @@ SqlConnect()
     if ( !tableExists )
     {
         #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTable);
+            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTable[g_DbType]);
         #endif
-        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTable) )
+        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTable[g_DbType]) )
         {
             SQL_GetError(g_DbConnection, error, sizeof(error));
             LogError("Could not create players table (error: %s)", error);
@@ -500,9 +500,9 @@ public Action:_CmdReset(client, args)
         return Plugin_Handled;
     }
     #if defined SQL_DEBUG
-        LogError("[DEBUG-SQL] %s", g_sql_createPlayerTable);
+        LogError("[DEBUG-SQL] %s", g_sql_createPlayerTable[g_DbType]);
     #endif
-    if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTable) )
+    if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTable[g_DbType]) )
     {
         SQL_GetError(g_DbConnection, error, sizeof(error));
         LogError("Could not create players table (error: %s)", error);
