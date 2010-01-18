@@ -1,7 +1,7 @@
 Changelog
 ---------
     1.0.7.13:
-        + Added postgresql support to stats plugin.
+        + Added postgresql support to stats plugin. Thanks to Lyfe from alliedmods forum.
         * Stats plugin improved: Stats plugin now checks sourcemod database config for section "gungame" 
             and only if there is no such section then use "storage-local". So now you can 
             use different databases for gungame and other plugins.
