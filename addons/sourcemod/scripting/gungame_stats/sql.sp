@@ -7,7 +7,11 @@ SqlConnect()
     }
     
     decl String:error[256];
-    g_DbConnection = SQL_Connect("storage-local", false, error, sizeof(error));
+	if ( SQL_CheckConfig("gungame") ) {
+        g_DbConnection = SQL_Connect("gungame", false, error, sizeof(error));
+	} else {
+        g_DbConnection = SQL_Connect("storage-local", false, error, sizeof(error));
+	}
     
     if ( g_DbConnection == INVALID_HANDLE )
     {
@@ -17,18 +21,18 @@ SqlConnect()
     
     new String:ident[16];
     SQL_ReadDriver(g_DbConnection, ident, sizeof(ident));
-    #if defined MYSQL_SUPPORT
-    if ( strcmp(ident, "mysql", false) != 0 )
-    #endif
-    #if defined SQLITE_SUPPORT
-    if ( strcmp(ident, "sqlite", false) != 0 )
-    #endif
-    {
+	if ( strcmp(ident, "sqlite") == 0 ) {
+        g_DbType = DbTypeSqlite;
+	} else if ( strcmp(ident, "mysql") == 0 ) {
+        g_DbType = DbTypeMysql;
+	} else if ( strcmp(ident, "pgsql") == 0 ) {
+        g_DbType = DbTypePgsql;
+	} else {
         CloseHandle(g_DbConnection);
         g_DbConnection = INVALID_HANDLE;
-        SetFailState("Invalid DB-Type (%s)", ident);
+        SetFailState("Unknown db type (%s)", ident);
         return;
-    }
+	}
     
     SQL_LockDatabase(g_DbConnection);
     
@@ -60,28 +64,32 @@ SqlConnect()
             SQL_UnlockDatabase(g_DbConnection);
             return;
         }
-        #if defined SQLITE_SUPPORT
+        if ( g_sql_createPlayerTableIndex1[g_DbType][0] != 0 )
+        {
             #if defined SQL_DEBUG
-                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1);
+                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1[g_DbType]);
             #endif
-            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1) )
+            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1[g_DbType]) )
             {
                 SQL_GetError(g_DbConnection, error, sizeof(error));
                 LogError("Could not create players table index 1 (error: %s)", error);
                 SQL_UnlockDatabase(g_DbConnection);
                 return;
             }
+        }
+        if ( g_sql_createPlayerTableIndex2[g_DbType][0] != 0 )
+        {
             #if defined SQL_DEBUG
-                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2);
+                LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2[g_DbType]);
             #endif
-            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2) )
+            if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2[g_DbType]) )
             {
                 SQL_GetError(g_DbConnection, error, sizeof(error));
                 LogError("Could not create players table index 2 (error: %s)", error);
                 SQL_UnlockDatabase(g_DbConnection);
                 return;
             }
-        #endif
+        }
     }
     SQL_UnlockDatabase(g_DbConnection);
 }
@@ -229,12 +237,11 @@ public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:
 SavePlayerDataInfo()
 {
     decl String:query[1024];
-    #if defined MYSQL_SUPPORT
-        Format(query, sizeof(query), g_sql_prunePlayers, Prune);
-    #endif
-    #if defined SQLITE_SUPPORT
-        Format(query, sizeof(query), g_sql_prunePlayers, GetTime() - Prune*86400);
-    #endif
+    if ( g_DbType == DbTypeSqlite ) {
+        Format(query, sizeof(query), g_sql_prunePlayers[g_DbType], GetTime() - Prune*86400);
+    } else {
+        Format(query, sizeof(query), g_sql_prunePlayers[g_DbType], Prune);
+    }
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
@@ -503,27 +510,32 @@ public Action:_CmdReset(client, args)
         ReplyToCommand(client, "[GunGame] Error reseting stats.");
         return Plugin_Handled;
     }
-    #if defined SQLITE_SUPPORT
+    if ( g_sql_createPlayerTableIndex1[g_DbType][0] != 0 )
+    {
         #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1);
+            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex1[g_DbType]);
         #endif
-        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1) )
+        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex1[g_DbType]) )
         {
             SQL_GetError(g_DbConnection, error, sizeof(error));
             LogError("Could not create players table index 1 (error: %s)", error);
             SQL_UnlockDatabase(g_DbConnection);
             return Plugin_Handled;
         }
+    }
+    if ( g_sql_createPlayerTableIndex2[g_DbType][0] != 0 )
+    {
         #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2);
+            LogError("[DEBUG-SQL] %s", g_sql_createPlayerTableIndex2[g_DbType]);
         #endif
-        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2) )
+        if ( !SQL_FastQuery(g_DbConnection, g_sql_createPlayerTableIndex2[g_DbType]) )
         {
             SQL_GetError(g_DbConnection, error, sizeof(error));
             LogError("Could not create players table index 2 (error: %s)", error);
             SQL_UnlockDatabase(g_DbConnection);
             return Plugin_Handled;
         }
+    }
     #endif
     SQL_UnlockDatabase(g_DbConnection);
     ReplyToCommand(client, "[GunGame] Stats has been reseted.");

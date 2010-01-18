@@ -12,8 +12,6 @@
  * Only one database type is supported at the same time.
  */
 #define SQL_SUPPORT
-#define SQLITE_SUPPORT
-//#define MYSQL_SUPPORT
 //#define SQL_DEBUG
 
 #include "gungame_stats/gungame_stats.h"

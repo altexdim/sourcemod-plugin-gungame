@@ -23,7 +23,7 @@ enum Sounds
 }
 
 // Killable weapons
-new const String:WeaponName[MAXWEAPON][] =
+new const String:WeaponName[Weapons:MAXWEAPON][] =
 {
     "",
     "weapon_knife",
