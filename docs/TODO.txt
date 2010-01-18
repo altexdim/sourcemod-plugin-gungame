@@ -1,6 +1,11 @@
 TODO
 ----
     ----====----==== High priority list ----====----====
+    
+    * Feature request:
+        1) Ability to disable losing a level from TK (in main config)
+        2) Ability to change the levels lost from killing yourself (in main config) like 1-5 or something
+        3) Display the players current level as their kills on the scoeboard
 
     ----====----==== Normal priority list ----====----====
     
