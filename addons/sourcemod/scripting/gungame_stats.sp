@@ -7,10 +7,6 @@
 #include <gungame_config>
 #include <colors>
 
-/**
- * Uncomment and recompile the plugin to support sql stats.
- * Only one database type is supported at the same time.
- */
 #define SQL_SUPPORT
 //#define SQL_DEBUG
 
