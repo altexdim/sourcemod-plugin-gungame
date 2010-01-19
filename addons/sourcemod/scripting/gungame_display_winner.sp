@@ -14,7 +14,7 @@ new g_winner;
 
 new State:ConfigState;
 new g_Cfg_DisplayWinnerMotd = 0;
-new String:g_Cfg_DisplayWinnerUrl[1024];
+new String:g_Cfg_DisplayWinnerUrl[256];
 new g_Cfg_ShowPlayerRankOnWin = 1;
 
 public Plugin:myinfo =
@@ -67,6 +67,7 @@ public GG_OnLoadRank()
     }
     if ( g_Cfg_DisplayWinnerMotd )
     {
+        decl String:url[128+sizeof(g_Cfg_DisplayWinnerUrl)];
         decl String:winnerNameUrlEncoded[sizeof(g_winnerName)*3+1];
         decl String:looserNameUrlEncoded[sizeof(g_looserName[])*3+1];
         url_encode(g_winnerName, sizeof(g_winnerName), winnerNameUrlEncoded, sizeof(winnerNameUrlEncoded));
