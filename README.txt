@@ -100,13 +100,13 @@ Plugins
                                       
     gungame_tk.smx
         * TeamKill Management System
-            - Depends on gungame.smx
+            - Depends on gungame.smx, gungame_config.smx
             - Optional plugin
             - Level down team killer
             
     gungame_display_winner.smx
         * Display winner
-            - Depends on gungame.smx, gungame_stats.smx
+            - Depends on gungame.smx, gungame_stats.smx, gungame_config.smx
             - Optional plugin
             - When someone wins it shows MOTD window with external URL displaing some info 
                 about winner.
