@@ -2,10 +2,21 @@
 {
     "Config"
     {
+        /* Give player armor on spawn */
+        "ArmorKevlar" "1"
+        "ArmorHelmet" "1"
+
+        /* Substract handicap level by this value */
+        "HandicapLevelSubstract" "0"
+
         /* Show levels in scoreboard */
         "LevelsInScoreboard" "0"
 
-        /* How much levels to loose after TK */
+        /**
+         * How much levels to loose after TK
+         * 0 - Disable
+         * 1..N - Levels to loose
+         */
         "TkLooseLevel" "0"
     
         /* Restore level on player reconnect */
@@ -112,6 +123,10 @@
         /* Enable God Mode when triple leveled */
         "TripleLevelBonusGodMode" "1"
 
+        /* Custom speed and gravity value multiplier for triple level bonus */
+        "TripleLevelSpeed" "1.5"
+        "TripleLevelGravity" "0.5"
+
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
         "KnifePro" "0"
 
@@ -159,11 +174,17 @@
          */
         "NadeBonus" ""
 
-        /* Gives a smoke grenade*/
+        /* Gives a smoke grenade on nade level */
         "NadeSmoke" "0"
 
-        /* Gives a Flash grenade */
+        /* Gives a Flash grenade on nade level */
         "NadeFlash" "0"
+
+        /* Gives a smoke grenade on knife level */
+        "KnifeSmoke" "0"
+
+        /* Gives a Flash grenade on knife level */
+        "KnifeFlash" "0"
 
         /* Gives an extra hegrenade to the player if they get a kill */
         "ExtraNade" "0"
@@ -231,6 +252,15 @@
          * if less then 2.
          */
         "NumberOfNades" "0"
+        
+        /* Display winner in MOTD window. */
+        "DisplayWinnerMotd" "0"
+
+        /* URL to display in MOTD window. */
+        "DisplayWinnerUrl" "http://gungame5.com/gg5_win.php"
+
+        /* Show player rank on win in chat */
+        "ShowPlayerRankOnWin" "1"
     }
 
     "Sounds"
@@ -249,3 +279,4 @@
         "WarmupTimerSound" "ambient/tones/floor1.wav"
     }
 }
+

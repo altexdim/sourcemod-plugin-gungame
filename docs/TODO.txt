@@ -2,33 +2,17 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
-    * [DONE] Feature request:
-        1) Ability to disable losing a level from TK (in main config)
-    * [DONE] Feature request:
-        2) Ability to change the levels lost from killing yourself (in main config) like 1-5 or something
-    * [DONE] Feature request:
-        3) Display the players current level as their kills on the scoreboard
-        SetEntProp(client, Prop_Data, "m_iFrags", gglevel); 
-
     ----====----==== Normal priority list ----====----====
     
-    * Feature request:
-        I'm talking about config option to subtract specified number of levels from level given by handicap. 
-    * Feature request:
-        What about a config option for player armor?
-        0 = no armor
-        1 = kevlar only
-        2 = kevlar + helmet 
-    * Feature request:
-        Add triple level bonus speed and gravity config variables to set custom values.
     * Feature request:
         I was wondering if there was an option to only level up when the bomb has exploded,
         not immediately on plant.
         NB. Add config variable.
     * Feature request: 
         Need features from es gg 5:
-        * Add bonuses (flash, smoke) on knife level.
         * Colorize knife-level player.
+    * Feature request: 
+        Need features from es gg 5:
         * Random sounds?
     * Feature request:
         Add visual effects to the player on bonus like blink golden effect and sparks.
@@ -40,7 +24,7 @@ TODO
         think about moving it to the hint box (like warmup timer) and add information about leader 
         level like "Leader level 24 :: awp"?
     * Think about this feature request:
-        I also would like to request that plugin could save level kills when level down. 
+        I also would like to request that plugin could save level kills when level down (and level up?). 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
         knifes you. Instead of starting from 0 kills on previous level you could continue 
         from 2 kill. Many people on my server are constantly complaining one this issue.
@@ -65,18 +49,15 @@ TODO
         (http://addons.eventscripts.com/addons/view/gg_winner_menu)
         https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
     * Think about new features:
-        I have few ideas, maybe you will find some of them useful:
         * split gungame.config.txt to few parts; each optional plugin should have own 
             config file like gungame.config.txt , gungame.config.afk.txt, 
             gungame.config.stats.txt, gungame.config.sounds.txt etc.; I think it 
             will be easier to configure plugin for new users and adding (maybe in 
             the future) more option to optional plugins won't affect main config or 
             or other optional plugins configs
-        * move sm_gungame_display_winner_url to config file instead of creating convar
-        * merge gungame_display_winner with gungame_stats (since it requires gungame_stats 
-            and there is not too much code)
-        * create some options for gungame_stats like showing MOTD panel, display rank to 
-            all or to player only, show winner in chat, show player rank on win in chat etc.
+    * Think about new features:
+        * create some options for gungame_stats like display rank to 
+            all or to player only, show winner in chat etc.
         
     ----====----==== High severity list ----====----====
     

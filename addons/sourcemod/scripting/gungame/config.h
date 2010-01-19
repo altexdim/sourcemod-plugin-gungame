@@ -60,4 +60,11 @@ new UnlimitedNadesMinPlayers = 0;
 new FFA = 0;
 new NumberOfNades = 0;
 new g_Cfg_LevelsInScoreboard = 0;
+new g_Cfg_HandicapLevelSubstract = 0;
+new g_Cfg_ArmorKevlar = 1;
+new g_Cfg_ArmorHelmet = 1;
+new Float:g_Cfg_TripleLevelBonusGravity = 0.5;
+new Float:g_Cfg_TripleLevelBonusSpeed = 1.5;
+new g_Cfg_KnifeSmoke = 0;
+new g_Cfg_KnifeFlash = 0;
 

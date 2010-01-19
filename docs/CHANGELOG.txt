@@ -1,5 +1,21 @@
 Changelog
 ---------
+    1.0.8.0:
+        + Feature: Added config variable "TkLooseLevel". It sets how much levels to loose after TK.
+        + Feature: Updated config variables "WorldspawnSuicide" and "CommitSuicide".
+            Now it sets how much levels to loose on suicide.
+        + Feature: Added config variable "LevelsInScoreboard" to show levels in scoreboard.
+            If enabled, display the players current level as their kills on the scoreboard.
+        + Feature: Added config variable "ShowPlayerRankOnWin" to show player rank on win in chat.
+        * Improvement: Added "DisplayWinnerMotd" and "DisplayWinnerUrl" config variables
+            instead of sm_gungame_display_winner_url.
+        + Feature: Added config variable "HandicapLevelSubstract" to subtract specified number 
+            of levels from level given by handicap. 
+        + Feature: Added config variables "ArmorKevlar" and "ArmorHelmet" to customize player armor.
+        + Feature: Added config variables "TripleLevelSpeed" and "TripleLevelGravity" to set
+            custom speed and gravity for triple level bonus.
+        + Feature: Added config variables "KnifeSmoke" and "KnifeFlash" to add bonuses on knife level.
+
     1.0.7.13:
         + Added postgresql support to stats plugin. Thanks to Lyfe from alliedmods forum.
         * Stats plugin improved: Stats plugin now checks sourcemod database config for section "gungame" 

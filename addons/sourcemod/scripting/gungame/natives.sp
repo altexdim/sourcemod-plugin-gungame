@@ -89,6 +89,10 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         if ( TotalLevel && Count )
         {   
             new level = TotalLevel / Count;
+            level -= g_Cfg_HandicapLevelSubstract;
+            if ( level < 0 ) {
+                level = 0;
+            }
             if ( PlayerLevel[client] < level )
             {
                 PlayerLevel[client] = level;
@@ -114,9 +118,16 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
                 }
             }
         }
-        if ( (minimum != -1) && (PlayerLevel[client] < minimum) ) 
+        if ( minimum != -1 ) 
         {
-            PlayerLevel[client] = minimum;
+            minimum -= g_Cfg_HandicapLevelSubstract;
+            if ( minimum < 0 ) {
+                minimum = 0;
+            }
+            if ( PlayerLevel[client] < minimum ) 
+            {
+                PlayerLevel[client] = minimum;
+            }
         }
     }
     

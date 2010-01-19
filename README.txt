@@ -18,7 +18,6 @@ Commands and Cvars
 ------------------
     sm_gungamesm_version            - Gungame version.
     gungame_enabled                 - Display if gungame is enabled or disabled.
-    sm_gungame_display_winner_url   - URL to display in MOTD window for gungame winner.
 
     gg_version                      - Show gungame version information.
     gg_status                       - Show state of the current game.

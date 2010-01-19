@@ -626,10 +626,16 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
-    /* Set armor to 100. */
-    SetEntData(client, OffsetArmor, 100);
-    /* Set user with helm. */
-    SetEntData(client, OffsetHelm, 1);
+    if ( g_Cfg_ArmorKevlar )
+    {
+        /* Set armor to 100. */
+        SetEntData(client, OffsetArmor, 100);
+    }
+    if ( g_Cfg_ArmorHelmet )
+    {
+        /* Set user with helm. */
+        SetEntData(client, OffsetHelm, 1);
+    }
 
     CurrentLevelPerRound[client] = 0;
     CurrentLevelPerRoundTriple[client] = 0;

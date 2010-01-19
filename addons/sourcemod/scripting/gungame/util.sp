@@ -669,7 +669,18 @@ UTIL_GiveNextWeapon(client, level, bool:drop = true)
             GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
         }
     }
-    if ( slot != Slot_Knife )
+    if ( slot == Slot_Knife )
+    {
+        if ( g_Cfg_KnifeSmoke )
+        {
+            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+        }
+        if ( g_Cfg_KnifeFlash )
+        {
+            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+        }
+    }
+    else
     {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
@@ -678,6 +689,7 @@ UTIL_GiveNextWeapon(client, level, bool:drop = true)
             g_ClientSlotEnt[client][slot] = ent;
         }
     }
+
     FakeClientCommand(client, "use %s", WeaponName[WeapId]);
 }
 
@@ -772,12 +784,12 @@ UTIL_StartTripleEffects(client)
         return;
     }
     g_tripleEffects[client] = 1;
-    SetEntityGravity(client, 0.5);
+    SetEntityGravity(client, g_Cfg_TripleLevelBonusGravity);
     if ( TripleLevelBonusGodMode )
     {
         UTIL_SetClientGodMode(client, 1);
     }
-    SetEntDataFloat(client, OffsetMovement, 1.5);
+    SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
     EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
 }
 

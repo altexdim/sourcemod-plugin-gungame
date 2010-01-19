@@ -1,6 +1,6 @@
 public GG_OnWinner(client, const String:Weapon[])
 {
-    if(IsClientInGame(client) && !IsFakeClient(client))
+    if ( IsClientInGame(client) && !IsFakeClient(client) )
     {
         ++PlayerWinsData[client];
         SavePlayerData(client);

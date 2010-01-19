@@ -53,6 +53,20 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("KnifeSmoke", key, false) == 0) {
+                g_Cfg_KnifeSmoke = StringToInt(value);
+            } else if(strcmp("KnifeFlash", key, false) == 0) {
+                g_Cfg_KnifeFlash = StringToInt(value);
+            } else if(strcmp("HandicapLevelSubstract", key, false) == 0) {
+                g_Cfg_HandicapLevelSubstract = StringToInt(value);
+            } else if(strcmp("ArmorKevlar", key, false) == 0) {
+                g_Cfg_ArmorKevlar = StringToInt(value);
+            } else if(strcmp("ArmorHelmet", key, false) == 0) {
+                g_Cfg_ArmorHelmet = StringToInt(value);
+            } else if(strcmp("TripleLevelBonusSpeed", key, false) == 0) {
+               g_Cfg_TripleLevelBonusSpeed = StringToFloat(value);
+            } else if(strcmp("TripleLevelBonusGravity", key, false) == 0) {
+               g_Cfg_TripleLevelBonusGravity = StringToFloat(value);
             } else if(strcmp("LevelsInScoreboard", key, false) == 0) {
                 g_Cfg_LevelsInScoreboard = bool:StringToInt(value);
             } else if(strcmp("UnlimitedNadesMinPlayers", key, false) == 0) {
