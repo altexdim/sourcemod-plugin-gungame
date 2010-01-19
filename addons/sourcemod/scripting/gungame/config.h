@@ -21,7 +21,7 @@ new bool:CanStealFirstLevel;
 new bool:CanLevelDownOnGrenade;
 new VoteLevelLessWeaponCount;
 new bool:ObjectiveBonus;
-new bool:WorldspawnSuicide;
+new WorldspawnSuicide = 1;
 new Weapons:NadeBonusWeaponId;
 new bool:NadeSmoke;
 new bool:NadeFlash;
@@ -47,7 +47,7 @@ new bool:TripleLevelBonus = false;
 new bool:KnifeProHE = false;
 new bool:ObjectiveBonusWin = false;
 new bool:InternalIsActive = true;
-new bool:CommitSuicide = true;
+new CommitSuicide = 1;
 new bool:AlltalkOnWin = false;
 new bool:RestoreLevelOnReconnect;
 new bool:TripleLevelBonusGodMode;
@@ -59,5 +59,5 @@ new WarmupRandomWeaponLevel = 0;
 new UnlimitedNadesMinPlayers = 0;
 new FFA = 0;
 new NumberOfNades = 0;
-
+new g_Cfg_LevelsInScoreboard = 0;
 

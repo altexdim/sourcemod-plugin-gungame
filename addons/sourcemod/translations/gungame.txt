@@ -236,6 +236,13 @@
 		"de"		 "{teamcolor}{1}{green} hat einen Level wegen Selbstmord verloren"
 		"ru"		 "{teamcolor}{1}{green} самоликвидировался и потерял уровень"
 	}
+	"Has lost levels by suicided"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"		 "{teamcolor}{1}{green} has lost {2} by suicided"
+		"de"		 "{teamcolor}{1}{green} hat einen {2} wegen Selbstmord verloren"
+		"ru"		 "{teamcolor}{1}{green} самоликвидировался и потерял {2}"
+	}
 	"LevelPanel: Level Information"
 	{
 		"en"	"[GunGame] Level Information"
@@ -587,11 +594,12 @@
 		"ru"	"Вы получите следующее оружие сразу же после прохождения уровня."
 		"de"	"Du bekommst Deine nächste Waffe erst, wenn Du im nächsten Level bist."
 	}
-	"RulesPanel: If you commit suicide you will lose a level"
+	"RulesPanel: If you commit suicide you will lose levels"
 	{
-		"en"	"If you commit suicide you will lose a level."
-		"ru"	"При самоликвидации вы потеряете уровень."
-		"de"	"Wenn Du Dich selber tötest, verlierst Du ein Level."
+		"#format"	"{1:s}"
+		"en"	"If you commit suicide you will lose {1}."
+		"ru"	"При самоликвидации вы потеряете {1}."
+		"de"	"Wenn Du Dich selber tötest, verlierst Du ein {1}."
 	}
 	"RulesPanel: There is a grace period at the end of each round to allow players to switch teams"
 	{

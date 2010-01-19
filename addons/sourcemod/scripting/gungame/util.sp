@@ -390,6 +390,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         return oldLevel;
     }
     UTIL_RecalculateLeader(client, oldLevel, Level);
+    UTIL_UpdatePlayerScoreLevel(client);
 
     return Level;
 }
@@ -796,25 +797,6 @@ UTIL_StopTripleEffects(client)
     EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
 }
 
-FormatLanguageNumberTextEx(client, String:text[], size, number, const String:tplName[])
-{
-    SetGlobalTransTarget(client);
-    decl String:tpl[64];
-    new num10 = number % 10;
-    new num100 = number % 100;
-
-    if ( number == 1 ) {
-        Format(tpl, sizeof(tpl), "1>%s", tplName);
-    } else if ( (num10 == 1) && (num100 != 11) ) {
-        Format(tpl, sizeof(tpl), "x1>%s", tplName);
-    } else if ( (num10 >= 2) && (num10 <= 4) && ((num100 < 12) || (num100 > 14)) ) {
-        Format(tpl, sizeof(tpl), "x2-x4>%s", tplName);
-    } else {
-        Format(tpl, sizeof(tpl), "x5-x20>%s", tplName);
-    }
-    Format(text, size, "%t", tpl, number);
-}
-
 /**
  * Return current leader client.
  *
@@ -961,5 +943,32 @@ UTIL_GiveExtraNade(client)
             GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
         }
     }
+}
+
+UTIL_SetClientScoreAndDeaths(client, score, deaths)
+{
+    SetEntProp(client, Prop_Data, "m_iFrags", score);
+    SetEntProp(client, Prop_Data, "m_iDeaths", deaths);
+}
+
+UTIL_UpdatePlayerScoreLevel(client)
+{
+    if ( g_Cfg_LevelsInScoreboard && client && IsClientInGame(client) )
+    {
+        UTIL_SetClientScoreAndDeaths(client, PlayerLevel[client] + 1, 0);
+    }
+}
+
+UTIL_UpdatePlayerScoreDelayed(client)
+{
+    if ( g_Cfg_LevelsInScoreboard && client && IsClientInGame(client) )
+    {
+        CreateTimer(0.1, UTIL_Timer_UpdatePlayerScore, client);
+    }
+}
+
+public Action:UTIL_Timer_UpdatePlayerScore(Handle:timer, any:client)
+{
+    UTIL_UpdatePlayerScoreLevel(client);
 }
 

@@ -322,13 +322,16 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     UTIL_RemoveClientDroppedWeapons(Victim);
     UTIL_StopTripleEffects(Victim);
     
+    new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
+    UTIL_UpdatePlayerScoreDelayed(Victim);
+    UTIL_UpdatePlayerScoreDelayed(Killer);
+    
     /* They change team at round end don't punish them. */
     if ( !RoundStarted && !AllowLevelUpAfterRoundEnd )
     {
         return;
     }
     
-    new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
     decl String:Weapon[24], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
 
     GetEventString(event, "weapon", Weapon, sizeof(Weapon));
@@ -340,7 +343,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     {
         if ( RoundStarted && WorldspawnSuicide )
         {
-            ClientSuicide(Victim, vName);
+            ClientSuicide(Victim, vName, WorldspawnSuicide);
         }
         return;
     }
@@ -351,7 +354,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         /* (Weapon is event weapon name, can be 'world' or 'hegrenade' etc) */
         if ( CommitSuicide && ( RoundStarted || /* weapon is not 'world' (ie not kill command) */ Weapon[0] != 'w') && (!g_teamChange[Victim]) )
         {
-            ClientSuicide(Victim, vName);
+            ClientSuicide(Victim, vName, CommitSuicide);
         }
         return;
     }
@@ -581,6 +584,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     
+    UTIL_UpdatePlayerScoreLevel(client);
+    
     g_teamChange[client] = false;
     
     new team = GetClientTeam(client);
@@ -783,15 +788,32 @@ public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
-ClientSuicide(client, const String:Name[])
+ClientSuicide(client, const String:Name[], loose)
 {
     new oldLevel = PlayerLevel[client];
-    new newLevel = UTIL_ChangeLevel(client, -1);
+    new newLevel = UTIL_ChangeLevel(client, -loose);
     if ( oldLevel == newLevel )
     {
         return;
     }
-    CPrintToChatAllEx(client, "%t", "Has lost a level by suicided", Name);
+    if ( loose > 1 )
+    {
+        decl String:subtext[64];
+        for ( new i = 1; i <= MaxClients; i++ )
+        {
+            if ( IsClientInGame(i) )
+            {
+                SetGlobalTransTarget(i);
+                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), oldLevel - newLevel, "levels");
+                CPrintToChatEx(i, client, "%t", "Has lost levels by suicided", Name, subtext);
+            }
+        }
+    }
+    else
+    {
+        CPrintToChatAllEx(client, "%t", "Has lost a level by suicided", Name);
+    }
+    
     PrintLeaderToChat(client, oldLevel, newLevel, Name);
 }
 

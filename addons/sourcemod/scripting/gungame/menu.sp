@@ -464,14 +464,15 @@ DisplayRulesMenu(client)
     SetPanelTitle(menu, text);
     DrawPanelText(menu, BLANK_SPACE);
 
-    new itemsCount = 5;
+    new itemsCount = 4;
     if ( ObjectiveBonus )       itemsCount++;
     if ( AutoFriendlyFire )     itemsCount++;
     if ( MaxLevelPerRound > 1 ) itemsCount++;
     if ( KnifePro )             itemsCount++;
     if ( KnifeElite )           itemsCount++;
     if ( TurboMode )            itemsCount++;
-
+    if ( CommitSuicide )        itemsCount++;
+    
     new itemsOnPage = 3;
     new pagesCount  = (itemsCount - 1)/itemsOnPage + 1;
     
@@ -535,8 +536,11 @@ DisplayRulesMenu(client)
         DrawPanelText(menu, text);
     }
     
-    if ( (++item >= itemStart) && (item <= itemEnd) ) {
-        Format(text, sizeof(text), "%t", "RulesPanel: If you commit suicide you will lose a level");
+    if ( CommitSuicide && (++item >= itemStart) && (item <= itemEnd) ) {
+        
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), CommitSuicide, "levels");
+        CRemoveTags(subtext, sizeof(subtext));
+        Format(text, sizeof(text), "%t", "RulesPanel: If you commit suicide you will lose levels", subtext);
         DrawPanelText(menu, text);
     }
 

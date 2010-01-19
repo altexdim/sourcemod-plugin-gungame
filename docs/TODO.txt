@@ -2,11 +2,12 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
-    * Feature request:
+    * [DONE] Feature request:
         1) Ability to disable losing a level from TK (in main config)
+    * [DONE] Feature request:
         2) Ability to change the levels lost from killing yourself (in main config) like 1-5 or something
-        3) Display the players current level as their kills on the scoeboard
-        
+    * [DONE] Feature request:
+        3) Display the players current level as their kills on the scoreboard
         SetEntProp(client, Prop_Data, "m_iFrags", gglevel); 
 
     ----====----==== Normal priority list ----====----====
@@ -51,9 +52,6 @@ TODO
         pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
-    + Feature request:
-        If you kill yourself or a teammate you loose one level. I want set this 
-        to loose 2 levels, or 3, or...
     + Implement gg_handicap_update like in esgg5.
     * Feature request:
         1) I want to run a random weapon order but *always* have knife 

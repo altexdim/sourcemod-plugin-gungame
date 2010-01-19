@@ -148,6 +148,18 @@ native GG_AddALevel(client);
 native GG_RemoveALevel(client);
 
 /**
+ * Remove multi levels from the player current level.
+ *
+ * This does not tell the client that they have lost a level.
+ * This also obeys the max level per round.
+ *
+ * @param client        Player index.
+ * @param loose         Levels to loose.
+ * @return          The player current level.
+ */
+native GG_RemoveLevelMulti(client, level);
+
+/**
  * Add a point to the player point per level.
  *
  * This does not tell the client if they gain a point

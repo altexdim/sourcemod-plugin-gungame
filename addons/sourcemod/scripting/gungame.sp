@@ -7,6 +7,7 @@
 #include <gungame_const>
 #include <gungame>
 #include <gungame_config>
+#include <langutils>
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
 
@@ -144,6 +145,8 @@ public OnClientAuthorized(client, const String:auth[])
             GG_GiveHandicapLevel(client, HandicapMode);
         }
     }
+    
+    UTIL_UpdatePlayerScoreLevel(client);
 }
 
 public OnPluginEnd()
@@ -418,8 +421,7 @@ public Action:EndOfWarmup(Handle:timer)
             EmitSoundToAll(EventSounds[WarmupTimerSound]);
         }
         decl String:subtext[64];
-        new maxClients = GetMaxClients();
-        for ( new i = 1; i <= maxClients; i++ )
+        for ( new i = 1; i <= MaxClients; i++ )
         {
             if ( IsClientInGame(i) )
             {
@@ -440,14 +442,15 @@ public Action:EndOfWarmup(Handle:timer)
 
     CPrintToChatAll("%t", "Warmup round has ended");
 
-    if(WarmupReset)
+    if ( WarmupReset )
     {
         new maxslots = GetMaxClients( );
         TotalLevel = NULL;
 
-        for(new i = 1; i <= maxslots; i++)
+        for ( new i = 1; i <= maxslots; i++ )
         {
             PlayerLevel[i] = 0;
+            UTIL_UpdatePlayerScoreLevel(i);
         }
     }
     

@@ -41,53 +41,14 @@ public Action:_CmdDisplay(client, args)
         //for(new i = 0; i <
     } else if(strcmp("Config", Args) == 0) {
         DisplayConfig(client);
-    } else if(strcmp("", Args) == 0) {
-
-    } else if(strcmp("", Args) == 0) {
-
-    } else if(strcmp("", Args) == 0) {
-
     }
+    // else if strcmp other commands
 
     return Plugin_Handled;
 }
 
 DisplayConfig(client)
 {
-    /*IsActive
-    RemoveBonusWeaponAmmo
-    ReloadWeapon
-    TurboMode
-    AllowLevelUpAfterRoundEnd
-    JoinMessage
-    IntermissionCalcWinner
-    CanStealFirstLevel
-    CanLevelDownOnGrenade
-    VoteLevelLessWeaponCount
-    AutoFriendlyFire
-    MapStatus
-    ObjectiveBonus
-    WorldspawnSuicide
-    MaxLevelPerRound
-    MinKillsPerLevel
-    BotCanWin
-    KnifePro
-    KnifeElite
-    WarmupEnabled
-    Warmup_TimeLength
-    WarmupKnifeOnly
-    WarmupReset
-    AfkManagement
-    AfkDeaths
-    AfkAction
-    NadeSmoke
-    NadeBonusWeaponId
-    NadeFlash
-    ExtraNade
-    UnlimitedNades
-    WarmupNades
-    Prune
-    WarmupStartup
-    TripleLevelBonus
-    Top10Handicap*/
+    // todo
 }
+

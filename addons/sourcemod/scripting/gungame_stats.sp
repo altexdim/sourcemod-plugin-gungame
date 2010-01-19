@@ -6,6 +6,7 @@
 #include <gungame_stats>
 #include <gungame_config>
 #include <colors>
+#include <langutils>
 
 #define SQL_SUPPORT
 //#define SQL_DEBUG
@@ -27,7 +28,6 @@
 #include "gungame_stats/ranks.sp"
 #include "gungame_stats/menu.sp"
 #include "gungame_stats/config.sp"
-#include "gungame_stats/util.sp"
 #include "gungame_stats/natives.sp"
 
 public Plugin:myinfo =

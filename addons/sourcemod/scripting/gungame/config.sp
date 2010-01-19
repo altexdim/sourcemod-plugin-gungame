@@ -53,6 +53,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("LevelsInScoreboard", key, false) == 0) {
+                g_Cfg_LevelsInScoreboard = bool:StringToInt(value);
             } else if(strcmp("UnlimitedNadesMinPlayers", key, false) == 0) {
                 UnlimitedNadesMinPlayers = StringToInt(value);
             } else if(strcmp("WarmupRandomWeaponMode", key, false) == 0) {
@@ -82,7 +84,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("ObjectiveBonus", key, false) == 0) {
                 ObjectiveBonus = bool:StringToInt(value);
             } else if(strcmp("WorldspawnSuicide", key, false) == 0) {
-                WorldspawnSuicide = bool:StringToInt(value);
+                WorldspawnSuicide = StringToInt(value);
             } else if(strcmp("MaxLevelPerRound", key, false) == 0) {
                 MaxLevelPerRound = StringToInt(value);
 
@@ -152,7 +154,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                     KnifeProMinLevel = NULL;
                 }
             } else if(strcmp("CommitSuicide", key, false) == 0) {
-                CommitSuicide = bool:StringToInt(value);
+                CommitSuicide = StringToInt(value);
             } else if(strcmp("HandicapMode", key, false) == 0) {
                 HandicapMode = StringToInt(value);
             } else if(strcmp("Top10Handicap", key, false) == 0) {

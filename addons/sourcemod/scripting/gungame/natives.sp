@@ -8,6 +8,7 @@ OnCreateNatives()
     CreateNative("GG_GetClientPointLevel", __GetClientPointLevel);
     CreateNative("GG_GetClientMaxPointLevel", __GetClientMaxPointLevel);
     CreateNative("GG_AddALevel", __AddALevel);
+    CreateNative("GG_RemoveLevelMulti", __RemoveLevelMulti);
     CreateNative("GG_RemoveALevel", __RemoveALevel);
     CreateNative("GG_GiveHandicapLevel", __GiveHandicapLevel);
     CreateNative("GG_IsClientCurrentWeapon", __IsClientCurrentWeapon);
@@ -122,19 +123,52 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
     return 1;
 }
 
-public __RemoveALevel(Handle:plugin, numParams)
+public __RemoveLevelMulti(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
+    new loose = GetNativeCell(2);
 
-    if(client < 1 || client > maxslots)
+    if ( client < 1 || client > MaxClients )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
+    } else if ( !IsClientInGame(client) ) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    if(--CurrentLevelPerRound[client] < 0)
+    CurrentLevelPerRound[client] -= loose;
+    if ( CurrentLevelPerRound[client] < 0 )
+    {
+        CurrentLevelPerRound[client] = 0;
+    }
+    CurrentLevelPerRoundTriple[client] = 0;
+    
+    new oldLevel = PlayerLevel[client];
+    new level = UTIL_ChangeLevel(client, -loose);
+    if ( level == oldLevel )
+    {
+        return 0;
+    }
+
+    if ( TurboMode )
+    {
+        UTIL_GiveNextWeapon(client, level);
+    }
+
+    return oldLevel - level;
+}
+
+public __RemoveALevel(Handle:plugin, numParams)
+{
+    new client = GetNativeCell(1);
+
+    if ( client < 1 || client > MaxClients )
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if ( !IsClientInGame(client) ) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
+
+    if ( --CurrentLevelPerRound[client] < 0 )
     {
         CurrentLevelPerRound[client] = 0;
     }
@@ -147,7 +181,7 @@ public __RemoveALevel(Handle:plugin, numParams)
         return 0;
     }
 
-    if(TurboMode)
+    if ( TurboMode )
     {
         UTIL_GiveNextWeapon(client, level);
     }

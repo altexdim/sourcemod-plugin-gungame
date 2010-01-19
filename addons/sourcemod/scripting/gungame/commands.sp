@@ -137,6 +137,7 @@ public Action:CmdReset(client, args)
         for(new i = 1; i <= maxslots; i++)
         {
             PlayerLevel[i] = 0;
+            UTIL_UpdatePlayerScoreLevel(i);
         }
 
         SetConVarInt(mp_restartgame, 1);

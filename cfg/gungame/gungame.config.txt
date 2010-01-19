@@ -2,6 +2,12 @@
 {
     "Config"
     {
+        /* Show levels in scoreboard */
+        "LevelsInScoreboard" "0"
+
+        /* How much levels to loose after TK */
+        "TkLooseLevel" "0"
+    
         /* Restore level on player reconnect */
         "RestoreLevelOnReconnect" "1"
 
@@ -41,10 +47,18 @@
         /* Display a join message, popup giving players instructions on how to play */
         "JoinMessage" "1"
 
-        /* Give player -1 level if they kill themself by WorldSpawn Suicide */
+        /** 
+         * Level down playr if they kill themself by WorldSpawn Suicide.
+         * 0 - Disable
+         * 1..N - Levels to loose
+         */
         "WorldspawnSuicide" "1"
 
-        /* Enables or disables -1 level if they use the "kill" command */
+        /**
+         * Level down players if they use the "kill" command
+         * 0 - Disable
+         * 1..N - Levels to loose
+         */
         "CommitSuicide"     "1"
 
         /* Enables or disables built in Afk management system */
