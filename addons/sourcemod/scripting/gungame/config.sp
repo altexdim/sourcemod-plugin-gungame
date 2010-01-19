@@ -68,7 +68,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("TripleLevelBonusGravity", key, false) == 0) {
                g_Cfg_TripleLevelBonusGravity = StringToFloat(value);
             } else if(strcmp("LevelsInScoreboard", key, false) == 0) {
-                g_Cfg_LevelsInScoreboard = bool:StringToInt(value);
+                g_Cfg_LevelsInScoreboard = StringToInt(value);
             } else if(strcmp("UnlimitedNadesMinPlayers", key, false) == 0) {
                 UnlimitedNadesMinPlayers = StringToInt(value);
             } else if(strcmp("WarmupRandomWeaponMode", key, false) == 0) {
