@@ -5,6 +5,8 @@ Changelog
             bonus for exploding or planting the bomb.
         + Feature: Added config variable "ShowLeaderWeapon" to have information about 
             leader weapon in chat message when someone is leading.
+        * Fixed: "UnlimitedNadesMinPlayers" was unable to work properly after map change
+            because of not reseting team players counters.
             
     1.0.8.0:
         + Feature: Added config variable "TkLooseLevel". It sets how much levels to loose after TK.

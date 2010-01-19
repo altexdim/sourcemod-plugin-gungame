@@ -467,6 +467,26 @@ public Action:EndOfWarmup(Handle:timer)
     return Plugin_Stop;
 }
 
+public OnMapStart()
+{
+    Tcount = 0;
+    CTcount = 0;
+    for ( new i = 1; i <= MaxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            switch ( GetClientTeam(i) ) {
+                case TEAM_T: {
+                    Tcount++;
+                } 
+                case TEAM_CT: {
+                    CTcount++;
+                }
+            }
+        }
+    }
+}
+
 /**
  * KillCam event message should probably should block in DeathMatch Style.
  * BarTime probably used to show how long left till respawn.

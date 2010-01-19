@@ -182,6 +182,7 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     new oldTeam         = GetEventInt(event, "oldteam");
     new newTeam         = GetEventInt(event, "team");
     new bool:disconnect = GetEventBool(event, "disconnect");
+    
     switch ( oldTeam )
     {
         case TEAM_T:
