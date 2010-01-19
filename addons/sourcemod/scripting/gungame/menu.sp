@@ -507,7 +507,11 @@ DisplayRulesMenu(client)
     if ( ObjectiveBonus && (++item >= itemStart) && (item <= itemEnd) ) {
         FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
         CRemoveTags(subtext, sizeof(subtext));
-        Format(text, sizeof(text), "%t", "RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb", subtext);
+        if ( g_Cfg_ObjectiveBonusExplode ) {
+            Format(text, sizeof(text), "%t", "RulesPanel: You can gain level by EXPLODING or DEFUSING the bomb", subtext);
+        } else {
+            Format(text, sizeof(text), "%t", "RulesPanel: You can gain level by PLANTING or DEFUSING the bomb", subtext);
+        }
         DrawPanelText(menu, text);
     }
 

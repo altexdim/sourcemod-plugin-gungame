@@ -67,4 +67,6 @@ new Float:g_Cfg_TripleLevelBonusGravity = 0.5;
 new Float:g_Cfg_TripleLevelBonusSpeed = 1.5;
 new g_Cfg_KnifeSmoke = 0;
 new g_Cfg_KnifeFlash = 0;
+new g_Cfg_ObjectiveBonusExplode = 0;
+new g_Cfg_ShowLeaderWeapon = 0;
 

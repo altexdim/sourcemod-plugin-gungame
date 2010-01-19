@@ -187,6 +187,7 @@ public OnMapEnd()
         {
             IsObjectiveHooked = false;
             UnhookEvent("bomb_planted", _BombState);
+            UnhookEvent("bomb_exploded", _BombState);
             UnhookEvent("bomb_defused", _BombState);
             UnhookEvent("bomb_pickup", _BombPickup);
         }
@@ -275,6 +276,7 @@ public GG_OnStartup(bool:Command)
             {
                 IsObjectiveHooked = true;
                 HookEvent("bomb_planted", _BombState);
+                HookEvent("bomb_exploded", _BombState);
                 HookEvent("bomb_defused", _BombState);
                 HookEvent("bomb_pickup", _BombPickup);
             }
@@ -342,6 +344,7 @@ public GG_OnShutdown(bool:Command)
             {
                 IsObjectiveHooked = false;
                 UnhookEvent("bomb_planted", _BombState);
+                UnhookEvent("bomb_exploded", _BombState);
                 UnhookEvent("bomb_defused", _BombState);
                 UnhookEvent("bomb_pickup", _BombPickup);
             }
@@ -374,7 +377,11 @@ PrintLeaderToChat(client, oldLevel, newLevel, const String:name[])
     if ( CurrentLeader == client )
     {
         // say leading on level X
-        CPrintToChatAllEx(client, "%t", "Is leading on level", name, newLevel + 1);
+        if ( g_Cfg_ShowLeaderWeapon ) {
+            CPrintToChatAllEx(client, "%t", "Is leading on level weapon", name, newLevel + 1, WeaponOrderName[newLevel]);
+        } else {
+            CPrintToChatAllEx(client, "%t", "Is leading on level", name, newLevel + 1);
+        }
         return;
     }
     // CurrentLeader != client

@@ -53,6 +53,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("ShowLeaderWeapon", key, false) == 0) {
+                g_Cfg_ShowLeaderWeapon = StringToInt(value);
+            } else if(strcmp("ObjectiveBonusExplode", key, false) == 0) {
+                g_Cfg_ObjectiveBonusExplode = StringToInt(value);
             } else if(strcmp("KnifeSmoke", key, false) == 0) {
                 g_Cfg_KnifeSmoke = StringToInt(value);
             } else if(strcmp("KnifeFlash", key, false) == 0) {

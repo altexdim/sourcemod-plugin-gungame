@@ -88,6 +88,13 @@
 		"de"		 "{teamcolor}{1} {green}führt mit Level {default}{2}{green}"
 		"ru"		 "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green}"
 	}
+	"Is leading on level weapon"
+	{
+		"#format"	"{1:s},{2:d},{3:s}"
+		"en"		 "{teamcolor}{1} {green}is leading on level {default}{2}{green} :: {default}{3}"
+		"de"		 "{teamcolor}{1} {green}führt mit Level {default}{2}{green} :: {default}{3}"
+		"ru"		 "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green} :: {default}{3}"
+	}
 	"Is tied with the leader on level"
 	{
 		"#format"	"{1:s},{2:d}"
@@ -186,6 +193,13 @@
 		"en"		 "{green}You gained {1} by planting the bomb"
 		"de"		 "{green}Du gewinnst {1} fürs planting der Bombe"
 		"ru"		 "{green}Вы получили {1} за установку бомбы"
+	}
+	"You gained level by exploding the bomb"
+	{
+		"#format"	"{1:s}"
+		"en"		 "{green}You gained {1} by exploding the bomb"
+		"de"		 "{green}Du gewinnst {1} fürs exploding der Bombe"
+		"ru"		 "{green}Вы получили {1} за взрыв бомбы"
 	}
 	"You gained level by defusing the bomb"
 	{
@@ -557,12 +571,18 @@
 		"ru"	"Очки, набранные из других оружий, не засчитываются."
 		"de"	"Wenn Du mit der falschen Waffe killst, bekommst Du keinen Level dazu."
 	}
-	"RulesPanel: You can gain %d level by PLANTING or DEFUSING the bomb"
+	"RulesPanel: You can gain level by PLANTING or DEFUSING the bomb"
 	{
 		"#format"	"{1:s}"
 		"en"	"You can gain {1} by PLANTING or DEFUSING the bomb."
 		"ru"	"Вы можете получить {1} за УСТАНОВКУ или ОБЕЗВРЕЖИВАНИЕ бомбы."
 		"de"	"Du kannst {1} gewinnen, in dem Du die Bombe legst bzw. entschärfst."
+	}
+	"RulesPanel: You can gain level by EXPLODING or DEFUSING the bomb"
+	{
+		"#format"	"{1:s}"
+		"en"	"You can gain {1} by EXPLODING or DEFUSING the bomb."
+		"ru"	"Вы можете получить {1} за ВЗРЫВ или ОБЕЗВРЕЖИВАНИЕ бомбы."
 	}
 	"RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level"
 	{

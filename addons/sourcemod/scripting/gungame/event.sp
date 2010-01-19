@@ -727,46 +727,59 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if(IsActive && ObjectiveBonus && GameCommenced && RoundStarted)
+    if ( !IsActive || !ObjectiveBonus || !GameCommenced || !RoundStarted )
     {
-        new client = GetClientOfUserId(GetEventInt(event, "userid"));
+        return;
+    }
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
 
-        if(client)
-        {
-            if(!ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - 1)
-            {
-                return;
-            }
+    if ( !client )
+    {
+        return;
+    }
+    
+    if ( !ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - 1 )
+    {
+        return;
+    }
 
-            /* Give them a level if give level for objective */
-            new oldLevel = PlayerLevel[client];
-            new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
-            if ( newLevel == oldLevel )
-            {
-                return;
-            }
-            decl String:cname[MAX_NAME_SIZE];
-            if ( client && IsClientConnected(client) && IsClientInGame(client) )
-            {
-                GetClientName(client, cname, sizeof(cname));
-            }
-            else
-            {
-                Format(cname, sizeof(cname), "[Client#%d]", client);
-            }
-            PrintLeaderToChat(client, oldLevel, newLevel, cname);
+    if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'p' ) ||
+         ( !g_Cfg_ObjectiveBonusExplode && name[5] == 'e' ) )
+    {
+        return;
+    }
+    
+    /* Give them a level if give level for objective */
+    new oldLevel = PlayerLevel[client];
+    new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
+    if ( newLevel == oldLevel )
+    {
+        return;
+    }
+    decl String:cname[MAX_NAME_SIZE];
+    if ( client && IsClientConnected(client) && IsClientInGame(client) )
+    {
+        GetClientName(client, cname, sizeof(cname));
+    }
+    else
+    {
+        Format(cname, sizeof(cname), "[Client#%d]", client);
+    }
+    PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
-            decl String:subtext[64];
-            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
-            if ( name[5] == 'p' )
-            {
-                CPrintToChat(client, "%t", "You gained level by planting the bomb", subtext);
-            }
-            else
-            {
-                CPrintToChat(client, "%t", "You gained level by defusing the bomb", subtext);
-            }
-        }
+    decl String:subtext[64];
+    FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
+    if ( name[5] == 'p' )
+    {
+        CPrintToChat(client, "%t", "You gained level by planting the bomb", subtext);
+    }
+    else if ( name[5] == 'e' )
+    {
+        CPrintToChat(client, "%t", "You gained level by exploding the bomb", subtext);
+    }
+    else
+    {
+        CPrintToChat(client, "%t", "You gained level by defusing the bomb", subtext);
     }
 }
 

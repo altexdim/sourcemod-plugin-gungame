@@ -1,5 +1,11 @@
 Changelog
 ---------
+    1.0.8.1:
+        + Feature: Added config variable "ObjectiveBonusExplode" to choose if it gives
+            bonus for exploding or planting the bomb.
+        + Feature: Added config variable "ShowLeaderWeapon" to have information about 
+            leader weapon in chat message when someone is leading.
+            
     1.0.8.0:
         + Feature: Added config variable "TkLooseLevel". It sets how much levels to loose after TK.
         + Feature: Updated config variables "WorldspawnSuicide" and "CommitSuicide".

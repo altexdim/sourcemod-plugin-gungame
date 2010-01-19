@@ -4,31 +4,11 @@ TODO
     
     ----====----==== Normal priority list ----====----====
     
-    * Feature request:
-        I was wondering if there was an option to only level up when the bomb has exploded,
-        not immediately on plant.
-        NB. Add config variable.
-    * Feature request: 
-        Need features from es gg 5:
-        * Colorize knife-level player.
-    * Feature request: 
-        Need features from es gg 5:
-        * Random sounds?
-    * Feature request:
-        Add visual effects to the player on bonus like blink golden effect and sparks.
-        Notes: It is simple to implement, but i do not know what exectly effect will be 
-        nice looking. env_spark is not usefull because it just does not spark for about 5
-        seconds from 10 seconds when effect is enabled.
-    + Feature request:
-        I also have an idea about round start message like "You are on level 1 :: glock". What do you 
-        think about moving it to the hint box (like warmup timer) and add information about leader 
-        level like "Leader level 24 :: awp"?
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down (and level up?). 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
         knifes you. Instead of starting from 0 kills on previous level you could continue 
         from 2 kill. Many people on my server are constantly complaining one this issue.
-
         Example:
         was - level 4, points 2 (miltikill 4)
         after knifed - level 3, point 1 (multikill 2)
@@ -43,43 +23,52 @@ TODO
         on it mixes knife and nade into the mix. Is there a way to make 
         knife and nade the last two weapons?
         Add something like configurable random weapons groups.
+        
+    ----====----==== High severity list ----====----====
+    
+    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
+        High severity because of needed changes in sourcemod it-self.
+    * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+        High severity because of needed changes in sourcemod it-self.
     + Add winners menu:
         Also could you incorporate the attached code into your next release?
         The menu idea is from GG5's Winner Menu 
         (http://addons.eventscripts.com/addons/view/gg_winner_menu)
         https://forums.alliedmods.net/showpost.php?p=949442&postcount=255
-    * Think about new features:
-        * split gungame.config.txt to few parts; each optional plugin should have own 
-            config file like gungame.config.txt , gungame.config.afk.txt, 
-            gungame.config.stats.txt, gungame.config.sounds.txt etc.; I think it 
-            will be easier to configure plugin for new users and adding (maybe in 
-            the future) more option to optional plugins won't affect main config or 
-            or other optional plugins configs
-    * Think about new features:
-        * create some options for gungame_stats like display rank to 
-            all or to player only, show winner in chat etc.
+        High severity because of much code to review and implement.
         
-    ----====----==== High severity list ----====----====
+    ----====----==== Pending list ----====----====
     
-    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    + Feature: Add visual effects to the player on bonus like blink golden effect and sparks.
+        Notes: It is simple to implement, but i do not know what exectly effect will be 
+        nice looking. env_spark is not usefull because it just does not spark for about 5
+        seconds from 10 seconds when effect is enabled.
+        Pending because of i do not know what exactly effect to use.
+    + Feature: create some options for gungame_stats like display rank to 
+        all or to player only, show winner in chat etc.
+        Pending because of i do not know what exactly features is needed.
+    + Feature: I also have an idea about round start message like "You are on level 1 :: glock". What do you 
+        think about moving it to the hint box (like warmup timer) and add information about leader 
+        level like "Leader level 24 :: awp"?
+        Pending for ideas how to put all this texts with multikill chat message in one small hint box.
+        I think it is very hard to do, and by the way it does not support colorize, so such 
+        messages as multikill chat message can be hard to read without colorizing. And we can not
+        leave this message in chat and all others in hintbox, because it looks junked.
     
     ----====----==== Low priority list ----====----====
     
-    + Implement !buylevel.
-    * When bot has just been added than it is assigning to team and spawning 
+    + Feature: Implement !buylevel.
+    * Bug: When bot has just been added than it is assigning to team and spawning 
       before it "entered the game". So he did not receive knife
       and then gungame plugin add him knife. But then he disconnects
       and respawning (after entren the game) but there is dropped
       knife.
-    * Feature request:
-        It would be nice to have information about leader weapon in chat message 
-        "[GunGame] Player is leading on level 10", like "[GunGame] Player is leading 
-        on level 10 :: xm1014"
-    * Make removement buyzones on/off. So once gg is enabled than buyzones are
+    * Bug: If KnifePro && KnifeProHE && ExtraNade are enabled then we give extra grenade 
+      on knife kill and leveling up player, but it is a bug.
+    * Improvement: Make removement buyzones on/off. So once gg is enabled than buyzones are
       disabled, and when gg is disabled buyzones are enabled.
       Maybe instead of removement buyzones just disable it to players on
       spawn and when gg swithces enabled/disabled.
-    * If KnifePro && KnifeProHE && ExtraNade are enabled then we give extra grenade 
-      on knife kill and leveling up player, but it is a bug.
+    + Feature: Need features from es gg 5: Colorize knife-level player.
+    + Feature: Need features from es gg 5: Random sounds?
         
