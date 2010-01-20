@@ -222,6 +222,13 @@
 		"de"		 "{teamcolor}{1} {green}triple leveled!!!"
 		"ru"		 "{teamcolor}{1} {green}набрал три уровня!!!"
 	}
+	"Has no levels to be stolen"
+	{
+		"#format"	"{1:s},"
+		"en"		 "{teamcolor}{1}}{green} has no levels to be stolen"
+		"de"		 "{teamcolor}{1}}{green} hat keinen Level gestohlen"
+		"ru"		 "{teamcolor}{1}}{green} на самом первом уровне"
+	}
 	"Is lower than the minimum knife stealing level"
 	{
 		"#format"	"{1:s},{2:d}"

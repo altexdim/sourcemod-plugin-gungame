@@ -325,7 +325,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             }
             else
             {
-                CPrintToChatEx(Killer, Victim, "%t", "Has no level to be stolen", vName);
+                CPrintToChatEx(Killer, Victim, "%t", "Has no levels to be stolen", vName);
             }
 
             if ( WeaponLevel == CSW_KNIFE )
