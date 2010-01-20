@@ -2,7 +2,7 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
-    * Bug: With KnifeProMinLevel "1" and ResetLevelAfterWarmup "1" 
+    * [UNCONFIRMED] Bug: With KnifeProMinLevel "1" and ResetLevelAfterWarmup "1" 
         you can still gain a level in the warmup round if you knife 
         someone after the round has ended and before the next round 
         starts.
