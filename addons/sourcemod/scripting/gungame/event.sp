@@ -738,6 +738,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     {
         return;
     }
+    UTIL_UpdatePlayerScoreDelayed(client);
     
     if ( !ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - ObjectiveBonus )
     {
