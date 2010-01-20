@@ -1,5 +1,6 @@
 Changelog
 ---------
+    1.0.8.3:
         + Added config variable "MaxHandicapLevel" to restrict maximum handicap level. 
         + Added config variable "ShowSpawnMsgInHintBox" to show players level message 
             in hint box instead of chat. If enabled then multikill chat messages will 
