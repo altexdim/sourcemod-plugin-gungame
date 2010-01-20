@@ -749,7 +749,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     LogError("... here 2");
-    if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'p' ) ||
+    if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'd' ) ||
          ( !g_Cfg_ObjectiveBonusExplode && name[5] == 'e' ) )
     {
         return;
