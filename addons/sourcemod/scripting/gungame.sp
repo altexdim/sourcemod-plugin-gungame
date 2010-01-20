@@ -307,7 +307,7 @@ public GG_OnShutdown(bool:Command)
 {
     if ( !IsActive )
     {
-        reuturn;
+        return;
     }
 
     IsActive = false;
