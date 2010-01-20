@@ -4,8 +4,9 @@ Changelog
         - Removed config variable "CanStealFirstLevel". It is now always enabled. Disabling of this
             config variable was just equivalent of "KnifeProMinLevel" "1".
         - Removed config variable "IntermissionCalcWinner". It is not very usefull feature.
-        - Removed config variable "ResetLevelAfterWarmup". It is now always enabled. If you 
-            still want to disable it, just disable warmup at all.
+        - Removed config variable "ResetLevelAfterWarmup". It is now always enabled. Actualy 
+            you can not level up or level down while warmup is enabled. If you still want to 
+            disable it, just disable warmup at all.
         - Removed config variable "WarmupKnifeOnly". It is just automaticaly enables if no other 
             warmup weapons options is used ("WarmupNades" "0" and "WarmupRandomWeaponMode" "0").
 
