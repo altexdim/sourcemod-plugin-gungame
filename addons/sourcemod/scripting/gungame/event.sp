@@ -734,12 +734,12 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     }
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
 
-    if ( !client )
+    if ( !client || !IsClientConnected(client) || !IsClientInGame(client) )
     {
         return;
     }
     
-    if ( !ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - 1 )
+    if ( !ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - ObjectiveBonus )
     {
         return;
     }
@@ -758,14 +758,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     decl String:cname[MAX_NAME_SIZE];
-    if ( client && IsClientConnected(client) && IsClientInGame(client) )
-    {
-        GetClientName(client, cname, sizeof(cname));
-    }
-    else
-    {
-        Format(cname, sizeof(cname), "[Client#%d]", client);
-    }
+    GetClientName(client, cname, sizeof(cname));
     PrintLeaderToChat(client, oldLevel, newLevel, cname);
 
     decl String:subtext[64];
