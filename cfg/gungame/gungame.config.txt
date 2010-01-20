@@ -222,12 +222,7 @@
         /* Warmup time length */
         "WarmupTimeLength" "60"
 
-        /* Knife only during warmup otherwise allow them to use the default weapon*/
-        "WarmupKnifeOnly" "0"
-
-        /* Gives unlimited hegrenades to the player if warmup is enabled.
-           It should be named WarmupNadesAndKnifeOnly because it gives only knife and nades.
-        */
+        /* Gives unlimited hegrenades to the player if warmup is enabled. */
         "WarmupNades" "1"
 
         /**

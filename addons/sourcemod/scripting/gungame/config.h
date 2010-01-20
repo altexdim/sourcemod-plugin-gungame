@@ -35,7 +35,6 @@ new bool:DisableWarmupOnRoundEnd = false;
 new bool:WarmupInitialized;
 new WarmupStartup = 1;
 new Warmup_TimeLength = 30;
-new WarmupKnifeOnly = 1;
 new WarmupCounter;
 new bool:IsVotingCalled = false;
 new bool:TripleLevelBonus = false;

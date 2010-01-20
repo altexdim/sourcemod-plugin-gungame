@@ -119,8 +119,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 DisableWarmupOnRoundEnd = false;
             } else if(strcmp("WarmupTimeLength", key, false) == 0) {
                 Warmup_TimeLength = StringToInt(value);
-            } else if(strcmp("WarmupKnifeOnly", key, false) == 0) {
-                WarmupKnifeOnly = bool:StringToInt(value);
             } else if(strcmp("NadeSmoke", key, false) == 0) {
                 NadeSmoke = bool:StringToInt(value);
             } else if(strcmp("NadeBonus", key, false) == 0) {

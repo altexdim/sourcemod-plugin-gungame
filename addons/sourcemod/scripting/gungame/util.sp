@@ -613,11 +613,6 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
 
 UTIL_GiveNextWeapon(client, level, bool:drop = true)
 {
-    if ( WarmupEnabled && (WarmupKnifeOnly || WarmupNades) )
-    {
-        return;
-    }
-
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     
     UTIL_CheckForFriendlyFire(client, WeapId);
@@ -919,18 +914,14 @@ UTIL_GiveWarmUpWeapon(client)
         {
             UTIL_GiveNextWeapon(client, UTIL_GetRandomInt(0, WeaponOrderCount-1), false);
         }
-        return 1;
+        return;
     }
     if ( WarmupNades ) {
         GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
         FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
-        return 1;
+        return;
     }
-    if ( WarmupKnifeOnly ) {
-        FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
-        return 1;
-    }
-    return 0;
+    FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
 }
 
 UTIL_GetRandomInt(start, end)

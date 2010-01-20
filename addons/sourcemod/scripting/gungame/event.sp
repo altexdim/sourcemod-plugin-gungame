@@ -159,6 +159,13 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
                 SetConVarInt(mp_restartgame, 1);
             }
             UTIL_PlaySoundForLeaderLevel();
+
+            // Disable warmup
+            if ( WarmupEnabled && DisableWarmupOnRoundEnd )
+            {
+                WarmupEnabled = false;
+                DisableWarmupOnRoundEnd = false;
+            }
         } else {
             /* Round has ended. */
             RoundStarted = false;
@@ -532,33 +539,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         GivePlayerItemWrapper(client, "weapon_knife");
     }
 
-    /* Many years ago something here was wrong */
-    if ( WarmupEnabled )
-    {
-        // Disable warmup
-        if ( DisableWarmupOnRoundEnd )
-        {
-            WarmupEnabled = false;
-            DisableWarmupOnRoundEnd = false;
-        }
-        else
-        {
-            if ( !WarmupInitialized )
-            {
-                CPrintToChat(client, "%t", "Warmup round has not started yet");
-            }
-            else
-            {
-                CPrintToChat(client, "%t", "Warmup round is in progress");
-            }
-
-            if ( UTIL_GiveWarmUpWeapon(client) )
-            {
-                return;
-            }
-        }
-    }
-
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if ( GameWinner )
     {
@@ -566,37 +546,38 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         SetEntData(client, OffsetFlags, flags);
     }
 
-    new Level = PlayerLevel[client];
-
-    if ( Level >= WeaponOrderCount )
+    /* Many years ago something here was wrong */
+    if ( WarmupEnabled && !DisableWarmupOnRoundEnd )
     {
+        if ( !WarmupInitialized ) {
+            CPrintToChat(client, "%t", "Warmup round has not started yet");
+        } else {
+            CPrintToChat(client, "%t", "Warmup round is in progress");
+        }
+
+        UTIL_GiveWarmUpWeapon(client);
         return;
     }
 
-    new Weapons:WeapId = WeaponOrderId[Level], killsPerLevel = CustomKillPerLevel[Level];
-    
-    if ( !killsPerLevel )
-    {
+    new Level = PlayerLevel[client];
+    UTIL_GiveNextWeapon(client, Level, false);
+
+    // spawn chat messages
+    new Weapons:WeapId = WeaponOrderId[Level];
+    new killsPerLevel = CustomKillPerLevel[Level];
+    if ( !killsPerLevel ) {
         killsPerLevel = MinKillsPerLevel;
     }
 
-    if ( !WarmupEnabled )
-    {
-        CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
-    }
+    CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
 
-    if ( killsPerLevel > 1 )
+    if ( MultiKillChat && ( killsPerLevel > 1 ) )
     {
         new kills = CurrentKillsPerWeap[client];
-        if ( MultiKillChat )
-        {
-            decl String:subtext[64];
-            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
-            CPrintToChat(client, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
-        }
+        decl String:subtext[64];
+        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
+        CPrintToChat(client, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
     }
-
-    UTIL_GiveNextWeapon(client, Level, false);
 }
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)

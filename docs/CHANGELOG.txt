@@ -4,6 +4,7 @@ Changelog
         - Removed config variable "CanStealFirstLevel".
         - Removed config variable "IntermissionCalcWinner".
         - Removed config variable "ResetLevelAfterWarmup".
+        - Removed config variable "WarmupKnifeOnly".
 
     1.0.8.2:
         * Fixed: "ObjectiveBonus" more then "1" was working like it is "1".
