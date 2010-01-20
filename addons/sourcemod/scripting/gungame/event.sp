@@ -745,7 +745,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'd' ) ||
+    if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'p' ) ||
          ( !g_Cfg_ObjectiveBonusExplode && name[5] == 'e' ) )
     {
         return;
