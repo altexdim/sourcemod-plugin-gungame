@@ -728,7 +728,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if ( !IsActive || !ObjectiveBonus || !GameCommenced || !RoundStarted )
+    if ( !IsActive || !ObjectiveBonus || !GameCommenced || (!RoundStarted && name[5] != 'e') )
     {
         return;
     }
