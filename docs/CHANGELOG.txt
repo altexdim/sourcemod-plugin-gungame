@@ -1,8 +1,14 @@
 Changelog
 ---------
+        + Added config variable "MaxHandicapLevel" to restrict maximum handicap level. 
+        + Added config variable "ShowSpawnMsgInHintBox" to show players level message 
+            in hint box instead of chat. If enabled then multikill chat messages will 
+            be shown in hint box too (requres "MultiKillChat" "1").
+        + Added config variable "ShowLeaderInHintBox" to show leader level info in hint box
+            (requires "ShowSpawnMsgInHintBox" to be "1").
         - Removed config variable "CanLevelDownOnGrenade". Absolutely not usefull feature.
         - Removed config variable "CanStealFirstLevel". It is now always enabled. Disabling of this
-            config variable was just equivalent of "KnifeProMinLevel" "1".
+            config variable was just equivalent to "KnifeProMinLevel" "1".
         - Removed config variable "IntermissionCalcWinner". It is not very usefull feature.
         - Removed config variable "ResetLevelAfterWarmup". It is now always enabled. Actualy 
             you can not level up or level down while warmup is enabled. If you still want to 

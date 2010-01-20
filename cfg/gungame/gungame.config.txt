@@ -9,6 +9,16 @@
         /* Enables/Disables GunGame Mod */
         "Enabled" "1"
 
+        /** 
+         * Show players level message in hint box instead of chat.
+         * If enabled then multikill chat messages will be shown 
+         * in hint box too (requres "MultiKillChat" "1").
+         */
+        "ShowSpawnMsgInHintBox" "0"
+        
+        /* Show leader level info in hint box (requires "ShowSpawnMsgInHintBox" to be "1") */
+        "ShowLeaderInHintBox" "0"
+
         /* Show leader's weapon name in chat with leading message */
         "ShowLeaderWeapon" "0"
         
@@ -117,6 +127,13 @@
 
         /* ----- [handicap] ----- */
         
+        /**
+         * Maximum level that handicap can give.
+         * 0 - Disable restriction
+         * 1..N - Max level
+         */
+        "MaxHandicapLevel" "0"
+        
         /* Substract handicap level by this value */
         "HandicapLevelSubstract" "1"
 
@@ -212,11 +229,12 @@
         /* Enables Warmup Round*/
         "WarmupEnabled" "1"
 
-        /* Decides when warmup round starts. 
-            1 = When each team has a player. 
-            2 = At the start of map load finish. 
-            3 = Both.
-        */
+        /**
+         * Decides when warmup round starts. 
+         * 1 = When each team has a player. 
+         * 2 = At the start of map load finish. 
+         * 3 = Both.
+         */
         "WarmupStartup" "2"
 
         /* Warmup time length */

@@ -63,4 +63,7 @@ new g_Cfg_KnifeSmoke = 0;
 new g_Cfg_KnifeFlash = 0;
 new g_Cfg_ObjectiveBonusExplode = 0;
 new g_Cfg_ShowLeaderWeapon = 0;
+new g_Cfg_ShowSpawnMsgInHintBox = 0;
+new g_Cfg_ShowLeaderInHintBox = 0;
+new g_Cfg_MaxHandicapLevel = 0;
 

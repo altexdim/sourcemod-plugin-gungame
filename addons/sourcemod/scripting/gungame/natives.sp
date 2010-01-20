@@ -90,6 +90,9 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         {   
             new level = TotalLevel / Count;
             level -= g_Cfg_HandicapLevelSubstract;
+            if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < level ) {
+                level = g_Cfg_MaxHandicapLevel;
+            }
             if ( level < 0 ) {
                 level = 0;
             }
@@ -121,6 +124,9 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         if ( minimum != -1 ) 
         {
             minimum -= g_Cfg_HandicapLevelSubstract;
+            if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < minimum ) {
+                minimum = g_Cfg_MaxHandicapLevel;
+            }
             if ( minimum < 0 ) {
                 minimum = 0;
             }

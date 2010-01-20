@@ -973,3 +973,47 @@ public Action:UTIL_Timer_UpdatePlayerScore(Handle:timer, any:client)
     UTIL_UpdatePlayerScoreLevel(client);
 }
 
+UTIL_ShowHintTextMulti(client, const String:textHint[], times, Float:time)
+{
+    if ( IsFakeClient(client) )
+    {
+        return;
+    }
+    
+    new Handle:data = CreateDataPack();
+    WritePackCell(data, times);
+    WritePackCell(data, client);
+    WritePackString(data, textHint);
+    
+    CreateTimer(time, UTIL_Timer_ShowHintText, data, TIMER_REPEAT);
+}
+
+public Action:UTIL_Timer_ShowHintText(Handle:timer, any:data)
+{
+    new client, String:textHint[512], times;
+    
+    ResetPack(data);
+    times = ReadPackCell(data);
+    client = ReadPackCell(data);
+    ReadPackString(data, textHint, sizeof(textHint));
+    
+    if ( !IsClientInGame(client) )
+    {
+        CloseHandle(data);
+        return Plugin_Stop;
+    }
+    
+    PrintHintText(client, textHint);
+    if ( --times <= 0 )
+    {
+        CloseHandle(data);
+        return Plugin_Stop;
+    }
+    else
+    {
+        SetPackPosition(data, 0);
+        WritePackCell(data, times);
+        return Plugin_Continue;
+    }
+}
+

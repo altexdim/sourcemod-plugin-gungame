@@ -399,10 +399,26 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             {
                 if ( MultiKillChat )
                 {
-                    decl String:subtext[64];
-                    FormatLanguageNumberTextEx(Killer, subtext, sizeof(subtext), killsPerLevel - kills, "points");
-                    CPrintToChat(Killer, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+                    if ( !g_Cfg_ShowSpawnMsgInHintBox )
+                    {
+                        decl String:subtext[64];
+                        FormatLanguageNumberTextEx(Killer, subtext, sizeof(subtext), killsPerLevel - kills, "points");
+                        CPrintToChat(Killer, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+                    }
+                    else
+                    {
+                        SetGlobalTransTarget(Killer);
+                        decl String:textHint[256];
+                        decl String:subtext[64];
+                        FormatLanguageNumberTextEx(Killer, subtext, sizeof(subtext), killsPerLevel - kills, "points");
+                        Format(textHint, sizeof(textHint), "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+                        CRemoveTags(textHint, sizeof(textHint));
+                        
+                        UTIL_ShowHintTextMulti(Killer, textHint, 5, 1.0);
+                    }
                 }
+                
+
                 UTIL_PlaySound(Killer, MultiKill);
                 if ( ReloadWeapon )
                 {
@@ -561,14 +577,47 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         killsPerLevel = MinKillsPerLevel;
     }
 
-    CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
-
-    if ( MultiKillChat && ( killsPerLevel > 1 ) )
+    if ( !g_Cfg_ShowSpawnMsgInHintBox )
     {
-        new kills = CurrentKillsPerWeap[client];
-        decl String:subtext[64];
-        FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
-        CPrintToChat(client, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+        CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
+
+        if ( MultiKillChat && ( killsPerLevel > 1 ) )
+        {
+            new kills = CurrentKillsPerWeap[client];
+            decl String:subtext[64];
+            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
+            CPrintToChat(client, "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+        }
+    }
+    else
+    {
+        SetGlobalTransTarget(client);
+        decl String:textHint[512], String:textHint2[256];
+        Format(textHint, sizeof(textHint), "%t", "You are on level", Level + 1, WeaponOrderName[Level]);
+        CRemoveTags(textHint, sizeof(textHint));
+        if ( g_Cfg_ShowLeaderInHintBox && CurrentLeader )
+        {
+            new leaderLevel = PlayerLevel[CurrentLeader];
+            if ( client == CurrentLeader ) {
+                Format(textHint2, sizeof(textHint2), "\n%t", "LevelPanel: You are currently the leader");
+            } else if ( Level == leaderLevel ) {
+                Format(textHint2, sizeof(textHint2), "\n%t", "LevelPanel: You have tied with the leader");
+            } else {
+                Format(textHint2, sizeof(textHint2), "\n%t", "Hint: Leader is on level", leaderLevel + 1, WeaponOrderName[leaderLevel]);
+            }
+            
+            StrCat(textHint, sizeof(textHint), textHint2);
+        }
+        if ( MultiKillChat && ( killsPerLevel > 1 ) )
+        {
+            new kills = CurrentKillsPerWeap[client];
+            decl String:subtext[64];
+            FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), killsPerLevel - kills, "points");
+            Format(textHint2, sizeof(textHint2), "\n%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
+            CRemoveTags(textHint2, sizeof(textHint2));
+            StrCat(textHint, sizeof(textHint), textHint2);
+        }
+        UTIL_ShowHintTextMulti(client, textHint, 5, 1.0);
     }
 }
 

@@ -53,6 +53,12 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("MaxHandicapLevel", key, false) == 0) {
+                g_Cfg_MaxHandicapLevel = StringToInt(value);
+            } else if(strcmp("ShowSpawnMsgInHintBox", key, false) == 0) {
+                g_Cfg_ShowSpawnMsgInHintBox = StringToInt(value);
+            } else if(strcmp("ShowLeaderInHintBox", key, false) == 0) {
+                g_Cfg_ShowLeaderInHintBox = StringToInt(value);
             } else if(strcmp("ShowLeaderWeapon", key, false) == 0) {
                 g_Cfg_ShowLeaderWeapon = StringToInt(value);
             } else if(strcmp("ObjectiveBonusExplode", key, false) == 0) {

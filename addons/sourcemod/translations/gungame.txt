@@ -130,9 +130,9 @@
 	"You need kills to advance to the next level"
 	{
 		"#format"	"{1:s},{2:d},{3:d}"
-		"en"		 "{green}You need {1} to advance to the next level :: Score: {default}{2} {green}/ {default}{3}"
-		"de"		 "{green}Du brauchst {1} um das nächste Level zu erreichen :: Punkte: {default}{2}{green} /{default} {3}"
-		"ru"		 "{green}Вам нужно {1} до следующего уровня :: Очки: {default}{2}{green} /{default} {3}"
+		"en"		 "{green}You need {1} to advance to the next level. Score :: {default}{2} {green}/ {default}{3}"
+		"de"		 "{green}Du brauchst {1} um das nächste Level zu erreichen. Punkte :: {default}{2}{green} /{default} {3}"
+		"ru"		 "{green}Вам нужно {1} до следующего уровня. Очки :: {default}{2}{green} /{default} {3}"
 	}	
 	"1>points"
 	{
@@ -180,6 +180,12 @@
 		"en"		 "{green}You are on level {default}{1} {green}:: {default}{2}"
 		"de"		 "{green}Du bist auf Level {default}{1} {green}:: {default}{2}"
 		"ru"		 "{green}Вы на уровне {default}{1} {green}:: {default}{2}"
+	}
+	"Hint: Leader is on level"
+	{
+		"#format"	"{1:d},{2:s}"
+		"en"		 "Leader is on level {1} :: {2}"
+		"ru"		 "Лидер на уровне {1} :: {2}"
 	}
 	"Friendly Fire has been enabled"
 	{

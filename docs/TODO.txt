@@ -4,10 +4,6 @@ TODO
     
     ----====----==== Normal priority list ----====----====
     
-    * [UNCONFIRMED] Bug: With KnifeProMinLevel "1" and ResetLevelAfterWarmup "1" 
-        you can still gain a level in the warmup round if you knife 
-        someone after the round has ended and before the next round 
-        starts.
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down (and level up?). 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
@@ -49,13 +45,6 @@ TODO
     + Feature: create some options for gungame_stats like display rank to 
         all or to player only, show winner in chat etc.
         Pending because of i do not know what exactly features is needed.
-    + Feature: I also have an idea about round start message like "You are on level 1 :: glock". What do you 
-        think about moving it to the hint box (like warmup timer) and add information about leader 
-        level like "Leader level 24 :: awp"?
-        Pending for ideas how to put all this texts with multikill chat message in one small hint box.
-        I think it is very hard to do, and by the way it does not support colorize, so such 
-        messages as multikill chat message can be hard to read without colorizing. And we can not
-        leave this message in chat and all others in hintbox, because it looks junked.
     
     ----====----==== Low priority list ----====----====
     
