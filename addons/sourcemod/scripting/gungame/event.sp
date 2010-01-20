@@ -128,57 +128,59 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
 {
+    if ( !IsActive )
+    {
+        return;
+    }
+
     /**
      * round_start
      * round_end
      * 0123456
      */
-    if(IsActive)
+    if(name[6] == 's')
     {
-        if(name[6] == 's')
+        if(GameWinner)
         {
-            if(GameWinner)
-            {
-                /* Lock all player since the winner was declare already if new round happened. */
-                UTIL_FreezeAllPlayer();
-            }
+            /* Lock all player since the winner was declare already if new round happened. */
+            UTIL_FreezeAllPlayer();
+        }
 
-            /* Round has Started. */
-            RoundStarted = true;
+        /* Round has Started. */
+        RoundStarted = true;
 
-            /* Only remove the hostages on after it been initialized */
-            if(MapStatus & OBJECTIVE_HOSTAGE && MapStatus & OBJECTIVE_REMOVE_HOSTAGE)
-            {
-                /*Delay for 0.1 because data need to be filled for hostage entity index */
-                CreateTimer(0.1, RemoveHostages);
-            }
+        /* Only remove the hostages on after it been initialized */
+        if(MapStatus & OBJECTIVE_HOSTAGE && MapStatus & OBJECTIVE_REMOVE_HOSTAGE)
+        {
+            /*Delay for 0.1 because data need to be filled for hostage entity index */
+            CreateTimer(0.1, RemoveHostages);
+        }
 
-            if(WarmupStartup & GAME_START && WarmupEnabled && !WarmupInitialized && GameCommenced)
-            {
-                StartWarmupRound();
-                SetConVarInt(mp_restartgame, 1);
-            }
-            UTIL_PlaySoundForLeaderLevel();
+        if(WarmupStartup & GAME_START && WarmupEnabled && !WarmupInitialized && GameCommenced)
+        {
+            StartWarmupRound();
+            SetConVarInt(mp_restartgame, 1);
+        }
+        UTIL_PlaySoundForLeaderLevel();
 
-            // Disable warmup
-            if ( WarmupEnabled && DisableWarmupOnRoundEnd )
-            {
-                WarmupEnabled = false;
-                DisableWarmupOnRoundEnd = false;
-            }
-        } else {
-            /* Round has ended. */
-            RoundStarted = false;
+        // Disable warmup
+        if ( WarmupEnabled && DisableWarmupOnRoundEnd )
+        {
+            WarmupEnabled = false;
+            DisableWarmupOnRoundEnd = false;
+        }
+    } else {
+        /* Round has ended. */
+        RoundStarted = false;
 
-            if ( GetEventInt(event, "reason") == 16 )
-            {
-                GameCommenced = true;
-            }
+        if ( GetEventInt(event, "reason") == 16 )
+        {
+            GameCommenced = true;
+        }
 
-            if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
-            {
-                WarmupRandomWeaponLevel = -1;
-            }
+        if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
+        {
+            WarmupRandomWeaponLevel = -1;
         }
     }
 }
@@ -260,9 +262,18 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // Victim > 0 && Killer > 0
 
-    new bool:TeamKill = (!FFA) && (GetClientTeam(Victim) == GetClientTeam(Killer));
     new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon), ret;
 
+    if ( WarmupEnabled )
+    {
+        if ( ReloadWeapon )
+        {
+            UTIL_ReloadActiveWeapon(Killer, WeaponIndex);
+        }
+        return;
+    }
+
+    new bool:TeamKill = (!FFA) && (GetClientTeam(Victim) == GetClientTeam(Killer));
     Call_StartForward(FwdDeath);
     Call_PushCell(Killer);
     Call_PushCell(Victim);
@@ -282,15 +293,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     if ( WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
     {
         UTIL_GiveExtraNade(Killer);
-    }
-
-    if ( WarmupEnabled )
-    {
-        if ( ReloadWeapon )
-        {
-            UTIL_ReloadActiveWeapon(Killer, WeaponIndex);
-        }
-        return;
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
