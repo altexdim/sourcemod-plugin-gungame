@@ -33,12 +33,6 @@
         /* Start voting if leader level is less maximum level by this value */
         "VoteLevelLessWeaponCount" "2"
         
-        /* Can level down victim if killer is on the grenade level */
-        "CanLevelDownOnGrenade" "1"
-
-        /* Can steal level if victim is on the first level */
-        "CanStealFirstLevel" "1"
-        
         /* (not used) If intermission starts do calculate winner */
         "IntermissionCalcWinner" "0"
 
@@ -230,9 +224,6 @@
 
         /* Knife only during warmup otherwise allow them to use the default weapon*/
         "WarmupKnifeOnly" "0"
-
-        /* Allow players to keep their levels after warmup otherwise it will reset to level 1 after warmup. */
-        "ResetLevelAfterWarmup" "1"
 
         /* Gives unlimited hegrenades to the player if warmup is enabled.
            It should be named WarmupNadesAndKnifeOnly because it gives only knife and nades.

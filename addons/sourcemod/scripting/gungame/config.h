@@ -15,10 +15,6 @@ new bool:RemoveBonusWeaponAmmo;
 new bool:ReloadWeapon;
 new bool:MultiKillChat;
 new bool:JoinMessage;
-// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-// new bool:IntermissionCalcWinner;
-new bool:CanStealFirstLevel;
-new bool:CanLevelDownOnGrenade;
 new VoteLevelLessWeaponCount;
 new ObjectiveBonus;
 new WorldspawnSuicide = 1;
@@ -40,7 +36,6 @@ new bool:WarmupInitialized;
 new WarmupStartup = 1;
 new Warmup_TimeLength = 30;
 new WarmupKnifeOnly = 1;
-new WarmupReset = 1;
 new WarmupCounter;
 new bool:IsVotingCalled = false;
 new bool:TripleLevelBonus = false;

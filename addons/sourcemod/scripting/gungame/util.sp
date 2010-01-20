@@ -278,7 +278,7 @@ UTIL_PlaySoundForLeaderLevel()
 
 UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 {
-    if ( !difference || !IsActive || (WarmupEnabled && WarmupReset) || GameWinner )
+    if ( !difference || !IsActive || WarmupEnabled || GameWinner )
     {
         return PlayerLevel[client];
     }
@@ -371,8 +371,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         Call_PushString(WeaponName[WeaponOrderId[Level - 1]][7]);
         Call_Finish();
 
-        // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-        // IsIntermissionCalled = true;
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();

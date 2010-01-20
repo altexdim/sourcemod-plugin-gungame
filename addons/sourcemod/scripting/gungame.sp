@@ -79,8 +79,6 @@ public OnPluginStart()
     PlayerLevelsBeforeDisconnect = CreateTrie();
     
     // ConVar
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    // VGUIMenu = GetUserMessageId("VGUIMenu");
     mp_friendlyfire = FindConVar("mp_friendlyfire");
     mp_restartgame = FindConVar("mp_restartgame");
     
@@ -169,8 +167,6 @@ public OnMapEnd()
     MapStatus = NULL;
     HostageEntInfo = NULL;
     IsVotingCalled = false;
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    // IsIntermissionCalled = false;
     GameWinner = NULL;
     TotalLevel = NULL;
     CurrentLeader = NULL;
@@ -315,8 +311,6 @@ public GG_OnShutdown(bool:Command)
     WarmupInitialized = false;
     WarmupCounter = NULL;
     IsVotingCalled = false;
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    // IsIntermissionCalled = false;
     GameWinner = NULL;
     TotalLevel = NULL;
     CurrentLeader = NULL;
@@ -451,16 +445,13 @@ public Action:EndOfWarmup(Handle:timer)
 
     CPrintToChatAll("%t", "Warmup round has ended");
 
-    if ( WarmupReset )
-    {
-        new maxslots = GetMaxClients( );
-        TotalLevel = NULL;
+    new maxslots = GetMaxClients( );
+    TotalLevel = NULL;
 
-        for ( new i = 1; i <= maxslots; i++ )
-        {
-            PlayerLevel[i] = 0;
-            UTIL_UpdatePlayerScoreLevel(i);
-        }
+    for ( new i = 1; i <= maxslots; i++ )
+    {
+        PlayerLevel[i] = 0;
+        UTIL_UpdatePlayerScoreLevel(i);
     }
     
     Call_StartForward(FwdWarmupEnd);

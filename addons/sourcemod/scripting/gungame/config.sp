@@ -84,17 +84,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 MultiKillChat = bool:StringToInt(value);
             } else if(strcmp("JoinMessage", key, false) == 0) {
                 JoinMessage = bool:StringToInt(value);
-            // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-            /*
-            } else if(strcmp("IntermissionCalcWinner", key, false) == 0) {
-                IntermissionCalcWinner = bool:StringToInt(value);
-            */
             } else if(strcmp("VoteLevelLessWeaponCount", key, false) == 0) {
                 VoteLevelLessWeaponCount = StringToInt(value);
-            } else if(strcmp("CanLevelDownOnGrenade", key, false) == 0) {
-                CanLevelDownOnGrenade = bool:StringToInt(value);
-            } else if(strcmp("CanStealFirstLevel", key, false) == 0) {
-                CanStealFirstLevel = bool:StringToInt(value);
             } else if(strcmp("AutoFriendlyFire", key, false) == 0) {
                 AutoFriendlyFire = bool:StringToInt(value);
             } else if(strcmp("RemoveObjectives", key, false) == 0) {
@@ -130,8 +121,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 Warmup_TimeLength = StringToInt(value);
             } else if(strcmp("WarmupKnifeOnly", key, false) == 0) {
                 WarmupKnifeOnly = bool:StringToInt(value);
-            } else if(strcmp("ResetLevelAfterWarmup", key, false) == 0) {
-                WarmupReset = bool:StringToInt(value);
             } else if(strcmp("NadeSmoke", key, false) == 0) {
                 NadeSmoke = bool:StringToInt(value);
             } else if(strcmp("NadeBonus", key, false) == 0) {
@@ -306,8 +295,6 @@ public GG_ConfigEnd()
 
     UTIL_ConvertWeaponToIndex();
 
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    // MinimumLevel = WeaponOrderCount / 2;
     WeaponLevelPages = (WeaponOrderCount / 7);
 
     if((WeaponOrderCount - (WeaponLevelPages * 7)) != 0)

@@ -30,8 +30,6 @@ TODO
         
     ----====----==== High severity list ----====----====
     
-    * Enable hookusermessage after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3817
-        High severity because of needed changes in sourcemod it-self.
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
         High severity because of needed changes in sourcemod it-self.
     + Add winners menu:

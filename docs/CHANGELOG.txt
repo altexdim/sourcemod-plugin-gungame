@@ -1,5 +1,10 @@
 Changelog
 ---------
+        - Removed config variable "CanLevelDownOnGrenade".
+        - Removed config variable "CanStealFirstLevel".
+        - Removed config variable "IntermissionCalcWinner".
+        - Removed config variable "ResetLevelAfterWarmup".
+
     1.0.8.2:
         * Fixed: "ObjectiveBonus" more then "1" was working like it is "1".
         * Fixed: When the bomb explodes you dont level up because of round_end fires 

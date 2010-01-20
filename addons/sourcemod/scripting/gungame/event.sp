@@ -8,9 +8,6 @@ OnEventStart()
     HookEvent("player_team", _PlayerTeam);
     HookEvent("item_pickup", _ItemPickup);
     HookEvent("hegrenade_detonate",_HeExplode);
-
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    //HookUserMessage(VGUIMenu, _VGuiMenu);
 }
 
 OnEventShutdown()
@@ -23,113 +20,7 @@ OnEventShutdown()
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
     UnhookEvent("hegrenade_detonate",_HeExplode);
-
-    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-    //UnhookUserMessage(VGUIMenu, _VGuiMenu);
 }
-
-// TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-/*
-public Action:_VGuiMenu(UserMsg:msg_id, Handle:bf, const players[], playersNum, bool:reliable, bool:init)
-{
-    // Check if init is always false after the first call.
-    if(!IsActive || IsIntermissionCalled || !IntermissionCalcWinner)
-    {
-        return;
-    }
-
-    decl String:Type[24];
-    BfReadString(bf, Type, sizeof(Type));
-
-    if(BfReadByte(bf) == 1 && BfReadByte(bf) == 0 && strcmp(Type, "scores", false) == 0)
-    {
-        IsIntermissionCalled =  true;
-
-        // Do intermission calculation if a winner wasn't declared by completing the weapon order.
-        if(!GameWinner)
-        {
-            // No decisive winner has completed the game.
-            if(!CurrentLeader)
-            {
-                CurrentLeader = FindLeader();
-                if ( !CurrentLeader )
-                {
-                    return;
-                }
-                new prevLeaderLevel = PlayerLevel[CurrentLeader];
-                PlayerLevel[CurrentLeader] = 0;
-                CurrentLeader = FindLeader();
-                if ( PlayerLevel[CurrentLeader] == prevLeaderLevel )
-                {
-                    // multiple leaders found
-                    return;
-                }
-            }
-
-            if(CurrentLeader)
-            {
-                if(!BotCanWin && IsFakeClient(CurrentLeader))
-                {
-                    CurrentLeader = FindLeader(true);
-                    // No real player was found
-                    if( !CurrentLeader )
-                    {
-                        return;
-                    }
-                }
-                new prevLeader = CurrentLeader;
-                new prevLeaderLevel = PlayerLevel[CurrentLeader];
-                PlayerLevel[CurrentLeader] = 0;
-                CurrentLeader = FindLeader();
-                if( CurrentLeader && PlayerLevel[CurrentLeader] == prevLeaderLevel )
-                {
-                    // multiple leaders found
-                    return;
-                }
-                CurrentLeader = prevLeader;
-                PlayerLevel[CurrentLeader] = prevLeaderLevel;
-                new level = PlayerLevel[CurrentLeader];
-
-                if(level > MinimumLevel)
-                {
-                    GameWinner = CurrentLeader;
-                }
-
-                if(GameWinner)
-                {
-                    decl String:Name[MAX_NAME_SIZE];
-
-                    if(IsClientInGame(GameWinner))
-                    {
-                        GetClientName(GameWinner, Name, sizeof(Name));
-                        new team = GetClientTeam(GameWinner);
-                        new r = (team == TEAM_T ? 255 : 0);
-                        new g =  team == TEAM_CT ? 128 : (team == TEAM_T ? 0 : 255);
-                        new b = (team == TEAM_CT ? 255 : 0);
-                        UTIL_PrintToUpperLeft(0, r, g, b, "%t", "Has won", Name);
-                    }
-
-                    Call_StartForward(FwdWinner);
-                    Call_PushCell(GameWinner);
-                    Call_PushString(WeaponName[WeaponOrderId[level]][7]);
-                    Call_Finish();
-
-                    UTIL_PlaySound(0, Winner);
-                    if ( AlltalkOnWin )
-                    {
-                        new Handle:sv_alltalk = FindConVar("sv_alltalk");
-                        if ( sv_alltalk != INVALID_HANDLE )
-                        {
-                            SetConVarInt(sv_alltalk,1);
-                        }
-                    }
-                }
-            }
-            // else no leader was found so no winner.
-        }
-    }
-}
-*/
 
 public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
@@ -386,7 +277,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         UTIL_GiveExtraNade(Killer);
     }
 
-    if ( WarmupEnabled && WarmupReset )
+    if ( WarmupEnabled )
     {
         if ( ReloadWeapon )
         {
@@ -408,29 +299,11 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         new KnifeLevel = (WeaponLevel == CSW_KNIFE);
         for (;;)
         {
-            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE && !CanLevelDownOnGrenade )
-            {
-                return;
-            }
-
             new VictimLevel = PlayerLevel[Victim];
 
             if ( VictimLevel < KnifeProMinLevel )
             {
                 CPrintToChatEx(Killer, Victim, "%t", "Is lower than the minimum knife stealing level", vName, KnifeProMinLevel);
-                if ( KnifeLevel ) {
-                    break;
-                } else {
-                    return;
-                }
-            }
-
-            if ( !VictimLevel && !CanStealFirstLevel )
-            {
-                /* They are at level 1. Internally it is set at 0 for starting
-                 * Levels only can be stolen if victim is level greater than 1.
-                 */
-                CPrintToChatEx(Killer, Victim, "%t", "Has no levels to be stolen", vName);
                 if ( KnifeLevel ) {
                     break;
                 } else {
@@ -707,7 +580,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         killsPerLevel = MinKillsPerLevel;
     }
 
-    if ( !WarmupEnabled || !WarmupReset )
+    if ( !WarmupEnabled )
     {
         CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
     }
