@@ -100,7 +100,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("RemoveObjectives", key, false) == 0) {
                 MapStatus = StringToInt(value);
             } else if(strcmp("ObjectiveBonus", key, false) == 0) {
-                ObjectiveBonus = bool:StringToInt(value);
+                ObjectiveBonus = StringToInt(value);
             } else if(strcmp("WorldspawnSuicide", key, false) == 0) {
                 WorldspawnSuicide = StringToInt(value);
             } else if(strcmp("MaxLevelPerRound", key, false) == 0) {

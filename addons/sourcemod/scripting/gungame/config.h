@@ -20,7 +20,7 @@ new bool:JoinMessage;
 new bool:CanStealFirstLevel;
 new bool:CanLevelDownOnGrenade;
 new VoteLevelLessWeaponCount;
-new bool:ObjectiveBonus;
+new ObjectiveBonus;
 new WorldspawnSuicide = 1;
 new Weapons:NadeBonusWeaponId;
 new bool:NadeSmoke;

@@ -728,11 +728,13 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 {
+    LogError("_BombState (name = %s)", name);
     if ( !IsActive || !ObjectiveBonus || !GameCommenced || !RoundStarted )
     {
         return;
     }
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    LogError("... client = %i", client);
 
     if ( !client || !IsClientConnected(client) || !IsClientInGame(client) )
     {
@@ -740,20 +742,24 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     }
     UTIL_UpdatePlayerScoreDelayed(client);
     
-    if ( !ObjectiveBonusWin && PlayerLevel[client] >= WeaponOrderCount - ObjectiveBonus )
+    LogError("... here 1");
+    if ( !ObjectiveBonusWin && ( PlayerLevel[client] >= WeaponOrderCount - ObjectiveBonus ) )
     {
         return;
     }
 
+    LogError("... here 2");
     if ( ( g_Cfg_ObjectiveBonusExplode && name[5] == 'p' ) ||
          ( !g_Cfg_ObjectiveBonusExplode && name[5] == 'e' ) )
     {
         return;
     }
+    LogError("... here 3");
     
     /* Give them a level if give level for objective */
     new oldLevel = PlayerLevel[client];
     new newLevel = UTIL_ChangeLevel(client, ObjectiveBonus);
+    LogError("... new level = %i old level = %i", oldLevel, newLevel);
     if ( newLevel == oldLevel )
     {
         return;
@@ -766,14 +772,17 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     FormatLanguageNumberTextEx(client, subtext, sizeof(subtext), ObjectiveBonus, "levels");
     if ( name[5] == 'p' )
     {
+        LogError("... %t", "You gained level by planting the bomb", subtext);
         CPrintToChat(client, "%t", "You gained level by planting the bomb", subtext);
     }
     else if ( name[5] == 'e' )
     {
+        LogError("... %t", "You gained level by exploding the bomb", subtext);
         CPrintToChat(client, "%t", "You gained level by exploding the bomb", subtext);
     }
     else
     {
+        LogError("... %t", "You gained level by defusing the bomb", subtext);
         CPrintToChat(client, "%t", "You gained level by defusing the bomb", subtext);
     }
 }
