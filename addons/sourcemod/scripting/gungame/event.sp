@@ -414,7 +414,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                         Format(textHint, sizeof(textHint), "%t", "You need kills to advance to the next level", subtext, kills, killsPerLevel);
                         CRemoveTags(textHint, sizeof(textHint));
                         
-                        UTIL_ShowHintTextMulti(Killer, textHint, 5, 1.0);
+                        UTIL_ShowHintTextMulti(Killer, textHint, 3, 1.0);
                     }
                 }
                 
@@ -617,7 +617,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             CRemoveTags(textHint2, sizeof(textHint2));
             StrCat(textHint, sizeof(textHint), textHint2);
         }
-        UTIL_ShowHintTextMulti(client, textHint, 5, 1.0);
+        UTIL_ShowHintTextMulti(client, textHint, 3, 1.0);
     }
 }
 
