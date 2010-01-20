@@ -779,26 +779,29 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if(IsActive && GameCommenced && RoundStarted)
+    if ( !IsActive || !GameCommenced || !RoundStarted )
     {
-        new client = GetClientOfUserId(GetEventInt(event, "userid"));
-
-        if(client)
-        {
-            decl String:Name[MAX_NAME_SIZE];
-            GetClientName(client, Name, sizeof(Name));
-
-            new oldLevel = PlayerLevel[client];
-            new newLevel = UTIL_ChangeLevel(client, -1);
-            if ( oldLevel == newLevel )
-            {
-                return;
-            }
-            PrintLeaderToChat(client, oldLevel, newLevel, Name);
-            
-            CPrintToChatAllEx(client, "%t", "Has lost a level by killing a hostage", Name);
-        }
+        return;
     }
+
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+
+    if ( !client )
+    {
+        return;
+    }
+
+    decl String:Name[MAX_NAME_SIZE];
+    GetClientName(client, Name, sizeof(Name));
+
+    new oldLevel = PlayerLevel[client];
+    new newLevel = UTIL_ChangeLevel(client, -1);
+    if ( oldLevel == newLevel )
+    {
+        return;
+    }
+    PrintLeaderToChat(client, oldLevel, newLevel, Name);
+    CPrintToChatAllEx(client, "%t", "Has lost a level by killing a hostage", Name);
 }
 
 ClientSuicide(client, const String:Name[], loose)
