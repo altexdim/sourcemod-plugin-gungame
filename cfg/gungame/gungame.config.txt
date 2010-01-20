@@ -16,7 +16,7 @@
         "StripDeadPlayersWeapon" "0"
         
         /* Show levels in scoreboard */
-        "LevelsInScoreboard" "0"
+        "LevelsInScoreboard" "1"
 
         /* Restore level on player reconnect */
         "RestoreLevelOnReconnect" "1"
@@ -25,22 +25,22 @@
         "AllowLevelUpAfterRoundEnd" "1"
     
         /* Show multikill hints in chat */
-        "MultiKillChat" "1"
+        "MultiKillChat" "0"
         
         /* Set sv_alltalk 1 after player win */
         "AlltalkOnWin" "1"
         
         /* Start voting if leader level is less maximum level by this value */
-        "VoteLevelLessWeaponCount" "1"
+        "VoteLevelLessWeaponCount" "2"
         
         /* Can level down victim if killer is on the grenade level */
-        "CanLevelDownOnGrenade" "0"
+        "CanLevelDownOnGrenade" "1"
 
         /* Can steal level if victim is on the first level */
-        "CanStealFirstLevel" "0"
+        "CanStealFirstLevel" "1"
         
         /* (not used) If intermission starts do calculate winner */
-        "IntermissionCalcWinner" "1"
+        "IntermissionCalcWinner" "0"
 
         /* Display a join message, popup giving players instructions on how to play */
         "JoinMessage" "1"
@@ -63,13 +63,13 @@
         "BotsCanWinGame" "0"
 
         /* How many levels they can gain in 1 round */
-        "MaxLevelPerRound" "3"
+        "MaxLevelPerRound" "30"
 
         /* Turbo Mode */
         "TurboMode" "0"
 
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
-        "KnifePro" "0"
+        "KnifePro" "1"
 
         /* Enables Knife Pro when a player is on hegrenade level */
         "KnifeProHE"    "0"
@@ -85,7 +85,7 @@
         "MinKillsPerLevel" "1"
 
         /* The minimum level that a player must be at before another player can knife steal from. Requires KnifePro on. */
-        "KnifeProMinLevel" "6"
+        "KnifeProMinLevel" "0"
 
         /* Enabled friendly fire automatically when a player reaches hegrenade level */
         "AutoFriendlyFire" "0"
@@ -119,12 +119,12 @@
         "ObjectiveBonusExplode" "0"
 
         /* Remove objectives from map. 0 = Disabled, 1 = BOMB, 2 = HOSTAGE, 3 = BOTH*/
-        "RemoveObjectives" "0"
+        "RemoveObjectives" "3"
 
         /* ----- [handicap] ----- */
         
         /* Substract handicap level by this value */
-        "HandicapLevelSubstract" "0"
+        "HandicapLevelSubstract" "1"
 
         /**
          * Gives joining players the avg level of all other players when they join late.
@@ -134,13 +134,13 @@
          * 2 - Min level
          * 3 - Min level (skip bots)
          */
-        "HandicapMode" "0"
+        "HandicapMode" "3"
 
         /**
          * Allow players in the top10 to receive a handicap with the rest of the players.
          * Handicap must also be turned on above for this to work.
          */
-        "Top10Handicap" "0"
+        "Top10Handicap" "1"
 
         /* ----- [equip] ----- */
         
@@ -191,7 +191,7 @@
          * 0 - Disable
          * 1 and above - Minimum number of players in each team for UnlimitedNames to be on.
          */
-        "UnlimitedNadesMinPlayers" "0"
+        "UnlimitedNadesMinPlayers" "1"
         
         /**
          * Number of nades on the nade level.
@@ -226,10 +226,10 @@
         "WarmupStartup" "2"
 
         /* Warmup time length */
-        "WarmupTimeLength" "30"
+        "WarmupTimeLength" "60"
 
         /* Knife only during warmup otherwise allow them to use the default weapon*/
-        "WarmupKnifeOnly" "1"
+        "WarmupKnifeOnly" "0"
 
         /* Allow players to keep their levels after warmup otherwise it will reset to level 1 after warmup. */
         "ResetLevelAfterWarmup" "1"
@@ -237,7 +237,7 @@
         /* Gives unlimited hegrenades to the player if warmup is enabled.
            It should be named WarmupNadesAndKnifeOnly because it gives only knife and nades.
         */
-        "WarmupNades" "0"
+        "WarmupNades" "1"
 
         /**
          * Give random weapon on warmup.
@@ -270,7 +270,7 @@
          * What action to deal with the player when the maximum is reach?
          * 0 = Nothing, 1 = Kick, 2 = Move to spectate, 
          */
-        "AfkAction" "1"
+        "AfkAction" "2"
 
         /* ===== [GUNGAME STATS CONFIG] ===== */
         
@@ -294,7 +294,7 @@
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"
     }
-
+    
     "Sounds"
     {
         "IntroSound" "gungame/gungame2.wav"
