@@ -2,6 +2,10 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
+    * Bug: When the bomb explodes you dont level up but the scoreboard 
+        does update (+3 score) like it would normally, but also the 
+        score resets to before the bomb exploded (-3 score) when the 
+        next round starts.
     * [UNCONFIRMED] Bug: With KnifeProMinLevel "1" and ResetLevelAfterWarmup "1" 
         you can still gain a level in the warmup round if you knife 
         someone after the round has ended and before the next round 
