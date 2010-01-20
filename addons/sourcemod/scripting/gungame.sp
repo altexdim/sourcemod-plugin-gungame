@@ -252,108 +252,112 @@ public OnClientDisconnect(client)
 
 public GG_OnStartup(bool:Command)
 {
-    if(!IsActive)
+    if ( !IsActive )
     {
         IsActive = true;
 
         OnEventStart();
     }
 
-    if(IsActive)
+    if ( !IsActive )
     {
-        UTIL_RemoveBuyZones();
+        return;
+    }
+
+    UTIL_RemoveBuyZones();
         
-        if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
+    if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
+    {
+        StartWarmupRound();
+    }
+
+    UTIL_FindMapObjective();
+
+    if(!IsObjectiveHooked)
+    {
+        if(MapStatus & OBJECTIVE_BOMB)
         {
-            StartWarmupRound();
+            IsObjectiveHooked = true;
+            HookEvent("bomb_planted", _BombState);
+            HookEvent("bomb_exploded", _BombState);
+            HookEvent("bomb_defused", _BombState);
+            HookEvent("bomb_pickup", _BombPickup);
         }
-
-        UTIL_FindMapObjective();
-
-        if(!IsObjectiveHooked)
-        {
-            if(MapStatus & OBJECTIVE_BOMB)
-            {
-                IsObjectiveHooked = true;
-                HookEvent("bomb_planted", _BombState);
-                HookEvent("bomb_exploded", _BombState);
-                HookEvent("bomb_defused", _BombState);
-                HookEvent("bomb_pickup", _BombPickup);
-            }
     
-            if(MapStatus & OBJECTIVE_HOSTAGE)
-            {
-                IsObjectiveHooked = true;
-                HookEvent("hostage_killed", _HostageKilled);
-            }
-        }
-
-        decl String:Hi[PLATFORM_MAX_PATH];
-        for(new Sounds:i = Welcome; i < MaxSounds; i++)
+        if(MapStatus & OBJECTIVE_HOSTAGE)
         {
-            if(EventSounds[i][0])
-            {
-                PrecacheSound(EventSounds[i]);
-                Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
-                AddFileToDownloadsTable(Hi);
-            }
+            IsObjectiveHooked = true;
+            HookEvent("hostage_killed", _HostageKilled);
+        }
+    }
+
+    decl String:Hi[PLATFORM_MAX_PATH];
+    for(new Sounds:i = Welcome; i < MaxSounds; i++)
+    {
+        if(EventSounds[i][0])
+        {
+            PrecacheSound(EventSounds[i]);
+            Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
+            AddFileToDownloadsTable(Hi);
         }
     }
 }
 
 public GG_OnShutdown(bool:Command)
 {
-    if(IsActive)
+    if ( !IsActive )
     {
-        IsActive = false;
-        InternalIsActive = false;
-        WarmupInitialized = false;
-        WarmupCounter = NULL;
-        IsVotingCalled = false;
-        // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
-        // IsIntermissionCalled = false;
-        GameWinner = NULL;
-        TotalLevel = NULL;
-        CurrentLeader = NULL;
-        ClearTrie(PlayerLevelsBeforeDisconnect);
+        reuturn;
+    }
+
+    IsActive = false;
+    InternalIsActive = false;
+    WarmupInitialized = false;
+    WarmupCounter = NULL;
+    IsVotingCalled = false;
+    // TODO: Enable after fix for: https://bugs.alliedmods.net/show_bug.cgi?id=3817
+    // IsIntermissionCalled = false;
+    GameWinner = NULL;
+    TotalLevel = NULL;
+    CurrentLeader = NULL;
+    ClearTrie(PlayerLevelsBeforeDisconnect);
         
-        OnEventShutdown();
+    OnEventShutdown();
 
-        if(Command)
+    if ( Command )
+    {
+        new maxslots = GetMaxClients( );
+
+        for(new i = 1; i <= maxslots; i++)
         {
-            new maxslots = GetMaxClients( );
-
-            for(new i = 1; i <= maxslots; i++)
+            if(IsClientInGame(i))
             {
-                if(IsClientInGame(i))
-                {
-                    OnClientDisconnect(i);
-                }
-            }
-
-            if(WarmupTimer != INVALID_HANDLE)
-            {
-                KillTimer(WarmupTimer);
-                WarmupTimer = INVALID_HANDLE;
+                OnClientDisconnect(i);
             }
         }
 
-        if(IsObjectiveHooked)
+        if(WarmupTimer != INVALID_HANDLE)
         {
-            if(MapStatus & OBJECTIVE_BOMB)
-            {
-                IsObjectiveHooked = false;
-                UnhookEvent("bomb_planted", _BombState);
-                UnhookEvent("bomb_exploded", _BombState);
-                UnhookEvent("bomb_defused", _BombState);
-                UnhookEvent("bomb_pickup", _BombPickup);
-            }
+            KillTimer(WarmupTimer);
+            WarmupTimer = INVALID_HANDLE;
+        }
+    }
 
-            if(MapStatus & OBJECTIVE_HOSTAGE)
-            {
-                IsObjectiveHooked = false;
-                UnhookEvent("hostage_killed", _HostageKilled);
-            }
+    if ( IsObjectiveHooked )
+    {
+        if ( MapStatus & OBJECTIVE_BOMB )
+        {
+            IsObjectiveHooked = false;
+            UnhookEvent("bomb_planted", _BombState);
+            UnhookEvent("bomb_exploded", _BombState);
+            UnhookEvent("bomb_defused", _BombState);
+            UnhookEvent("bomb_pickup", _BombPickup);
+        }
+
+        if(MapStatus & OBJECTIVE_HOSTAGE)
+        {
+            IsObjectiveHooked = false;
+            UnhookEvent("hostage_killed", _HostageKilled);
         }
     }
 }
