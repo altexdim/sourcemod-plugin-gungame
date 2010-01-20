@@ -303,7 +303,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
      */
     if ( KnifePro && WeaponIndex == CSW_KNIFE )
     {
-        new KnifeLevel = (WeaponLevel == CSW_KNIFE);
         for (;;)
         {
             new VictimLevel = PlayerLevel[Victim];
@@ -311,29 +310,25 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             if ( VictimLevel < KnifeProMinLevel )
             {
                 CPrintToChatEx(Killer, Victim, "%t", "Is lower than the minimum knife stealing level", vName, KnifeProMinLevel);
-                if ( KnifeLevel ) {
-                    break;
-                } else {
-                    return;
-                }
+                break;
             }
 
-            new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
             if ( VictimLevel )
             {
+                new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
                 if ( ChangedLevel == VictimLevel )
                 {
-                    if ( KnifeLevel ) {
-                        break;
-                    } else {
-                        return;
-                    }
+                    break;
                 }
 
                 CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             }
+            else
+            {
+                CPrintToChatEx(Killer, Victim, "%t", "Has no level to be stolen", vName);
+            }
 
-            if ( KnifeLevel )
+            if ( WeaponLevel == CSW_KNIFE )
             {
                 new killsPerLevel = CustomKillPerLevel[level];
                 if ( !killsPerLevel )
