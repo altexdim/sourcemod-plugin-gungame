@@ -157,7 +157,7 @@ public OnPluginEnd()
 public OnMapEnd()
 {
     /* Kill timer on map change if was in warmup round. */
-    if(WarmupTimer != INVALID_HANDLE)
+    if ( WarmupTimer != INVALID_HANDLE )
     {
         KillTimer(WarmupTimer);
         WarmupTimer = INVALID_HANDLE;
@@ -176,14 +176,14 @@ public OnMapEnd()
     CurrentLeader = NULL;
     ClearTrie(PlayerLevelsBeforeDisconnect);
 
-    for(new Sounds:i = Welcome; i < MaxSounds; i++)
+    for ( new Sounds:i = Welcome; i < MaxSounds; i++ )
     {
         EventSounds[i][0] = '\0';
     }
 
-    if(IsObjectiveHooked)
+    if ( IsObjectiveHooked )
     {
-        if(MapStatus & OBJECTIVE_BOMB)
+        if ( MapStatus & OBJECTIVE_BOMB )
         {
             IsObjectiveHooked = false;
             UnhookEvent("bomb_planted", _BombState);
@@ -192,7 +192,7 @@ public OnMapEnd()
             UnhookEvent("bomb_pickup", _BombPickup);
         }
 
-        if(MapStatus & OBJECTIVE_HOSTAGE)
+        if ( MapStatus & OBJECTIVE_HOSTAGE )
         {
             IsObjectiveHooked = false;
             UnhookEvent("hostage_killed", _HostageKilled);
@@ -266,16 +266,16 @@ public GG_OnStartup(bool:Command)
 
     UTIL_RemoveBuyZones();
         
-    if(WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled)
+    if ( WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled )
     {
         StartWarmupRound();
     }
 
     UTIL_FindMapObjective();
 
-    if(!IsObjectiveHooked)
+    if ( !IsObjectiveHooked )
     {
-        if(MapStatus & OBJECTIVE_BOMB)
+        if ( MapStatus & OBJECTIVE_BOMB )
         {
             IsObjectiveHooked = true;
             HookEvent("bomb_planted", _BombState);
@@ -284,7 +284,7 @@ public GG_OnStartup(bool:Command)
             HookEvent("bomb_pickup", _BombPickup);
         }
     
-        if(MapStatus & OBJECTIVE_HOSTAGE)
+        if ( MapStatus & OBJECTIVE_HOSTAGE )
         {
             IsObjectiveHooked = true;
             HookEvent("hostage_killed", _HostageKilled);
@@ -292,9 +292,9 @@ public GG_OnStartup(bool:Command)
     }
 
     decl String:Hi[PLATFORM_MAX_PATH];
-    for(new Sounds:i = Welcome; i < MaxSounds; i++)
+    for ( new Sounds:i = Welcome; i < MaxSounds; i++ )
     {
-        if(EventSounds[i][0])
+        if ( EventSounds[i][0] )
         {
             PrecacheSound(EventSounds[i]);
             Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
@@ -326,17 +326,15 @@ public GG_OnShutdown(bool:Command)
 
     if ( Command )
     {
-        new maxslots = GetMaxClients( );
-
-        for(new i = 1; i <= maxslots; i++)
+        for ( new i = 1; i <= MaxClients; i++ )
         {
-            if(IsClientInGame(i))
+            if ( IsClientInGame(i) )
             {
                 OnClientDisconnect(i);
             }
         }
 
-        if(WarmupTimer != INVALID_HANDLE)
+        if ( WarmupTimer != INVALID_HANDLE )
         {
             KillTimer(WarmupTimer);
             WarmupTimer = INVALID_HANDLE;
@@ -354,7 +352,7 @@ public GG_OnShutdown(bool:Command)
             UnhookEvent("bomb_pickup", _BombPickup);
         }
 
-        if(MapStatus & OBJECTIVE_HOSTAGE)
+        if ( MapStatus & OBJECTIVE_HOSTAGE )
         {
             IsObjectiveHooked = false;
             UnhookEvent("hostage_killed", _HostageKilled);
