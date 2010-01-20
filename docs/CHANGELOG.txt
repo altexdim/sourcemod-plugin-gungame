@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed: "ObjectiveBonus" more then "1" was working like it is "1".
+
     1.0.8.1:
         + Feature: Added config variable "ObjectiveBonusExplode" to choose if it gives
             bonus for exploding or planting the bomb.
