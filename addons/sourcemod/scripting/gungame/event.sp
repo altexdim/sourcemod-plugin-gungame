@@ -541,7 +541,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         SetEntData(client, OffsetFlags, flags);
     }
 
-    /* Many years ago something here was wrong */
     if ( WarmupEnabled && !DisableWarmupOnRoundEnd )
     {
         if ( !WarmupInitialized ) {
