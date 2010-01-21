@@ -5,64 +5,70 @@
                 "#format"    "{1:d}"
             "en"    "{1} Win"
             "ru"    "{1} победа"
-			"de"    "{1} Win"
+			"de"    "{1} Sieg"
         }
         "x1>wins"
         {
                 "#format"    "{1:d}"
             "en"    "{1} Wins"
             "ru"    "{1} победа"
-			"de"    "{1} Wins"
+			"de"    "{1} Siege"
         }
         "x2-x4>wins"
         {
                 "#format"    "{1:d}"
             "en"    "{1} Wins"
             "ru"    "{1} победы"
-			"de"    "{1} Wins"
+			"de"    "{1} Siege"
         }
         "x5-x20>wins"
         {
                 "#format"    "{1:d}"
             "en"    "{1} Wins"
             "ru"    "{1} побед"
-			"de"    "{1} Wins"
+			"de"    "{1} Siege"
         }
     "Rank: not ranked"
     {
         "#format"    "{1:s}"
         "en"    "{teamcolor}{1} {green}has no wins yet"
         "ru"    "{teamcolor}{1} {green}ещё не имеет побед"
+		"de"    "{teamcolor}{1} {green}hat aktuell keine Siege"
     }
     "Rank: rank"
     {
         "#format"    "{1:s},{2:d},{3:s},{4:d}"
         "en"    "{teamcolor}{1} {green}is on {default}{2} {green}place from {default}{4} {green}with {3}"
         "ru"    "{teamcolor}{1} {green}занимает {default}{2} {green}место из {default}{4} {green}с {3}"
+		"de"    "{teamcolor}{1} {green}ist auf dem {default}{2} {green}Platz von {default}{4} {green}mit {3}"
     }
         "1>with wins"
         {
                 "#format"    "{1:d}"
             "en"    "{default}{1} {green}win"
             "ru"    "{default}{1} {green}победой"
+			"de"    "{default}{1} {green}Sieg"
         }
         "x1>with wins"
         {
                 "#format"    "{1:d}"
             "en"    "{default}{1} {green}wins"
             "ru"    "{default}{1} {green}победой"
+			"de"    "{default}{1} {green}Siegen"
         }
         "x2-x4>with wins"
         {
                 "#format"    "{1:d}"
             "en"    "{default}{1} {green}wins"
             "ru"    "{default}{1} {green}победами"
+			"de"    "{default}{1} {green}Siegen"
         }
         "x5-x20>with wins"
         {
                 "#format"    "{1:d}"
             "en"    "{default}{1} {green}wins"
             "ru"    "{default}{1} {green}победами"
+			"de"    "{default}{1} {green}Siegen"
         }
 	"Panel: Page"
 	{
@@ -106,6 +112,7 @@
 		"#format"	"{1:d},{2:d},{3:d}"
         "en"    "[GunGame] Top {1}-{2} from {3}"
         "ru"    "[GunGame] Топ {1}-{2} из {3}"
+		"de"    "[GunGame] Top {1}-{2} von {3}"
     }
     "TopPanel: Name Wins"
     {

@@ -4,6 +4,7 @@
     {
 		"en"		 "{lightgreen}GunGame stats is disabled"
 		"ru"		 "{lightgreen}Статистика GunGame отключена"
+		"de"		 "{lightgreen}GunGame Stats sind ausgeschaltet"
     }
 	"Warmup round seconds left"
 	{
@@ -186,6 +187,7 @@
 		"#format"	"{1:d},{2:s}"
 		"en"		 "Leader is on level {1} :: {2}"
 		"ru"		 "Лидер на уровне {1} :: {2}"
+		"de"		 "Der Führende ist auf Level {1} :: {2}"
 	}
 	"Friendly Fire has been enabled"
 	{
@@ -526,11 +528,13 @@
     {
 		"en"	"!leader to show current leaders"
 		"ru"	"!leader - лидеры"
+		"de"	"!leader um den aktuell Führenden anzuzeigen"
     }
 	"CommandPanel: !rank to see your place in stats"
 	{
 		"en"	"!rank to see your place in stats"
 		"ru"	"!rank - ваше место в статистике"
+		"de"	"!rank um deinen aktuellen Platz in den Stats anzuzeigen"
 	}
 	"CommandPanel: !rules to see the rules and how to play"
 	{
@@ -582,6 +586,7 @@
 		"#format"	"{1:s}"
 		"en"	"You can gain {1} by EXPLODING or DEFUSING the bomb."
 		"ru"	"Вы можете получить {1} за ВЗРЫВ или ОБЕЗВРЕЖИВАНИЕ бомбы."
+		"de"	"Du kannst {1} bekommen, wenn die Bombe explodiert oder Du sie entschärfst."
 	}
 	"RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level"
 	{
@@ -643,16 +648,19 @@
     {
 		"en"	"[GunGame] Leaders\n "
 		"ru"	"[GunGame] Лидеры\n "
+		"de"	"[GunGame] Leaders\n "
     }
     "LeaderMenu: No leaders"
     {
 		"en"	"There is currently no leader."
 		"ru"	"Сейчас лидеров нет."
+		"de"	"Es gibt aktuell keinen Führenden."
     }
     "LeaderMenu: Leader level and weapon"
     {
 		"#format"	"{1:d},{2:s}"
 		"en"	"\nCurrent leader is on level {1} :: {2}\n \nLeaders:"
 		"ru"	"\nЛидер находится на уровне {1} :: {2}\n \nЛидеры:"
+		"de"	"\naktuell Führender ist auf Level {1} :: {2}\n \nLeaders:"
     }
 }
