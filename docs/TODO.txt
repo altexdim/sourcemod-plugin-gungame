@@ -4,6 +4,8 @@ TODO
     
     ----====----==== Normal priority list ----====----====
     
+    * What about a configuration option to specify which weapon 
+        is to be used during the warmup round? 
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down (and level up?). 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
