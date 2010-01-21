@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Updated german translation. Thanks to tObIwAnKeNoBi.
+
     1.0.8.4:
         + Added config variable "ScoreboardClearDeaths" to make clearing deaths optional. 
         
