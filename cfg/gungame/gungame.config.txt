@@ -16,7 +16,10 @@
          */
         "ShowSpawnMsgInHintBox" "0"
         
-        /* Show leader level info in hint box (requires "ShowSpawnMsgInHintBox" to be "1") */
+        /**
+         * Show leader level info in hint box 
+         * (requires "ShowSpawnMsgInHintBox" to be "1")
+         */
         "ShowLeaderInHintBox" "0"
 
         /* Show leader's weapon name in chat with leading message */
@@ -28,6 +31,12 @@
         /* Show levels in scoreboard */
         "LevelsInScoreboard" "1"
 
+        /**
+         * When shows levels in scoreboard it will 
+         * clear deaths (requires "LevelsInScoreboard" "1")
+         */
+        "ScoreboardClearDeaths" "0"
+        
         /* Restore level on player reconnect */
         "RestoreLevelOnReconnect" "1"
 

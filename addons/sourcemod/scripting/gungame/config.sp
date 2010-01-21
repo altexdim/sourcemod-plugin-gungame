@@ -53,6 +53,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("ScoreboardClearDeaths", key, false) == 0) {
+                g_Cfg_ScoreboardClearDeaths = StringToInt(value);
             } else if(strcmp("MaxHandicapLevel", key, false) == 0) {
                 g_Cfg_MaxHandicapLevel = StringToInt(value);
             } else if(strcmp("ShowSpawnMsgInHintBox", key, false) == 0) {

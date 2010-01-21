@@ -66,4 +66,5 @@ new g_Cfg_ShowLeaderWeapon = 0;
 new g_Cfg_ShowSpawnMsgInHintBox = 0;
 new g_Cfg_ShowLeaderInHintBox = 0;
 new g_Cfg_MaxHandicapLevel = 0;
+new g_Cfg_ScoreboardClearDeaths = 0;
 

@@ -946,17 +946,20 @@ UTIL_GiveExtraNade(client)
     }
 }
 
-UTIL_SetClientScoreAndDeaths(client, score, deaths)
+UTIL_SetClientScoreAndDeaths(client, score, deaths = -1)
 {
     SetEntProp(client, Prop_Data, "m_iFrags", score);
-    SetEntProp(client, Prop_Data, "m_iDeaths", deaths);
+    if ( deaths >= 0 )
+    {
+        SetEntProp(client, Prop_Data, "m_iDeaths", deaths);
+    }
 }
 
 UTIL_UpdatePlayerScoreLevel(client)
 {
     if ( g_Cfg_LevelsInScoreboard && client && IsClientInGame(client) )
     {
-        UTIL_SetClientScoreAndDeaths(client, PlayerLevel[client] + 1, 0);
+        UTIL_SetClientScoreAndDeaths(client, PlayerLevel[client] + 1, g_Cfg_ScoreboardClearDeaths? 0: -1);
     }
 }
 
