@@ -110,7 +110,9 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         {
             if ( IsClientInGame(i) )
             {
-                if ( client == i || ( (mode == 3) && IsFakeClient(i) ) )
+                if ( ( client == i )
+                    || ( (mode == 3) && IsFakeClient(i) ) 
+                    || ( GetClientTeam(i) < 2 ) )
                 {
                     continue;
                 }

@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Improvement: Handicap mode 2 and 3 is now does not count spectators.
+
     1.0.8.5:
         + Feature: Added equip config variable "RandomWeaponReserveLevels" to set
             the numbers of levels which to keep unchanged from randomization by
