@@ -4,8 +4,7 @@ TODO
     
     ----====----==== Normal priority list ----====----====
     
-    * What about a configuration option to specify which weapon 
-        is to be used during the warmup round? 
+    + Implement gg_handicap_update like in esgg5.
     * Think about this feature request:
         I also would like to request that plugin could save level kills when level down (and level up?). 
         For example when there are 3 kill levels and you have already killed 2 and somebody 
@@ -18,13 +17,6 @@ TODO
         pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
     + Feature request:
         Is it possible to enable friendly fire earlier than on nade level
-    + Implement gg_handicap_update like in esgg5.
-    * Feature request:
-        1) I want to run a random weapon order but *always* have knife 
-        and nade as the last two weapons. When I turn random weapon order 
-        on it mixes knife and nade into the mix. Is there a way to make 
-        knife and nade the last two weapons?
-        Add something like configurable random weapons groups.
         
     ----====----==== High severity list ----====----====
     

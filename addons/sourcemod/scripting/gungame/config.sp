@@ -53,6 +53,12 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("WarmupWeapon", key, false) == 0) {
+                if ( !value[0] ) {
+                    g_Cfg_WarmupWeapon = Weapons:0;
+                } else {
+                    g_Cfg_WarmupWeapon = UTIL_GetWeaponIndex(value);
+                }
             } else if(strcmp("ScoreboardClearDeaths", key, false) == 0) {
                 g_Cfg_ScoreboardClearDeaths = StringToInt(value);
             } else if(strcmp("MaxHandicapLevel", key, false) == 0) {
@@ -130,16 +136,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("NadeSmoke", key, false) == 0) {
                 NadeSmoke = bool:StringToInt(value);
             } else if(strcmp("NadeBonus", key, false) == 0) {
-                new String:NadeBonus[24];
-                strcopy(NadeBonus, sizeof(NadeBonus), value);
-                if ( strcmp("", NadeBonus, true) != 0 )
-                {
-                    UTIL_StringToLower(NadeBonus);
-                    NadeBonusWeaponId = UTIL_GetWeaponIndex(NadeBonus);
-                }
-                else
-                {
+                if ( !value[0] ) {
                     NadeBonusWeaponId = Weapons:0;
+                } else {
+                    NadeBonusWeaponId = UTIL_GetWeaponIndex(value);
                 }
             } else if(strcmp("NadeFlash", key, false) == 0) {
                 NadeFlash = bool:StringToInt(value);
@@ -177,20 +177,38 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         
         case CONFIG_STATE_EQUIP:
         {
-            if ( (strcmp("RandomWeaponOrder", key, false) == 0) && (StringToInt(value) == 1) )
+            if ( ( strcmp("RandomWeaponOrderReservLevels", key, false) == 0 ) && ( !value[0] ) )
+            {
+                new String:buffers[sizeof(g_Cfg_RandomWeaponReservLevels)][2];
+                ExplodeString(value, ",", buffers, sizeof(buffers), sizeof(buffers[]));
+                for ( new i = 0; i < sizeof(g_Cfg_RandomWeaponReservLevels); i++ )
+                {
+                    if ( buffers[i][0] )
+                    {
+                        break;
+                    }
+                    g_Cfg_RandomWeaponReservLevels[StringToInt(buffers[i])] = 1;
+                }
+            }
+            else if ( ( strcmp("RandomWeaponOrder", key, false) == 0 ) && ( StringToInt(value) == 1 ) )
             {
                 // Setup random weapon order.
                 RandomWeaponOrder = true;
                 new switchIndex, switchLevel, String:switchWeaponName[24];
-                for (new i = 0; i < WeaponOrderCount; i++)
+                for ( new i = 0; i < WeaponOrderCount; i++ )
                 {
                     RandomWeaponOrderMap[i] = i;
                 }
-                for (new i = 0; i < WeaponOrderCount; i++)
+                for ( new i = 0; i < WeaponOrderCount; i++ )
                 {
-                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount-1);
-                    if ( switchIndex == i )
+                    if ( g_Cfg_RandomWeaponReservLevels[i] )
                     {
+                        continue;
+                    }
+                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount-1);
+                    if ( switchIndex == i || g_Cfg_RandomWeaponReservLevels[switchIndex] )
+                    {
+                        i--;
                         continue;
                     }
                     switchWeaponName = WeaponOrderName[switchIndex];

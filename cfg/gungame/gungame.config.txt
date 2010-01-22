@@ -249,11 +249,15 @@
         /* Warmup time length */
         "WarmupTimeLength" "60"
 
-        /* Gives unlimited hegrenades to the player if warmup is enabled. */
+        /**
+         * Gives unlimited hegrenades to the player if warmup is enabled.
+         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
+         */
         "WarmupNades" "1"
 
         /**
          * Give random weapon on warmup.
+         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
          *
          * 0 - Disable
          * 1 - Random weapon every map
@@ -261,6 +265,12 @@
          * 3 - Random weapon every spawn
          */
         "WarmupRandomWeaponMode" "0"
+
+        /**
+         * Weapon for warmup.
+         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
+         */
+        "WarmupWeapon" ""
 
         /* ===== [GUNGAME TK CONFIG] ===== */
         

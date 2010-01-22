@@ -1,5 +1,13 @@
 Changelog
 ---------
+        * Feature request:
+            1) I want to run a random weapon order but *always* have knife 
+            and nade as the last two weapons. When I turn random weapon order 
+            on it mixes knife and nade into the mix. Is there a way to make 
+            knife and nade the last two weapons?
+            Add something like configurable random weapons groups.
+        + Added config variable "WarmupWeapon" specify which weapon 
+            is to be used during the warmup round.
         * Updated german translation. Thanks to tObIwAnKeNoBi.
 
     1.0.8.4:

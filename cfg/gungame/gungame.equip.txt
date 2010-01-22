@@ -62,7 +62,20 @@
 		"22" "hegrenade"
 		"23" "knife"
 
-		/* This will take the weapons in the WeaponOrder and randomize all the weapons order.*/
+    	/**
+         * If RandomWeaponOrder is enabled, keep this levels unchanged.
+         * Please keep this config line after levels list and before RandomWeaponOrder.
+         *
+         * "22,23"  - keep knife and nade levels on defined levels
+         * "23"     - keep knife level on defined level
+         * ""       - randomize all levels
+         */
+		"RandomWeaponOrderReservLevels" ""
+
+    	/**
+         * This will take the weapons in the WeaponOrder and randomize all the weapons order.
+         * Please keep this config line after levels list and after RandomWeaponOrder.
+         */
 		"RandomWeaponOrder" "0"
 	}
 
