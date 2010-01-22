@@ -177,17 +177,17 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         
         case CONFIG_STATE_EQUIP:
         {
-            if ( ( strcmp("RandomWeaponOrderReservLevels", key, false) == 0 ) && ( !value[0] ) )
+            
+            if ( ( strcmp("RandomWeaponOrderReservLevels", key, false) == 0 ) && ( value[0] ) )
             {
-                new String:buffers[sizeof(g_Cfg_RandomWeaponReservLevels)][2];
+                new String:buffers[sizeof(g_Cfg_RandomWeaponReservLevels)][3];
                 ExplodeString(value, ",", buffers, sizeof(buffers), sizeof(buffers[]));
-                for ( new i = 0; i < sizeof(g_Cfg_RandomWeaponReservLevels); i++ )
+                for ( new i = 0; i < sizeof(buffers); i++ )
                 {
-                    if ( buffers[i][0] )
-                    {
+                    if ( !buffers[i][0] ) {
                         break;
                     }
-                    g_Cfg_RandomWeaponReservLevels[StringToInt(buffers[i])] = 1;
+                    g_Cfg_RandomWeaponReservLevels[StringToInt(buffers[i])-1] = 1;
                 }
             }
             else if ( ( strcmp("RandomWeaponOrder", key, false) == 0 ) && ( StringToInt(value) == 1 ) )
@@ -199,18 +199,51 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 {
                     RandomWeaponOrderMap[i] = i;
                 }
-                for ( new i = 0; i < WeaponOrderCount; i++ )
+                for ( new i = 0; i < WeaponOrderCount - 1; i++ )
                 {
-                    if ( g_Cfg_RandomWeaponReservLevels[i] )
-                    {
+                    if ( g_Cfg_RandomWeaponReservLevels[i] ) {
+                        LogError("g_Cfg_RandomWeaponReservLevels[%i] = 1", i);
                         continue;
                     }
-                    switchIndex = UTIL_GetRandomInt(0, WeaponOrderCount-1);
-                    if ( switchIndex == i || g_Cfg_RandomWeaponReservLevels[switchIndex] )
+                    switchIndex = UTIL_GetRandomInt(i, WeaponOrderCount-1);
+                    LogError("index %i swi %i (%i,%i)", i, switchIndex, i, WeaponOrderCount-1);
+                    if ( g_Cfg_RandomWeaponReservLevels[switchIndex] )
                     {
-                        i--;
+                        LogError("try found1 %i-%i", switchIndex+1, WeaponOrderCount-1);
+                        // try to find next available value to the end
+                        for ( new j = switchIndex+1; j <= WeaponOrderCount-1; j++ )
+                        {
+                            if ( !g_Cfg_RandomWeaponReservLevels[j] )
+                            {
+                                switchIndex = j;
+                                LogError("found1 %i", switchIndex);
+                                break;
+                            }
+                        }
+                    }
+                    if ( g_Cfg_RandomWeaponReservLevels[switchIndex] )
+                    {
+                        // try to find next available value from the beginning
+                        LogError("try found2 %i-%i", i, switchIndex-1);
+                        for ( new j = i; j <= switchIndex-1; j++ )
+                        {
+                            if ( !g_Cfg_RandomWeaponReservLevels[j] )
+                            {
+                                switchIndex = j;
+                                LogError("found2 %i", switchIndex);
+                                break;
+                            }
+                        }
+                    }
+                    if ( g_Cfg_RandomWeaponReservLevels[switchIndex] ) {
+                        // if not found
+                        LogError("not found, %i", switchIndex);
+                        break;
+                    }
+                    if ( i == switchIndex ) {
                         continue;
                     }
+
                     switchWeaponName = WeaponOrderName[switchIndex];
                     WeaponOrderName[switchIndex] = WeaponOrderName[i];
                     WeaponOrderName[i] = switchWeaponName;
@@ -218,6 +251,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                     switchLevel = RandomWeaponOrderMap[switchIndex];
                     RandomWeaponOrderMap[switchIndex] = RandomWeaponOrderMap[i];
                     RandomWeaponOrderMap[i] = switchLevel;
+                }
+                for ( new i = 0; i < WeaponOrderCount; i++ )
+                {
+                    LogError("%i -> %i", i, RandomWeaponOrderMap[i]);
                 }
             }
             else
