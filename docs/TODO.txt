@@ -15,13 +15,15 @@ TODO
         after knifed - level 3, point 1 (multikill 2)
         levelNew = levelOld - 1, 
         pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
-    + Feature request:
-        Is it possible to enable friendly fire earlier than on nade level
+    + Feature: Add ability to enable friendly fire earlier than on nade level
+    + Feature: Add ability to disable rtv if leader is above X level.
         
     ----====----==== High severity list ----====----====
     
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
         High severity because of needed changes in sourcemod it-self.
+        It was fixed in sm version 1.3.0 by GerURandomInt() function.
+        So add version check.
     + Add winners menu:
         Also could you incorporate the attached code into your next release?
         The menu idea is from GG5's Winner Menu 

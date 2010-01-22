@@ -921,6 +921,12 @@ UTIL_GiveWarmUpWeapon(client)
         FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
         return;
     }
+    if ( g_Cfg_WarmupWeapon && g_Cfg_WarmupWeapon != CSW_KNIFE )
+    {
+        GivePlayerItemWrapper(client, WeaponName[g_Cfg_WarmupWeapon]);
+        FakeClientCommand(client, "use %s", WeaponName[g_Cfg_WarmupWeapon]);
+        return;
+    }
     FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
 }
 
@@ -928,6 +934,8 @@ UTIL_GetRandomInt(start, end)
 {
     // TODO: Improve random number generation algorithm after 
     // fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
+    // it fixed only in SourceMod version 1.3.0
+    // add check for sm version
     new Float:etime = GetEngineTime() + GetRandomFloat();
     new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % (end - start + 1);
     return rand + start;
@@ -1017,6 +1025,27 @@ public Action:UTIL_Timer_ShowHintText(Handle:timer, any:data)
         SetPackPosition(data, 0);
         WritePackCell(data, times);
         return Plugin_Continue;
+    }
+}
+
+UTIL_ArrayIntRand(array[], size)
+{
+    if ( size < 2 )
+    {
+        return;
+    }
+    new tmpIndex, tmpValue;
+    for ( new i = 0; i < size-1; i++ )
+    {
+        tmpIndex = UTIL_GetRandomInt(i, size-1);
+        if ( tmpIndex == i )
+        {
+            continue;
+        }
+        tmpValue = array[tmpIndex];
+        
+        array[tmpIndex] = array[i];
+        array[i] = tmpValue;
     }
 }
 
