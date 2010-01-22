@@ -4,7 +4,7 @@
     {
         /**
          * Weapon Choices:
-         * There are a total of 32 levels by default. (To change this value you can edit the gungame.inc
+         * There are a total of 64 levels by default. (To change this value you can edit the gungame_const.inc
          * to change the maximum allowed level of the game by changing the define MAX_LEVEL)
          *
          * There are a total of 25 usable killing weapons for GunGame.
