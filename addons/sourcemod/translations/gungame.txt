@@ -663,4 +663,9 @@
 		"ru"	"\nЛидер находится на уровне {1} :: {2}\n \nЛидеры:"
 		"de"	"\naktuell Führender ist auf Level {1} :: {2}\n \nLeaders:"
     }
+    "Your level has been updated by handicap"
+    {
+		"en"	"{green}Your level has been updated by handicap"
+		"ru"	"{green}Ваш уровень обновлён, так как он был самым низким"
+    }
 }

@@ -318,8 +318,12 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     }
 
     // Client got new level
-    CurrentKillsPerWeap[client] = 0;
     PlayerLevel[client] = Level;
+    if ( KnifeSteal && g_Cfg_KnifeProRecalcPoints ) {
+        CurrentKillsPerWeap[client] = CurrentKillsPerWeap[client] * UTIL_GetCustomKillPerLevel(Level) / UTIL_GetCustomKillPerLevel(oldLevel);
+    } else {
+        CurrentKillsPerWeap[client] = 0;
+    }
     
     if ( difference < 0 )
     {
@@ -932,13 +936,15 @@ UTIL_GiveWarmUpWeapon(client)
 
 UTIL_GetRandomInt(start, end)
 {
-    // TODO: Improve random number generation algorithm after 
-    // fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
-    // it fixed only in SourceMod version 1.3.0
-    // add check for sm version with "sourcemod_version" cvar.
-    new Float:etime = GetEngineTime() + GetRandomFloat();
-    new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % (end - start + 1);
-    return rand + start;
+    new rand;
+    #if defined URANDOM_SUPPORT
+        // if sourcemod version >= 1.3.0
+        rand = GetURandomInt();
+    #else
+        new Float:frand = GetEngineTime() + GetRandomFloat();
+        rand = RoundFloat( ( frand - RoundToZero(frand) ) * 1000000 ) + GetTime();
+    #endif
+    return ( rand % (1 + end - start) ) + start;
 }
 
 UTIL_GiveExtraNade(client)
@@ -965,6 +971,10 @@ UTIL_SetClientScoreAndDeaths(client, score, deaths = -1)
 
 UTIL_UpdatePlayerScoreLevel(client)
 {
+    if ( WarmupEnabled && !DisableWarmupOnRoundEnd )
+    {
+        return;
+    }
     if ( g_Cfg_LevelsInScoreboard && client && IsClientInGame(client) )
     {
         UTIL_SetClientScoreAndDeaths(client, PlayerLevel[client] + 1, g_Cfg_ScoreboardClearDeaths? 0: -1);
@@ -1047,5 +1057,38 @@ UTIL_ArrayIntRand(array[], size)
         array[tmpIndex] = array[i];
         array[i] = tmpValue;
     }
+}
+
+UTIL_GetMinimunLevel(bool:skipBots = true, aboveLevel = -1, skipClient = 0)
+{
+    new minimum = -1;
+    new level = 0;
+    for ( new i = 1; i <= MaxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            if ( ( skipBots && IsFakeClient(i) ) 
+                || ( GetClientTeam(i) < 2 )
+                || ( skipClient == i ) )
+            {
+                continue;
+            }
+            level = PlayerLevel[i];
+            if ( (level > aboveLevel) && ((minimum == -1) || (level < minimum)) )
+            {                 
+                minimum = level;
+            }
+        }
+    }
+    return minimum;
+}
+
+UTIL_GetCustomKillPerLevel(level)
+{
+    if ( CustomKillPerLevel[level] )
+    {
+        return CustomKillPerLevel[level];
+    }
+    return MinKillsPerLevel;
 }
 

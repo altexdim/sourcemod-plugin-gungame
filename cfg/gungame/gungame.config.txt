@@ -81,12 +81,6 @@
         /* Turbo Mode */
         "TurboMode" "0"
 
-        /* Turn Knife Pro allow stealing a player level by killing them with a knife */
-        "KnifePro" "1"
-
-        /* Enables Knife Pro when a player is on hegrenade level */
-        "KnifeProHE"    "0"
-
         /* Knife Elite force them to only have a knife after they level up.
            They will get a normal weapon again next round */
         "KnifeElite" "0"
@@ -96,9 +90,6 @@
          * Kills will count across all rounds so that you don't have to get them in one round.
          */
         "MinKillsPerLevel" "1"
-
-        /* The minimum level that a player must be at before another player can knife steal from. Requires KnifePro on. */
-        "KnifeProMinLevel" "0"
 
         /* Enabled friendly fire automatically when a player reaches hegrenade level */
         "AutoFriendlyFire" "0"
@@ -114,6 +105,20 @@
          */
         "FFA" "0"
 
+        /* ----- [knifepro] ----- */
+        
+        /* Turn Knife Pro allow stealing a player level by killing them with a knife */
+        "KnifePro" "1"
+
+        /* Enables Knife Pro when a player is on hegrenade level */
+        "KnifeProHE"    "0"
+
+        /* The minimum level that a player must be at before another player can knife steal from. Requires KnifePro on */
+        "KnifeProMinLevel" "0"
+        
+        /* If enabled then knife kill will also affect points */
+        "KnifeProRecalcPoints" "0"
+        
         /* ----- [objectives] ----- */
         
         /* Give x number of level by completing the bomb planting/defusing objectives.
@@ -161,6 +166,14 @@
          * Handicap must also be turned on above for this to work.
          */
         "Top10Handicap" "1"
+
+        /**
+         * Handicap all players automaticaly every defined number of seconds.
+         * This work only for players that is on very minimum level from 
+         * all the players.
+         * Handicap must also be turned on above for this to work.
+         */
+        "HandicapUpdate" "0"
 
         /* ----- [equip] ----- */
         
@@ -230,8 +243,8 @@
         "TripleLevelBonusGodMode" "1"
 
         /* Custom speed and gravity value multiplier for triple level bonus */
-        "TripleLevelSpeed" "1.5"
-        "TripleLevelGravity" "0.5"
+        "TripleLevelBonusSpeed" "1.5"
+        "TripleLevelBonusGravity" "0.5"
 
         /* ----- [warmup] ----- */
         

@@ -1,5 +1,19 @@
 Changelog
 ---------
+    1.0.8.6:
+        + Feature: Added config variable "KnifeProRecalcPoints" that saves level kills 
+            when level down (and level up) with knife kill. For example when there are 
+            3 kill levels and you have already killed 2 and somebody 
+            knifes you. Instead of starting from 0 kills on previous level you could continue 
+            from 2 kill.
+        * Fixed: In the config file two variables was with incorrect names: 
+            "TripleLevelBonusSpeed", "TripleLevelBonusGravity".
+        * Improvement: Random number generation algorythm improved.
+            If you are using sm version >= 1.3.0 then uncomment URANDOM_SUPPORT
+            in gungame.sp and recompile plugin for better random algorythm support.
+        + Feature: Added config variable "HandicapUpdate" for updating players
+            on minimum level automaticaly.
+        * Improvement: If warmup is enabled do not use levelinscoreboard.
         * Improvement: Handicap mode 2 and 3 is now does not count spectators.
 
     1.0.8.5:

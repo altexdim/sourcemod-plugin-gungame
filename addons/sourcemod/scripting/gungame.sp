@@ -11,10 +11,11 @@
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
 
-/**
- * Enable debug code
- */
-//#define DEBUG
+// Enable debug code
+// #define DEBUG
+
+// Uncomment if sm version >= 1.3.0
+// #define URANDOM_SUPPORT
 
 #include "gungame/gungame.h"
 #include "gungame/menu.h"
@@ -129,19 +130,14 @@ public OnClientAuthorized(client, const String:auth[])
     
     UTIL_RecalculateLeader(client, 0, level);
 
-    if ( auth[0] == 'B' )
+    if ( HandicapMode && ( 
+            ( auth[0] == 'B' )
+            || Top10Handicap 
+            || !StatsEnabled 
+            || ( GG_GetPlayerPlaceInTop10(auth) == -1 ) /* HINT: gungame_stats */
+    ) )
     {
-        if ( HandicapMode )
-        {
-            GG_GiveHandicapLevel(client, HandicapMode);
-        }
-    } else {
-        if ( HandicapMode && ( Top10Handicap 
-            || !StatsEnabled || (GG_GetPlayerPlaceInTop10(auth) == -1) /* HINT: gungame_stats */
-        ) )
-        {
-            GG_GiveHandicapLevel(client, HandicapMode);
-        }
+        GG_GiveHandicapLevel(client, HandicapMode);
     }
     
     UTIL_UpdatePlayerScoreLevel(client);
@@ -234,7 +230,7 @@ public OnClientDisconnect(client)
     }
     
     PlayerLevel[client] = 0;
-    CurrentKillsPerWeap[client] = NULL;
+    CurrentKillsPerWeap[client] = 0;
     CurrentLevelPerRound[client] = 0;
     CurrentLevelPerRoundTriple[client] = 0;
     PlayerState[client] = NULL;
@@ -296,6 +292,32 @@ public GG_OnStartup(bool:Command)
             Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
             AddFileToDownloadsTable(Hi);
         }
+    }
+    
+    Tcount = 0;
+    CTcount = 0;
+    for ( new i = 1; i <= MaxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            switch ( GetClientTeam(i) ) {
+                case TEAM_T: {
+                    Tcount++;
+                } 
+                case TEAM_CT: {
+                    CTcount++;
+                }
+            }
+        }
+    }
+    
+    if ( g_Cfg_HandicapUpdate )
+    {
+        StartHandicapUpdate();
+    }
+    else
+    {
+        StopHandicapUpdate();
     }
 }
 
@@ -460,24 +482,72 @@ public Action:EndOfWarmup(Handle:timer)
     return Plugin_Stop;
 }
 
-public OnMapStart()
+StartHandicapUpdate()
 {
-    Tcount = 0;
-    CTcount = 0;
+    if ( g_Timer_HandicapUpdate != INVALID_HANDLE )
+    {
+        return;
+    }
+    g_Timer_HandicapUpdate = CreateTimer(g_Cfg_HandicapUpdate, Timer_HandicapUpdate, _, TIMER_REPEAT);
+}
+
+StopHandicapUpdate()
+{
+    if ( g_Timer_HandicapUpdate == INVALID_HANDLE )
+    {
+        return;
+    }
+    KillTimer(g_Timer_HandicapUpdate);
+    g_Timer_HandicapUpdate = INVALID_HANDLE;
+}
+
+public Action:Timer_HandicapUpdate(Handle:timer)
+{
+    if ( WarmupEnabled || !HandicapMode )
+    {
+        return Plugin_Continue;
+    }
+
+    // get very minimum level
+    new minimum = UTIL_GetMinimunLevel(HandicapMode == 3);
+    if ( minimum == -1 )
+    {
+        return Plugin_Continue;
+    }
+    // get minimum level above very minimum level
+    new minLevel = UTIL_GetMinimunLevel(HandicapMode == 3, minimum);
+    if ( minLevel == -1 )
+    {
+        return Plugin_Continue;
+    }
+        
     for ( new i = 1; i <= MaxClients; i++ )
     {
-        if ( IsClientInGame(i) )
+        if ( IsClientInGame(i) && (PlayerLevel[i] == minimum) )
         {
-            switch ( GetClientTeam(i) ) {
-                case TEAM_T: {
-                    Tcount++;
-                } 
-                case TEAM_CT: {
-                    CTcount++;
+            decl String:steamid[64];
+            GetClientAuthString(i, steamid, sizeof(steamid));
+            if ( HandicapMode && ( 
+                    ( steamid[0] == 'B' )
+                    || Top10Handicap 
+                    || !StatsEnabled 
+                    || ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
+            ) )
+            {
+                if ( GG_GiveHandicapLevel(i, HandicapMode, minLevel) )
+                {
+                    CPrintToChat(i, "%t", "Your level has been updated by handicap");
+                    if ( TurboMode && IsPlayerAlive(i) )
+                    {
+                        UTIL_GiveNextWeapon(i, PlayerLevel[i]);
+                    }
+                    UTIL_UpdatePlayerScoreLevel(i);
                 }
             }
         }
     }
+    
+    return Plugin_Continue;
 }
 
 /**

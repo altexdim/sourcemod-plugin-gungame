@@ -69,4 +69,6 @@ new g_Cfg_MaxHandicapLevel = 0;
 new g_Cfg_ScoreboardClearDeaths = 0;
 new Weapons:g_Cfg_WarmupWeapon = Weapons:0;
 new g_Cfg_RandomWeaponReservLevels[GUNGAME_MAX_LEVEL];
+new Float:g_Cfg_HandicapUpdate;
+new g_Cfg_KnifeProRecalcPoints = 0;
 

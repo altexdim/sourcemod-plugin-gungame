@@ -76,6 +76,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
     new mode = GetNativeCell(2);
+    new minLevel = GetNativeCell(3);
 
     if ( (client < 1) || (client > MaxClients) )
     {
@@ -86,60 +87,49 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
     {
         new Count = GetClientCount();
 
-        if ( TotalLevel && Count )
-        {   
-            new level = TotalLevel / Count;
-            level -= g_Cfg_HandicapLevelSubstract;
-            if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < level ) {
-                level = g_Cfg_MaxHandicapLevel;
-            }
-            if ( level < 0 ) {
-                level = 0;
-            }
-            if ( PlayerLevel[client] < level )
-            {
-                PlayerLevel[client] = level;
-            }
+        if ( !TotalLevel || !Count ) {   
+            return 0;
+        }
+        new level = TotalLevel / Count;
+        level -= g_Cfg_HandicapLevelSubstract;
+        if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < level ) {
+            level = g_Cfg_MaxHandicapLevel;
+        }
+        if ( level < 0 ) {
+            return 0;
+        }
+        if ( PlayerLevel[client] < level )
+        {
+            PlayerLevel[client] = level;
+            CurrentKillsPerWeap[client] = 0;
+            return 1;
         }
     }
     else if ( mode == 2 || mode == 3 )
     {
-        new minimum = -1;
-        new level = 0;
-        for ( new i = 1; i <= MaxClients; i++ )
+        if ( minLevel == -1)
         {
-            if ( IsClientInGame(i) )
-            {
-                if ( ( client == i )
-                    || ( (mode == 3) && IsFakeClient(i) ) 
-                    || ( GetClientTeam(i) < 2 ) )
-                {
-                    continue;
-                }
-                level = PlayerLevel[i];
-                if ( (minimum == -1) || (level < minimum) )
-                {                 
-                    minimum = level;
-                }
+            minLevel = UTIL_GetMinimunLevel(mode == 3, -1, client);
+            if ( minLevel == -1 ) {
+                return 0;
             }
         }
-        if ( minimum != -1 ) 
+        minLevel -= g_Cfg_HandicapLevelSubstract;
+        if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < minLevel ) {
+            minLevel = g_Cfg_MaxHandicapLevel;
+        }
+        if ( minLevel < 0 ) {
+            return 0;
+        }
+        if ( PlayerLevel[client] < minLevel ) 
         {
-            minimum -= g_Cfg_HandicapLevelSubstract;
-            if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < minimum ) {
-                minimum = g_Cfg_MaxHandicapLevel;
-            }
-            if ( minimum < 0 ) {
-                minimum = 0;
-            }
-            if ( PlayerLevel[client] < minimum ) 
-            {
-                PlayerLevel[client] = minimum;
-            }
+            PlayerLevel[client] = minLevel;
+            CurrentKillsPerWeap[client] = 0;
+            return 1;
         }
     }
     
-    return 1;
+    return 0;
 }
 
 public __RemoveLevelMulti(Handle:plugin, numParams)
