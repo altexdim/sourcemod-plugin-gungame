@@ -17,6 +17,7 @@ TODO
         pointsNew = floor((poinsOld/miltikillOld) * multikillNew)
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
+    * If warmup is enabled do not use showlevelinscoreboard.
         
     ----====----==== High severity list ----====----====
     
