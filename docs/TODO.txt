@@ -23,7 +23,7 @@ TODO
     * Improve random number generation algorithm after fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
         High severity because of needed changes in sourcemod it-self.
         It was fixed in sm version 1.3.0 by GerURandomInt() function.
-        So add version check.
+        So add version check with "sourcemod_version" cvar.
     + Add winners menu:
         Also could you incorporate the attached code into your next release?
         The menu idea is from GG5's Winner Menu 

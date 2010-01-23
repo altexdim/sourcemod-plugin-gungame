@@ -935,7 +935,7 @@ UTIL_GetRandomInt(start, end)
     // TODO: Improve random number generation algorithm after 
     // fix for https://bugs.alliedmods.net/show_bug.cgi?id=3831
     // it fixed only in SourceMod version 1.3.0
-    // add check for sm version
+    // add check for sm version with "sourcemod_version" cvar.
     new Float:etime = GetEngineTime() + GetRandomFloat();
     new rand = (RoundFloat((etime-RoundToZero(etime))*1000000) + GetTime()) % (end - start + 1);
     return rand + start;
