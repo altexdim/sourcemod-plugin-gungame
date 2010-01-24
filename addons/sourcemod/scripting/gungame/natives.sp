@@ -201,17 +201,15 @@ public __RemoveALevel(Handle:plugin, numParams)
 public __AddALevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    /*  Do stuff */
-    if(CurrentLevelPerRound[client] >= MaxLevelPerRound)
+    if ( MaxLevelPerRound && CurrentLevelPerRound[client] >= MaxLevelPerRound )
     {
         return 0;
     }
@@ -238,9 +236,8 @@ public __AddALevel(Handle:plugin, numParams)
 public __IsClientCurrentWeapon(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -261,9 +258,8 @@ public __IsClientCurrentWeapon(Handle:plugin, numParams)
 public __GetClientLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -276,9 +272,8 @@ public __GetClientLevel(Handle:plugin, numParams)
 public __GetMaxLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -291,43 +286,35 @@ public __GetMaxLevel(Handle:plugin, numParams)
 public __AddAPoint(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if ( client < 1 || client > MaxClients )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
+    } else if ( !IsClientInGame(client) ) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    new level = PlayerLevel[client],
-        killsPerLevel = CustomKillPerLevel[level],
-        point = ++CurrentKillsPerWeap[client];
-    if ( !killsPerLevel )
-    {
-        killsPerLevel = MinKillsPerLevel;
-    }
-
-    if(point < killsPerLevel)
-    {
-        return point;
-    } /* They leveled up.*/
-
-    if(CurrentLevelPerRound[client] >= MaxLevelPerRound)
+    if ( MaxLevelPerRound && CurrentLevelPerRound[client] >= MaxLevelPerRound )
     {
         return 0;
     }
-
-    CurrentLevelPerRound[client]++;
-
+    
     new oldLevel = PlayerLevel[client];
-    level = UTIL_ChangeLevel(client, 1);
+    new point = ++CurrentKillsPerWeap[client];
+    if ( point < UTIL_GetCustomKillPerLevel(oldLevel) )
+    {
+        return point;
+    }
+    
+    /* They leveled up.*/
+    new level = UTIL_ChangeLevel(client, 1);
     if ( level == oldLevel )
     {
         return 0;
     }
+    CurrentLevelPerRound[client]++;
 
-    if(TurboMode)
+    if ( TurboMode )
     {
         UTIL_GiveNextWeapon(client, level);
     }
@@ -340,57 +327,46 @@ public __AddAPoint(Handle:plugin, numParams)
 public __RemoveAPoint(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if ( client < 1 || client > MaxClients )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
+    } else if ( !IsClientInGame(client) ) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    new level = PlayerLevel[client], 
-        killsPerLevel = CustomKillPerLevel[level],
-        point = --CurrentKillsPerWeap[client];
-    if ( !killsPerLevel )
-    {
-        killsPerLevel = MinKillsPerLevel;
-    }
-
-    if(point >= 0)
+    new oldLevel = PlayerLevel[client];
+    new point = --CurrentKillsPerWeap[client];
+    if ( point >= 0 )
     {
         return point;
-    } else {
-        CurrentKillsPerWeap[client] = killsPerLevel - 1;
-
-        if(--CurrentLevelPerRound[client] < 0)
-        {
-            CurrentLevelPerRound[client] = 0;
-        }
-        CurrentLevelPerRoundTriple[client] = 0;
+    } 
+    
+    // remove a level
+    if ( --CurrentLevelPerRound[client] < 0 )
+    {
+        CurrentLevelPerRound[client] = 0;
     }
+    CurrentLevelPerRoundTriple[client] = 0;
 
-    new oldLevel = PlayerLevel[client];
-    level = UTIL_ChangeLevel(client, -1);
+    new level = UTIL_ChangeLevel(client, -1);
     if ( oldLevel == level )
     {
-        return 0;
+        return CurrentKillsPerWeap[client] = 0;
     }
 
-    /* They lost a level if turbo mode is enabled return them back to the previous weapon */
-    if(TurboMode)
+    if ( TurboMode )
     {
         UTIL_GiveNextWeapon(client, level);
     }
-
-    return killsPerLevel - 1;
+    
+    return CurrentKillsPerWeap[client] = UTIL_GetCustomKillPerLevel(level) - 1;
 }
 public __GetClientPointLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -402,18 +378,15 @@ public __GetClientPointLevel(Handle:plugin, numParams)
 public __GetClientMaxPointLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new maxslots = GetMaxClients( );
 
-    if(client < 1 || client > maxslots)
+    if ( client < 1 || client > MaxClients )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
+    } else if ( !IsClientInGame(client) ) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    new level = PlayerLevel[client], killsPerLevel = CustomKillPerLevel[level];
-
-    return killsPerLevel ? killsPerLevel : MinKillsPerLevel;
+    return UTIL_GetCustomKillPerLevel(PlayerLevel[client]);
 }
 
 public __SetWeaponLevel(Handle:plugin, numParams)

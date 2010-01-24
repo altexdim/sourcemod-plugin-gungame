@@ -315,47 +315,36 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 break;
             }
 
+            new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
             if ( VictimLevel )
             {
-                new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
-                if ( ChangedLevel == VictimLevel )
-                {
+                if ( ChangedLevel == VictimLevel ) {
                     break;
                 }
-
                 CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             }
 
             if ( WeaponLevel == CSW_KNIFE )
             {
-                new killsPerLevel = CustomKillPerLevel[level];
-                if ( !killsPerLevel )
-                {
-                    killsPerLevel = MinKillsPerLevel;
-                }
-                if ( killsPerLevel > 1 )
-                {
+                if ( UTIL_GetCustomKillPerLevel(level) > 1 ) {
                     break;
                 }
             }
 
-            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE )
-            {
+            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE ) {
                 return;
             }
 
             new oldLevelKiller = level;
             level = UTIL_ChangeLevel(Killer, 1, true);
-            if ( oldLevelKiller == level )
-            {
+            if ( oldLevelKiller == level ) {
                 return;
             }
 
             PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
             CurrentLevelPerRound[Killer]++;
                    
-            if ( TurboMode )
-            {
+            if ( TurboMode ) {
                 UTIL_GiveNextWeapon(Killer, level);
             }
 
@@ -366,17 +355,11 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     /* They didn't kill with the weapon required */
-    if ( WeaponIndex != WeaponLevel )
-    {
+    if ( WeaponIndex != WeaponLevel ) {
         return;
     }
     
-    new killsPerLevel = CustomKillPerLevel[level];
-    if ( !killsPerLevel )
-    {
-        killsPerLevel = MinKillsPerLevel;
-    }
-    
+    new killsPerLevel = UTIL_GetCustomKillPerLevel(level);
     if ( killsPerLevel > 1 )
     {
         new kills = ++CurrentKillsPerWeap[Killer], Handled;
@@ -572,10 +555,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     // spawn chat messages
     new Weapons:WeapId = WeaponOrderId[Level];
-    new killsPerLevel = CustomKillPerLevel[Level];
-    if ( !killsPerLevel ) {
-        killsPerLevel = MinKillsPerLevel;
-    }
+    new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);
 
     if ( !g_Cfg_ShowSpawnMsgInHintBox )
     {

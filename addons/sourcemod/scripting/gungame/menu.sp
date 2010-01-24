@@ -81,11 +81,9 @@ CreateLevelPanel(client)
     SetPanelTitle(LevelPanel, text);
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 
-    new Level = PlayerLevel[client], Weapons:WeapId = WeaponOrderId[Level], killsPerLevel = CustomKillPerLevel[Level];
-    if ( !killsPerLevel )
-    {
-        killsPerLevel = MinKillsPerLevel;
-    }
+    new Level = PlayerLevel[client], 
+        Weapons:WeapId = WeaponOrderId[Level], 
+        killsPerLevel = UTIL_GetCustomKillPerLevel(Level);
 
     Format(text, sizeof(text), "%t", "LevelPanel: Level");
     DrawPanelItem(LevelPanel, text);

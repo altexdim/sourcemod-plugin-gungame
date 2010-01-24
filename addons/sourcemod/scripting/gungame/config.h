@@ -6,7 +6,7 @@ new State:ConfigState;
 new bool:ConfigReset;
 
 new MapStatus;
-new MaxLevelPerRound = 3;
+new MaxLevelPerRound = 0;
 new MinKillsPerLevel = 1;
 new bool:TurboMode;
 new bool:StripDeadPlayersWeapon;

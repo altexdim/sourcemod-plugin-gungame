@@ -114,18 +114,16 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 WorldspawnSuicide = StringToInt(value);
             } else if(strcmp("MaxLevelPerRound", key, false) == 0) {
                 MaxLevelPerRound = StringToInt(value);
-
-                if(MaxLevelPerRound < 0)
+                if ( MaxLevelPerRound < 0 )
                 {
-                    MaxLevelPerRound = NULL;
+                    MaxLevelPerRound = 0;
                 }
             } else if(strcmp("MinKillsPerLevel", key, false) == 0) {
-
-                if((MinKillsPerLevel = StringToInt(value)) < 1)
+                MinKillsPerLevel = StringToInt(value);
+                if( MinKillsPerLevel < 1)
                 {
                     MinKillsPerLevel = 1;
                 }
-
             } else if(strcmp("BotsCanWinGame", key, false) == 0) {
                 BotCanWin = bool:StringToInt(value);
             } else if(strcmp("KnifePro", key, false) == 0) {
@@ -168,7 +166,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 
                 if(KnifeProMinLevel < 0)
                 {
-                    KnifeProMinLevel = NULL;
+                    KnifeProMinLevel = 0;
                 }
             } else if(strcmp("CommitSuicide", key, false) == 0) {
                 CommitSuicide = StringToInt(value);
@@ -253,7 +251,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             {
                 if ( (CustomKillPerLevel[Level] = StringToInt(value)) < 0 )
                 {
-                    CustomKillPerLevel[Level] = NULL;
+                    CustomKillPerLevel[Level] = 0;
                 }
             }
         }
@@ -356,6 +354,6 @@ ClearCustomKill()
 {
     for(new i = 0; i < WeaponOrderCount; i++)
     {
-        CustomKillPerLevel[i] = NULL;
+        CustomKillPerLevel[i] = 0;
     }
 }

@@ -131,10 +131,8 @@ public Action:CmdReset(client, args)
 {
     if(IsActive)
     {
-        new maxslots = GetMaxClients( );
-
         /* Reset the game and start over */
-        for(new i = 1; i <= maxslots; i++)
+        for(new i = 1; i <= MaxClients; i++)
         {
             PlayerLevel[i] = 0;
             UTIL_UpdatePlayerScoreLevel(i);

@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.0.8.7:
+        * Fixed: If multikill and knifepro are enabled then clear current points 
+            of the knifed victim even if it is on the first level.
+        
     1.0.8.6:
         + Feature: Added config variable "KnifeProRecalcPoints" that saves level kills 
             when level down (and level up) with knife kill. For example when there are 

@@ -39,7 +39,7 @@ new const String:WeaponName[Weapons:MAXWEAPON][] =
 
 new const Slots:WeaponSlot[Weapons:MAXWEAPON] =
 {
-    Slots:NULL,
+    Slots:0,
     Slot_Knife,
     // Secondary Weapon
     Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary,

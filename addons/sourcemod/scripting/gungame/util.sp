@@ -1,19 +1,18 @@
 UTIL_FindMapObjective()
 {
     new i = FindEntityByClassname(-1, "func_bomb_target");
-    new maxslots = GetMaxClients( );
     
-    if(i > maxslots)
+    if(i > MaxClients)
     {
         MapStatus |= OBJECTIVE_BOMB;
     } else {
-        if((i = FindEntityByClassname(-1, "info_bomb_target")) > maxslots)
+        if((i = FindEntityByClassname(-1, "info_bomb_target")) > MaxClients)
         {
             MapStatus |= OBJECTIVE_BOMB;
         }
     }
     
-    if((i = FindEntityByClassname((i = 0), "hostage_entity")) > maxslots)
+    if((i = FindEntityByClassname((i = 0), "hostage_entity")) > MaxClients)
     {
         MapStatus |= OBJECTIVE_HOSTAGE;
     }
@@ -88,9 +87,7 @@ UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
 
         if(client == 0)
         {
-            new maxslots = GetMaxClients( );
-
-            for(new i = 1; i <= maxslots; i++)
+            for(new i = 1; i <= MaxClients; i++)
             {
                 if(IsClientInGame(i))
                 {
@@ -285,12 +282,9 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     
     new oldLevel = PlayerLevel[client], Level = oldLevel + difference;
 
-    if ( Level < 0 )
-    {
+    if ( Level < 0 ) {
         Level = 0;
-    }
-    else if ( Level > WeaponOrderCount )
-    {
+    } else if ( Level > WeaponOrderCount ) {
         Level = WeaponOrderCount;
     }
 
@@ -307,8 +301,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 
     if ( ret )
     {
-        PlayerLevel[client] = oldLevel;
-        return oldLevel;
+        return PlayerLevel[client] = oldLevel;
     }
 
     if ( !BotCanWin && IsFakeClient(client) && (Level >= WeaponOrderCount) )
@@ -319,7 +312,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 
     // Client got new level
     PlayerLevel[client] = Level;
-    if ( KnifeSteal && g_Cfg_KnifeProRecalcPoints ) {
+    if ( KnifeSteal && g_Cfg_KnifeProRecalcPoints && (oldLevel != Level) ) {
         CurrentKillsPerWeap[client] = CurrentKillsPerWeap[client] * UTIL_GetCustomKillPerLevel(Level) / UTIL_GetCustomKillPerLevel(oldLevel);
     } else {
         CurrentKillsPerWeap[client] = 0;
@@ -342,9 +335,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     }
 
     TotalLevel += Level - oldLevel;
-
-    if ( TotalLevel < 0 )
-    {
+    if ( TotalLevel < 0 ) {
         TotalLevel = 0;
     }
 
@@ -408,9 +399,7 @@ ForceMapChange()
 
 UTIL_FreezeAllPlayer()
 {
-    new maxslots = GetMaxClients( );
-
-    for(new i = 1, b; i <= maxslots; i++)
+    for(new i = 1, b; i <= MaxClients; i++)
     {
         if(IsClientInGame(i))
         {
@@ -549,13 +538,12 @@ UTIL_DropAllGrenades(client, bool:remove = false)
 UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false)
 {
     decl String:Class[64];
-    new maxslots = GetMaxClients( );
 
     for(new i = 0, ent; i < 128; i += 4)
     {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
 
-        if(ent > maxslots && HACK_GetSlot(ent) == _:Slot_Grenade)
+        if(ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade)
         {
             GetEdictClassname(ent, Class, sizeof(Class));
 
@@ -1085,10 +1073,7 @@ UTIL_GetMinimunLevel(bool:skipBots = true, aboveLevel = -1, skipClient = 0)
 
 UTIL_GetCustomKillPerLevel(level)
 {
-    if ( CustomKillPerLevel[level] )
-    {
-        return CustomKillPerLevel[level];
-    }
-    return MinKillsPerLevel;
+    new killsPerLevel = CustomKillPerLevel[level];
+    return killsPerLevel ? killsPerLevel : MinKillsPerLevel;
 }
 

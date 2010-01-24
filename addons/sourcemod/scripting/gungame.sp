@@ -159,13 +159,13 @@ public OnMapEnd()
 
     /* Clear out data */
     WarmupInitialized = false;
-    WarmupCounter = NULL;
-    MapStatus = NULL;
-    HostageEntInfo = NULL;
+    WarmupCounter = 0;
+    MapStatus = 0;
+    HostageEntInfo = 0;
     IsVotingCalled = false;
-    GameWinner = NULL;
-    TotalLevel = NULL;
-    CurrentLeader = NULL;
+    GameWinner = 0;
+    TotalLevel = 0;
+    CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
 
     for ( new Sounds:i = Welcome; i < MaxSounds; i++ )
@@ -216,10 +216,8 @@ public OnClientDisconnect(client)
 
     /* This does not take into account for steals. */
     TotalLevel -= PlayerLevel[client];
-
-    if ( TotalLevel < 0 )
-    {
-        TotalLevel = NULL;
+    if ( TotalLevel < 0 ) {
+        TotalLevel = 0;
     }
 
     if ( !IsFakeClient(client) )
@@ -233,7 +231,7 @@ public OnClientDisconnect(client)
     CurrentKillsPerWeap[client] = 0;
     CurrentLevelPerRound[client] = 0;
     CurrentLevelPerRoundTriple[client] = 0;
-    PlayerState[client] = NULL;
+    PlayerState[client] = 0;
     
     if ( IsClientInGame(client) && IsPlayerAlive(client) )
     {
@@ -331,11 +329,11 @@ public GG_OnShutdown(bool:Command)
     IsActive = false;
     InternalIsActive = false;
     WarmupInitialized = false;
-    WarmupCounter = NULL;
+    WarmupCounter = 0;
     IsVotingCalled = false;
-    GameWinner = NULL;
-    TotalLevel = NULL;
-    CurrentLeader = NULL;
+    GameWinner = 0;
+    TotalLevel = 0;
+    CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
         
     OnEventShutdown();
@@ -421,8 +419,7 @@ StartWarmupRound()
     WarmupInitialized = true;
     PrintToServer("[GunGame] Warmup round has started.");
     decl String:subtext[64];
-    new maxClients = GetMaxClients();
-    for ( new i = 1; i <= maxClients; i++ )
+    for ( new i = 1; i <= MaxClients; i++ )
     {
         if ( IsClientInGame(i) )
         {
@@ -467,10 +464,8 @@ public Action:EndOfWarmup(Handle:timer)
 
     CPrintToChatAll("%t", "Warmup round has ended");
 
-    new maxslots = GetMaxClients( );
-    TotalLevel = NULL;
-
-    for ( new i = 1; i <= maxslots; i++ )
+    TotalLevel = 0;
+    for ( new i = 1; i <= MaxClients; i++ )
     {
         PlayerLevel[i] = 0;
         UTIL_UpdatePlayerScoreLevel(i);

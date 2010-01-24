@@ -75,8 +75,8 @@
         /* Can bots win the game otherwise when they reach the last weapon and nothing will happen */
         "BotsCanWinGame" "0"
 
-        /* How many levels they can gain in 1 round */
-        "MaxLevelPerRound" "30"
+        /* How many levels they can gain in 1 round (0 - disabled) */
+        "MaxLevelPerRound" "0"
 
         /* Turbo Mode */
         "TurboMode" "0"

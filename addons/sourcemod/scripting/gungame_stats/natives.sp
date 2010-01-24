@@ -12,7 +12,7 @@ public __DisplayTop(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
 
-    if(client < 1 || client > GetMaxClients())
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -27,7 +27,7 @@ public __ShowRank(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
 
-    if(client < 1 || client > GetMaxClients())
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -42,7 +42,7 @@ public __GetPlayerPlaceInStat(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
 
-    if(client < 1 || client > GetMaxClients())
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
@@ -61,7 +61,7 @@ public __GetPlayerWins(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
 
-    if(client < 1 || client > GetMaxClients())
+    if(client < 1 || client > MaxClients)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     } else if(!IsClientInGame(client)) {
