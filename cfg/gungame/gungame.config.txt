@@ -52,9 +52,6 @@
         /* Start voting if leader level is less maximum level by this value */
         "VoteLevelLessWeaponCount" "2"
         
-        /* (not used) If intermission starts do calculate winner */
-        "IntermissionCalcWinner" "0"
-
         /* Display a join message, popup giving players instructions on how to play */
         "JoinMessage" "1"
 
