@@ -6,6 +6,9 @@ TODO
     
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
+    + Feature: How about changing TripleLevelBonus to MultiLevelBonus with 
+        optional MultiLevelBonusLevels for number of levels.
+        It could say in chat, "Player leveled x times!!".
         
     ----====----==== High severity list ----====----====
     
