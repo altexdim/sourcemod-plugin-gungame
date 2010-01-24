@@ -17,7 +17,7 @@
 	{
 		"#format"	"{1:d}"
 		"en"	"{1} second left"
-		"de"	"{1} Sekunden verbleibend"
+		"de"	"{1} Sekunde verbleibend"
 		"ru"	"{1} секунда осталась"
 	}
 	"x1>seconds left"
