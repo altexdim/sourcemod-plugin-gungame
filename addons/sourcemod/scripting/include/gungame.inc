@@ -104,14 +104,12 @@ forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKille
  * Handicap mode: 
  *    1 - Average level
  *    2 - Minimum level
- *    3 - Minimum level skip bots
  *
  * @param client        Player index.
- * @param mode          Handicap mode.
- * @param minLevel      Min level to use for handicap mode 2 and 3.
- * @return              If level was set then return 1. 0 - level was not changed.
+ * @return              If level was set then return 1. 
+ *                      0 - level was not changed.
  */
-native GG_GiveHandicapLevel(client, mode, minLevel = -1);
+native GG_GiveHandicapLevel(client);
 
 /**
  * Get the player current level.

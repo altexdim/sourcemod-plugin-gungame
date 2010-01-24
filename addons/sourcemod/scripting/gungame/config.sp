@@ -53,6 +53,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("HandicapSkipBots", key, false) == 0) {
+                g_Cfg_HandicapSkipBots = bool:StringToInt(value);
             } else if(strcmp("KnifeProRecalcPoints", key, false) == 0) {
                 g_Cfg_KnifeProRecalcPoints = StringToInt(value);
             } else if(strcmp("HandicapUpdate", key, false) == 0) {

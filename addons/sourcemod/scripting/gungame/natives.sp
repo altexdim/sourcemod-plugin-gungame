@@ -75,58 +75,38 @@ public __GetWeaponIndex(Handle:plugin, numParams)
 public __GiveHandicapLevel(Handle:plugin, numParams)
 {
     new client = GetNativeCell(1);
-    new mode = GetNativeCell(2);
-    new minLevel = GetNativeCell(3);
 
     if ( (client < 1) || (client > MaxClients) )
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
     }
 
-    if ( mode == 1 )
-    {
-        new Count = GetClientCount();
-
-        if ( !TotalLevel || !Count ) {   
-            return 0;
-        }
-        new level = TotalLevel / Count;
-        level -= g_Cfg_HandicapLevelSubstract;
-        if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < level ) {
-            level = g_Cfg_MaxHandicapLevel;
-        }
-        if ( level < 0 ) {
-            return 0;
-        }
-        if ( PlayerLevel[client] < level )
-        {
-            PlayerLevel[client] = level;
-            CurrentKillsPerWeap[client] = 0;
-            return 1;
-        }
+    if ( !HandicapMode ) {
+        return 0;
     }
-    else if ( mode == 2 || mode == 3 )
+    
+    decl String:steamid[64];
+    GetClientAuthString(client, steamid, sizeof(steamid));
+    
+    if ( g_Cfg_HandicapSkipBots && steamid[0] == 'B' ) {
+        return 0;
+    }
+    
+    if ( steamid[0] != 'B'
+         && !Top10Handicap 
+         && StatsEnabled 
+         && ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
+    )
     {
-        if ( minLevel == -1)
-        {
-            minLevel = UTIL_GetMinimunLevel(mode == 3, -1, client);
-            if ( minLevel == -1 ) {
-                return 0;
-            }
-        }
-        minLevel -= g_Cfg_HandicapLevelSubstract;
-        if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < minLevel ) {
-            minLevel = g_Cfg_MaxHandicapLevel;
-        }
-        if ( minLevel < 0 ) {
-            return 0;
-        }
-        if ( PlayerLevel[client] < minLevel ) 
-        {
-            PlayerLevel[client] = minLevel;
-            CurrentKillsPerWeap[client] = 0;
-            return 1;
-        }
+        return 0;
+    }
+    
+    new level = UTIL_GetHandicapLevel(client);
+    if ( PlayerLevel[client] < level )
+    {
+        PlayerLevel[client] = level;
+        CurrentKillsPerWeap[client] = 0;
+        return 1;
     }
     
     return 0;

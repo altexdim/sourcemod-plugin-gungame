@@ -29,7 +29,6 @@ new KnifeProMinLevel;
 new bool:KnifeElite;
 new bool:AutoFriendlyFire;
 new bool:BotCanWin;
-new TotalLevel;
 new bool:WarmupEnabled = true;
 new bool:DisableWarmupOnRoundEnd = false;
 new bool:WarmupInitialized;
@@ -71,4 +70,5 @@ new Weapons:g_Cfg_WarmupWeapon = Weapons:0;
 new g_Cfg_RandomWeaponReservLevels[GUNGAME_MAX_LEVEL];
 new Float:g_Cfg_HandicapUpdate;
 new g_Cfg_KnifeProRecalcPoints = 0;
+new bool:g_Cfg_HandicapSkipBots = false;
 

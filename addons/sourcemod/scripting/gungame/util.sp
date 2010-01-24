@@ -334,11 +334,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         }
     }
 
-    TotalLevel += Level - oldLevel;
-    if ( TotalLevel < 0 ) {
-        TotalLevel = 0;
-    }
-
     if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
     {
         /* Call map voting */
@@ -1047,7 +1042,34 @@ UTIL_ArrayIntRand(array[], size)
     }
 }
 
-UTIL_GetMinimunLevel(bool:skipBots = true, aboveLevel = -1, skipClient = 0)
+UTIL_GetCustomKillPerLevel(level)
+{
+    new killsPerLevel = CustomKillPerLevel[level];
+    return killsPerLevel ? killsPerLevel : MinKillsPerLevel;
+}
+
+UTIL_GetHandicapLevel(skipClient = 0, aboveLevel = -1)
+{
+    new level;
+    if ( HandicapMode == 1 ) {
+        level = UTIL_GetAverageLevel(g_Cfg_HandicapSkipBots, aboveLevel, skipClient);
+    } else if ( HandicapMode == 2 ) {
+        level = UTIL_GetMinimumLevel(g_Cfg_HandicapSkipBots, aboveLevel, skipClient);
+    }
+    if ( level == -1 ) {
+        return 0;
+    }
+    level -= g_Cfg_HandicapLevelSubstract;
+    if ( g_Cfg_MaxHandicapLevel && g_Cfg_MaxHandicapLevel < level ) {
+        level = g_Cfg_MaxHandicapLevel;
+    }
+    if ( level < 1 ) {
+        return 0;
+    }
+    return level;
+}
+
+UTIL_GetMinimumLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
 {
     new minimum = -1;
     new level = 0;
@@ -1062,7 +1084,10 @@ UTIL_GetMinimunLevel(bool:skipBots = true, aboveLevel = -1, skipClient = 0)
                 continue;
             }
             level = PlayerLevel[i];
-            if ( (level > aboveLevel) && ((minimum == -1) || (level < minimum)) )
+            if ( aboveLevel >= level ) {
+                continue;
+            }
+            if ( (minimum == -1) || (level < minimum) )
             {                 
                 minimum = level;
             }
@@ -1071,9 +1096,31 @@ UTIL_GetMinimunLevel(bool:skipBots = true, aboveLevel = -1, skipClient = 0)
     return minimum;
 }
 
-UTIL_GetCustomKillPerLevel(level)
+UTIL_GetAverageLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
 {
-    new killsPerLevel = CustomKillPerLevel[level];
-    return killsPerLevel ? killsPerLevel : MinKillsPerLevel;
+    new count, level, tmpLevel;
+    for ( new i = 1; i <= MaxClients; i++ )
+    {
+        if ( IsClientInGame(i) )
+        {
+            if ( ( skipBots && IsFakeClient(i) ) 
+                || ( GetClientTeam(i) < 2 )
+                || ( skipClient == i ) )
+            {
+                continue;
+            }
+            tmpLevel = PlayerLevel[i];
+            if ( aboveLevel >= tmpLevel ) {
+                continue;
+            }
+            level += tmpLevel;
+            count++;
+        }
+    }
+    if ( !count ) {
+        return -1;
+    }
+    level /= count;
+    return level;
 }
 

@@ -114,32 +114,20 @@ public OnPluginStart()
 
 public OnClientAuthorized(client, const String:auth[])
 {
-    if ( IsFakeClient(client) || !RestoreLevelOnReconnect )
-    {
-        return;
-    }
-
-    new level = 0;
-    if ( GetTrieValue(PlayerLevelsBeforeDisconnect, auth, level) )
-    {
-        if ( PlayerLevel[client] < level )
+    if ( RestoreLevelOnReconnect )
+    {    
+        new level = 0;
+        if ( GetTrieValue(PlayerLevelsBeforeDisconnect, auth, level) )
         {
-            PlayerLevel[client] = level;
+            if ( PlayerLevel[client] < level )
+            {
+                PlayerLevel[client] = level;
+                UTIL_RecalculateLeader(client, 0, level);
+            }
         }
     }
     
-    UTIL_RecalculateLeader(client, 0, level);
-
-    if ( HandicapMode && ( 
-            ( auth[0] == 'B' )
-            || Top10Handicap 
-            || !StatsEnabled 
-            || ( GG_GetPlayerPlaceInTop10(auth) == -1 ) /* HINT: gungame_stats */
-    ) )
-    {
-        GG_GiveHandicapLevel(client, HandicapMode);
-    }
-    
+    GG_GiveHandicapLevel(client);
     UTIL_UpdatePlayerScoreLevel(client);
 }
 
@@ -164,7 +152,6 @@ public OnMapEnd()
     HostageEntInfo = 0;
     IsVotingCalled = false;
     GameWinner = 0;
-    TotalLevel = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
 
@@ -212,12 +199,6 @@ public OnClientDisconnect(client)
         {
             UTIL_ChangeFriendlyFire(false);
         }
-    }
-
-    /* This does not take into account for steals. */
-    TotalLevel -= PlayerLevel[client];
-    if ( TotalLevel < 0 ) {
-        TotalLevel = 0;
     }
 
     if ( !IsFakeClient(client) )
@@ -332,7 +313,6 @@ public GG_OnShutdown(bool:Command)
     WarmupCounter = 0;
     IsVotingCalled = false;
     GameWinner = 0;
-    TotalLevel = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
         
@@ -464,7 +444,6 @@ public Action:EndOfWarmup(Handle:timer)
 
     CPrintToChatAll("%t", "Warmup round has ended");
 
-    TotalLevel = 0;
     for ( new i = 1; i <= MaxClients; i++ )
     {
         PlayerLevel[i] = 0;
@@ -504,41 +483,41 @@ public Action:Timer_HandicapUpdate(Handle:timer)
     }
 
     // get very minimum level
-    new minimum = UTIL_GetMinimunLevel(HandicapMode == 3);
-    if ( minimum == -1 )
-    {
+    new minimum = UTIL_GetMinimumLevel(g_Cfg_HandicapSkipBots);
+    if ( minimum == -1 ) {
         return Plugin_Continue;
     }
-    // get minimum level above very minimum level
-    new minLevel = UTIL_GetMinimunLevel(HandicapMode == 3, minimum);
-    if ( minLevel == -1 )
-    {
+    // get handicap level for players above very minimum level
+    new level = UTIL_GetHandicapLevel(0, minimum);
+    if ( level <= minimum ) {
         return Plugin_Continue;
     }
         
+    decl String:steamid[64];
     for ( new i = 1; i <= MaxClients; i++ )
     {
         if ( IsClientInGame(i) && (PlayerLevel[i] == minimum) )
         {
-            decl String:steamid[64];
             GetClientAuthString(i, steamid, sizeof(steamid));
-            if ( HandicapMode && ( 
-                    ( steamid[0] == 'B' )
-                    || Top10Handicap 
-                    || !StatsEnabled 
-                    || ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
-            ) )
-            {
-                if ( GG_GiveHandicapLevel(i, HandicapMode, minLevel) )
-                {
-                    CPrintToChat(i, "%t", "Your level has been updated by handicap");
-                    if ( TurboMode && IsPlayerAlive(i) )
-                    {
-                        UTIL_GiveNextWeapon(i, PlayerLevel[i]);
-                    }
-                    UTIL_UpdatePlayerScoreLevel(i);
-                }
+            if ( g_Cfg_HandicapSkipBots && steamid[0] == 'B' ) {
+                continue;
             }
+            if ( steamid[0] != 'B'
+                 && !Top10Handicap 
+                 && StatsEnabled 
+                 && ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
+            )
+            {
+                continue;
+            }
+            PlayerLevel[i] = level;
+            CurrentKillsPerWeap[i] = 0;
+            CPrintToChat(i, "%t", "Your level has been updated by handicap");
+            if ( TurboMode && IsPlayerAlive(i) )
+            {
+                UTIL_GiveNextWeapon(i, level);
+            }
+            UTIL_UpdatePlayerScoreLevel(i);
         }
     }
     

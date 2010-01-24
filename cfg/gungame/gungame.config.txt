@@ -149,14 +149,12 @@
         "HandicapLevelSubstract" "1"
 
         /**
-         * Gives joining players the avg level of all other players when they join late.
-         * If you're in the top10, you do not get this handicap even if it is turned on.
+         * Gives joining players the avg/min level of all other players when they join late.
          * 0 - Disable
          * 1 - Avg level
          * 2 - Min level
-         * 3 - Min level (skip bots)
          */
-        "HandicapMode" "3"
+        "HandicapMode" "2"
 
         /**
          * Allow players in the top10 to receive a handicap with the rest of the players.
@@ -165,13 +163,19 @@
         "Top10Handicap" "1"
 
         /**
-         * Handicap all players automaticaly every defined number of seconds.
-         * This work only for players that is on very minimum level from 
+         * Gives handicap level automaticaly every defined number of seconds.
+         * This only works for players that is on very minimum level from 
          * all the players.
-         * Handicap must also be turned on above for this to work.
+         * Handicap must also be turned on for this to work.
          */
         "HandicapUpdate" "0"
 
+        /**
+         * Dont use bots levels for handicap calculation. 
+         * Dont give handicap level to bots too.
+         */
+        "HandicapSkipBots" "0"
+        
         /* ----- [equip] ----- */
         
         /* Auto reload current level weapon on kill */
