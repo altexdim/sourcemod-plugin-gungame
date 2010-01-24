@@ -554,12 +554,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     UTIL_GiveNextWeapon(client, Level, false);
 
     // spawn chat messages
-    new Weapons:WeapId = WeaponOrderId[Level];
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);
 
     if ( !g_Cfg_ShowSpawnMsgInHintBox )
     {
-        CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponName[WeapId][7]);
+        CPrintToChat(client, "%t", "You are on level", Level + 1, WeaponOrderName[Level]);
 
         if ( MultiKillChat && ( killsPerLevel > 1 ) )
         {

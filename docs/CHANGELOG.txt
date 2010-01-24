@@ -1,6 +1,7 @@
 Changelog
 ---------
     1.0.8.7:
+        * Improvement: Added custom kills per level info into weapons panel.
         * Fixed: If multikill and knifepro are enabled then clear current points 
             of the knifed victim even if it is on the first level.
         

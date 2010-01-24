@@ -548,12 +548,12 @@
 		"ru"	"[GunGame] Оружие на уровнях"
 		"de"	"[GunGame] Waffen Levels"
 	}
-	"WeaponLevelPanel: Order Weapon"
+	"WeaponLevelPanel: Order Weapon Kills"
 	{
-		"#format"	"{1:d},{2:s}"
-		"en"	"{1}. {2}"
-		"ru"	"{1}. {2}"
-		"de"	"{1}. {2}"
+		"#format"	"{1:d},{2:s},{3:d}"
+		"en"	"{1}. {3}x {2}"
+		"ru"	"{1}. {3}x {2}"
+		"de"	"{1}. {3}x {2}"
 	}
 	"RulesPanel: [GunGame] Rules information"
 	{

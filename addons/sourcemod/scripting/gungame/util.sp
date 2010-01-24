@@ -363,7 +363,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 
         Call_StartForward(FwdWinner);
         Call_PushCell(client);
-        Call_PushString(WeaponName[WeaponOrderId[Level - 1]][7]);
+        Call_PushString(WeaponOrderName[Level - 1]);
         Call_Finish();
 
         GameWinner = client;

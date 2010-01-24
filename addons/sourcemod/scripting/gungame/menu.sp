@@ -82,13 +82,12 @@ CreateLevelPanel(client)
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
 
     new Level = PlayerLevel[client], 
-        Weapons:WeapId = WeaponOrderId[Level], 
         killsPerLevel = UTIL_GetCustomKillPerLevel(Level);
 
     Format(text, sizeof(text), "%t", "LevelPanel: Level");
     DrawPanelItem(LevelPanel, text);
     Format(text, sizeof(text), "%t", "LevelPanel: You are on level",
-        Level + 1, WeaponName[WeapId][7], CurrentKillsPerWeap[client], killsPerLevel);
+        Level + 1, WeaponOrderName[Level], CurrentKillsPerWeap[client], killsPerLevel);
     DrawPanelText(LevelPanel, text);
 
     if ( CurrentLeader == client )
@@ -368,17 +367,17 @@ DisplayWeaponLevelPanel(client)
 {
     SetGlobalTransTarget(client);
     decl String:text[256];
-    new Handle:Ham = CreatePanel(), i = ClientOnPage[client] * 7, end = i + 7;
+    new Handle:Ham = CreatePanel();
 
     Format(text, sizeof(text), "%t", "WeaponLevelPanel: [GunGame] Weapon Levels");
     SetPanelTitle(Ham, text);
     DrawPanelText(Ham, BLANK_SPACE);
 
-    for(; i < end; i++)
+    for ( new i = ClientOnPage[client] * 7, end = i + 7; i < end; i++ )
     {
-        if(i < WeaponOrderCount)
+        if ( i < WeaponOrderCount )
         {
-            Format(text, sizeof(text), "%t", "WeaponLevelPanel: Order Weapon", i + 1, WeaponName[WeaponOrderId[i]][7]);
+            Format(text, sizeof(text), "%t", "WeaponLevelPanel: Order Weapon Kills", i + 1, WeaponOrderName[i], UTIL_GetCustomKillPerLevel(i));
             DrawPanelText(Ham, text);
         }
     }
