@@ -667,5 +667,6 @@
     {
 		"en"	"{green}Your level has been updated by handicap"
 		"ru"	"{green}Ваш уровень обновлён, так как он был самым низким"
+		"de"	"{green}Dein Level wurde vom Handycap upgedated"
     }
 }
