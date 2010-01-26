@@ -3,7 +3,10 @@ TODO
     ----====----==== High priority list ----====----====
     
     ----====----==== Normal priority list ----====----====
-    
+
+    + Feature: if a players level is x amount below the persons level they 
+        knifed they will not get a level up and the person knifed will not 
+        get a level down.
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
     + Feature: How about changing TripleLevelBonus to MultiLevelBonus with 
