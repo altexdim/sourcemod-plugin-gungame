@@ -243,9 +243,12 @@
         /* Enable God Mode when triple leveled */
         "TripleLevelBonusGodMode" "1"
 
-        /* Custom speed and gravity value multiplier for triple level bonus */
-        "TripleLevelBonusSpeed" "1.5"
+        /**
+         * Custom speed and gravity value multiplier for triple level bonus.
+         * 0 - Disabled
+         */
         "TripleLevelBonusGravity" "0.5"
+        "TripleLevelBonusSpeed" "1.5"
 
         /* ----- [warmup] ----- */
         
