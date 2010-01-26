@@ -759,33 +759,37 @@ UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
 
 UTIL_StartTripleEffects(client)
 {
-    if ( g_tripleEffects[client] )
-    {
+    if ( g_tripleEffects[client] ) {
         return;
     }
     g_tripleEffects[client] = 1;
-    SetEntityGravity(client, g_Cfg_TripleLevelBonusGravity);
-    if ( TripleLevelBonusGodMode )
-    {
+    if ( TripleLevelBonusGodMode ) {
         UTIL_SetClientGodMode(client, 1);
     }
-    SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
+    if ( g_Cfg_TripleLevelBonusGravity ) {
+        SetEntityGravity(client, g_Cfg_TripleLevelBonusGravity);
+    }
+    if ( g_Cfg_TripleLevelBonusSpeed ) {
+        SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
+    }
     EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
 }
 
 UTIL_StopTripleEffects(client)
 {
-    if ( !g_tripleEffects[client] )
-    {
+    if ( !g_tripleEffects[client] ) {
         return;
     }
     g_tripleEffects[client] = 0;
-    SetEntityGravity(client, 1.0);
-    if ( TripleLevelBonusGodMode )
-    {
+    if ( TripleLevelBonusGodMode ) {
         UTIL_SetClientGodMode(client, 0);
     }
-    SetEntDataFloat(client, OffsetMovement, 1.0);
+    if ( g_Cfg_TripleLevelBonusGravity ) {
+        SetEntityGravity(client, 1.0);
+    }
+    if ( g_Cfg_TripleLevelBonusSpeed ) {
+        SetEntDataFloat(client, OffsetMovement, 1.0);
+    }
     EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
 }
 
