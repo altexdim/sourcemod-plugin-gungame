@@ -5,6 +5,7 @@
 		"en"		 "{lightgreen}GunGame stats is disabled"
 		"ru"		 "{lightgreen}Статистика GunGame отключена"
 		"de"		 "{lightgreen}GunGame Stats sind ausgeschaltet"
+		"pt"		 "{lightgreen}Estatisticas de Gungame desligadas"
     }
 	"Warmup round seconds left"
 	{
@@ -12,6 +13,7 @@
 		"en"		 "Warmup round :: {1}"
 		"de"		 "Warmup round :: {1}"
 		"ru"		 "Разогрев :: {1}"
+		"pt"		 "Round de warmup :: {1}"
 	}
 	"1>seconds left"
 	{
@@ -19,6 +21,7 @@
 		"en"	"{1} second left"
 		"de"	"{1} Sekunde verbleibend"
 		"ru"	"{1} секунда осталась"
+		"pt"	"Falta {1} segundo"
 	}
 	"x1>seconds left"
 	{
@@ -26,6 +29,7 @@
 		"en"	"{1} seconds left"
 		"de"	"{1} Sekunden verbleibend"
 		"ru"	"{1} секунда осталась"
+		"pt"	"Faltam {1} segundos"
 	}
 	"x2-x4>seconds left"
 	{
@@ -33,6 +37,7 @@
 		"en"	"{1} seconds left"
 		"de"	"{1} Sekunden verbleibend"
 		"ru"	"{1} секунды осталось"
+		"pt"	"Faltam {1} segundos"
 	}
 	"x5-x20>seconds left"
 	{
@@ -40,12 +45,14 @@
 		"en"	"{1} seconds left"
 		"de"	"{1} Sekunden verbleibend"
 		"ru"	"{1} секунд осталось"
+		"pt"	"Faltam {1} segundos"
 	}
 	"Warmup round has ended"
 	{
 		"en"		 "{green}Warmup round has ended"
 		"de"		 "{green}Warmup Runde ist zu Ende"
 		"ru"		 "{green}Разогрев закончен"
+		"pt"		 "{green}Round de warmup terminou"
 	}
 	"You are levels behind leader"
 	{
@@ -53,6 +60,7 @@
 		"en"		 "{green}You are {1} behind the leader"
 		"de"		 "{green}Du bist {1} hinter dem Führenden"
 		"ru"		 "{green}Вы на {1} отстаёте от лидера"
+		"pt"		 "{green}Estas {1} atraz do primeiro"
 	}
 	"1>levels"
 	{
@@ -60,6 +68,7 @@
 		"en"	"{default}{1} {green}level"
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровень"
+		"pt"	"{default}{1} {green}nivel"
 	}
 	"x1>levels"
 	{
@@ -67,6 +76,7 @@
 		"en"	"{default}{1} {green}levels"
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровень"
+		"pt"	"{default}{1} {green}niveis"
 	}
 	"x2-x4>levels"
 	{
@@ -74,6 +84,7 @@
 		"en"	"{default}{1} {green}levels"
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровня"
+		"pt"	"{default}{1} {green}niveis"
 	}
 	"x5-x20>levels"
 	{
@@ -81,6 +92,7 @@
 		"en"	"{default}{1} {green}levels"
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровней"
+		"pt"	"{default}{1} {green}niveis"
 	}
 	"Is leading on level"
 	{
@@ -88,6 +100,7 @@
 		"en"		 "{teamcolor}{1} {green}is leading on level {default}{2}{green}"
 		"de"		 "{teamcolor}{1} {green}führt mit Level {default}{2}{green}"
 		"ru"		 "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green}"
+		"pt"		 "{teamcolor}{1} {green}está na frente no nivel {default}{2}{green}"
 	}
 	"Is leading on level weapon"
 	{
@@ -95,6 +108,7 @@
 		"en"		 "{teamcolor}{1} {green}is leading on level {default}{2}{green} :: {default}{3}"
 		"de"		 "{teamcolor}{1} {green}führt mit Level {default}{2}{green} :: {default}{3}"
 		"ru"		 "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green} :: {default}{3}"
+		"pt"		 "{teamcolor}{1} {green}está na frente no nivel {default}{2}{green} :: {default}{3}"
 	}
 	"Is tied with the leader on level"
 	{
@@ -102,24 +116,28 @@
 		"en"		 "{teamcolor}{1} {green}is tied with the leader on level {default}{2}{green}"
 		"de"		 "{teamcolor}{1} {green}hat den Führenden auf Level {default}{2}{green} eingeholt"
 		"ru"		 "{teamcolor}{1} {green}догнал лидера на уровне {default}{2}{green}"
+		"pt"		 "{teamcolor}{1} {green}está empatado com o primeiro no nivel {default}{2}{green}"
 	}
 	"GunGame has been enabled"
 	{
 		"en"		 "{green}GunGame has been enabled"
 		"de"		 "{green}GunGame wurde eingeschaltet"
 		"ru"		 "{green}GunGame включен"
+		"pt"		 "{green}GunGame está ligado"
 	}
 	"GunGame has been disabled"
 	{
 		"en"		 "{green}GunGame has been disabled"
 		"de"		 "{green}GunGame wurde abgeschaltet"
 		"ru"		 "{green}GunGame выключен"
+		"pt"		 "{green}GunGame está desligado"
 	}
 	"Please view your console for more information"
 	{
 		"en"		 "{green}Please view your console for more information"
 		"de"		 "{green}Bitte schau in die Konsole für mehr Informationen"
 		"ru"		 "{green}Дополнительная информация находится в консоле"
+		"pt"		 "{green}Vê a consola para mais informação"
 	}
 	"Has won"
 	{
@@ -127,6 +145,7 @@
 		"en"		 "{1} has won"
 		"de"		 "{1} hat gewonnen"
 		"ru"		 "{1} выиграл"
+		"pt"		 "{1} ganhou"
 	}
 	"You need kills to advance to the next level"
 	{
@@ -134,6 +153,7 @@
 		"en"		 "{green}You need {1} to advance to the next level. Score :: {default}{2} {green}/ {default}{3}"
 		"de"		 "{green}Du brauchst {1} um das nächste Level zu erreichen. Punkte :: {default}{2}{green} /{default} {3}"
 		"ru"		 "{green}Вам нужно {1} до следующего уровня. Очки :: {default}{2}{green} /{default} {3}"
+		"pt"		 "{green}Precisas {1} para avançar para o nivel seguinte. Pontos :: {default}{2} {green}/ {default}{3}"
 	}	
 	"1>points"
 	{
@@ -141,6 +161,7 @@
 		"en"	"{default}{1}{green} kill"
 		"de"	"{default}{1}{green} kills"
 		"ru"	"{default}{1}{green} очко"
+		"pt"	"{default}{1}{green} morte"
 	}
 	"x1>points"
 	{
@@ -148,6 +169,7 @@
 		"en"	"{default}{1}{green} kills"
 		"de"	"{default}{1}{green} kills"
 		"ru"	"{default}{1}{green} очко"
+		"pt"	"{default}{1}{green} mortes"
 	}
 	"x2-x4>points"
 	{
@@ -155,6 +177,7 @@
 		"en"	"{default}{1}{green} kills"
 		"de"	"{default}{1}{green} kills"
 		"ru"	"{default}{1}{green} очка"
+		"pt"	"{default}{1}{green} mortes"
 	}
 	"x5-x20>points"
 	{
@@ -162,18 +185,21 @@
 		"en"	"{default}{1}{green} kills"
 		"de"	"{default}{1}{green} kills"
 		"ru"	"{default}{1}{green} очков"
+		"pt"	"{default}{1}{green} mortes"
 	}
 	"Warmup round has not started yet"
 	{
 		"en"		 "{green}Warmup round has not started yet"
 		"de"		 "{green}Warmup Runde wurde nicht gestartet"
 		"ru"		 "{green}Разогрев ещё не начинался"
+		"pt"		 "{green}Round de warmup ainda não começou"
 	}
 	"Warmup round is in progress"
 	{
 		"en"		 "{green}Warmup round is in progress"
 		"de"		 "{green}Warmup Runde läuft"
 		"ru"		 "{green}Разогрев продолжается"
+		"pt"		 "{green}Round de warmup está a decorrer"
 	}
 	"You are on level"
 	{
@@ -181,6 +207,7 @@
 		"en"		 "{green}You are on level {default}{1} {green}:: {default}{2}"
 		"de"		 "{green}Du bist auf Level {default}{1} {green}:: {default}{2}"
 		"ru"		 "{green}Вы на уровне {default}{1} {green}:: {default}{2}"
+		"pt"		 "{green}Estas no nivel {default}{1} {green}:: {default}{2}"
 	}
 	"Hint: Leader is on level"
 	{
@@ -188,12 +215,14 @@
 		"en"		 "Leader is on level {1} :: {2}"
 		"ru"		 "Лидер на уровне {1} :: {2}"
 		"de"		 "Der Führende ist auf Level {1} :: {2}"
+		"pt"		 "O lider está no nivel {1} :: {2}"
 	}
 	"Friendly Fire has been enabled"
 	{
 		"en"		 "{green}Friendly Fire has been enabled"
 		"de"		 "{green}Friendly Fire wurde eingeschaltet"
 		"ru"		 "{green}Включен режим Friendly Fire"
+		"pt"		 "{green}O Friendly Fire foi ligado"
 	}
 	"You gained level by planting the bomb"
 	{
@@ -201,6 +230,7 @@
 		"en"		 "{green}You gained {1} by planting the bomb"
 		"de"		 "{green}Du gewinnst {1} fürs planting der Bombe"
 		"ru"		 "{green}Вы получили {1} за установку бомбы"
+		"pt"		 "{green}Ganhaste {1} por pôr a bomba"
 	}
 	"You gained level by exploding the bomb"
 	{
@@ -208,6 +238,7 @@
 		"en"		 "{green}You gained {1} by exploding the bomb"
 		"de"		 "{green}Du gewinnst {1} fürs exploding der Bombe"
 		"ru"		 "{green}Вы получили {1} за взрыв бомбы"
+		"pt"		 "{green}Ganhaste {1} por explodir a bomba"
 	}
 	"You gained level by defusing the bomb"
 	{
@@ -215,6 +246,7 @@
 		"en"		 "{green}You gained {1} by defusing the bomb"
 		"de"		 "{green}Du gewinnst {1} fürs defusing der Bombe"
 		"ru"		 "{green}Вы получили {1} за разминирование бомбы"
+		"pt"		 "{green}Ganhaste {1} por desligar a bomba"
 	}
 	"Has stolen a level from"
 	{
@@ -222,6 +254,7 @@
 		"en"		 "{teamcolor}{1}{green} has stolen a level from {default}{2}"
 		"de"		 "{teamcolor}{1}{green} hat einen Level von {default}{2} {green}gestohlen"
 		"ru"		 "{teamcolor}{1}{green} украл уровень у {default}{2}"
+		"pt"		 "{teamcolor}{1}{green} roubou um nivel de {default}{2}"
 	}
 	"Triple leveled"
 	{
@@ -229,6 +262,7 @@
 		"en"		 "{teamcolor}{1} {green}triple leveled!!!"
 		"de"		 "{teamcolor}{1} {green}triple leveled!!!"
 		"ru"		 "{teamcolor}{1} {green}набрал три уровня!!!"
+		"pt"		 "{teamcolor}{1} {green}nivelou três vezes!!!"
 	}
 	"Is lower than the minimum knife stealing level"
 	{
@@ -236,6 +270,7 @@
 		"en"		 "{teamcolor}{1}{green} is lower than the minimum knife stealing level. They must be at least {default}{2}{green} level before you can steal"
 		"de"		 "{teamcolor}{1}{green} hat ein zu geringes Level. Er muss mind. Level {default}{2}{green} haben, bevor Du eins stehlen kannst"
 		"ru"		 "{teamcolor}{1}{green} находится ниже уровня, который можно украсть. Он должен быть хотя бы на {default}{2}{green} уровне"
+		"pt"		 "{teamcolor}{1}{green} está mais baixo que o nivel minimo para roubar um nivel. Têm de estar pelo menos no {default}{2}{green} nivel antes de poderes roubar"
 	}
 	"Has lost a level by killing a hostage"
 	{
@@ -243,6 +278,7 @@
 		"en"		 "{teamcolor}{1}{green} has lost a level by killing a hostage"
 		"de"		 "{teamcolor}{1}{green} hat einen Level verloren, wegen Tötung einer Geisel"
 		"ru"		 "{teamcolor}{1}{green} потерял уровень за убийство заложника"
+		"pt"		 "{teamcolor}{1}{green} perdeu um nivel por ter morto um refem"
 	}
 	"Has lost a level by suicided"
 	{
@@ -250,6 +286,7 @@
 		"en"		 "{teamcolor}{1}{green} has lost a level by suicided"
 		"de"		 "{teamcolor}{1}{green} hat einen Level wegen Selbstmord verloren"
 		"ru"		 "{teamcolor}{1}{green} самоликвидировался и потерял уровень"
+		"pt"		 "{teamcolor}{1}{green} perdeu um nivel por se ter suicidado"
 	}
 	"Has lost levels by suicided"
 	{
@@ -257,18 +294,21 @@
 		"en"		 "{teamcolor}{1}{green} has lost {2} by suicided"
 		"de"		 "{teamcolor}{1}{green} hat einen {2} wegen Selbstmord verloren"
 		"ru"		 "{teamcolor}{1}{green} самоликвидировался и потерял {2}"
+		"pt"		 "{teamcolor}{1}{green} perdeu {2} por se ter suicidado"
 	}
 	"LevelPanel: Level Information"
 	{
 		"en"	"[GunGame] Level Information"
 		"ru"	"[GunGame] Информация об уровене"
 		"de"	"[GunGame] Level Information"
+		"pt"	"[GunGame] Informação de nivel"
 	}
 	"LevelPanel: Level"
 	{
 		"en"	"Level:"
 		"ru"	"Уровень:"
 		"de"	"Level:"
+		"pt"	"Nivel:"
 	}
 	"LevelPanel: You are on level"
 	{
@@ -276,18 +316,21 @@
 		"en"	"You are on level {1} :: {2}\nYou have made {3} / {4} of your required kills."
 		"ru"	"Вы на уровне {1} :: {2}\nВы набрали {3} / {4} из необходимых очков."
 		"de"	"Du bist auf Level {1} :: {2}\nDu hast {3} / {4} deiner benötigten kills."
+		"pt"	"Estas no nivel {1} :: {2}\nFizeste {3} / {4} das mortes necessárias."
 	}
 	"LevelPanel: You are currently the leader"
 	{
 		"en"	"You are currently the leader."
 		"ru"	"Вы лидер."
 		"de"	"Du bist aktuell Führender."
+		"pt"	"És o lider actual."
 	}
 	"LevelPanel: Wins"
 	{
 		"en"	"Wins:"
 		"ru"	"Победы:"
 		"de"	"Wins:"
+		"pt"	"Vitórias:"
 	}
 	"LevelPanel: You have won times"
 	{
@@ -295,6 +338,7 @@
 		"en"	"You have won {1}."
 		"ru"	"Вы выиграли {1}."
 		"de"	"Du hast gewonnen {1}."
+		"pt"	"Ganhaste {1}."
 	}
 	"1>times"
 	{
@@ -302,6 +346,7 @@
 		"en"	"{1} time"
 		"ru"	"{1} раз"
 		"de"	"{1} mal"
+		"pt"	"{1} vez"
 	}
 	"x1>times"
 	{
@@ -309,6 +354,7 @@
 		"en"	"{1} times"
 		"ru"	"{1} раз"
 		"de"	"{1} mal"
+		"pt"	"{1} vezes"
 	}
 	"x2-x4>times"
 	{
@@ -316,6 +362,7 @@
 		"en"	"{1} times"
 		"ru"	"{1} раза"
 		"de"	"{1} mal"
+		"pt"	"{1} vezes"
 	}
 	"x5-x20>times"
 	{
@@ -323,12 +370,14 @@
 		"en"	"{1} times"
 		"ru"	"{1} раз"
 		"de"	"{1} mal"
+		"pt"	"{1} vezes"
 	}
 	"LevelPanel: Leader"
 	{
 		"en"	"Leader:"
 		"ru"	"Лидер:"
 		"de"	"Führender:"
+		"pt"	"Lider:"
 	}
 	"LevelPanel: The current leader is on level"
 	{
@@ -336,12 +385,14 @@
 		"en"	"The current leader is {1} on level {2} :: {3}."
 		"ru"	"Текущий лидер {1} на уровне {2} :: {3}."
 		"de"	"Der aktuell Führende ist {1} mit Level {2} :: {3}."
+		"pt"	"O lider actual é {1} no nivel {2} :: {3}."
 	}
 	"LevelPanel: You have tied with the leader"
 	{
 		"en"	"You have tied with the leader."
 		"ru"	"Вы на одном уровне с лидером."
 		"de"	"Du bist nun mit dem Führenden gleich auf."
+		"pt"	"Empataste com o lider."
 	}
 	"LevelPanel: You are levels from the leader"
 	{
@@ -349,48 +400,56 @@
 		"en"	"You are {1} from the leader."
 		"ru"	"Вы на {1} отстаёте от лидера."
 		"de"	"Du bist {1} von dem Führenden."
+		"pt"	"Estás a {1} do lider."
 	}
 	"LevelPanel: There is currently no leader"
 	{
 		"en"	"There is currently no leader."
 		"ru"	"Нет лидеров."
 		"de"	"Es gibt aktuell keinen Führenden."
+		"pt"	"Não há de momento um lider"
 	}
 	"LevelPanel: Scores"
 	{
 		"en"	"Scores:"
 		"ru"	"Очки:"
 		"de"	"Punkte:"
+		"pt"	"Pontuação:"
 	}
 	"LevelPanel: Press 4 to show scores"
 	{
 		"en"	"Press 4 to show scores."
 		"ru"	"Нажмите 4 для просмотра очков."
 		"de"	"Drücke 4 um die Punkte zu zeigen."
+		"pt"	"Carrega no 4 para mostrar a pontuação."
 	}
 	"Panel: Exit"
 	{
 		"en"	"Exit"
 		"ru"	"Выход"
 		"de"	"Ausgang"
+		"pt"	"Sair"
 	}
 	"Panel: Back"
 	{
 		"en"	"Back"
 		"ru"	"Назад"
 		"de"	"Zurück"
+		"pt"	"Atras"
 	}
 	"Panel: Next"
 	{
 		"en"	"Next"
 		"ru"	"Вперёд"
 		"de"	"Vor"
+		"pt"	"Seguinte"
 	}
 	"PlayersLevelPanel: Players level information"
 	{
 		"en"	"[GunGame] Players level information\n "
 		"ru"	"[GunGame] Уровни игроков\n "
 		"de"	"[GunGame] Spieler Level Information\n "
+		"pt"	"[GunGame] Informação de niveis de jogadores\n "
 	}
     "PlayersLevelPanel: Level Name"
     {
@@ -398,6 +457,7 @@
 		"en"	"Level {1} :: {3} :: {2}"
 		"ru"	"Уровень {1} :: {3} :: {2}"
 		"de"	"Level {1} :: {3} :: {2}"
+		"pt"	"Nivel {1} :: {3} :: {2}"
     }
 	"PlayersLevelPanel: Level Wins Name"
 	{
@@ -405,6 +465,7 @@
 		"en"	"Level {1} :: {4} :: {2} :: {3}"
 		"ru"	"Уровень {1} :: {4} :: {2} :: {3}"
 		"de"	"Level {1} :: {4} :: {2} :: {3}"
+		"pt"	"Nivel {1} :: {4} :: {2} :: {3}"
 	}
 	"1>wins"
 	{
@@ -412,6 +473,7 @@
 		"en"	"{1} Win"
 		"ru"	"{1} победа"
 		"de"	"{1} Win"
+		"pt"	"{1} Vitoria"
 	}
 	"x1>wins"
 	{
@@ -419,6 +481,7 @@
 		"en"	"{1} Wins"
 		"ru"	"{1} победа"
 		"de"	"{1} Wins"
+		"pt"	"{1} Vitorias"
 	}
 	"x2-x4>wins"
 	{
@@ -426,6 +489,7 @@
 		"en"	"{1} Wins"
 		"ru"	"{1} победы"
 		"de"	"{1} Wins"
+		"pt"	"{1} Vitorias"
 	}
 	"x5-x20>wins"
 	{
@@ -433,120 +497,140 @@
 		"en"	"{1} Wins"
 		"ru"	"{1} побед"
 		"de"	"{1} Wins"
+		"pt"	"{1} Vitorias"
 	}
 	"JoinPanel: This server is running the GunGame:SM"
 	{
 		"en"	"This server is running the GunGame:SM"
 		"ru"	"Этот сервер работает в режиме GunGame"
 		"de"	"Auf diesem Server läuft GunGame:SM"
+		"pt"	"Este servidor está a correr GunGame:SM"
 	}
 	"JoinPanel: Bots can win the game is ENABLED!!"
 	{
 		"en"	"Bots can win the game is ENABLED!!"
 		"ru"	"Боты МОГУТ выигрывать игру!!"
 		"de"	"Bots können Spiele gewinnen ist EINGESCHALTET!!"
+		"pt"	"Bots poderem ganhar o jogo está LIGADO!!"
 	}
 	"JoinPanel: Turbo Mode is ENABLED!!"
 	{
 		"en"	"Turbo Mode is ENABLED!!"
 		"ru"	"Турбо режим ВКЛЮЧЕН!!"
 		"de"	"Turbo Modus ist EINGESCHALTET!!"
+		"pt"	"Modo Turbo está LIGADO!!"
 	}
 	"JoinPanel: Knife Pro is ENABLED!!"
 	{
 		"en"	"Knife Pro is ENABLED!!"
 		"ru"	"Режим Knife Pro ВКЛЮЧЕН!!"
 		"de"	"Knife Pro ist EINGESCHALTET!!"
+		"pt"	"Knife Pro está LIGADO!!"
 	}
 	"JoinPanel: Knife Elite is ENABLED!!"
 	{
 		"en"	"Knife Elite is ENABLED!!"
 		"ru"	"Режим Knife Elite ВКЛЮЧЕН!!"
 		"de"	"Knife Elite ist EINGESCHALTET!!"
+		"pt"	"Knife Elite está LIGADO!!"
 	}
 	"JoinPanel: Multikill Mode is ENABLED!!"
 	{
 		"en"	"Multikill Mode is ENABLED!!"
 		"ru"	"Режим Multikill ВКЛЮЧЕН!!"
 		"de"	"Multikill Mode ist EINGESCHALTET!!"
+		"pt"	"Modo Multikill está LIGADO!!"
 	}
 	"JoinPanel: Type !rules for instructions on how to play"
 	{
 		"en"	"Type !rules for instructions on how to play"
 		"ru"	"!rules - правила игры"
 		"de"	"Schreib !rules für eine Anleitung zu diesem Spiel"
+		"pt"	"Escreve !rules para instruções de como jogar"
 	}
 	"JoinPanel: Type !level to get your level info and who is leading"
 	{
 		"en"	"Type !level to get your level info and who is leading"
 		"ru"	"!level - ваш уровень и кто лидер"
 		"de"	"Schreib !level für die Info, wer aktuell führt"
+		"pt"	"Escreve !level para veres a informação do teu nivel e quem lidera"
 	}
 	"JoinPanel: Type !score to get a list of all players scores and winnings"
 	{
 		"en"	"Type !score to get a list of all players scores and winnings"
 		"ru"	"!score - уровни игроков и их победы"
 		"de"	"Schreib !score für eine Liste über die Punkte und Siege aller Spieler"
+		"pt"	"Escreve !score para veres uma lista de todas as pontuações e vitórias"
 	}
 	"JoinPanel: Type !commands to get a full list of gungame commands"
 	{
 		"en"	"Type !commands to get a full list of gungame commands"
 		"ru"	"!commands - список команд"
 		"de"	"Schreib !commands für eine Liste der gungame commands"
+		"pt"	"Escreve !commands para uma lista completa de comandos do gungame"
 	}
 	"CommandPanel: [GunGame] Command list information"
 	{
 		"en"	"[GunGame] Command list information"
 		"ru"	"[GunGame] Список команд"
 		"de"	"[GunGame] Command list Information"
+		"pt"	"[GunGame] Lista de comandos"
 	}
 	"CommandPanel: !level to see your current level and who is winning"
 	{
 		"en"	"!level to see your current level and who is winning"
 		"ru"	"!level - ваш уровень и кто лидирует"
 		"de"	"!level um dein aktuelles Level zu sehen und wer aktuell gewinnt"
+		"pt"	"!level para ver o teu nivel e quem lidera"
 	}
 	"CommandPanel: !weapons to see the weapon order"
 	{
 		"en"	"!weapons to see the weapon order"
 		"ru"	"!weapons - порядок оружия"
 		"de"	"!weapons um die Waffenreihenfolge zu sehen"
+		"pt"	"!weapons para ver a ordem das armas"
 	}
 	"CommandPanel: !score to see all player current scores"
 	{
 		"en"	"!score to see all player current scores"
 		"ru"	"!score - текущие очки игроков"
 		"de"	"!score um die Punkte aller Spieler zu sehen"
+		"pt"	"!score para ver todas as pontuações"
 	}
 	"CommandPanel: !top to see the top winners on the server"
 	{
 		"en"	"!top to see the top winners on the server"
 		"ru"	"!top - Топ победителей"
 		"de"	"!top um die Top Spieler dieses Servers zu sehen"
+		"pt"	"!top para ver o top de vencedores do servidor"
 	}
     "CommandPanel: !leader to see current leaders"
     {
 		"en"	"!leader to show current leaders"
 		"ru"	"!leader - лидеры"
 		"de"	"!leader um den aktuell Führenden anzuzeigen"
+		"pt"	"!leader para mostrar o lider corrente"
     }
 	"CommandPanel: !rank to see your place in stats"
 	{
 		"en"	"!rank to see your place in stats"
 		"ru"	"!rank - ваше место в статистике"
 		"de"	"!rank um deinen aktuellen Platz in den Stats anzuzeigen"
+		"pt"	"!rank para ver a tua posição nos stats"
 	}
 	"CommandPanel: !rules to see the rules and how to play"
 	{
 		"en"	"!rules to see the rules and how to play"
 		"ru"	"!rules - правила игры"
 		"de"	"!rules um die Regeln zu sehen und wie man hier spielt"
+		"pt"	"!rules para ver as regras e como jogar"
 	}
 	"WeaponLevelPanel: [GunGame] Weapon Levels"
 	{
 		"en"	"[GunGame] Weapon Levels"
 		"ru"	"[GunGame] Оружие на уровнях"
 		"de"	"[GunGame] Waffen Levels"
+		"pt"	"[GunGame] Niveis de armas"
 	}
 	"WeaponLevelPanel: Order Weapon Kills"
 	{
@@ -554,12 +638,14 @@
 		"en"	"{1}. {3}x {2}"
 		"ru"	"{1}. {3}x {2}"
 		"de"	"{1}. {3}x {2}"
+		"pt"	"{1}. {3}x {2}"
 	}
 	"RulesPanel: [GunGame] Rules information"
 	{
 		"en"	"[GunGame] Rules information"
 		"ru"	"[GunGame] Правила игры"
 		"de"	"[GunGame] Regeln Information"
+		"pt"	"[GunGame] Informação de regras"
 	}
 	"RulesPanel: You must get kills with your current weapon to level up"
 	{
@@ -567,12 +653,14 @@
 		"en"	"You must get {1} with your current weapon to level up."
 		"ru"	"Вам нужно набрать {1} с вашим текущим оружием до следующего уровня."
 		"de"	"Du musst {1} mit Deiner Waffe haben, um einen Level zu steigen."
+		"pt"	"Tens de fazer {1} com a tua arma corrente para subires de nivel."
 	}
 	"RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level"
 	{
 		"en"	"If you get a kill with a weapon out of order, it does not count towards your level."
 		"ru"	"Очки, набранные из других оружий, не засчитываются."
 		"de"	"Wenn Du mit der falschen Waffe killst, bekommst Du keinen Level dazu."
+		"pt"	"Se fizeres uma morte com uma arma fora da ordem não conta para o teu nivel."
 	}
 	"RulesPanel: You can gain level by PLANTING or DEFUSING the bomb"
 	{
@@ -580,6 +668,7 @@
 		"en"	"You can gain {1} by PLANTING or DEFUSING the bomb."
 		"ru"	"Вы можете получить {1} за УСТАНОВКУ или ОБЕЗВРЕЖИВАНИЕ бомбы."
 		"de"	"Du kannst {1} gewinnen, in dem Du die Bombe legst bzw. entschärfst."
+		"pt"	"Podes ganhar {1} por pôr ou desligar a bomba."
 	}
 	"RulesPanel: You can gain level by EXPLODING or DEFUSING the bomb"
 	{
@@ -587,36 +676,42 @@
 		"en"	"You can gain {1} by EXPLODING or DEFUSING the bomb."
 		"ru"	"Вы можете получить {1} за ВЗРЫВ или ОБЕЗВРЕЖИВАНИЕ бомбы."
 		"de"	"Du kannst {1} bekommen, wenn die Bombe explodiert oder Du sie entschärfst."
+		"pt"	"Podes ganhar {1} por explodir ou desligar a bomba."
 	}
 	"RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level"
 	{
 		"en"	"Friendly Fire is automatically turned ON when someone reaches GRENADE level."
 		"ru"	"Режим Friendly Fire автоматически ВКЛЮЧАЕТСЯ, когда кто-либо доходит до ГРАНАТЫ."
 		"de"	"Friendly Fire ist automatisch an, wenn jemand die Granate erreicht."
+		"pt"	"Friendly Fire é ligado automaticamente quando algum chega ao nivel da granada."
 	}
 	"RulesPanel: You CAN gained more than one level per round"
 	{
 		"en"	"You CAN gain more than one level per round."
 		"ru"	"Вы МОЖЕТЕ подняться больше, чем на один уровень за раунд."
 		"de"	"Du kannst mehr als EIN Level pr Runde machen."
+		"pt"	"Podes ganhar mais de um nivel por turno."
 	}
 	"RulesPanel: You can steal a level from an opponent by knifing them"
 	{
 		"en"	"You can steal a level from an opponent by knifing them."
 		"ru"	"Вы можете украсть уровень с помощью ножа."
 		"de"	"Du kannst einem Gegner einen Level stehlen, in dem Du ihn mit dem Messer killst."
+		"pt"	"Podes roubar um nivel aos adversários se os matares com a faca."
 	}
 	"RulesPanel: After you levelup, you will only have a knife until the next round starts"
 	{
 		"en"	"After you levelup, you will only have a knife until the next round starts."
 		"ru"	"После прохождения каждого уровня вы у вас будет оставаться только нож."
 		"de"	"Nach dem Du gelevelt hast, hast Du nächste Runde nur ein Messer als Waffe."
+		"pt"	"Depois de subires de nivel so terás a faca até ao proximo turno."
 	}
 	"RulesPanel: You will receive your next weapon immediately when you level up"
 	{
 		"en"	"You will receive your next weapon immediately when you level up."
 		"ru"	"Вы получите следующее оружие сразу же после прохождения уровня."
 		"de"	"Du bekommst Deine nächste Waffe erst, wenn Du im nächsten Level bist."
+		"pt"	"Irás receber a proxima arma imediatamente depois de subir de nivel."
 	}
 	"RulesPanel: If you commit suicide you will lose levels"
 	{
@@ -624,18 +719,21 @@
 		"en"	"If you commit suicide you will lose {1}."
 		"ru"	"При самоликвидации вы потеряете {1}."
 		"de"	"Wenn Du Dich selber tötest, verlierst Du ein {1}."
+		"pt"	"Se te suicidares iras perder {1}."
 	}
 	"RulesPanel: There is a grace period at the end of each round to allow players to switch teams"
 	{
 		"en"	"There is a grace period at the end of each round to allow players to switch teams."
 		"ru"	"Вы можете сменить команду в любое время, вы не потеряете уровень."
 		"de"	"Da ist eine Frist an jedem Ende einer Runde die es Spielern erlaubt das Team zu wechseln."
+		"pt"	"Há um periodo no fim de cada turno em que podes mudar de equipa."
 	}
 	"RulesPanel: Type !commands to see the list of gungame commands"
 	{
 		"en"	"Type !commands to see the list of gungame commands."
 		"ru"	"Напишите !commands для просмотра списка команд."
 		"de"	"Schrieb !commands für eine Liste aller gungame commands."
+		"pt"	"Escreve !commands para ver a lista de comandos do gungame."
 	}
 	"RulesPanel: Page"
 	{
@@ -643,18 +741,21 @@
 		"en"	"Page {1} / {2}"
 		"ru"	"Страница {1} / {2}"
 		"de"	"Seite {1} / {2}"
+		"pt"	"Pagina {1} / {2}"
 	}
     "LeaderMenu: Leaders"
     {
 		"en"	"[GunGame] Leaders\n "
 		"ru"	"[GunGame] Лидеры\n "
 		"de"	"[GunGame] Leaders\n "
+		"pt"	"[GunGame] Lideres\n "
     }
     "LeaderMenu: No leaders"
     {
 		"en"	"There is currently no leader."
 		"ru"	"Сейчас лидеров нет."
 		"de"	"Es gibt aktuell keinen Führenden."
+		"pt"	"Não há nenhum lider de momento."
     }
     "LeaderMenu: Leader level and weapon"
     {
@@ -662,11 +763,13 @@
 		"en"	"\nCurrent leader is on level {1} :: {2}\n \nLeaders:"
 		"ru"	"\nЛидер находится на уровне {1} :: {2}\n \nЛидеры:"
 		"de"	"\naktuell Führender ist auf Level {1} :: {2}\n \nLeaders:"
+		"pt"	"\nO lider corrente está no nivel {1} :: {2}\n \nLideres:"
     }
     "Your level has been updated by handicap"
     {
 		"en"	"{green}Your level has been updated by handicap"
 		"ru"	"{green}Ваш уровень обновлён, так как он был самым низким"
 		"de"	"{green}Dein Level wurde vom Handycap upgedated"
+		"pt"	"{green}O teu nivel foi actualizado pelo handicap"
     }
 }

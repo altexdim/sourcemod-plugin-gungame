@@ -5,5 +5,6 @@
         "en"         "{lightgreen}You do not gain a level because you killed an afk"
 	"de"         "{lightgreen}Du bekommst für den Kill keinen Level. Der Spieler ist AFK"
         "ru"         "{lightgreen}Вы не получили уровень за убийство AFK"
+		"pt"         "{lightgreen}Não ganhas um nivel porque mataste um AFK"
     }
 }
