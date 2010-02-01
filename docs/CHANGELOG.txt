@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Fixed: Player names have not been properly quoted in sql.
         + Added translation to portuguese. Thanks to VoGon.
         * German transtlation has been updated. Thanks to tObIwAnKeNoBi.
         

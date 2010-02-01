@@ -4,24 +4,6 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
-    * Bug:
-        Hey. There is a bug in GunGame SQL support. I've noticed this when 
-        I was importing data file to database with gg_importdb. Problem is 
-        that when player have '\' character in the name then database will 
-        return error for SQL statements like here:
-
-        INSERT INTO gungame_playerdata (wins, name, timestamp, authid) 
-        VALUES (1, "*-B@mAk0-* /!\", current_timestamp, "STEAM_0:0:1588393129");
-
-        L 02/01/2010 - 16:05:32: [gungame_stats.smx] Could not save player 
-        (error: You have an error in your SQL syntax; check the manual that 
-        corresponds to your MySQL server version for the right syntax to use 
-        near 'STEAM_0:0:1588393129")' at line 1) 
-
-        It takes '\' as escape sequence, so you should change every '\' 
-        to "\\" in player names. I just started to updating plugin on my 
-        server, so if you could provide quick fix for it - I will appreciate 
-        that.
     + Feature: Do you think handicap should be given on first spawn, not on 
         connect? As an admin I might spec for the first 2 minutes of a map 
         but never join the game. If I reconnect I can get the handicap. 

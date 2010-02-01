@@ -107,15 +107,13 @@ SavePlayerData(client)
     GetClientAuthString(client, auth, sizeof(auth));
     GetClientName(client, name, sizeof(name));
 
-    /* Create enough space to make sure our string is quoted properly  */
     new bufferLen = strlen(name) * 2 + 1;
-    new String:newName[bufferLen];
+    new String:nameQuoted[bufferLen];
  
-    /* Ask the SQL driver to make sure our string is safely quoted */
-    SQL_EscapeString(g_DbConnection, name, newName, bufferLen);
+    SQL_EscapeString(g_DbConnection, name, nameQuoted, bufferLen);
         
     decl String:query[1024];
-    Format(query, sizeof(query), wins == 1 ? g_sql_insertPlayer : g_sql_updatePlayerByAuth, wins, name, auth);
+    Format(query, sizeof(query), wins == 1 ? g_sql_insertPlayer : g_sql_updatePlayerByAuth, wins, nameQuoted, auth);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
@@ -289,6 +287,9 @@ public Action:_CmdImport(client, args)
     decl Wins, String:Name[64];
     decl ImportedWins, String:Auth[64];
 
+    new bufferLen = strlen(Name) * 2 + 1;
+    decl String:nameQuoted[bufferLen];
+
     do
     {
         KvGetSectionName(KvGunGame, Auth, sizeof(Auth));
@@ -328,10 +329,12 @@ public Action:_CmdImport(client, args)
         CloseHandle(result);
         
         if ( Wins ) {
-            Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, Name, Auth);
+            SQL_EscapeString(g_DbConnection, Name, nameQuoted, bufferLen);
+            Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, nameQuoted, Auth);
         } else {
             KvGetString(KvGunGame, "name", Name, sizeof(Name));
-            Format(query, sizeof(query), g_sql_insertPlayer, ImportedWins, Name, Auth);
+            SQL_EscapeString(g_DbConnection, Name, nameQuoted, bufferLen);
+            Format(query, sizeof(query), g_sql_insertPlayer, ImportedWins, nameQuoted, Auth);
         }
 
         // SavePlayerData
@@ -395,6 +398,9 @@ public Action:_CmdImportDb(client, args)
     decl Wins, String:Name[64];
     decl ImportedWins, String:Auth[64];
 
+    new bufferLen = strlen(Name) * 2 + 1;
+    decl String:nameQuoted[bufferLen];
+
     do
     {
         KvGetSectionName(KvGunGame, Auth, sizeof(Auth));
@@ -434,10 +440,12 @@ public Action:_CmdImportDb(client, args)
         CloseHandle(result);
         
         if ( Wins ) {
-            Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, Name, Auth);
+            SQL_EscapeString(g_DbConnection, Name, nameQuoted, bufferLen);
+            Format(query, sizeof(query), g_sql_updatePlayerByAuth, Wins + ImportedWins, nameQuoted, Auth);
         } else {
             KvGetString(KvGunGame, "Name", Name, sizeof(Name));
-            Format(query, sizeof(query), g_sql_insertPlayer, ImportedWins, Name, Auth);
+            SQL_EscapeString(g_DbConnection, Name, nameQuoted, bufferLen);
+            Format(query, sizeof(query), g_sql_insertPlayer, ImportedWins, nameQuoted, Auth);
         }
 
         // SavePlayerData
