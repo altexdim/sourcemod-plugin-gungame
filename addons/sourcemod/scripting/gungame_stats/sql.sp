@@ -107,8 +107,8 @@ SavePlayerData(client)
     GetClientAuthString(client, auth, sizeof(auth));
     GetClientName(client, name, sizeof(name));
 
-    new bufferLen = strlen(name) * 2 + 1;
-    new String:nameQuoted[bufferLen];
+    new bufferLen = sizeof(name) * 2 + 1;
+    decl String:nameQuoted[bufferLen];
  
     SQL_EscapeString(g_DbConnection, name, nameQuoted, bufferLen);
         
@@ -287,7 +287,7 @@ public Action:_CmdImport(client, args)
     decl Wins, String:Name[64];
     decl ImportedWins, String:Auth[64];
 
-    new bufferLen = strlen(Name) * 2 + 1;
+    new bufferLen = sizeof(Name) * 2 + 1;
     decl String:nameQuoted[bufferLen];
 
     do
@@ -398,7 +398,7 @@ public Action:_CmdImportDb(client, args)
     decl Wins, String:Name[64];
     decl ImportedWins, String:Auth[64];
 
-    new bufferLen = strlen(Name) * 2 + 1;
+    new bufferLen = sizeof(Name) * 2 + 1;
     decl String:nameQuoted[bufferLen];
 
     do
