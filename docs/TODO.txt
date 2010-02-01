@@ -4,6 +4,7 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    * Bug: Do not cache/use empty sounds.
     + Feature: Do you think handicap should be given on first spawn, not on 
         connect? As an admin I might spec for the first 2 minutes of a map 
         but never join the game. If I reconnect I can get the handicap. 
