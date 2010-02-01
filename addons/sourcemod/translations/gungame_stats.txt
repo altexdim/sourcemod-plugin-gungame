@@ -100,7 +100,7 @@
 		"en"	"Next"
 		"ru"	"Вперёд"
 		"de"	"Vor"
-		"en"	"Seguinte"
+		"pt"	"Seguinte"
 	}
     "Panel: Exit"
     {
