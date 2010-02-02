@@ -249,10 +249,10 @@
         
         /* ----- [multi level] ----- */
         
-        /* Triple Level Bonus */
+        /* Milti Level Bonus */
         "MultiLevelBonus" "0"
 
-        /* Enable God Mode when triple leveled */
+        /* Enable God Mode when multi leveled */
         "MultiLevelBonusGodMode" "1"
 
         /**
