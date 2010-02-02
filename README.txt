@@ -156,6 +156,9 @@ Issues
     3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
         a) http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
 
+    4) How to switch stats database from sqlite to mysql 
+        a) http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865        
+        
 3-rd party plugins
 ------------------
     * Winners menu:
