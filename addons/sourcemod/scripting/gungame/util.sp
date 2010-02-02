@@ -772,7 +772,9 @@ UTIL_StartTripleEffects(client)
     if ( g_Cfg_TripleLevelBonusSpeed ) {
         SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
     }
-    EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+    if ( EventSounds[Triple][0] ) {
+        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+    }
 }
 
 UTIL_StopTripleEffects(client)
@@ -790,7 +792,9 @@ UTIL_StopTripleEffects(client)
     if ( g_Cfg_TripleLevelBonusSpeed ) {
         SetEntDataFloat(client, OffsetMovement, 1.0);
     }
-    EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+    if ( EventSounds[Triple][0] ) {
+        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+    }
 }
 
 /**

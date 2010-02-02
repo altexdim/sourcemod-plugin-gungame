@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed: "SV_StartSound:  not precached (0)" in error logs.
+    
     1.0.8.9:
         * Fixed: Player names have not been properly quoted in sql.
         + Added translation to portuguese. Thanks to VoGon.

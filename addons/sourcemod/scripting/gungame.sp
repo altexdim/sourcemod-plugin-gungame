@@ -420,7 +420,7 @@ public Action:EndOfWarmup(Handle:timer)
     {
         if ( Warmup_TimeLength - WarmupCounter < 5)
         {
-            EmitSoundToAll(EventSounds[WarmupTimerSound]);
+            UTIL_PlaySound(0, WarmupTimerSound);
         }
         decl String:subtext[64];
         for ( new i = 1; i <= MaxClients; i++ )

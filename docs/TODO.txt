@@ -2,25 +2,25 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
+    + Feature: option to give handicap level maximum n times per map; people 
+        like to reconnect to get better level instead of trying to play 
+        better; it should be easy to implement since you did restore level 
+        after reconnect.
+    + Feature: if a players level is x amount below the persons level they 
+        knifed they will not get a level up and the person knifed will not 
+        get a level down.
+        
     ----====----==== Normal priority list ----====----====
 
-    * Bug: Do not cache/use empty sounds.
     + Feature: Do you think handicap should be given on first spawn, not on 
         connect? As an admin I might spec for the first 2 minutes of a map 
         but never join the game. If I reconnect I can get the handicap. 
         But it might as well give it to me the first time I join into play, 
         since other players connecting would be given the handicap. 
-    + Feature: option to give handicap level maximum n times per map; people 
-        like to reconnect to get better level instead of trying to play 
-        better; it should be easy to implement since you did restore level 
-        after reconnect.
     + Feature: change "Top10Handicap" to make possibility to choose other 
         Top range for excluding from handicap; "HandicapMaxRank" "25" for 
         example, might mean that only players with rank > 25 will get 
         handicap level.
-    + Feature: if a players level is x amount below the persons level they 
-        knifed they will not get a level up and the person knifed will not 
-        get a level down.
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
     + Feature: How about changing TripleLevelBonus to MultiLevelBonus with 
@@ -46,7 +46,7 @@ TODO
     + Feature: create some options for gungame_stats like display rank to 
         all or to player only, show winner in chat etc.
         Pending because of i do not know what exactly features is needed.
-    * Waiting for ability to chech sourcemod version in runtime and use function that
+    * Waiting for ability to check sourcemod version in runtime and use function that
         is not present in the previous versions. For example GetURandomInt was added
         in sm 1.3.0. So it is needed to recompile this plugin for versions less then 1.3.0
         without this function.
