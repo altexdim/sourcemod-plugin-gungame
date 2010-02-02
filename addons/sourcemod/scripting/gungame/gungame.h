@@ -100,4 +100,5 @@ new Handle:PlayerLevelsBeforeDisconnect = INVALID_HANDLE;
 new g_ClientSlotEnt[MAXPLAYERS+1][2];
 new g_IsInGiveCommand = false;
 new Handle:g_Timer_HandicapUpdate = INVALID_HANDLE;
+new Handle:PlayerHandicapTimes = INVALID_HANDLE;
 

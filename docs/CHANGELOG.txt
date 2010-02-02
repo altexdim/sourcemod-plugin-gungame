@@ -1,7 +1,11 @@
 Changelog
 ---------
+    1.0.8.10:
+        * Translation file has been changed. Need update from translators.
+        + Feature: Added config variable "HandicapTimesPerMap" option to give handicap level 
+            maximum this times per map;
         + Feature: Added config variable "MultiLevelAmount" for number of levels to get bonus.
-            All variables names changed from "TripleLevel*" to "MultiLevel*".
+            All config variables names changed from "TripleLevel*" to "MultiLevel*".
         + Feature: Added config variable "KnifeProMaxDiff". If a players level is x amount below 
             the persons level they knifed they will not get a level up and the person knifed will not 
             get a level down.

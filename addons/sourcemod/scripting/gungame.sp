@@ -78,6 +78,7 @@ public OnPluginStart()
     StatsEnabled = LibraryExists("gungame_st");
     LoadTranslations("gungame");
     PlayerLevelsBeforeDisconnect = CreateTrie();
+    PlayerHandicapTimes = CreateTrie();
     
     // ConVar
     mp_friendlyfire = FindConVar("mp_friendlyfire");
@@ -127,7 +128,21 @@ public OnClientAuthorized(client, const String:auth[])
         }
     }
     
-    GG_GiveHandicapLevel(client);
+    new times = 0;
+    if ( g_Cfg_HandicapTimesPerMap )
+    {
+        if ( !GetTrieValue(PlayerHandicapTimes, auth, times) ) {
+            times = 0;
+        }
+        times++;
+        SetTrieValue(PlayerHandicapTimes, auth, times);
+    }
+    
+    if ( !g_Cfg_HandicapTimesPerMap || g_Cfg_HandicapTimesPerMap >= times )
+    {
+        GG_GiveHandicapLevel(client);
+    }
+    
     UTIL_UpdatePlayerScoreLevel(client);
 }
 
@@ -154,6 +169,7 @@ public OnMapEnd()
     GameWinner = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
+    ClearTrie(PlayerHandicapTimes);
 
     for ( new Sounds:i = Welcome; i < MaxSounds; i++ )
     {
@@ -315,6 +331,7 @@ public GG_OnShutdown(bool:Command)
     GameWinner = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
+    ClearTrie(PlayerHandicapTimes);
         
     OnEventShutdown();
 

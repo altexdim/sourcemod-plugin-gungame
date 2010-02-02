@@ -2,11 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
-    + Feature: option to give handicap level maximum n times per map; people 
-        like to reconnect to get better level instead of trying to play 
-        better; it should be easy to implement since you did restore level 
-        after reconnect.
-        
     ----====----==== Normal priority list ----====----====
 
     + Feature: Do you think handicap should be given on first spawn, not on 
