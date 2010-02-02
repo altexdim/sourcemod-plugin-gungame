@@ -256,14 +256,36 @@
 		"ru"		 "{teamcolor}{1}{green} украл уровень у {default}{2}"
 		"pt"		 "{teamcolor}{1}{green} roubou um nivel de {default}{2}"
 	}
-	"Triple leveled"
+	"Player has been leveled many times"
 	{
-		"#format"	"{1:s},"
-		"en"		 "{teamcolor}{1} {green}triple leveled!!!"
-		"de"		 "{teamcolor}{1} {green}triple leveled!!!"
-		"ru"		 "{teamcolor}{1} {green}набрал три уровня!!!"
-		"pt"		 "{teamcolor}{1} {green}nivelou três vezes!!!"
+		"#format"	"{1:s},{2:s}"
+		"en"		 "{teamcolor}{1} {green}has been leveled {2}!!!"
+		"ru"		 "{teamcolor}{1} {green}прошёл {2}!!!"
 	}
+		"1>leveled times"
+		{
+			"#format"	"{1:d}"
+			"en"	"{default}{1} {green}time"
+			"ru"	"{default}{1} {green}уровень"
+		}
+		"x1>leveled times"
+		{
+			"#format"	"{1:d}"
+			"en"	"{default}{1} {green}times"
+			"ru"	"{default}{1} {green}уровень"
+		}
+		"x2-x4>leveled times"
+		{
+			"#format"	"{1:d}"
+			"en"	"{default}{1} {green}times"
+			"ru"	"{default}{1} {green}уровня"
+		}
+		"x5-x20>leveled times"
+		{
+			"#format"	"{1:d}"
+			"en"	"{default}{1} {green}times"
+			"ru"	"{default}{1} {green}уровней"
+		}
 	"Is lower than the minimum knife stealing level"
 	{
 		"#format"	"{1:s},{2:d}"
@@ -771,5 +793,11 @@
 		"ru"	"{green}Ваш уровень обновлён, так как он был самым низким"
 		"de"	"{green}Dein Level wurde vom Handycap upgedated"
 		"pt"	"{green}O teu nivel foi actualizado pelo handicap"
+    }
+    "You can not steal level from %s, your levels difference is more then %d"
+    {
+		"#format"	"{1:s},{2:d}"
+		"en"	"{green}You can not steal level from {teamcolor}{1}{green}, your levels difference is more then {default}{2}"
+		"ru"	"{green}Вы не можете украсть уровень у {teamcolor}{1}{green}, разница в уровнях больше {default}{2}"
     }
 }

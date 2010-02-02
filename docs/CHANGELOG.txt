@@ -1,5 +1,14 @@
 Changelog
 ---------
+        + Feature: Added config variable "MultiLevelAmount" for number of levels to get bonus.
+            All variables names changed from "TripleLevel*" to "MultiLevel*".
+        + Feature: Added config variable "KnifeProMaxDiff". If a players level is x amount below 
+            the persons level they knifed they will not get a level up and the person knifed will not 
+            get a level down.
+        * Fixed:
+            L 02/02/2010 - 16:35:56: [SM] Native "GG_ShowRank" reported: Client is not currently ingame [14]
+            L 02/02/2010 - 16:35:56: [SM] Displaying call stack trace for plugin "gungame_display_winner.smx":
+            L 02/02/2010 - 16:35:56: [SM]   [0]  Line 66, gungame_display_winner.sp::GG_OnLoadRank()
         * Fixed: "SV_StartSound:  not precached (0)" in error logs.
     
     1.0.8.9:

@@ -53,6 +53,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+            } else if(strcmp("MultiLevelAmount", key, false) == 0) {
+                g_Cfg_MultiLevelAmount = StringToInt(value);
+            } else if(strcmp("KnifeProMaxDiff", key, false) == 0) {
+                g_Cfg_KnifeProMaxDiff = StringToInt(value);
             } else if(strcmp("HandicapSkipBots", key, false) == 0) {
                 g_Cfg_HandicapSkipBots = bool:StringToInt(value);
             } else if(strcmp("KnifeProRecalcPoints", key, false) == 0) {
@@ -87,9 +91,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_ArmorKevlar = StringToInt(value);
             } else if(strcmp("ArmorHelmet", key, false) == 0) {
                 g_Cfg_ArmorHelmet = StringToInt(value);
-            } else if(strcmp("TripleLevelBonusSpeed", key, false) == 0) {
+            } else if(strcmp("MultiLevelBonusSpeed", key, false) == 0) {
                g_Cfg_TripleLevelBonusSpeed = StringToFloat(value);
-            } else if(strcmp("TripleLevelBonusGravity", key, false) == 0) {
+            } else if(strcmp("MultiLevelBonusGravity", key, false) == 0) {
                g_Cfg_TripleLevelBonusGravity = StringToFloat(value);
             } else if(strcmp("LevelsInScoreboard", key, false) == 0) {
                 g_Cfg_LevelsInScoreboard = StringToInt(value);
@@ -155,9 +159,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 WarmupNades = bool:StringToInt(value);
             } else if(strcmp("WarmupStartup", key, false) == 0) {
                 WarmupStartup = StringToInt(value);
-            } else if(strcmp("TripleLevelBonus", key, false) == 0) {
+            } else if(strcmp("MultiLevelBonus", key, false) == 0) {
                 TripleLevelBonus = bool:StringToInt(value);
-            } else if(strcmp("TripleLevelBonusGodMode", key, false) == 0) {
+            } else if(strcmp("MultiLevelBonusGodMode", key, false) == 0) {
                 TripleLevelBonusGodMode = bool:StringToInt(value);
             } else if(strcmp("ObjectiveBonusWin", key, false) == 0) {
                 ObjectiveBonusWin = bool:StringToInt(value);

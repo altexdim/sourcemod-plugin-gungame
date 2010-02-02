@@ -6,9 +6,6 @@ TODO
         like to reconnect to get better level instead of trying to play 
         better; it should be easy to implement since you did restore level 
         after reconnect.
-    + Feature: if a players level is x amount below the persons level they 
-        knifed they will not get a level up and the person knifed will not 
-        get a level down.
         
     ----====----==== Normal priority list ----====----====
 
@@ -23,9 +20,6 @@ TODO
         handicap level.
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
-    + Feature: How about changing TripleLevelBonus to MultiLevelBonus with 
-        optional MultiLevelBonusLevels for number of levels.
-        It could say in chat, "Player leveled x times!!".
         
     ----====----==== High severity list ----====----====
     

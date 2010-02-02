@@ -116,6 +116,12 @@
         /* If enabled then knife kill will also affect points */
         "KnifeProRecalcPoints" "0"
         
+        /* Maximum level difference between players to allow steal level 
+         * 0 - Disabled
+         * 1..N - Level difference between killer and victim
+         */
+        "KnifeProMaxDiff" "0"
+
         /* ----- [objectives] ----- */
         
         /* Give x number of level by completing the bomb planting/defusing objectives.
@@ -235,20 +241,23 @@
          */
         "NumberOfNades" "0"
         
-        /* ----- [triple level] ----- */
+        /* ----- [multi level] ----- */
         
         /* Triple Level Bonus */
-        "TripleLevelBonus" "0"
+        "MultiLevelBonus" "0"
 
         /* Enable God Mode when triple leveled */
-        "TripleLevelBonusGodMode" "1"
+        "MultiLevelBonusGodMode" "1"
 
         /**
-         * Custom speed and gravity value multiplier for triple level bonus.
+         * Custom speed and gravity value multiplier for multi level bonus.
          * 0 - Disabled
          */
-        "TripleLevelBonusGravity" "0.5"
-        "TripleLevelBonusSpeed" "1.5"
+        "MultiLevelBonusGravity" "0.5"
+        "MultiLevelBonusSpeed" "1.5"
+
+        /* How much levels is needed to get bonus */
+        "MultiLevelAmount" "3"
 
         /* ----- [warmup] ----- */
         

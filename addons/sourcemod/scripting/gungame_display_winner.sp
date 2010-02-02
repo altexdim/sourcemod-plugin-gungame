@@ -61,9 +61,9 @@ public GG_OnLoadRank()
     }
     g_showWinnerOnRankUpdate = false;
 
-    if ( g_Cfg_ShowPlayerRankOnWin )
+    if ( g_Cfg_ShowPlayerRankOnWin && IsClientInGame(g_winner) )
     {
-        GG_ShowRank(g_winner);
+        GG_ShowRank(g_winner);                  /* HINT: gungame_stats */
     }
     if ( g_Cfg_DisplayWinnerMotd )
     {

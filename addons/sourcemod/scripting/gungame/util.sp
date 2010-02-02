@@ -833,12 +833,21 @@ FindLeader(bool:DisallowBot = false)
 CheckForTripleLevel(client)
 {
     CurrentLevelPerRoundTriple[client]++;
-    if ( TripleLevelBonus && CurrentLevelPerRoundTriple[client] == 3 )
+    if ( TripleLevelBonus && CurrentLevelPerRoundTriple[client] == g_Cfg_MultiLevelAmount )
     {
         decl String:Name[MAX_NAME_SIZE];
         GetClientName(client, Name, sizeof(Name));
 
-        CPrintToChatAllEx(client, "%t", "Triple leveled", Name);
+        decl String:subtext[64];
+        for ( new i = 1; i <= MaxClients; i++ )
+        {
+            if ( IsClientInGame(i) )
+            {
+                SetGlobalTransTarget(i);
+                FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), g_Cfg_MultiLevelAmount, "leveled times");
+                CPrintToChatEx(i, client, "%t", "Player has been leveled many times", Name, subtext);
+            }
+        }
 
         UTIL_StartTripleEffects(client);
         CreateTimer(10.0, RemoveBonus, client);

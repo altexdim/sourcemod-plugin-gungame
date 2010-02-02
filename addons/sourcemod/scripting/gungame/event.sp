@@ -315,6 +315,12 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 break;
             }
 
+            if ( g_Cfg_KnifeProMaxDiff && ( g_Cfg_KnifeProMaxDiff < level - VictimLevel ) )
+            {
+                CPrintToChatEx(Killer, Victim, "%t", "You can not steal level from %s, your levels difference is more then %d", vName, g_Cfg_KnifeProMaxDiff);
+                break;
+            }
+
             new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
             if ( VictimLevel )
             {
