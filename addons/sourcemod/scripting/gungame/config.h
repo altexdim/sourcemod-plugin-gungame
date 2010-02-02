@@ -73,4 +73,5 @@ new g_Cfg_KnifeProRecalcPoints = 0;
 new bool:g_Cfg_HandicapSkipBots = false;
 new g_Cfg_KnifeProMaxDiff = 0;
 new g_Cfg_MultiLevelAmount = 3;
+new g_Cfg_HandicapTimesPerMap = 0;
 

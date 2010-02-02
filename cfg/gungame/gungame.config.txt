@@ -182,6 +182,12 @@
          */
         "HandicapSkipBots" "0"
         
+        /**
+         * Give handicap not more then given number of times per map.
+         * 0 - disabled
+         */
+        "HandicapTimesPerMap" "0"
+
         /* ----- [equip] ----- */
         
         /* Auto reload current level weapon on kill */
