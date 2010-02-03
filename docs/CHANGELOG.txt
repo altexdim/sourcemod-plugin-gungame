@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Portuguese translation has been updated. Thanks to VoGon.
+
     1.0.8.10:
         * Translation file has been changed. Need update from translators.
         + Feature: Added config variable "HandicapTimesPerMap" option to give handicap level 
