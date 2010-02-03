@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * German translation has been updated. Thanks to tObIwAnKeNoBi.
         * Fixed: 
             L 02/02/2010 - 17:11:02: [SM] Native "SetEntProp" reported: Entity -1 (-1) is invalid
             L 02/02/2010 - 17:11:02: [SM] Displaying call stack trace for plugin "gungame.smx":
