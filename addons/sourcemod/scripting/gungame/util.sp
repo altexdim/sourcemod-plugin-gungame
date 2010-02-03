@@ -125,7 +125,7 @@ Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
         }
     }
 
-    return Weapons:0;
+    return CSW_NONE;
 }
 */
 
@@ -149,7 +149,7 @@ Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
         }
     }
 
-    return Weapons:0;
+    return CSW_NONE;
 }
 
 stock UTIL_CopyC(String:Dest[], len, const String:Source[], ch)

@@ -89,7 +89,8 @@ enum Slots
 
 enum Weapons
 {
-    CSW_KNIFE = 1,
+    CSW_NONE,
+    CSW_KNIFE,
     // Secondary Weapon
     CSW_USP,
     CSW_GLOCK,

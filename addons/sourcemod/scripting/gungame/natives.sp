@@ -52,7 +52,7 @@ public __SetMaxLevel(Handle:plugin, numParams)
     for(new i = level; i < GUNGAME_MAX_LEVEL; i++)
     {
         WeaponOrderName[i][0] = '\0';
-        WeaponOrderId[i] = Weapons:0;
+        WeaponOrderId[i] = CSW_NONE;
     }
 
     return 1;

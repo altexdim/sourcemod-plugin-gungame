@@ -67,7 +67,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_HandicapUpdate = StringToFloat(value);
             } else if(strcmp("WarmupWeapon", key, false) == 0) {
                 if ( !value[0] ) {
-                    g_Cfg_WarmupWeapon = Weapons:0;
+                    g_Cfg_WarmupWeapon = CSW_NONE;
                 } else {
                     g_Cfg_WarmupWeapon = UTIL_GetWeaponIndex(value);
                 }
@@ -147,7 +147,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 NadeSmoke = bool:StringToInt(value);
             } else if(strcmp("NadeBonus", key, false) == 0) {
                 if ( !value[0] ) {
-                    NadeBonusWeaponId = Weapons:0;
+                    NadeBonusWeaponId = CSW_NONE;
                 } else {
                     NadeBonusWeaponId = UTIL_GetWeaponIndex(value);
                 }
