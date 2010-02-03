@@ -1,5 +1,10 @@
 Changelog
 ---------
+        * Fixed: 
+            L 02/02/2010 - 17:11:02: [SM] Native "SetEntProp" reported: Entity -1 (-1) is invalid
+            L 02/02/2010 - 17:11:02: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 02/02/2010 - 17:11:02: [SM]   [0]  Line 725, gungame/util.sp::UTIL_ReloadActiveWeapon()
+            L 02/02/2010 - 17:11:02: [SM]   [1]  Line 271, gungame/event.sp::_PlayerDeath()
         * Portuguese translation has been updated. Thanks to VoGon.
 
     1.0.8.10:

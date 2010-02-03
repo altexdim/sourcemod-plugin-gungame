@@ -460,7 +460,7 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
  */
 UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, bool:DropBomb = false)
 {
-    for(new Slots:i = Slot_Primary, ent; i < Slot_None; i++)
+    for(new Slots:i = Slot_Primary, ent; i < Slot_Max; i++)
     {
         if(i == Slot_Grenade)
         {
@@ -722,11 +722,10 @@ UTIL_ReloadActiveWeapon(client, Weapons:WeaponId)
     new Slots:slot = WeaponSlot[WeaponId];
     if ( (slot == Slot_Primary || slot == Slot_Secondary) )
     {
-        // todo: add check if active weapon exists
-        SetEntProp(
-            GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon"), 
-            Prop_Send, "m_iClip1", WeaponAmmo[WeaponId]
-        );
+        new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+        if ( ent > -1 ) {
+            SetEntProp(ent, Prop_Send, "m_iClip1", WeaponAmmo[WeaponId]);
+        }
     }
 }
 

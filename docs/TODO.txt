@@ -2,12 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    * Fix bug: 
-        L 02/02/2010 - 17:11:02: [SM] Native "SetEntProp" reported: Entity -1 (-1) is invalid
-        L 02/02/2010 - 17:11:02: [SM] Displaying call stack trace for plugin "gungame.smx":
-        L 02/02/2010 - 17:11:02: [SM]   [0]  Line 725, gungame/util.sp::UTIL_ReloadActiveWeapon()
-        L 02/02/2010 - 17:11:02: [SM]   [1]  Line 271, gungame/event.sp::_PlayerDeath()
-    
     ----====----==== Normal priority list ----====----====
 
     + Feature: Do you think handicap should be given on first spawn, not on 

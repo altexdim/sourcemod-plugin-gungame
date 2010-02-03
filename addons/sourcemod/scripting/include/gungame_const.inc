@@ -78,12 +78,13 @@ stock const String:BLANK_SPACE[] = " ";
 
 enum Slots
 {
-    Slot_Primary = 0,
+    Slot_None,
+    Slot_Primary,
     Slot_Secondary,
     Slot_Knife,
     Slot_Grenade,
     Slot_C4,
-    Slot_None /* Not used for anything but a marker for last slot*/
+    Slot_Max /* Not used for anything but a marker for last slot*/
 };
 
 enum Weapons
