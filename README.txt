@@ -1,21 +1,23 @@
-GunGame
+[COLOR=#ff6600][SIZE=5][B]GunGame[/B][/SIZE][/COLOR]
 
-Table of contents
-------
-    * Description
-    * Commands and Cvars
-    * Requirements
-    * Installation
-    * Plugins
-    * Credits
-    * Changelog
-    * TODO
-    * Issues
-    * 3-rd party plugins
+[b]Table of contents[/b]
+----------------------------------------------------
+[list]
+    [*] [goanchor=Description]Description[/goanchor]
+    [*] [goanchor=Commands and Cvars]Commands and Cvars[/goanchor]
+    [*] [goanchor=Requirements]Requirements[/goanchor]
+    [*] [goanchor=Installation]Installation[/goanchor]
+    [*] [goanchor=Plugins]Plugins[/goanchor]
+    [*] [goanchor=Credits]Credits[/goanchor]
+    [*] [goanchor=Changelog]Changelog[/goanchor]
+    [*] [goanchor=TODO]TODO[/goanchor]
+    [*] [goanchor=Issues]Issues[/goanchor]
+    [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
+[/list]
 
-Description
------------
-    GunGame:SM is the gameplay plugin that makes you to
+[anchor]Description[/anchor][b]Description[/b]
+----------------------------------------------------
+    [indent]GunGame:SM is the gameplay plugin that makes you to
     act with various guns and not only with your favorite
     one. On spawn you get one weapon. You should kill
     enemy with the current weapon to get next weapon.
@@ -24,134 +26,159 @@ Description
     http://forums.alliedmods.net/showthread.php?t=93977
 
     Complementary plugins:
-        - deathmatch, elimination, spawn protection
-            sm_ggdm - http://forums.alliedmods.net/showthread.php?t=103242
-        - noblock
-            sm_noblock - http://forums.alliedmods.net/showthread.php?t=91617
+    [list]
+        [*] deathmatch, elimination, spawn protection
+            [b]sm_ggdm[/b] - http://forums.alliedmods.net/showthread.php?t=103242
+        [*] noblock
+            [b]sm_noblock[/b] - http://forums.alliedmods.net/showthread.php?t=91617
+    [/list]
+    [/indent]
         
-Commands and Cvars
-------------------
-    sm_gungamesm_version            - Gungame version.
-    gungame_enabled                 - Display if gungame is enabled or disabled.
+[b]Commands and Cvars[/b][anchor]Commands and Cvars[/anchor]
+----------------------------------------------------
+[list]
+    [*] [b]sm_gungamesm_version[/b]            - Gungame version.
+    [*] [b]gungame_enabled[/b]                 - Display if gungame is enabled or disabled.
+[/list]
 
-    gg_version                      - Show gungame version information.
-    gg_status                       - Show state of the current game.
-    gg_restart                      - Restarts the whole game from the beginning.
-    gg_enable                       - Turn on gungame and restart the game.
-    gg_disable                      - Turn off gungame and restart the game.
-    gg_rebuild                      - Rebuilds the top10 rank from the player data information.
-    gg_import                       - Imports the winners file from es es gungame3. File must be in data/gungame/es_gg_winners_db.txt.
-                                      You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py.
-    gg_reset                        - Reset all gungame stats. (only if sql stats enabled)
-    gg_importdb                     - Imports the winners from gungame players data file into database. (only if sql stats enabled)
+[list]
+    [*] [b]gg_version[/b]                      - Show gungame version information.
+    [*] [b]gg_status[/b]                       - Show state of the current game.
+    [*] [b]gg_restart[/b]                      - Restarts the whole game from the beginning.
+    [*] [b]gg_enable[/b]                       - Turn on gungame and restart the game.
+    [*] [b]gg_disable[/b]                      - Turn off gungame and restart the game.
+    [*] [b]gg_rebuild[/b]                      - Rebuilds the top10 rank from the player data information.
+    [*] [b]gg_import[/b]                       - Imports the winners file from es es gungame3. File must be in data/gungame/es_gg_winners_db.txt.
+                                                 You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py.
+    [*] [b]gg_reset[/b]                        - Reset all gungame stats. (only if sql stats enabled)
+    [*] [b]gg_importdb[/b]                     - Imports the winners from gungame players data file into database. (only if sql stats enabled)
+[/list]
 
-    say !level                      - Show your current level and who is winning.
-    say !weapons                    - Show the weapon order.
-    say !score                      - Show all player current scores.
-    say !top                        - Show the top winners on the server.
-    say !leader                     - Show current leaders.
-    say !rank                       - Show your current place in stats. (only if sql stats enabled)
-    say !rules                      - Show the rules and how to play.
+[list]
+    [*] [b]say !level[/b]                      - Show your current level and who is winning.
+    [*] [b]say !weapons[/b]                    - Show the weapon order.
+    [*] [b]say !score[/b]                      - Show all player current scores.
+    [*] [b]say !top[/b]                        - Show the top winners on the server.
+    [*] [b]say !leader[/b]                     - Show current leaders.
+    [*] [b]say !rank[/b]                       - Show your current place in stats. (only if sql stats enabled)
+    [*] [b]say !rules[/b]                      - Show the rules and how to play.
+[/list]
 
-Requirements
-------------
-    Counter-Strike: Source
-    SourceMod 1.2.0+
+[anchor]Requirements[/anchor][b]Requirements[/b]
+----------------------------------------------------
+[list]
+    [*] Counter-Strike: Source
+    [*] SourceMod 1.2.0+
+[/list]
 
-Installation
-------------
-    * Install Metamod:Source.
-    * Install SourceMod.
-    * Upload the addons, sound, and cfg into your cstrike folder for CS:Source
-    * Config gungame.config.txt and gungame.equip.txt to your liking in cfg/gungame/
-    * Restart your server.
+[anchor]Installation[/anchor][b]Installation[/b]
+----------------------------------------------------
+[list]
+    [*] Install Metamod:Source.
+    [*] Install SourceMod.
+    [*] Upload the addons, sound, and cfg into your cstrike folder for CS:Source
+    [*] Config gungame.config.txt and gungame.equip.txt to your liking in cfg/gungame/
+    [*] Restart your server.
+[/list]
 
-Plugins
--------
-    gungame.smx
-        * Main GunGame:SM plugin
-            - Depends on gungame_config.smx, gungame_stats.smx (optional)
-            - Mandatory plugin
-            - Provides almost all gungame functionality
+[anchor]Plugins[/anchor][b]Plugins[/b]
+----------------------------------------------------
+[list]
+    [*] gungame.smx - Main GunGame:SM plugin
+    [list]
+        [*] Depends on gungame_config.smx, gungame_stats.smx (optional)
+        [*] Mandatory plugin
+        [*] Provides almost all gungame functionality
+    [/list]
             
-    gungame_config.smx
-        * Config Reader
-            - No dependencies
-            - Mandatory plugin
-            - Read all config files
-            - Can load different configs (*.config.txt, *.equip.txt) depending on map 
-                prefixes and map names in configs/gungame/maps.
-                gungame.config.txt will be read first before prefix map name.
-                Prefix map name will be executed first before map specfic map.
-                Then map specifc config files will be loaded.
+    [*] gungame_config.smx - Config Reader
+    [list]
+        [*] No dependencies
+        [*] Mandatory plugin
+        [*] Read all config files
+        [*] Can load different configs (*.config.txt, *.equip.txt) depending on map 
+            prefixes and map names in configs/gungame/maps.
+            gungame.config.txt will be read first before prefix map name.
+            Prefix map name will be executed first before map specfic map.
+            Then map specifc config files will be loaded.
+    [/list]
                 
-    gungame_stats.smx
-        * Stats
-            - Depends on gungame.smx, gungame_config.smx
-            - Optional plugin
-            - Displays top10 panel
-            - Stores players wins data and top10 data
-            - Sets handicap level for the new connected players
+    [*] gungame_stats.smx - Stats
+    [list]
+        [*] Depends on gungame.smx, gungame_config.smx
+        [*] Optional plugin
+        [*] Displays top10 panel
+        [*] Stores players wins data and top10 data
+        [*] Sets handicap level for the new connected players
+    [/list]
                 
-    gungame_afk.smx
-        * Afk Management System
-            - Depends on gungame_config.smx, gungame.smx
-            - Optional plugin
-            - Detect afk players, kick them if needed, do not allow level up on afk players
+    [*] gungame_afk.smx - Afk Management System
+    [list]
+        [*] Depends on gungame_config.smx, gungame.smx
+        [*] Optional plugin
+        [*] Detect afk players, kick them if needed, do not allow level up on afk players
+    [/list]
             
-    gungame_mapvoting.smx
-        * Map voting
-            - Depends on gungame.smx
-            - Optional plugin
-            - Starts the map voting for the next map when someone reaches particular level
+    [*] gungame_mapvoting.smx - Map voting
+    [list]
+        [*] Depends on gungame.smx
+        [*] Optional plugin
+        [*] Starts the map voting for the next map when someone reaches particular level
               by executing cfg/gungame/gungame.mapvote.cfg
+    [/list]
                                       
-    gungame_logging.smx
-        * Logging events
-            - Depends on gungame.smx
-            - Optional plugin
-            - Logs events: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
+    [*] gungame_logging.smx - Logging events
+    [list]
+        [*] Depends on gungame.smx
+        [*] Optional plugin
+        [*] Logs events: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
               gg_knife_level, gg_triple_level, gg_last_level
+    [/list]
                                       
-    gungame_tk.smx
-        * TeamKill Management System
-            - Depends on gungame.smx, gungame_config.smx
-            - Optional plugin
-            - Level down team killer
+    [*] gungame_tk.smx - TeamKill Management System
+    [list]
+        [*] Depends on gungame.smx, gungame_config.smx
+        [*] Optional plugin
+        [*] Level down team killer
+    [/list]
             
-    gungame_display_winner.smx
-        * Display winner
-            - Depends on gungame.smx, gungame_stats.smx, gungame_config.smx
-            - Optional plugin
-            - When someone wins it shows MOTD window with external URL displaing some info 
+    [*] gungame_display_winner.smx - Display winner
+    [list]
+        [*] Depends on gungame.smx, gungame_stats.smx, gungame_config.smx
+        [*] Optional plugin
+        [*] When someone wins it shows MOTD window with external URL displaing some info 
                 about winner.
+    [/list]
+[/list]
             
-Credits
--------
-    * Thanks to VoGon for the translation to portuguese.
-    * Thanks to tObIwAnKeNoBi for german translation.
-    * Thanks to exvel for sourcemod library Colors 1.0.2
+[anchor]Credits[/anchor][b]Credits[/b]
+----------------------------------------------------
+[list]
+    [*] Thanks to VoGon for the translation to portuguese.
+    [*] Thanks to tObIwAnKeNoBi for german translation.
+    [*] Thanks to exvel for sourcemod library Colors 1.0.2
       http://forums.alliedmods.net/showthread.php?t=96831
-    * Thanks to bl4nk for GunGame Display Winner plugin.
-    * Thanks to Liam for GunGame:SM till version 1.0.0.1
+    [*] Thanks to bl4nk for GunGame Display Winner plugin.
+    [*] Thanks to Liam for GunGame:SM till version 1.0.0.1
       http://forums.alliedmods.net/showthread.php?t=80609
-    * Original Idea and concepts of Gun Game was made by cagemonkey
+    [*] Original Idea and concepts of Gun Game was made by cagemonkey
       http://www.cagemonkey.org
-    * Original SourceMod code by Teame06
+    [*] Original SourceMod code by Teame06
+[/list]        
 
-Changelog
----------
-    * For full changelog see docs/CHANGELOG.txt
-        
-TODO
-----
-    * For full todo list see docs/TODO.txt
+[anchor]Changelog[/anchor][b]Changelog[/b]
+----------------------------------------------------
+    [indent]For full changelog see docs/CHANGELOG.txt[/indent]
 
-Issues
-------
-    1) My server crashes right after someone wins the map.
-        a) Update your server binaries.
-        b) OR Update your gamedata/gungame.games.txt:
+[anchor]TODO[/anchor][b]TODO[/b]
+----------------------------------------------------
+    [indent]For full todo list see docs/TODO.txt[/indent]
+
+[anchor]Issues[/anchor][b]Issues[/b]
+----------------------------------------------------
+[list]
+    [*] [b]Q.[/b] My server crashes right after someone wins the map.
+        [b]A.[/b] Update your server binaries OR Update your gamedata/gungame.games.txt:
             Replace:
                 "EndMultiplayerGame"
                 {
@@ -165,21 +192,24 @@ Issues
                     "linux"     "102"
                 }
 
-    2) My server does not change map after someone wins the map.
-        a) Update your gamedata/gungame.games.txt from latest gungame release.
+    [*] [b]Q.[/b] My server does not change map after someone wins the map.
+        [b]A.[/b] Update your gamedata/gungame.games.txt from latest gungame release.
 
-    3) How to enable/disable gungame depending on map prefixes (aka buyzone issue):
-        a) http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
+    [*] [b]Q.[/b] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
+        [b]A.[/b] http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389    
 
-    4) How to switch stats database from sqlite to mysql 
-        a) http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865        
+    [*] [b]Q.[/b] How to switch stats database from sqlite to mysql 
+        [b]A.[/b] http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865        
+[/list]
         
-3-rd party plugins
-------------------
-    * Winners menu:
+[anchor]3-rd party plugins[/anchor][b]3-rd party plugins[/b]
+----------------------------------------------------
+[list]
+    [*] Winners menu:
         http://forums.alliedmods.net/showpost.php?p=949442&postcount=255
-    * Advanced stats:
+    [*] Advanced stats:
         http://forums.alliedmods.net/showpost.php?p=1036934&postcount=594
-    * say !give
+    [*] say !give
         https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701
+[/list]
 
