@@ -1,3 +1,18 @@
+GunGame
+
+Table of contents
+------
+    * Description
+    * Commands and Cvars
+    * Requirements
+    * Installation
+    * Plugins
+    * Credits
+    * Changelog
+    * TODO
+    * Issues
+    * 3-rd party plugins
+
 Description
 -----------
     GunGame:SM is the gameplay plugin that makes you to
