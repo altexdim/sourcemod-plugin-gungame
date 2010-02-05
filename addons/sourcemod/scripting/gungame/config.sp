@@ -75,6 +75,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_ScoreboardClearDeaths = StringToInt(value);
             } else if(strcmp("MaxHandicapLevel", key, false) == 0) {
                 g_Cfg_MaxHandicapLevel = StringToInt(value);
+                if ( g_Cfg_MaxHandicapLevel ) {
+                    g_Cfg_MaxHandicapLevel -= 1;
+                }
             } else if(strcmp("ShowSpawnMsgInHintBox", key, false) == 0) {
                 g_Cfg_ShowSpawnMsgInHintBox = StringToInt(value);
             } else if(strcmp("ShowLeaderInHintBox", key, false) == 0) {
