@@ -2,6 +2,9 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
+    + Feature: Add ability to enable friendly fire earlier than on nade level
+    + Feature: Add ability to disable rtv if leader is above X level.
+    
     ----====----==== Normal priority list ----====----====
 
     + Feature: Do you think handicap should be given on first spawn, not on 
@@ -13,8 +16,6 @@ TODO
         Top range for excluding from handicap; "HandicapMaxRank" "25" for 
         example, might mean that only players with rank > 25 will get 
         handicap level.
-    + Feature: Add ability to enable friendly fire earlier than on nade level
-    + Feature: Add ability to disable rtv if leader is above X level.
         
     ----====----==== High severity list ----====----====
     
