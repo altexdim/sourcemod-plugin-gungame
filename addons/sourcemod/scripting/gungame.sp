@@ -50,6 +50,14 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
+{
+    RegPluginLibrary("gungame");
+    OnCreateNatives();
+    return APLRes_Success;
+}
+
+// deprecated in 1.3.1
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame");
