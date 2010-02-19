@@ -168,11 +168,11 @@
 
 [anchor]Changelog[/anchor][b]Changelog[/b]
 ----------------------------------------------------
-    [indent]For full changelog see docs/CHANGELOG.txt[/indent]
+    [indent]For full changelog see doc/CHANGELOG.txt[/indent]
 
 [anchor]TODO[/anchor][b]TODO[/b]
 ----------------------------------------------------
-    [indent]For full todo list see docs/TODO.txt[/indent]
+    [indent]For full todo list see doc/TODO.txt[/indent]
 
 [anchor]Issues[/anchor][b]Issues[/b]
 ----------------------------------------------------
