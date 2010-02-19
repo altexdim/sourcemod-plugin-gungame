@@ -1,5 +1,11 @@
 Changelog
 ---------
+        * Fixed: Not to display winner motd after map end if database was slow to display motd right
+            after player win.
+        * Fixed:
+            L 02/19/2010 - 00:25:54: [SM] Native "GG_GetPlayerPlaceInStat" reported: Client is not currently ingame [15]
+            L 02/19/2010 - 00:25:54: [SM] Displaying call stack trace for plugin "gungame_display_winner.smx":
+            L 02/19/2010 - 00:25:54: [SM]   [0]  Line 75, gungame_display_winner.sp::GG_OnLoadRank()
         * German translation has been updated. Thanks to tObIwAnKeNoBi.
         * Fixed: 
             L 02/02/2010 - 17:11:02: [SM] Native "SetEntProp" reported: Entity -1 (-1) is invalid

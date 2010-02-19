@@ -61,6 +61,11 @@ public GG_OnLoadRank()
     }
     g_showWinnerOnRankUpdate = false;
 
+    if ( !IsClientInGame(g_winner) )
+    {
+        return;
+    }
+    
     if ( g_Cfg_ShowPlayerRankOnWin && IsClientInGame(g_winner) )
     {
         GG_ShowRank(g_winner);                  /* HINT: gungame_stats */
@@ -115,5 +120,10 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
 public GG_ConfigParseEnd()
 {
     ConfigState = CONFIG_STATE_NONE;
+}
+
+public OnMapEnd()
+{
+    g_showWinnerOnRankUpdate = false;
 }
 

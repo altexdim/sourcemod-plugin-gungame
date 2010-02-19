@@ -2,15 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
     
-    * Fix: Hi. I store my winners info in remote MySQL database and after 
-        midnight it response really slow sometimes. So, after win I don't 
-        get winner motd and place in stats immediately. I'm getting it on 
-        the next map, which is kinda weird for players. Could you cancel 
-        displaying winner's infos if this happens on the next map? Thanx
-    * Bug report:
-        L 02/19/2010 - 00:25:54: [SM] Native "GG_GetPlayerPlaceInStat" reported: Client is not currently ingame [15]
-        L 02/19/2010 - 00:25:54: [SM] Displaying call stack trace for plugin "gungame_display_winner.smx":
-        L 02/19/2010 - 00:25:54: [SM]   [0]  Line 75, gungame_display_winner.sp::GG_OnLoadRank()
     + Feature: Add ability to enable friendly fire earlier than on nade level
     + Feature: Add ability to disable rtv if leader is above X level.
     
