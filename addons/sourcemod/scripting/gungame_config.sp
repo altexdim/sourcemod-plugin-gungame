@@ -38,12 +38,13 @@ new Handle:FwdConfigKeyValue = INVALID_HANDLE;
 new Handle:FwdConfigParseEnd = INVALID_HANDLE;
 new Handle:FwdConfigEnd = INVALID_HANDLE;
 
+#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame_cfg");
-    OnCreateNatives();
     return APLRes_Success;
 }
+#endif
 
 // deprecated in 1.3.1
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)

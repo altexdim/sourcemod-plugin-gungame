@@ -4,6 +4,36 @@
 #define _gungame_const_included_
 
 /**
+ * Enable debug code.
+ * Default is disabled.
+ */
+// #define GUNGAME_DEBUG
+
+/**
+ * Uncomment if sm version >= 1.3.0.
+ * Default is disabled.
+ */
+// #define URANDOM_SUPPORT
+
+/**
+ * Uncomment if sm version >= 1.3.1.
+ * Default is disabled.
+ */
+// #define ASK_PLUGIN_LOAD2_SUPPORT
+
+/**
+ * Enable debug code for sql in stats plugin.
+ * Default is disabled.
+ */
+// #define SQL_DEBUG
+
+/**
+ * Enable sql support for stats plugin.
+ * Default is enabled.
+ */
+#define SQL_SUPPORT
+
+/**
  * Const
  */
 

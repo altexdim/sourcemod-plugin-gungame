@@ -8,9 +8,6 @@
 #include <colors>
 #include <langutils>
 
-#define SQL_SUPPORT
-//#define SQL_DEBUG
-
 #include "gungame_stats/gungame_stats.h"
 #include "gungame_stats/config.h"
 #include "gungame_stats/menu.h"
@@ -39,12 +36,14 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
+#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame_st");
     OnCreateNatives();
     return APLRes_Success;
 }
+#endif
 
 // deprecated in 1.3.1
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)

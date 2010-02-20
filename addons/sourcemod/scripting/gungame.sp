@@ -11,12 +11,6 @@
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
 
-// Enable debug code
-// #define DEBUG
-
-// Uncomment if sm version >= 1.3.0
-// #define URANDOM_SUPPORT
-
 #include "gungame/gungame.h"
 #include "gungame/menu.h"
 #include "gungame/config.h"
@@ -26,7 +20,7 @@
 #include "gungame/offset.h"
 #include "gungame/util.h"
 
-#if defined DEBUG
+#if defined GUNGAME_DEBUG
 #include "gungame/debug.h"
 #include "gungame/debug.sp"
 #endif
@@ -50,12 +44,14 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
+#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame");
     OnCreateNatives();
     return APLRes_Success;
 }
+#endif
 
 // deprecated in 1.3.1
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
@@ -120,7 +116,7 @@ public OnPluginStart()
     OnCreateCommand();
     OnHackStart();
 
-    #if defined DEBUG
+    #if defined GUNGAME_DEBUG
     OnCreateDebug();
     #endif
 }
