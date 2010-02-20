@@ -107,7 +107,11 @@ public OnPluginStart()
     FwdWinner = CreateGlobalForward("GG_OnWinner", ET_Ignore, Param_Cell, Param_String);
     FwdTripleLevel = CreateGlobalForward("GG_OnTripleLevel", ET_Ignore, Param_Cell);
     FwdWarmupEnd = CreateGlobalForward("GG_OnWarmupEnd", ET_Ignore);
+    
     FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
+    FwdDisableRtv = CreateGlobalForward("GG_OnDisableRtv", ET_Ignore);
+    FwdEnableFriendlyFire = CreateGlobalForward("GG_OnEnableFriendlyFire", ET_Ignore);
+    
     FwdStart = CreateGlobalForward("GG_OnStartup", ET_Ignore, Param_Cell);
     FwdShutdown = CreateGlobalForward("GG_OnShutdown", ET_Ignore, Param_Cell);
 
@@ -174,6 +178,8 @@ public OnMapEnd()
     MapStatus = 0;
     HostageEntInfo = 0;
     IsVotingCalled = false;
+    g_isCalledEnableFriendlyFire = false;
+    g_isCalledDisableRtv = false;
     GameWinner = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);
@@ -336,6 +342,8 @@ public GG_OnShutdown(bool:Command)
     WarmupInitialized = false;
     WarmupCounter = 0;
     IsVotingCalled = false;
+    g_isCalledEnableFriendlyFire = false;
+    g_isCalledDisableRtv = false;
     GameWinner = 0;
     CurrentLeader = 0;
     ClearTrie(PlayerLevelsBeforeDisconnect);

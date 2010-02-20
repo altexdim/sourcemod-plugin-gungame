@@ -334,12 +334,24 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         }
     }
 
-    if( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
+    if ( !IsVotingCalled && Level >= WeaponOrderCount - VoteLevelLessWeaponCount )
     {
-        /* Call map voting */
         IsVotingCalled = true;
-
         Call_StartForward(FwdVoteStart);
+        Call_Finish();
+    }
+
+    if ( g_cfgDisableRtvLevel && !g_isCalledDisableRtv && Level >= g_cfgDisableRtvLevel )
+    {
+        g_isCalledDisableRtv = true;
+        Call_StartForward(FwdDisableRtv);
+        Call_Finish();
+    }
+    
+    if ( g_cfgEnableFriendlyFireLevel && !g_isCalledEnableFriendlyFire && Level >= g_cfgEnableFriendlyFireLevel )
+    {
+        g_isCalledEnableFriendlyFire = true;
+        Call_StartForward(FwdEnableFriendlyFire);
         Call_Finish();
     }
     

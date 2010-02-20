@@ -33,6 +33,16 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             if(strcmp("Enabled", key, false) == 0)
             {
                 InternalIsActive = bool:StringToInt(value);
+            } else if(strcmp("DisableRtvLevel", key, false) == 0) {
+                g_cfgDisableRtvLevel = StringToInt(value) - 1;
+                if ( g_cfgDisableRtvLevel < 0 ) {
+                    g_cfgDisableRtvLevel = 0;
+                }
+            } else if(strcmp("EnableFriendlyFireLevel", key, false) == 0) {
+                g_cfgEnableFriendlyFireLevel = StringToInt(value) - 1;
+                if ( g_cfgEnableFriendlyFireLevel < 0 ) {
+                    g_cfgEnableFriendlyFireLevel = 0;
+                }
             } else if(strcmp("AlltalkOnWin", key, false) == 0) {
                 AlltalkOnWin = bool:StringToInt(value);
             } else if(strcmp("RemoveBonusWeaponAmmo", key, false) == 0) {

@@ -36,6 +36,8 @@ new WarmupStartup = 1;
 new Warmup_TimeLength = 30;
 new WarmupCounter;
 new bool:IsVotingCalled = false;
+new bool:g_isCalledEnableFriendlyFire = false;
+new bool:g_isCalledDisableRtv = false;
 new bool:TripleLevelBonus = false;
 new bool:KnifeProHE = false;
 new bool:ObjectiveBonusWin = false;
@@ -74,4 +76,6 @@ new bool:g_Cfg_HandicapSkipBots = false;
 new g_Cfg_KnifeProMaxDiff = 0;
 new g_Cfg_MultiLevelAmount = 3;
 new g_Cfg_HandicapTimesPerMap = 0;
+new g_cfgDisableRtvLevel = 0;
+new g_cfgEnableFriendlyFireLevel = 0;
 

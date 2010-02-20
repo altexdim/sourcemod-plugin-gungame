@@ -102,6 +102,16 @@
          */
         "FFA" "0"
 
+        /** 
+         * Enable friendly fire on defined level. 0 - disabled.
+         */
+        "EnableFriendlyFireLevel" "0"
+        
+        /** 
+         * Disable rtv on defined level. 0 - disabled.
+         */
+        "DisableRtvLevel" "0"
+
         /* ----- [knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
