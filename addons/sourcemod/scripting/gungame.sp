@@ -136,21 +136,6 @@ public OnClientAuthorized(client, const String:auth[])
         }
     }
     
-    new times = 0;
-    if ( g_Cfg_HandicapTimesPerMap )
-    {
-        if ( !GetTrieValue(PlayerHandicapTimes, auth, times) ) {
-            times = 0;
-        }
-        times++;
-        SetTrieValue(PlayerHandicapTimes, auth, times);
-    }
-    
-    if ( !g_Cfg_HandicapTimesPerMap || g_Cfg_HandicapTimesPerMap >= times )
-    {
-        GG_GiveHandicapLevel(client);
-    }
-    
     UTIL_UpdatePlayerScoreLevel(client);
 }
 

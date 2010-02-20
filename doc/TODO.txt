@@ -4,11 +4,6 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
-    + Feature: Do you think handicap should be given on first spawn, not on 
-        connect? As an admin I might spec for the first 2 minutes of a map 
-        but never join the game. If I reconnect I can get the handicap. 
-        But it might as well give it to me the first time I join into play, 
-        since other players connecting would be given the handicap. 
     + Feature: change "Top10Handicap" to make possibility to choose other 
         Top range for excluding from handicap; "HandicapMaxRank" "25" for 
         example, might mean that only players with rank > 25 will get 

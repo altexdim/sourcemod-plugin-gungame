@@ -490,7 +490,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     {
         PlayerState[client] |= FIRST_JOIN;
 
-        if(!IsFakeClient(client))
+        if ( !IsFakeClient(client) )
         {
             UTIL_PlaySound(client, Welcome);
 
@@ -503,6 +503,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
                 ShowJoinMsgPanel(client);
             }
         }
+        
+        UTIL_SetHandicapForClient(client);
     }
 
     if ( g_Cfg_ArmorKevlar )
