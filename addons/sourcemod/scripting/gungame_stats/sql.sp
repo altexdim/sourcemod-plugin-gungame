@@ -612,7 +612,7 @@ public T_CountWinners(Handle:owner, Handle:result, const String:error[], any:dat
 LoadTop10Data()
 {
     decl String:query[1024];
-    Format(query, sizeof(query), g_sql_getTopPlayers, 10, 0);
+    Format(query, sizeof(query), g_sql_getTopPlayers, MAX_RANK, 0);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
