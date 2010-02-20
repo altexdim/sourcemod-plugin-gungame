@@ -557,10 +557,6 @@ public Action:_CmdReset(client, args)
     
     // reset top 10 data
     TotalWinners = 0;
-    for (new i = 0; i < MAX_RANK; i++)
-    {
-        PlayerWins[i] = 0;
-    }
     
     return Plugin_Handled;
 }
@@ -570,10 +566,6 @@ LoadRank()
 {
     // reset top 10 data
     TotalWinners = 0;
-    for ( new i = 0; i < MAX_RANK; i++ )
-    {
-        PlayerWins[i] = 0;
-    }
     for ( new i = 1; i <= MAXPLAYERS; i++ )
     {
         PlayerPlaceData[i] = 0;
@@ -630,8 +622,6 @@ public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:da
     new i = 0;
     while ( SQL_FetchRow(result) )
     {
-        PlayerWins[i] = SQL_FetchInt(result, 1);
-        SQL_FetchString(result, 2, PlayerName[i], sizeof(PlayerName[]));
         SQL_FetchString(result, 3, PlayerAuthid[i], sizeof(PlayerAuthid[]));
         i++;
     }

@@ -34,6 +34,11 @@
 #define SQL_SUPPORT
 
 /**
+ * Max rank for stats.
+ */
+#define MAX_RANK         10
+
+/**
  * Const
  */
 
