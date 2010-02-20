@@ -5,7 +5,7 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     + Feature: change "Top10Handicap" to make possibility to choose other 
-        Top range for excluding from handicap; "HandicapMaxRank" "25" for 
+        Top range for excluding from handicap; "HandicapTopRank" "25" for 
         example, might mean that only players with rank > 25 will get 
         handicap level.
         
