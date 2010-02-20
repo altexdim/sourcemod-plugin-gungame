@@ -472,7 +472,7 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
  */
 UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, bool:DropBomb = false)
 {
-    for(new Slots:i = Slot_Primary, ent; i < Slot_Max; i++)
+    for(new Slots:i = Slot_Primary, ent; i < Slot_None; i++)
     {
         if(i == Slot_Grenade)
         {
