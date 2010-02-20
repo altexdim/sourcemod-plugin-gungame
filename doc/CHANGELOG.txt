@@ -1,5 +1,7 @@
 Changelog
 ---------
+        + Added motd example file "tools/gungame_winner.php".
+
     1.0.9.0:
         + Feature: Added config variable "EnableFriendlyFireLevel" to enable friendly fire on defined level.
         + Feature: Added config variable "DisableRtvLevel" to disable rtv if leader is on defined level.
