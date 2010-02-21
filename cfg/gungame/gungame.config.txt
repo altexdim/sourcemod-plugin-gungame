@@ -173,10 +173,15 @@
         "HandicapMode" "2"
 
         /**
-         * Allow players in the top10 to receive a handicap with the rest of the players.
+         * Allow players in the top rank to receive a handicap with the rest of the players.
+         *
          * Handicap must also be turned on above for this to work.
+         * See also "HandicapTopRank" to set rank limit for tp rank.
+         *
+         * 0 - Do not give handicap to the top rank players.
+         * 1 - Give handicap to all players.
          */
-        "Top10Handicap" "1"
+        "TopRankHandicap" "1"
 
         /**
          * Gives handicap level automaticaly every defined number of seconds.
@@ -198,6 +203,16 @@
          */
         "HandicapTimesPerMap" "0"
 
+        /**
+         * Do not give handicap to the top rank players.
+         *
+         * See also "TopRankHandicap" to allow all players to receive handicap.
+         *
+         * 0 - Give handicap to all players.
+         * N - Do not give handicap for the first N players.
+         */
+        "HandicapTopRank" "10"
+        
         /* ----- [equip] ----- */
         
         /* Auto reload current level weapon on kill */

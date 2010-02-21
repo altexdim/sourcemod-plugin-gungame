@@ -4,7 +4,8 @@ OnCreateNatives()
     CreateNative("GG_GetClientWins", __GetPlayerWins);
     CreateNative("GG_CountPlayersInStat", __CountPlayersInStat);
     CreateNative("GG_GetPlayerPlaceInStat", __GetPlayerPlaceInStat);
-    CreateNative("GG_GetPlayerPlaceInTop10", __GetPlayerPlaceInTop10);
+    CreateNative("GG_IsPlayerInTopRank", __IsPlayerInTopRank);
+    CreateNative("GG_IsPlayerWinsLoaded", __IsPlayerWinsLoaded);
     CreateNative("GG_ShowRank", __ShowRank);
 }
 
@@ -71,9 +72,37 @@ public __GetPlayerWins(Handle:plugin, numParams)
     return PlayerWinsData[client];
 }
 
-public __GetPlayerPlaceInTop10(Handle:plugin, numParams)
+public __IsPlayerInTopRank(Handle:plugin, numParams)
 {
-    new String:auth[64];
-    GetNativeString(1, auth, sizeof(auth));
-    return GetPlayerPlaceInTop10(auth);
+    new client = GetNativeCell(1);
+
+    if(client < 1 || client > MaxClients)
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
+
+    #if defined SQL_SUPPORT
+        return IsPlayerInTopRank(client);
+    #else
+        decl String:Authid[64];
+        GetClientAuthString(client, Authid, sizeof(Authid));
+        return GetPlayerPlaceInTop10(Authid) != -1;
+    #endif
 }
+
+public __IsPlayerWinsLoaded(Handle:plugin, numParams)
+{
+    new client = GetNativeCell(1);
+
+    if(client < 1 || client > MaxClients)
+    {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
+    } else if(!IsClientInGame(client)) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
+    }
+
+    return g_PlayerWinsLoaded[client];
+}
+

@@ -1,5 +1,5 @@
 /**
- * Top10 and player data will sync after map change.
+ * Top rank and player data will sync after map change.
  */
 
 new bool:SaveProcess;
@@ -13,5 +13,11 @@ new bool:IsActive;
     new TotalWinners = 0;
 #endif
 
-new Handle:FwdLoadRank = INVALID_HANDLE;
+#if defined SQL_SUPPORT
+    new Handle:FwdLoadRank = INVALID_HANDLE;
+    new Handle:FwdLoadPlayerWins = INVALID_HANDLE;
+    new g_cfgHandicapTopWins = 0;
+#endif
+
+new bool:g_PlayerWinsLoaded[MAXPLAYERS + 1] = {false, ...};
 

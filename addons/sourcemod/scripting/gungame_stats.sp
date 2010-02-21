@@ -11,18 +11,19 @@
 #include "gungame_stats/gungame_stats.h"
 #include "gungame_stats/config.h"
 #include "gungame_stats/menu.h"
-#include "gungame_stats/ranks.h"
 
 #if defined SQL_SUPPORT
     #include "gungame_stats/sql.h"
     #include "gungame_stats/sql.sp"
 #endif
+
 #if !defined SQL_SUPPORT
+    #include "gungame_stats/ranks.h"
+    #include "gungame_stats/ranks.sp"
     #include "gungame_stats/keyvalues.h"
     #include "gungame_stats/keyvalues.sp"
 #endif
 
-#include "gungame_stats/ranks.sp"
 #include "gungame_stats/menu.sp"
 #include "gungame_stats/config.sp"
 #include "gungame_stats/natives.sp"
@@ -55,7 +56,11 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 
 public OnPluginStart()
 {
-    FwdLoadRank = CreateGlobalForward("GG_OnLoadRank", ET_Ignore);
+    #if defined SQL_SUPPORT
+        FwdLoadRank = CreateGlobalForward("GG_OnLoadRank", ET_Ignore);
+        FwdLoadPlayerWins = CreateGlobalForward("GG_OnLoadPlayerWins", ET_Ignore, Param_Cell);
+    #endif
+    
     LoadTranslations("gungame_stats");
     OnCreateKeyValues();
 
@@ -64,7 +69,7 @@ public OnPluginStart()
     #if defined SQL_SUPPORT
         RegConsoleCmd("rank", _CmdRank);
     #endif
-    RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top10 rank from the player data information");
+    RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top rank from the player data information");
     RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
     #if defined SQL_SUPPORT
         RegAdminCmd("gg_reset", _CmdReset, GUNGAME_ADMINFLAG, "Reset all gungame stats.");
@@ -129,6 +134,7 @@ public GG_OnShutdown()
 
 public OnClientDisconnect(client)
 {
+    g_PlayerWinsLoaded[client] = false;
     PlayerWinsData[client] = 0;
     #if defined SQL_SUPPORT
         PlayerPlaceData[client] = 0;
@@ -169,3 +175,16 @@ EndProcess()
     #endif
     SavePlayerDataInfo();
 }
+
+public GG_OnWinner(client, const String:Weapon[])
+{
+    if ( IsClientInGame(client) && !IsFakeClient(client) )
+    {
+        ++PlayerWinsData[client];
+        SavePlayerData(client);
+        #if !defined SQL_SUPPORT
+            CheckRank(client);
+        #endif
+    }
+}
+

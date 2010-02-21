@@ -507,19 +507,18 @@ public Action:Timer_HandicapUpdate(Handle:timer)
         return Plugin_Continue;
     }
         
-    decl String:steamid[64];
     for ( new i = 1; i <= MaxClients; i++ )
     {
         if ( IsClientInGame(i) && (PlayerLevel[i] == minimum) )
         {
-            GetClientAuthString(i, steamid, sizeof(steamid));
-            if ( g_Cfg_HandicapSkipBots && steamid[0] == 'B' ) {
+            if ( g_Cfg_HandicapSkipBots && IsFakeClient(i) ) {
                 continue;
             }
-            if ( steamid[0] != 'B'
-                 && !Top10Handicap 
+            if ( !IsFakeClient(i)
+                 && !TopRankHandicap 
                  && StatsEnabled 
-                 && ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
+                 && ( !GG_IsPlayerWinsLoaded(i) /* HINT: gungame_stats */
+                    || GG_IsPlayerInTopRank(i) ) /* HINT: gungame_stats */
             )
             {
                 continue;
@@ -537,6 +536,19 @@ public Action:Timer_HandicapUpdate(Handle:timer)
     
     return Plugin_Continue;
 }
+
+public GG_OnLoadPlayerWins(client)
+{
+    if ( !(PlayerState[client] & FIRST_JOIN) )
+    {
+        return;
+    }
+    if ( UTIL_SetHandicapForClient(client) && IsPlayerAlive(client) )
+    {
+        UTIL_GiveNextWeapon(client, PlayerLevel[client]);
+    }
+}
+
 
 /**
  * KillCam event message should probably should block in DeathMatch Style.

@@ -1153,7 +1153,7 @@ UTIL_GetAverageLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
     return level;
 }
 
-UTIL_SetHandicapForClient(client)
+bool:UTIL_SetHandicapForClient(client)
 {
     decl String:auth[64];
     GetClientAuthString(client, auth, sizeof(auth));
@@ -1170,9 +1170,8 @@ UTIL_SetHandicapForClient(client)
     
     if ( !g_Cfg_HandicapTimesPerMap || g_Cfg_HandicapTimesPerMap >= times )
     {
-        GG_GiveHandicapLevel(client);
+        return bool:GG_GiveHandicapLevel(client);
     }
-    
-    UTIL_UpdatePlayerScoreLevel(client);
+    return false;
 }
 

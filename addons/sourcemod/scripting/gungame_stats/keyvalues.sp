@@ -96,13 +96,14 @@ RetrieveKeyValues(client, const String:auth[])
 {
     if ( auth[0] == 'B' )
     {
+        g_PlayerWinsLoaded[client] = true;
         return;
     }
-    if(PlayerOpen)
+    if ( PlayerOpen )
     {
         KvRewind(KvPlayer);
 
-        if(KvJumpToKey(KvPlayer, auth, false))
+        if ( KvJumpToKey(KvPlayer, auth, false) )
         {
             /*"Name"        "faluco"
             "Wins"      "10"
@@ -113,6 +114,8 @@ RetrieveKeyValues(client, const String:auth[])
             /* Update timestamp */
             KvSetNum(KvPlayer, "TimeStamp", GetTime());
         }
+        
+        g_PlayerWinsLoaded[client] = true;
     }
 }
 

@@ -1,15 +1,3 @@
-public GG_OnWinner(client, const String:Weapon[])
-{
-    if ( IsClientInGame(client) && !IsFakeClient(client) )
-    {
-        ++PlayerWinsData[client];
-        SavePlayerData(client);
-        #if !defined SQL_SUPPORT
-            CheckRank(client);
-        #endif
-    }
-}
-
 GetPlayerPlaceInTop10(const String:Auth[])
 {
     for(new i = 0; i < MAX_RANK; i++)
@@ -23,7 +11,6 @@ GetPlayerPlaceInTop10(const String:Auth[])
     return -1;
 }
 
-#if !defined SQL_SUPPORT
 CheckRank(client)
 {
     new Wins = PlayerWinsData[client];
@@ -97,5 +84,4 @@ ShiftRanksUp(client, Wins, RankToReplace, const String:Auth[64])
     GetClientName(client, PlayerName[RankToReplace], sizeof(PlayerName[]));
     PlayerAuthid[RankToReplace] = Auth;
 }
-#endif
 

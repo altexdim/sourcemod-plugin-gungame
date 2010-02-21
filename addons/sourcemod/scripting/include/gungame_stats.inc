@@ -47,12 +47,20 @@ native GG_CountPlayersInStat(); /* HINT: gungame_stats */
 native GG_GetClientWins(client); /* HINT: gungame_stats */
 
 /**
- * Get player's place in top 10.
+ * Check if player in top rank.
  *
- * @param auth          Steam id.
- * @return              Player place in top 10 (from 0 to 9), -1 if not found.
+ * @param client        Player index.
+ * @return              True if player is in top rank, false if he is not.
  */
-native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
+native bool:GG_IsPlayerInTopRank(client); /* HINT: gungame_stats */
+
+/**
+ * Check if player wins is loaded.
+ *
+ * @param client        Player index.
+ * @return              True if player wins is loaded, false if it is not.
+ */
+native bool:GG_IsPlayerWinsLoaded(client); /* HINT: gungame_stats */
 
 /**
  * Called when rank loaded.
@@ -61,6 +69,15 @@ native GG_GetPlayerPlaceInTop10(const String:auth[]); /* HINT: gungame_stats */
  * @noreturn
  */
 forward GG_OnLoadRank();
+
+/**
+ * Called when player wins is loaded.
+ *
+ * @param client        Player index.
+ * @noreturn
+ */
+forward GG_OnLoadPlayerWins(client);
+
 
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame_st =
@@ -81,5 +98,7 @@ public __pl_gungame_st_SetNTVOptional()
     MarkNativeAsOptional("GG_GetPlayerPlaceInStat");
     MarkNativeAsOptional("GG_CountPlayersInStat");
     MarkNativeAsOptional("GG_GetClientWins");
-    MarkNativeAsOptional("GG_GetPlayerPlaceInTop10");
+    MarkNativeAsOptional("GG_IsPlayerInTopRank");
+    MarkNativeAsOptional("GG_IsPlayerWinsLoaded");
 }
+

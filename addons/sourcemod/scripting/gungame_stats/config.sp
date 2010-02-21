@@ -12,6 +12,8 @@ public GG_ConfigKeyValue(const String:Key[], const String:Value[])
     {
         if ( strcmp(Key, "Prune", false) == 0 ) {
             Prune = StringToInt(Value);
+        } else if ( strcmp(Key, "HandicapTopRank", false) == 0 ) {
+            g_cfgHandicapTopRank = StringToInt(Value);
         }
     }
 }

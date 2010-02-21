@@ -1,5 +1,10 @@
 Changelog
 ---------
+    1.0.9.2:
+        + Feature: Added config variable "HandicapTopRank" to define what is the lowest rank
+            which is not allowing players to get handicap if "TopRankHandicap" "0".
+        * Config variable "Top10Handicap" renamed to "TopRankHandicap".
+                
     1.0.9.1:
         * Improvement: Handicap is now been gived on first team join, not on connect.
         + Added motd example file "tools/gungame_winner.php".

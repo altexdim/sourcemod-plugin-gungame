@@ -85,17 +85,15 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
         return 0;
     }
     
-    decl String:steamid[64];
-    GetClientAuthString(client, steamid, sizeof(steamid));
-    
-    if ( g_Cfg_HandicapSkipBots && steamid[0] == 'B' ) {
+    if ( g_Cfg_HandicapSkipBots && IsFakeClient(client) ) {
         return 0;
     }
     
-    if ( steamid[0] != 'B'
-         && !Top10Handicap 
+    if ( !IsFakeClient(client)
+         && !TopRankHandicap 
          && StatsEnabled 
-         && ( GG_GetPlayerPlaceInTop10(steamid) == -1 ) /* HINT: gungame_stats */
+         && ( !GG_IsPlayerWinsLoaded(client) /* HINT: gungame_stats */
+            || GG_IsPlayerInTopRank(client) ) /* HINT: gungame_stats */
     )
     {
         return 0;
@@ -106,6 +104,7 @@ public __GiveHandicapLevel(Handle:plugin, numParams)
     {
         PlayerLevel[client] = level;
         CurrentKillsPerWeap[client] = 0;
+        UTIL_UpdatePlayerScoreLevel(client);
         return 1;
     }
     

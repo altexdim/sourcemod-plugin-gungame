@@ -504,7 +504,10 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             }
         }
         
-        UTIL_SetHandicapForClient(client);
+        if ( !StatsEnabled || GG_IsPlayerWinsLoaded(client) ) /* HINT: gungame_stats */
+        {
+            UTIL_SetHandicapForClient(client);
+        }
     }
 
     if ( g_Cfg_ArmorKevlar )

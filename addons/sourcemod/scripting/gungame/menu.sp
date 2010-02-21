@@ -14,7 +14,7 @@ public CommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
                 ShowWeaponLevelPanel(client);
             case 3: /* !score */
                 ShowPlayerLevelMenu(client);
-            case 4: /* !top10 */
+            case 4: /* !top */
             {
                 if ( StatsEnabled ) 
                 {
@@ -50,7 +50,7 @@ public ScoreCommandPanelHandler(Handle:menu, MenuAction:action, client, param2)
     {
         switch(param2)
         {
-            case 2: /* !top10 */
+            case 2: /* !top */
             {
                 if ( StatsEnabled ) 
                 {

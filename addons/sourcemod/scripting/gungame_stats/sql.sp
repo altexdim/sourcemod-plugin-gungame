@@ -129,7 +129,7 @@ public T_SavePlayerData(Handle:owner, Handle:result, const String:error[], any:d
         return;
     }
 
-    // Reload top10 data after winner has beed updated in the database
+    // Reload top rank data after winner has beed updated in the database
     LoadRank();
 }
 
@@ -184,6 +184,16 @@ RetrieveKeyValues(client, const String:auth[])
 {
     if ( auth[0] == 'B' )
     {
+        g_PlayerWinsLoaded[client] = true;
+        PlayerWinsData[client] = 0;
+        
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] FORWARD PLAYER WINS LOADED client=%i is BOT", client);
+        #endif
+        
+        Call_StartForward(FwdLoadPlayerWins);
+        Call_PushCell(client);
+        Call_Finish();
         return;
     }
     decl String:query[1024];
@@ -210,6 +220,14 @@ public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], an
     {
         new id = SQL_FetchInt(result, 0);
         PlayerWinsData[client] = SQL_FetchInt(result, 1);
+        g_PlayerWinsLoaded[client] = true;
+        
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] FORWARD PLAYER WINS LOADED client=%i, wins=%i", client, PlayerWinsData[client]);
+        #endif
+        Call_StartForward(FwdLoadPlayerWins);
+        Call_PushCell(client);
+        Call_Finish();
         
         // update player timestamp
         decl String:query[1024];
@@ -367,7 +385,7 @@ public Action:_CmdImport(client, args)
         }
     }
 
-    ReplyToCommand(client, "[GunGame] Import of es player data completed. Please run gg_rebuild to update the top10.");
+    ReplyToCommand(client, "[GunGame] Import of es player data completed. Please run gg_rebuild to update the top rank.");
 
     return Plugin_Handled;
 }
@@ -478,7 +496,7 @@ public Action:_CmdImportDb(client, args)
         }
     }
 
-    ReplyToCommand(client, "[GunGame] Import of player data completed. Please run gg_rebuild to update the top10.");
+    ReplyToCommand(client, "[GunGame] Import of player data completed. Please run gg_rebuild to update the top rank.");
 
     return Plugin_Handled;
 }
@@ -487,7 +505,7 @@ public Action:_CmdImportDb(client, args)
 public Action:_CmdRebuild(client, args)
 {
     LoadRank();
-    ReplyToCommand(client, "[GunGame] Top10 has been rebuilt");
+    ReplyToCommand(client, "[GunGame] Top rank has been rebuilt");
     return Plugin_Handled;
 }
 
@@ -557,6 +575,7 @@ public Action:_CmdReset(client, args)
     
     // reset top 10 data
     TotalWinners = 0;
+    g_cfgHandicapTopWins = 0;
     
     return Plugin_Handled;
 }
@@ -566,6 +585,7 @@ LoadRank()
 {
     // reset top 10 data
     TotalWinners = 0;
+    g_cfgHandicapTopWins = 0;
     for ( new i = 1; i <= MAXPLAYERS; i++ )
     {
         PlayerPlaceData[i] = 0;
@@ -596,34 +616,70 @@ public T_CountWinners(Handle:owner, Handle:result, const String:error[], any:dat
         count = SQL_FetchInt(result, 0);
     }
     TotalWinners = count;
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] Found %i winners in the rank table", TotalWinners);
+    #endif
 
-    LoadTop10Data();
+    LoadTopRankData();
 }
 
 // threaded
-LoadTop10Data()
+LoadTopRankData()
 {
+    if ( !g_cfgHandicapTopRank )
+    {
+        g_cfgHandicapTopWins = 0;
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] Handicap top wins = 0 (handicap top rank disabled)");
+        #endif
+        Call_StartForward(FwdLoadRank);
+        Call_Finish();
+        return;
+    }
+    
+    if ( g_cfgHandicapTopRank >= TotalWinners )
+    {
+        g_cfgHandicapTopWins = 1;
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] Handicap top wins = 1 (handicap top rank more then total winners)");
+        #endif
+        Call_StartForward(FwdLoadRank);
+        Call_Finish();
+        return;
+    }
+
     decl String:query[1024];
-    Format(query, sizeof(query), g_sql_getTopPlayers, MAX_RANK, 0);
+    Format(query, sizeof(query), g_sql_getTopPlayers, 1, g_cfgHandicapTopRank - 1);
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] %s", query);
     #endif
-    SQL_TQuery(g_DbConnection, T_LoadTop10Data, query);
+    SQL_TQuery(g_DbConnection, T_LoadTopRankData, query);
 }
 
-public T_LoadTop10Data(Handle:owner, Handle:result, const String:error[], any:data)
+public T_LoadTopRankData(Handle:owner, Handle:result, const String:error[], any:data)
 {
     if ( result == INVALID_HANDLE )
     {
         LogError("Failed to load rank data (error: %s)", error);
+        g_cfgHandicapTopWins = 0;
+        Call_StartForward(FwdLoadRank);
+        Call_Finish();
         return;
     }
     
-    new i = 0;
-    while ( SQL_FetchRow(result) )
+    if ( SQL_FetchRow(result) )
     {
-        SQL_FetchString(result, 3, PlayerAuthid[i], sizeof(PlayerAuthid[]));
-        i++;
+        g_cfgHandicapTopWins = SQL_FetchInt(result, 1);
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] Handicap top wins = %i", g_cfgHandicapTopWins);
+        #endif
+    }
+    else
+    {
+        g_cfgHandicapTopWins = 0;
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] Handicap top wins = 0 (cant fetch rows from sql)");
+        #endif
     }
 
     Call_StartForward(FwdLoadRank);
@@ -688,5 +744,31 @@ ShowRankInChat(client)
             }
         }
     }
+}
+
+
+bool:IsPlayerInTopRank(client)
+{
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] IsPlayerInTopRank client=%i", client);
+    #endif
+    if ( !g_cfgHandicapTopWins )
+    {
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] ... false (top rank handicap wins not loaded)");
+        #endif
+        return false;
+    }
+    if ( PlayerWinsData[client] < g_cfgHandicapTopWins )
+    {
+        #if defined SQL_DEBUG
+            LogError("[DEBUG-SQL] ... false (player wins less then top rank handicap wins)");
+        #endif
+        return false;
+    }
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] ... true (player wins more or equal to top rank handicap wins)");
+    #endif
+    return true;
 }
 

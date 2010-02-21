@@ -193,8 +193,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 CommitSuicide = StringToInt(value);
             } else if(strcmp("HandicapMode", key, false) == 0) {
                 HandicapMode = StringToInt(value);
-            } else if(strcmp("Top10Handicap", key, false) == 0) {
-                Top10Handicap = bool:StringToInt(value);
+            } else if(strcmp("TopRankHandicap", key, false) == 0) {
+                TopRankHandicap = bool:StringToInt(value);
             }
         }
         
