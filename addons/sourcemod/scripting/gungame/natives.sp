@@ -248,17 +248,9 @@ public __GetClientLevel(Handle:plugin, numParams)
     return PlayerLevel[client] + 1;
 
 }
+
 public __GetMaxLevel(Handle:plugin, numParams)
 {
-    new client = GetNativeCell(1);
-
-    if(client < 1 || client > MaxClients)
-    {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Invalid client index [%d]", client);
-    } else if(!IsClientInGame(client)) {
-        return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
-    }
-
     return WeaponOrderCount;
 }
 

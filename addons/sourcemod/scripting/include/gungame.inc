@@ -120,12 +120,11 @@ native GG_GiveHandicapLevel(client);
 native GG_GetClientLevel(client);
 
 /**
- * Retrieves the client max level.
+ * Retrieves the max level.
  *
- * @param client        Player index.
- * @param return        The client max level (starting from 1).
+ * @param return        The max level (starting from 1).
  */
-native GG_GetClientMaxLevel(client);
+native GG_GetMaxLevel();
 
 /**
  * Add a level to the player current level.
