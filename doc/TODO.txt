@@ -3,6 +3,9 @@ TODO
     ----====----==== High priority list ----====----====
     
     ----====----==== Normal priority list ----====----====
+    + Feature: I have one more question. Is it possible to have few equip files (for 
+        classic mode, reversed, random etc.) and change them by my own plugin?
+        And what about changing GG cvar by plugin (some native for example)?
 
     ----====----==== High severity list ----====----====
     
