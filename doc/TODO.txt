@@ -4,6 +4,10 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    + Feature: Could you please add option, which will prevent winning game 
+        by killing a bot? I have bots only to keep players on the server 
+        before more of them will come. So, I don't want situation when 1 
+        player pwning bots all the time and have "fake" wins. 
     + Feature: I have one more question. Is it possible to have few equip files (for 
         classic mode, reversed, random etc.) and change them by my own plugin?
         And what about changing GG cvar by plugin (some native for example)?
