@@ -4,6 +4,19 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    + Feature: I would like to ask if there is an update of your plugin to come. 
+        It would be cool, if some things could be added or improved. I could 
+        think about some little aspects like
+        - enable a 1 second respawn 
+        - announcing nextmap on gg_win event
+        - synchronising mp_chattime with the length of the individual map end sound
+        - by updating gungame even the !give plugin could be worked over. Its now 
+            a bit buggy, but the author told me hes also waiting for a gungame 
+            update to fix his plugin (for example during knife warmup its possible 
+            now to get the first weapon already by typing !give)
+        - maybe its possible to implement a very simple achievement system (for 
+            example "Owner of the Day with x.xxx Kills" or "Killing Machine with 
+            xxx Kills") which is set to zero every day, so you dont need a big database.
     + Feature: Could you please add option, which will prevent winning game 
         by killing a bot? I have bots only to keep players on the server 
         before more of them will come. So, I don't want situation when 1 
