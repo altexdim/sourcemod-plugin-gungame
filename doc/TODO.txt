@@ -18,6 +18,24 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    + Bug report: Add support for cssdm. 
+		L 06/26/2010 - 14:00:00: [SM] Plugin encountered error 25: Call was aborted
+		L 06/26/2010 - 14:00:00: [SM] Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author.
+		L 06/26/2010 - 14:00:00: [SM] Displaying call stack trace for plugin "gungame.smx":
+		L 06/26/2010 - 14:00:00: [SM] [0] Line 89, gungame/hacks.sp::CreateDropHack()
+		L 06/26/2010 - 14:00:00: [SM] [1] Line 6, gungame/hacks.sp::OnHackStart()
+		L 06/26/2010 - 14:00:00: [SM] [2] Line 117, gungame.sp::OnPluginStart()
+		[SM] Loaded plugin gungame.smx successfully.
+
+		However i get when i try to couple Gungame with CSSDM bailopen wrote. As 
+		a standalone plugin CSSDM and Gungame work great but i get that error when 
+		i try to load them together is there an ideas?
+		Running:
+	
+		MM 1.8.2	
+		SM 1.3.3 hg2991
+		GG 1.0.9.1 w/new file fix
+		CSSDM Latest with the patch.. cant get them to work together
     + Feature: I would like to ask if there is an update of your plugin to come. 
         It would be cool, if some things could be added or improved. I could 
         think about some little aspects like
