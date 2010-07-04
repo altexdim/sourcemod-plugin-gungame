@@ -29,7 +29,7 @@
          * aug, m249, awp
          *
          * Automatic Rifles:
-         * sg552, g3sg1
+         * sg550, g3sg1
          *
          * Machine Gun:
          * m249
