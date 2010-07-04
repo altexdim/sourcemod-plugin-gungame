@@ -44,8 +44,8 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
     OnCreateNatives();
     return APLRes_Success;
 }
-#endif
 
+#else
 // deprecated in 1.3.1
 public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 {
@@ -53,6 +53,7 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
     OnCreateNatives();
     return true;
 }
+#endif
 
 public OnPluginStart()
 {

@@ -13,13 +13,13 @@
  * Uncomment if sm version >= 1.3.0.
  * Default is disabled.
  */
-// #define URANDOM_SUPPORT
+#define URANDOM_SUPPORT
 
 /**
  * Uncomment if sm version >= 1.3.1.
  * Default is disabled.
  */
-// #define ASK_PLUGIN_LOAD2_SUPPORT
+#define ASK_PLUGIN_LOAD2_SUPPORT
 
 /**
  * Enable debug code for sql in stats plugin.

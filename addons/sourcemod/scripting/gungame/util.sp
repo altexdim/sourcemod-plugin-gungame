@@ -1157,17 +1157,17 @@ bool:UTIL_SetHandicapForClient(client)
 {
     if ( g_Cfg_HandicapTimesPerMap )
     {
-	    decl String:auth[64];
-    	GetClientAuthString(client, auth, sizeof(auth));
-    
-	    new times = 0;
+        decl String:auth[64];
+        GetClientAuthString(client, auth, sizeof(auth));
+
+        new times = 0;
         if ( !GetTrieValue(PlayerHandicapTimes, auth, times) ) {
             times = 0;
         }
 
-		if ( times >= g_Cfg_HandicapTimesPerMap ) {
-			return false;
-		}
+        if ( times >= g_Cfg_HandicapTimesPerMap ) {
+            return false;
+        }
 
         times++;
         SetTrieValue(PlayerHandicapTimes, auth, times);
