@@ -2,7 +2,7 @@ Changelog
 ---------
     1.0.9.3:
         * Fixed: handicap does not work for new players who has never win yet.
-        * Update: gungame.games.txt updated for CSS OB version.
+        * Update: gungame.games.txt updated for CSS OB version. Thanks to psychonic.
 
     1.0.9.2:
         + Feature: Added config variable "HandicapTopRank" to define what is the lowest rank
