@@ -1155,23 +1155,24 @@ UTIL_GetAverageLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
 
 bool:UTIL_SetHandicapForClient(client)
 {
-    decl String:auth[64];
-    GetClientAuthString(client, auth, sizeof(auth));
-    
-    new times = 0;
     if ( g_Cfg_HandicapTimesPerMap )
     {
+	    decl String:auth[64];
+    	GetClientAuthString(client, auth, sizeof(auth));
+    
+	    new times = 0;
         if ( !GetTrieValue(PlayerHandicapTimes, auth, times) ) {
             times = 0;
         }
+
+		if ( times >= g_Cfg_HandicapTimesPerMap ) {
+			return false;
+		}
+
         times++;
         SetTrieValue(PlayerHandicapTimes, auth, times);
     }
     
-    if ( !g_Cfg_HandicapTimesPerMap || g_Cfg_HandicapTimesPerMap >= times )
-    {
-        return bool:GG_GiveHandicapLevel(client);
-    }
-    return false;
+    return bool:GG_GiveHandicapLevel(client);
 }
 

@@ -216,18 +216,11 @@ public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], an
         LogError("Failed to retrieve player by auth (error: %s)", error);
         return;
     }
+    g_PlayerWinsLoaded[client] = true;
     if ( SQL_FetchRow(result) )
     {
         new id = SQL_FetchInt(result, 0);
         PlayerWinsData[client] = SQL_FetchInt(result, 1);
-        g_PlayerWinsLoaded[client] = true;
-        
-        #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] FORWARD PLAYER WINS LOADED client=%i, wins=%i", client, PlayerWinsData[client]);
-        #endif
-        Call_StartForward(FwdLoadPlayerWins);
-        Call_PushCell(client);
-        Call_Finish();
         
         // update player timestamp
         decl String:query[1024];
@@ -237,6 +230,16 @@ public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], an
         #endif
         SQL_TQuery(g_DbConnection, T_FastQueryResult, query);
     }
+    else
+    {
+    	PlayerWinsData[client] = 0;
+    }
+    #if defined SQL_DEBUG
+        LogError("[DEBUG-SQL] FORWARD PLAYER WINS LOADED client=%i, wins=%i", client, PlayerWinsData[client]);
+    #endif
+    Call_StartForward(FwdLoadPlayerWins);
+    Call_PushCell(client);
+    Call_Finish();
 }
 
 public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:data)
