@@ -7,12 +7,8 @@
         {
             "EndMultiplayerGame"
             {
-                /* TODO
                 "windows"       "118"
                 "linux"     "119"
-                */
-                "windows"       "117"
-                "linux"     "118"
             }
 
             "GetPrimaryAmmoType"
