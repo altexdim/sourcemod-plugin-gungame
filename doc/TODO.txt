@@ -11,6 +11,9 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    * Bug report: gungame does not work with cssdm.
+	    Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author. 
+    	2.1.1. CSSDM
     * Bug report: weapons does not removed in dm mode.
     * Bug report: Add support for cssdm. 
 		L 06/26/2010 - 14:00:00: [SM] Plugin encountered error 25: Call was aborted
