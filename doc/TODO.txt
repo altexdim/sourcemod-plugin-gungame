@@ -11,6 +11,7 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    * Bug report: "has won" does not translates.
     * Bug report: gungame does not work with cssdm.
 	    Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author. 
     	2.1.1. CSSDM
