@@ -2,6 +2,11 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
+    * check:
+        Hi, !score command is not working, players have to type !level and press
+        4 to see the scores. How can I fix this?
+    * check: After doing a kill players dont get another gun (but they do levelup)...
+        "TurboMode" "1"
     * Add feature: Добавить возможность переключать куда выводить инфу о времени
     	до конца вармапа - чат/хинтбокс.
     * Bug report:
