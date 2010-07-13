@@ -2,6 +2,7 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
+    * remove GameCommenced var and starting warmup on both teams have players.
     * check:
         Hi, !score command is not working, players have to type !level and press
         4 to see the scores. How can I fix this?
