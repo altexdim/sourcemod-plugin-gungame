@@ -170,10 +170,10 @@
 ----------------------------------------------------
 
 [LIST]
-[*][B]Q.[/B] Plugin does not work after css update in june 2010?
-         [B]A.[/B] Update your gungame.games.txt
-         [URL]https://forums.alliedmods.net/attachment.php?attachmentid=68499&stc=1&d=1277740210[/URL]
-         Thanks to psychonic.
+[*][B]Q.[/B] Plugin does not change map or crashing server after latest css update?
+         [B]A.[/B] Update your gungame.games.txt attached to this post.
+[*][B]Q.[/B] Plugin does not work after latest css update?
+         [B]A.[/B] Update your gungame.games.txt attached to this post.
 [*][B]Q.[/B] Sounds does not work after css update in june 2010?
          [B]A.[/B] If you are running css server on windows platform, then you need to change paths to sound files: 
          replace slashes "/" with double backslashes "\\". And of course don't forget to restore your pure_server_whitelist.txt and sv_pure 1 in config.

@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Updated gungame.games.txt after css update on 16 Jul 2010. Thanks to p3tsin. 
+
     1.0.9.4:
     	* Added cssdm 2.1.1 support.
 
