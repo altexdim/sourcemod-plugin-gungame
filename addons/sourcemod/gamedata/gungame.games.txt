@@ -7,20 +7,20 @@
         {
             "EndMultiplayerGame"
             {
-                "windows"       "118"
+                "windows"   "118"
                 "linux"     "119"
             }
 
             "GetPrimaryAmmoType"
             {
-                "windows"       "322"
-                "linux"     "323"
+                "windows"   "323"
+                "linux"     "324"
             }
             
             "GetSlot"
             {
-                "windows"       "313"
-                "linux"         "314"
+                "windows"   "310"
+                "linux"     "315"
             }
         }
 
