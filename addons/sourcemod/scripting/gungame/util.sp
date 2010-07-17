@@ -639,7 +639,7 @@ UTIL_GiveNextWeapon(client, level, bool:drop = true)
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo )
             {
-                new iAmmo = HACK_GetAmmoType(ent);
+                new iAmmo = UTIL_GetAmmoType(ent);
 
                 if ( iAmmo != -1 )
                 {
@@ -1176,3 +1176,6 @@ bool:UTIL_SetHandicapForClient(client)
     return bool:GG_GiveHandicapLevel(client);
 }
 
+UTIL_GetAmmoType(weapon) {
+    return GetEntData(weapon, g_iOffs_iPrimaryAmmoType, 1);
+}

@@ -31,6 +31,13 @@ OnOffsetStart()
         SetFailState(Error);
     }
     
+    g_iOffs_iPrimaryAmmoType = FindSendPropInfo("CBaseCombatWeapon","m_iPrimaryAmmoType");
+    if ( g_iOffs_iPrimaryAmmoType == INVALID_OFFSET )
+    {
+        FormatEx(Error, sizeof(Error), "FATAL ERROR g_iOffs_iPrimaryAmmoType [%d]. Please contact the author.", g_iOffs_iPrimaryAmmoType);
+        SetFailState(Error);
+    }
+    
     FindCstrikeOffset();
 
     /**

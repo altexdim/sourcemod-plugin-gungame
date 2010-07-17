@@ -11,12 +11,6 @@
                 "linux"     "119"
             }
 
-            "GetPrimaryAmmoType"
-            {
-            	"windows"	"319"
-            	"linux"		"324"
-            }
-            
             "GetSlot"
             {
                 "windows"   "310"

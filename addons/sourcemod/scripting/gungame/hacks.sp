@@ -4,7 +4,6 @@ OnHackStart()
 
 	CreateEndMultiplayerGame();
 	CreateDropHack();
-	CreateGetAmmoTypeHack();
 	CreateRemoveAmmoHack();
 	CreateGetSlotHack();
 	CreateRemoveHack();
@@ -62,19 +61,6 @@ HACK_RemoveAmmo(client, iCount, iAmmoIndex)
 	SDKCall(RemoveAmmo, client, iCount, iAmmoIndex);
 }
 
-CreateGetAmmoTypeHack()
-{
-	StartPrepSDKCall(SDKCall_Entity);
-	PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetPrimaryAmmoType");
-	PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
-	GetAmmoType = EndPrepSDKCall();
-
-	if(GetAmmoType == INVALID_HANDLE)
-	{
-		SetFailState("Virtual CBaseCombatWeapon::GetPrimaryAmmoType Failed. Please contact the author.");
-	}
-}
-
 CreateDropHack()
 {
 	StartPrepSDKCall(SDKCall_Player);
@@ -111,17 +97,6 @@ CreateDropHack()
 HACK_CSWeaponDrop(client, weapon)
 {
 	SDKCall(CSWeaponDrop, client, weapon, true, false);
-}
-
-/**
- * Returns the ammo type for the weapon
- *
- * @param weapon		Weapon entity index
- * @return		  Ammo Type index
- */
-HACK_GetAmmoType(weapon)
-{
-	return SDKCall(GetAmmoType, weapon);
 }
 
 /**
