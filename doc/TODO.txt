@@ -17,6 +17,13 @@ TODO
     
     ----====----==== Normal priority list ----====----====
 
+    + Feature request:
+        Is there an option to display how many kills a person has on each level? Where when you spawn or kill someone it would say:
+
+        You are on level 1 :: Glock 1/4 kills
+        You are on level 1 :: Glock 2/4 kills
+
+        etc for each level?
     * Bug report: "has won" does not translates.
     * Bug report: gungame does not work with cssdm.
 	    Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author. 
