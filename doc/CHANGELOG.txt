@@ -1,5 +1,7 @@
 Changelog
 ---------
+    1.0.9.5:
+        * Bug fixed: "has won" does not translates.
         - Removed native GG_IsGameCommenced. Now commencing of the game is not important.
         - Removed config variable WarmupStartup. Not warmup starts only on map start.
         + Added config variable MultiLevelEffect.

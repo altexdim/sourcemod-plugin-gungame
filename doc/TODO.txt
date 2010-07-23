@@ -2,8 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    * Bug report: "has won" does not translates.
-
     ----====----==== Normal priority list ----====----====
 
     * Bug report:

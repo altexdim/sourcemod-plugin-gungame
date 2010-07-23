@@ -12,6 +12,8 @@ set LOG_COMPILE=%DIR_SOURCES_SCRIPTING%\compile_gungame.log
 
 xcopy /e /f /y %DIR_SOURCES_SCRIPTING%\*.* %DIR_SERVER_SCRIPTING%\
 
+cd %DIR_SERVER_SCRIPTING%
+
 echo %DATE% %TIME% > %LOG_COMPILE%
 %DIR_SERVER_SCRIPTING%\spcomp gungame.sp                >> %LOG_COMPILE%
 %DIR_SERVER_SCRIPTING%\spcomp gungame_afk.sp            >> %LOG_COMPILE%
@@ -39,3 +41,5 @@ copy %DIR_SERVER_SCRIPTING%\gungame_logging.smx         %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_mapvoting.smx       %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx           %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx              %DIR_SERVER_PLUGINS%\
+
+cd %DIR_SOURCES_SCRIPTING%

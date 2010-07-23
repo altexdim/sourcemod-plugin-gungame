@@ -74,7 +74,6 @@ UTIL_PrintToUpperLeft(r, g, b, const String:source[], any:...)
         if ( IsClientInGame(i) && !IsFakeClient(i) ) {
             SetGlobalTransTarget(i);
             VFormat(Buffer, sizeof(Buffer), source, 5);
-
             Msg = CreateKeyValues("msg");
 
             if ( Msg != INVALID_HANDLE ) {
@@ -83,7 +82,7 @@ UTIL_PrintToUpperLeft(r, g, b, const String:source[], any:...)
                 KvSetNum(Msg, "level", 0);
                 KvSetNum(Msg, "time", 20);
 
-                CreateDialog(client, Msg, DialogType_Msg);
+                CreateDialog(i, Msg, DialogType_Msg);
 
                 CloseHandle(Msg);
             }
@@ -1188,7 +1187,9 @@ UTIL_StopEffectClient(client) {
     if ( g_Ent_Effect[client] < 0 ) {
         return;
     }
-    RemoveEdict(g_Ent_Effect[client]);
+    if ( IsValidEdict(g_Ent_Effect[client]) ) {
+        RemoveEdict(g_Ent_Effect[client]);
+    }
     g_Ent_Effect[client] = -1;
 }
 
