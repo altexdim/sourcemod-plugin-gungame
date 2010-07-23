@@ -287,6 +287,9 @@
         "MultiLevelBonusGravity" "0.5"
         "MultiLevelBonusSpeed" "1.5"
 
+        /* Miltilevel visual effect */
+        "MultiLevelEffect" "0"
+
         /* How much levels is needed to get bonus */
         "MultiLevelAmount" "3"
 

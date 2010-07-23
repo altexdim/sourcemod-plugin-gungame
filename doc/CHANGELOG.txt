@@ -1,5 +1,6 @@
 Changelog
 ---------
+        + Added config variable MultiLevelEffect.
         * Updated gungame.games.txt after css update on 16 Jul 2010. Thanks to p3tsin. 
         * Optimized ammo removment code. Thanks to p3tsin. 
 

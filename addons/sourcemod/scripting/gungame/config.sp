@@ -108,6 +108,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_ArmorHelmet = StringToInt(value);
             } else if(strcmp("MultiLevelBonusSpeed", key, false) == 0) {
                g_Cfg_TripleLevelBonusSpeed = StringToFloat(value);
+            } else if(strcmp("MultiLevelEffect", key, false) == 0) {
+               g_Cfg_TripleLevelEffect = bool:StringToInt(value);
             } else if(strcmp("MultiLevelBonusGravity", key, false) == 0) {
                g_Cfg_TripleLevelBonusGravity = StringToFloat(value);
             } else if(strcmp("LevelsInScoreboard", key, false) == 0) {
