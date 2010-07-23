@@ -1014,6 +1014,7 @@ UTIL_ShowHintTextMulti(client, const String:textHint[], times, Float:time)
     WritePackString(data, textHint);
     
     CreateTimer(time, UTIL_Timer_ShowHintText, data, TIMER_REPEAT);
+    CreateTimer(0.1, UTIL_Timer_ShowHintText, data);
 }
 
 public Action:UTIL_Timer_ShowHintText(Handle:timer, any:data)
