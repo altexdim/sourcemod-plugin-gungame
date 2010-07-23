@@ -3,10 +3,10 @@ Changelog
     1.0.9.5:
         * Bug fixed: "has won" does not translates.
         - Removed native GG_IsGameCommenced. Now commencing of the game is not important.
-        - Removed config variable WarmupStartup. Not warmup starts only on map start.
+        - Removed config variable WarmupStartup. Now warmup starts only on map start.
         + Added config variable MultiLevelEffect.
         * Updated gungame.games.txt after css update on 16 Jul 2010. Thanks to p3tsin. 
-        * Optimized ammo removment code. Thanks to p3tsin. 
+        * Optimized ammo removement code. Thanks to p3tsin. 
 
     1.0.9.4:
     	* Added cssdm 2.1.1 support.
