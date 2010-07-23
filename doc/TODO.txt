@@ -3,13 +3,6 @@ TODO
     ----====----==== High priority list ----====----====
 
     * remove GameCommenced var and starting warmup on both teams have players.
-    * check:
-        Hi, !score command is not working, players have to type !level and press
-        4 to see the scores. How can I fix this?
-    * check: After doing a kill players dont get another gun (but they do levelup)...
-        "TurboMode" "1"
-    * Add feature: Добавить возможность переключать куда выводить инфу о времени
-    	до конца вармапа - чат/хинтбокс.
     * Bug report:
         во еще глюк заметил !score
         появляется меню если игроков много или ники длинные то next exit 
@@ -114,4 +107,3 @@ TODO
       spawn and when gg swithces enabled/disabled.
     + Feature: Need features from es gg 5: Colorize knife-level player.
     + Feature: Need features from es gg 5: Random sounds?
-        
