@@ -66,39 +66,28 @@ stock UTIL_PrintToClient(client, type, const String:szMsg[], any:...)
     }
 }
 
-UTIL_PrintToUpperLeft(client, r, g, b, const String:source[], any:...)
+UTIL_PrintToUpperLeft(r, g, b, const String:source[], any:...)
 {
-    if(client && IsFakeClient(client))
-    {
-        return;
-    }
+    decl String:Buffer[64];
+    new Handle:Msg;
+    for ( new i = 1; i <= MaxClients; i++ ) {
+        if ( IsClientInGame(i) && !IsFakeClient(i) ) {
+            SetGlobalTransTarget(i);
+            VFormat(Buffer, sizeof(Buffer), source, 5);
 
-    decl String:Buffer[53];
-    VFormat(Buffer, sizeof(Buffer), source, 6);
+            Msg = CreateKeyValues("msg");
 
-    new Handle:Msg = CreateKeyValues("msg");
+            if ( Msg != INVALID_HANDLE ) {
+                KvSetString(Msg, "title", Buffer);
+                KvSetColor(Msg, "color", r, g, b, 255);
+                KvSetNum(Msg, "level", 0);
+                KvSetNum(Msg, "time", 20);
 
-    if(Msg != INVALID_HANDLE)
-    {
-        KvSetString(Msg, "title", Buffer);
-        KvSetColor(Msg, "color", r, g, b, 255);
-        KvSetNum(Msg, "level", 0);
-        KvSetNum(Msg, "time", 20);
+                CreateDialog(client, Msg, DialogType_Msg);
 
-        if(client == 0)
-        {
-            for(new i = 1; i <= MaxClients; i++)
-            {
-                if(IsClientInGame(i))
-                {
-                    CreateDialog(i, Msg, DialogType_Msg);
-                }
+                CloseHandle(Msg);
             }
-        } else {
-            CreateDialog(client, Msg, DialogType_Msg);
         }
-
-        CloseHandle(Msg);
     }
 }
 
@@ -366,7 +355,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         new r = (team == TEAM_T ? 255 : 0);
         new g =  team == TEAM_CT ? 128 : (team == TEAM_T ? 0 : 255);
         new b = (team == TEAM_CT ? 255 : 0);
-        UTIL_PrintToUpperLeft(0, r, g, b, "%t", "Has won", Name);
+        UTIL_PrintToUpperLeft(r, g, b, "%t", "Has won", Name);
 
         Call_StartForward(FwdWinner);
         Call_PushCell(client);
