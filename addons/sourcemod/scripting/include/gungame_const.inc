@@ -101,9 +101,6 @@ stock const String:BLANK_SPACE[] = " ";
 #define PRINT_TALK           3
 #define PRINT_CENTER         4
 
-#define GAME_START           1
-#define MAP_START            2
-
 #define INVALID_OFFSET      -1
 
 enum Slots

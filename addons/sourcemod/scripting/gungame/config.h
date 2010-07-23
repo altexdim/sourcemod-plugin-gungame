@@ -32,7 +32,6 @@ new bool:BotCanWin;
 new bool:WarmupEnabled = true;
 new bool:DisableWarmupOnRoundEnd = false;
 new bool:WarmupInitialized;
-new WarmupStartup = 1;
 new Warmup_TimeLength = 30;
 new WarmupCounter;
 new bool:IsVotingCalled = false;

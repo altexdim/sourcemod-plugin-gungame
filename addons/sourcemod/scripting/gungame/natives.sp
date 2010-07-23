@@ -15,14 +15,8 @@ OnCreateNatives()
     CreateNative("GG_SetWeaponLevel", __SetWeaponLevel);
     CreateNative("GG_SetWeaponLevelByName", __SetWeaponLevelByName);
     CreateNative("GG_GetWeaponIndex", __GetWeaponIndex);
-    CreateNative("GG_IsGameCommenced", __IsGameCommenced);
     CreateNative("GG_GetLevelWeaponName", __GetLevelWeaponName);
     CreateNative("GG_IsWarmupInProgress", __IsWarmupInProgress);
-}
-
-public __IsGameCommenced(Handle:plugin, numParams)
-{
-    return GameCommenced;
 }
 
 public __IsWarmupInProgress(Handle:plugin, numParams)

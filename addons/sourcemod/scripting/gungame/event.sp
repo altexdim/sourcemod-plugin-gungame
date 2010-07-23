@@ -107,12 +107,6 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
         UnlimitedNades = ( Tcount <= UnlimitedNadesMinPlayers || CTcount <= UnlimitedNadesMinPlayers );
     }
 
-    /* If one of the counts goes to 0 that means game is not commenced any more */
-    if ( !CTcount || !Tcount )
-    {
-        GameCommenced = false;
-    }
-
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     if ( client && !disconnect && (oldTeam >= 2) && (newTeam < 2) && IsClientInGame(client) && IsPlayerAlive(client) )
     {
@@ -156,11 +150,6 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
             CreateTimer(0.1, RemoveHostages);
         }
 
-        if(WarmupStartup & GAME_START && WarmupEnabled && !WarmupInitialized && GameCommenced)
-        {
-            StartWarmupRound();
-            SetConVarInt(mp_restartgame, 1);
-        }
         UTIL_PlaySoundForLeaderLevel();
 
         // Disable warmup
@@ -172,11 +161,6 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
     } else {
         /* Round has ended. */
         RoundStarted = false;
-
-        if ( GetEventInt(event, "reason") == 16 )
-        {
-            GameCommenced = true;
-        }
 
         if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
         {
@@ -613,7 +597,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if ( !IsActive || !ObjectiveBonus || !GameCommenced || (!RoundStarted && name[5] != 'e') )
+    if ( !IsActive || !ObjectiveBonus || (!RoundStarted && name[5] != 'e') )
     {
         return;
     }
@@ -665,7 +649,7 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
 
 public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    if ( !IsActive || !GameCommenced || !RoundStarted )
+    if ( !IsActive || !RoundStarted )
     {
         return;
     }

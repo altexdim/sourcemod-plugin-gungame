@@ -1,5 +1,7 @@
 Changelog
 ---------
+        - Removed native GG_IsGameCommenced. Now commencing of the game is not important.
+        - Removed config variable WarmupStartup. Not warmup starts only on map start.
         + Added config variable MultiLevelEffect.
         * Updated gungame.games.txt after css update on 16 Jul 2010. Thanks to p3tsin. 
         * Optimized ammo removment code. Thanks to p3tsin. 

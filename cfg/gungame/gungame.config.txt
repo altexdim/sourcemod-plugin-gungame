@@ -298,14 +298,6 @@
         /* Enables Warmup Round*/
         "WarmupEnabled" "1"
 
-        /**
-         * Decides when warmup round starts. 
-         * 1 = When each team has a player. 
-         * 2 = At the start of map load finish. 
-         * 3 = Both.
-         */
-        "WarmupStartup" "2"
-
         /* Warmup time length */
         "WarmupTimeLength" "60"
 

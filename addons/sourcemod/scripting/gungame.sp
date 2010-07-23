@@ -249,7 +249,7 @@ public GG_OnStartup(bool:Command)
 
     UTIL_RemoveBuyZones();
         
-    if ( WarmupStartup & MAP_START && !WarmupInitialized && WarmupEnabled )
+    if ( !WarmupInitialized && WarmupEnabled )
     {
         StartWarmupRound();
     }

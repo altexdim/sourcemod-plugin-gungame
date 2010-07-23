@@ -232,14 +232,6 @@ native GG_SetMaxLevel(level);
 native Weapons:GG_GetWeaponIndex(const String:weapon[]);
 
 /**
- * Retrieves if the game is commenced.
- *
- * @noparam
- * @return          Return true if game is commenced otherwise false.
- */
-native bool:GG_IsGameCommenced();
-
-/**
  * Get weapon name from level.
  *
  * @param level         The current level (starting from 1).

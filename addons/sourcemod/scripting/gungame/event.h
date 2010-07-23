@@ -1,11 +1,6 @@
 new PlayerState[MAXPLAYERS + 1];
 new PlayerOnGrenade;
 
-/**
- * Caching information to see if there aleast a player on each team
- * Work around for game_start and game_end. Use GameCommenced for replacement
- */
-new bool:GameCommenced;
 new CTcount;
 new Tcount;
 
