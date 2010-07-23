@@ -1,35 +1,41 @@
 @echo off 
 
-xcopy /e /f /y D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\*.* D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\
+set DIR_SERVER_SOURCEMOD=D:\games\css_server\orangebox\cstrike\addons\sourcemod
+set DIR_SERVER_SCRIPTING=%DIR_SERVER_SOURCEMOD%\scripting
+set DIR_SERVER_PLUGINS=%DIR_SERVER_SOURCEMOD%\plugins
 
-cd D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\
+set DIR_SOURCES_SOURCEMOD=D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod
+set DIR_SOURCES_SCRIPTING=%DIR_SOURCES_SOURCEMOD%\scripting
+set DIR_SOURCES_PLUGINS=%DIR_SOURCES_SOURCEMOD%\plugins
 
-echo %DATE% %TIME% > D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_afk.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_config.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_display_winner.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_logging.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_mapvoting.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_stats.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
-D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\spcomp gungame_tk.sp >> D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting\compile_gungame.log
+set LOG_COMPILE=%DIR_SOURCES_SCRIPTING%\compile_gungame.log
 
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_afk.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_config.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_display_winner.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_logging.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_mapvoting.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_stats.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_tk.smx D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\plugins\
+xcopy /e /f /y %DIR_SOURCES_SCRIPTING%\*.* %DIR_SERVER_SCRIPTING%\
 
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_afk.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_config.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_display_winner.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_logging.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_mapvoting.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_stats.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
-copy D:\games\css_server\orangebox\cstrike\addons\sourcemod\scripting\gungame_tk.smx D:\games\css_server\orangebox\cstrike\addons\sourcemod\plugins\
+echo %DATE% %TIME% > %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame.sp                >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_afk.sp            >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_config.sp         >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_display_winner.sp >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_logging.sp        >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_mapvoting.sp      >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_stats.sp          >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_tk.sp             >> %LOG_COMPILE%
 
-cd D:\home\altex\css_plugins-trunk\sm_gungame\addons\sourcemod\scripting
+copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_afk.smx             %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_config.smx          %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_display_winner.smx  %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_logging.smx         %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_mapvoting.smx       %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx           %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx              %DIR_SOURCES_PLUGINS%\
+
+copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_afk.smx             %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_config.smx          %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_display_winner.smx  %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_logging.smx         %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_mapvoting.smx       %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx           %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx              %DIR_SERVER_PLUGINS%\
