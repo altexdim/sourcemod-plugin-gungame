@@ -1,5 +1,11 @@
 Changelog
 ---------
+    1.0.9.6:
+        * Fixed:
+            L 07/23/2010 - 20:57:48: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 07/23/2010 - 20:57:48: [SM]   [0]  Line 1023, gungame/util.sp::UTIL_Timer_ShowHintText()
+            L 07/23/2010 - 20:57:49: [SM] Native "ResetPack" reported: Invalid data pack handle 31b50627 (error 1)
+
     1.0.9.5:
         * Bug fixed: "has won" does not translates.
         - Removed native GG_IsGameCommenced. Now commencing of the game is not important.
