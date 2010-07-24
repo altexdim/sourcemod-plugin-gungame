@@ -1011,22 +1011,24 @@ UTIL_ShowHintTextMulti(client, const String:textHint[], times, Float:time)
     WritePackCell(data, times);
     WritePackCell(data, client);
     WritePackString(data, textHint);
-    WritePackFloat(data, time);
-    WritePackCell(data, 1);
     
-    CreateTimer(0.1, UTIL_Timer_ShowHintText, data);
+    new Handle:timer = CreateTimer(time, UTIL_Timer_ShowHintText, data, TIMER_REPEAT);
+    CreateTimer(0.1, UTIL_Timer_ShowHintTextFirst, timer);
+}
+
+public Action:UTIL_Timer_ShowHintTextFirst(Handle:timer, any:data)
+{
+    TriggerTimer(data);
 }
 
 public Action:UTIL_Timer_ShowHintText(Handle:timer, any:data)
 {
-    new client, String:textHint[512], times, Float:time, startTimer;
+    new client, String:textHint[512], times;
     
     ResetPack(data);
     times = ReadPackCell(data);
     client = ReadPackCell(data);
     ReadPackString(data, textHint, sizeof(textHint));
-    time = ReadPackFloat(data);
-    startTimer = ReadPackCell(data);
     
     if ( !IsClientInGame(client) )
     {
@@ -1044,11 +1046,6 @@ public Action:UTIL_Timer_ShowHintText(Handle:timer, any:data)
     {
         SetPackPosition(data, 0);
         WritePackCell(data, times);
-        if ( startTimer ) {
-            SetPackPosition(data, 4);
-            WritePackCell(data, 0);
-            CreateTimer(time, UTIL_Timer_ShowHintText, data, TIMER_REPEAT);
-        }
         return Plugin_Continue;
     }
 }

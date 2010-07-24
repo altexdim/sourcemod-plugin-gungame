@@ -1,5 +1,11 @@
 Changelog
 ---------
+    1.0.9.7:
+        * Fixed:
+            L 07/23/2010 - 23:06:22: [SM] Displaying call stack trace for plugin "gungame.smx":
+            L 07/23/2010 - 23:06:22: [SM]   [0]  Line 1027, gungame/util.sp::UTIL_Timer_ShowHintText()
+            L 07/23/2010 - 23:06:22: [SM] Native "ReadPackString" reported: DataPack operation is out of bounds.
+
     1.0.9.6:
         * Fixed:
             L 07/23/2010 - 20:57:48: [SM] Displaying call stack trace for plugin "gungame.smx":
