@@ -172,6 +172,7 @@
 [LIST]
 [*][B]Q.[/B] Plugin does not change map or crashing server after latest css update?
          [B]A.[/B] Update your gungame.games.txt attached to this post.
+         Update server binaries and update gungame plugin to the latest version.
 [*][B]Q.[/B] Plugin does not work after latest css update?
          [B]A.[/B] Update your gungame.games.txt attached to this post.
 [*][B]Q.[/B] Sounds does not work after css update in june 2010?
