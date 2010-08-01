@@ -365,7 +365,16 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
 
         UTIL_FreezeAllPlayer();
         ForceMapChange();
-        UTIL_PlaySound(0, Winner);
+
+        new result;
+        Call_StartForward(FwdSoundWinner);
+        Call_PushCell(client);
+        Call_Finish(result);
+
+        if ( !result ) {
+            UTIL_PlaySound(0, Winner);
+        }
+
         if ( AlltalkOnWin )
         {
             new Handle:sv_alltalk = FindConVar("sv_alltalk");

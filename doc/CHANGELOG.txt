@@ -1,5 +1,6 @@
 Changelog
 ---------
+        + Added GG_OnWinnerSound forward.
         * Fixed: When you do multikill (for example kill two enemies with single AWP shot) you level up twice.
 
     1.0.9.7:

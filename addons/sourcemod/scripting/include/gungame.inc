@@ -99,6 +99,14 @@ forward GG_OnStartMapVote();
 forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKilled);
 
 /**
+ * Called before winner sound starts to play.
+ *
+ * @param client    Winner's index.
+ * @return          Plugin_Handled; to prevent winner sound to play.
+ */
+forward Action:GG_OnSoundWinner(client);
+
+/**
  * Gives the client the average/minimum level of all players in the server.
  *
  * Handicap mode: 
