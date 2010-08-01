@@ -598,8 +598,28 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, bool:drop = true)
-{
+UTIL_GiveNextWeapon(client, level, bool:drop = true) {
+    new Handle:data = CreateDataPack();
+    WritePackCell(data, client);
+    WritePackCell(data, level);
+    WritePackCell(data, _:drop);
+       
+    CreateTimer(0.1, UTIL_Timer_GiveNextWeapon, data);
+}
+
+public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
+    new client, level, bool:drop;
+
+    ResetPack(data);
+    client = ReadPackCell(data);
+    level = ReadPackCell(data);
+    drop = bool:ReadPackCell(data);
+    CloseHandle(data);
+
+    UTIL_GiveNextWeaponReal(client, level, drop);
+}
+
+UTIL_GiveNextWeaponReal(client, level, bool:drop = true) {
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     
     UTIL_CheckForFriendlyFire(client, WeapId);

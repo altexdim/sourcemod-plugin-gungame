@@ -61,9 +61,6 @@ TODO
     * Bug report: Problem is that on nade level I get sometimes 2 flash nades. 
         I throw one and suddenly get another from nowhere. I'm not sure how to 
         reproduce it yet.
-    * Bug report: Second bug I remember. When you do multikill (for example kill 
-        two enemies with single AWP shot) you level up twice. I think this is a 
-        bug because you level up with wrong weapon.
 
     ----====----==== High severity list ----====----====
     

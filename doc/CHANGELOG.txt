@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed: When you do multikill (for example kill two enemies with single AWP shot) you level up twice.
+
     1.0.9.7:
         * Fixed:
             L 07/23/2010 - 23:06:22: [SM] Displaying call stack trace for plugin "gungame.smx":
