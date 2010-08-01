@@ -195,6 +195,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 HandicapMode = StringToInt(value);
             } else if(strcmp("TopRankHandicap", key, false) == 0) {
                 TopRankHandicap = bool:StringToInt(value);
+            } else if(strcmp("FriendlyFireOnOff", key, false) == 0) {
+                g_cfgFriendlyFireOnOff = bool:StringToInt(value);
             }
         }
         

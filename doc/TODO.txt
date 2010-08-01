@@ -4,6 +4,8 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Feature request: add options to allow 
+
     * Bug report:
         во еще глюк заметил !score
         появляется меню если игроков много или ники длинные то next exit 

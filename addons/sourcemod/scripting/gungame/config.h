@@ -78,4 +78,4 @@ new g_Cfg_MultiLevelAmount = 3;
 new g_Cfg_HandicapTimesPerMap = 0;
 new g_cfgDisableRtvLevel = 0;
 new g_cfgEnableFriendlyFireLevel = 0;
-
+new bool:g_cfgFriendlyFireOnOff = true;

@@ -88,7 +88,16 @@
          */
         "MinKillsPerLevel" "1"
 
-        /* Enabled friendly fire automatically when a player reaches hegrenade level */
+        /**
+         * Enabled friendly fire automatically when a player reaches hegrenade level.
+         *
+         * When nobody on nade level, than switches friendly fire back.
+         * This does not affect EnableFriendlyFireLevel and EnableFriendlyFireLevel is not requered to be enabled.
+         * See also FriendlyFireOnOff.
+         *
+         * 0 - Disabled
+         * 1 - Enable friendly fire on nade level.
+         */
         "AutoFriendlyFire" "0"
 
         /** 
@@ -103,9 +112,24 @@
         "FFA" "0"
 
         /** 
-         * Enable friendly fire on defined level. 0 - disabled.
+         * Enable friendly fire on defined level.
+         *
+         * This does not affect AutoFriendlyFire and AutoFriendlyFire is not requered to be 1.
+         * See also FriendlyFireOnOff.
+         *
+         * 0 - Disabled.
+         * 1..N - enable friendly fire on defined level.
          */
         "EnableFriendlyFireLevel" "0"
+        
+        /** 
+         * What to do with friendly fire when EnableFriendlyFireLevel is not 0 and leader reaches EnableFriendlyFireLevel
+         * or AutoFriendlyFire is 1 and someone reaches nade level.
+         *
+         * 1 - Enable friendy fire
+         * 0 - Disable friendy fire
+         */
+        "FriendlyFireOnOff" "1"
         
         /** 
          * Disable rtv on defined level. 0 - disabled.

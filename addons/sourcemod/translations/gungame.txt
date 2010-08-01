@@ -224,6 +224,11 @@
         "ru"     "{green}Включен режим Friendly Fire"
         "pt"     "{green}O Friendly Fire foi ligado"
     }
+    "Friendly Fire has been disabled"
+    {
+        "en"     "{green}Friendly Fire has been disabled"
+        "ru"     "{green}Выключен режим Friendly Fire"
+    }
     "You gained level by planting the bomb"
     {
         "#format"    "{1:s}"

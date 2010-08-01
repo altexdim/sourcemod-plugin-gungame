@@ -156,6 +156,14 @@ UTIL_ChangeFriendlyFire(bool:Status)
     SetConVarFlags(mp_friendlyfire, flags &= ~FCVAR_SPONLY|FCVAR_NOTIFY);
     SetConVarInt(mp_friendlyfire, Status ? 1 : 0);
     SetConVarFlags(mp_friendlyfire, flags);
+
+    if ( Status ) {
+        CPrintToChatAll("%t", "Friendly Fire has been disabled");
+    } else {
+        CPrintToChatAll("%t", "Friendly Fire has been enabled");
+    }
+
+    UTIL_PlaySound(0, AutoFF);
 }
 
 UTIL_SetClientGodMode(client, mode = 0)
@@ -339,8 +347,11 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     if ( g_cfgEnableFriendlyFireLevel && !g_isCalledEnableFriendlyFire && Level >= g_cfgEnableFriendlyFireLevel )
     {
         g_isCalledEnableFriendlyFire = true;
-        Call_StartForward(FwdEnableFriendlyFire);
-        Call_Finish();
+        if ( g_cfgFriendlyFireOnOff ) {
+            UTIL_ChangeFriendlyFire(true);
+        } else {
+            UTIL_ChangeFriendlyFire(false);
+        }
     }
     
     /* WeaponOrder count is the last weapon. */
@@ -588,7 +599,11 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
 
         if ( --PlayerOnGrenade < 1 )
         {
-            UTIL_ChangeFriendlyFire(false);
+            if ( g_cfgFriendlyFireOnOff ) {
+                UTIL_ChangeFriendlyFire(false);
+            } else {
+                UTIL_ChangeFriendlyFire(true);
+            }
         }
         return;
     }
@@ -599,9 +614,11 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
             
         if ( !GetConVarInt(mp_friendlyfire) )
         {
-            UTIL_ChangeFriendlyFire(true);
-            CPrintToChatAll("%t", "Friendly Fire has been enabled");
-            UTIL_PlaySound(0, AutoFF);
+            if ( g_cfgFriendlyFireOnOff ) {
+                UTIL_ChangeFriendlyFire(true);
+            } else {
+                UTIL_ChangeFriendlyFire(false);
+            }
         }
         return;
     }

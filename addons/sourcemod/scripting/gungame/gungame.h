@@ -88,7 +88,6 @@ new Handle:FwdTripleLevel = INVALID_HANDLE;
 new Handle:FwdLeader = INVALID_HANDLE;
 new Handle:FwdVoteStart = INVALID_HANDLE;
 new Handle:FwdDisableRtv = INVALID_HANDLE;
-new Handle:FwdEnableFriendlyFire = INVALID_HANDLE;
 new Handle:FwdDeath = INVALID_HANDLE;
 new Handle:FwdPoint = INVALID_HANDLE;
 new Handle:FwdStart = INVALID_HANDLE;

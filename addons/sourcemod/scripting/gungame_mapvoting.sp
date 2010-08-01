@@ -22,9 +22,3 @@ public GG_OnDisableRtv()
 {
     InsertServerCommand("exec gungame\\gungame.disable_rtv.cfg");
 }
-
-public GG_OnEnableFriendlyFire()
-{
-    InsertServerCommand("exec gungame\\gungame.enable_friendly_fire.cfg");
-}
-

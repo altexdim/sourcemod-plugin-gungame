@@ -108,7 +108,6 @@ public OnPluginStart()
     
     FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
     FwdDisableRtv = CreateGlobalForward("GG_OnDisableRtv", ET_Ignore);
-    FwdEnableFriendlyFire = CreateGlobalForward("GG_OnEnableFriendlyFire", ET_Ignore);
     
     FwdStart = CreateGlobalForward("GG_OnStartup", ET_Ignore, Param_Cell);
     FwdShutdown = CreateGlobalForward("GG_OnShutdown", ET_Ignore, Param_Cell);
@@ -210,7 +209,11 @@ public OnClientDisconnect(client)
 
         if ( --PlayerOnGrenade < 1 )
         {
-            UTIL_ChangeFriendlyFire(false);
+            if ( g_cfgFriendlyFireOnOff ) {
+                UTIL_ChangeFriendlyFire(false);
+            } else {
+                UTIL_ChangeFriendlyFire(true);
+            }
         }
     }
 
