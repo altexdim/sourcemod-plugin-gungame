@@ -642,6 +642,10 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
     drop = bool:ReadPackCell(data);
     CloseHandle(data);
 
+    if ( !IsClientInGame(client) ) {
+        return;
+    }
+
     UTIL_GiveNextWeaponReal(client, level, drop);
 }
 
