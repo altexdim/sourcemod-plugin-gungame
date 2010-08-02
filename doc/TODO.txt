@@ -2,6 +2,12 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
+L 08/02/2010 - 16:33:48: [SM] Native "GivePlayerItem" reported: Client 5 is not in game
+L 08/02/2010 - 16:33:48: [SM] Displaying call stack trace for plugin "gungame.smx":
+L 08/02/2010 - 16:33:48: [SM]   [0]  Line 755, gungame/util.sp::GivePlayerItemWrapper()
+L 08/02/2010 - 16:33:48: [SM]   [1]  Line 686, gungame/util.sp::UTIL_GiveNextWeaponReal()
+L 08/02/2010 - 16:33:48: [SM]   [2]  Line 619, gungame/util.sp::UTIL_Timer_GiveNextWeapon()
+
     ----====----==== Normal priority list ----====----====
 
     * Feature request: add options to allow 
