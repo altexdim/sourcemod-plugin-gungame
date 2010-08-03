@@ -3,6 +3,7 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Fix: L 08/02/2010 - 05:414: [gungame_stats.smx] Failed to save player data (error: near "bob": syntax error) 
+        Nick with quotes.
 
     ----====----==== Normal priority list ----====----====
 
