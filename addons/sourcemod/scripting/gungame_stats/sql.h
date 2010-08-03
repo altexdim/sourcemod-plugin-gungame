@@ -35,11 +35,11 @@ new const String:g_sql_checkTableExists[DbType:MaxDbTypes][]    =
 };
 new const String:g_sql_dropPlayerTable[]      = "DROP TABLE IF EXISTS gungame_playerdata;";
 
-new const String:g_sql_insertPlayer[]         = "INSERT INTO gungame_playerdata (wins, name, timestamp, authid) VALUES (%i, \"%s\", current_timestamp, \"%s\");";
-new const String:g_sql_updatePlayerByAuth[]   = "UPDATE gungame_playerdata SET wins = %i, name = \"%s\", timestamp = current_timestamp WHERE authid = \"%s\";";
+new const String:g_sql_insertPlayer[]         = "INSERT INTO gungame_playerdata (wins, name, timestamp, authid) VALUES (%i, '%s', current_timestamp, '%s');";
+new const String:g_sql_updatePlayerByAuth[]   = "UPDATE gungame_playerdata SET wins = %i, name = '%s', timestamp = current_timestamp WHERE authid = '%s';";
 new const String:g_sql_getPlayerPlaceByWins[] = "SELECT count(*) FROM gungame_playerdata WHERE wins > %i;";
 new const String:g_sql_getPlayersCount[]      = "SELECT count(*) FROM gungame_playerdata;";
-new const String:g_sql_getPlayerByAuth[]      = "SELECT id, wins, name FROM gungame_playerdata WHERE authid = \"%s\";";
+new const String:g_sql_getPlayerByAuth[]      = "SELECT id, wins, name FROM gungame_playerdata WHERE authid = '%s';";
 new const String:g_sql_updatePlayerTsById[]   = "UPDATE gungame_playerdata SET timestamp = current_timestamp WHERE id = %i;";
 new const String:g_sql_getTopPlayers[]        = "SELECT id, wins, name, authid FROM gungame_playerdata ORDER by wins desc, id LIMIT %i OFFSET %i;";
 

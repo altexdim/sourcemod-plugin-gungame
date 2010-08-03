@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Fixed sql error when nick contains doublequotes.
         - Removed "gungame\gungame.enable_friendly_fire.cfg" file.
         + Added config variable "FriendlyFireOnOff".
         + Added GG_OnWinnerSound forward.
