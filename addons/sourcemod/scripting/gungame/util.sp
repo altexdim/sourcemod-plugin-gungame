@@ -644,7 +644,6 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
 }
 
 UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
-    PrintToChatAll("config = %i", g_Cfg_BlockWeaponSwitchIfKnife);
     if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = true;
     }
@@ -721,7 +720,6 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
     if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = false;
     } else {
-        PrintToChatAll("use %s", WeaponName[WeapId]);
         FakeClientCommand(client, "use %s", WeaponName[WeapId]);
     }
 }
