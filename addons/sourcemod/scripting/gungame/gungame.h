@@ -104,4 +104,4 @@ new g_ClientSlotEnt[MAXPLAYERS+1][Slot_Knife];
 new g_IsInGiveCommand = false;
 new Handle:g_Timer_HandicapUpdate = INVALID_HANDLE;
 new Handle:PlayerHandicapTimes = INVALID_HANDLE;
-
+new bool:g_SkipSpawn[MAXPLAYERS+1] = {false, ...};

@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed: Skip first bot spawn to not allow them drop knifes and pistols on spawn.
+
     1.0.9.8:
         * Fixed sql error when nick contains doublequotes.
         - Removed "gungame\gungame.enable_friendly_fire.cfg" file.

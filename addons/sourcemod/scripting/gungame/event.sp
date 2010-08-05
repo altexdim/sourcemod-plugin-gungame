@@ -447,6 +447,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     
+    if ( g_SkipSpawn[client] ) {
+        g_SkipSpawn[client] = false;
+        return;
+    }
+
     UTIL_UpdatePlayerScoreLevel(client);
     
     g_teamChange[client] = false;

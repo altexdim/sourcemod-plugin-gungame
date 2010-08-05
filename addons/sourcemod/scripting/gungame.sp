@@ -122,6 +122,14 @@ public OnPluginStart()
     #endif
 }
 
+public OnClientPutInServer(client) {
+    if ( IsFakeClient(client) ) {
+        g_SkipSpawn[client] = true;
+    } else {
+        g_SkipSpawn[client] = false;
+    }
+}
+
 public OnClientAuthorized(client, const String:auth[])
 {
     if ( RestoreLevelOnReconnect )
