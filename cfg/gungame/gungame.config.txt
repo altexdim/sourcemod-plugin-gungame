@@ -69,9 +69,6 @@
          */
         "CommitSuicide"     "1"
 
-        /* Can bots win the game otherwise when they reach the last weapon and nothing will happen */
-        "BotsCanWinGame" "0"
-
         /* How many levels they can gain in 1 round (0 - disabled) */
         "MaxLevelPerRound" "0"
 
@@ -214,12 +211,6 @@
          * Handicap must also be turned on for this to work.
          */
         "HandicapUpdate" "0"
-
-        /**
-         * Dont use bots levels for handicap calculation. 
-         * Dont give handicap level to bots too.
-         */
-        "HandicapSkipBots" "0"
         
         /**
          * Give handicap not more then given number of times per map.
@@ -392,6 +383,29 @@
 
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"
+
+        /* ===== [GUNGAME BOTS CONFIG] ===== */
+
+        /**
+         * Dont use bots levels for handicap calculation. 
+         * Dont give handicap level to bots too.
+         */
+        "HandicapSkipBots" "0"
+
+        /* Can bots win the game otherwise when they reach the last weapon and nothing will happen */
+        "BotsCanWinGame" "0"
+
+        /* Allow level up by killing a bot with knife */
+        "AllowLevelUpByKnifeBot" "0"
+
+        /* Allow level up by killing a bot with hegrenade */
+        "AllowLevelUpByExplodeBot" "0"
+
+        /* Allow level up by killing a bot with knife if there is other human */
+        "AllowLevelUpByKnifeBotIfNoHuman" "1"
+
+        /* Allow level up by killing a bot with hegrenade if there is other human */
+        "AllowLevelUpByExplodeBotIfNoHuman" "1"
     }
     
     "Sounds"
