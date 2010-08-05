@@ -550,30 +550,22 @@ UTIL_DropAllGrenades(client, bool:remove = false)
  *
  * @return        -1 if not found or you drop the grenade otherwise will return the Entity index.
  */
-UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false)
-{
+UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false) {
     decl String:Class[64];
 
-    for(new i = 0, ent; i < 128; i += 4)
-    {
+    for ( new i = 0, ent; i < 128; i += 4 ) {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
 
-        if(ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade)
-        {
+        if ( ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade ) {
             GetEdictClassname(ent, Class, sizeof(Class));
 
-            if(strcmp(Class, Grenade, false) == 0)
-            {
-                if(drop)
-                {
-                    if ( remove )
-                    {
+            if ( strcmp(Class, Grenade, false) == 0 ) {
+                if ( drop ) {
+                    if ( remove ) {
                         RemovePlayerItem(client, ent);
                         RemoveEdict(ent);
                         return -1;
-                    }
-                    else
-                    {
+                    } else {
                         HACK_CSWeaponDrop(client, ent);
                     }
                 }
@@ -624,32 +616,38 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, bool:drop = true) {
+UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false) {
     new Handle:data = CreateDataPack();
     WritePackCell(data, client);
     WritePackCell(data, level);
     WritePackCell(data, _:drop);
+    WritePackCell(data, _:knife);
        
     CreateTimer(0.1, UTIL_Timer_GiveNextWeapon, data);
 }
 
 public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
-    new client, level, bool:drop;
+    new client, level, bool:drop, bool:knife;
 
     ResetPack(data);
     client = ReadPackCell(data);
     level = ReadPackCell(data);
     drop = bool:ReadPackCell(data);
+    knife = bool:ReadPackCell(data);
     CloseHandle(data);
 
     if ( !IsClientInGame(client) ) {
         return;
     }
 
-    UTIL_GiveNextWeaponReal(client, level, drop);
+    UTIL_GiveNextWeaponReal(client, level, drop, knife);
 }
 
-UTIL_GiveNextWeaponReal(client, level, bool:drop = true) {
+UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
+    PrintToChatAll("config = %i", g_Cfg_BlockWeaponSwitchIfKnife);
+    if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+        g_BlockSwitch[client] = true;
+    }
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     
     UTIL_CheckForFriendlyFire(client, WeapId);
@@ -720,7 +718,12 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true) {
         }
     }
 
-    FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+    if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+        g_BlockSwitch[client] = false;
+    } else {
+        PrintToChatAll("use %s", WeaponName[WeapId]);
+        FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+    }
 }
 
 /**
@@ -1003,7 +1006,7 @@ UTIL_GetRandomInt(start, end)
     return ( rand % (1 + end - start) ) + start;
 }
 
-UTIL_GiveExtraNade(client)
+UTIL_GiveExtraNade(client, bool:knife)
 {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( ExtraNade )
@@ -1011,7 +1014,13 @@ UTIL_GiveExtraNade(client)
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
         {
+            if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+                g_BlockSwitch[client] = true;
+            }
             GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+                g_BlockSwitch[client] = false;
+            }
         }
     }
 }

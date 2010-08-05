@@ -2,6 +2,7 @@
 
 #include <sourcemod>
 #include <sdktools>
+#include <sdkhooks>
 
 #include <colors>
 #include <gungame_const>
@@ -128,6 +129,10 @@ public OnClientPutInServer(client) {
     } else {
         g_SkipSpawn[client] = false;
     }
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+        g_BlockSwitch[client] = false;
+        SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+    }
 }
 
 public OnClientAuthorized(client, const String:auth[])
@@ -201,6 +206,9 @@ public OnMapEnd()
 
 public OnClientDisconnect(client)
 {
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+        SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+    }
     /* Clear current leader if player is leader */
     if ( CurrentLeader == client )
     {

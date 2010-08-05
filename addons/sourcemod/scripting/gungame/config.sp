@@ -197,6 +197,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 TopRankHandicap = bool:StringToInt(value);
             } else if(strcmp("FriendlyFireOnOff", key, false) == 0) {
                 g_cfgFriendlyFireOnOff = bool:StringToInt(value);
+            } else if(strcmp("BlockWeaponSwitchIfKnife", key, false) == 0) {
+                g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
             }
         }
         

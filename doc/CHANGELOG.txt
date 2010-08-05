@@ -1,7 +1,9 @@
 Changelog
 ---------
+        + SDK Hooks is now required.
+        + Added config variable "BlockWeaponSwitchIfKnife".
         + Added config options: "AllowLevelUpByKnifeBot", "AllowLevelUpByExplodeBot", 
-          "AllowLevelUpByKnifeBotIfNoHuman", "AllowLevelUpByExplodeBotIfNoHuman"
+          "AllowLevelUpByKnifeBotIfNoHuman", "AllowLevelUpByExplodeBotIfNoHuman".
         * Fixed: Skip first bot spawn to not allow them drop knifes and pistols on spawn.
 
     1.0.9.8:

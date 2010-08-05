@@ -8,6 +8,9 @@ OnEventStart()
     HookEvent("player_team", _PlayerTeam);
     HookEvent("item_pickup", _ItemPickup);
     HookEvent("hegrenade_detonate",_HeExplode);
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+        StartSwitchHook();
+    }
 }
 
 OnEventShutdown()
@@ -20,6 +23,26 @@ OnEventShutdown()
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
     UnhookEvent("hegrenade_detonate",_HeExplode);
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+        StopSwitchHook();
+    }
+}
+
+StartSwitchHook() {
+    for (new client = 1; client <= MaxClients; client++) { 
+        if ( IsClientInGame(client) ) { 
+            g_BlockSwitch[client] = false;
+            SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+        } 
+    }
+}
+
+StopSwitchHook() {
+    for (new client = 1; client <= MaxClients; client++) { 
+        if ( IsClientInGame(client) ) { 
+            SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+        } 
+    }
 }
 
 public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
@@ -276,7 +299,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
     {
-        UTIL_GiveExtraNade(Killer);
+        UTIL_GiveExtraNade(Killer, WeaponIndex == CSW_KNIFE );
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
@@ -335,7 +358,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CurrentLevelPerRound[Killer]++;
                    
             if ( TurboMode ) {
-                UTIL_GiveNextWeapon(Killer, level);
+                UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == CSW_KNIFE);
             }
 
             CheckForTripleLevel(Killer);
@@ -426,7 +449,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( TurboMode )
     {
-        UTIL_GiveNextWeapon(Killer, level);
+        UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == CSW_KNIFE);
     }
 
     CheckForTripleLevel(Killer);
@@ -734,3 +757,9 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
+public Action:OnWeaponSwitch(client, weapon) {
+    if ( g_BlockSwitch[client] ) {
+        return Plugin_Handled;
+    }
+    return Plugin_Continue;
+}

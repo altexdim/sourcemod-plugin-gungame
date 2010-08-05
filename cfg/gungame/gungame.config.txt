@@ -9,6 +9,9 @@
         /* Enables/Disables GunGame Mod */
         "Enabled" "1"
 
+        /* Block weapon switch if killer leveled up with knife */
+        "BlockWeaponSwitchIfKnife" "1"
+
         /** 
          * Show players level message in hint box instead of chat.
          * If enabled then multikill chat messages will be shown 
