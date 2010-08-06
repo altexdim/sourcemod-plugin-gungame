@@ -539,6 +539,11 @@ UTIL_DropAllGrenades(client, bool:remove = false)
             HACK_CSWeaponDrop(client, ent);
         }
     }
+    if ( StripDeadPlayersWeapon ) {
+        g_ClientSlotEntHeGrenade[client] = -1;
+        g_ClientSlotEntSmoke[client] = -1;
+        UTIL_ClearFlashCounter(client);
+    }
 }
 
 /**
@@ -564,6 +569,15 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
                     if ( remove ) {
                         RemovePlayerItem(client, ent);
                         RemoveEdict(ent);
+                        if ( StripDeadPlayersWeapon ) {
+                            if ( StrEqual(Grenade, WeaponName[CSW_HEGRENADE]) ) {
+                                g_ClientSlotEntHeGrenade[client] = -1;
+                            } else if ( StrEqual(Grenade, WeaponName[CSW_SMOKEGRENADE]) ) {
+                                g_ClientSlotEntSmoke[client] = -1;
+                            } else if ( StrEqual(Grenade, WeaponName[CSW_FLASHBANG]) ) {
+                                UTIL_UpdateFlashCounter(client);
+                            }
+                        }
                         return -1;
                     } else {
                         HACK_CSWeaponDrop(client, ent);
@@ -653,8 +667,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
 
     if ( drop )
     {
-        UTIL_ForceDropWeaponBySlot(client, Slot_Primary);
-        UTIL_ForceDropWeaponBySlot(client, Slot_Secondary);
+        UTIL_ForceDropAllWeapon(client, true);
     }
 
     if ( slot == Slot_Grenade )
@@ -689,32 +702,44 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
         }
         if ( NadeSmoke )
         {
-            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            g_ClientSlotEntSmoke[client] = ent;
         }
         if ( NadeFlash )
         {
-            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            UTIL_FlashCounterAdd(client, ent);
         }
     }
     if ( slot == Slot_Knife )
     {
         if ( g_Cfg_KnifeSmoke )
         {
-            GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            g_ClientSlotEntSmoke[client] = ent;
         }
         if ( g_Cfg_KnifeFlash )
         {
-            GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            UTIL_FlashCounterAdd(client, ent);
         }
     }
     else
     {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
-        if ( slot == Slot_Primary || slot == Slot_Secondary ) 
-        {
+        if ( slot == Slot_Primary || slot == Slot_Secondary ) {
             g_ClientSlotEnt[client][slot] = ent;
+        } else if ( slot == Slot_Grenade ) {
+            if ( WeapId == CSW_HEGRENADE ) {
+                g_ClientSlotEntHeGrenade[client] = ent;
+            } else if ( WeapId == CSW_SMOKEGRENADE ) {
+                g_ClientSlotEntSmoke[client] = ent;
+            } else if ( WeapId == CSW_FLASHBANG ) {
+                UTIL_FlashCounterAdd(client, ent);
+            }
         }
+
     }
 
     if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
@@ -802,9 +827,29 @@ UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
         {
             RemoveEdict(ent);
         }
+        ent = g_ClientSlotEntHeGrenade[client];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
+        {
+            RemoveEdict(ent);
+        }
+        ent = g_ClientSlotEntSmoke[client];
+        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
+        {
+            RemoveEdict(ent);
+        }
+        for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
+            ent = g_ClientSlotEntFlash[client][i];
+            if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
+            {
+                RemoveEdict(ent);
+            }
+        }
 
         g_ClientSlotEnt[client][Slot_Primary] = -1;
         g_ClientSlotEnt[client][Slot_Secondary] = -1;
+        g_ClientSlotEntHeGrenade[client] = -1;
+        g_ClientSlotEntSmoke[client] = -1;
+        UTIL_ClearFlashCounter(client);
     }
 }
 
@@ -978,7 +1023,8 @@ UTIL_GiveWarmUpWeapon(client)
         return;
     }
     if ( WarmupNades ) {
-        GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+        new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+        g_ClientSlotEntHeGrenade[client] = ent;
         FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
         return;
     }
@@ -1015,7 +1061,9 @@ UTIL_GiveExtraNade(client, bool:knife)
             if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
                 g_BlockSwitch[client] = true;
             }
-            GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            g_ClientSlotEntHeGrenade[client] = ent;
+
             if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
                 g_BlockSwitch[client] = false;
             }
@@ -1282,4 +1330,38 @@ UTIL_CreateEffect(client) {
     SetVariantString(target);
     AcceptEntityInput(ent, "SetParent");
     return ent;
+}
+
+UTIL_UpdateFlashCounter(client) {
+    decl String:Class[64];
+    new index = 0;
+
+    UTIL_ClearFlashCounter(client);
+
+    for ( new i = 0, ent; i < 128; i += 4 ) {
+        ent = GetEntDataEnt2(client, m_hMyWeapons + i);
+
+        if ( ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade ) {
+            GetEdictClassname(ent, Class, sizeof(Class));
+
+            if ( StrEqual(Class, WeaponName[CSW_FLASHBANG], false) ) {
+                g_ClientSlotEntFlash[client][index++] = ent;
+            }
+        }
+    }
+}
+
+UTIL_ClearFlashCounter(client) {
+    for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
+        g_ClientSlotEntFlash[client][i] = -1;
+    }
+}
+
+UTIL_FlashCounterAdd(client, ent) {
+    for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
+        if ( g_ClientSlotEntFlash[client][i] == -1 ) {
+            g_ClientSlotEntFlash[client][i] = ent;
+            return;
+        }
+    }
 }

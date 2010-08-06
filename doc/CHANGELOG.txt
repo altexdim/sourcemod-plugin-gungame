@@ -1,5 +1,7 @@
 Changelog
 ---------
+    1.1.0.0:
+        + Now hegrenades, flashbangs, smokegrenades are removing if "StripDeadPlayersWeapon" is enabled.
         + SDK Hooks is now required.
         + Added config variable "BlockWeaponSwitchIfKnife".
         + Added config options: "AllowLevelUpByKnifeBot", "AllowLevelUpByExplodeBot", 

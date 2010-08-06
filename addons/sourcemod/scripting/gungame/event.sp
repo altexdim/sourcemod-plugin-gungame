@@ -8,6 +8,10 @@ OnEventStart()
     HookEvent("player_team", _PlayerTeam);
     HookEvent("item_pickup", _ItemPickup);
     HookEvent("hegrenade_detonate",_HeExplode);
+    if ( StripDeadPlayersWeapon ) {
+        HookEvent("flashbang_detonate",_FlashExplode);
+        HookEvent("weapon_fire", _WeaponFire);
+    }
     if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         StartSwitchHook();
     }
@@ -23,6 +27,10 @@ OnEventShutdown()
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
     UnhookEvent("hegrenade_detonate",_HeExplode);
+    if ( StripDeadPlayersWeapon ) {
+        UnhookEvent("flashbang_detonate",_FlashExplode);
+        UnhookEvent("weapon_fire", _WeaponFire);
+    }
     if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         StopSwitchHook();
     }
@@ -42,6 +50,22 @@ StopSwitchHook() {
         if ( IsClientInGame(client) ) { 
             SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
         } 
+    }
+}
+
+public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast) {
+    if ( !IsActive ) {
+        return;
+    }
+
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    decl String:weapon[24];
+    GetEventString(event, "weapon", weapon, sizeof(weapon));
+    new Weapons:WeapId = UTIL_GetWeaponIndex(weapon);
+    if ( WeapId == CSW_HEGRENADE ) {
+        g_ClientSlotEntHeGrenade[client] = -1;
+    } else if ( WeapId == CSW_SMOKEGRENADE ) {
+        g_ClientSlotEntSmoke[client] = -1;
     }
 }
 
@@ -70,9 +94,16 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
         if ( WeapId != CSW_NONE )
         {
             new Slots:slot = WeaponSlot[WeapId];
-            if ( slot == Slot_Primary || slot == Slot_Secondary ) 
-            {
+            if ( slot == Slot_Primary || slot == Slot_Secondary ) {
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
+            } else if ( slot == Slot_Grenade ) {
+                if ( WeapId == CSW_HEGRENADE ) {
+                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]);
+                } else if ( WeapId == CSW_SMOKEGRENADE ) {
+                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, WeaponName[CSW_SMOKEGRENADE]);
+                } else if ( WeapId == CSW_FLASHBANG ) {
+                    UTIL_UpdateFlashCounter(client);
+                }
             }
         }
     }
@@ -751,10 +782,23 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
             {
                 g_NumberOfNades[client]--;
             }
-            GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+            g_ClientSlotEntHeGrenade[client] = ent;
+
             FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
         }
     }
+}
+
+public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
+{
+    new client = GetClientOfUserId(GetEventInt(event, "userid"));
+    if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
+    {
+        return;
+    }
+
+    UTIL_UpdateFlashCounter(client);
 }
 
 public Action:OnWeaponSwitch(client, weapon) {

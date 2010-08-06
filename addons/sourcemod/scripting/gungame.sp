@@ -133,6 +133,13 @@ public OnClientPutInServer(client) {
         g_BlockSwitch[client] = false;
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }
+    if ( StripDeadPlayersWeapon ) {
+        g_ClientSlotEnt[client][Slot_Primary] = -1;
+        g_ClientSlotEnt[client][Slot_Secondary] = -1;
+        g_ClientSlotEntHeGrenade[client] = -1;
+        g_ClientSlotEntSmoke[client] = -1;
+        UTIL_ClearFlashCounter(client);
+    }
 }
 
 public OnClientAuthorized(client, const String:auth[])
