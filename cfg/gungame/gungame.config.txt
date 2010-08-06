@@ -9,7 +9,11 @@
         /* Enables/Disables GunGame Mod */
         "Enabled" "1"
 
-        /* Block weapon switch if killer leveled up with knife */
+        /**
+         * Block weapon switch if killer leveled up with knife
+         * You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
+         * To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_const.inc and recompile plugin.
+         */
         "BlockWeaponSwitchIfKnife" "1"
 
         /** 
