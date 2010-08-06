@@ -151,6 +151,13 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
                 about winner.
 [/LIST]
  
+[*] gungame_bot.smx - Bot protection
+[LIST]
+[*] Depends on gungame.smx, gungame_config.smx
+[*] Optional plugin
+[*] Does not allow players to win by killing a bot.
+[/LIST]
+
 [/LIST]
             
 [anchor]Credits[/anchor][B]Credits[/B]
