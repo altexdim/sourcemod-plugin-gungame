@@ -11,6 +11,7 @@ TODO
         kind of nades (especially hegrenade  ). There are some maps where you can 
         get nades given by map creator. Would be nice if nade kill with it could 
         level up player.
+        add config variable (or two) to exclude these functionalities for last level.
 
     * Bug report:
         во еще глюк заметил !score
