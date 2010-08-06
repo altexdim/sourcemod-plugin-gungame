@@ -2,7 +2,6 @@
 
 #include <sourcemod>
 #include <sdktools>
-#include <sdkhooks>
 
 #include <colors>
 #include <gungame_const>
@@ -11,6 +10,10 @@
 #include <langutils>
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
+
+#if defined USE_SDK_HOOKS
+#include <sdkhooks>
+#endif
 
 #include "gungame/gungame.h"
 #include "gungame/menu.h"
@@ -129,10 +132,12 @@ public OnClientPutInServer(client) {
     } else {
         g_SkipSpawn[client] = false;
     }
+    #if defined USE_SDK_HOOKS
     if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         g_BlockSwitch[client] = false;
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }
+    #endif
     if ( StripDeadPlayersWeapon ) {
         g_ClientSlotEnt[client][Slot_Primary] = -1;
         g_ClientSlotEnt[client][Slot_Secondary] = -1;
@@ -213,9 +218,11 @@ public OnMapEnd()
 
 public OnClientDisconnect(client)
 {
+    #if defined USE_SDK_HOOKS
     if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }
+    #endif
     /* Clear current leader if player is leader */
     if ( CurrentLeader == client )
     {

@@ -4,6 +4,12 @@
 #define _gungame_const_included_
 
 /**
+ * Enable SDK Hooks support.
+ * Default is disabled.
+ */
+// #define USE_SDK_HOOKS
+
+/**
  * Enable debug code.
  * Default is disabled.
  */
@@ -54,7 +60,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru";
-stock const String:GUNGAME_VERSION[] = "1.1.0.0";
+stock const String:GUNGAME_VERSION[] = "1.1.0.1";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 

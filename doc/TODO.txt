@@ -2,8 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    * Add grenade removement.
-
     ----====----==== Normal priority list ----====----====
 
     * Bug report:

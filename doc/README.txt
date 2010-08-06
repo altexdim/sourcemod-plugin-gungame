@@ -66,7 +66,9 @@
 [LIST]
 [*] Counter-Strike: Source
 [*] SourceMod 1.2.0+
-[*] SDK Hooks 1.3 (Updated 2010-05-12) or later (https://forums.alliedmods.net/showthread.php?t=106748)
+[*] (Optional, not required by default) SDK Hooks 1.3 (Updated 2010-05-12) or later (https://forums.alliedmods.net/showthread.php?t=106748)
+You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
+To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_const.inc and recompile plugin.
 [/LIST]
 
 [anchor]Installation[/anchor][B]Installation[/B]
@@ -74,7 +76,7 @@
 [LIST]
 [*] Install Metamod:Source.
 [*] Install SourceMod.
-[*] Install SDK Hooks.
+[*] (Optional, not required by default) Install SDK Hooks.
 [*] Upload the addons, sound, and cfg into your cstrike folder for CS:Source
 [*] Config gungame.config.txt and gungame.equip.txt to your liking in cfg/gungame/
 [*] Restart your server.
