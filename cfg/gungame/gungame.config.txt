@@ -404,10 +404,10 @@
         /* Allow level up by killing a bot with hegrenade */
         "AllowLevelUpByExplodeBot" "0"
 
-        /* Allow level up by killing a bot with knife if there is other human */
+        /* Allow level up by killing a bot with knife if there is no other human */
         "AllowLevelUpByKnifeBotIfNoHuman" "1"
 
-        /* Allow level up by killing a bot with hegrenade if there is other human */
+        /* Allow level up by killing a bot with hegrenade if there is no other human */
         "AllowLevelUpByExplodeBotIfNoHuman" "1"
     }
     
