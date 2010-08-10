@@ -4,6 +4,8 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
+
     * Feature request:
         I have a request. Maybe you could consider to add two new config variables 
         and functionalities. First is to level up player by killing opponent by 
