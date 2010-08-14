@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Small fix with weapons in the air after player death.
+
     1.1.0.1: 
         + Added "USE_SDK_HOOKS" define in gungame_const.inc.
         - SDK Hooks is not required by default.
