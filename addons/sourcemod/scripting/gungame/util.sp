@@ -650,7 +650,7 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
     knife = bool:ReadPackCell(data);
     CloseHandle(data);
 
-    if ( !IsClientInGame(client) ) {
+    if ( !IsClientInGame(client) || !IsPlayerAlive(client) ) {
         return;
     }
 
