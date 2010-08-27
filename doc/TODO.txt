@@ -2,6 +2,13 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
+    * Bug report: I have found a glitch, not sure if it happens everytime. What is 
+        happening is that if someone multi levels they receive the increased speed 
+        and gravity like normal, but if the round ends and a new one starts within 
+        the multi level period then the player will still have increased gravity 
+        when the next round starts. They dont have increased speed or the music 
+        playing but the do still have increased gravity. 
+
     ----====----==== Normal priority list ----====----====
 
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
