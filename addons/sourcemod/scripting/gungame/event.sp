@@ -220,6 +220,10 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
         }
     } else {
         /* Round has ended. */
+        for ( new i = 1; i <= MaxClients; i++ ) {
+            UTIL_StopTripleEffects(i);
+        }
+
         RoundStarted = false;
 
         if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
