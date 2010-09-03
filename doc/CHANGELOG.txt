@@ -1,5 +1,6 @@
 Changelog
 ---------
+    1.1.1.0: 
         * Fixed stopping triple level effects when round ends.
         + Feature: Added option to ignore spectators when caclulating handicap level ("HandicapUseSpectators").
         * New function signatures. Thanks to psychonic.
