@@ -1,5 +1,6 @@
 Changelog
 ---------
+        + Feature: Added option to ignore spectators when caclulating handicap level ("HandicapUseSpectators").
         * New function signatures. Thanks to psychonic.
         * Small fix with weapons in the air after player death.
 

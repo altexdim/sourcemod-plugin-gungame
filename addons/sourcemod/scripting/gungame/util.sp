@@ -1209,7 +1209,7 @@ UTIL_GetMinimumLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
     new level = 0;
     for ( new i = 1; i <= MaxClients; i++ )
     {
-        if ( IsClientInGame(i) )
+        if ( IsClientInGame(i) && ( g_Cfg_HandicapUseSpectators || GetClientTeam(i) > 1 ) )
         {
             if ( ( skipBots && IsFakeClient(i) ) 
                 || ( GetClientTeam(i) < 2 )
@@ -1235,7 +1235,7 @@ UTIL_GetAverageLevel(bool:skipBots = false, aboveLevel = -1, skipClient = 0)
     new count, level, tmpLevel;
     for ( new i = 1; i <= MaxClients; i++ )
     {
-        if ( IsClientInGame(i) )
+        if ( IsClientInGame(i) && ( g_Cfg_HandicapUseSpectators || GetClientTeam(i) > 1 ) )
         {
             if ( ( skipBots && IsFakeClient(i) ) 
                 || ( GetClientTeam(i) < 2 )

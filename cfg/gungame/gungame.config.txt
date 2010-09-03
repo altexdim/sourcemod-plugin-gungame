@@ -235,6 +235,14 @@
          */
         "HandicapTopRank" "10"
         
+        /**
+         * Use spectator's levels to calculate handicap level.
+         *
+         * 0 - Handicap does not count levels of spectators.
+         * 1 - Handicap counts levels of spectators.
+         */
+        "HandicapUseSpectators" "0"
+        
         /* ----- [equip] ----- */
         
         /* Auto reload current level weapon on kill */

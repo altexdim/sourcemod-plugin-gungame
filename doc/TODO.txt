@@ -9,8 +9,6 @@ TODO
         when the next round starts. They dont have increased speed or the music 
         playing but the do still have increased gravity. 
 
-    + Feature: Сделать опцию участия спеков в хендикапе.
-
     ----====----==== Normal priority list ----====----====
 
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.

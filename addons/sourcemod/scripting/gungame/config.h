@@ -80,3 +80,4 @@ new g_cfgDisableRtvLevel = 0;
 new g_cfgEnableFriendlyFireLevel = 0;
 new bool:g_cfgFriendlyFireOnOff = true;
 new bool:g_Cfg_BlockWeaponSwitchIfKnife = true;
+new bool:g_Cfg_HandicapUseSpectators = false;

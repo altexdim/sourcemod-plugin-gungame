@@ -199,6 +199,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_cfgFriendlyFireOnOff = bool:StringToInt(value);
             } else if(strcmp("BlockWeaponSwitchIfKnife", key, false) == 0) {
                 g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
+            } else if(strcmp("HandicapUseSpectators", key, false) == 0) {
+                g_Cfg_HandicapUseSpectators = bool:StringToInt(value);
             }
         }
         
