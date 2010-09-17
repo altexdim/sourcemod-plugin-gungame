@@ -140,6 +140,12 @@
          */
         "DisableRtvLevel" "0"
 
+        /**
+         * How many seconds to wait from win to end multiplayer game.
+         * It is a time from freezing all players after win till scoreboard appeares.
+         */
+        "ChangeLevelTime" "0"
+
         /* ----- [knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */

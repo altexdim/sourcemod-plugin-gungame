@@ -375,7 +375,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();
-        ForceMapChange();
+        UTIL_ForceMapChange();
 
         new result;
         Call_StartForward(FwdSoundWinner);
@@ -401,6 +401,18 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
     UTIL_UpdatePlayerScoreLevel(client);
 
     return Level;
+}
+
+UTIL_ForceMapChange() {
+    if ( g_Cfg_ChangeLevelTime > 0 ) {
+        CreateTimer(g_Cfg_ChangeLevelTime, UTIL_Timer_ForceMapChange);
+    } else {
+        ForceMapChange();
+    }
+}
+
+public Action:UTIL_Timer_ForceMapChange(Handle:timer, Handle:data) {
+    ForceMapChange();
 }
 
 ForceMapChange()
