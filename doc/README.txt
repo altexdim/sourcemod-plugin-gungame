@@ -181,14 +181,10 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 ----------------------------------------------------
 
 [LIST]
-[*][B]Q.[/B] Plugin does not change map or crashing server after latest css update?
-         [B]A.[/B] Update your gungame.games.txt attached to this post.
-         Update server binaries and update gungame plugin to the latest version.
-[*][B]Q.[/B] Plugin does not work after latest css update?
-         [B]A.[/B] Update your gungame.games.txt attached to this post.
-[*][B]Q.[/B] Sounds does not work after css update in june 2010?
-         [B]A.[/B] If you are running css server on windows platform, then you need to change paths to sound files: 
-         replace slashes "/" with double backslashes "\\". And of course don't forget to restore your pure_server_whitelist.txt and sv_pure 1 in config.
+[*][B]Q.[/B] Weapons desapiearing on level up and player spawn.
+         [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
+         set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
+         then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
 [*] [B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
         [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
 [*] [B]Q.[/B] How to switch stats database from sqlite to mysql 
