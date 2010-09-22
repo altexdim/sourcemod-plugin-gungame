@@ -3,6 +3,7 @@ TODO
     ----====----==== High priority list ----====----====
 
     ----====----==== Normal priority list ----====----====
+    + Р”РѕР±Р°РІРёС‚СЊ СЃРѕР±С‹С‚РёСЏ gg_team_win, gg_team_loose
 
     * Btw, could you please restore an old behaviour of multi-level bonuses? 
         It's LAAAAAAMMMMMEEEEE now  . They just stop after round end, damnit 
@@ -21,9 +22,9 @@ TODO
         add config variable (or two) to exclude these functionalities for last level.
 
     * Bug report:
-        во еще глюк заметил !score
-        появляется меню если игроков много или ники длинные то next exit 
-        непоявляется но нажать можно перейдет на след страничку
+        РІРѕ РµС‰Рµ РіР»СЋРє Р·Р°РјРµС‚РёР» !score
+        РїРѕСЏРІР»СЏРµС‚СЃСЏ РјРµРЅСЋ РµСЃР»Рё РёРіСЂРѕРєРѕРІ РјРЅРѕРіРѕ РёР»Рё РЅРёРєРё РґР»РёРЅРЅС‹Рµ С‚Рѕ next exit 
+        РЅРµРїРѕСЏРІР»СЏРµС‚СЃСЏ РЅРѕ РЅР°Р¶Р°С‚СЊ РјРѕР¶РЅРѕ РїРµСЂРµР№РґРµС‚ РЅР° СЃР»РµРґ СЃС‚СЂР°РЅРёС‡РєСѓ
     
     + Feature request:
         Is there an option to display how many kills a person has on each level? Where when you spawn or kill someone it would say:
