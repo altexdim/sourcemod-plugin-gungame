@@ -642,14 +642,14 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false) {
+UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false, Float:delay = 0.1) {
     new Handle:data = CreateDataPack();
     WritePackCell(data, client);
     WritePackCell(data, level);
     WritePackCell(data, _:drop);
     WritePackCell(data, _:knife);
        
-    CreateTimer(0.1, UTIL_Timer_GiveNextWeapon, data);
+    CreateTimer(delay, UTIL_Timer_GiveNextWeapon, data);
 }
 
 public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
@@ -885,6 +885,15 @@ UTIL_StartTripleEffects(client)
     }
     if ( g_Cfg_TripleLevelEffect ) {
         UTIL_StartEffectClient(client);
+    }
+}
+
+UTIL_StopBonusGravity(client)
+    if ( !g_tripleEffects[client] ) {
+        return;
+    }
+    if ( g_Cfg_TripleLevelBonusGravity ) {
+        SetEntityGravity(client, 1.0);
     }
 }
 

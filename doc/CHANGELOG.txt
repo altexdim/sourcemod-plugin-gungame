@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed stopping triple level effects when round ends. Now triple level effects stops on spawn.
+        * Fixed unpredictible weapon disapearing on round start by adding 0.3 seconds delay.
         + Added config variable "ChangeLevelTime".
 
     1.1.1.0: 

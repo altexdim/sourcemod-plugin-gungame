@@ -220,10 +220,6 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
         }
     } else {
         /* Round has ended. */
-        for ( new i = 1; i <= MaxClients; i++ ) {
-            UTIL_StopTripleEffects(i);
-        }
-
         RoundStarted = false;
 
         if ( WarmupEnabled && WarmupRandomWeaponMode == 2 )
@@ -517,6 +513,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     UTIL_UpdatePlayerScoreLevel(client);
+    UTIL_StopBonusGravity(client);
     
     g_teamChange[client] = false;
     
@@ -615,7 +612,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new Level = PlayerLevel[client];
-    UTIL_GiveNextWeapon(client, Level, false);
+    UTIL_GiveNextWeapon(client, Level, false, false, 0.3);
 
     // spawn chat messages
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);
