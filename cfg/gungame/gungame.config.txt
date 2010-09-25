@@ -2,9 +2,9 @@
 {
     "Config"
     {
-        /* ===== [GUNGAME MAIN CONFIG] ===== */
+        /* ===== [1. GUNGAME MAIN CONFIG] ===== */
 
-        /* ----- [main] ----- */
+        /* ----- [1.1. main] ----- */
         
         /* Enables/Disables GunGame Mod */
         "Enabled" "1"
@@ -141,12 +141,38 @@
         "DisableRtvLevel" "0"
 
         /**
-         * How many seconds to wait from win to end multiplayer game.
+         * How many seconds to wait from win to end multiplayer game (before intermission).
          * It is a time from freezing all players after win till scoreboard appeares.
          */
         "ChangeLevelTime" "0"
 
-        /* ----- [knifepro] ----- */
+        /**
+         * 
+         * If this option is enabled, than player can level up by killing with prop_physics.
+         * For example with fuel barrels etc.
+         * 
+         * 1 - Enabled
+         * 0 - Disabled
+         */
+        "CanLevelUpWithPhysics"             "0"
+
+        /**
+         * Use "CanLevelUpWithPhysics" option when player is on grenade level.
+         * 
+         * 1 - Enabled
+         * 0 - Disabled
+         */
+        "CanLevelUpWithPhysicsOnGrenade"    "0"
+
+        /**
+         * Use "CanLevelUpWithPhysics" option when player is on knife level.
+         * 
+         * 1 - Enabled
+         * 0 - Disabled
+         */
+        "CanLevelUpWithPhysicsOnKnife"      "0"
+
+        /* ----- [1.2. knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
         "KnifePro" "1"
@@ -166,7 +192,7 @@
          */
         "KnifeProMaxDiff" "0"
 
-        /* ----- [objectives] ----- */
+        /* ----- [1.3. objectives] ----- */
         
         /* Give x number of level by completing the bomb planting/defusing objectives.
          * Amount giving base on the value setting.
@@ -186,7 +212,7 @@
         /* Remove objectives from map. 0 = Disabled, 1 = BOMB, 2 = HOSTAGE, 3 = BOTH*/
         "RemoveObjectives" "3"
 
-        /* ----- [handicap] ----- */
+        /* ----- [1.4. handicap] ----- */
         
         /**
          * Maximum level that handicap can give.
@@ -249,7 +275,7 @@
          */
         "HandicapUseSpectators" "0"
         
-        /* ----- [equip] ----- */
+        /* ----- [1.5. equip] ----- */
         
         /* Auto reload current level weapon on kill */
         "ReloadWeapon" "1"
@@ -308,7 +334,7 @@
          */
         "NumberOfNades" "0"
         
-        /* ----- [multi level] ----- */
+        /* ----- [1.6. multi level] ----- */
         
         /* Milti Level Bonus */
         "MultiLevelBonus" "0"
@@ -329,7 +355,7 @@
         /* How much levels is needed to get bonus */
         "MultiLevelAmount" "3"
 
-        /* ----- [warmup] ----- */
+        /* ----- [1.7. warmup] ----- */
         
         /* Enables Warmup Round*/
         "WarmupEnabled" "1"
@@ -360,7 +386,7 @@
          */
         "WarmupWeapon" ""
 
-        /* ===== [GUNGAME TK CONFIG] ===== */
+        /* ===== [2. GUNGAME TK CONFIG] ===== */
         
         /**
          * How much levels to loose after TK
@@ -369,7 +395,7 @@
          */
         "TkLooseLevel" "0"
     
-        /* ===== [GUNGAME AFK CONFIG] ===== */
+        /* ===== [3. GUNGAME AFK CONFIG] ===== */
         
         /* Enables or disables built in Afk management system */
         "AfkManagement" "1"
@@ -383,7 +409,7 @@
          */
         "AfkAction" "2"
 
-        /* ===== [GUNGAME STATS CONFIG] ===== */
+        /* ===== [4. GUNGAME STATS CONFIG] ===== */
         
         /**
          * Prune player from player win database after numbers of days if they
@@ -394,7 +420,7 @@
          */
         "Prune"     "366"
 
-        /* ===== [GUNGAME DISPLAY WINNER CONFIG] ===== */
+        /* ===== [5. GUNGAME DISPLAY WINNER CONFIG] ===== */
         
         /* Display winner in MOTD window. */
         "DisplayWinnerMotd" "0"
@@ -405,7 +431,7 @@
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"
 
-        /* ===== [GUNGAME BOTS CONFIG] ===== */
+        /* ===== [6. GUNGAME BOTS CONFIG] ===== */
 
         /**
          * Dont use bots levels for handicap calculation. 
@@ -445,4 +471,3 @@
         "WarmupTimerSound" "ambient/tones/floor1.wav"
     }
 }
-

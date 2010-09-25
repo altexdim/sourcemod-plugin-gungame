@@ -82,3 +82,6 @@ new bool:g_cfgFriendlyFireOnOff = true;
 new bool:g_Cfg_BlockWeaponSwitchIfKnife = true;
 new bool:g_Cfg_HandicapUseSpectators = false;
 new Float:g_Cfg_ChangeLevelTime = 0.0;
+new bool:g_Cfg_CanLevelUpWithPhysics = false;
+new bool:g_Cfg_CanLevelUpWithPhysicsG = false;
+new bool:g_Cfg_CanLevelUpWithPhysicsK = false;

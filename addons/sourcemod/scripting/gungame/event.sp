@@ -404,13 +404,27 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
+    new LevelUpWithPhysics = false;
+
     /* They didn't kill with the weapon required */
     if ( WeaponIndex != WeaponLevel ) {
-        return;
+        if ( 
+            g_Cfg_CanLevelUpWithPhysics
+            && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
+            && ( 
+                ( ( WeaponLevel != CSW_HEGRENADE) && ( WeaponLevel != CSW_KNIFE) )
+                || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == CSW_HEGRENADE ) )
+                || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == CSW_KNIFE ) )
+            )
+        ) {
+            LevelUpWithPhysics = true;
+        } else {
+            return;
+        }
     }
     
     new killsPerLevel = UTIL_GetCustomKillPerLevel(level);
-    if ( killsPerLevel > 1 )
+    if ( ( killsPerLevel > 1 ) && !LevelUpWithPhysics )
     {
         new kills = ++CurrentKillsPerWeap[Killer], Handled;
 

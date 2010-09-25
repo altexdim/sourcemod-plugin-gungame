@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.1.2.0: 
+        + Added config variables: "CanLevelUpWithPhysics", "CanLevelUpWithPhysicsOnGrenade", 
+          "CanLevelUpWithPhysicsOnKnife".
         + Added events for players on gungame win: gg_team_win, gg_team_loose.
         * Fixed stopping triple level effects when round ends. Now triple level effects stops on spawn.
           Old behaviour of multi-level bonuses is restored.

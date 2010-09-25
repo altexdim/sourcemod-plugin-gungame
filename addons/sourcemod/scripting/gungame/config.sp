@@ -203,7 +203,14 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_HandicapUseSpectators = bool:StringToInt(value);
             } else if(strcmp("ChangeLevelTime", key, false) == 0) {
                 g_Cfg_ChangeLevelTime = StringToFloat(value);
+            } else if(strcmp("CanLevelUpWithPhysics", key, false) == 0) {
+                g_Cfg_CanLevelUpWithPhysics = bool:StringToInt(value);
+            } else if(strcmp("CanLevelUpWithPhysicsOnGrenade", key, false) == 0) {
+                g_Cfg_CanLevelUpWithPhysicsG = bool:StringToInt(value);
+            } else if(strcmp("CanLevelUpWithPhysicsOnKnife", key, false) == 0) {
+                g_Cfg_CanLevelUpWithPhysicsK = bool:StringToInt(value);
             }
+
         }
         
         case CONFIG_STATE_EQUIP:
