@@ -2,7 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    ----====----==== Normal priority list ----====----====
     + Добавить события gg_team_win, gg_team_loose
 
     * Btw, could you please restore an old behaviour of multi-level bonuses? 
@@ -10,16 +9,23 @@ TODO
         it was fun when they were fucking around with those effect after round 
         end  . I'm not running DM, round ends are often and break the fun of multi-level. 
 
-    * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
-
     * Feature request:
         I have a request. Maybe you could consider to add two new config variables 
-        and functionalities. First is to level up player by killing opponent by 
-        world physics (like blowing barrel). Second is to do the same with all 
+        and functionalities. 
+        
+        First is to level up player by killing opponent by 
+        world physics (like blowing barrel). 
+        
+        Second is to do the same with all 
         kind of nades (especially hegrenade  ). There are some maps where you can 
         get nades given by map creator. Would be nice if nade kill with it could 
         level up player.
+
         add config variable (or two) to exclude these functionalities for last level.
+
+    ----====----==== Normal priority list ----====----====
+
+    * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
 
     * Bug report:
         во еще глюк заметил !score
