@@ -1,6 +1,8 @@
 Changelog
 ---------
+        + Added events for players on gungame win: gg_team_win, gg_team_loose.
         * Fixed stopping triple level effects when round ends. Now triple level effects stops on spawn.
+          Old behaviour of multi-level bonuses is restored.
         * Fixed unpredictible weapon disapearing on round start by adding 0.3 seconds delay.
         + Added config variable "ChangeLevelTime".
 

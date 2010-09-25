@@ -132,8 +132,8 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [LIST]
 [*] Depends on gungame.smx
 [*] Optional plugin
-[*] Logs events: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
-              gg_knife_level, gg_triple_level, gg_last_level
+[*] Logs events for players: gg_win, gg_leader, gg_levelup, gg_leveldown, gg_knife_steal, 
+              gg_knife_level, gg_triple_level, gg_last_level, gg_team_win, gg_team_loose.
 [/LIST]
  
 [*] gungame_tk.smx - TeamKill Management System

@@ -2,13 +2,6 @@ TODO
 ----
     ----====----==== High priority list ----====----====
 
-    + Добавить события gg_team_win, gg_team_loose
-
-    * Btw, could you please restore an old behaviour of multi-level bonuses? 
-        It's LAAAAAAMMMMMEEEEE now  . They just stop after round end, damnit 
-        it was fun when they were fucking around with those effect after round 
-        end  . I'm not running DM, round ends are often and break the fun of multi-level. 
-
     * Feature request:
         I have a request. Maybe you could consider to add two new config variables 
         and functionalities. 

@@ -888,7 +888,7 @@ UTIL_StartTripleEffects(client)
     }
 }
 
-UTIL_StopBonusGravity(client)
+UTIL_StopBonusGravity(client) {
     if ( !g_tripleEffects[client] ) {
         return;
     }
