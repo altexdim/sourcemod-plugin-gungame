@@ -1,8 +1,10 @@
 TODO
-----
+==============================================================================
+
     ----====----==== High priority list ----====----====
 
     * don't add wins when player wins on bot. He can still win but without adding win to the database.
+    * Remove ChangeLevelTime option.
 
     ----====----==== Normal priority list ----====----====
 
