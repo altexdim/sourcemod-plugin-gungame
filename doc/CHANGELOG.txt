@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Fixed misspelling foe event logger - gg_team_loose -> gg_team_lose.
+
     1.1.2.0: 
         + Added config variables: "CanLevelUpWithPhysics", "CanLevelUpWithPhysicsOnGrenade", 
           "CanLevelUpWithPhysicsOnKnife".

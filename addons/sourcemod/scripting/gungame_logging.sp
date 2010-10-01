@@ -22,15 +22,15 @@ public GG_OnWinner(client, const String:Weapon[])
     LogEventToGame("gg_win", client);
 
     new teamWin = GetClientTeam(client);
-    new teamLoose = ( (teamWin == TEAM_CT) ? TEAM_T : TEAM_CT );
+    new teamLose = ( (teamWin == TEAM_CT) ? TEAM_T : TEAM_CT );
     new team;
     for ( new i = 1; i <= MaxClients; i++ ) {
         if ( IsClientInGame(i) ) {
             team = GetClientTeam(i);
             if ( team == teamWin ) {
                 LogEventToGame("gg_team_win", i);
-            } else if ( team == teamLoose ) {
-                LogEventToGame("gg_team_loose", i);
+            } else if ( team == teamLose ) {
+                LogEventToGame("gg_team_lose", i);
             }
         }
     }
