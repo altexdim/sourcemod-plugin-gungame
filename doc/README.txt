@@ -184,7 +184,7 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [*][B]Q.[/B] Sound does not work.
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
-[*][B]Q.[/B] Weapons desapiearing on level up and player spawn.
+[*][B]Q.[/B] Weapons desapearing on level up and player spawn.
          [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
