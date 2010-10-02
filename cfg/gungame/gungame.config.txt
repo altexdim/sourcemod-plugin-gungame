@@ -79,7 +79,7 @@
         /* How many levels they can gain in 1 round (0 - disabled) */
         "MaxLevelPerRound" "0"
 
-        /* Turbo Mode */
+        /* Turbo Mode: give next level weapon on level up */
         "TurboMode" "0"
 
         /* Knife Elite force them to only have a knife after they level up.
