@@ -11,6 +11,7 @@
 [*] [goanchor=Credits]Credits[/goanchor]
 [*] [goanchor=Changelog]Changelog[/goanchor]
 [*] [goanchor=TODO]TODO[/goanchor]
+[*] [goanchor=FAQ]FAQ[/goanchor]
 [*] [goanchor=Issues]Issues[/goanchor]
 [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
 [/LIST]
@@ -177,7 +178,17 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 
 [anchor]Changelog[/anchor][B]Changelog[/B]
 ----------------------------------------------------[INDENT]For full changelog see doc/CHANGELOG.txt[/INDENT][anchor]TODO[/anchor][B]TODO[/B]
-----------------------------------------------------[INDENT]For full todo list see doc/TODO.txt[/INDENT][anchor]Issues[/anchor][B]Issues[/B]
+----------------------------------------------------[INDENT]For full todo list see doc/TODO.txt[/INDENT]
+
+[anchor]FAQ[/anchor][B]FAQ[/B]
+----------------------------------------------------
+
+[LIST]
+[*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not on the next round.
+         [B]A.[/B] "TurboMode" "1" in gungame.config.txt.
+[/LIST]
+        
+[anchor]Issues[/anchor][B]Issues[/B]
 ----------------------------------------------------
 
 [LIST]
