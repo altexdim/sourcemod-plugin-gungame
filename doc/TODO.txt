@@ -3,10 +3,7 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    + Add option to disable mvp panel:
-        1) all the time
-        2) after gg win only
-        There is an event round_mvp.
+    + Add option: "CanLevelUpWithNadeAlways", "CanLevelUpWithNadeOnKnife".
     * don't add wins when player wins on bot. He can still win but without adding win to the database.
     * Remove ChangeLevelTime option.
 
