@@ -184,7 +184,7 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 ----------------------------------------------------
 
 [LIST]
-[*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not on the next round.
+[*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.
          [B]A.[/B] "TurboMode" "1" in gungame.config.txt.
 [/LIST]
         
