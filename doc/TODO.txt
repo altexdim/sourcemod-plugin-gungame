@@ -3,6 +3,10 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Check if knife elite works. 
+        Bug report: Knife elite does not appear to be working for me either, 
+        I have it enabled but you dont get forced to use a knife after killing someone.
+
     ----====----==== Normal priority list ----====----====
 
     * don't add wins when bot wins. He can still win but without adding win to the database.
