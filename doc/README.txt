@@ -186,6 +186,10 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [LIST]
 [*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.
          [B]A.[/B] "TurboMode" "1" in gungame.config.txt.
+[*] [B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
+        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
+[*] [B]Q.[/B] How to switch stats database from sqlite to mysql 
+        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865[/URL]
 [/LIST]
         
 [anchor]Issues[/anchor][B]Issues[/B]
@@ -199,10 +203,6 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
          [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
-[*] [B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
-        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
-[*] [B]Q.[/B] How to switch stats database from sqlite to mysql 
-        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865[/URL]
 [/LIST]
         
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]

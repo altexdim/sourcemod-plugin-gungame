@@ -1,0 +1,28 @@
+[quote=ChOJJa;1075602]Hi Altex, i want to upgrade from 1.0.7.8 to the latest release. However i want to use a mysql-db afterwards and my stats are currently using sqlite. What should i change in the database.cfg and how can i import the old stuff.
+
+Thx in advance.[/quote]
+
+Thanks for the good question.
+
+1) In database cfg you should add
+[code]
+    "gungame"
+    {
+        "driver"            "mysql"
+        "host"              "<host/ip>"
+        "database"          "<db name>"
+        "user"              "<username>"
+        "pass"              "<password>"
+    }
+[/code]2) Then download and install command line sqlite client (http://www.sqlite.org/sqlite-3_6_22.zip)
+for example into cstrike\addons\sourcemod\data\sqlite directory.
+
+3) Export database.
+[code]
+sqlite3.exe -csv sourcemod-local.sq3 "select * from gungame_playerdata" > c:\temp\gungame.csv
+[/code]4) Import into mysql.
+Login to mysql as root and type this sql commands:
+[code]
+drop table if exists gungame_playerdata;
+CREATE TABLE `gungame_playerdata`(`id` int(11) NOT NULL auto_increment,`wins` int(12) NOT NULL default '0',`authid` varchar(255) NOT NULL default '',`name` varchar(255) NOT NULL default '',`timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP,PRIMARY KEY  (`id`),KEY `wins` (`wins`),KEY `authid` (`authid`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+LOAD DATA INFILE 'C:\\temp\\gungame.csv' IGNORE INTO TABLE dbname.gungame_playerdata FIELDS TERMINATED BY ',' ENCLOSED BY '"' ESCAPED BY '\\' (id, wins, authid, name);[/code]

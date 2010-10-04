@@ -1,0 +1,26 @@
+[quote=BDeep;1009714]I am really lost on this i guess. Lets just say for example that I dont use a plugin to excute configs. How EXACTLY do I do this with just gungame. WOuld I have to make a gg_config for all GG maps and all the other maps that I have? If so thats not really a very good setup becuase I have 100's of maps that would take forever.
+
+Now lets say that I have a plugin that executes a config if a map starts with gg_ and a different config if the map starts with cs_ or de_. If I use this plugin then the buyzones are still gone on cs_ and de_ maps.
+
+The plugin that I was using is my own and can be seen here
+
+What would be nice is if there was simply a cvar in gungame that could be used in a config for turning on and off the buyzone code in your gungame plugin.[/quote]
+
+ok, let's start it from the begining
+As i understand your server is running not in gungame-24x7 mode, and gungame should run only on gungame maps, and on other maps it should not be enabled at all. And you have many maps for gungame and many maps for regular game.
+First of all you should disable gungame in your cfg/gungame/gungame.config.txt (Enabled "0")
+Than you should create particular prefix configs, for example
+for gg_* maps you can use prefix "gg" and create config
+cfg/gungame/maps/gg.config.txt
+or for particular map you should create config with that map name, for example if map is aim_ag_texture, than config will be
+cfg/gungame/maps/aim_ag_texture.config.txt
+And in that particular configs you should enable gungame
+[code]
+"GunGame.Config"
+{
+    "Config"
+    {
+        "Enabled" "1"
+    }
+}
+[/code]
