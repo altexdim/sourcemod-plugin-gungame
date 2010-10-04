@@ -3,19 +3,15 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    + Add option: "CanLevelUpWithNadeAlways", "CanLevelUpWithNadeOnKnife".
-    * don't add wins when player wins on bot. He can still win but without adding win to the database.
-    * Remove ChangeLevelTime option.
-
     ----====----==== Normal priority list ----====----====
 
+    * don't add wins when bot wins. He can still win but without adding win to the database.
+    * Add option to don't add wins when player wins on bot. He can still win but without adding win to the database.
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
-
     * Bug report:
         во еще глюк заметил !score
         появляется меню если игроков много или ники длинные то next exit 
         непоявляется но нажать можно перейдет на след страничку
-    
     + Feature request:
         Is there an option to display how many kills a person has on each level? Where when you spawn or kill someone it would say:
 

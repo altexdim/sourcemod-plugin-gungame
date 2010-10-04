@@ -141,13 +141,6 @@
         "DisableRtvLevel" "0"
 
         /**
-         * How many seconds to wait from win to end multiplayer game (before intermission).
-         * It is a time from freezing all players after win till scoreboard appeares.
-         */
-        "ChangeLevelTime" "0"
-
-        /**
-         * 
          * If this option is enabled, than player can level up by killing with prop_physics.
          * For example with fuel barrels etc.
          * 
@@ -171,6 +164,23 @@
          * 0 - Disabled
          */
         "CanLevelUpWithPhysicsOnKnife"      "0"
+
+        /**
+         * If this option is enabled, than player can level up by killing with nade at any time.
+         * For example there are maps having grenades on them leaved by the author.
+         * 
+         * 1 - Enabled
+         * 0 - Disabled
+         */
+        "CanLevelUpWithMapNades"            "0"
+
+        /**
+         * Use "CanLevelUpWithMapNades" option when player is on knife level.
+         * 
+         * 1 - Enabled
+         * 0 - Disabled
+         */
+        "CanLevelUpWithNadeOnKnife"         "0"
 
         /* ----- [1.2. knifepro] ----- */
         

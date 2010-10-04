@@ -408,21 +408,37 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* They didn't kill with the weapon required */
     if ( WeaponIndex != WeaponLevel ) {
-        if ( 
-            g_Cfg_CanLevelUpWithPhysics
-            && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
-            && ( 
-                ( ( WeaponLevel != CSW_HEGRENADE) && ( WeaponLevel != CSW_KNIFE) )
-                || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == CSW_HEGRENADE ) )
-                || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == CSW_KNIFE ) )
-            )
-        ) {
-            LevelUpWithPhysics = true;
+        if ( WeaponIndex == CSW_HEGRENADE ) {
+            // Killed with grenade made by map author
+            if ( 
+                g_Cfg_CanLevelUpWithMapNades
+                && ( 
+                    g_Cfg_CanLevelUpWithNadeOnKnife
+                    || ( WeaponLevel != CSW_KNIFE )
+                )
+            ) {
+                LevelUpWithPhysics = true;
+            } else {
+                return;
+            }
         } else {
-            return;
+            // Maybe killed with physics made by map author
+            if ( 
+                g_Cfg_CanLevelUpWithPhysics
+                && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
+                && ( 
+                    ( ( WeaponLevel != CSW_HEGRENADE) && ( WeaponLevel != CSW_KNIFE) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == CSW_HEGRENADE ) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == CSW_KNIFE ) )
+                )
+            ) {
+                LevelUpWithPhysics = true;
+            } else {
+                return;
+            }
         }
     }
-    
+
     new killsPerLevel = UTIL_GetCustomKillPerLevel(level);
     if ( ( killsPerLevel > 1 ) && !LevelUpWithPhysics )
     {
