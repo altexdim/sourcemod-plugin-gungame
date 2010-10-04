@@ -3,7 +3,7 @@ Changelog
     1.1.3.0: 
         + Added options: "CanLevelUpWithMapNades", "CanLevelUpWithNadeOnKnife".
         - Removed ChangeLevelTime option.
-        * Fixed misspelling foe event logger - gg_team_loose -> gg_team_lose.
+        * Fixed misspelling for event logger - gg_team_loose -> gg_team_lose.
 
     1.1.2.0: 
         + Added config variables: "CanLevelUpWithPhysics", "CanLevelUpWithPhysicsOnGrenade", 
