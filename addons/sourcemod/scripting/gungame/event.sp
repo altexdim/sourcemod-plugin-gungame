@@ -365,13 +365,15 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 break;
             }
 
-            new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
-            if ( VictimLevel )
-            {
-                if ( ChangedLevel == VictimLevel ) {
-                    break;
+            if ( !g_Cfg_DisableLevelDown ) {
+                new ChangedLevel = UTIL_ChangeLevel(Victim, -1, true);
+                if ( VictimLevel )
+                {
+                    if ( ChangedLevel == VictimLevel ) {
+                        break;
+                    }
+                    CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
                 }
-                CPrintToChatAllEx(Killer, "%t", "Has stolen a level from", kName, vName);
             }
 
             if ( WeaponLevel == CSW_KNIFE )
@@ -514,7 +516,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     PrintLeaderToChat(Killer, oldLevelKiller, level, kName);
 
-    if ( TurboMode )
+    if ( TurboMode || KnifeElite )
     {
         UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == CSW_KNIFE);
     }

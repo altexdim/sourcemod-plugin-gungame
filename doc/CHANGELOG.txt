@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.1.4.0: 
+        + Added option "DisableLevelDown".
+        * Fixed KnifeElite.
+
     1.1.3.0: 
         + Added options: "CanLevelUpWithMapNades", "CanLevelUpWithNadeOnKnife".
         - Removed ChangeLevelTime option.

@@ -670,6 +670,15 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
         UTIL_ForceDropAllWeapon(client, true);
     }
 
+    if ( PlayerState[client] & KNIFE_ELITE ) {
+        if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+            g_BlockSwitch[client] = false;
+        } else {
+            FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+        }
+        return;
+    }
+
     if ( slot == Slot_Grenade )
     {
         if ( NumberOfNades )

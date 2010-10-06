@@ -196,11 +196,20 @@
         /* If enabled then knife kill will also affect points */
         "KnifeProRecalcPoints" "0"
         
-        /* Maximum level difference between players to allow steal level 
+        /**
+         * Maximum level difference between players to allow steal level 
          * 0 - Disabled
          * 1..N - Level difference between killer and victim
          */
         "KnifeProMaxDiff" "0"
+
+        /**
+         * Disable level down on knifepro.
+         *
+         * 1 - Level down disabled
+         * 0 - Level down enabled
+         */
+        "DisableLevelDown" "0"
 
         /* ----- [1.3. objectives] ----- */
         

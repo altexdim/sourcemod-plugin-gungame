@@ -211,6 +211,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_CanLevelUpWithMapNades = bool:StringToInt(value);
             } else if(strcmp("CanLevelUpWithNadeOnKnife", key, false) == 0) {
                 g_Cfg_CanLevelUpWithNadeOnKnife = bool:StringToInt(value);
+            } else if(strcmp("DisableLevelDown", key, false) == 0) {
+                g_Cfg_DisableLevelDown = bool:StringToInt(value);
             }
         }
         

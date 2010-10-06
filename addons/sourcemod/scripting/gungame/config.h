@@ -86,3 +86,4 @@ new bool:g_Cfg_CanLevelUpWithPhysicsG = false;
 new bool:g_Cfg_CanLevelUpWithPhysicsK = false;
 new bool:g_Cfg_CanLevelUpWithMapNades = false;
 new bool:g_Cfg_CanLevelUpWithNadeOnKnife = false;
+new bool:g_Cfg_DisableLevelDown = false;
