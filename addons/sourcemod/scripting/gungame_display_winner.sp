@@ -42,7 +42,7 @@ public Event_PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     GetClientName(victim, g_looserName[attacker], sizeof(g_looserName[]));
 }
 
-public GG_OnWinner(client, const String:weapon[])
+public GG_OnWinner(client, const String:weapon[], victim)
 {
     if ( ( !g_Cfg_DisplayWinnerMotd && !g_Cfg_ShowPlayerRankOnWin ) || IsFakeClient(client) )
     {

@@ -388,7 +388,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             }
 
             new oldLevelKiller = level;
-            level = UTIL_ChangeLevel(Killer, 1, true);
+            level = UTIL_ChangeLevel(Killer, 1, true, Victim);
             if ( oldLevelKiller == level ) {
                 return;
             }
@@ -506,7 +506,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new oldLevelKiller = level;
-    level = UTIL_ChangeLevel(Killer, 1);
+    level = UTIL_ChangeLevel(Killer, 1, _, Victim);
     if ( oldLevelKiller == level )
     {
         return;

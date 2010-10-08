@@ -177,10 +177,12 @@ EndProcess()
     SavePlayerDataInfo();
 }
 
-public GG_OnWinner(client, const String:Weapon[])
-{
-    if ( IsClientInGame(client) && !IsFakeClient(client) )
-    {
+public GG_OnWinner(client, const String:Weapon[], victim) {
+    if ( IsClientInGame(client) && !IsFakeClient(client) ) {
+        if ( g_Cfg_DontAddWinsOnBot && victim && IsFakeClient(victim) ) {
+            return;
+        }
+
         ++PlayerWinsData[client];
         SavePlayerData(client);
         #if !defined SQL_SUPPORT
@@ -188,4 +190,3 @@ public GG_OnWinner(client, const String:Weapon[])
         #endif
     }
 }
-

@@ -450,6 +450,14 @@
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"
 
+        /**
+         * If player wins on bot, then dont add win in stats.
+         *
+         * 0 - Add win into stats.
+         * 1 - Don't add win into stats.
+         */
+        "DontAddWinsOnBot" "0"
+
         /* ===== [6. GUNGAME BOTS CONFIG] ===== */
 
         /**

@@ -14,6 +14,8 @@ public GG_ConfigKeyValue(const String:Key[], const String:Value[])
             Prune = StringToInt(Value);
         } else if ( strcmp(Key, "HandicapTopRank", false) == 0 ) {
             g_cfgHandicapTopRank = StringToInt(Value);
+        } else if ( strcmp(Key, "DontAddWinsOnBot", false) == 0 ) {
+            g_Cfg_DontAddWinsOnBot = bool:StringToInt(Value);
         }
     }
 }

@@ -17,7 +17,7 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
-public GG_OnWinner(client, const String:Weapon[])
+public GG_OnWinner(client, const String:Weapon[], victim)
 {
     LogEventToGame("gg_win", client);
 

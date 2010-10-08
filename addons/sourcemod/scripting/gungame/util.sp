@@ -269,7 +269,7 @@ UTIL_PlaySoundForLeaderLevel()
     }
 }
 
-UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
+UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
 {
     if ( !difference || !IsActive || WarmupEnabled || GameWinner )
     {
@@ -370,6 +370,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false)
         Call_StartForward(FwdWinner);
         Call_PushCell(client);
         Call_PushString(WeaponOrderName[Level - 1]);
+        Call_PushCell(victim);
         Call_Finish();
 
         GameWinner = client;

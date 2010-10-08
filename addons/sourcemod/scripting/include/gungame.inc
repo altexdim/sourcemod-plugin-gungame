@@ -51,9 +51,10 @@ forward Action:GG_OnClientPointChange(client, point, difference);
  *
  * @param client        Player index.
  * @param Weapon        The player weapon they won with.
+ * @param victim        Player index of victim (or 0 if there was no victim).
  * @noreturn
  */
-forward GG_OnWinner(client, const String:Weapon[]);
+forward GG_OnWinner(client, const String:Weapon[], victim);
 
 /**
  * Called when a client triple leveled.
