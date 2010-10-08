@@ -3,8 +3,6 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Add option to don't add wins when player wins on bot. He can still win but without adding win to the database.
-
     ----====----==== Normal priority list ----====----====
 
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
