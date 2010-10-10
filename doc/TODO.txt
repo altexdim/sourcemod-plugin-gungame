@@ -5,28 +5,6 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
-    * Bug report:
-        since source update 1.0.0.55 gg:sm doesn't work.
-        so i had download 1.1.5.0 version from sourceforge.
-
-        All server are running and i have all menu
-        but :
-        when i try to disable it :
-        00:13:52 [GunGame] Turning off GunGame:SM
-        00:13:52 L 10/09/2010 - 00:167: server_cvar: "gungame_enabled" "0"
-        00:13:52 L 10/09/2010 - 00:167: [SM] Native "UnhookEvent" reported: Game event "player_spawn" has no active hook
-        00:13:52 L 10/09/2010 - 00:167: [SM] Displaying call stack trace for plugin "gungame_afk.smx":
-        00:13:52 L 10/09/2010 - 00:167: [SM] [0] Line 58, gungame_afk.sp::GG_OnShutdown()
-        00:14:04 cvarlist "gg_"
-        and when i want to enable it :
-        00:146 [GunGame] Turning on GunGame:SM
-        00:146 L 10/09/2010 - 00:17:21: server_cvar: "gungame_enabled" "1"
-        00:14:45 gg_status
-        00:14:46 [GunGame] Currently not implmented
-
-        And ingame, we need to wait all team kill for respawn.
-        Anybody know the issue ?
-
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
     * Bug report:
         во еще глюк заметил !score
