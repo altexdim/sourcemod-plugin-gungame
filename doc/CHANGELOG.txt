@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Added option "AfkReload". Thanks to LordMarqus.
+
     1.1.5.0: 
         * GG_OnWinner forward has changed. See gungame.inc.
         + Added config variable "DontAddWinsOnBot".

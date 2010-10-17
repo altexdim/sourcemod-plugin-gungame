@@ -355,7 +355,7 @@
         
         /* ----- [1.6. multi level] ----- */
         
-        /* Milti Level Bonus */
+        /* Multi Level Bonus */
         "MultiLevelBonus" "0"
 
         /* Enable God Mode when multi leveled */
@@ -427,6 +427,9 @@
          * 0 = Nothing, 1 = Kick, 2 = Move to spectate, 
          */
         "AfkAction" "2"
+		
+		/* Reload current weapon on afk kill. */
+        "AfkReload" "0"
 
         /* ===== [4. GUNGAME STATS CONFIG] ===== */
         

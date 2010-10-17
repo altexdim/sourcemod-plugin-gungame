@@ -11,6 +11,7 @@ new OffsetOrigin;
 new bool:AfkManagement;
 new AfkDeaths;
 new AfkAction;
+new AfkReload;
 new bool:IsActive;
 
 new Float:PlayerAfk[MAXPLAYERS + 1][3];
@@ -126,6 +127,11 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
                 PlayerAfkCount[Victim] = 0;
             }
         }
+		
+        if ( AfkReload )
+        {
+            return Plugin_Changed;
+        }
 
         return Plugin_Handled;
     }
@@ -152,6 +158,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             AfkDeaths = StringToInt(value);
         } else if(strcmp("AfkAction", key, false) == 0) {
             AfkAction = StringToInt(value);
+		} else if(strcmp("AfkReload", key, false) == 0) {
+            AfkReload = StringToInt(value);
         }
     }
 }

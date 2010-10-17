@@ -306,7 +306,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // Victim > 0 && Killer > 0
 
-    new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon), ret;
+    new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon);
+    new Action:ret;
 
     if ( WarmupEnabled )
     {
@@ -327,6 +328,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( ret || TeamKill )
     {
+        if ( ret == Plugin_Changed )
+        {
+            UTIL_ReloadActiveWeapon(Killer, WeaponIndex);
+        }
         return;
     }
 
