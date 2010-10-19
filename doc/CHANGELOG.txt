@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Gamedata file updated.
         * Added option "AfkReload". Thanks to LordMarqus.
 
     1.1.5.0: 
