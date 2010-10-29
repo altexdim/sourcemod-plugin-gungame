@@ -93,6 +93,8 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [*] Provides almost all gungame functionality
 [/LIST]
  
+[*] disabled\gungame_sdkhooks.smx - Main GunGame:SM plugin with uncommented "USE_SDK_HOOKS".
+ 
 [*] gungame_config.smx - Config Reader
 [LIST]
 [*] No dependencies
