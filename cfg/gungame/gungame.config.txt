@@ -448,7 +448,7 @@
         "DisplayWinnerMotd" "0"
 
         /* URL to display in MOTD window. */
-        "DisplayWinnerUrl" "http://gungame5.com/gg5_win.php"
+        "DisplayWinnerUrl" "http://otstrel.ru/gg5_win.php"
 
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"

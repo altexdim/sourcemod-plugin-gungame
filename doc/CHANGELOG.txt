@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Changed default url for winner display.
         * Gamedata file updated.
         * Added option "AfkReload". Thanks to LordMarqus.
 
