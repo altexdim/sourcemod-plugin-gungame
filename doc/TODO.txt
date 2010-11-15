@@ -5,6 +5,11 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    + Feature request:
+        Altex, do you think it's possible to add a feature to start the map 
+        vote once someone has won the game?
+        I'd like to have the mapvote after the game has been won instead of 
+        when someone reaches "x" level. 
     * Bug report: There is a bug when player switch team fast, dropped weapons and knives.
     * Bug report:
         во еще глюк заметил !score
