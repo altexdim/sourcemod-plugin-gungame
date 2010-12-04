@@ -6,6 +6,9 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
+        Altex, could you please add disabling winner announce in left upper corner in the next release? 
+
+    + Feature request:
         Altex, do you think it's possible to add a feature to start the map 
         vote once someone has won the game?
         I'd like to have the mapvote after the game has been won instead of 
