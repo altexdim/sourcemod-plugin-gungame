@@ -966,7 +966,7 @@ CheckForTripleLevel(client)
             {
                 SetGlobalTransTarget(i);
                 FormatLanguageNumberTextEx(i, subtext, sizeof(subtext), g_Cfg_MultiLevelAmount, "leveled times");
-                CPrintToChatEx(i, client, "%t", "Player has been leveled many times", Name, subtext);
+                CPrintToChatEx(i, client, "%t", "Player has leveled many times", Name, subtext);
             }
         }
 

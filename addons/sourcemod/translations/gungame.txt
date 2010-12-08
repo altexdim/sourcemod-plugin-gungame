@@ -261,10 +261,10 @@
         "ru"     "{teamcolor}{1}{green} украл уровень у {default}{2}"
         "pt"     "{teamcolor}{1}{green} roubou um nivel de {default}{2}"
     }
-    "Player has been leveled many times"
+    "Player has leveled many times"
     {
         "#format"    "{1:s},{2:s}"
-        "en"     "{teamcolor}{1} {green}has been leveled {2}!!!"
+        "en"     "{teamcolor}{1} {green}has leveled {2}!!!"
         "de"     "{teamcolor}{1} {green}hat {2} gelevelt!!!"
         "ru"     "{teamcolor}{1} {green}прошёл {2}!!!"
         "pt"     "{teamcolor}{1} {green}subiu de nivel {2}!!!"
