@@ -277,7 +277,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
     
-    decl String:Weapon[24], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
+    decl String:Weapon[MAX_WEAPON_NAME_SIZE], String:vName[MAX_NAME_SIZE], String:kName[MAX_NAME_SIZE];
 
     GetEventString(event, "weapon", Weapon, sizeof(Weapon));
     GetClientName(Victim, vName, sizeof(vName));

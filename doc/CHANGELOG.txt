@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Fixed level up with prop_physics_multiplayer.
         * Changed default url for winner display.
         * Gamedata file updated.
         * Added option "AfkReload". Thanks to LordMarqus.

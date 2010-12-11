@@ -66,6 +66,7 @@ stock const String:BLANK_SPACE[] = " ";
 
 #define MAX_NAME_SIZE        64
 #define MAX_CHAT_SIZE        192
+#define MAX_WEAPON_NAME_SIZE 32
 
 #define YELLOW               0x01
 #define NAME_TEAMCOLOR       0x02
@@ -166,4 +167,3 @@ enum State
     CONFIG_STATE_SOUNDS,
     CONFIG_STATE_SECONDARY_LIST
 }
-
