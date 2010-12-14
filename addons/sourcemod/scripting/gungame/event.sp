@@ -168,7 +168,7 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    if ( client && !disconnect && (oldTeam >= 2) && (newTeam < 2) && IsClientInGame(client) && IsPlayerAlive(client) )
+    if ( client && !disconnect && (oldTeam >= 2) && IsClientInGame(client) && IsPlayerAlive(client) )
     {
         UTIL_RemoveClientDroppedWeapons(client, true);
         UTIL_StopTripleEffects(client);
@@ -622,13 +622,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     UTIL_ForceDropAllWeapon(client, true);
 
-    /* A check to make sure player always has a knife because some maps do not give the knife. */
-    new knife = GetPlayerWeaponSlot(client, _:Slot_Knife);
-    if ( knife == -1 )
-    {
-        GivePlayerItemWrapper(client, "weapon_knife");
-    }
-
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if ( GameWinner )
     {
@@ -649,7 +642,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new Level = PlayerLevel[client];
-    UTIL_GiveNextWeapon(client, Level, false, false, 0.3);
+    UTIL_GiveNextWeapon(client, Level, false, false, 0.3, true);
 
     // spawn chat messages
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);

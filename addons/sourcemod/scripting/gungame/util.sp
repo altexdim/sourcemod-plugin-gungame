@@ -631,34 +631,42 @@ UTIL_CheckForFriendlyFire(client, Weapons:WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false, Float:delay = 0.1) {
+UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false, Float:delay = 0.1, bool:spawn = false) {
     new Handle:data = CreateDataPack();
     WritePackCell(data, client);
     WritePackCell(data, level);
     WritePackCell(data, _:drop);
     WritePackCell(data, _:knife);
+    WritePackCell(data, _:spawn);
        
     CreateTimer(delay, UTIL_Timer_GiveNextWeapon, data);
 }
 
 public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
-    new client, level, bool:drop, bool:knife;
+    new client, level, bool:drop, bool:knife, bool:spawn;
 
     ResetPack(data);
     client = ReadPackCell(data);
     level = ReadPackCell(data);
     drop = bool:ReadPackCell(data);
     knife = bool:ReadPackCell(data);
+    spawn = bool:ReadPackCell(data);
     CloseHandle(data);
 
     if ( !IsClientInGame(client) || !IsPlayerAlive(client) ) {
         return;
     }
 
-    UTIL_GiveNextWeaponReal(client, level, drop, knife);
+    UTIL_GiveNextWeaponReal(client, level, drop, knife, spawn);
 }
 
-UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
+UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, bool:spawn = false) {
+    // A check to make sure player always has a knife 
+    // because some maps do not give the knife.
+    if ( spawn && GetPlayerWeaponSlot(client, _:Slot_Knife) == -1 ) {
+        GivePlayerItemWrapper(client, WeaponName[CSW_KNIFE]);
+    }
+
     if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = true;
     }
@@ -666,8 +674,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
     
     UTIL_CheckForFriendlyFire(client, WeapId);
 
-    if ( drop )
-    {
+    if ( drop ) {
         UTIL_ForceDropAllWeapon(client, true);
     }
 
@@ -680,27 +687,21 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
         return;
     }
 
-    if ( slot == Slot_Grenade )
-    {
-        if ( NumberOfNades )
-        {
+    if ( slot == Slot_Grenade ) {
+        if ( NumberOfNades ) {
             g_NumberOfNades[client] = NumberOfNades - 1;
         }
-        if ( NadeBonusWeaponId )
-        {
+        if ( NadeBonusWeaponId ) {
             new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
             new Slots:slotBonus = WeaponSlot[NadeBonusWeaponId];
-            if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) 
-            {
+            if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) {
                 g_ClientSlotEnt[client][slotBonus] = ent;
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
-            if ( (ent != -1) && RemoveBonusWeaponAmmo )
-            {
+            if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
                 new iAmmo = UTIL_GetAmmoType(ent);
 
-                if ( iAmmo != -1 )
-                {
+                if ( iAmmo != -1 ) {
                     new Handle:Info = CreateDataPack();
                     WritePackCell(Info, client);
                     WritePackCell(Info, iAmmo);
@@ -710,32 +711,25 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false) {
                 }
             }
         }
-        if ( NadeSmoke )
-        {
+        if ( NadeSmoke ) {
             new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
             g_ClientSlotEntSmoke[client] = ent;
         }
-        if ( NadeFlash )
-        {
+        if ( NadeFlash ) {
             new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
             UTIL_FlashCounterAdd(client, ent);
         }
     }
-    if ( slot == Slot_Knife )
-    {
-        if ( g_Cfg_KnifeSmoke )
-        {
+    if ( slot == Slot_Knife ) {
+        if ( g_Cfg_KnifeSmoke ) {
             new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
             g_ClientSlotEntSmoke[client] = ent;
         }
-        if ( g_Cfg_KnifeFlash )
-        {
+        if ( g_Cfg_KnifeFlash ) {
             new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
             UTIL_FlashCounterAdd(client, ent);
         }
-    }
-    else
-    {
+    } else {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
         if ( slot == Slot_Primary || slot == Slot_Secondary ) {
