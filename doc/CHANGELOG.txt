@@ -1,5 +1,8 @@
 Changelog
 ---------
+        * Added cool multilevel bonus effect. 
+          Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from http://www.war3source.com/
+          for "War3Source - Addon - Display Particles on Level Up" plugin version 1.1.
         * Fixed level up with prop_physics_multiplayer.
         * Changed default url for winner display.
         * Gamedata file updated.

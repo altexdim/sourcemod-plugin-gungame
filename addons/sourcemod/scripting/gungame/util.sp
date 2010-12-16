@@ -1311,38 +1311,53 @@ UTIL_StopEffectClient(client) {
         return;
     }
     if ( IsValidEdict(g_Ent_Effect[client]) ) {
-        RemoveEdict(g_Ent_Effect[client]);
+        AcceptEntityInput( g_Ent_Effect[client], "TurnOff" );
+        AcceptEntityInput( g_Ent_Effect[client], "Kill" );
     }
     g_Ent_Effect[client] = -1;
 }
 
 UTIL_CreateEffect(client) {
-    new ent = CreateEntityByName("env_spritetrail");
-    new String:target[32];
-    Format(target, sizeof(target), "target%i", client);
+    if ( !IsClientInGame( client ) ) {
+        return -1;
+    }
+
+    new particle = CreateEntityByName("env_smokestack");
+    if ( !IsValidEdict(particle) ) {
+        LogError( "Failed to create env_smokestack (%i) for client %i!", particle, client );
+        return -1;
+    }
+
+    decl String:Name[32], Float:fPos[3], Float:fAng[3] = { 0.0, 0.0, 0.0 };
+    Format( Name, sizeof( Name ), "CSParticle_%i", client );
+    GetEntPropVector( client, Prop_Send, "m_vecOrigin", fPos );
+    fPos[2] += 28;
+
+    //Set Key Values
+    DispatchKeyValueVector( particle, "Origin", fPos );
+    DispatchKeyValueVector( particle, "Angles", fAng );
+    DispatchKeyValueFloat( particle, "BaseSpread", 15.0 );
+    DispatchKeyValueFloat( particle, "StartSize", 2.0 );
+    DispatchKeyValueFloat( particle, "EndSize", 6.0 );
+    DispatchKeyValueFloat( particle, "Twist", 0.0 );
     
-    DispatchKeyValue(client, "targetname", target);
-    DispatchKeyValue(ent, "parentname", target);
-    DispatchKeyValue(ent, "lifetime", "1.0");
-    DispatchKeyValue(ent, "endwidth", "1.0");
-    DispatchKeyValue(ent, "startwidth", "20.0");
-    //DispatchKeyValue(ent, "spritename", "materials/sprites/bluelaser1.vmt");
-    DispatchKeyValue(ent, "spritename", "materials/sprites/crystal_beam1.vmt");
-    DispatchKeyValue(ent, "renderamt", "255");
-    //DispatchKeyValue(ent, "rendercolor", "0 128 255");
-    DispatchKeyValue(ent, "rendercolor", "255 128 0");
-    DispatchKeyValue(ent, "rendermode", "5");
-    
-    DispatchSpawn(ent);
-    
-    new Float:Client_Origin[3];
-    GetClientAbsOrigin(client,Client_Origin);
-    Client_Origin[2] += 20.0; //Beam clips into the floor without this
-    TeleportEntity(ent, Client_Origin, NULL_VECTOR, NULL_VECTOR);
-    
-    SetVariantString(target);
-    AcceptEntityInput(ent, "SetParent");
-    return ent;
+    DispatchKeyValue( particle, "Name", Name );
+    DispatchKeyValue( particle, "SmokeMaterial", MULTI_LEVEL_EFFECT );
+    DispatchKeyValue( particle, "RenderColor", "252 232 131" );
+    DispatchKeyValue( particle, "SpreadSpeed", "10" );
+    DispatchKeyValue( particle, "RenderAmt", "200" );
+    DispatchKeyValue( particle, "JetLength", "13" );
+    DispatchKeyValue( particle, "RenderMode", "0" );
+    DispatchKeyValue( particle, "Initial", "0" );
+    DispatchKeyValue( particle, "Speed", "10" );
+    DispatchKeyValue( particle, "Rate", "173" );
+    DispatchSpawn( particle );
+
+    //Set Entity Inputs
+    SetVariantString( "!activator" );
+    AcceptEntityInput( particle, "SetParent", client, particle, 0 );
+    AcceptEntityInput( particle, "TurnOn" );
+    return particle;
 }
 
 UTIL_UpdateFlashCounter(client) {

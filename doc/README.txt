@@ -166,6 +166,9 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [anchor]Credits[/anchor][B]Credits[/B]
 ----------------------------------------------------
 [LIST]
+[*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from http://www.war3source.com/
+    for cool visual effect from "War3Source - Addon - Display Particles on Level Up" plugin version 1.1
+    used in multi level bonus effect in gungame plugin.
 [*] Thanks to VoGon for the translation to portuguese.
 [*] Thanks to tObIwAnKeNoBi for german translation.
 [*] Thanks to exvel for sourcemod library Colors 1.0.2

@@ -597,3 +597,7 @@ Check byte size for SendProp Offset
 */
 
 /* I wonder sending game_end or round_end with nextlevel cvar will force map to change? */
+
+public OnMapStart() {
+    PrecacheModel(MULTI_LEVEL_EFFECT);
+}
