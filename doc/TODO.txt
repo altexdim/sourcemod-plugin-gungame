@@ -5,8 +5,6 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
-    * Bug: late precache of "effects/combinemuzzle2.vmt" bug.
-
     + Feature request:
         Altex, could you please add disabling winner announce in left upper corner in the next release? 
 

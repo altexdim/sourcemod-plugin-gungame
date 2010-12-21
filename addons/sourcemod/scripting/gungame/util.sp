@@ -1342,7 +1342,7 @@ UTIL_CreateEffect(client) {
     DispatchKeyValueFloat( particle, "Twist", 0.0 );
     
     DispatchKeyValue( particle, "Name", Name );
-    DispatchKeyValue( particle, "SmokeMaterial", MULTI_LEVEL_EFFECT );
+    DispatchKeyValue( particle, "SmokeMaterial", MULTI_LEVEL_EFFECT2 );
     DispatchKeyValue( particle, "RenderColor", "252 232 131" );
     DispatchKeyValue( particle, "SpreadSpeed", "10" );
     DispatchKeyValue( particle, "RenderAmt", "200" );

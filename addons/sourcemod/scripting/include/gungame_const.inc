@@ -168,4 +168,5 @@ enum State
     CONFIG_STATE_SECONDARY_LIST
 }
 
-#define MULTI_LEVEL_EFFECT      "effects/combinemuzzle2.vmt"
+#define MULTI_LEVEL_EFFECT2      "effects/combinemuzzle2.vmt"
+#define MULTI_LEVEL_EFFECT1      "effects/combinemuzzle1.vmt"
