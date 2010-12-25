@@ -337,10 +337,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     new level = PlayerLevel[Killer], Weapons:WeaponLevel = WeaponOrderId[level];
 
-    // FIXME: If KnifePro && KnifeProHE are enabled then we give extra grenade here, but it is a bug
-    /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-    if ( WeaponLevel == CSW_HEGRENADE && WeaponIndex != CSW_HEGRENADE )
-    {
+    /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled */
+    if ( (WeaponLevel == CSW_HEGRENADE) && (WeaponIndex != CSW_HEGRENADE) 
+        && !( (WeaponIndex == CSW_KNIFE) && KnifeProHE ) // TODO: Remove "&& !( (WeaponIndex == CSW_KNIFE) && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
+    ) {
         UTIL_GiveExtraNade(Killer, WeaponIndex == CSW_KNIFE );
     }
 

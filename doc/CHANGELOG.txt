@@ -1,12 +1,14 @@
 Changelog
 ---------
+        * Gamedata file updated.
+        * Fixed level up with prop_physics_multiplayer.
+        * Changed default url for winner display.
+        * Added option "AfkReload". Thanks to LordMarqus.
         * Added cool multilevel bonus effect. 
           Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from http://www.war3source.com/
           for "War3Source - Addon - Display Particles on Level Up" plugin version 1.1.
-        * Fixed level up with prop_physics_multiplayer.
-        * Changed default url for winner display.
-        * Gamedata file updated.
-        * Added option "AfkReload". Thanks to LordMarqus.
+        * Fixed bug: If KnifePro && KnifeProHE && ExtraNade are enabled then we give extra grenade 
+          on knife kill and leveling up player.
 
     1.1.5.0: 
         * GG_OnWinner forward has changed. See gungame.inc.
