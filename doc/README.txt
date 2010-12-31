@@ -208,6 +208,9 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
          [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
+[*][B]Q.[/B] Something does not work, what should i do?
+        [B]A.[/B] Start with posting your [B]rcon plugin_print; rcon meta list; rcon sm plugins list[/B] 
+        and [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
 [/LIST]
         
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
