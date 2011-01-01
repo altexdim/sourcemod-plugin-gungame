@@ -6,6 +6,16 @@ TODO
     ----====----==== Normal priority list ----====----====
 
     + Feature request:
+
+        Make it possible to disable or enable Turbo on the fly. gg_turbo 0...
+        Make it possible to change triple level amount on the fly. gg_multilvl_amount 6
+        Make it possible to change Weapon order on the fly. IE gg_weaponorder 1 or gg_weaponorder 2...
+
+        If those are possible man That would be awsome..
+
+        Also is it possible to give 2 flashes with knife level? 
+
+    + Feature request:
         Altex, could you please add disabling winner announce in left upper corner in the next release? 
 
     + Feature request:
