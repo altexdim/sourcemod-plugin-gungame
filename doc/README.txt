@@ -216,10 +216,8 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
 ----------------------------------------------------
 [LIST]
-[*] Winners menu:
-        [URL]http://forums.alliedmods.net/showpost.php?p=949442&postcount=255[/URL]
-[*] Advanced stats:
-        [URL]http://forums.alliedmods.net/showpost.php?p=1036934&postcount=594[/URL]
-[*] say !give
-        [URL]https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701[/URL]
+[*]Winners menu [URL]http://forums.alliedmods.net/showpost.php?p=949442&postcount=255[/URL]
+[*]!give [URL]https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701[/URL]
+[*]!buylevel [URL]http://forums.alliedmods.net/showthread.php?t=134264[/URL]
+[*]!buylevel [URL]https://forums.alliedmods.net/showpost.php?p=1387759&postcount=2366[/URL]
 [/LIST]
