@@ -50,6 +50,12 @@
                                       You can convert winners db file from es gungame5 to gungame3 - use tools/convert_winners_esgg_5to3.py.
 [*] [B]gg_reset[/B]                        - Reset all gungame stats. (only if sql stats enabled)
 [*] [B]gg_importdb[/B]                     - Imports the winners from gungame players data file into database. (only if sql stats enabled)
+
+[*] [B]sm_gg_cfgdirname[/B]                - Define config directory where gungame.config.txt is located. 
+                                             Default is "gungame" (so config files will be loaded from "cfg\gungame\").
+                                             You can define your own directory after gungame winner, for example exec "sm_gg_cfgdirname gungame-dm",
+                                             and after map change the config files will be loaded from "cfg\gungame-dm"
+                                             (so config files will be loaded from "cfg\gungame\").
 [/LIST]
 
 [LIST]

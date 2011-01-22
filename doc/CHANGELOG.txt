@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.1.7.0:
+        * Added cvar "sm_gg_cfgdirname". Now you can change gungame rules after every map change.
+
     1.1.6.0: 
         * Gamedata file updated.
         * Fixed level up with prop_physics_multiplayer.

@@ -38,6 +38,8 @@ new Handle:FwdConfigKeyValue = INVALID_HANDLE;
 new Handle:FwdConfigParseEnd = INVALID_HANDLE;
 new Handle:FwdConfigEnd = INVALID_HANDLE;
 
+new Handle:g_Cvar_CfgDirName = INVALID_HANDLE;
+
 #if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
@@ -60,6 +62,7 @@ public OnPluginStart()
     FwdConfigKeyValue = CreateGlobalForward("GG_ConfigKeyValue", ET_Ignore, Param_String, Param_String);
     FwdConfigParseEnd = CreateGlobalForward("GG_COnfigParseEnd", ET_Ignore);
     FwdConfigEnd = CreateGlobalForward("GG_ConfigEnd", ET_Ignore);
+    g_Cvar_CfgDirName = CreateConVar("sm_gg_cfgdirname", "gungame", "Config directory for gungame (from cfg path)");
 }
 
 public OnMapStart()
@@ -79,8 +82,11 @@ ReadConfig()
         return;
     }
     
+    decl String:ConfigDirName[PLATFORM_MAX_PATH];
+    GetConVarString(g_Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
+
     decl String:ConfigDir[PLATFORM_MAX_PATH];
-    FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\gungame");
+    FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s", ConfigDirName);
 
     decl String:ConfigFile[PLATFORM_MAX_PATH], String:EquipFile[PLATFORM_MAX_PATH];
     decl String:Error[PLATFORM_MAX_PATH + 64];
