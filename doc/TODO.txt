@@ -5,6 +5,8 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Is there a way to get the old effect back?
+
     + Feature request:
 
         Make it possible to disable or enable Turbo on the fly. gg_turbo 0...
