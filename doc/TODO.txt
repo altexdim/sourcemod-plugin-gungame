@@ -5,6 +5,9 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Bug report:
+        "ShowPlayerRankOnWin" "1" не работает.
+
     * Is there a way to get the old effect back?
 
     + Feature request:
