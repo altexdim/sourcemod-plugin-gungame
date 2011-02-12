@@ -5,6 +5,13 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Check how much winner songs is supported. Make it possible to use up to 
+      100 songs.
+
+    * Add multiple triple level sounds. Plaing randomly each triple level.
+      Release as separate plugin. Make it possible to use up to 
+      100 songs.
+
     * Bug report:
         "ShowPlayerRankOnWin" "1" не работает.
 
