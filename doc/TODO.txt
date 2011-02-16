@@ -5,6 +5,8 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * People want to dinamicaly change turbo mode on/off.
+
     * Make 2 plugins.
     
         Add multiple triple level sounds. Plaing randomly each triple level.
