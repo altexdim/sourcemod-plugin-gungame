@@ -5,6 +5,16 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Hello, first of all cause I´m new here, very thx for that plugin!
+
+        I´ve a small problem, maybe someone can help. We are running a server for a small group of "old" dm-shooters. Default server setting is CSSDM in FFA mode.
+        We can switch on the fly to nonFFA/teams (depending on how many players are on...) without probs.
+        I figured out how to switch to gungame FFA/nonFFA on the fly too, by loading from different config dirs and using the gg_enable/gg_disable command in config files.
+        It works well with one limitation. The level down on tk does not work on the "nonFFA"-mode, the teamkiller gets a notice but will be leveled up. I can´t find a reason for that...
+        I´ve checked the cvar cssdm_ffa_enabled - its 0
+        I´ve checked the cvar sm_gg_cfgdirname - it points to the right directory (where FFA is 0 and TkLooseLevel is 1)
+        Does anybody has an idea and can help me? 
+
     * People want to dinamicaly change turbo mode on/off.
 
     * Make 2 plugins.
