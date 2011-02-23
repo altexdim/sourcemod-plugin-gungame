@@ -15,6 +15,11 @@ TODO
         I´ve checked the cvar sm_gg_cfgdirname - it points to the right directory (where FFA is 0 and TkLooseLevel is 1)
         Does anybody has an idea and can help me? 
 
+        I got it, had to restart the config reader plugin to make things happen
+        (btw - some cvars could make things easier for somebody like me)
+
+        nevertheless - thx again for that great plugin 
+
     * People want to dinamicaly change turbo mode on/off.
 
     * Make 2 plugins.
