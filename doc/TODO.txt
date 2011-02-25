@@ -5,6 +5,16 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Would be really great 
+        I have a small request. Is it possible for you to add option to 
+        built-in AFK manager, which would disable it during the warmup? 
+        I'm currently replacing Mani Admin Plugin with SourceMod plugins 
+        and your AFK manager is the best for GunGame. But I enable DM in 
+        warmup and I'm afraid that 3 AFK kills I set to kick players might 
+        not work well. Of course in normal gameplay it is a good value but 
+        in warmup it can kick them if they won't move for a 10-20 seconds 
+        (not sure about but it is possible). So, I request "AfkDisableInWarmup".
+
     * Hello, first of all cause I´m new here, very thx for that plugin!
 
         I´ve a small problem, maybe someone can help. We are running a server for a small group of "old" dm-shooters. Default server setting is CSSDM in FFA mode.
