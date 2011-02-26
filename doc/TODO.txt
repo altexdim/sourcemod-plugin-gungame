@@ -5,6 +5,9 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * there is another option for controlling number on nades on nade level. If I could 
+        change it during the gameplay, I would set it to value we need based on number of players. 
+
     * Would be really great 
         I have a small request. Is it possible for you to add option to 
         built-in AFK manager, which would disable it during the warmup? 
