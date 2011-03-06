@@ -17,6 +17,9 @@ OnEventStart()
         StartSwitchHook();
     }
     #endif
+    if ( g_Cfg_SelfKillProtection ) {
+        AddCommandListener(Event_KillCommand, "kill");
+    }
 }
 
 OnEventShutdown()
@@ -38,6 +41,9 @@ OnEventShutdown()
         StopSwitchHook();
     }
     #endif
+    if ( g_Cfg_SelfKillProtection ) {
+        RemoveCommandListener(Event_KillCommand, "kill");
+    }
 }
 
 #if defined USE_SDK_HOOKS
@@ -846,3 +852,7 @@ public Action:OnWeaponSwitch(client, weapon) {
     return Plugin_Continue;
 }
 #endif
+
+public Action:Event_KillCommand(client, const String:command[], argc) {
+    return Plugin_Handled;
+}

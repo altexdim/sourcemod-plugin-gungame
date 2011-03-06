@@ -213,6 +213,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_CanLevelUpWithNadeOnKnife = bool:StringToInt(value);
             } else if(strcmp("DisableLevelDown", key, false) == 0) {
                 g_Cfg_DisableLevelDown = bool:StringToInt(value);
+            } else if(strcmp("SelfKillProtection", key, false) == 0) {
+                g_Cfg_SelfKillProtection = bool:StringToInt(value);
             }
         }
         

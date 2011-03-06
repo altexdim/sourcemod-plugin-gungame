@@ -182,6 +182,11 @@
          */
         "CanLevelUpWithNadeOnKnife"         "0"
 
+        /**
+         * Prevent players from using kill command.
+         */
+        "SelfKillProtection" "1"
+
         /* ----- [1.2. knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */
@@ -483,7 +488,7 @@
 
         /* Allow level up by killing a bot with hegrenade if there is no other human */
         "AllowLevelUpByExplodeBotIfNoHuman" "1"
-    }
+     }
     
     "Sounds"
     {
