@@ -75,7 +75,6 @@
 [*] SourceMod 1.2.0+
 [*] (Optional, not required by default) SDK Hooks 1.3 (Updated 2010-05-12) or later (https://forums.alliedmods.net/showthread.php?t=106748)
 You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
-To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_const.inc and recompile plugin.
 [/LIST]
 
 [anchor]Installation[/anchor][B]Installation[/B]
@@ -98,8 +97,6 @@ To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_co
 [*] Mandatory plugin
 [*] Provides almost all gungame functionality
 [/LIST]
- 
-[*] disabled\gungame_sdkhooks.smx - Main GunGame:SM plugin with uncommented "USE_SDK_HOOKS".
  
 [*] gungame_config.smx - Config Reader
 [LIST]

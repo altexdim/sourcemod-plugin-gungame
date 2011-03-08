@@ -108,3 +108,4 @@ new g_ClientSlotEnt[MAXPLAYERS+1][Slot_Knife];
 new g_ClientSlotEntHeGrenade[MAXPLAYERS+1];
 new g_ClientSlotEntSmoke[MAXPLAYERS+1];
 new g_ClientSlotEntFlash[MAXPLAYERS+1][2];
+new bool:g_SdkHooksEnabled = false;

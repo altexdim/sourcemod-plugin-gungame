@@ -4,12 +4,6 @@
 #define _gungame_const_included_
 
 /**
- * Enable SDK Hooks support.
- * Default is disabled.
- */
-// #define USE_SDK_HOOKS
-
-/**
  * Enable debug code.
  * Default is disabled.
  */
