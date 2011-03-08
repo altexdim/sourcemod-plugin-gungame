@@ -2,6 +2,7 @@ Changelog
 ---------
         * Added config variable "SelfKillProtection".
         * Added sdkhooks autodetection and removed gungame_sdkhooks.smx.
+        * Added config variable "GameDesc".
 
     1.1.7.0:
         * Added cvar "sm_gg_cfgdirname". Now you can change gungame rules after every map change.

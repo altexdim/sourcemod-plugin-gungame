@@ -848,3 +848,12 @@ public Action:OnWeaponSwitch(client, weapon) {
 public Action:Event_KillCommand(client, const String:command[], argc) {
     return Plugin_Handled;
 }
+
+public Action:OnGetGameDescription(String:gameDesc[64]) {
+	if ( !g_CfgGameDesc[0] ) {
+        return Plugin_Continue;
+	}
+
+	strcopy(gameDesc, sizeof(gameDesc), g_CfgGameDesc);
+	return Plugin_Changed;
+}

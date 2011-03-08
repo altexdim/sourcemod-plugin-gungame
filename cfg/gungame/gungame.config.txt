@@ -187,6 +187,16 @@
          */
         "SelfKillProtection" "1"
 
+        /**
+         * Change game description.
+         *
+         * Requires DSK Hooks.
+         * "{version}" will be changed to plugin version.
+         * 
+         * "" = Option disabled.
+         */
+        "GameDesc" "GunGame {version} for SourceMod"
+
         /* ----- [1.2. knifepro] ----- */
         
         /* Turn Knife Pro allow stealing a player level by killing them with a knife */

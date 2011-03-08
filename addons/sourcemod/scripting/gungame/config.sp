@@ -215,6 +215,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_DisableLevelDown = bool:StringToInt(value);
             } else if(strcmp("SelfKillProtection", key, false) == 0) {
                 g_Cfg_SelfKillProtection = bool:StringToInt(value);
+            } else if(strcmp("GameDesc", key, false) == 0) {
+                strcopy(g_CfgGameDesc, sizeof(g_CfgGameDesc[]), value);
+            	ReplaceString(g_CfgGameDesc, sizeof(g_CfgGameDesc), "{version}", GUNGAME_VERSION, false);
             }
         }
         
