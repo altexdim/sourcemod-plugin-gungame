@@ -3,6 +3,9 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Is there a way to get the old effect back?
+    * People want to dinamicaly change turbo mode on/off.
+
     ----====----==== Normal priority list ----====----====
 
     * there is another option for controlling number on nades on nade level. If I could 
@@ -33,8 +36,6 @@ TODO
 
         nevertheless - thx again for that great plugin 
 
-    * People want to dinamicaly change turbo mode on/off.
-
     * Make 2 plugins.
     
         Add multiple triple level sounds. Plaing randomly each triple level.
@@ -45,11 +46,6 @@ TODO
         
         Check how much winner songs is supported. Make it possible to use up to 
         100 songs. Make as separate plugin as for triple level unlimited songs.
-
-    * Bug report:
-        "ShowPlayerRankOnWin" "1" не работает.
-
-    * Is there a way to get the old effect back?
 
     + Feature request:
 
