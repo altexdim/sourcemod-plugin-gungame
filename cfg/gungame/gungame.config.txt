@@ -195,7 +195,7 @@
          * 
          * "" = Option disabled.
          */
-        "GameDesc" "GunGame {version} for SourceMod"
+        "GameDesc" "GunGame:SM {version}"
 
         /* ----- [1.2. knifepro] ----- */
         
