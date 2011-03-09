@@ -8,6 +8,8 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Add autoupdater.
+
     * there is another option for controlling number on nades on nade level. If I could 
         change it during the gameplay, I would set it to value we need based on number of players. 
 
