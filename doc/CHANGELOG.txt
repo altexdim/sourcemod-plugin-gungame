@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.1.8.0:
+        * Added console variable "sm_gg_turbo".
+        * Added console variable "sm_gg_multilevelamount".
         * Added config variable "MultilevelEffectType" and you can choose between 
           old and new multi level bonus effect.
         * Added config variable "SelfKillProtection".

@@ -90,3 +90,6 @@ new bool:g_Cfg_DisableLevelDown = false;
 new bool:g_Cfg_SelfKillProtection = false;
 new String:g_CfgGameDesc[64] = "";
 new g_Cfg_MultilevelEffectType = 2;
+
+new Handle:g_Cvar_Turbo;
+new Handle:g_Cvar_MultiLevelAmount;

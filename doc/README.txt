@@ -56,6 +56,9 @@
                                              You can define your own directory after gungame winner, for example exec "sm_gg_cfgdirname gungame-dm",
                                              and after map change the config files will be loaded from "cfg\gungame-dm"
                                              (so config files will be loaded from "cfg\gungame\").
+
+[*] [B]sm_gg_turbo[/B]                     - Change TurboMode config variable.
+[*] [B]sm_gg_multilevelamount[/B]          - Change MultiLevelAmount config variable.
 [/LIST]
 
 [LIST]

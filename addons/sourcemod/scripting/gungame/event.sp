@@ -857,3 +857,17 @@ public Action:OnGetGameDescription(String:gameDesc[64]) {
 	strcopy(gameDesc, sizeof(gameDesc), g_CfgGameDesc);
 	return Plugin_Changed;
 }
+
+public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newValue[]) {
+    if ( cvar == g_Cvar_Turbo ) {
+        TurboMode = GetConVarBool(g_Cvar_Turbo);
+        return;
+    } else if ( cvar == g_Cvar_MultiLevelAmount ) {
+        g_Cfg_MultiLevelAmount = GetConVarInt(g_Cvar_MultiLevelAmount);
+        if ( g_Cfg_MultiLevelAmount < 0 ) {
+            g_Cfg_MultiLevelAmount = 1;
+        }
+        return;
+    }
+}
+

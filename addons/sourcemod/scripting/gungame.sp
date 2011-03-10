@@ -127,6 +127,12 @@ public OnPluginStart()
     #if defined GUNGAME_DEBUG
     OnCreateDebug();
     #endif
+
+    g_Cvar_Turbo = CreateConVar("sm_gg_turbo", "0", "Turbo mode");
+    g_Cvar_MultiLevelAmount = CreateConVar("sm_gg_multilevelamount", "3", "Multi level amount");
+
+    HookConVarChange(g_Cvar_Turbo, Event_CvarChanged);
+    HookConVarChange(g_Cvar_MultiLevelAmount, Event_CvarChanged);
 }
 
 public OnClientPutInServer(client) {

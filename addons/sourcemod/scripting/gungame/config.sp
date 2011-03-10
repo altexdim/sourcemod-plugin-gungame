@@ -30,8 +30,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
     {
         case CONFIG_STATE_CONFIG:
         {
-            if(strcmp("Enabled", key, false) == 0)
-            {
+            if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
             } else if(strcmp("DisableRtvLevel", key, false) == 0) {
                 g_cfgDisableRtvLevel = StringToInt(value) - 1;
@@ -63,10 +62,12 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("TurboMode", key, false) == 0) {
                 TurboMode = bool:StringToInt(value);
+                SetConVarInt(g_Cvar_Turbo, TurboMode);
             } else if(strcmp("HandicapTimesPerMap", key, false) == 0) {
                 g_Cfg_HandicapTimesPerMap = StringToInt(value);
             } else if(strcmp("MultiLevelAmount", key, false) == 0) {
                 g_Cfg_MultiLevelAmount = StringToInt(value);
+                SetConVarInt(g_Cvar_MultiLevelAmount, g_Cfg_MultiLevelAmount);
             } else if(strcmp("KnifeProMaxDiff", key, false) == 0) {
                 g_Cfg_KnifeProMaxDiff = StringToInt(value);
             } else if(strcmp("HandicapSkipBots", key, false) == 0) {
