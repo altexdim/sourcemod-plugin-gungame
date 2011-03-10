@@ -89,3 +89,4 @@ new bool:g_Cfg_CanLevelUpWithNadeOnKnife = false;
 new bool:g_Cfg_DisableLevelDown = false;
 new bool:g_Cfg_SelfKillProtection = false;
 new String:g_CfgGameDesc[64] = "";
+new g_Cfg_MultilevelEffectType = 2;

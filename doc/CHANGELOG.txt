@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Added config variable "MultilevelEffectType" and you can choose between 
+          old and new multi level bonus effect.
         * Added config variable "SelfKillProtection".
         * Added sdkhooks autodetection and removed gungame_sdkhooks.smx.
         * Added config variable "GameDesc".

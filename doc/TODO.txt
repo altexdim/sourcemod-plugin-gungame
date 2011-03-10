@@ -3,8 +3,8 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Is there a way to get the old effect back?
     * People want to dinamicaly change turbo mode on/off.
+    * Make it possible to change triple level amount on the fly. gg_multilvl_amount 6
 
     ----====----==== Normal priority list ----====----====
 

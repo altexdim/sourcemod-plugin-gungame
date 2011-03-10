@@ -1306,22 +1306,60 @@ UTIL_StartEffectClient(client) {
     return 1;
 }
 
+
+UTIL_StopMultilevelEffect1(client) {
+    RemoveEdict(g_Ent_Effect[client]);
+}
+
+UTIL_StopMultilevelEffect2(client) {
+    AcceptEntityInput( g_Ent_Effect[client], "TurnOff" );
+    AcceptEntityInput( g_Ent_Effect[client], "Kill" );
+}
+
 UTIL_StopEffectClient(client) {
     if ( g_Ent_Effect[client] < 0 ) {
         return;
     }
     if ( IsValidEdict(g_Ent_Effect[client]) ) {
-        AcceptEntityInput( g_Ent_Effect[client], "TurnOff" );
-        AcceptEntityInput( g_Ent_Effect[client], "Kill" );
+        if ( g_Cfg_MultilevelEffectType == 1 ) {
+            UTIL_StopMultilevelEffect1(client);
+        } else {
+            UTIL_StopMultilevelEffect2(client);
+        }
     }
     g_Ent_Effect[client] = -1;
 }
 
-UTIL_CreateEffect(client) {
-    if ( !IsClientInGame( client ) ) {
-        return -1;
-    }
+UTIL_CreateMultilevelEffect1(client) {
+    new ent = CreateEntityByName("env_spritetrail");
+    new String:target[32];
+    Format(target, sizeof(target), "target%i", client);
+     
+    DispatchKeyValue(client, "targetname", target);
+    DispatchKeyValue(ent, "parentname", target);
+    DispatchKeyValue(ent, "lifetime", "1.0");
+    DispatchKeyValue(ent, "endwidth", "1.0");
+    DispatchKeyValue(ent, "startwidth", "20.0");
+    //DispatchKeyValue(ent, "spritename", "materials/sprites/bluelaser1.vmt");
+    DispatchKeyValue(ent, "spritename", "materials/sprites/crystal_beam1.vmt");
+    DispatchKeyValue(ent, "renderamt", "255");
+    //DispatchKeyValue(ent, "rendercolor", "0 128 255");
+    DispatchKeyValue(ent, "rendercolor", "255 128 0");
+    DispatchKeyValue(ent, "rendermode", "5");
+    
+    DispatchSpawn(ent);
+    
+    new Float:Client_Origin[3];
+    GetClientAbsOrigin(client,Client_Origin);
+    Client_Origin[2] += 20.0; //Beam clips into the floor without this
+    TeleportEntity(ent, Client_Origin, NULL_VECTOR, NULL_VECTOR);
+    
+    SetVariantString(target);
+    AcceptEntityInput(ent, "SetParent");
+    return ent;
+}
 
+UTIL_CreateMultilevelEffect2(client) {
     new particle = CreateEntityByName("env_smokestack");
     if ( !IsValidEdict(particle) ) {
         LogError( "Failed to create env_smokestack (%i) for client %i!", particle, client );
@@ -1358,6 +1396,18 @@ UTIL_CreateEffect(client) {
     AcceptEntityInput( particle, "SetParent", client, particle, 0 );
     AcceptEntityInput( particle, "TurnOn" );
     return particle;
+}
+
+UTIL_CreateEffect(client) {
+    if ( !IsClientInGame( client ) ) {
+        return -1;
+    }
+
+    if ( g_Cfg_MultilevelEffectType == 1 ) {
+        return UTIL_CreateMultilevelEffect1(client);
+    } else {
+        return UTIL_CreateMultilevelEffect2(client);
+    }
 }
 
 UTIL_UpdateFlashCounter(client) {

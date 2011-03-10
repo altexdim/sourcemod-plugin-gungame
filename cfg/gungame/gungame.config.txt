@@ -389,6 +389,14 @@
         /* How much levels is needed to get bonus */
         "MultiLevelAmount" "3"
 
+        /**
+         * Type of the multi level effect.
+         *
+         * 1 - Old effect.
+         * 2 - New effect (default).
+         */
+        "MultilevelEffectType" "2"
+
         /* ----- [1.7. warmup] ----- */
         
         /* Enables Warmup Round*/
