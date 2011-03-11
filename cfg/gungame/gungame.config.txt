@@ -190,7 +190,7 @@
         /**
          * Change game description.
          *
-         * Requires DSK Hooks.
+         * Requires SDK Hooks.
          * "{version}" will be changed to plugin version.
          * 
          * "" = Option disabled.

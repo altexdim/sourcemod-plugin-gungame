@@ -2,6 +2,10 @@ TODO
 ==============================================================================
 
     ----====----==== High priority list ----====----====
+    
+    * Add option - "dont switch to nade"
+        when you throw nade and go back to glock its annoying 
+        when it changes back to nade when you get a new one
 
     ----====----==== Normal priority list ----====----====
 
