@@ -210,13 +210,18 @@ You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
 [*][B]Q.[/B] Sound does not work.
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
+[*][B]Q.[/B] Sound still does not work.
+         Good article for beginning http://developer.valvesoftware.com/wiki/Pure_Servers
+         Post your question with the following info: output of the command on server "sv_pure",
+         output of the command on client "sv_pure" or content of the file "cstrike/pure_server_whitelist.txt",
+         output of the command "sv_downloadurl" on server or client.
 [*][B]Q.[/B] Weapons desapearing on level up and player spawn.
          [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
 [*][B]Q.[/B] Something does not work, what should i do?
-        [B]A.[/B] Start with posting your [B]rcon plugin_print; rcon meta list; rcon sm plugins list[/B] 
-        and [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
+        [B]A.[/B] Start with posting your output of server commands "plugin_print; meta list; sm plugins list"
+        and content of the latest file [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
 [/LIST]
         
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
