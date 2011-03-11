@@ -211,7 +211,7 @@ You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
 [*][B]Q.[/B] Sound still does not work.
-         Good article for beginning http://developer.valvesoftware.com/wiki/Pure_Servers
+         [B]A.[/B] Good article for beginning http://developer.valvesoftware.com/wiki/Pure_Servers
          Post your question with the following info: output of the command on server "sv_pure",
          output of the command on client "sv_pure" or content of the file "cstrike/pure_server_whitelist.txt",
          output of the command "sv_downloadurl" on server or client.
