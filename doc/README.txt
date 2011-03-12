@@ -77,7 +77,8 @@
 [*] Counter-Strike: Source
 [*] SourceMod 1.2.0+
 [*] (Optional, not required by default) SDK Hooks 1.3 or later (https://forums.alliedmods.net/showthread.php?t=106748)
-You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
+You need SDK Hooks if you want to set specific options in config 
+(search for "sdkhooks" in "gungame.config.txt" and read comments for more info)
 [/LIST]
 
 [anchor]Installation[/anchor][B]Installation[/B]

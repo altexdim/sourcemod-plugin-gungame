@@ -811,11 +811,9 @@ ClientSuicide(client, const String:Name[], loose)
     PrintLeaderToChat(client, oldLevel, newLevel, Name);
 }
 
-public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
-{
+public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
-    {
+    if ( !IsClientInGame(client) || !IsPlayerAlive(client) ) {
         return;
     }
 
@@ -825,16 +823,16 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast)
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
-        {
-            if ( NumberOfNades )
-            {
+        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 ) {
+            if ( NumberOfNades ) {
                 g_NumberOfNades[client]--;
             }
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
-            g_ClientSlotEntHeGrenade[client] = ent;
 
-            FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE], g_Cfg_BlockWeaponSwitchOnNade);
+
+            if ( !g_Cfg_BlockWeaponSwitchOnNade ) {
+                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+            }
         }
     }
 }

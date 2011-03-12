@@ -142,7 +142,7 @@ public OnClientPutInServer(client) {
     }
 
     #if defined USE_SDK_HOOKS
-    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+    if ( g_Cfg_BlockWeaponSwitchIfKnife || g_Cfg_BlockWeaponSwitchOnNade ) {
         g_BlockSwitch[client] = false;
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }

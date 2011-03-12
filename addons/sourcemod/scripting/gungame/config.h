@@ -79,7 +79,13 @@ new g_Cfg_HandicapTimesPerMap = 0;
 new g_cfgDisableRtvLevel = 0;
 new g_cfgEnableFriendlyFireLevel = 0;
 new bool:g_cfgFriendlyFireOnOff = true;
+#if defined USE_SDK_HOOKS
 new bool:g_Cfg_BlockWeaponSwitchIfKnife = true;
+new bool:g_Cfg_BlockWeaponSwitchOnNade = true;
+#else
+new bool:g_Cfg_BlockWeaponSwitchIfKnife = false;
+new bool:g_Cfg_BlockWeaponSwitchOnNade = false;
+#endif
 new bool:g_Cfg_HandicapUseSpectators = false;
 new bool:g_Cfg_CanLevelUpWithPhysics = false;
 new bool:g_Cfg_CanLevelUpWithPhysicsG = false;

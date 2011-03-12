@@ -11,10 +11,26 @@
 
         /**
          * Block weapon switch if killer leveled up with knife
-         * You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
-         * To enable this option you need to uncomment "USE_SDK_HOOKS" define in gungame_const.inc and recompile plugin.
+         *
+         * You need SDK Hooks (sdkhooks) if you want to set it to "1"
+         *
+         * Options:
+         *     1 - Block weapon switch
+         *     0 - Do not block weapon switch
          */
         "BlockWeaponSwitchIfKnife" "1"
+
+        /**
+         * Block weapon switch if you get next hegrenade 
+         * after previous hegrenade explode or after getting extra nade.
+         *
+         * You need SDK Hooks (sdkhooks) if you want to set it to "1"
+         *
+         * Options:
+         *     1 - Block weapon switch
+         *     0 - Do not block weapon switch
+         */
+        "BlockWeaponSwitchOnNade" "1"
 
         /** 
          * Show players level message in hint box instead of chat.
@@ -190,10 +206,12 @@
         /**
          * Change game description.
          *
-         * Requires SDK Hooks.
+         * Requires SDK Hooks (sdkhooks).
+         *
          * "{version}" will be changed to plugin version.
-         * 
-         * "" = Option disabled.
+         *
+         * Options: 
+         *     "" = Option disabled.
          */
         "GameDesc" "GunGame:SM {version}"
 

@@ -670,6 +670,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
     if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = true;
     }
+
     new Weapons:WeapId = WeaponOrderId[level], Slots:slot = WeaponSlot[WeapId];
     
     UTIL_CheckForFriendlyFire(client, WeapId);
@@ -712,21 +713,21 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             }
         }
         if ( NadeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
             g_ClientSlotEntSmoke[client] = ent;
         }
         if ( NadeFlash ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG], !g_BlockSwitch[client]);
             UTIL_FlashCounterAdd(client, ent);
         }
     }
     if ( slot == Slot_Knife ) {
         if ( g_Cfg_KnifeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
             g_ClientSlotEntSmoke[client] = ent;
         }
         if ( g_Cfg_KnifeFlash ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG]);
+            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG], !g_BlockSwitch[client]);
             UTIL_FlashCounterAdd(client, ent);
         }
     } else {
@@ -809,11 +810,16 @@ UTIL_ReloadActiveWeapon(client, Weapons:WeaponId)
     }
 }
 
-GivePlayerItemWrapper(client, const String:item[])
-{
+GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
+    if ( blockSwitch ) {
+        g_BlockSwitch[client] = true;
+    }
     g_IsInGiveCommand = true;
     new ent = GivePlayerItem(client, item);
     g_IsInGiveCommand = false;
+    if ( blockSwitch ) {
+        g_BlockSwitch[client] = false;
+    }
     return ent;
 }
 
@@ -1063,22 +1069,18 @@ UTIL_GetRandomInt(start, end)
     return ( rand % (1 + end - start) ) + start;
 }
 
-UTIL_GiveExtraNade(client, bool:knife)
-{
+UTIL_GiveExtraNade(client, bool:knife) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-    if ( ExtraNade )
-    {
+    if ( ExtraNade ) {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 )
-        {
-            if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
-                g_BlockSwitch[client] = true;
-            }
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
-            g_ClientSlotEntHeGrenade[client] = ent;
-
-            if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
-                g_BlockSwitch[client] = false;
+        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 ) {
+            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
+                client, 
+                WeaponName[CSW_HEGRENADE], 
+                g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade
+            );
+            if ( !(g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade) ) {
+                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
             }
         }
     }

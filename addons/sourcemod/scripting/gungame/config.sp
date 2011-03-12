@@ -198,8 +198,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 TopRankHandicap = bool:StringToInt(value);
             } else if(strcmp("FriendlyFireOnOff", key, false) == 0) {
                 g_cfgFriendlyFireOnOff = bool:StringToInt(value);
-            } else if(strcmp("BlockWeaponSwitchIfKnife", key, false) == 0) {
-                g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
             } else if(strcmp("HandicapUseSpectators", key, false) == 0) {
                 g_Cfg_HandicapUseSpectators = bool:StringToInt(value);
             } else if(strcmp("CanLevelUpWithPhysics", key, false) == 0) {
@@ -222,6 +220,14 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("MultilevelEffectType", key, false) == 0) {
                 g_Cfg_MultilevelEffectType = StringToInt(value);
             }
+
+            #if defined USE_SDK_HOOKS
+            if ( strcmp("BlockWeaponSwitchOnNade", key, false) == 0 ) {
+                g_Cfg_BlockWeaponSwitchOnNade = bool:StringToInt(value);
+            } else if ( strcmp("BlockWeaponSwitchIfKnife", key, false) == 0 ) {
+                g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
+            }
+            #endif
         }
         
         case CONFIG_STATE_EQUIP:
