@@ -76,7 +76,7 @@
 [LIST]
 [*] Counter-Strike: Source
 [*] SourceMod 1.2.0+
-[*] (Optional, not required by default) SDK Hooks 1.3 (Updated 2010-05-12) or later (https://forums.alliedmods.net/showthread.php?t=106748)
+[*] (Optional, not required by default) SDK Hooks 1.3 or later (https://forums.alliedmods.net/showthread.php?t=106748)
 You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
 [/LIST]
 
@@ -86,8 +86,12 @@ You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
 [*] Install Metamod:Source.
 [*] Install SourceMod.
 [*] (Optional, not required by default) Install SDK Hooks.
-[*] Upload the addons, sound, and cfg into your cstrike folder for CS:Source
-[*] Config gungame.config.txt and gungame.equip.txt to your liking in cfg/gungame/
+[*] Upload the "addons", "sound", and "cfg" into your "cstrike" folder for CS:Source
+[*] (Optional, not required by default) If you have SDK Hooks installed, 
+switch files "gungame.smx" and "disabled/gungame_sdkhooks.smx"
+(move "plugins/gungame.smx" file into "plugins/disabled" folder
+and move "plugins/disabled/gungame_sdkhooks.smx" file into "plugins" folder).
+[*] Config "gungame.config.txt" and "gungame.equip.txt" to your liking in "cfg/gungame/"
 [*] Restart your server.
 [/LIST]
 
@@ -101,6 +105,8 @@ You need SDK Hooks if you want to set "BlockWeaponSwitchIfKnife" "1"
 [*] Provides almost all gungame functionality
 [/LIST]
  
+[*] disabled/gungame_sdkhooks.smx - Main GunGame:SM plugin compiled with SDK Hooks support.
+
 [*] gungame_config.smx - Config Reader
 [LIST]
 [*] No dependencies

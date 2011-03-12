@@ -16,9 +16,9 @@ cd %DIR_SERVER_SCRIPTING%
 
 echo %DATE% %TIME% > %LOG_COMPILE%
 
-::%DIR_SERVER_SCRIPTING%\spcomp gungame.sp USE_SDK_HOOKS=1    >> %LOG_COMPILE%
-::copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SOURCES_PLUGINS%\disabled\gungame_sdkhooks.smx
-::copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SERVER_PLUGINS%\disabled\gungame_sdkhooks.smx
+%DIR_SERVER_SCRIPTING%\spcomp gungame.sp USE_SDK_HOOKS=1    >> %LOG_COMPILE%
+copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SOURCES_PLUGINS%\disabled\gungame_sdkhooks.smx
+copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SERVER_PLUGINS%\disabled\gungame_sdkhooks.smx
 
 %DIR_SERVER_SCRIPTING%\spcomp gungame.sp                >> %LOG_COMPILE%
 %DIR_SERVER_SCRIPTING%\spcomp gungame_afk.sp            >> %LOG_COMPILE%

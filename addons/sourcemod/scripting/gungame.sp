@@ -8,10 +8,13 @@
 #include <gungame>
 #include <gungame_config>
 #include <langutils>
+
+#if defined USE_SDK_HOOKS
+#include <sdkhooks>
+#endif
+
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
-
-#include <sdkhooks>
 
 #include "gungame/gungame.h"
 #include "gungame/menu.h"
@@ -67,27 +70,23 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 public OnLibraryAdded(const String:name[]) {
     if ( StrEqual(name, "gungame_st") ) {
         StatsEnabled = true;
-    } else if (strcmp(name, "sdkhooks.ext") == 0) {
-		g_SdkHooksEnabled = true;
-	}
+    }
 }
 
 public OnLibraryRemoved(const String:name[]) {
     if ( StrEqual(name, "gungame_st") ) {
         StatsEnabled = false;
-    } else if (strcmp(name, "sdkhooks.ext") == 0) {
-		g_SdkHooksEnabled = false;
-	}
+    }
 }
 
 public OnAllPluginsLoaded() {
-    g_SdkHooksEnabled = GetExtensionFileStatus("sdkhooks.ext") == 1;
     StatsEnabled = LibraryExists("gungame_st");
 }
 
 public OnPluginStart()
 {
     StatsEnabled = LibraryExists("gungame_st");
+
     LoadTranslations("gungame");
     PlayerLevelsBeforeDisconnect = CreateTrie();
     PlayerHandicapTimes = CreateTrie();
@@ -141,10 +140,14 @@ public OnClientPutInServer(client) {
     } else {
         g_SkipSpawn[client] = false;
     }
-    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
+
+    #if defined USE_SDK_HOOKS
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         g_BlockSwitch[client] = false;
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }
+    #endif
+
     if ( StripDeadPlayersWeapon ) {
         g_ClientSlotEnt[client][Slot_Primary] = -1;
         g_ClientSlotEnt[client][Slot_Secondary] = -1;
@@ -225,9 +228,12 @@ public OnMapEnd()
 
 public OnClientDisconnect(client)
 {
-    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
+    #if defined USE_SDK_HOOKS
+    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
         SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
     }
+    #endif
+
     /* Clear current leader if player is leader */
     if ( CurrentLeader == client )
     {

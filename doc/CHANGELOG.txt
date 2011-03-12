@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.1.8.1:
+        * Removed sdkhooks autodetection, it does not work. Reverted separate 
+          plugin with sdkhooks support - "plugins/disabled/gungame_sdkhooks.smx".
+
     1.1.8.0:
         * Added console variable "sm_gg_turbo".
         * Added console variable "sm_gg_multilevelamount".
