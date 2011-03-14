@@ -219,15 +219,11 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             	ReplaceString(g_CfgGameDesc, sizeof(g_CfgGameDesc), "{version}", GUNGAME_VERSION, false);
             } else if(strcmp("MultilevelEffectType", key, false) == 0) {
                 g_Cfg_MultilevelEffectType = StringToInt(value);
-            }
-
-            #if defined USE_SDK_HOOKS
-            if ( strcmp("BlockWeaponSwitchOnNade", key, false) == 0 ) {
+            } else if ( strcmp("BlockWeaponSwitchOnNade", key, false) == 0 ) {
                 g_Cfg_BlockWeaponSwitchOnNade = bool:StringToInt(value);
             } else if ( strcmp("BlockWeaponSwitchIfKnife", key, false) == 0 ) {
                 g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
             }
-            #endif
         }
         
         case CONFIG_STATE_EQUIP:

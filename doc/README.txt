@@ -90,10 +90,6 @@ You need SDK Hooks if you want to set specific options in config
 [*] Install SourceMod.
 [*] (Optional, not required by default) Install SDK Hooks.
 [*] Upload the "addons", "sound", and "cfg" into your "cstrike" folder for CS:Source
-[*] (Optional, not required by default) If you have SDK Hooks installed, 
-switch files "gungame.smx" and "disabled/gungame_sdkhooks.smx"
-(move "plugins/gungame.smx" file into "plugins/disabled" folder
-and move "plugins/disabled/gungame_sdkhooks.smx" file into "plugins" folder).
 [*] Config "gungame.config.txt" and "gungame.equip.txt" to your liking in "cfg/gungame/"
 [*] Restart your server.
 [/LIST]
@@ -108,8 +104,6 @@ and move "plugins/disabled/gungame_sdkhooks.smx" file into "plugins" folder).
 [*] Provides almost all gungame functionality
 [/LIST]
  
-[*] disabled/gungame_sdkhooks.smx - Main GunGame:SM plugin compiled with SDK Hooks support.
-
 [*] gungame_config.smx - Config Reader
 [LIST]
 [*] No dependencies

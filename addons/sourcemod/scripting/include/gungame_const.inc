@@ -10,12 +10,6 @@
 // #define GUNGAME_DEBUG
 
 /**
- * Enable SDK Hooks support.
- * Default is disabled.
- */
-//#define USE_SDK_HOOKS
-
-/**
  * Uncomment if sm version >= 1.3.0.
  * Default is disabled.
  */
@@ -60,7 +54,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru";
-stock const String:GUNGAME_VERSION[] = "1.1.8.2";
+stock const String:GUNGAME_VERSION[] = "1.1.9.0";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 

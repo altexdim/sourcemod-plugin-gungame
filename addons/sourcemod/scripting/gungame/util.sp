@@ -667,7 +667,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
         GivePlayerItemWrapper(client, WeaponName[CSW_KNIFE]);
     }
 
-    if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = true;
     }
 
@@ -680,7 +680,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
     }
 
     if ( PlayerState[client] & KNIFE_ELITE ) {
-        if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+        if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
             g_BlockSwitch[client] = false;
         } else {
             FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
@@ -747,7 +747,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
 
     }
 
-    if ( g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = false;
     } else {
         FakeClientCommand(client, "use %s", WeaponName[WeapId]);
@@ -1077,9 +1077,9 @@ UTIL_GiveExtraNade(client, bool:knife) {
             g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
                 client, 
                 WeaponName[CSW_HEGRENADE], 
-                g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade
+                g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade )
             );
-            if ( !(g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade) ) {
+            if ( !( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade ) ) ) {
                 FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
             }
         }

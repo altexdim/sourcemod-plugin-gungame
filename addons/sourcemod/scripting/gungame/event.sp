@@ -14,11 +14,9 @@ OnEventStart()
         HookEvent("weapon_fire", _WeaponFire);
     }
 
-    #if defined USE_SDK_HOOKS
-    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
         StartSwitchHook();
     }
-    #endif
 
     if ( g_Cfg_SelfKillProtection ) {
         AddCommandListener(Event_KillCommand, "kill");
@@ -41,18 +39,15 @@ OnEventShutdown()
         UnhookEvent("weapon_fire", _WeaponFire);
     }
 
-    #if defined USE_SDK_HOOKS
-    if ( g_Cfg_BlockWeaponSwitchIfKnife ) {
+    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
         StopSwitchHook();
     }
-    #endif
 
     if ( g_Cfg_SelfKillProtection ) {
         RemoveCommandListener(Event_KillCommand, "kill");
     }
 }
 
-#if defined USE_SDK_HOOKS
 StartSwitchHook() {
     for (new client = 1; client <= MaxClients; client++) { 
         if ( IsClientInGame(client) ) { 
@@ -69,7 +64,6 @@ StopSwitchHook() {
         } 
     }
 }
-#endif
 
 public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast) {
     if ( !IsActive ) {
@@ -828,9 +822,9 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
                 g_NumberOfNades[client]--;
             }
 
-            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE], g_Cfg_BlockWeaponSwitchOnNade);
+            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
 
-            if ( !g_Cfg_BlockWeaponSwitchOnNade ) {
+            if ( !( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade ) ) {
                 FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
             }
         }
@@ -848,20 +842,17 @@ public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
     UTIL_UpdateFlashCounter(client);
 }
 
-#if defined USE_SDK_HOOKS
 public Action:OnWeaponSwitch(client, weapon) {
     if ( g_BlockSwitch[client] ) {
         return Plugin_Handled;
     }
     return Plugin_Continue;
 }
-#endif
 
 public Action:Event_KillCommand(client, const String:command[], argc) {
     return Plugin_Handled;
 }
 
-#if defined USE_SDK_HOOKS
 public Action:OnGetGameDescription(String:gameDesc[64]) {
 	if ( !g_CfgGameDesc[0] ) {
         return Plugin_Continue;
@@ -870,7 +861,6 @@ public Action:OnGetGameDescription(String:gameDesc[64]) {
 	strcopy(gameDesc, sizeof(gameDesc), g_CfgGameDesc);
 	return Plugin_Changed;
 }
-#endif
 
 public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newValue[]) {
     if ( cvar == g_Cvar_Turbo ) {
