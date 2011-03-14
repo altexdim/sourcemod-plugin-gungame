@@ -15,7 +15,7 @@
 [*] [goanchor=Issues]Issues[/goanchor]
 [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
 [*] [goanchor=maps]My gungame maps[/goanchor]
-[*] [goanchor=download]Dowload[/goanchor]
+[*] [goanchor=download]Download[/goanchor]
 [/LIST]
 
 [anchor]Description[/anchor][B]Description[/B]
