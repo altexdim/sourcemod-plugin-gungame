@@ -14,6 +14,8 @@
 [*] [goanchor=FAQ]FAQ[/goanchor]
 [*] [goanchor=Issues]Issues[/goanchor]
 [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
+[*] [goanchor=maps]My gungame maps[/goanchor]
+[*] [goanchor=download]Dowload[/goanchor]
 [/LIST]
 
 [anchor]Description[/anchor][B]Description[/B]
@@ -239,3 +241,13 @@ and move "plugins/disabled/gungame_sdkhooks.smx" file into "plugins" folder).
 [*]!buylevel [URL]http://forums.alliedmods.net/showthread.php?t=134264[/URL]
 [*]!buylevel [URL]https://forums.alliedmods.net/showpost.php?p=1387759&postcount=2366[/URL]
 [/LIST]
+
+[anchor]maps[/anchor][B]My gungame maps[/B]
+----------------------------------------------------
+[LIST]
+[*][URL="http://www.gamebanana.com/maps/154683"][U]gg_xlighty[/U][/URL]
+[/LIST]
+
+[anchor]download[/anchor][B]Download[/B]
+----------------------------------------------------
+Links below
