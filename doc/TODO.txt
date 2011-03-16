@@ -3,6 +3,8 @@ TODO
 
     ----====----==== High priority list ----====----====
     
+    * Сделать загрузку конфигов gungame_warmup_start.cfg и gungame_warmup_stop.cfg.
+
     ----====----==== Normal priority list ----====----====
 
     * Add autoupdater.
