@@ -361,11 +361,11 @@
         "KnifeFlash" "0"
 
         /**
-		 * Gives an extra hegrenade to the player if they get a kill
-		 * 
-		 * 0 - Disables
-		 * 1 - Enabled
-		 * 2 - Enabled only for knife kills
+         * Gives an extra hegrenade to the player if they get a kill
+         * 
+         * 0 - Disable
+         * 1 - Enable
+         * 2 - Enable only for knife kills
          */
         "ExtraNade" "0"
 
