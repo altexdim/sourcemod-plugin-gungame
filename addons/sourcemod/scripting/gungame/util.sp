@@ -1071,7 +1071,7 @@ UTIL_GetRandomInt(start, end)
 
 UTIL_GiveExtraNade(client, bool:knife) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-    if ( ExtraNade ) {
+    if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
         if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 ) {
             g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
@@ -1086,11 +1086,9 @@ UTIL_GiveExtraNade(client, bool:knife) {
     }
 }
 
-UTIL_SetClientScoreAndDeaths(client, score, deaths = -1)
-{
+UTIL_SetClientScoreAndDeaths(client, score, deaths = -1) {
     SetEntProp(client, Prop_Data, "m_iFrags", score);
-    if ( deaths >= 0 )
-    {
+    if ( deaths >= 0 ) {
         SetEntProp(client, Prop_Data, "m_iDeaths", deaths);
     }
 }

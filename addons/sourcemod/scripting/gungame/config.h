@@ -21,7 +21,7 @@ new WorldspawnSuicide = 1;
 new Weapons:NadeBonusWeaponId;
 new bool:NadeSmoke;
 new bool:NadeFlash;
-new bool:ExtraNade;
+new g_Cfg_ExtraNade;
 new bool:UnlimitedNades;
 new bool:WarmupNades;
 new bool:KnifePro;

@@ -170,7 +170,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("NadeFlash", key, false) == 0) {
                 NadeFlash = bool:StringToInt(value);
             } else if(strcmp("ExtraNade", key, false) == 0) {
-                ExtraNade = bool:StringToInt(value);
+                g_Cfg_ExtraNade = StringToInt(value);
             } else if(strcmp("UnlimitedNades", key, false) == 0) {
                 UnlimitedNades = bool:StringToInt(value);
             } else if(strcmp("WarmupNades", key, false) == 0) {
@@ -216,7 +216,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_SelfKillProtection = bool:StringToInt(value);
             } else if(strcmp("GameDesc", key, false) == 0) {
                 strcopy(g_CfgGameDesc, sizeof(g_CfgGameDesc), value);
-            	ReplaceString(g_CfgGameDesc, sizeof(g_CfgGameDesc), "{version}", GUNGAME_VERSION, false);
+                ReplaceString(g_CfgGameDesc, sizeof(g_CfgGameDesc), "{version}", GUNGAME_VERSION, false);
             } else if(strcmp("MultilevelEffectType", key, false) == 0) {
                 g_Cfg_MultilevelEffectType = StringToInt(value);
             } else if ( strcmp("BlockWeaponSwitchOnNade", key, false) == 0 ) {

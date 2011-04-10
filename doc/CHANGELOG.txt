@@ -1,5 +1,8 @@
 Changelog
 ---------
+        * Changed "ExtraNade" config option. Now you can set it to "2" 
+          if you want to give extra nade only on knife kills.
+
     1.1.9.0:
         * Added sdkhooks autodetection and removed gungame_sdkhooks.smx.
 
@@ -99,7 +102,7 @@ Changelog
         * Optimized ammo removement code. Thanks to p3tsin. 
 
     1.0.9.4:
-    	* Added cssdm 2.1.1 support.
+        * Added cssdm 2.1.1 support.
 
     1.0.9.3:
         * Fixed: handicap does not work for new players who has never win yet.
