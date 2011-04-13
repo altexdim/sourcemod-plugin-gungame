@@ -91,7 +91,12 @@ new bool:g_Cfg_DisableLevelDown = false;
 new bool:g_Cfg_SelfKillProtection = false;
 new String:g_CfgGameDesc[64] = "";
 new g_Cfg_MultilevelEffectType = 2;
+
+#if defined WITH_SDKHOOKS
+new bool:g_SdkHooksEnabled = true;
+#else
 new bool:g_SdkHooksEnabled = false;
+#endif
 
 new Handle:g_Cvar_Turbo;
 new Handle:g_Cvar_MultiLevelAmount;

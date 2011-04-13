@@ -52,7 +52,9 @@ StartSwitchHook() {
     for (new client = 1; client <= MaxClients; client++) { 
         if ( IsClientInGame(client) ) { 
             g_BlockSwitch[client] = false;
+            #if defined WITH_SDKHOOKS
             SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+            #endif
         } 
     }
 }
@@ -60,7 +62,9 @@ StartSwitchHook() {
 StopSwitchHook() {
     for (new client = 1; client <= MaxClients; client++) { 
         if ( IsClientInGame(client) ) { 
+            #if defined WITH_SDKHOOKS
             SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+            #endif
         } 
     }
 }
@@ -854,12 +858,12 @@ public Action:Event_KillCommand(client, const String:command[], argc) {
 }
 
 public Action:OnGetGameDescription(String:gameDesc[64]) {
-	if ( !g_CfgGameDesc[0] ) {
+    if ( !g_CfgGameDesc[0] ) {
         return Plugin_Continue;
-	}
+    }
 
-	strcopy(gameDesc, sizeof(gameDesc), g_CfgGameDesc);
-	return Plugin_Changed;
+    strcopy(gameDesc, sizeof(gameDesc), g_CfgGameDesc);
+    return Plugin_Changed;
 }
 
 public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newValue[]) {

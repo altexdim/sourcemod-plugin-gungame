@@ -9,9 +9,9 @@
 #include <gungame_config>
 #include <langutils>
 
-#undef AUTOLOAD_EXTENSIONS
-#undef REQUIRE_EXTENSIONS
+#if defined WITH_SDKHOOKS
 #include <sdkhooks>
+#endif
 
 #undef REQUIRE_PLUGIN
 #include <gungame_stats>
@@ -42,7 +42,11 @@
 
 public Plugin:myinfo =
 {
+    #if defined WITH_SDKHOOKS
+    name = "GunGame:SM (with SDK Hooks support)",
+    #else
     name = "GunGame:SM",
+    #endif
     author = GUNGAME_AUTHOR,
     description = "GunGame:SM for SourceMod",
     version = GUNGAME_VERSION,
@@ -52,9 +56,10 @@ public Plugin:myinfo =
 #if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
+    /*
     MarkNativeAsOptional("SDKHook");
     MarkNativeAsOptional("SDKUnhook");
-
+    */
     RegPluginLibrary("gungame");
     OnCreateNatives();
     return APLRes_Success;
@@ -71,47 +76,50 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 #endif
 
 public OnLibraryAdded(const String:name[]) {
-    //LogError("DEBUG ADD name = %s", name);
     if ( StrEqual(name, "gungame_st") ) {
         StatsEnabled = true;
-    } else if (strcmp(name, "sdkhooks.ext") == 0) {
+    }
+    /*
+    if (strcmp(name, "sdkhooks.ext") == 0) {
         g_SdkHooksEnabled = true;
-        //LogError("DEBUG ADD g_SdkHooksEnabled = %i", g_SdkHooksEnabled);
-	}
+    }
+    */
 }
 
 public OnLibraryRemoved(const String:name[]) {
-    //LogError("DEBUG RM name = %s", name);
     if ( StrEqual(name, "gungame_st") ) {
         StatsEnabled = false;
-    } else if (strcmp(name, "sdkhooks.ext") == 0) {
+    }
+    /*
+    if (strcmp(name, "sdkhooks.ext") == 0) {
         g_SdkHooksEnabled = false;
-        //LogError("DEBUG RM g_SdkHooksEnabled = %i", g_SdkHooksEnabled);
-	}
+    }
+    */
 }
 
 public OnAllPluginsLoaded() {
     StatsEnabled = LibraryExists("gungame_st");
-    g_SdkHooksEnabled = GetExtensionFileStatus("sdkhooks.ext") == 1;
-    //LogError("DEBUG LOADED g_SdkHooksEnabled = %i", g_SdkHooksEnabled);
+    /*
+    g_SdkHooksEnabled = (GetExtensionFileStatus("sdkhooks.ext") == 1);
+    */
 }
 
+/*
 public Action:Timer_CheckSdkHooks(Handle:timer) {
-    g_SdkHooksEnabled = GetExtensionFileStatus("sdkhooks.ext") == 1;
-    //LogError("DEBUG TIMER g_SdkHooksEnabled = %i", g_SdkHooksEnabled);
+    g_SdkHooksEnabled = (GetExtensionFileStatus("sdkhooks.ext") == 1);
 }
+*/
 
 public OnPluginStart()
 {
     StatsEnabled = LibraryExists("gungame_st");
-    g_SdkHooksEnabled = GetExtensionFileStatus("sdkhooks.ext") == 1;
-    //LogError("DEBUG START g_SdkHooksEnabled = %i", g_SdkHooksEnabled);
-
+    /*
+    g_SdkHooksEnabled = (GetExtensionFileStatus("sdkhooks.ext") == 1);
     if ( !g_SdkHooksEnabled ) {
-        //LogError("Try load sdkhooks");
         InsertServerCommand("sm exts load sdkhooks");
         CreateTimer(0.1, Timer_CheckSdkHooks);
     }
+    */
 
     LoadTranslations("gungame");
     PlayerLevelsBeforeDisconnect = CreateTrie();
@@ -169,7 +177,9 @@ public OnClientPutInServer(client) {
 
     if ( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife || g_Cfg_BlockWeaponSwitchOnNade ) ) {
         g_BlockSwitch[client] = false;
+        #if defined WITH_SDKHOOKS
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+        #endif
     }
 
     if ( StripDeadPlayersWeapon ) {
@@ -253,7 +263,9 @@ public OnMapEnd()
 public OnClientDisconnect(client)
 {
     if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
+        #if defined WITH_SDKHOOKS
         SDKUnhook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
+        #endif
     }
 
     /* Clear current leader if player is leader */
