@@ -1,5 +1,6 @@
 Changelog
 ---------
+        * Removed sdkhooks autodetection and reverted gungame_sdkhooks.smx because i don't know how to make sdkhooks optional.
         * Changed "ExtraNade" config option. Now you can set it to "2" 
           if you want to give extra nade only on knife kills.
 

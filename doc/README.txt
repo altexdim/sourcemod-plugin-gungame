@@ -91,6 +91,8 @@ You need SDK Hooks if you want to set specific options in config
 [*] (Optional, not required by default) Install SDK Hooks.
 [*] Upload the "addons", "sound", and "cfg" into your "cstrike" folder for CS:Source
 [*] Config "gungame.config.txt" and "gungame.equip.txt" to your liking in "cfg/gungame/"
+[*] (Optional, not required by default) If you installed SDK Hooks, remove "gungame.smx" from "plugins" folder
+    and add "gungame_sdkhooks.smx" from "disabled" info "plugins" folder.
 [*] Restart your server.
 [/LIST]
 
@@ -104,6 +106,14 @@ You need SDK Hooks if you want to set specific options in config
 [*] Provides almost all gungame functionality
 [/LIST]
  
+[*] disabled/gungame_sdkhooks.smx - Main GunGame:SM plugin compiled with SDK Hooks support.
+[LIST]
+[*] You need SDK Hooks if you want to set specific options in config 
+(search for "sdkhooks" in "gungame.config.txt" and read comments for more info)
+[*] If you want to use sdk hooks version of gungame, then remove gungame.smx and add gungame_sdkhooks.smx.
+Don't use both gungame.smx and gungame_sdkhooks.smx.
+[/LIST]
+
 [*] gungame_config.smx - Config Reader
 [LIST]
 [*] No dependencies
