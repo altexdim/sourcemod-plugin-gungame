@@ -112,6 +112,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
         && !(!g_IsInGiveCommand && StrEqual(WeaponDebug, "glock")) 
         && !(!g_IsInGiveCommand && StrEqual(WeaponDebug, "usp")) 
         && !(g_IsInGiveCommand && StrEqual(WeaponDebug, "deagle")) 
+        && !(g_IsInGiveCommand && StrEqual(WeaponDebug, "smokegrenade")) 
         && !WarmupEnabled
     ) {
         LogError("[GG-PICK] [ERROR] level=%i weap=%s ItemPickup(client=%i, item=%s, g_IsInGiveCommand=%i)", levelDebug, WeaponName[WeaponLevelDebug], client, WeaponDebug, g_IsInGiveCommand);
