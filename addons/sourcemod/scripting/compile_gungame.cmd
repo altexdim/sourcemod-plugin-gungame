@@ -40,7 +40,7 @@ copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx           %DIR_SOURCES_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx              %DIR_SOURCES_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_bot.smx             %DIR_SOURCES_PLUGINS%\
 
-copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame.smx                 %DIR_SERVER_PLUGINS%\disabled\
 copy %DIR_SERVER_SCRIPTING%\gungame_afk.smx             %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_config.smx          %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_display_winner.smx  %DIR_SERVER_PLUGINS%\

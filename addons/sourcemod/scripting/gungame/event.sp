@@ -102,6 +102,21 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
+    // BEGIN DEBUG 
+    new levelDebug = PlayerLevel[client];
+    new Weapons:WeaponLevelDebug = WeaponOrderId[levelDebug];
+    decl String:WeaponDebug[24];
+    GetEventString(event, "item", WeaponDebug, sizeof(WeaponDebug));
+    if ( !StrEqual(WeaponName[WeaponLevelDebug][7], WeaponDebug) 
+        && !(!g_IsInGiveCommand && StrEqual(WeaponDebug, "knife")) 
+        && !(!g_IsInGiveCommand && StrEqual(WeaponDebug, "glock")) 
+        && !(!g_IsInGiveCommand && StrEqual(WeaponDebug, "usp")) 
+        && !(g_IsInGiveCommand && StrEqual(WeaponDebug, "deagle")) 
+        && !WarmupEnabled
+    ) {
+        LogError("[GG-PICK] [ERROR] level=%i weap=%s ItemPickup(client=%i, item=%s, g_IsInGiveCommand=%i)", levelDebug, WeaponName[WeaponLevelDebug], client, WeaponDebug, g_IsInGiveCommand);
+    }
+    // END DEBUG 
     if ( StripDeadPlayersWeapon && !g_IsInGiveCommand )
     {
         decl String:Weapon[24];

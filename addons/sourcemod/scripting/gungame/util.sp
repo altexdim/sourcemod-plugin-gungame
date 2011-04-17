@@ -815,6 +815,16 @@ GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
         g_BlockSwitch[client] = true;
     }
     g_IsInGiveCommand = true;
+    // BEGIN DEBUG 
+    new levelDebug = PlayerLevel[client];
+    new Weapons:WeaponLevelDebug = WeaponOrderId[levelDebug];
+    if ( !StrEqual(WeaponName[WeaponLevelDebug], item) 
+        && !(g_IsInGiveCommand && StrEqual(item, "weapon_deagle")) 
+        && !WarmupEnabled
+    ) {
+        LogError("[GG-GIVE] [ERROR] level=%i weap=%s GivePlayerItem(client=%i, item=%s)", levelDebug, WeaponName[WeaponLevelDebug], client, item);
+    }
+    // END DEBUG 
     new ent = GivePlayerItem(client, item);
     g_IsInGiveCommand = false;
     if ( blockSwitch ) {
