@@ -12,7 +12,7 @@
 [*] [goanchor=Changelog]Changelog[/goanchor]
 [*] [goanchor=TODO]TODO[/goanchor]
 [*] [goanchor=FAQ]FAQ[/goanchor]
-[*] [goanchor=Issues]Issues[/goanchor]
+[*] [goanchor=Issues]Issues (updated on 15 Apr 2011)[/goanchor]
 [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
 [*] [goanchor=maps]My gungame maps[/goanchor]
 [*] [goanchor=download]Download[/goanchor]
@@ -220,6 +220,8 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 
 [LIST]
+[*][B]Q.[/B] (15 Apr 2011) Server crashes after update.
+         [B]A.[/B] Install mmsource-1.8.6-hg760, sourcemod-1.3.7-hg3126, sdkhooks-2.0 (only if you are using sdkhooks), disable or update stripper:source.
 [*][B]Q.[/B] Sound does not work.
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
