@@ -13,8 +13,8 @@
 
             "GetSlot"
             {
-                "windows"   "311"
-                "linux"     "316"
+                "windows"   "313"
+                "linux"     "318"
             }
         }
 
