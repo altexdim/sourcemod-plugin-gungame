@@ -98,7 +98,9 @@ TODO
     * Bug report: Problem is that on nade level I get sometimes 2 flash nades. 
         I throw one and suddenly get another from nowhere. I'm not sure how to 
         reproduce it yet.
-
+    * feature request
+        we have a server runnign this gg mod but wanted to know if it is possible to have the players kills moved into the deaths column.
+        at the moment i have the players level in the kills column and i assume that the deaths column is untouched?
     ----====----==== High severity list ----====----====
     
     + Add winners menu:
