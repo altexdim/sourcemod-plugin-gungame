@@ -246,6 +246,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*]!give [URL]https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701[/URL]
 [*]!buylevel [URL]http://forums.alliedmods.net/showthread.php?t=134264[/URL]
 [*]!buylevel [URL]https://forums.alliedmods.net/showpost.php?p=1387759&postcount=2366[/URL]
+[*]MVP as level [URL]https://forums.alliedmods.net/showpost.php?p=1627823&postcount=3105[/URL]
 [/LIST]
 
 [anchor]maps[/anchor][B]My gungame maps[/B]
