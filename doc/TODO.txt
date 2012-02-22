@@ -16,6 +16,24 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+	* add feature
+		/**
+		*Disable Armor on spawn if a player is on nade level.
+		*
+		*1 - Disables armor if someone is on nade level
+		*0 - Doesn't remove armor
+		*/
+		"DisableArmorOnNade" "1"
+
+	* add feature
+		/**
+		* Disable level down on knifepro when killer is on nade level.
+		*
+		* 1 - Level down disabled on nade-level
+		* 0 - Level down enabled on nade-level
+		*/
+		"DisableLevelDownOnNadeLevel" "1"
+
     * Add autoupdater.
 
     * there is another option for controlling number on nades on nade level. If I could 
