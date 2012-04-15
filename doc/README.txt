@@ -78,7 +78,7 @@
 [LIST]
 [*] Counter-Strike: Source
 [*] SourceMod 1.2.0+
-[*] (Optional, not required by default) SDK Hooks 1.3 or later (https://forums.alliedmods.net/showthread.php?t=106748)
+[*] (Optional, not required by default) SDK Hooks 1.3 or later ([url]https://forums.alliedmods.net/showthread.php?t=106748[/url])
 You need SDK Hooks if you want to set specific options in config 
 (search for "sdkhooks" in "gungame.config.txt" and read comments for more info)
 [/LIST]
@@ -186,7 +186,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 [LIST]
 [*] Thanks to Xilver266 for spanish translation.
-[*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from http://www.war3source.com/
+[*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from [url]http://www.war3source.com/[/url]
     for cool visual effect from "War3Source - Addon - Display Particles on Level Up" plugin version 1.1
     used in multi level bonus effect in gungame plugin.
 [*] Thanks to VoGon for the translation to portuguese.
@@ -227,7 +227,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
 [*][B]Q.[/B] Sound still does not work.
-         [B]A.[/B] Good article for beginning http://developer.valvesoftware.com/wiki/Pure_Servers
+         [B]A.[/B] Good article for beginning [url]http://developer.valvesoftware.com/wiki/Pure_Servers[/url]
          Post your question with the following info: output of the command on server "sv_pure",
          output of the command on client "sv_pure" or content of the file "cstrike/pure_server_whitelist.txt",
          output of the command "sv_downloadurl" on server or client.
@@ -254,8 +254,11 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 [LIST]
 [*][URL="http://www.gamebanana.com/maps/154683"][U]gg_xlighty[/U][/URL]
+[*][URL="http://www.gamebanana.com/maps/156400"][U]gg_block9[/U][/URL]
 [/LIST]
 
 [anchor]download[/anchor][B]Download[/B]
 ----------------------------------------------------
 Links below
+
+[URL="http://otstrel.ru/forum/css/obmen_opytom/45996-last_updated_sourcemod_plugins.html#post853421"][color=#ff6600][u]My plugins[/u][/color][/URL] | [URL="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TD6GHUK986RY2&lc=RU&item_name=Altex%2c%20thank%20you%20for%20your%20sourcemod%20plugins&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"][color=#009900][u]Donations via PayPal[/u][/color][/URL]
