@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Added spanish translation, thanks to Xilver266.
+
     1.1.9.1:
         * gamedata file updated after css update on 15 Apr 2011.
         * Removed sdkhooks autodetection and reverted gungame_sdkhooks.smx because i don't know how to make sdkhooks optional.

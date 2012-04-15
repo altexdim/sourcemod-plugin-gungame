@@ -7,6 +7,7 @@
     	"de"         "{teamcolor}{1}{green} hat für den Teamkill an {teamcolor}{2}{green} einen Level verloren"
         "ru"         "{teamcolor}{1}{green} потерял уровень за убийство {teamcolor}{2}{green} из своей команды"
 		"pt"         "{teamcolor}{1}{green} perdeu um nivel por ter morto {teamcolor}{2}{green} que é da mesma equipa"
+		"es"         "{teamcolor}{1}{green} ha perdido un nivel por matar a {teamcolor}{2}{green} que es del mismo equipo"
     }
     "Has lost levels due to team kill"
     {
@@ -15,6 +16,7 @@
     	"de"         "{teamcolor}{1}{green} hat für den Teamkill an {teamcolor}{2}{green} einen {3} verloren"
         "ru"         "{teamcolor}{1}{green} потерял {3} за убийство {teamcolor}{2}{green} из своей команды"
 		"pt"         "{teamcolor}{1}{green} perdeu {3} por ter morto {teamcolor}{2}{green} que é da mesma equipa"
+		"es"         "{teamcolor}{1}{green} ha perdido {3} por matar a {teamcolor}{2}{green} que es del mismo equipo"
     }
 	"1>levels"
 	{
@@ -23,6 +25,7 @@
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровень"
 		"pt"	"{default}{1} {green}nivel"
+		"es"	"{default}{1} {green}nivel"
 	}
 	"x1>levels"
 	{
@@ -31,6 +34,7 @@
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровень"
 		"pt"	"{default}{1} {green}niveis"
+		"es"	"{default}{1} {green}niveles"
 	}
 	"x2-x4>levels"
 	{
@@ -39,6 +43,7 @@
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровня"
 		"pt"	"{default}{1} {green}niveis"
+		"es"	"{default}{1} {green}niveles"
 	}
 	"x5-x20>levels"
 	{
@@ -47,5 +52,6 @@
 		"de"	"{default}{1} {green}Level"
 		"ru"	"{default}{1} {green}уровней"
 		"pt"	"{default}{1} {green}niveis"
+		"es"	"{default}{1} {green}niveles"
 	}
 }

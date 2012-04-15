@@ -7,6 +7,7 @@
             "ru"    "{1} победа"
 			"de"    "{1} Sieg"
 			"pt"    "{1} Vitoria"
+			"es"    "{1} Victoria"
         }
         "x1>wins"
         {
@@ -15,6 +16,7 @@
             "ru"    "{1} победа"
 			"de"    "{1} Siege"
 			"pt"    "{1} Vitorias"
+			"es"    "{1} Victorias"
         }
         "x2-x4>wins"
         {
@@ -23,6 +25,7 @@
             "ru"    "{1} победы"
 			"de"    "{1} Siege"
 			"pt"    "{1} Vitorias"
+			"es"    "{1} Victorias"
         }
         "x5-x20>wins"
         {
@@ -31,6 +34,7 @@
             "ru"    "{1} побед"
 			"de"    "{1} Siege"
 			"pt"    "{1} Vitorias"
+			"es"    "{1} Victorias"
         }
     "Rank: not ranked"
     {
@@ -39,6 +43,7 @@
         "ru"    "{teamcolor}{1} {green}ещё не имеет побед"
 		"de"    "{teamcolor}{1} {green}hat aktuell keine Siege"
 		"pt"    "{teamcolor}{1} {green}ainda não tem vitorias"
+		"es"    "{teamcolor}{1} {green}no tiene ninguna victoria todavía"
     }
     "Rank: rank"
     {
@@ -47,6 +52,7 @@
         "ru"    "{teamcolor}{1} {green}занимает {default}{2} {green}место из {default}{4} {green}с {3}"
 		"de"    "{teamcolor}{1} {green}ist auf dem {default}{2} {green}Platz von {default}{4} {green}mit {3}"
 		"pt"    "{teamcolor}{1} {green}está no {default}{2} {green}lugar de {default}{4} {green}com {3}"
+		"es"    "{teamcolor}{1} {green}está en {default}{2} {green}lugar de {default}{4} {green}con {3}"
     }
         "1>with wins"
         {
@@ -55,6 +61,7 @@
             "ru"    "{default}{1} {green}победой"
 			"de"    "{default}{1} {green}Sieg"
 			"pt"    "{default}{1} {green}vitoria"
+			"es"    "{default}{1} {green}victoria"
         }
         "x1>with wins"
         {
@@ -63,6 +70,7 @@
             "ru"    "{default}{1} {green}победой"
 			"de"    "{default}{1} {green}Siegen"
 			"pt"    "{default}{1} {green}vitorias"
+			"es"    "{default}{1} {green}victorias"
         }
         "x2-x4>with wins"
         {
@@ -71,6 +79,7 @@
             "ru"    "{default}{1} {green}победами"
 			"de"    "{default}{1} {green}Siegen"
 			"pt"    "{default}{1} {green}vitorias"
+			"es"    "{default}{1} {green}victorias"
         }
         "x5-x20>with wins"
         {
@@ -79,6 +88,7 @@
             "ru"    "{default}{1} {green}победами"
 			"de"    "{default}{1} {green}Siegen"
 			"pt"    "{default}{1} {green}vitorias"
+			"es"    "{default}{1} {green}victorias"
         }
 	"Panel: Page"
 	{
@@ -87,6 +97,7 @@
 		"ru"	"Страница {1} / {2}"
 		"de"	"Seite {1} / {2}"
 		"pt"	"Pagina {1} / {2}"
+		"es"	"Página {1} / {2}"
 	}
 	"Panel: Back"
 	{
@@ -94,6 +105,7 @@
 		"ru"	"Назад"
 		"de"	"Zurück"
 		"pt"	"Atras"
+		"es"	"Volver"
 	}
 	"Panel: Next"
 	{
@@ -101,6 +113,7 @@
 		"ru"	"Вперёд"
 		"de"	"Vor"
 		"pt"	"Seguinte"
+		"es"	"Siguiente"
 	}
     "Panel: Exit"
     {
@@ -108,6 +121,7 @@
         "ru"    "Выход"
 		"de"    "Ausgang"
 		"pt"    "Sair"
+		"es"    "Salir"
     }
     "TopPanel: There are currently no players in the top"
     {
@@ -115,6 +129,7 @@
         "ru"    "Нет игроков в Топ"
 		"de"    "Aktuell ist kein Spieler in den Top"
 		"pt"    "Ainda não há jogadores no Top"
+		"es"    "Actualmente no hay jugadores en el top"
     }
     "TopPanel: Top short"
     {
@@ -122,6 +137,7 @@
         "ru"    "[GunGame] Топ"
 		"de"    "[GunGame] Top"
 		"pt"    "[GunGame] Top"
+		"es"    "[GunGame] Top"
     }
     "TopPanel: Top"
     {
@@ -130,6 +146,7 @@
         "ru"    "[GunGame] Топ {1}-{2} из {3}"
 		"de"    "[GunGame] Top {1}-{2} von {3}"
 		"pt"    "[GunGame] Top {1}-{2} de {3}"
+		"es"    "[GunGame] Top {1}-{2} de {3}"
     }
     "TopPanel: Name Wins"
     {
@@ -138,6 +155,7 @@
         "ru"    "{1} :: {2}"
 		"de"    "{1} :: {2}"
 		"pt"    "{1} :: {2}"
+		"es"    "{1} :: {2}"
     }
     "TopPanel: Place Name Wins"
     {
@@ -146,5 +164,6 @@
         "ru"    "{1}. {2} :: {3}"
 		"de"    "{1}. {2} :: {3}"
 		"pt"    "{1}. {2} :: {3}"
+		"es"    "{1}. {2} :: {3}"
     }
 }
