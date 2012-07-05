@@ -13,8 +13,8 @@
 
             "GetSlot"
             {
-                "windows"   "319"
-                "linux"     "320"
+                "windows"   "318"
+                "linux"     "324"
             }
         }
 
@@ -30,14 +30,14 @@
             "RemoveAmmo"
             {
                 "library"   "server"
-                "windows"   "\x55\x8B\xEC\x53\x8B\x2A\x2A\x85\xDB\x56\x8B\xF1\x7E\x2A\x57\x8B\x2A\x2A\x57\xE8\x2A\x2A\x2A\x2A\x8B\xC8\xE8"
+                "windows"   "\x55\x8B\xEC\x53\x8B\x5D\x2A\x85\xDB\x56\x8B\xF1\x7E\x2A\x57"
                 "linux"     "@_ZN20CBaseCombatCharacter10RemoveAmmoEii"
             }
-            
+
             "UTIL_Remove"
             {
                 "library"   "server"
-                "windows"   "\x55\x8B\xEC\x8B\x2A\x2A\x85\xC0\x74\x2A\x83\x2A\x2A\x50"
+                "windows"   "\x55\x8B\xEC\x8B\x45\x2A\x85\xC0\x74\x2A\x83\xC0"
                 "linux"     "@_Z11UTIL_RemoveP11CBaseEntity"
             }
         }
