@@ -1,0 +1,50 @@
+// thanks to tigerox for the list of gg events
+
+        "gg_player_levelup"
+        {
+                "userid"        "short"         // player who leveled up
+                "weaponrank"    "short"
+                "weaponname"    "string"        // name of weapon being awarded
+        }
+        
+        "ggtr_player_levelup"
+        {
+                "userid"        "short"         // player who leveled up
+                "weaponrank"    "short"
+                "weaponname"    "string"        // name of weapon being awarded
+        }
+        
+        "ggprogressive_player_levelup"
+        {
+                "userid"        "short"         // player who leveled up
+                "weaponrank"    "short"
+                "weaponname"    "string"        // name of weapon being awarded
+        }
+        
+        "gg_killed_enemy"
+        {
+                "victimid"      "short"         // user ID who died                             
+                "attackerid"    "short"         // user ID who killed
+                "dominated"     "short"         // did killer dominate victim with this kill
+                "revenge"       "short"         // did killer get revenge on victim with this kill
+        }
+        
+        "gg_final_weapon_achieved"
+        {
+                "playerid"      "short"         // user ID who achieved the final gun game weapon
+        }
+
+        "gg_bonus_grenade_achieved"
+        {
+                "userid"        "short"         // user ID who achieved the bonus grenade
+        }
+
+        "gg_leader"
+        {
+                "playerid"      "short"         // user ID that is currently in the lead
+        }
+
+        "gg_player_impending_upgrade"
+        {
+                "userid"        "short"         // player who will be leveling up
+        }
