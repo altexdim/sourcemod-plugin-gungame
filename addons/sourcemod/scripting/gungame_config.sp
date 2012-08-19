@@ -3,6 +3,7 @@
 #include <sourcemod>
 #include <gungame_const>
 #include <gungame_config>
+#include "gungame/stock.sp"
 
 /**
  * Do map specific config
@@ -40,6 +41,8 @@ new Handle:FwdConfigEnd = INVALID_HANDLE;
 
 new Handle:g_Cvar_CfgDirName = INVALID_HANDLE;
 
+new GameName:g_GameName = GameName:None;
+
 #if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
@@ -56,8 +59,12 @@ public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
 }
 #endif
 
-public OnPluginStart()
-{
+public OnPluginStart() {
+    g_GameName = DetectGame();
+    if (g_GameName == GameName:None) {
+        SetFailState("ERROR: Unsupported game. Please contact the author.");
+    }
+
     FwdConfigNewSection = CreateGlobalForward("GG_ConfigNewSection", ET_Ignore, Param_String);
     FwdConfigKeyValue = CreateGlobalForward("GG_ConfigKeyValue", ET_Ignore, Param_String, Param_String);
     FwdConfigParseEnd = CreateGlobalForward("GG_COnfigParseEnd", ET_Ignore);
@@ -86,7 +93,11 @@ ReadConfig()
     GetConVarString(g_Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
 
     decl String:ConfigDir[PLATFORM_MAX_PATH];
-    FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s", ConfigDirName);
+    if (g_GameName == GameName:Css) {
+        FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s\\css", ConfigDirName);
+    } else if (g_GameName == GameName:Csgo) {
+        FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s\\csgo", ConfigDirName);
+    }
 
     decl String:ConfigFile[PLATFORM_MAX_PATH], String:EquipFile[PLATFORM_MAX_PATH];
     decl String:Error[PLATFORM_MAX_PATH + 64];

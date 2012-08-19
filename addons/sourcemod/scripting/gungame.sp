@@ -2,6 +2,7 @@
 
 #include <sourcemod>
 #include <sdktools>
+#include <cstrike>
 
 #include <colors>
 #include <gungame_const>
@@ -30,6 +31,7 @@
 #include "gungame/debug.sp"
 #endif
 
+#include "gungame/stock.sp"
 #include "gungame/util.sp"
 #include "gungame/natives.sp"
 #include "gungame/offset.sp"
@@ -110,8 +112,12 @@ public Action:Timer_CheckSdkHooks(Handle:timer) {
 }
 */
 
-public OnPluginStart()
-{
+public OnPluginStart() {
+    g_GameName = DetectGame();
+    if (g_GameName == GameName:None) {
+        SetFailState("ERROR: Unsupported game. Please contact the author.");
+    }
+
     StatsEnabled = LibraryExists("gungame_st");
     /*
     g_SdkHooksEnabled = (GetExtensionFileStatus("sdkhooks.ext") == 1);

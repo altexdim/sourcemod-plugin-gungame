@@ -170,3 +170,10 @@ enum State
 
 #define MULTI_LEVEL_EFFECT2      "effects/combinemuzzle2.vmt"
 #define MULTI_LEVEL_EFFECT1      "effects/combinemuzzle1.vmt"
+
+enum GameName {
+    None,
+    Css,
+    Csgo,
+    MaxGameNames
+}

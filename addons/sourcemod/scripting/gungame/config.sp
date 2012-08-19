@@ -397,12 +397,21 @@ public OnConfigsExecuted()
     {
         new Handle:Cvar_CfgDirName;
         Cvar_CfgDirName = FindConVar("sm_gg_cfgdirname");
+
         if ( Cvar_CfgDirName == INVALID_HANDLE ) {
-            InsertServerCommand("exec \\gungame\\gungame.mapconfig.cfg");
+            LogError("Cvar sm_gg_cfgdirname not found. Does gungame_config.smx plugin loaded?");
         } else {
             decl String:ConfigDirName[PLATFORM_MAX_PATH];
             GetConVarString(Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
-            InsertServerCommand("exec \\%s\\gungame.mapconfig.cfg", ConfigDirName);
+
+            decl String:ConfigDir[PLATFORM_MAX_PATH];
+            if (g_GameName == GameName:Css) {
+                FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\css", ConfigDirName);
+            } else if (g_GameName == GameName:Csgo) {
+                FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\csgo", ConfigDirName);
+            }
+
+            InsertServerCommand("exec \\%s\\gungame.mapconfig.cfg", ConfigDir);
         }
     }
 }

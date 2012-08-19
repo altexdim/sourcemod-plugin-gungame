@@ -37,7 +37,11 @@ OnKeyValueStart()
 {
     /* Make sure to use unique section name just incase someone else uses it */
     KvWeapon = CreateKeyValues("gg_WeaponInfo", BLANK, BLANK);
-    FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\weaponinfo.txt");
+    if (g_GameName == GameName:Css) {
+        FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\css\\weaponinfo.txt");
+    } else if (g_GameName == GameName:Csgo) {
+        FormatEx(WeaponFile, sizeof(WeaponFile), "cfg\\gungame\\csgo\\weaponinfo.txt");
+    }
 
     if ( !FileExists(WeaponFile) )
     {

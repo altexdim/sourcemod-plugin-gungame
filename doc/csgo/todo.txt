@@ -1,0 +1,6 @@
+1>) Сделать список оружия, записать его в cfg\gungame\csgo\gungame.equip.txt
+2) Сделать список оружия в cfg\gungame\csgo\weaponinfo.txt
+3) Сделать список оружия в sourcemod\scripting\include\*.inc
+4) Сделать список оружия в sourcemod\scripting\*\*.h
+5) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*\*.sp
+6) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*.sp

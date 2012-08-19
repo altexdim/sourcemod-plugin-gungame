@@ -1,7 +1,11 @@
-UTIL_Remove calls can be replaced in all games by AcceptEntityInput( index, "Kill" ).
+1+) UTIL_Remove calls can be replaced in all games by 
+    AcceptEntityInput( index, "Kill" ).
 
-GetSlot and RemoveAmmo should still work fine with new offsets.
+2+-) GetSlot and RemoveAmmo should still work fine with new offsets.
 
-There is a new native in SM for CSWeaponDrop, CS_DropWeapon, [url]http://docs.sourcemod.net/api/index.php?fastload=show&id=1013&[/url] It should work in both CS:S and CS:GO.
+3+) There is a new native in SM for CSWeaponDrop, CS_DropWeapon, 
+    [url]http://docs.sourcemod.net/api/index.php?fastload=show&id=1013&[/url] 
+    It should work in both CS:S and CS:GO.
 
-I'm not sure about EndMultiplayerGame. It might or might not work with new offset.
+4+) I'm not sure about EndMultiplayerGame. It might or might 
+    not work with new offset.
