@@ -1,56 +1,11 @@
-1+) Сделать список оружия, записать его в cfg\gungame\csgo\gungame.equip.txt
-2+) Сделать список оружия в cfg\gungame\csgo\weaponinfo.txt
-
-используется только для 
-------------
-Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
-
-используется здесь
-------------
-addons\sourcemod\scripting\gungame\config.sp:                    g_Cfg_WarmupWeapon = UTIL_GetWeaponIndex(value);
-- load config: warmup weapon id by name
-addons\sourcemod\scripting\gungame\config.sp:                    NadeBonusWeaponId = UTIL_GetWeaponIndex(value);
-- load config: nade bonus weapon id by name
-
-addons\sourcemod\scripting\gungame\event.sp:    new Weapons:WeapId = UTIL_GetWeaponIndex(weapon);
-- _WeaponFire: for remove player items (he, smoke)
-addons\sourcemod\scripting\gungame\event.sp:        new Weapons:WeapId = UTIL_GetWeaponIndex(Weapon);
-- _ItemPickup: for set player items (all)
-addons\sourcemod\scripting\gungame\event.sp:    new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon);
-- _PlayerDeath: check levels
-
-addons\sourcemod\scripting\gungame\natives.sp:    return _:UTIL_GetWeaponIndex(weapon);
-- public __GetWeaponIndex(Handle:plugin, numParams): get internal weapon index by weapon name
-addons\sourcemod\scripting\gungame\natives.sp:    new Weapons:weap = Weapons:UTIL_GetWeaponIndex(weapon);
-- public __SetWeaponLevelByName(Handle:plugin, numParams): init level in weapon order by weapon name. actualy not used
-
-addons\sourcemod\scripting\gungame\util.sp:        if(!(b = UTIL_GetWeaponIndex(WeaponOrderName[i])))
-- stock UTIL_ConvertWeaponToIndex(): init orderid by ordername
-addons\sourcemod\scripting\gungame\util.sp:Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
-- Weapons:UTIL_GetWeaponIndex(const String:Weapon[]): commented. uses keyvalue file
-addons\sourcemod\scripting\gungame\util.sp:Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
-- Weapons:UTIL_GetWeaponIndex(const String:Weapon[]): get weapon index by weapon name from trie
-
-определяется в gungame_const.inc: enum Weapons - внутренний индекс
-
-3+) Сделать список оружия в sourcemod\scripting\include\*.inc
-4+) Сделать список оружия в sourcemod\scripting\*\*.h
-5+) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*\*.sp
-6+) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*.sp
-7) добавить логику для новых оружий
+1) добавить логику для новых оружий
     1) MOLOTOV как HEGRENADE
     2) INCGRENADE как HEGRENADE
-    3) TASER как KNIFE
+    3) TASER как KNIFE (только при использовании нужно, чтобы оружие убиралось с карты и не засоряло)
 
-8+) протестировать
-    1+) turbo -  пропадает ли старое? даётся ли новое?
-    1.1+) когда находишься на гранатном уровне, имеешь гранату, делаешь knifekill, должна даваться граната. проверить, что если нет гранаты - она дается, если есть граната - то не остается лежать на земле
-    2+) turbo + knife kill - меняется ли оружие, когда дается новое оружие?
-    3+) turbo + knife kill + sdkhooks - меняется ли оружие, когда дается новое оружие, если включен sdkhooks?
-    4+) strip weapons on kill - удаляются ли пистолеты, автоматы, гранаты?
-    5+) god mode, visual effect, player speed - протестировать бонусы за три левелапа
-    6-) motd - работает нет?
-    7+) sound - вообще не работает
-
-9) known issues
+2) known issues
     1) MOTD does not work
+
+3) нужно восстановить для ggdm настройки
+    1) проверить, что работает dm плагин
+    2) найти настройки, аналог mp_ignore_round_win_conditions
