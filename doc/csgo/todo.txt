@@ -48,3 +48,5 @@ addons\sourcemod\scripting\gungame\util.sp:Weapons:UTIL_GetWeaponIndex(const Str
     3) turbo + knife kill + sdkhooks - меняется ли оружие, когда дается новое оружие, если включен sdkhooks?
     4) strip weapons on kill - удаляются ли пистолеты, автоматы, гранаты?
     5) god mode, visual effect, player speed - протестировать бонусы за три левелапа
+    6) motd - работает нет?
+    7) sound - вообще не работает
