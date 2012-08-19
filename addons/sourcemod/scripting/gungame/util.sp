@@ -707,6 +707,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
                     WritePackCell(Info, client);
                     WritePackCell(Info, iAmmo);
                     WritePackCell(Info, ent);
+                    ResetPack(Info);
 
                     CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
                 }
@@ -760,11 +761,9 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
  * So I had to delay reseting the hegrenade with glock to 50 bullets by 0.2
  */
 public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data) {
-    ResetPack(data);
     new client = ReadPackCell(data);
     new ammo = ReadPackCell(data);
     new weapon = ReadPackCell(data);
-    CloseHandle(data);
 
     if (IsClientInGame(client)) {
         HACK_RemoveAmmo(client, 90, ammo, weapon);
@@ -800,14 +799,12 @@ UTIL_RemoveBuyZones()
     if ( found > 0 ) RemoveEdict(found);
 }
 
-UTIL_ReloadActiveWeapon(client, Weapons:WeaponId)
-{
+UTIL_ReloadActiveWeapon(client, Weapons:WeaponId) {
     new Slots:slot = WeaponSlot[WeaponId];
-    if ( (slot == Slot_Primary || slot == Slot_Secondary) )
-    {
+    if ((slot == Slot_Primary || slot == Slot_Secondary)) {
         new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
-        if ( ent > -1 ) {
-            SetEntProp(ent, Prop_Send, "m_iClip1", WeaponAmmo[WeaponId]);
+        if ((ent > -1) && WeaponAmmo[WeaponId]) {
+            SetEntProp(ent, Prop_Send, "m_iClip1", WeaponAmmo[WeaponId] + 1); // "+1" is needed because ammo is refilling before last shot is counted
         }
     }
 }
@@ -1453,12 +1450,18 @@ UTIL_RemoveAmmoNew(client, weapon) {
             SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, primaryAmmoType);
         }
         
+        /*
+        // NOT USED
         new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
         if (secondaryAmmoType != -1) {
             SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
         }
+        */
     
-        SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+        // LEAVE ONE CLIP
+        //SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+
+        // REMOVE EXTRA CLIPS
         SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
     }
 }
