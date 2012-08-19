@@ -5,7 +5,3 @@
 
 2) known issues
     1) MOTD does not work
-
-3) нужно восстановить для ggdm настройки
-    1) проверить, что работает dm плагин
-    2) найти настройки, аналог mp_ignore_round_win_conditions

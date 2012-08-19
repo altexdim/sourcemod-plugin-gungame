@@ -211,18 +211,10 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [LIST]
 [*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.
          [B]A.[/B] "TurboMode" "1" in gungame.config.txt.
-[*] [B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
+[*][B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
         [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
-[*] [B]Q.[/B] How to switch stats database from sqlite to mysql 
+[*][B]Q.[/B] How to switch stats database from sqlite to mysql 
         [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865[/URL]
-[/LIST]
-        
-[anchor]Issues[/anchor][B]Issues[/B]
-----------------------------------------------------
-
-[LIST]
-[*][B]Q.[/B] (15 Apr 2011) Server crashes after update.
-         [B]A.[/B] Install mmsource-1.8.6-hg760, sourcemod-1.3.7-hg3126, sdkhooks-2.0 (only if you are using sdkhooks), disable or update stripper:source.
 [*][B]Q.[/B] Sound does not work.
          [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
@@ -238,6 +230,14 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*][B]Q.[/B] Something does not work, what should i do?
         [B]A.[/B] Start with posting your output of server commands "plugin_print; meta list; sm plugins list"
         and content of the latest file [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
+[/LIST]
+        
+[anchor]Known Issues[/anchor][B]Issues[/B]
+----------------------------------------------------
+
+[LIST]
+[*][B]Q.[/B] [CSGO] MOTD does not work.
+         [B]A.[/B] MOTD does not work in csgo version.
 [/LIST]
         
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
