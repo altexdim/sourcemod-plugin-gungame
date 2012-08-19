@@ -3,6 +3,48 @@
 
 2+-) GetSlot and RemoveAmmo should still work fine with new offsets.
 
+REMOVEAMMO
+================================
+I'll look into it, but as an alternative, in any game, you can remove ammo by utilizing the m_iAmmo (array of ammo per ammo type on player), and m_iClip1 / m_iClip2 (ammo inside weapon) netprops.
+
+Example of removing all ammo:
+Code:
+new ammoTypeCount = GetEntPropArraySize(client, Prop_Send, "m_iAmmo")
+for (new i = 0; i < ammoTypeCount; ++i)
+{
+    SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, i);
+}
+
+new weaponCount = GetEntPropArraySize(client, Prop_Send, "m_hMyWeapons")
+for (new i = 0; i < weaponCount; ++i)
+{
+    new weapon = GetEntPropEnt(client, Prop_Send, "m_hMyWeapons", _, i);
+    if (weapon == INVALID_ENT_REFERENCE)
+        continue;
+    SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+    SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
+}
+
+Or example to just remove all ammo for one weapon (using active weapon as example):
+Code:
+new weapon = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
+if (weapon != INVALID_ENT_REFERENCE)
+{
+    new primaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+    if (primaryAmmoType != -1)
+        SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, primaryAmmoType);
+
+    new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
+    if (secondaryAmmoType != -1)
+        SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
+
+    SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+    SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
+}
+
+I hope this helps.
+================================
+
 3+) There is a new native in SM for CSWeaponDrop, CS_DropWeapon, 
     [url]http://docs.sourcemod.net/api/index.php?fastload=show&id=1013&[/url] 
     It should work in both CS:S and CS:GO.

@@ -17,57 +17,86 @@
          *
 
 ======================
-MELEE
-    SHARED: knife zeus
-    CT
-    T
-PISTOLS
-    SHARED: glock p250 fiveseven elite deagle
-    CT:     hkp2000
-    T:      tec9 
-SHORT GUNS
-    SHARED: nova xm1014
-    CT:     mag7
-    T:      sawedoff
-SUB MACHINE GUNS
-    SHARED: mp7 ump45 bizon p90
-    CT:     mp9
-    T:      mac10
-RIFLES
-    SHARED: 
-    CT:     famas m4a1 aug scar20
-    T:      galil ak47 sg552 g3sg1
-SNIPERS
-    SHARED: ssg08 awp
-    CT:     
-    T:      
-MACHINE GUNS
-    SHARED: m249 negev
-    CT:     
-    T:      
-GEAR
-    SHARED: kevlar helmet
-    CT:     defusekit
-    T:      c4
-GRENADES
-    SHARED: flashbang smokegrenade hegrenade decoy
-    CT:     incendiary
-    T:      molotov
+melee
+    all:    knife taser
+pistols
+    all:    glock p250 fiveseven deagle elite
+    ct:     hkp2000
+    t:      tec9
+shotguns
+    all:    nova xm1014
+    t:      sawedoff
+mgs
+    all:    m249 negev
+    ct:     mag7
+smgs
+    all:    mp7 ump45 p90 bizon
+    ct:     mp9
+    t:      mac10
+riffles
+    ct:     famas m4a1 aug
+    t:      galilar ak47 sg556
+snipers
+    all:    ssg08 awp
+    ct:     scar20
+    t:      g3sg1
+gear
+    all:    kevlar vesthelm
+    ct:     defuser
+    t:      c4
+grenades
+    all:    decoy flashbang hegrenade smokegrenade
+    ct:     incgrenade
+    t:      molotov
 ======================
+weapon_knife
+weapon_knifegg
+weapon_taser
 
-  p228
-  scout
-  sg550
-  galilar
-  usp
-  mp5navy
-  m3
-  tmp
-  taser
-  scar17
-  sg556
-  
-  
+weapon_glock
+weapon_p250
+weapon_fiveseven
+weapon_deagle
+weapon_elite
+weapon_hkp2000
+weapon_tec9
+
+weapon_nova
+weapon_xm1014
+weapon_sawedoff
+
+weapon_m249
+weapon_negev
+weapon_mag7
+
+weapon_mp7
+weapon_ump45
+weapon_p90
+weapon_bizon
+weapon_mp9
+weapon_mac10
+
+weapon_famas
+weapon_m4a1
+weapon_aug
+weapon_galilar
+weapon_ak47
+weapon_sg556
+
+weapon_ssg08
+weapon_awp
+weapon_scar20
+weapon_gs3sg1
+
+weapon_c4
+
+weapon_decoy
+weapon_flashbang
+weapon_hegrenade
+weapon_smokegrenade
+weapon_incgrenade
+weapon_molotov
+======================
 
          */
 
