@@ -18,7 +18,7 @@
 
 ======================
 melee
-    all:    knife taser
+    all:    knife knifegg taser
 pistols
     all:    glock p250 fiveseven deagle elite
     ct:     hkp2000
@@ -48,6 +48,7 @@ grenades
     all:    decoy flashbang hegrenade smokegrenade
     ct:     incgrenade
     t:      molotov
+
 ======================
 weapon_knife
 weapon_knifegg
@@ -86,7 +87,7 @@ weapon_sg556
 weapon_ssg08
 weapon_awp
 weapon_scar20
-weapon_gs3sg1
+weapon_g3sg1
 
 weapon_c4
 
@@ -96,6 +97,12 @@ weapon_hegrenade
 weapon_smokegrenade
 weapon_incgrenade
 weapon_molotov
+======================
+PLUGIN LIMITATION
+
+Do not use while plugin in beta stage: molotov, incgrenade, taser, 
+Do not use at all: decoy, any of the gears
+
 ======================
 
          */

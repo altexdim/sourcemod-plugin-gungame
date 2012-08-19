@@ -55,9 +55,11 @@ CreateRemoveAmmoHack() {
     }
 }
 
-HACK_RemoveAmmo(client, iCount, iAmmoIndex) {
+HACK_RemoveAmmo(client, iCount, iAmmoIndex, weapon) {
     if (g_GameName == GameName:Css) {
         SDKCall(RemoveAmmo, client, iCount, iAmmoIndex);
+    } else if (g_GameName == GameName:Csgo) {
+        UTIL_RemoveAmmoNew(client, weapon);
     }
 }
 

@@ -1,6 +1,43 @@
-1>) Сделать список оружия, записать его в cfg\gungame\csgo\gungame.equip.txt
-2) Сделать список оружия в cfg\gungame\csgo\weaponinfo.txt
-3) Сделать список оружия в sourcemod\scripting\include\*.inc
-4) Сделать список оружия в sourcemod\scripting\*\*.h
-5) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*\*.sp
-6) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*.sp
+1+) Сделать список оружия, записать его в cfg\gungame\csgo\gungame.equip.txt
+2+) Сделать список оружия в cfg\gungame\csgo\weaponinfo.txt
+
+используется только для 
+------------
+Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
+
+используется здесь
+------------
+addons\sourcemod\scripting\gungame\config.sp:                    g_Cfg_WarmupWeapon = UTIL_GetWeaponIndex(value);
+- load config: warmup weapon id by name
+addons\sourcemod\scripting\gungame\config.sp:                    NadeBonusWeaponId = UTIL_GetWeaponIndex(value);
+- load config: nade bonus weapon id by name
+
+addons\sourcemod\scripting\gungame\event.sp:    new Weapons:WeapId = UTIL_GetWeaponIndex(weapon);
+- _WeaponFire: for remove player items (he, smoke)
+addons\sourcemod\scripting\gungame\event.sp:        new Weapons:WeapId = UTIL_GetWeaponIndex(Weapon);
+- _ItemPickup: for set player items (all)
+addons\sourcemod\scripting\gungame\event.sp:    new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon);
+- _PlayerDeath: check levels
+
+addons\sourcemod\scripting\gungame\natives.sp:    return _:UTIL_GetWeaponIndex(weapon);
+- public __GetWeaponIndex(Handle:plugin, numParams): get internal weapon index by weapon name
+addons\sourcemod\scripting\gungame\natives.sp:    new Weapons:weap = Weapons:UTIL_GetWeaponIndex(weapon);
+- public __SetWeaponLevelByName(Handle:plugin, numParams): init level in weapon order by weapon name. actualy not used
+
+addons\sourcemod\scripting\gungame\util.sp:        if(!(b = UTIL_GetWeaponIndex(WeaponOrderName[i])))
+- stock UTIL_ConvertWeaponToIndex(): init orderid by ordername
+addons\sourcemod\scripting\gungame\util.sp:Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
+- Weapons:UTIL_GetWeaponIndex(const String:Weapon[]): commented. uses keyvalue file
+addons\sourcemod\scripting\gungame\util.sp:Weapons:UTIL_GetWeaponIndex(const String:Weapon[])
+- Weapons:UTIL_GetWeaponIndex(const String:Weapon[]): get weapon index by weapon name from trie
+
+определяется в gungame_const.inc: enum Weapons - внутренний индекс
+
+3+) Сделать список оружия в sourcemod\scripting\include\*.inc
+4+) Сделать список оружия в sourcemod\scripting\*\*.h
+5+) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*\*.sp
+6+) Сделать список оружия во всех оставшихся файлах sourcemod\scripting\*.sp
+7) добавить логику для новых оружий
+    1) MOLOTOV как HEGRENADE
+    2) INCGRENADE как HEGRENADE
+    3) TASER как KNIFE

@@ -706,7 +706,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
                     new Handle:Info = CreateDataPack();
                     WritePackCell(Info, client);
                     WritePackCell(Info, iAmmo);
-                    ResetPack(Info);
+                    WritePackCell(Info, ent);
 
                     CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
                 }
@@ -759,13 +759,15 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
  * recent Source update. They are giving full ammo no matter if mp_dynamicpricing was 0 or 1.
  * So I had to delay reseting the hegrenade with glock to 50 bullets by 0.2
  */
-public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data)
-{
+public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data) {
+    ResetPack(data);
     new client = ReadPackCell(data);
+    new ammo = ReadPackCell(data);
+    new weapon = ReadPackCell(data);
+    CloseHandle(data);
 
-    if(IsClientInGame(client))
-    {
-        HACK_RemoveAmmo(client, 90, ReadPackCell(data));
+    if (IsClientInGame(client)) {
+        HACK_RemoveAmmo(client, 90, ammo, weapon);
     }
 }
 
@@ -1441,5 +1443,22 @@ UTIL_FlashCounterAdd(client, ent) {
             g_ClientSlotEntFlash[client][i] = ent;
             return;
         }
+    }
+}
+
+UTIL_RemoveAmmoNew(client, weapon) {
+    if (weapon != INVALID_ENT_REFERENCE) {
+        new primaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+        if (primaryAmmoType != -1) {
+            SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, primaryAmmoType);
+        }
+        
+        new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
+        if (secondaryAmmoType != -1) {
+            SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
+        }
+    
+        SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+        SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
     }
 }

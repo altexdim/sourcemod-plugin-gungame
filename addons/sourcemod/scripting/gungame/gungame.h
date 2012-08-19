@@ -22,6 +22,7 @@ enum Sounds
     MaxSounds
 }
 
+#if defined WITH_CSS_SUPPORT
 // Killable weapons
 new const String:WeaponName[Weapons:MAXWEAPON][] =
 {
@@ -64,6 +65,68 @@ new const WeaponAmmo[Weapons:MAXWEAPON] =
 
     1, 2, 1
 };
+#endif
+
+#if defined WITH_CSGO_SUPPORT
+// Killable weapons
+new const String:WeaponName[Weapons:MAXWEAPON][] = {
+    // none
+    "",
+    // melee
+    "weapon_knife", "weapon_knifegg", "weapon_taser",
+    // Secondary Weapon
+    "weapon_glock", "weapon_p250", "weapon_fiveseven", "weapon_deagle", "weapon_elite", "weapon_hkp200", "weapon_tec9",
+    // Primary weapon
+    "weapon_nova", "weapon_xm1014", "weapon_sawedoff", 
+    "weapon_m249", "weapon_negev", "weapon_mag7", 
+    "weapon_mp7", "weapon_ump45", "weapon_p90", "weapon_bizon", "weapon_mp9", "weapon_mac10",
+    "weapon_famas", "weapon_m4a1", "weapon_aug", "weapon_galilar", "weapon_ak47", "weapon_sg556",
+    "weapon_ssg08", "weapon_awp", "weapon_scar20", "weapon_g3sg1",
+    // nade
+    "weapon_decoy", "weapon_flashbang", "weapon_hegrenade", "weapon_smokegrenade", "weapon_incgrenade", "weapon_molotov",
+    // c4
+    "weapon_c4"
+};
+
+new const Slots:WeaponSlot[Weapons:MAXWEAPON] = {
+    // none
+    Slot_None,
+    // melee
+    Slot_Knife, Slot_Knife, Slot_Knife,
+    // Secondary Weapon
+    Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary, Slot_Secondary,
+    // Primary weapon
+    Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    Slot_Primary, Slot_Primary, Slot_Primary, Slot_Primary,
+    // nade
+    Slot_Grenade, Slot_Grenade, Slot_Grenade, Slot_Grenade, Slot_Grenade, Slot_Grenade,
+    // c4
+    Slot_C4
+};
+
+// clip size
+new const WeaponAmmo[Weapons:MAXWEAPON] = {
+    // none
+    0,
+    // melee
+    0, 0, 0,
+    // Secondary Weapon
+    20, 13, 20, 7, 30, 13, 32,
+    // Primary weapon
+    8, 7, 7,
+    100, 150, 5,
+    30, 25, 50, 64, 30, 30,
+    25, 30, 30, 35, 30, 30,
+    10, 10, 20, 20,
+    // nade
+    0, 0, 0, 0, 0, 0,
+    // c4
+    0
+};
+#endif
 
 new String:EventSounds[Sounds:MaxSounds][64];
 

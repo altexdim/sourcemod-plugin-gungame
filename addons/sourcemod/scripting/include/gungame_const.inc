@@ -4,6 +4,13 @@
 #define _gungame_const_included_
 
 /**
+ * Enable CSGO, CSS suport.
+ * define it with command line option when compiling
+ */
+// #define WITH_CSS_SUPPORT
+// #define WITH_CSGO_SUPPORT
+
+/**
  * Enable SDK Hooks support.
  * Default is disabled.
  */
@@ -60,7 +67,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru";
-stock const String:GUNGAME_VERSION[] = "1.1.9.1";
+stock const String:GUNGAME_VERSION[] = "1.2.0.0.beta";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 
@@ -120,10 +127,15 @@ enum Slots
     Slot_None
 };
 
+#if defined WITH_CSS_SUPPORT
 enum Weapons
 {
+    // None weapon
     CSW_NONE,
+
+    // Melee weapon
     CSW_KNIFE,
+
     // Secondary Weapon
     CSW_USP,
     CSW_GLOCK,
@@ -131,6 +143,7 @@ enum Weapons
     CSW_DEAGLE,
     CSW_FIVESEVEN,
     CSW_ELITE,
+
     // Primary weapon
     CSW_M3,
     CSW_XM1014,
@@ -150,6 +163,8 @@ enum Weapons
     CSW_AWP,
     CSW_G3SG1,
     CSW_M249,
+
+    // Grenade weapon
     CSW_HEGRENADE,
     CSW_FLASHBANG,
     CSW_SMOKEGRENADE,
@@ -157,6 +172,70 @@ enum Weapons
     // Do not delete line below
     MAXWEAPON
 };
+#endif
+
+#if defined WITH_CSGO_SUPPORT
+enum Weapons {
+    // None weapon
+    CSW_NONE,
+
+    // Melee weapon
+    CSW_KNIFE,
+    CSW_KNIFEGG,
+    CSW_TASER,
+
+    // Secondary Weapon
+    CSW_GLOCK,
+    CSW_P250,
+    CSW_FIVESEVEN,
+    CSW_DEAGLE,
+    CSW_ELITE,
+    CSW_HKP2000,
+    CSW_TEC9,
+
+    // Primary weapon
+    CSW_NOVA,
+    CSW_XM1014,
+    CSW_SAWEDOFF,
+
+    CSW_M249,
+    CSW_NEGEV,
+    CSW_MAG7,
+
+    CSW_MP7,
+    CSW_UMP45,
+    CSW_P90,
+    CSW_BIZON,
+    CSW_MP9,
+    CSW_MAC10,
+
+    CSW_FAMAS,
+    CSW_M4A1,
+    CSW_AUG,
+    CSW_GALILAR,
+    CSW_AK47,
+    CSW_SG556,
+
+    CSW_SSG08,
+    CSW_AWP,
+    CSW_SCAR20,
+    CSW_G3SG1,
+
+    // Grenade weapon
+    CSW_DECOY,
+    CSW_FLASHBANG,
+    CSW_HEGRENADE,
+    CSW_SMOKEGRENADE,
+    CSW_INCGRENADE,
+    CSW_MOLOTOV,
+
+    // C4
+    CSW_C4,
+
+    // Do not delete line below
+    MAXWEAPON
+};
+#endif
 
 enum State
 {

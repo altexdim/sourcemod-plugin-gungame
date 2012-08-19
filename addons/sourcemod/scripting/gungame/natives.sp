@@ -365,7 +365,7 @@ public __SetWeaponLevel(Handle:plugin, numParams)
 
     new Weapons:weap = Weapons:GetNativeCell(2);
 
-    if(weap < CSW_KNIFE || weap > CSW_SMOKEGRENADE)
+    if(weap <= CSW_NONE || weap >= MAXWEAPON)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon index out of range [%d]", weap);
     }
@@ -390,7 +390,7 @@ public __SetWeaponLevelByName(Handle:plugin, numParams)
 
     new Weapons:weap = Weapons:UTIL_GetWeaponIndex(weapon);
 
-    if(weap < CSW_KNIFE || weap > CSW_SMOKEGRENADE)
+    if(weap <= CSW_NONE || weap >= MAXWEAPON)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon name is invalid [%s]", weapon);
     }
