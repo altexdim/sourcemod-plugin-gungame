@@ -75,7 +75,7 @@ new const String:WeaponName[Weapons:MAXWEAPON][] = {
     // melee
     "weapon_knife", "weapon_knifegg", "weapon_taser",
     // Secondary Weapon
-    "weapon_glock", "weapon_p250", "weapon_fiveseven", "weapon_deagle", "weapon_elite", "weapon_hkp200", "weapon_tec9",
+    "weapon_glock", "weapon_p250", "weapon_fiveseven", "weapon_deagle", "weapon_elite", "weapon_hkp2000", "weapon_tec9",
     // Primary weapon
     "weapon_nova", "weapon_xm1014", "weapon_sawedoff", 
     "weapon_m249", "weapon_negev", "weapon_mag7", 
