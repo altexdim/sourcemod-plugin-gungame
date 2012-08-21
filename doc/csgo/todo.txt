@@ -5,8 +5,7 @@
 
 2) known issues
     1) MOTD does not work
-    2) Some chat messages are displayed with the wrong colour. Need update color.inc
     3) "GameDesc" config variable does not work.
-    4) L 08/21/2012 - 10:27:18: [gungame_sdkhooks.smx] [GunGame] *** FATAL ERROR *** Weapon Order has an invalid entry :: name scar20 :: level 29
+    5) the volume very low on the gungame sounds
 
 3) refactoring - same version for css ans csgo!

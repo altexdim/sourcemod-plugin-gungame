@@ -82,6 +82,7 @@ OnKeyValueStart()
             break;
         }
         index = Weapons:KvGetNum(KvWeapon, "index");
+        UTIL_StringToLower(name);
         SetTrieValue(TrieWeapon, name, index);
         if ( !KvGotoNextKey(KvWeapon) )
         {
