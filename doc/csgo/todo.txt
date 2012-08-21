@@ -5,3 +5,7 @@
 
 2) known issues
     1) MOTD does not work
+    2) Weapon hkp2000 is not working. Your weapons are stripped and you are not given the gun.
+    3) Some chat messages are displayed with the wrong colour.
+
+3) refactoring - same version for css ans csgo!
