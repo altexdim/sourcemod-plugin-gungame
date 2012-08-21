@@ -185,6 +185,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [anchor]Credits[/anchor][B]Credits[/B]
 ----------------------------------------------------
 [LIST]
+[*] Thanks to psychonic! Actualy he made version for CSGO possible and i can not imagine this plugin without his support.
 [*] Thanks to Xilver266 for spanish translation.
 [*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from [url]http://www.war3source.com/[/url]
     for cool visual effect from "War3Source - Addon - Display Particles on Level Up" plugin version 1.1
