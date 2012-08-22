@@ -97,7 +97,7 @@ public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
-public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
+public Action:GG_OnClientDeath(Killer, Victim, WeaponId, bool:TeamKilled)
 {
     /* Afk management only checks after the player worldspawn/suicide checks */
     if ( !AfkManagement )
@@ -127,7 +127,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
                 PlayerAfkCount[Victim] = 0;
             }
         }
-		
+        
         if ( AfkReload )
         {
             return Plugin_Changed;
@@ -158,7 +158,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             AfkDeaths = StringToInt(value);
         } else if(strcmp("AfkAction", key, false) == 0) {
             AfkAction = StringToInt(value);
-		} else if(strcmp("AfkReload", key, false) == 0) {
+        } else if(strcmp("AfkReload", key, false) == 0) {
             AfkReload = StringToInt(value);
         }
     }

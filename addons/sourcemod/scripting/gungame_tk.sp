@@ -28,7 +28,7 @@ public OnPluginStart()
     LoadTranslations("gungame_tk");
 }
 
-public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
+public Action:GG_OnClientDeath(Killer, Victim, WeaponId, bool:TeamKilled)
 {
     if ( !TeamKilled || !TkLooseLevel )
     {

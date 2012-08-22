@@ -637,17 +637,10 @@ public GG_OnLoadPlayerWins(client)
 
 
 /**
+ * TODO:
  * KillCam event message should probably should block in DeathMatch Style.
  * BarTime probably used to show how long left till respawn.
  */
-
-/*
-old todo:
-Wait for CBasePlayer?::GetWeaponSlot()
-Check byte size for SendProp Offset
-*/
-
-/* I wonder sending game_end or round_end with nextlevel cvar will force map to change? */
 
 public OnMapStart() {
     PrecacheModel(MULTI_LEVEL_EFFECT2);

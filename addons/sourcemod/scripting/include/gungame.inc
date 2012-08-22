@@ -97,7 +97,7 @@ forward GG_OnStartMapVote();
  * @param WeaponId      The weapon index the player was killed with.
  * @param TeamKilled    True if they were killed by a team mate.
  */
-forward Action:GG_OnClientDeath(killer, victim, Weapons:WeaponId, bool:TeamKilled);
+forward Action:GG_OnClientDeath(killer, victim, WeaponId, bool:TeamKilled);
 
 /**
  * Called before winner sound starts to play.
@@ -212,7 +212,7 @@ native GG_GetClientMaxPointLevel(client);
  * @param weapon        The weapon index
  * @noreturn
  */
-native GG_SetWeaponLevel(level, Weapons:weapon);
+native GG_SetWeaponLevel(level, weapon);
 
 /**
  * Set the level weapon by weapon name.
@@ -236,9 +236,9 @@ native GG_SetMaxLevel(level);
  * Retrieves the weapon index from weapon name.
  *
  * @param weapon        The short weapon name. ie awp, glock.
- * @return          0 if weapon is not found or the CSW_* weapon index.
+ * @return          0 if weapon is not found or the weapon index.
  */
-native Weapons:GG_GetWeaponIndex(const String:weapon[]);
+native GG_GetWeaponIndex(const String:weapon[]);
 
 /**
  * Get weapon name from level.
@@ -257,6 +257,22 @@ native GG_GetLevelWeaponName(level, String:weapon[], maxlength);
  * @return          Return true if warmup is in progress otherwise false.
  */
 native bool:GG_IsWarmupInProgress();
+
+/**
+ * Return weapon id for knife weapon.
+ *
+ * @noparam
+ * @return          Return weapon id for knife weapon.
+ */
+native GG_GetWeaponIdKnife();
+
+/**
+ * Return weapon id for hegrenade weapon.
+ *
+ * @noparam
+ * @return          Return weapon id for hegrenade weapon.
+ */
+native GG_GetWeaponIdHegrenade();
 
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame =

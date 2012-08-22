@@ -17,6 +17,16 @@ OnCreateNatives()
     CreateNative("GG_GetWeaponIndex", __GetWeaponIndex);
     CreateNative("GG_GetLevelWeaponName", __GetLevelWeaponName);
     CreateNative("GG_IsWarmupInProgress", __IsWarmupInProgress);
+    CreateNative("GG_GetWeaponIdKnife", __GetWeaponIdKnife);
+    CreateNative("GG_GetWeaponIdHegrenade", __GetWeaponIdHegrenade);
+}
+
+public __GetWeaponIdKnife(Handle:plugin, numParams) {
+    return g_WeaponIdKnife;
+}
+
+public __GetWeaponIdHegrenade(Handle:plugin, numParams) {
+    return g_WeaponIdHegrenade;
 }
 
 public __IsWarmupInProgress(Handle:plugin, numParams)
@@ -46,7 +56,7 @@ public __SetMaxLevel(Handle:plugin, numParams)
     for(new i = level; i < GUNGAME_MAX_LEVEL; i++)
     {
         WeaponOrderName[i][0] = '\0';
-        WeaponOrderId[i] = CSW_NONE;
+        WeaponOrderId[i] = 0;
     }
 
     return 1;
@@ -57,7 +67,7 @@ public __SetMaxLevel(Handle:plugin, numParams)
  *
  * @param weapon        Name of weapon. short or long name.
  */
-//native Weapons:GG_GetWeaponIndex(const String:weapon[]);
+//native GG_GetWeaponIndex(const String:weapon[]);
 public __GetWeaponIndex(Handle:plugin, numParams)
 {
     decl String:weapon[24];
@@ -363,14 +373,14 @@ public __SetWeaponLevel(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Level out of range [%d]", level);
     }
 
-    new Weapons:weap = Weapons:GetNativeCell(2);
+    new weap = GetNativeCell(2);
 
-    if(weap <= CSW_NONE || weap >= MAXWEAPON)
+    if(weap <= 0 || weap > g_WeaponsMaxId)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon index out of range [%d]", weap);
     }
 
-    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[_:weap]);
+    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[weap]);
     WeaponOrderId[level - 1] = weap;
 
     return 1;
@@ -388,14 +398,14 @@ public __SetWeaponLevelByName(Handle:plugin, numParams)
     decl String:weapon[24];
     GetNativeString(2, weapon, sizeof(weapon));
 
-    new Weapons:weap = Weapons:UTIL_GetWeaponIndex(weapon);
+    new weap = UTIL_GetWeaponIndex(weapon);
 
-    if(weap <= CSW_NONE || weap >= MAXWEAPON)
+    if(weap <= 0 || weap > g_WeaponsMaxId)
     {
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon name is invalid [%s]", weapon);
     }
 
-    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[_:weap]);
+    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[weap]);
     WeaponOrderId[level - 1] = weap;
 
     return 1;

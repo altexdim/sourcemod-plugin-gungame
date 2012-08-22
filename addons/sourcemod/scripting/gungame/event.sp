@@ -77,10 +77,10 @@ public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast) {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     decl String:weapon[24];
     GetEventString(event, "weapon", weapon, sizeof(weapon));
-    new Weapons:WeapId = UTIL_GetWeaponIndex(weapon);
-    if ( WeapId == CSW_HEGRENADE ) {
+    new WeapId = UTIL_GetWeaponIndex(weapon);
+    if ( WeapId == g_WeaponIdHegrenade ) {
         g_ClientSlotEntHeGrenade[client] = -1;
-    } else if ( WeapId == CSW_SMOKEGRENADE ) {
+    } else if ( WeapId == g_WeaponIdSmokegrenade ) {
         g_ClientSlotEntSmoke[client] = -1;
     }
 }
@@ -106,18 +106,18 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
     {
         decl String:Weapon[24];
         GetEventString(event, "item", Weapon, sizeof(Weapon));
-        new Weapons:WeapId = UTIL_GetWeaponIndex(Weapon);
-        if ( WeapId != CSW_NONE )
+        new WeapId = UTIL_GetWeaponIndex(Weapon);
+        if ( WeapId != 0 )
         {
-            new Slots:slot = WeaponSlot[WeapId];
+            new Slots:slot = g_WeaponSlot[WeapId];
             if ( slot == Slot_Primary || slot == Slot_Secondary ) {
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
             } else if ( slot == Slot_Grenade ) {
-                if ( WeapId == CSW_HEGRENADE ) {
-                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_HEGRENADE]);
-                } else if ( WeapId == CSW_SMOKEGRENADE ) {
-                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_SMOKEGRENADE]);
-                } else if ( WeapId == CSW_FLASHBANG ) {
+                if ( WeapId == g_WeaponIdHegrenade ) {
+                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdHegrenade]);
+                } else if ( WeapId == g_WeaponIdSmokegrenade ) {
+                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdSmokegrenade]);
+                } else if ( WeapId == g_WeaponIdFlashbang ) {
                     UTIL_UpdateFlashCounter(client);
                 }
             }
@@ -316,7 +316,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // Victim > 0 && Killer > 0
 
-    new Weapons:WeaponIndex = UTIL_GetWeaponIndex(Weapon);
+    new WeaponIndex = UTIL_GetWeaponIndex(Weapon);
     new Action:ret;
 
     if ( WarmupEnabled )
@@ -345,13 +345,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    new level = PlayerLevel[Killer], Weapons:WeaponLevel = WeaponOrderId[level];
+    new level = PlayerLevel[Killer], WeaponLevel = WeaponOrderId[level];
 
     /* Give them another grenade if they killed another person with another weapon */
-    if ( (WeaponLevel == CSW_HEGRENADE) && (WeaponIndex != CSW_HEGRENADE) 
-        && !( (WeaponIndex == CSW_KNIFE) && KnifeProHE ) // TODO: Remove "&& !( (WeaponIndex == CSW_KNIFE) && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
+    if ( (WeaponLevel == g_WeaponIdHegrenade) && (WeaponIndex != g_WeaponIdHegrenade) 
+        && !( (WeaponIndex == g_WeaponIdKnife) && KnifeProHE ) // TODO: Remove "&& !( (WeaponIndex == g_WeaponIdKnife) && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
     ) {
-        UTIL_GiveExtraNade(Killer, WeaponIndex == CSW_KNIFE );
+        UTIL_GiveExtraNade(Killer, WeaponIndex == g_WeaponIdKnife );
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
@@ -362,7 +362,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /**
      * Steal level from other player.
      */
-    if ( KnifePro && WeaponIndex == CSW_KNIFE )
+    if ( KnifePro && WeaponIndex == g_WeaponIdKnife )
     {
         for (;;)
         {
@@ -391,14 +391,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 }
             }
 
-            if ( WeaponLevel == CSW_KNIFE )
+            if ( WeaponLevel == g_WeaponIdKnife )
             {
                 if ( UTIL_GetCustomKillPerLevel(level) > 1 ) {
                     break;
                 }
             }
 
-            if ( !KnifeProHE && WeaponLevel == CSW_HEGRENADE ) {
+            if ( !KnifeProHE && WeaponLevel == g_WeaponIdHegrenade ) {
                 return;
             }
 
@@ -412,7 +412,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CurrentLevelPerRound[Killer]++;
                    
             if ( TurboMode ) {
-                UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == CSW_KNIFE);
+                UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == g_WeaponIdKnife);
             }
 
             CheckForTripleLevel(Killer);
@@ -425,13 +425,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* They didn't kill with the weapon required */
     if ( WeaponIndex != WeaponLevel ) {
-        if ( WeaponIndex == CSW_HEGRENADE ) {
+        if ( WeaponIndex == g_WeaponIdHegrenade ) {
             // Killed with grenade made by map author
             if ( 
                 g_Cfg_CanLevelUpWithMapNades
                 && ( 
                     g_Cfg_CanLevelUpWithNadeOnKnife
-                    || ( WeaponLevel != CSW_KNIFE )
+                    || ( WeaponLevel != g_WeaponIdKnife )
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -444,9 +444,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 g_Cfg_CanLevelUpWithPhysics
                 && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
                 && ( 
-                    ( ( WeaponLevel != CSW_HEGRENADE) && ( WeaponLevel != CSW_KNIFE) )
-                    || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == CSW_HEGRENADE ) )
-                    || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == CSW_KNIFE ) )
+                    ( ( WeaponLevel != g_WeaponIdHegrenade) && ( WeaponLevel != g_WeaponIdKnife) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == g_WeaponIdHegrenade ) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == g_WeaponIdKnife ) )
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -533,7 +533,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( TurboMode || KnifeElite )
     {
-        UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == CSW_KNIFE);
+        UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == g_WeaponIdKnife);
     }
 
     CheckForTripleLevel(Killer);
@@ -816,20 +816,20 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
     }
 
     if ( ( WarmupNades && WarmupEnabled )
-         || ( WeaponOrderId[PlayerLevel[client]] == CSW_HEGRENADE 
+         || ( WeaponOrderId[PlayerLevel[client]] == g_WeaponIdHegrenade
             && ( UnlimitedNades 
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_HEGRENADE]) == -1 ) {
+        if ( UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdHegrenade]) == -1 ) {
             if ( NumberOfNades ) {
                 g_NumberOfNades[client]--;
             }
 
-            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_HEGRENADE], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
+            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
 
             if ( !( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade ) ) {
-                FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_HEGRENADE]);
+                FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
             }
         }
     }

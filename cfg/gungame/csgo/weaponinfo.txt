@@ -4,17 +4,15 @@
     "knife" {
         "index" "1"
         "slot"  "2"
-        "clipsize"  "0"
+        "is_knife"  "1"
     }
     "knifegg" {
         "index" "2"
         "slot"  "2"
-        "clipsize"  "0"
     }
     "taser" {
         "index" "3"
         "slot"  "2"
-        "clipsize"  "0"
     }
     // Secondary Weapon
     "glock" {
@@ -172,37 +170,33 @@
     "decoy" {
         "index" "33"
         "slot"  "3"
-        "clipsize"  "0"
     }
     "flashbang" {
         "index" "34"
         "slot"  "3"
-        "clipsize"  "0"
+        "is_flashbang"  "1"
     }
     "hegrenade" {
         "index" "35"
         "slot"  "3"
-        "clipsize"  "0"
+        "is_hegrenade"  "1"
     }
     "smokegrenade" {
         "index" "36"
         "slot"  "3"
-        "clipsize"  "0"
+        "is_smokegrenade"   "1"
     }
     "incgrenade" {
         "index" "37"
         "slot"  "3"
-        "clipsize"  "0"
     }
     "molotov" {
         "index" "38"
         "slot"  "3"
-        "clipsize"  "0"
     }
     // C4
     "c4" {
         "index" "39"
         "slot"  "4"
-        "clipsize"  "0"
     }
 }

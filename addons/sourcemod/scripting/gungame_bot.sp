@@ -26,13 +26,13 @@ public OnPluginStart()
     LoadTranslations("gungame_bot");
 }
 
-public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled)
+public Action:GG_OnClientDeath(Killer, Victim, WeaponId, bool:TeamKilled)
 {
     if ( TeamKilled || !IsFakeClient(Victim) || IsFakeClient(Killer) ) {
         return Plugin_Continue;
     }
 
-    if ( WeaponId == CSW_KNIFE ) {
+    if (WeaponId == GG_GetWeaponIdKnife()) {
         if ( g_Cfg_AllowUpByKnifeBot ) {
             return Plugin_Continue;
         }
@@ -48,7 +48,7 @@ public Action:GG_OnClientDeath(Killer, Victim, Weapons:WeaponId, bool:TeamKilled
 
         CPrintToChat(Killer, "%t", "You can not level up on bot with knife");
         return Plugin_Handled;
-    } else if ( WeaponId == CSW_HEGRENADE ) {
+    } else if ( WeaponId == GG_GetWeaponIdHegrenade() ) {
         if ( g_Cfg_AllowUpByExplodeBot ) {
             return Plugin_Continue;
         }

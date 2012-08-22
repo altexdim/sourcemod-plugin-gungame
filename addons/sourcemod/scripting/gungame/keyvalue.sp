@@ -74,25 +74,40 @@ OnKeyValueStart()
     }
 
     new String:name[MAX_WEAPON_NAME_LEN];
-    new Weapons:index;
+    new index;
+    g_WeaponsMaxId          = 0;
+    g_WeaponIdKnife         = 0;
+    g_WeaponIdHegrenade     = 0;
+    g_WeaponIdSmokegrenade  = 0;
+    g_WeaponIdFlashbang     = 0;
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
             break;
         }
 
-        index = Weapons:KvGetNum(KvWeapon, "index");
+        index = KvGetNum(KvWeapon, "index");
         UTIL_StringToLower(name);
 
         // init weapons by name array
         SetTrieValue(TrieWeapon, name, index);
         // init weapons count
-        g_WeaponsCount++;
+        g_WeaponsMaxId++;
         // init weapons full names (to use in give commands)
         FormatEx(g_WeaponName[index], sizeof(g_WeaponName[]), "weapon_%s", name);
         // init weapons slots
         g_WeaponSlot[index] = Slots:KvGetNum(KvWeapon, "slot");
         // init weapons clip size
-        g_WeaponAmmo[index] = Slots:KvGetNum(KvWeapon, "clipsize");
+        g_WeaponAmmo[index] = KvGetNum(KvWeapon, "clipsize", 0);
+
+        if (KvGetNum(KvWeapon, "is_knife", 0)) {
+            g_WeaponIdKnife         = index;
+        } else if (KvGetNum(KvWeapon, "is_hegrenade", 0)) {
+            g_WeaponIdHegrenade     = index;
+        } else if (KvGetNum(KvWeapon, "is_smokegrenade", 0)) {
+            g_WeaponIdSmokegrenade  = index;
+        } else if (KvGetNum(KvWeapon, "is_flashbang", 0)) {
+            g_WeaponIdFlashbang     = index;
+        }
 
         if ( !KvGotoNextKey(KvWeapon) ) {
             break;
@@ -100,4 +115,16 @@ OnKeyValueStart()
     }
 
     KvRewind(KvWeapon);
+
+    if (!(  g_WeaponsMaxId
+            && g_WeaponIdKnife
+            && g_WeaponIdHegrenade
+            && g_WeaponIdSmokegrenade
+            && g_WeaponIdFlashbang
+    )) {
+        decl String:Error[1024];
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i] ", 
+            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang);
+        SetFailState(Error);
+    }
 }
