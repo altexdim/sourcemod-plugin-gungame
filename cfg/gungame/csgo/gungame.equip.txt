@@ -107,12 +107,85 @@ Do not use at all: decoy, any of the gears
 
          */
 
-        "1" "glock"
-        "2" "deagle"
+        /** reverse order
+        "29" "awp"
+        "28" "g3sg1"
+        "27" "scar20"
+
+        "26" "ak47"
+        "25" "m4a1"
+        "24" "sg556"
+        "23" "aug"
+        "22" "galilar"
+        "21" "famas"
+
+        "20" "mac10"
+        "19" "mp9"
+        "18" "bizon"
+        "17" "p90"
+        "16" "ump45"
+        "15" "mp7"
+
+        "14" "mag7"
+        "13" "negev"
+        "12" "m249"
+
+        "11" "sawedoff"
+        "10" "xm1014"
+        "9" "nova"
+
+        "8" "ssg08"
+
+        "7" "deagle"
+        "6" "elite"
+        "5" "tec9"
+        "4" "hkp2000"
         "3" "fiveseven"
-        "4" "elite"
-        "5" "hegrenade"
-        "6" "knife"
+        "2" "p250"
+        "1" "glock"
+
+        "30" "hegrenade"
+        "31" "knife"
+        */
+
+        "1" "awp"
+        "2" "g3sg1"
+        "3" "scar20"
+
+        "4" "ak47"
+        "5" "m4a1"
+        "6" "sg556"
+        "7" "aug"
+        "8" "galilar"
+        "9" "famas"
+
+        "10" "mac10"
+        "11" "mp9"
+        "12" "bizon"
+        "13" "p90"
+        "14" "ump45"
+        "15" "mp7"
+
+        "16" "mag7"
+        "17" "negev"
+        "18" "m249"
+
+        "19" "sawedoff"
+        "20" "xm1014"
+        "21" "nova"
+
+        "22" "ssg08"
+
+        "23" "deagle"
+        "24" "elite"
+        "25" "tec9"
+        "26" "hkp2000"
+        "27" "fiveseven"
+        "28" "p250"
+        "29" "glock"
+
+        "30" "hegrenade"
+        "31" "knife"
 
         /**
          * If RandomWeaponOrder is enabled, keep this levels unchanged.
