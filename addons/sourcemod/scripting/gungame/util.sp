@@ -666,8 +666,8 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             g_NumberOfNades[client] = NumberOfNades - 1;
         }
         if ( NadeBonusWeaponId ) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:NadeBonusWeaponId]);
-            new Slots:slotBonus = g_WeaponSlot[_:NadeBonusWeaponId];
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[NadeBonusWeaponId]);
+            new Slots:slotBonus = g_WeaponSlot[NadeBonusWeaponId];
             if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) {
                 g_ClientSlotEnt[client][slotBonus] = ent;
             }
@@ -1019,8 +1019,8 @@ UTIL_GiveWarmUpWeapon(client)
     }
     if ( g_Cfg_WarmupWeapon && g_Cfg_WarmupWeapon != g_WeaponIdKnife )
     {
-        GivePlayerItemWrapper(client, g_WeaponName[_:g_Cfg_WarmupWeapon]);
-        FakeClientCommand(client, "use %s", g_WeaponName[_:g_Cfg_WarmupWeapon]);
+        GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_WarmupWeapon]);
+        FakeClientCommand(client, "use %s", g_WeaponName[g_Cfg_WarmupWeapon]);
         return;
     }
     FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);

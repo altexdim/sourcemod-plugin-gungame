@@ -73,7 +73,7 @@ public __GetWeaponIndex(Handle:plugin, numParams)
     decl String:weapon[24];
     GetNativeString(1, weapon, sizeof(weapon));
 
-    return _:UTIL_GetWeaponIndex(weapon);
+    return UTIL_GetWeaponIndex(weapon);
 }
 
 public __GiveHandicapLevel(Handle:plugin, numParams)
@@ -230,7 +230,7 @@ public __IsClientCurrentWeapon(Handle:plugin, numParams)
     decl String:Weapon[24];
     GetNativeString(2, Weapon, sizeof(Weapon));
 
-    if(strcmp(Weapon, g_WeaponName[_:WeaponOrderId[PlayerLevel[client]]], false) == 0)
+    if(strcmp(Weapon, g_WeaponName[WeaponOrderId[PlayerLevel[client]]], false) == 0)
     {
         return 1;
     }
