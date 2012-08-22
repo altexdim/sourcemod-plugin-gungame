@@ -3,8 +3,7 @@ Changelog
     1.2.0.0.beta:
         * Added spanish translation, thanks to Xilver266.
         * Added CSGO support. Thanks to psychonic! Actualy he made this version possible and can not imagine this plugin without his support.
-            If you want to recompile with CSGO support, you should define WITH_CSGO_SUPPORT=1 in command line (see include/gungame_const.inc for more defines).
-            If you want to recompile with CSS support, you should define WITH_CSS_SUPPORT=1 in command line (see include/gungame_const.inc for more defines).
+        * Merged css and csgo versions of plugin into one plugin (you can use it without recompiling).
 
     1.1.9.1:
         * gamedata file updated after css update on 15 Apr 2011.
