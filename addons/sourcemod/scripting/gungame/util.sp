@@ -571,11 +571,11 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
                         RemovePlayerItem(client, ent);
                         RemoveEdict(ent);
                         if ( StripDeadPlayersWeapon ) {
-                            if ( StrEqual(Grenade, WeaponName[CSW_HEGRENADE]) ) {
+                            if ( StrEqual(Grenade, g_WeaponName[_:CSW_HEGRENADE]) ) {
                                 g_ClientSlotEntHeGrenade[client] = -1;
-                            } else if ( StrEqual(Grenade, WeaponName[CSW_SMOKEGRENADE]) ) {
+                            } else if ( StrEqual(Grenade, g_WeaponName[_:CSW_SMOKEGRENADE]) ) {
                                 g_ClientSlotEntSmoke[client] = -1;
-                            } else if ( StrEqual(Grenade, WeaponName[CSW_FLASHBANG]) ) {
+                            } else if ( StrEqual(Grenade, g_WeaponName[_:CSW_FLASHBANG]) ) {
                                 UTIL_UpdateFlashCounter(client);
                             }
                         }
@@ -664,7 +664,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
     // A check to make sure player always has a knife 
     // because some maps do not give the knife.
     if ( spawn && GetPlayerWeaponSlot(client, _:Slot_Knife) == -1 ) {
-        GivePlayerItemWrapper(client, WeaponName[CSW_KNIFE]);
+        GivePlayerItemWrapper(client, g_WeaponName[_:CSW_KNIFE]);
     }
 
     if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
@@ -683,7 +683,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
         if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
             g_BlockSwitch[client] = false;
         } else {
-            FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+            FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_KNIFE]);
         }
         return;
     }
@@ -693,7 +693,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             g_NumberOfNades[client] = NumberOfNades - 1;
         }
         if ( NadeBonusWeaponId ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[NadeBonusWeaponId]);
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:NadeBonusWeaponId]);
             new Slots:slotBonus = WeaponSlot[NadeBonusWeaponId];
             if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) {
                 g_ClientSlotEnt[client][slotBonus] = ent;
@@ -702,7 +702,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
                 new iAmmo = UTIL_GetAmmoType(ent);
 
-                if ( iAmmo != -1 ) {
+                if ((iAmmo != -1) && (ent != INVALID_ENT_REFERENCE)) {
                     new Handle:Info = CreateDataPack();
                     WritePackCell(Info, client);
                     WritePackCell(Info, iAmmo);
@@ -714,26 +714,26 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             }
         }
         if ( NadeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
             g_ClientSlotEntSmoke[client] = ent;
         }
         if ( NadeFlash ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG], !g_BlockSwitch[client]);
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_FLASHBANG], !g_BlockSwitch[client]);
             UTIL_FlashCounterAdd(client, ent);
         }
     }
     if ( slot == Slot_Knife ) {
         if ( g_Cfg_KnifeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_SMOKEGRENADE], !g_BlockSwitch[client]);
             g_ClientSlotEntSmoke[client] = ent;
         }
         if ( g_Cfg_KnifeFlash ) {
-            new ent = GivePlayerItemWrapper(client, WeaponName[CSW_FLASHBANG], !g_BlockSwitch[client]);
+            new ent = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_FLASHBANG], !g_BlockSwitch[client]);
             UTIL_FlashCounterAdd(client, ent);
         }
     } else {
         /* Give new weapon */
-        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId]);
+        new ent = GivePlayerItemWrapper(client, g_WeaponName[_:WeapId]);
         if ( slot == Slot_Primary || slot == Slot_Secondary ) {
             g_ClientSlotEnt[client][slot] = ent;
         } else if ( slot == Slot_Grenade ) {
@@ -751,7 +751,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
     if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
         g_BlockSwitch[client] = false;
     } else {
-        FakeClientCommand(client, "use %s", WeaponName[WeapId]);
+        FakeClientCommand(client, "use %s", g_WeaponName[_:WeapId]);
     }
 }
 
@@ -1041,18 +1041,18 @@ UTIL_GiveWarmUpWeapon(client)
         return;
     }
     if ( WarmupNades ) {
-        new ent = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE]);
+        new ent = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_HEGRENADE]);
         g_ClientSlotEntHeGrenade[client] = ent;
-        FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+        FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_HEGRENADE]);
         return;
     }
     if ( g_Cfg_WarmupWeapon && g_Cfg_WarmupWeapon != CSW_KNIFE )
     {
-        GivePlayerItemWrapper(client, WeaponName[g_Cfg_WarmupWeapon]);
-        FakeClientCommand(client, "use %s", WeaponName[g_Cfg_WarmupWeapon]);
+        GivePlayerItemWrapper(client, g_WeaponName[_:g_Cfg_WarmupWeapon]);
+        FakeClientCommand(client, "use %s", g_WeaponName[_:g_Cfg_WarmupWeapon]);
         return;
     }
-    FakeClientCommand(client, "use %s", WeaponName[CSW_KNIFE]);
+    FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_KNIFE]);
 }
 
 UTIL_GetRandomInt(start, end)
@@ -1072,14 +1072,14 @@ UTIL_GiveExtraNade(client, bool:knife) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 ) {
+        if ( UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_HEGRENADE]) == -1 ) {
             g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
                 client, 
-                WeaponName[CSW_HEGRENADE], 
+                g_WeaponName[_:CSW_HEGRENADE], 
                 g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade )
             );
             if ( !( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade ) ) ) {
-                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+                FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_HEGRENADE]);
             }
         }
     }
@@ -1421,7 +1421,7 @@ UTIL_UpdateFlashCounter(client) {
         if ( ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade ) {
             GetEdictClassname(ent, Class, sizeof(Class));
 
-            if ( StrEqual(Class, WeaponName[CSW_FLASHBANG], false) ) {
+            if ( StrEqual(Class, g_WeaponName[_:CSW_FLASHBANG], false) ) {
                 g_ClientSlotEntFlash[client][index++] = ent;
             }
         }
@@ -1444,24 +1444,22 @@ UTIL_FlashCounterAdd(client, ent) {
 }
 
 UTIL_RemoveAmmoNew(client, weapon) {
-    if (weapon != INVALID_ENT_REFERENCE) {
-        new primaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
-        if (primaryAmmoType != -1) {
-            SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, primaryAmmoType);
-        }
-        
-        /*
-        // NOT USED
-        new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
-        if (secondaryAmmoType != -1) {
-            SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
-        }
-        */
-    
-        // LEAVE ONE CLIP
-        //SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
-
-        // REMOVE EXTRA CLIPS
-        SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
+    new primaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
+    if (primaryAmmoType != -1) {
+        SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, primaryAmmoType);
     }
+        
+    /*
+    // NOT USED
+    new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
+    if (secondaryAmmoType != -1) {
+        SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
+    }
+    */
+    
+    // LEAVE ONE CLIP
+    //SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+
+    // REMOVE EXTRA CLIPS
+    SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
 }

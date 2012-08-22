@@ -114,9 +114,9 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
                 g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
             } else if ( slot == Slot_Grenade ) {
                 if ( WeapId == CSW_HEGRENADE ) {
-                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]);
+                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_HEGRENADE]);
                 } else if ( WeapId == CSW_SMOKEGRENADE ) {
-                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, WeaponName[CSW_SMOKEGRENADE]);
+                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_SMOKEGRENADE]);
                 } else if ( WeapId == CSW_FLASHBANG ) {
                     UTIL_UpdateFlashCounter(client);
                 }
@@ -821,15 +821,15 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, WeaponName[CSW_HEGRENADE]) == -1 ) {
+        if ( UTIL_FindGrenadeByName(client, g_WeaponName[_:CSW_HEGRENADE]) == -1 ) {
             if ( NumberOfNades ) {
                 g_NumberOfNades[client]--;
             }
 
-            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, WeaponName[CSW_HEGRENADE], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
+            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, g_WeaponName[_:CSW_HEGRENADE], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
 
             if ( !( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade ) ) {
-                FakeClientCommand(client, "use %s", WeaponName[CSW_HEGRENADE]);
+                FakeClientCommand(client, "use %s", g_WeaponName[_:CSW_HEGRENADE]);
             }
         }
     }

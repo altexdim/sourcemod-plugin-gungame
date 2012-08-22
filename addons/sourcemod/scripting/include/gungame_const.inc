@@ -175,6 +175,11 @@ enum Weapons
 #endif
 
 #if defined WITH_CSGO_SUPPORT
+
+#define MAX_WEAPONS_COUNT 64
+#define MAX_WEAPON_NAME_LEN 24
+
+//deprecated
 enum Weapons {
     // None weapon
     CSW_NONE,

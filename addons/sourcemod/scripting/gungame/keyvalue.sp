@@ -73,19 +73,28 @@ OnKeyValueStart()
         return;
     }
 
-    new String:name[24];
+    new String:name[MAX_WEAPON_NAME_LEN];
     new Weapons:index;
-    for (;;)
-    {
-        if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) )
-        {
+    for (;;) {
+        if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
             break;
         }
+
         index = Weapons:KvGetNum(KvWeapon, "index");
         UTIL_StringToLower(name);
+
+        // init weapons by name array
         SetTrieValue(TrieWeapon, name, index);
-        if ( !KvGotoNextKey(KvWeapon) )
-        {
+        // init weapons count
+        g_WeaponsCount++;
+        // init weapons full names (to use in give commands)
+        FormatEx(g_WeaponName[index], sizeof(g_WeaponName[]), "weapon_%s", name);
+        // init weapons slots
+        g_WeaponSlot[index] = Slots:KvGetNum(KvWeapon, "slot");
+        // init weapons clip size
+        g_WeaponAmmo[index] = Slots:KvGetNum(KvWeapon, "clipsize");
+
+        if ( !KvGotoNextKey(KvWeapon) ) {
             break;
         }
     }

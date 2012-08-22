@@ -68,6 +68,11 @@ new const WeaponAmmo[Weapons:MAXWEAPON] =
 #endif
 
 #if defined WITH_CSGO_SUPPORT
+
+new String:g_WeaponName[MAX_WEAPONS_COUNT][MAX_WEAPON_NAME_LEN];
+new Slots:g_WeaponSlot[MAX_WEAPONS_COUNT];
+new g_WeaponAmmo[MAX_WEAPONS_COUNT];
+
 // Killable weapons
 new const String:WeaponName[Weapons:MAXWEAPON][] = {
     // none
@@ -173,3 +178,4 @@ new g_ClientSlotEntSmoke[MAXPLAYERS+1];
 new g_ClientSlotEntFlash[MAXPLAYERS+1][2];
 
 new GameName:g_GameName = GameName:None;
+new g_WeaponsCount = 0;

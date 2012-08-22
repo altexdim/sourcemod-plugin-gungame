@@ -220,7 +220,7 @@ public __IsClientCurrentWeapon(Handle:plugin, numParams)
     decl String:Weapon[24];
     GetNativeString(2, Weapon, sizeof(Weapon));
 
-    if(strcmp(Weapon, WeaponName[WeaponOrderId[PlayerLevel[client]]], false) == 0)
+    if(strcmp(Weapon, g_WeaponName[_:WeaponOrderId[PlayerLevel[client]]], false) == 0)
     {
         return 1;
     }
@@ -370,7 +370,7 @@ public __SetWeaponLevel(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon index out of range [%d]", weap);
     }
 
-    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), WeaponName[weap]);
+    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[_:weap]);
     WeaponOrderId[level - 1] = weap;
 
     return 1;
@@ -395,7 +395,7 @@ public __SetWeaponLevelByName(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon name is invalid [%s]", weapon);
     }
 
-    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), WeaponName[weap]);
+    strcopy(WeaponOrderName[level - 1], sizeof(WeaponOrderName[]), g_WeaponName[_:weap]);
     WeaponOrderId[level - 1] = weap;
 
     return 1;
