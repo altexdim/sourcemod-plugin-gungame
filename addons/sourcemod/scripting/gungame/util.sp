@@ -752,9 +752,9 @@ UTIL_PlaySound(client, Sounds:type)
         return;
     }
     if ( !client ) {
-        EmitSoundToAll(EventSounds[type]);
+        EmitSoundToAll(EventSounds[type], _, _, SNDLEVEL_RAIDSIREN);
     } else {
-        EmitSoundToClient(client, EventSounds[type]);
+        EmitSoundToClient(client, EventSounds[type], _, _, SNDLEVEL_RAIDSIREN);
     }
 }
 
@@ -849,7 +849,7 @@ UTIL_StartTripleEffects(client)
         SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
     }
     if ( EventSounds[Triple][0] ) {
-        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_NOFLAGS, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+        EmitSoundToAll(EventSounds[Triple], client, _, SNDLEVEL_RAIDSIREN);
     }
     if ( g_Cfg_TripleLevelEffect ) {
         UTIL_StartEffectClient(client);
@@ -881,7 +881,7 @@ UTIL_StopTripleEffects(client)
         SetEntDataFloat(client, OffsetMovement, 1.0);
     }
     if ( EventSounds[Triple][0] ) {
-        EmitSoundToAll(EventSounds[Triple], client, SNDCHAN_AUTO, SNDLEVEL_NORMAL, SND_STOPLOOPING, SNDVOL_NORMAL, SNDPITCH_NORMAL);
+        EmitSoundToAll(EventSounds[Triple], client, _, SNDLEVEL_RAIDSIREN, SND_STOPLOOPING);
     }
     if ( g_Cfg_TripleLevelEffect ) {
         UTIL_StopEffectClient(client);
