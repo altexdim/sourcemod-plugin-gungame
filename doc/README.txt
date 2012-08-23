@@ -4,6 +4,7 @@
 ----------------------------------------------------
 [LIST]
 [*] [goanchor=Description]Description[/goanchor]
+[*] [goanchor=Complementary plugins]Complementary plugins[/goanchor]
 [*] [goanchor=Commands and Cvars]Commands and Cvars[/goanchor]
 [*] [goanchor=Requirements]Requirements[/goanchor]
 [*] [goanchor=Installation]Installation[/goanchor]
@@ -26,15 +27,18 @@
     You should kill enemies with all the weapons to win the game.
 
     [URL]http://forums.alliedmods.net/showthread.php?t=93977[/URL]
+[/INDENT]
 
-    Complementary plugins:
+[anchor]Complementary plugins[/anchor][B]Complementary plugins[/B]
+----------------------------------------------------
 [LIST]
 [*] deathmatch, elimination, spawn protection
             [B]sm_ggdm[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=103242[/URL]
 [*] noblock
             [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
 [/LIST]
-    [/INDENT][B]Commands and Cvars[/B][anchor]Commands and Cvars[/anchor]
+
+[anchor]Commands and Cvars[/anchor][B]Commands and Cvars[/B]
 ----------------------------------------------------
 [LIST]
 [*] [B]sm_gungamesm_version[/B]            - Gungame version.
