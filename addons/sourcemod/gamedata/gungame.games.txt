@@ -7,8 +7,8 @@
                 "linux"     "119"
             }
             "GetSlot" {
-                "windows"   "318"
-                "linux"     "324"
+                "windows"   "320"
+                "linux"     "326"
             }
         }
     }
