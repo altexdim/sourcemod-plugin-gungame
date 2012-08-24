@@ -24,6 +24,7 @@ HACK_GetSlot(entity) {
 }
 
 CreateEndMultiplayerGame() {
+#if defined DISABLED_HACKS
     StartPrepSDKCall(SDKCall_GameRules);
     PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "EndMultiplayerGame");
     EndMultiplayerGame = EndPrepSDKCall();
@@ -31,6 +32,7 @@ CreateEndMultiplayerGame() {
     if (EndMultiplayerGame == INVALID_HANDLE) {
         SetFailState("Virtual CGameRules::EndMultiplayerGame Failed. Please contact the author.");
     }
+#endif
 }
 
 /**
@@ -40,5 +42,10 @@ CreateEndMultiplayerGame() {
  * @noreturn
  */
 HACK_EndMultiplayerGame() {
+#if defined DISABLED_HACKS
     SDKCall(EndMultiplayerGame);
+#endif
+    new ent = CreateEntityByName("game_end");
+    DispatchSpawn(ent);
+    AcceptEntityInput(ent, "EndGame");
 }

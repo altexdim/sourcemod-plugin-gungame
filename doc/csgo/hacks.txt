@@ -51,3 +51,21 @@ I hope this helps.
 
 4+) I'm not sure about EndMultiplayerGame. It might or might 
     not work with new offset.
+
+5+)
+Looking at the sdk, at least in CS:S, you should be able to force EndMultiplayerGame 
+by creating a game_end entity (with CreateEntityByName) and then 
+using AcceptEntityInput to fire the "EndGame" input. 
+I have not tested this, but it looks like it is exactly what you want.
+
+6)
+For GetSlot, the only thing that comes to mind is maybe checking 
+the ammo type (m_iPrimaryAmmoType, Prop_Send) on the weapon 
+since each grenade type has their own.
+
+From ZR:
+#define AMMO_INDEX_HE 11
+#define AMMO_INDEX_FLASH 12
+#define AMMO_INDEX_SMOKE 13
+
+нужно понять, для чего сейчас конкретно используется getslot
