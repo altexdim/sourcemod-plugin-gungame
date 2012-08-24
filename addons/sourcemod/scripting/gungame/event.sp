@@ -9,13 +9,6 @@ OnEventStart()
     HookEvent("item_pickup", _ItemPickup);
     HookEvent("hegrenade_detonate",_HeExplode);
 
-    if ( StripDeadPlayersWeapon ) {
-        #if defined TEMPORARY_DISABLED
-        HookEvent("flashbang_detonate",_FlashExplode);
-        #endif
-        HookEvent("weapon_fire", _WeaponFire);
-    }
-
     if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
         StartSwitchHook();
     }
@@ -35,13 +28,6 @@ OnEventShutdown()
     UnhookEvent("player_team", _PlayerTeam);
     UnhookEvent("item_pickup", _ItemPickup);
     UnhookEvent("hegrenade_detonate",_HeExplode);
-
-    if ( StripDeadPlayersWeapon ) {
-        #if defined TEMPORARY_DISABLED
-        UnhookEvent("flashbang_detonate",_FlashExplode);
-        #endif
-        UnhookEvent("weapon_fire", _WeaponFire);
-    }
 
     if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife ) {
         StopSwitchHook();
@@ -107,28 +93,6 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
             UTIL_ForceDropAllWeapon(client);
         }
     }
-
-    if ( StripDeadPlayersWeapon && !g_IsInGiveCommand )
-    {
-        decl String:Weapon[24];
-        GetEventString(event, "item", Weapon, sizeof(Weapon));
-        new WeapId = UTIL_GetWeaponIndex(Weapon);
-        if ( WeapId != 0 )
-        {
-            new Slots:slot = g_WeaponSlot[WeapId];
-            if ( slot == Slot_Primary || slot == Slot_Secondary ) {
-                g_ClientSlotEnt[client][slot] = GetPlayerWeaponSlot(client, _:slot);
-            } else if ( slot == Slot_Grenade ) {
-                if ( WeapId == g_WeaponIdHegrenade ) {
-                    g_ClientSlotEntHeGrenade[client] = UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdHegrenade]);
-                } else if ( WeapId == g_WeaponIdSmokegrenade ) {
-                    g_ClientSlotEntSmoke[client] = UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdSmokegrenade]);
-                } else if ( WeapId == g_WeaponIdFlashbang ) {
-                    UTIL_UpdateFlashCounter(client);
-                }
-            }
-        }
-    }
 }
 
 public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast)
@@ -186,7 +150,6 @@ public _PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     if ( client && !disconnect && (oldTeam >= 2) && IsClientInGame(client) && IsPlayerAlive(client) )
     {
-        UTIL_RemoveClientDroppedWeapons(client, true);
         UTIL_StopTripleEffects(client);
     }
     if ( !client || disconnect || (oldTeam < 2) || (newTeam < 2) || !IsPlayerAlive(client) || (oldTeam == newTeam) )
@@ -280,7 +243,6 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     }
     
     new Victim = GetClientOfUserId(GetEventInt(event, "userid"));
-    UTIL_RemoveClientDroppedWeapons(Victim);
     UTIL_StopTripleEffects(Victim);
     
     new Killer = GetClientOfUserId(GetEventInt(event, "attacker"));
@@ -827,7 +789,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdHegrenade]) == -1 ) {
+        if ( UTIL_FindGrenadeByAmmoType(client, g_WeaponAmmoTypeHegrenade) == -1 ) {
             if ( NumberOfNades ) {
                 g_NumberOfNades[client]--;
             }
@@ -888,6 +850,9 @@ public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newV
 }
 
 public Action:CS_OnCSWeaponDrop(client, weapon) {
-    PrintToChatAll("drop: %d %d", client, weapon);
-    return Plugin_Continue;
+    if (StripDeadPlayersWeapon) {
+        return Plugin_Stop;
+    } else {
+        return Plugin_Continue;
+    }
 }

@@ -142,7 +142,7 @@ OnKeyValueStart()
     )) {
         decl String:Error[1024];
         FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found HE=[%i] FLASH=[%i] SMOKE=[%i]", 
-            g_WeaponsMaxId, g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
+            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
         SetFailState(Error);
     }
 }

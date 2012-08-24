@@ -60,7 +60,6 @@ new bool:IsActive = false;
 new bool:IsObjectiveHooked;
 new HostageEntInfo;
 new Handle:PlayerLevelsBeforeDisconnect = INVALID_HANDLE;
-new g_IsInGiveCommand = false;
 new Handle:g_Timer_HandicapUpdate = INVALID_HANDLE;
 new Handle:PlayerHandicapTimes = INVALID_HANDLE;
 new bool:g_SkipSpawn[MAXPLAYERS+1] = {false, ...};

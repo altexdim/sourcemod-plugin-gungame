@@ -22,7 +22,6 @@
 #include "gungame/config.h"
 #include "gungame/keyvalue.h"
 #include "gungame/event.h"
-#include "gungame/hacks.h"
 #include "gungame/offset.h"
 #include "gungame/util.h"
 
@@ -35,7 +34,6 @@
 #include "gungame/util.sp"
 #include "gungame/natives.sp"
 #include "gungame/offset.sp"
-#include "gungame/hacks.sp"
 #include "gungame/config.sp"
 #include "gungame/keyvalue.sp"
 #include "gungame/event.sp"
@@ -161,7 +159,6 @@ public OnPluginStart() {
     OnKeyValueStart();
     OnOffsetStart();
     OnCreateCommand();
-    OnHackStart();
 
     #if defined GUNGAME_DEBUG
     OnCreateDebug();
@@ -186,14 +183,6 @@ public OnClientPutInServer(client) {
         #if defined WITH_SDKHOOKS
         SDKHook(client, SDKHook_WeaponSwitch, OnWeaponSwitch);
         #endif
-    }
-
-    if ( StripDeadPlayersWeapon ) {
-        g_ClientSlotEnt[client][Slot_Primary] = -1;
-        g_ClientSlotEnt[client][Slot_Secondary] = -1;
-        g_ClientSlotEntHeGrenade[client] = -1;
-        g_ClientSlotEntSmoke[client] = -1;
-        UTIL_ClearFlashCounter(client);
     }
 }
 
@@ -313,7 +302,6 @@ public OnClientDisconnect(client)
     
     if ( IsClientInGame(client) && IsPlayerAlive(client) )
     {
-        UTIL_RemoveClientDroppedWeapons(client, true);
         UTIL_StopTripleEffects(client);
     }
 }

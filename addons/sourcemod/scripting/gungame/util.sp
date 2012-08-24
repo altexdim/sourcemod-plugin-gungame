@@ -349,7 +349,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
         GameWinner = client;
 
         UTIL_FreezeAllPlayer();
-        ForceMapChange();
+        UTIL_EndMultiplayerGame();
 
         new result;
         Call_StartForward(FwdSoundWinner);
@@ -377,12 +377,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
     return Level;
 }
 
-ForceMapChange()
-{
-    /* Force intermission change map. */
-    HACK_EndMultiplayerGame();
-}
-
 UTIL_FreezeAllPlayer()
 {
     for(new i = 1, b; i <= MaxClients; i++)
@@ -397,6 +391,8 @@ UTIL_FreezeAllPlayer()
 
 /**
  * Force drop a weapon by a slot
+ *
+ * NOTICE: Only used for C4 slot.
  *
  * @param client        Player index.
  * @param slot            The player weapon slot. Look at enum Slots.
@@ -486,6 +482,8 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
 }
 
 /**
+ * // FIXME: CSGO does not drop INCGRENADE
+ *
  * @client        Player index
  * @remove        Remove grenade on drop
  * @noreturn
@@ -510,11 +508,6 @@ UTIL_DropAllGrenades(client, bool:remove = false)
             CS_DropWeapon(client, ent, false, false);
         }
     }
-    if ( StripDeadPlayersWeapon ) {
-        g_ClientSlotEntHeGrenade[client] = -1;
-        g_ClientSlotEntSmoke[client] = -1;
-        UTIL_ClearFlashCounter(client);
-    }
 }
 
 /**
@@ -526,10 +519,10 @@ UTIL_DropAllGrenades(client, bool:remove = false)
  *
  * @return        -1 if not found or you drop the grenade otherwise will return the Entity index.
  */
-UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false) {
+stock UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false) {
     decl String:Class[64];
 
-    for (new i = 0, ent; i < 128; i += 4) {
+    for (new i = 0, ent, type; i < 128; i += 4) {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
         if (ent <= MaxClients) {
             continue;
@@ -545,16 +538,41 @@ UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:r
                 if (remove) {
                     RemovePlayerItem(client, ent);
                     RemoveEdict(ent);
-                    if ( StripDeadPlayersWeapon ) {
-                        if (g_WeaponAmmoTypeHegrenade == type) {
-                            g_ClientSlotEntHeGrenade[client] = -1;
-                        } else if (g_WeaponAmmoTypeSmokegrenade == type) {
-                            g_ClientSlotEntSmoke[client] = -1;
-                        } else if (g_WeaponAmmoTypeFlashbang == type) {
-                            UTIL_UpdateFlashCounter(client);
-                        }
-                    }
-                    return -1;
+                    return -2;
+                } else {
+                    CS_DropWeapon(client, ent, false, false);
+                }
+            }
+
+            return ent;
+        }
+
+    }
+
+    return -1;
+}
+
+/**
+ *
+ * @param client    Player client
+ * @param Grenade    Grenade weapon ammo type. ie 11
+ * @param drop        Drop the grenade
+ * @param remove    Removes the weapon from the world
+ *
+ * @return        -1 if not found or you drop the grenade otherwise will return the Entity index.
+ */
+UTIL_FindGrenadeByAmmoType(client, Grenade, bool:drop = false, bool:remove = false) {
+    for (new i = 0, ent; i < 128; i += 4) {
+        ent = GetEntDataEnt2(client, m_hMyWeapons + i);
+        if (ent <= MaxClients) {
+            continue;
+        }
+        if (Grenade == UTIL_WeaponGetGrenadeType(ent)) {
+            if (drop) {
+                if (remove) {
+                    RemovePlayerItem(client, ent);
+                    RemoveEdict(ent);
+                    return -2;
                 } else {
                     CS_DropWeapon(client, ent, false, false);
                 }
@@ -786,53 +804,11 @@ GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
     if ( blockSwitch ) {
         g_BlockSwitch[client] = true;
     }
-    g_IsInGiveCommand = true;
     new ent = GivePlayerItem(client, item);
-    g_IsInGiveCommand = false;
     if ( blockSwitch ) {
         g_BlockSwitch[client] = false;
     }
     return ent;
-}
-
-UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
-{
-    if ( StripDeadPlayersWeapon )
-    {
-        new ent = g_ClientSlotEnt[client][Slot_Primary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
-        {
-            RemoveEdict(ent);
-        }
-        ent = g_ClientSlotEnt[client][Slot_Secondary];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
-        {
-            RemoveEdict(ent);
-        }
-        ent = g_ClientSlotEntHeGrenade[client];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
-        {
-            RemoveEdict(ent);
-        }
-        ent = g_ClientSlotEntSmoke[client];
-        if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
-        {
-            RemoveEdict(ent);
-        }
-        for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
-            ent = g_ClientSlotEntFlash[client][i];
-            if ( ent >= 0 && IsValidEdict(ent) && IsValidEntity(ent) && (GetEntDataEnt2(ent, OffsetWeaponParent) == -1 || disconnect) )
-            {
-                RemoveEdict(ent);
-            }
-        }
-
-        g_ClientSlotEnt[client][Slot_Primary] = -1;
-        g_ClientSlotEnt[client][Slot_Secondary] = -1;
-        g_ClientSlotEntHeGrenade[client] = -1;
-        g_ClientSlotEntSmoke[client] = -1;
-        UTIL_ClearFlashCounter(client);
-    }
 }
 
 UTIL_StartTripleEffects(client)
@@ -1045,7 +1021,7 @@ UTIL_GiveExtraNade(client, bool:knife) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByName(client, g_WeaponName[g_WeaponIdHegrenade]) == -1 ) {
+        if ( UTIL_FindGrenadeByAmmoType(client, g_WeaponAmmoTypeHegrenade) == -1 ) {
             g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
@@ -1382,14 +1358,13 @@ UTIL_CreateEffect(client) {
     }
 }
 
-UTIL_WeaponTypeIsGrenade(type) {
+stock UTIL_WeaponTypeIsGrenade(type) {
     return type == g_WeaponAmmoTypeHegrenade 
         || type == g_WeaponAmmoTypeFlashbang 
         || type == g_WeaponAmmoTypeSmokegrenade;
 }
 
 UTIL_UpdateFlashCounter(client) {
-    decl String:Class[64];
     new index = 0;
 
     UTIL_ClearFlashCounter(client);
@@ -1431,15 +1406,15 @@ UTIL_RemoveAmmo(client, weapon) {
     }
         
     /*
-    // NOT USED (TODO: check with mp5navy!)
+    // NOT USED BECAUSE NOT ALL WEAPONS HAS SECAMMO (TODO: check with mp5navy!)
     new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
     if (secondaryAmmoType != -1) {
         SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);
     }
     */
     
-    // LEAVE ONE CLIP
-    //SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
+    // LEAVE ONE CLIP -> COMMENTED REMOVE
+    // SetEntProp(weapon, Prop_Send, "m_iClip1", 0);
 
     // REMOVE EXTRA CLIPS
     SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
@@ -1455,4 +1430,16 @@ UTIL_Remove(entity) {
     if (entity) {
         AcceptEntityInput(entity, "Kill");
     }
+}
+
+/**
+ * Forces multiplayer game to end so it can go threw intermission and map change.
+ *
+ * @noparam
+ * @noreturn
+ */
+UTIL_EndMultiplayerGame() {
+    new ent = CreateEntityByName("game_end");
+    DispatchSpawn(ent);
+    AcceptEntityInput(ent, "EndGame");
 }
