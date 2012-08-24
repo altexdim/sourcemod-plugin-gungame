@@ -887,3 +887,7 @@ public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newV
     }
 }
 
+public Action:CS_OnCSWeaponDrop(client, weapon) {
+    PrintToChatAll("drop: %d %d", client, weapon);
+    return Plugin_Continue;
+}
