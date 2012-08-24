@@ -80,6 +80,11 @@ OnKeyValueStart()
     g_WeaponIdHegrenade     = 0;
     g_WeaponIdSmokegrenade  = 0;
     g_WeaponIdFlashbang     = 0;
+
+    g_WeaponAmmoTypeHegrenade       = 0;
+    g_WeaponAmmoTypeFlashbang       = 0;
+    g_WeaponAmmoTypeSmokegrenade    = 0;
+
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
             break;
@@ -100,15 +105,18 @@ OnKeyValueStart()
         g_WeaponAmmo[index] = KvGetNum(KvWeapon, "clipsize", 0);
 
         if (KvGetNum(KvWeapon, "is_knife", 0)) {
-            g_WeaponIdKnife         = index;
+            g_WeaponIdKnife                 = index;
         } else if (KvGetNum(KvWeapon, "is_hegrenade", 0)) {
-            g_WeaponIdHegrenade     = index;
+            g_WeaponIdHegrenade             = index;
+            g_WeaponAmmoTypeHegrenade       = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_smokegrenade", 0)) {
-            g_WeaponIdSmokegrenade  = index;
+            g_WeaponIdSmokegrenade          = index;
+            g_WeaponAmmoTypeSmokegrenade    = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_flashbang", 0)) {
-            g_WeaponIdFlashbang     = index;
-        }
-
+            g_WeaponIdFlashbang             = index;
+            g_WeaponAmmoTypeFlashbang       = KvGetNum(KvWeapon, "ammotype", 0);
+        } 
+        
         if ( !KvGotoNextKey(KvWeapon) ) {
             break;
         }
@@ -123,8 +131,18 @@ OnKeyValueStart()
             && g_WeaponIdFlashbang
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i] ", 
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i]", 
             g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang);
+        SetFailState(Error);
+    }
+
+    if (!(  g_WeaponAmmoTypeHegrenade
+            && g_WeaponAmmoTypeFlashbang
+            && g_WeaponAmmoTypeSmokegrenade
+    )) {
+        decl String:Error[1024];
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found HE=[%i] FLASH=[%i] SMOKE=[%i]", 
+            g_WeaponsMaxId, g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
         SetFailState(Error);
     }
 }

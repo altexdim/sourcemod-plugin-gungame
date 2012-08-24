@@ -10,7 +10,9 @@ OnEventStart()
     HookEvent("hegrenade_detonate",_HeExplode);
 
     if ( StripDeadPlayersWeapon ) {
+        #if defined TEMPORARY_DISABLED
         HookEvent("flashbang_detonate",_FlashExplode);
+        #endif
         HookEvent("weapon_fire", _WeaponFire);
     }
 
@@ -35,7 +37,9 @@ OnEventShutdown()
     UnhookEvent("hegrenade_detonate",_HeExplode);
 
     if ( StripDeadPlayersWeapon ) {
+        #if defined TEMPORARY_DISABLED
         UnhookEvent("flashbang_detonate",_FlashExplode);
+        #endif
         UnhookEvent("weapon_fire", _WeaponFire);
     }
 
@@ -82,6 +86,8 @@ public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast) {
         g_ClientSlotEntHeGrenade[client] = -1;
     } else if ( WeapId == g_WeaponIdSmokegrenade ) {
         g_ClientSlotEntSmoke[client] = -1;
+    } else if ( WeapId == g_WeaponIdFlashbang ) {
+        UTIL_UpdateFlashCounter(client);
     }
 }
 
@@ -835,6 +841,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
     }
 }
 
+#if defined TEMPORARY_DISABLED
 public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
 {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
@@ -845,6 +852,7 @@ public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
 
     UTIL_UpdateFlashCounter(client);
 }
+#endif
 
 public Action:OnWeaponSwitch(client, weapon) {
     if ( g_BlockSwitch[client] ) {

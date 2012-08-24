@@ -8,6 +8,7 @@ OnHackStart() {
 }
 
 CreateGetSlotHack() {
+#if defined DISABLED_HACKS
     StartPrepSDKCall(SDKCall_Entity);
     PrepSDKCall_SetFromConf(GameConf, SDKConf_Virtual, "GetSlot");
     PrepSDKCall_SetReturnInfo(SDKType_PlainOldData, SDKPass_Plain);
@@ -17,10 +18,13 @@ CreateGetSlotHack() {
     {
         SetFailState("Virtual CBaseCombatWeapon::GetSlot Failed. Please contact the author.");
     }
+#endif
 }
 
-HACK_GetSlot(entity) {
+stock HACK_GetSlot(entity) {
+#if defined DISABLED_HACKS
     return SDKCall(GetSlot, entity);
+#endif
 }
 
 CreateEndMultiplayerGame() {

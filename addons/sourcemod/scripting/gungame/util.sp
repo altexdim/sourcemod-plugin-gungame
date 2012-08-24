@@ -380,9 +380,6 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
 ForceMapChange()
 {
     /* Force intermission change map. */
-    #if 0
-    HACK_ForceGameEnd();
-    #endif
     HACK_EndMultiplayerGame();
 }
 
@@ -532,35 +529,40 @@ UTIL_DropAllGrenades(client, bool:remove = false)
 UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false) {
     decl String:Class[64];
 
-    for ( new i = 0, ent; i < 128; i += 4 ) {
+    for (new i = 0, ent; i < 128; i += 4) {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
-
-        if ( ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade ) {
-            GetEdictClassname(ent, Class, sizeof(Class));
-
-            if ( strcmp(Class, Grenade, false) == 0 ) {
-                if ( drop ) {
-                    if ( remove ) {
-                        RemovePlayerItem(client, ent);
-                        RemoveEdict(ent);
-                        if ( StripDeadPlayersWeapon ) {
-                            if ( StrEqual(Grenade, g_WeaponName[g_WeaponIdHegrenade]) ) {
-                                g_ClientSlotEntHeGrenade[client] = -1;
-                            } else if ( StrEqual(Grenade, g_WeaponName[g_WeaponIdSmokegrenade]) ) {
-                                g_ClientSlotEntSmoke[client] = -1;
-                            } else if ( StrEqual(Grenade, g_WeaponName[g_WeaponIdFlashbang]) ) {
-                                UTIL_UpdateFlashCounter(client);
-                            }
-                        }
-                        return -1;
-                    } else {
-                        CS_DropWeapon(client, ent, false, false);
-                    }
-                }
-
-                return ent;
-            }
+        if (ent <= MaxClients) {
+            continue;
         }
+        type = UTIL_WeaponGetGrenadeType(ent);
+        if (!UTIL_WeaponTypeIsGrenade(type)) {
+            continue;
+        }
+
+        GetEdictClassname(ent, Class, sizeof(Class));
+        if (strcmp(Class, Grenade, false) == 0) {
+            if (drop) {
+                if (remove) {
+                    RemovePlayerItem(client, ent);
+                    RemoveEdict(ent);
+                    if ( StripDeadPlayersWeapon ) {
+                        if (g_WeaponAmmoTypeHegrenade == type) {
+                            g_ClientSlotEntHeGrenade[client] = -1;
+                        } else if (g_WeaponAmmoTypeSmokegrenade == type) {
+                            g_ClientSlotEntSmoke[client] = -1;
+                        } else if (g_WeaponAmmoTypeFlashbang == type) {
+                            UTIL_UpdateFlashCounter(client);
+                        }
+                    }
+                    return -1;
+                } else {
+                    CS_DropWeapon(client, ent, false, false);
+                }
+            }
+
+            return ent;
+        }
+
     }
 
     return -1;
@@ -1380,23 +1382,31 @@ UTIL_CreateEffect(client) {
     }
 }
 
+UTIL_WeaponTypeIsGrenade(type) {
+    return type == g_WeaponAmmoTypeHegrenade 
+        || type == g_WeaponAmmoTypeFlashbang 
+        || type == g_WeaponAmmoTypeSmokegrenade;
+}
+
 UTIL_UpdateFlashCounter(client) {
     decl String:Class[64];
     new index = 0;
 
     UTIL_ClearFlashCounter(client);
 
-    for ( new i = 0, ent; i < 128; i += 4 ) {
+    for (new i = 0, ent; i < 128; i += 4) {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
-
-        if ( ent > MaxClients && HACK_GetSlot(ent) == _:Slot_Grenade ) {
-            GetEdictClassname(ent, Class, sizeof(Class));
-
-            if ( StrEqual(Class, g_WeaponName[g_WeaponIdFlashbang], false) ) {
-                g_ClientSlotEntFlash[client][index++] = ent;
-            }
+        if (ent <= MaxClients) {
+            continue;
+        }
+        if (UTIL_WeaponGetGrenadeType(ent) == g_WeaponAmmoTypeFlashbang) {
+            g_ClientSlotEntFlash[client][index++] = ent;
         }
     }
+}
+
+UTIL_WeaponGetGrenadeType(weapon) {
+    return GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
 }
 
 UTIL_ClearFlashCounter(client) {
@@ -1421,7 +1431,7 @@ UTIL_RemoveAmmo(client, weapon) {
     }
         
     /*
-    // NOT USED
+    // NOT USED (TODO: check with mp5navy!)
     new secondaryAmmoType = GetEntProp(weapon, Prop_Send, "m_iSeconaryAmmoType");
     if (secondaryAmmoType != -1) {
         SetEntProp(client, Prop_Send, "m_iAmmo", 0, _, secondaryAmmoType);

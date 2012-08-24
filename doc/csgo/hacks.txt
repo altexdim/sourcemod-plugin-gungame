@@ -68,4 +68,34 @@ From ZR:
 #define AMMO_INDEX_FLASH 12
 #define AMMO_INDEX_SMOKE 13
 
-нужно понять, для чего сейчас конкретно используется getslot
+    нужно понять, для чего сейчас конкретно используется getslot
+
+    1) UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false);
+        GET entity id
+        DROP entity
+        REMOVE entity
+        <-- 1) UTIL_GiveExtraNade(client, bool:knife) {
+            CHECK if player has hegrenade (before five another one)
+        <-- 2) public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
+            CHECK if player has hegrenade (before five another one)
+        <-- 3) public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
+            STORE entity id in g_ClientSlotEntHeGrenade
+            STORE entity id in g_ClientSlotEntSmokeGrenade
+
+        ---> 4) UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
+            GET entity id in g_ClientSlotEntHeGrenade
+            GET entity id in g_ClientSlotEntSmokeGrenade
+
+    2) UTIL_UpdateFlashCounter(client);
+        GET flash enitiy ids, STORE flash entity ids to g_ClientSlotEntFlashbang[]
+        <-- 1) UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, bool:remove = false) {
+            NEVER (realy)
+        <-- 2) public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
+            RECALC (move to weaponfire?)
+        <-- 3) public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
+            RECALC
+
+        ---> 4) UTIL_RemoveClientDroppedWeapons(client, bool:disconnect = false)
+            GET entity id in g_ClientSlotEntFlashbang
+    
+    Итак нужно это гломально только для того, чтобы после смерти игрока убирать за ним предметы с пола.
