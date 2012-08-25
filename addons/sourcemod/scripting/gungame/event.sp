@@ -789,7 +789,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByAmmoType(client, g_WeaponAmmoTypeHegrenade) == -1 ) {
+        if (!UTIL_HasClientHegrenade(client)) {
             if ( NumberOfNades ) {
                 g_NumberOfNades[client]--;
             }

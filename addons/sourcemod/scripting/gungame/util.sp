@@ -561,7 +561,7 @@ stock UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, 
  *
  * @return        -1 if not found or you drop the grenade otherwise will return the Entity index.
  */
-UTIL_FindGrenadeByAmmoType(client, Grenade, bool:drop = false, bool:remove = false) {
+stock UTIL_FindGrenadeByAmmoType(client, Grenade, bool:drop = false, bool:remove = false) {
     for (new i = 0, ent; i < 128; i += 4) {
         ent = GetEntDataEnt2(client, m_hMyWeapons + i);
         if (ent <= MaxClients) {
@@ -1021,7 +1021,7 @@ UTIL_GiveExtraNade(client, bool:knife) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
     if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
-        if ( UTIL_FindGrenadeByAmmoType(client, g_WeaponAmmoTypeHegrenade) == -1 ) {
+        if (!UTIL_HasClientHegrenade(client)) {
             g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
@@ -1442,4 +1442,18 @@ UTIL_EndMultiplayerGame() {
     new ent = CreateEntityByName("game_end");
     DispatchSpawn(ent);
     AcceptEntityInput(ent, "EndGame");
+}
+
+/**
+ * Get the count of any grenade type a client has.
+ * 
+ * @param client    The client index.
+ * @param type      The type of grenade.
+ */
+stock UTIL_WeaponAmmoGetGrenadeCount(client, type) {
+    return GetEntData(client, g_iOffsetAmmo + (type * 4));
+}
+
+stock bool:UTIL_HasClientHegrenade(client) {
+    return UTIL_WeaponAmmoGetGrenadeCount(client, g_WeaponAmmoTypeHegrenade) > 0;
 }

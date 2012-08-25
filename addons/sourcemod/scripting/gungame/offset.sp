@@ -1,8 +1,12 @@
 OnOffsetStart()
 {
-
     decl String:Error[64];
     
+    g_iOffsetAmmo = FindSendPropInfo("CBasePlayer", "m_iAmmo");
+    if (g_iOffsetAmmo == INVALID_OFFSET) {
+        SetFailState("FATAL ERROR: Offset \"CBasePlayer::m_iAmmo\" was not found.");
+    }
+
     OffsetFlags = FindSendPropOffs("CBasePlayer", "m_fFlags");
     if(OffsetFlags == INVALID_OFFSET)
     {
