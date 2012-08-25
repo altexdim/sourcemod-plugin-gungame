@@ -15,6 +15,11 @@ L 08/21/2012 - 22:08:00: [SM]   [0]  Line 1448, E:\Downloads\sm_gungame-1.2.0.0.
 L 08/21/2012 - 22:08:00: [SM]   [1]  Line 62, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/hacks.sp::HACK_RemoveAmmo()
 L 08/21/2012 - 22:08:00: [SM]   [2]  Line 769, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_DelayAmmoRemove()  
 
+[PHP]L 08/25/2012 - 07:20:02: [SM] Native "GetEntProp" reported: Entity 161 (161) is invalid
+L 08/25/2012 - 07:20:02: [SM] Displaying call stack trace for plugin "gungame.smx":
+L 08/25/2012 - 07:20:02: [SM]   [0]  Line 1403, gungame/util.sp::UTIL_RemoveAmmo()
+L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRemove()[/PHP]
+
     Тут используется задержка в 0.1 секунды. За это время оружие может пропасть у игрока? Оружие даётся при ставне или при левелапе.
     А может попробовать сразу у оружия обнулять патроны?
     ----
