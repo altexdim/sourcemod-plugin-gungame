@@ -175,13 +175,13 @@
         "index" "34"
         "slot"  "3"
         "is_flashbang"  "1"
-        "ammotype"  "11"
+        "ammotype"  "12"
     }
     "hegrenade" {
         "index" "35"
         "slot"  "3"
         "is_hegrenade"  "1"
-        "ammotype"  "12"
+        "ammotype"  "11"
     }
     "smokegrenade" {
         "index" "36"
