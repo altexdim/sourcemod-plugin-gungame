@@ -1,6 +1,6 @@
 Changelog
 ---------
-    1.2.0.0.beta6:
+    1.2.0.0:
         * Added spanish translation, thanks to Xilver266.
         * Added CSGO support. Thanks to psychonic! Actualy he made this version possible and can not imagine this plugin without his support.
         * Merged css and csgo versions of plugin into one plugin (you can use it without recompiling).

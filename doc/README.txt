@@ -80,9 +80,9 @@
 [anchor]Requirements[/anchor][B]Requirements[/B]
 ----------------------------------------------------
 [LIST]
-[*] Counter-Strike: Source
-[*] SourceMod 1.2.0+
-[*] (Optional, not required by default) SDK Hooks 1.3 or later ([url]https://forums.alliedmods.net/showthread.php?t=106748[/url])
+[*] Counter-Strike: Source, Counter-Strike: Global Offensive
+[*] SourceMod 1.4.5+
+[*] (Optional, not required by default) SDK Hooks 2.2 or later ([url]https://forums.alliedmods.net/showthread.php?t=106748[/url])
 You need SDK Hooks if you want to set specific options in config 
 (search for "sdkhooks" in "gungame.config.txt" and read comments for more info)
 [/LIST]
