@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.0.1:
+        * Fixed drop of C4. Minor fix.
+
     1.2.0.0:
         * Added spanish translation, thanks to Xilver266.
         * Added CSGO support. Thanks to psychonic! Actualy he made this version possible and can not imagine this plugin without his support.

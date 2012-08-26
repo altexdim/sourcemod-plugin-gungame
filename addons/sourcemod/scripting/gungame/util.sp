@@ -424,7 +424,7 @@ UTIL_ForceDropWeaponBySlot(client, Slots:slot)
         // I believe that it is more correct than using HACK_CSWeaponDrop
         if ( slot == Slot_C4 )
         {
-            CS_DropWeapon(client, ent, false, false);
+            CS_DropWeapon(client, ent, false, true);
             UTIL_Remove(ent);
         }
         else
@@ -475,7 +475,7 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
             }
             else
             {
-                CS_DropWeapon(client, ent, false, false);
+                CS_DropWeapon(client, ent, false, true);
             }
         }
     }
@@ -505,7 +505,7 @@ UTIL_DropAllGrenades(client, bool:remove = false)
         }
         else
         {
-            CS_DropWeapon(client, ent, false, false);
+            CS_DropWeapon(client, ent, false, true);
         }
     }
 }
@@ -540,7 +540,7 @@ stock UTIL_FindGrenadeByName(client, const String:Grenade[], bool:drop = false, 
                     RemoveEdict(ent);
                     return -2;
                 } else {
-                    CS_DropWeapon(client, ent, false, false);
+                    CS_DropWeapon(client, ent, false, true);
                 }
             }
 
@@ -574,7 +574,7 @@ stock UTIL_FindGrenadeByAmmoType(client, Grenade, bool:drop = false, bool:remove
                     RemoveEdict(ent);
                     return -2;
                 } else {
-                    CS_DropWeapon(client, ent, false, false);
+                    CS_DropWeapon(client, ent, false, true);
                 }
             }
 
