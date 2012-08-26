@@ -693,7 +693,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
-                new iAmmo = UTIL_GetAmmoType(ent);
+                new iAmmo = UTIL_GetAmmoType(ent); // TODO: not needed
 
                 if ((iAmmo != -1) && (ent != INVALID_ENT_REFERENCE)) {
                     new Handle:Info = CreateDataPack();
