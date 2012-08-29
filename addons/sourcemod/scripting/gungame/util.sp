@@ -1467,10 +1467,10 @@ stock bool:UTIL_HasClientHegrenade(client) {
 }
 
 bool:UTIL_IsWeaponKnife(weaponId) {
-    return (g_WeaponIdKnife = weaponId) 
-        || (g_GameName == GameName:Csgo && g_WeaponIdKnifegg = weaponId);
+    return (g_WeaponIdKnife == weaponId) 
+        || (g_GameName == GameName:Csgo && g_WeaponIdKnifegg == weaponId);
 }
 
 bool:UTIL_IsWeaponKnifegg(weaponId) {
-    return g_GameName == GameName:Csgo && g_WeaponIdKnifegg = weaponId;
+    return g_GameName == GameName:Csgo && g_WeaponIdKnifegg == weaponId;
 }

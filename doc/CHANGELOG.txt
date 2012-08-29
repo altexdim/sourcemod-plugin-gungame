@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.2.1.0:
+        * [CS:GO] added "knifegg" weapon in "cfg\gungame\csgo\gungame.equip.txt". You can use it instead of "knife".
+        * [CS:GO] updated "cfg\gungame\csgo\weaponinfo.txt". If you're upgrating the plugin, you have to update this file from the latest release.
+
     1.2.0.1:
         * Fixed drop of C4. Minor fix.
 

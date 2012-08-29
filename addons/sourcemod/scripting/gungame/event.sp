@@ -598,7 +598,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         }
     }
 
-    UTIL_ForceDropAllWeapon(client, true);
+    new Level = PlayerLevel[client];
+    UTIL_ForceDropAllWeapon(client, true, UTIL_IsWeaponKnifegg(WeaponOrderId[Level]));
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if ( GameWinner )
@@ -619,7 +620,6 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    new Level = PlayerLevel[client];
     UTIL_GiveNextWeapon(client, Level, false, false, 0.3, true);
 
     // spawn chat messages
