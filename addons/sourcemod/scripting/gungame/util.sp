@@ -1457,3 +1457,8 @@ stock UTIL_WeaponAmmoGetGrenadeCount(client, type) {
 stock bool:UTIL_HasClientHegrenade(client) {
     return UTIL_WeaponAmmoGetGrenadeCount(client, g_WeaponAmmoTypeHegrenade) > 0;
 }
+
+bool:UTIL_IsWeaponKnife(weaponId) {
+    return (g_WeaponIdKnife = weaponId) 
+        || (g_GameName == GameName:Csgo && g_WeaponIdKnifegg = weaponId);
+}

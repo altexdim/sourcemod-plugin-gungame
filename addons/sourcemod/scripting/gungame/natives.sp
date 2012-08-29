@@ -18,11 +18,21 @@ OnCreateNatives()
     CreateNative("GG_GetLevelWeaponName", __GetLevelWeaponName);
     CreateNative("GG_IsWarmupInProgress", __IsWarmupInProgress);
     CreateNative("GG_GetWeaponIdKnife", __GetWeaponIdKnife);
+    CreateNative("GG_IsWeaponKnife", __IsWeaponKnife);
     CreateNative("GG_GetWeaponIdHegrenade", __GetWeaponIdHegrenade);
 }
 
 public __GetWeaponIdKnife(Handle:plugin, numParams) {
     return g_WeaponIdKnife;
+}
+
+public bool:__IsWeaponKnife(Handle:plugin, numParams) {
+    new weaponId = GetNativeCell(1);
+    if(weaponId <= 0 || weaponId > g_WeaponsMaxId) {
+        return ThrowNativeError(SP_ERROR_NATIVE, "Weapon index out of range [%d]", weaponId);
+    }
+
+    return UTIL_IsWeaponKnife(weaponId);
 }
 
 public __GetWeaponIdHegrenade(Handle:plugin, numParams) {

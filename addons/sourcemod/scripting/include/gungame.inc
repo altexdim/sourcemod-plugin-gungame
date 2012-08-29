@@ -267,6 +267,14 @@ native bool:GG_IsWarmupInProgress();
 native GG_GetWeaponIdKnife();
 
 /**
+ * Return true if weapon is knife.
+ *
+ * @param weaponId  The weapon id to ckeck.
+ * @return          Return weapon id for knife weapon.
+ */
+native bool:GG_IsWeaponKnife(weaponId);
+
+/**
  * Return weapon id for hegrenade weapon.
  *
  * @noparam
