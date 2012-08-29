@@ -9,6 +9,7 @@
     "knifegg" {
         "index" "2"
         "slot"  "2"
+        "is_knifegg"    "1"
     }
     "taser" {
         "index" "3"
