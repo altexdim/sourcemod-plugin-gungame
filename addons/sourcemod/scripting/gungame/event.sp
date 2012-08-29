@@ -317,9 +317,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* Give them another grenade if they killed another person with another weapon */
     if ( (WeaponLevel == g_WeaponIdHegrenade) && (WeaponIndex != g_WeaponIdHegrenade) 
-        && !( (WeaponIndex == g_WeaponIdKnife) && KnifeProHE ) // TODO: Remove "&& !( (WeaponIndex == g_WeaponIdKnife) && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
+        && !( UTIL_IsWeaponKnife(WeaponIndex) && KnifeProHE ) // TODO: Remove "&& !( UTIL_IsWeaponKnife(WeaponIndex) && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
     ) {
-        UTIL_GiveExtraNade(Killer, WeaponIndex == g_WeaponIdKnife );
+        UTIL_GiveExtraNade(Killer, UTIL_IsWeaponKnife(WeaponIndex));
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
@@ -330,7 +330,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /**
      * Steal level from other player.
      */
-    if ( KnifePro && WeaponIndex == g_WeaponIdKnife )
+    if ( KnifePro && UTIL_IsWeaponKnife(WeaponIndex) )
     {
         for (;;)
         {
@@ -359,7 +359,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 }
             }
 
-            if ( WeaponLevel == g_WeaponIdKnife )
+            if ( UTIL_IsWeaponKnife(WeaponLevel) )
             {
                 if ( UTIL_GetCustomKillPerLevel(level) > 1 ) {
                     break;
@@ -380,7 +380,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CurrentLevelPerRound[Killer]++;
                    
             if ( TurboMode ) {
-                UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == g_WeaponIdKnife);
+                UTIL_GiveNextWeapon(Killer, level, true, UTIL_IsWeaponKnife(WeaponIndex));
             }
 
             CheckForTripleLevel(Killer);
@@ -399,7 +399,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 g_Cfg_CanLevelUpWithMapNades
                 && ( 
                     g_Cfg_CanLevelUpWithNadeOnKnife
-                    || ( WeaponLevel != g_WeaponIdKnife )
+                    || !UTIL_IsWeaponKnife(WeaponLevel)
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -412,9 +412,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 g_Cfg_CanLevelUpWithPhysics
                 && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
                 && ( 
-                    ( ( WeaponLevel != g_WeaponIdHegrenade) && ( WeaponLevel != g_WeaponIdKnife) )
+                    ( ( WeaponLevel != g_WeaponIdHegrenade) && !UTIL_IsWeaponKnife(WeaponLevel) )
                     || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == g_WeaponIdHegrenade ) )
-                    || ( g_Cfg_CanLevelUpWithPhysicsK && ( WeaponLevel == g_WeaponIdKnife ) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsK && UTIL_IsWeaponKnife(WeaponLevel) )
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -501,7 +501,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( TurboMode || KnifeElite )
     {
-        UTIL_GiveNextWeapon(Killer, level, true, WeaponIndex == g_WeaponIdKnife);
+        UTIL_GiveNextWeapon(Killer, level, true, UTIL_IsWeaponKnife(WeaponIndex));
     }
 
     CheckForTripleLevel(Killer);

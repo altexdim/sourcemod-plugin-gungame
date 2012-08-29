@@ -84,6 +84,7 @@ OnKeyValueStart()
     g_WeaponAmmoTypeHegrenade       = 0;
     g_WeaponAmmoTypeFlashbang       = 0;
     g_WeaponAmmoTypeSmokegrenade    = 0;
+    g_WeaponIdKnifegg       = 0;
 
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
@@ -116,6 +117,12 @@ OnKeyValueStart()
             g_WeaponIdFlashbang             = index;
             g_WeaponAmmoTypeFlashbang       = KvGetNum(KvWeapon, "ammotype", 0);
         } 
+
+        if (g_GameName == GameName:Csgo) {
+            if (KvGetNum(KvWeapon, "is_knifegg", 0)) {
+                g_WeaponIdKnifegg           = index;
+            }       
+        }
         
         if ( !KvGotoNextKey(KvWeapon) ) {
             break;
@@ -145,4 +152,14 @@ OnKeyValueStart()
             g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
         SetFailState(Error);
     }
+
+    if (g_GameName == GameName:Csgo) {
+        if (!g_WeaponIdKnifegg) {
+            decl String:Error[1024];
+            FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found for CS:GO KNIFEGG=[%i]", 
+                g_WeaponIdKnifegg);
+            SetFailState(Error);
+        }
+    }
+
 }

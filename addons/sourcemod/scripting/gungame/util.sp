@@ -235,7 +235,7 @@ UTIL_PlaySoundForLeaderLevel()
         UTIL_PlaySound(0, Nade);
         return;
     }
-    if ( WeapId == g_WeaponIdKnife )
+    if ( UTIL_IsWeaponKnife(WeapId) )
     {
         UTIL_PlaySound(0, Knife);
         return;
@@ -265,7 +265,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
     Call_PushCell(difference);
     Call_PushCell(KnifeSteal);
     Call_PushCell(Level == (WeaponOrderCount - 1));
-    Call_PushCell(g_WeaponIdKnife == WeaponOrderId[Level]);
+    Call_PushCell(UTIL_IsWeaponKnife(WeaponOrderId[Level]));
     Call_Finish(ret);
 
     if ( ret )
@@ -654,26 +654,31 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
 }
 
 UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, bool:spawn = false) {
+    new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
+    new bool:weaponIsKnifegg = UTIL_IsWeaponKnifegg(WeapId);
+    new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife;
+
     // A check to make sure player always has a knife 
     // because some maps do not give the knife.
-    if ( spawn && GetPlayerWeaponSlot(client, _:Slot_Knife) == -1 ) {
-        GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdKnife]);
+
+    if (!weaponIsKnifegg) {
+        if ( spawn && GetPlayerWeaponSlot(client, _:Slot_Knife) == -1 ) {
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdKnife]);
+        }
     }
 
-    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+    if (blockSwitch && !weaponIsKnifegg) {
         g_BlockSwitch[client] = true;
     }
 
-    new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
-    
     UTIL_CheckForFriendlyFire(client, WeapId);
 
     if ( drop ) {
-        UTIL_ForceDropAllWeapon(client, true);
+        UTIL_ForceDropAllWeapon(client, true, weaponIsKnifegg);
     }
 
     if ( PlayerState[client] & KNIFE_ELITE ) {
-        if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+        if (blockSwitch) { //todo: csgo knifegg
             g_BlockSwitch[client] = false;
         } else {
             FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
@@ -723,6 +728,9 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
             new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
             UTIL_FlashCounterAdd(client, ent);
         }
+        if (weaponIsKnifegg) {
+            GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+        }
     } else {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
@@ -740,7 +748,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
 
     }
 
-    if ( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife ) {
+    if (blockSwitch && !weaponIsKnifegg) {
         g_BlockSwitch[client] = false;
     } else {
         FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
@@ -995,7 +1003,7 @@ UTIL_GiveWarmUpWeapon(client)
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
         return;
     }
-    if ( g_Cfg_WarmupWeapon && g_Cfg_WarmupWeapon != g_WeaponIdKnife )
+    if ( g_Cfg_WarmupWeapon && !UTIL_IsWeaponKnifegg(g_Cfg_WarmupWeapon) )
     {
         GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_WarmupWeapon]);
         FakeClientCommand(client, "use %s", g_WeaponName[g_Cfg_WarmupWeapon]);
@@ -1461,4 +1469,8 @@ stock bool:UTIL_HasClientHegrenade(client) {
 bool:UTIL_IsWeaponKnife(weaponId) {
     return (g_WeaponIdKnife = weaponId) 
         || (g_GameName == GameName:Csgo && g_WeaponIdKnifegg = weaponId);
+}
+
+bool:UTIL_IsWeaponKnifegg(weaponId) {
+    return g_GameName == GameName:Csgo && g_WeaponIdKnifegg = weaponId;
 }
