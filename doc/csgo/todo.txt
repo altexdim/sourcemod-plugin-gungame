@@ -6,7 +6,7 @@
 2) known issues
     1) MOTD does not work
     2) "GameDesc" config variable does not work.
-    3) the volume very low on the gungame sounds
+    3)+ the volume very low on the gungame sounds
         нужно сделать примитивный плагин, который играет звук, и посмотреть как он будет работать
     4) error
     ----
@@ -27,5 +27,5 @@ L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRe
     5) в ксс ammo дается на единицу больше, чем в ксго
     7) когда меняется оружие, то отбирается всё предыдущее оружие, за исключением incgrenade :)
 
-3) цвета попортились, нужно вставлять байт нулевой длины
+3)+ цвета попортились, нужно вставлять байт нулевой длины
     https://www.sourcemod.net/showthread.php?t=193328
