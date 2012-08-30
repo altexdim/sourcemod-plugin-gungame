@@ -627,12 +627,12 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
 
     UTIL_CheckForFriendlyFire(client, WeapId);
 
-    if ( drop ) {
+    if (drop) {
         UTIL_ForceDropAllWeapon(client, true, dropKnife);
     }
 
-    if ( PlayerState[client] & KNIFE_ELITE ) {
-        if (blockSwitch) { //todo: csgo knifegg
+    if (PlayerState[client] & KNIFE_ELITE) {
+        if (blockSwitch) {
             g_BlockSwitch[client] = false;
         } else {
             FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
@@ -640,11 +640,11 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
         return;
     }
 
-    if ( slot == Slot_Grenade ) {
-        if ( NumberOfNades ) {
+    if (slot == Slot_Grenade) {
+        if (NumberOfNades) {
             g_NumberOfNades[client] = NumberOfNades - 1;
         }
-        if ( NadeBonusWeaponId ) {
+        if (NadeBonusWeaponId) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[NadeBonusWeaponId]);
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
@@ -660,26 +660,27 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
                 }
             }
         }
-        if ( NadeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
+        if (NadeSmoke) {
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
         }
-        if ( NadeFlash ) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+        if (NadeFlash) {
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
         }
     }
-    if ( slot == Slot_Knife ) {
-        if ( g_Cfg_KnifeSmoke ) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
+
+    if (slot == Slot_Knife) {
+        if (g_Cfg_KnifeSmoke) {
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
         }
-        if ( g_Cfg_KnifeFlash ) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+        if (g_Cfg_KnifeFlash) {
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
         }
         if (dropKnife) {
             GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
         }
     } else {
         /* Give new weapon */
-        new ent = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+        GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
     }
 
     if (blockSwitch) {
