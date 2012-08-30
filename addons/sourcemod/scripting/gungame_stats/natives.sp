@@ -83,13 +83,7 @@ public __IsPlayerInTopRank(Handle:plugin, numParams)
         return ThrowNativeError(SP_ERROR_NATIVE, "Client is not currently ingame [%d]", client);
     }
 
-    #if defined SQL_SUPPORT
-        return IsPlayerInTopRank(client);
-    #else
-        decl String:Authid[64];
-        GetClientAuthString(client, Authid, sizeof(Authid));
-        return GetPlayerPlaceInTop10(Authid) != -1;
-    #endif
+    return IsPlayerInTopRank(client);
 }
 
 public __IsPlayerWinsLoaded(Handle:plugin, numParams)

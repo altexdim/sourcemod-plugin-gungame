@@ -565,7 +565,6 @@ public Action:_CmdReset(client, args)
             return Plugin_Handled;
         }
     }
-    #endif
     SQL_UnlockDatabase(g_DbConnection);
     ReplyToCommand(client, "[GunGame] Stats has been reseted.");
     

@@ -43,21 +43,11 @@ new Handle:g_Cvar_CfgDirName = INVALID_HANDLE;
 
 new GameName:g_GameName = GameName:None;
 
-#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame_cfg");
     return APLRes_Success;
 }
-
-#else
-// deprecated in 1.3.1
-public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
-{
-    RegPluginLibrary("gungame_cfg");
-    return true;
-}
-#endif
 
 public OnPluginStart() {
     g_GameName = DetectGame();

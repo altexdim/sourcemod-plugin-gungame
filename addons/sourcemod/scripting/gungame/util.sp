@@ -976,13 +976,8 @@ UTIL_GiveWarmUpWeapon(client)
 UTIL_GetRandomInt(start, end)
 {
     new rand;
-    #if defined URANDOM_SUPPORT
-        // if sourcemod version >= 1.3.0
-        rand = GetURandomInt();
-    #else
-        new Float:frand = GetEngineTime() + GetRandomFloat();
-        rand = RoundFloat( ( frand - RoundToZero(frand) ) * 1000000 ) + GetTime();
-    #endif
+    // if sourcemod version >= 1.3.0
+    rand = GetURandomInt();
     return ( rand % (1 + end - start) ) + start;
 }
 

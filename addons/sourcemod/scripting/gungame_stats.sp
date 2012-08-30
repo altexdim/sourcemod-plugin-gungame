@@ -12,17 +12,8 @@
 #include "gungame_stats/config.h"
 #include "gungame_stats/menu.h"
 
-#if defined SQL_SUPPORT
-    #include "gungame_stats/sql.h"
-    #include "gungame_stats/sql.sp"
-#endif
-
-#if !defined SQL_SUPPORT
-    #include "gungame_stats/ranks.h"
-    #include "gungame_stats/ranks.sp"
-    #include "gungame_stats/keyvalues.h"
-    #include "gungame_stats/keyvalues.sp"
-#endif
+#include "gungame_stats/sql.h"
+#include "gungame_stats/sql.sp"
 
 #include "gungame_stats/menu.sp"
 #include "gungame_stats/config.sp"
@@ -37,7 +28,6 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
-#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame_st");
@@ -45,37 +35,21 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
     return APLRes_Success;
 }
 
-#else
-// deprecated in 1.3.1
-public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
-{
-    RegPluginLibrary("gungame_st");
-    OnCreateNatives();
-    return true;
-}
-#endif
-
 public OnPluginStart()
 {
-    #if defined SQL_SUPPORT
-        FwdLoadRank = CreateGlobalForward("GG_OnLoadRank", ET_Ignore);
-        FwdLoadPlayerWins = CreateGlobalForward("GG_OnLoadPlayerWins", ET_Ignore, Param_Cell);
-    #endif
+    FwdLoadRank = CreateGlobalForward("GG_OnLoadRank", ET_Ignore);
+    FwdLoadPlayerWins = CreateGlobalForward("GG_OnLoadPlayerWins", ET_Ignore, Param_Cell);
     
     LoadTranslations("gungame_stats");
     OnCreateKeyValues();
 
     RegConsoleCmd("top10", _CmdTop);
     RegConsoleCmd("top", _CmdTop);
-    #if defined SQL_SUPPORT
-        RegConsoleCmd("rank", _CmdRank);
-    #endif
+    RegConsoleCmd("rank", _CmdRank);
     RegAdminCmd("gg_rebuild", _CmdRebuild, GUNGAME_ADMINFLAG, "Rebuilds the top rank from the player data information");
     RegAdminCmd("gg_import", _CmdImport, GUNGAME_ADMINFLAG, "Imports the winners file from es gungame.");
-    #if defined SQL_SUPPORT
-        RegAdminCmd("gg_reset", _CmdReset, GUNGAME_ADMINFLAG, "Reset all gungame stats.");
-        RegAdminCmd("gg_importdb", _CmdImportDb, GUNGAME_ADMINFLAG, "Imports the winners from gungame players data file into database.");
-    #endif
+    RegAdminCmd("gg_reset", _CmdReset, GUNGAME_ADMINFLAG, "Reset all gungame stats.");
+    RegAdminCmd("gg_importdb", _CmdImportDb, GUNGAME_ADMINFLAG, "Imports the winners from gungame players data file into database.");
 }
 
 public OnClientAuthorized(client, const String:auth[])
@@ -137,9 +111,7 @@ public OnClientDisconnect(client)
 {
     g_PlayerWinsLoaded[client] = false;
     PlayerWinsData[client] = 0;
-    #if defined SQL_SUPPORT
-        PlayerPlaceData[client] = 0;
-    #endif
+    PlayerPlaceData[client] = 0;
 }
 
 public Action:_CmdTop(client, args)
@@ -151,7 +123,6 @@ public Action:_CmdTop(client, args)
     return Plugin_Handled;
 }
 
-#if defined SQL_SUPPORT
 public Action:_CmdRank(client, args)
 {
     if ( IsActive )
@@ -160,7 +131,6 @@ public Action:_CmdRank(client, args)
     }
     return Plugin_Handled;
 }
-#endif
 
 EndProcess()
 {
@@ -170,10 +140,6 @@ EndProcess()
     }
     
     SaveProcess = true;
-
-    #if !defined SQL_SUPPORT
-        SaveRank();
-    #endif
     SavePlayerDataInfo();
 }
 
@@ -185,8 +151,5 @@ public GG_OnWinner(client, const String:Weapon[], victim) {
 
         ++PlayerWinsData[client];
         SavePlayerData(client);
-        #if !defined SQL_SUPPORT
-            CheckRank(client);
-        #endif
     }
 }

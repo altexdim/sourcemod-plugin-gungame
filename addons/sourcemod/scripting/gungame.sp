@@ -53,7 +53,6 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
-#if defined ASK_PLUGIN_LOAD2_SUPPORT
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     /*
@@ -64,16 +63,6 @@ public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
     OnCreateNatives();
     return APLRes_Success;
 }
-
-#else
-// deprecated in 1.3.1
-public bool:AskPluginLoad(Handle:myself, bool:late, String:error[], err_max)
-{
-    RegPluginLibrary("gungame");
-    OnCreateNatives();
-    return true;
-}
-#endif
 
 public OnLibraryAdded(const String:name[]) {
     if ( StrEqual(name, "gungame_st") ) {

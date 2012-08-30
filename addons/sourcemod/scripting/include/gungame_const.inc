@@ -16,28 +16,10 @@
 // #define GUNGAME_DEBUG
 
 /**
- * Uncomment if sm version >= 1.3.0.
- * Default is disabled.
- */
-#define URANDOM_SUPPORT
-
-/**
- * Uncomment if sm version >= 1.3.1.
- * Default is disabled.
- */
-#define ASK_PLUGIN_LOAD2_SUPPORT
-
-/**
  * Enable debug code for sql in stats plugin.
  * Default is disabled.
  */
 // #define SQL_DEBUG
-
-/**
- * Enable sql support for stats plugin.
- * Default is enabled.
- */
-#define SQL_SUPPORT
 
 /**
  * Const
@@ -46,12 +28,12 @@
 /**
  * Maximum level in gungame.
  */
-#define GUNGAME_MAX_LEVEL            64
+#define GUNGAME_MAX_LEVEL   64
                                         
 /**
  * This is the maximum allow time for a menu to be !rules, !weapons, !score, !level is display for.
  */
-#define GUNGAME_MENU_TIME 360
+#define GUNGAME_MENU_TIME   360
 
 /**
  * Admin flag for admin commands
@@ -101,7 +83,7 @@ stock const String:BLANK_SPACE[] = " ";
 
 // AfkAction
 #define AFK_KICK             1
-#define AFK_SPECTATE         2
+#define AFK_SPECTATE         2                                                                        
 
 #define PRINT_NOTIFY         1
 #define PRINT_CONSOLE        2
