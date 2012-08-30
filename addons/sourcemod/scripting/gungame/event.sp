@@ -59,24 +59,6 @@ StopSwitchHook() {
     }
 }
 
-public _WeaponFire(Handle:event, const String:name[], bool:dontBroadcast) {
-    if ( !IsActive ) {
-        return;
-    }
-
-    new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    decl String:weapon[24];
-    GetEventString(event, "weapon", weapon, sizeof(weapon));
-    new WeapId = UTIL_GetWeaponIndex(weapon);
-    if ( WeapId == g_WeaponIdHegrenade ) {
-        g_ClientSlotEntHeGrenade[client] = -1;
-    } else if ( WeapId == g_WeaponIdSmokegrenade ) {
-        g_ClientSlotEntSmoke[client] = -1;
-    } else if ( WeapId == g_WeaponIdFlashbang ) {
-        UTIL_UpdateFlashCounter(client);
-    }
-}
-
 public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
 {
     if ( !IsActive )
@@ -95,15 +77,11 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
     }
 }
 
-public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast)
-{
-    if(IsActive && MapStatus & OBJECTIVE_REMOVE_BOMB)
-    {
+public _BombPickup(Handle:event, const String:name[], bool:dontBroadcast) {
+    if (IsActive && MapStatus & OBJECTIVE_REMOVE_BOMB) {
         new client = GetClientOfUserId(GetEventInt(event, "userid"));
-
-        if(client)
-        {
-            UTIL_ForceDropWeaponBySlot(client, Slot_C4);
+        if (client) {
+            UTIL_ForceDropC4(client);
         }
     }
 }
@@ -794,7 +772,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
                 g_NumberOfNades[client]--;
             }
 
-            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
+            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade], g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade);
 
             if ( !( g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade ) ) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
@@ -802,19 +780,6 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
         }
     }
 }
-
-#if defined TEMPORARY_DISABLED
-public _FlashExplode(Handle:event, const String:name[], bool:dontBroadcast)
-{
-    new client = GetClientOfUserId(GetEventInt(event, "userid"));
-    if ( !IsClientInGame(client) || !IsPlayerAlive(client) )
-    {
-        return;
-    }
-
-    UTIL_UpdateFlashCounter(client);
-}
-#endif
 
 public Action:OnWeaponSwitch(client, weapon) {
     if ( g_BlockSwitch[client] ) {

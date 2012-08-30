@@ -390,52 +390,17 @@ UTIL_FreezeAllPlayer()
 }
 
 /**
- * Force drop a weapon by a slot
+ * Force drop C4.
  *
- * NOTICE: Only used for C4 slot.
- *
- * @param client        Player index.
- * @param slot            The player weapon slot. Look at enum Slots.
- * @return            Return entity index or -1 if not found
+ * @param   int client - Player index.
+ * @return  void
  */
-UTIL_ForceDropWeaponBySlot(client, Slots:slot)
-{
-    if(slot == Slot_Grenade)
-    {
-        ThrowError("You must use UTIL_FindGrenadeByName to drop a grenade");
-        return -1;
+UTIL_ForceDropC4(client) {
+    new ent = GetPlayerWeaponSlot(client, _:Slot_C4);
+    if (ent > 0) {
+        CS_DropWeapon(client, ent, false, true);
+        UTIL_Remove(ent);
     }
-
-    if ( slot == Slot_Primary || slot == Slot_Secondary )
-    {
-        g_ClientSlotEnt[client][slot] = -1;
-    }
-
-    new ent = GetPlayerWeaponSlot(client, _:slot);
-    if ( ent > 0 )
-    {
-        // TODO: test and find out which is correct method
-        // native bool:RemovePlayerItem(client, item);
-        // or removeedict ?
-
-        // TODO: find out is HACK_CSWeaponDrop needed here
-        // HACK_CSWeaponDrop(client, ent);
-        
-        // I believe that it is more correct than using HACK_CSWeaponDrop
-        if ( slot == Slot_C4 )
-        {
-            CS_DropWeapon(client, ent, false, true);
-            UTIL_Remove(ent);
-        }
-        else
-        {
-            RemovePlayerItem(client, ent);
-            RemoveEdict(ent);
-        }
-        return -1;
-    }
-
-    return -1;
 }
 
 /**
@@ -453,11 +418,6 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
         {
             UTIL_DropAllGrenades(client, remove);
             continue;
-        }
-
-        if ( i == Slot_Primary || i == Slot_Secondary )
-        {
-            g_ClientSlotEnt[client][i] = -1;
         }
 
         ent = GetPlayerWeaponSlot(client, _:i);
@@ -686,10 +646,6 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
         }
         if ( NadeBonusWeaponId ) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[NadeBonusWeaponId]);
-            new Slots:slotBonus = g_WeaponSlot[NadeBonusWeaponId];
-            if ( slotBonus == Slot_Primary || slotBonus == Slot_Secondary ) {
-                g_ClientSlotEnt[client][slotBonus] = ent;
-            }
             // Remove bonus weapon ammo! So player can not reload weapon!
             if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
                 new iAmmo = UTIL_GetAmmoType(ent); // TODO: not needed
@@ -706,21 +662,17 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
         }
         if ( NadeSmoke ) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
-            g_ClientSlotEntSmoke[client] = ent;
         }
         if ( NadeFlash ) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
-            UTIL_FlashCounterAdd(client, ent);
         }
     }
     if ( slot == Slot_Knife ) {
         if ( g_Cfg_KnifeSmoke ) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
-            g_ClientSlotEntSmoke[client] = ent;
         }
         if ( g_Cfg_KnifeFlash ) {
             new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
-            UTIL_FlashCounterAdd(client, ent);
         }
         if (dropKnife) {
             GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
@@ -728,18 +680,6 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
     } else {
         /* Give new weapon */
         new ent = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
-        if ( slot == Slot_Primary || slot == Slot_Secondary ) {
-            g_ClientSlotEnt[client][slot] = ent;
-        } else if ( slot == Slot_Grenade ) {
-            if ( WeapId == g_WeaponIdHegrenade ) {
-                g_ClientSlotEntHeGrenade[client] = ent;
-            } else if ( WeapId == g_WeaponIdSmokegrenade ) {
-                g_ClientSlotEntSmoke[client] = ent;
-            } else if ( WeapId == g_WeaponIdFlashbang ) {
-                UTIL_FlashCounterAdd(client, ent);
-            }
-        }
-
     }
 
     if (blockSwitch) {
@@ -1020,7 +960,6 @@ UTIL_GiveWarmUpWeapon(client)
     }
     if ( WarmupNades ) {
         new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade]);
-        g_ClientSlotEntHeGrenade[client] = ent;
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
         return;
     }
@@ -1051,7 +990,7 @@ UTIL_GiveExtraNade(client, bool:knife) {
     if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
         if (!UTIL_HasClientHegrenade(client)) {
-            g_ClientSlotEntHeGrenade[client] = GivePlayerItemWrapper(
+            GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
                 g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade )
@@ -1393,39 +1332,8 @@ stock UTIL_WeaponTypeIsGrenade(type) {
         || type == g_WeaponAmmoTypeSmokegrenade;
 }
 
-UTIL_UpdateFlashCounter(client) {
-    new index = 0;
-
-    UTIL_ClearFlashCounter(client);
-
-    for (new i = 0, ent; i < 128; i += 4) {
-        ent = GetEntDataEnt2(client, m_hMyWeapons + i);
-        if (ent <= MaxClients) {
-            continue;
-        }
-        if (UTIL_WeaponGetGrenadeType(ent) == g_WeaponAmmoTypeFlashbang) {
-            g_ClientSlotEntFlash[client][index++] = ent;
-        }
-    }
-}
-
 UTIL_WeaponGetGrenadeType(weapon) {
     return GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
-}
-
-UTIL_ClearFlashCounter(client) {
-    for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
-        g_ClientSlotEntFlash[client][i] = -1;
-    }
-}
-
-UTIL_FlashCounterAdd(client, ent) {
-    for ( new i = 0; i < sizeof(g_ClientSlotEntFlash[]); i++ ) {
-        if ( g_ClientSlotEntFlash[client][i] == -1 ) {
-            g_ClientSlotEntFlash[client][i] = ent;
-            return;
-        }
-    }
 }
 
 UTIL_RemoveAmmo(client, weapon) {

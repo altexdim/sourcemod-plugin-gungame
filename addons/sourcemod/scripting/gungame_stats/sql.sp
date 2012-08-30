@@ -232,7 +232,7 @@ public T_RetrieveKeyValues(Handle:owner, Handle:result, const String:error[], an
     }
     else
     {
-    	PlayerWinsData[client] = 0;
+        PlayerWinsData[client] = 0;
     }
     #if defined SQL_DEBUG
         LogError("[DEBUG-SQL] FORWARD PLAYER WINS LOADED client=%i, wins=%i", client, PlayerWinsData[client]);
@@ -633,7 +633,7 @@ LoadTopRankData()
     {
         g_cfgHandicapTopWins = 0;
         #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] Handicap top wins = 0 (handicap top rank disabled)");
+            LogError("[DEBUG-SQL] Handicap top wins = 0 (handicap top rank is disabled)");
         #endif
         Call_StartForward(FwdLoadRank);
         Call_Finish();
@@ -644,7 +644,7 @@ LoadTopRankData()
     {
         g_cfgHandicapTopWins = 1;
         #if defined SQL_DEBUG
-            LogError("[DEBUG-SQL] Handicap top wins = 1 (handicap top rank more then total winners)");
+            LogError("[DEBUG-SQL] Handicap top wins = 1 (handicap top rank is more then total winners)");
         #endif
         Call_StartForward(FwdLoadRank);
         Call_Finish();

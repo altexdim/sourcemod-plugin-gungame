@@ -65,11 +65,6 @@ new Handle:PlayerLevelsBeforeDisconnect = INVALID_HANDLE;
 new Handle:g_Timer_HandicapUpdate = INVALID_HANDLE;
 new Handle:PlayerHandicapTimes = INVALID_HANDLE;
 new bool:g_SkipSpawn[MAXPLAYERS+1] = {false, ...};
-// only primary and secondary is needed, so array size = secondary + 1 = knife
-new g_ClientSlotEnt[MAXPLAYERS+1][Slot_Knife];
-new g_ClientSlotEntHeGrenade[MAXPLAYERS+1];
-new g_ClientSlotEntSmoke[MAXPLAYERS+1];
-new g_ClientSlotEntFlash[MAXPLAYERS+1][2];
 
 new GameName:g_GameName = GameName:None;
 new g_WeaponsMaxId          = 0;
