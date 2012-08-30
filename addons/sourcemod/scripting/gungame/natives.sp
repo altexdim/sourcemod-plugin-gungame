@@ -32,7 +32,7 @@ public __IsWeaponKnife(Handle:plugin, numParams) {
         return ThrowNativeError(SP_ERROR_NATIVE, "Weapon index out of range [%d]", weaponId);
     }
 
-    return UTIL_IsWeaponKnife(weaponId);
+    return g_WeaponIsKnifeType[weaponId];
 }
 
 public __GetWeaponIdHegrenade(Handle:plugin, numParams) {

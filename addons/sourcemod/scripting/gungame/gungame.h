@@ -25,6 +25,8 @@ enum Sounds
 new String:g_WeaponName[MAX_WEAPONS_COUNT][MAX_WEAPON_NAME_LEN];
 new Slots:g_WeaponSlot[MAX_WEAPONS_COUNT];
 new g_WeaponAmmo[MAX_WEAPONS_COUNT];
+new bool:g_WeaponDropKnife[MAX_WEAPONS_COUNT];
+new bool:g_WeaponIsKnifeType[MAX_WEAPONS_COUNT];
 
 new String:EventSounds[Sounds:MaxSounds][64];
 
@@ -72,7 +74,6 @@ new g_ClientSlotEntFlash[MAXPLAYERS+1][2];
 new GameName:g_GameName = GameName:None;
 new g_WeaponsMaxId          = 0;
 new g_WeaponIdKnife         = 0;
-new g_WeaponIdKnifegg       = 0;
 new g_WeaponIdHegrenade     = 0;
 new g_WeaponIdSmokegrenade  = 0;
 new g_WeaponIdFlashbang     = 0;

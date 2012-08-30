@@ -84,7 +84,6 @@ OnKeyValueStart()
     g_WeaponAmmoTypeHegrenade       = 0;
     g_WeaponAmmoTypeFlashbang       = 0;
     g_WeaponAmmoTypeSmokegrenade    = 0;
-    g_WeaponIdKnifegg       = 0;
 
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
@@ -104,8 +103,12 @@ OnKeyValueStart()
         g_WeaponSlot[index] = Slots:KvGetNum(KvWeapon, "slot");
         // init weapons clip size
         g_WeaponAmmo[index] = KvGetNum(KvWeapon, "clipsize", 0);
+        // init weapons that need drop knife
+        g_WeaponDropKnife[index] = bool:KvGetNum(KvWeapon, "drop_knife", 0);
+        // init weapons that is like knife, but is not default knife
+        g_WeaponIsKnifeType[index] = bool:KvGetNum(KvWeapon, "is_knife_type", 0);
 
-        if (KvGetNum(KvWeapon, "is_knife", 0)) {
+        if (KvGetNum(KvWeapon, "is_knife_default", 0)) {
             g_WeaponIdKnife                 = index;
         } else if (KvGetNum(KvWeapon, "is_hegrenade", 0)) {
             g_WeaponIdHegrenade             = index;
@@ -118,12 +121,6 @@ OnKeyValueStart()
             g_WeaponAmmoTypeFlashbang       = KvGetNum(KvWeapon, "ammotype", 0);
         } 
 
-        if (g_GameName == GameName:Csgo) {
-            if (KvGetNum(KvWeapon, "is_knifegg", 0)) {
-                g_WeaponIdKnifegg           = index;
-            }       
-        }
-        
         if ( !KvGotoNextKey(KvWeapon) ) {
             break;
         }
@@ -152,14 +149,4 @@ OnKeyValueStart()
             g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
         SetFailState(Error);
     }
-
-    if (g_GameName == GameName:Csgo) {
-        if (!g_WeaponIdKnifegg) {
-            decl String:Error[1024];
-            FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found for CS:GO KNIFEGG=[%i]", 
-                g_WeaponIdKnifegg);
-            SetFailState(Error);
-        }
-    }
-
 }

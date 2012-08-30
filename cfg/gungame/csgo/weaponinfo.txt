@@ -4,12 +4,14 @@
     "knife" {
         "index" "1"
         "slot"  "2"
-        "is_knife"  "1"
+        "is_knife_type" "1"
+        "is_knife_default"  "1"
     }
     "knifegg" {
         "index" "2"
         "slot"  "2"
-        "is_knifegg"    "1"
+        "is_knife_type" "1"
+        "drop_knife"    "1"
     }
     "taser" {
         "index" "3"

@@ -5,7 +5,8 @@
     "knife" {
         "index" "1"
         "slot"  "2"
-        "is_knife"  "1"
+        "is_knife_type" "1"
+        "is_knife_default"  "1"
     }
     // secondary
     "usp" {
