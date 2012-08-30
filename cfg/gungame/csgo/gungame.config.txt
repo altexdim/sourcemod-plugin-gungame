@@ -19,7 +19,7 @@
          *     0-1 - Do not multiply
          *     2-5 - Multiply by defined number of times
          */
-        "MultiplySoundVolume" "4"
+        "MultiplySoundVolume" "3"
 
         /**
          * Block weapon switch if killer leveled up with knife

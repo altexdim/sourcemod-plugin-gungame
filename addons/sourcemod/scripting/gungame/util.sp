@@ -735,7 +735,7 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
         return;
     }
 
-    if (g_Cfg_MultiplySoundVolume <= 1 || g_Cfg_MultiplySoundVolume > 5 || stop) {
+    if (g_Cfg_MultiplySoundVolume <= 1 || g_Cfg_MultiplySoundVolume > 5) {
         if (!client) {
             EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
         } else {
@@ -744,9 +744,9 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
     } else {
         for (new i=0; i<g_Cfg_MultiplySoundVolume; i++) {
             if (!client) {
-                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN);
+                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
             } else {
-                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN);
+                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
             }
         }
     }
@@ -769,7 +769,7 @@ UTIL_ReloadActiveWeapon(client, WeaponId) {
     if ((slot == Slot_Primary || slot == Slot_Secondary)) {
         new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
         if ((ent > -1) && g_WeaponAmmo[WeaponId]) {
-            SetEntProp(ent, Prop_Send, "m_iClip1", g_WeaponAmmo[WeaponId] + (g_GameName==GameName:Csgo?1:0); // "+1" is needed because ammo is refilling before last shot is counted
+            SetEntProp(ent, Prop_Send, "m_iClip1", g_WeaponAmmo[WeaponId] + (g_GameName==GameName:Csgo?1:0)); // "+1" is needed because ammo is refilling before last shot is counted
         }
     }
 }
@@ -960,7 +960,7 @@ UTIL_GiveWarmUpWeapon(client)
         return;
     }
     if ( WarmupNades ) {
-        new ent = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade]);
+        GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade]);
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
         return;
     }
@@ -1333,7 +1333,7 @@ stock UTIL_WeaponTypeIsGrenade(type) {
         || type == g_WeaponAmmoTypeSmokegrenade;
 }
 
-UTIL_WeaponGetGrenadeType(weapon) {
+stock UTIL_WeaponGetGrenadeType(weapon) {
     return GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
 }
 
