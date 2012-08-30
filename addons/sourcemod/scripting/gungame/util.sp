@@ -482,29 +482,23 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
 }
 
 /**
- * // FIXME: CSGO does not drop INCGRENADE
+ * Drop/remove all grenades.
  *
  * @client        Player index
  * @remove        Remove grenade on drop
  * @noreturn
  */
-UTIL_DropAllGrenades(client, bool:remove = false)
-{
-    for(new i = 0, ent; i , i < 4; i++)
-    {
+UTIL_DropAllGrenades(client, bool:remove = false) {
+    for (new i = 0, ent; i < 5; i++) {
         ent = GetPlayerWeaponSlot(client, _:Slot_Grenade);
-        if ( ent < 1 )
-        {
+        if (ent < 1) {
             break;
         }
 
-        if ( remove )
-        {
+        if (remove) {
             RemovePlayerItem(client, ent);
             RemoveEdict(ent);
-        }
-        else
-        {
+        } else {
             CS_DropWeapon(client, ent, false, true);
         }
     }
@@ -834,7 +828,7 @@ UTIL_ReloadActiveWeapon(client, WeaponId) {
     if ((slot == Slot_Primary || slot == Slot_Secondary)) {
         new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
         if ((ent > -1) && g_WeaponAmmo[WeaponId]) {
-            SetEntProp(ent, Prop_Send, "m_iClip1", g_WeaponAmmo[WeaponId] + 1); // "+1" is needed because ammo is refilling before last shot is counted
+            SetEntProp(ent, Prop_Send, "m_iClip1", g_WeaponAmmo[WeaponId] + (g_GameName==GameName:Csgo?1:0); // "+1" is needed because ammo is refilling before last shot is counted
         }
     }
 }

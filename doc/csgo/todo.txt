@@ -4,11 +4,11 @@
     3) TASER как KNIFE (только при использовании нужно, чтобы оружие убиралось с карты и не засоряло)
 
 2) known issues
-    1) MOTD does not work
-    2) "GameDesc" config variable does not work.
+    1)- MOTD does not work
+    2)- "GameDesc" config variable does not work.
     3)+ the volume very low on the gungame sounds
         нужно сделать примитивный плагин, который играет звук, и посмотреть как он будет работать
-    4) error
+    4)? error
     ----
 L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
 L 08/21/2012 - 22:08:00: [SM] Displaying call stack trace for plugin "gungame.smx":
@@ -24,8 +24,8 @@ L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRe
     Тут используется задержка в 0.1 секунды. За это время оружие может пропасть у игрока? Оружие даётся при ставне или при левелапе.
     А может попробовать сразу у оружия обнулять патроны?
     ----
-    5) в ксс ammo дается на единицу больше, чем в ксго
-    7) когда меняется оружие, то отбирается всё предыдущее оружие, за исключением incgrenade :)
+    5)+ в ксс ammo дается на единицу больше, чем в ксго
+    7)+ когда меняется оружие, то отбирается всё предыдущее оружие, за исключением incgrenade :)
 
 3)+ цвета попортились, нужно вставлять байт нулевой длины
     https://www.sourcemod.net/showthread.php?t=193328
