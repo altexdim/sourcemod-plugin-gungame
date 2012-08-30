@@ -10,6 +10,18 @@
         "Enabled" "1"
 
         /**
+         * Multiply sound effects volume.
+         *
+         * In CS:GO the volume is too low.
+         * You can up the volume with this multiplier.
+         *
+         * Options:
+         *     0-1 - Do not multiply
+         *     2-5 - Multiply by defined number of times
+         */
+        "MultiplySoundVolume" "0"
+
+        /**
          * Block weapon switch if killer leveled up with knife
          *
          * You need SDK Hooks (sdkhooks) if you want to set it to "1"

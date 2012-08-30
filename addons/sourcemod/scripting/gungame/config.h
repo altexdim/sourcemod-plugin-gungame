@@ -100,3 +100,4 @@ new bool:g_SdkHooksEnabled = false;
 
 new Handle:g_Cvar_Turbo;
 new Handle:g_Cvar_MultiLevelAmount;
+new g_Cfg_MultiplySoundVolume = 0;

@@ -655,7 +655,7 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
 
 UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, bool:spawn = false) {
     new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
-    new bool:dropKnife = g_WeaponDropKnife[WeaponOrderId[Level]];
+    new bool:dropKnife = g_WeaponDropKnife[WeapId];
     new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife && !dropKnife;
 
     // A check to make sure player always has a knife 
@@ -769,20 +769,51 @@ public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data) {
     }
 }
 
-UTIL_PlaySound(client, Sounds:type)
-{
-    if ( !EventSounds[type][0] )
-    {
+/*
+stock EmitSoundToAll(const String:sample[], 
+                 entity = SOUND_FROM_PLAYER, 
+                 channel = SNDCHAN_AUTO, 
+                 level = SNDLEVEL_NORMAL, 
+                 flags = SND_NOFLAGS, 
+                 Float:volume = SNDVOL_NORMAL, 
+                 pitch = SNDPITCH_NORMAL, 
+                 speakerentity = -1, 
+                 const Float:origin[3] = NULL_VECTOR, 
+                 const Float:dir[3] = NULL_VECTOR, 
+                 bool:updatePos = true, 
+                 Float:soundtime = 0.0)
+*/
+/**
+ * Play gungame sound.
+ *
+ * @param   int     client  - Emit sound to. 0=play to all, int=play to that client id.
+ * @param   Sounds  type    - Type of the sounds (enum Sounds).
+ * @param   int     entity  - Emit sound from. Entity, that emits sound.
+ * @param   bool    stop    - Stop that sound.
+ * @return void
+ */
+UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = false) {
+    if (!EventSounds[type][0]) {
         return;
     }
-    if ( client && !IsClientInGame(client) )
-    {
+    if (client && !IsClientInGame(client)) {
         return;
     }
-    if ( !client ) {
-        EmitSoundToAll(EventSounds[type], _, _, SNDLEVEL_RAIDSIREN);
+
+    if (g_Cfg_MultiplySoundVolume <= 1 || g_Cfg_MultiplySoundVolume > 5 || stop) {
+        if (!client) {
+            EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
+        } else {
+            EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
+        }
     } else {
-        EmitSoundToClient(client, EventSounds[type], _, _, SNDLEVEL_RAIDSIREN);
+        for (new i=0; i<g_Cfg_MultiplySoundVolume; i++) {
+            if (!client) {
+                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN);
+            } else {
+                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN);
+            }
+        }
     }
 }
 
@@ -834,9 +865,7 @@ UTIL_StartTripleEffects(client)
     if ( g_Cfg_TripleLevelBonusSpeed ) {
         SetEntDataFloat(client, OffsetMovement, g_Cfg_TripleLevelBonusSpeed);
     }
-    if ( EventSounds[Triple][0] ) {
-        EmitSoundToAll(EventSounds[Triple], client, _, SNDLEVEL_RAIDSIREN);
-    }
+    UTIL_PlaySound(0, Triple, client);
     if ( g_Cfg_TripleLevelEffect ) {
         UTIL_StartEffectClient(client);
     }
@@ -866,9 +895,7 @@ UTIL_StopTripleEffects(client)
     if ( g_Cfg_TripleLevelBonusSpeed ) {
         SetEntDataFloat(client, OffsetMovement, 1.0);
     }
-    if ( EventSounds[Triple][0] ) {
-        EmitSoundToAll(EventSounds[Triple], client, _, SNDLEVEL_RAIDSIREN, SND_STOPLOOPING);
-    }
+    UTIL_PlaySound(0, Triple, client, true);
     if ( g_Cfg_TripleLevelEffect ) {
         UTIL_StopEffectClient(client);
     }

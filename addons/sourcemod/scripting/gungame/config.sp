@@ -32,6 +32,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         {
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
+            } else if(strcmp("MultiplySoundVolume", key, false) == 0) {
+                g_Cfg_MultiplySoundVolume = StringToInt(value);
             } else if(strcmp("DisableRtvLevel", key, false) == 0) {
                 g_cfgDisableRtvLevel = StringToInt(value) - 1;
                 if ( g_cfgDisableRtvLevel < 0 ) {
