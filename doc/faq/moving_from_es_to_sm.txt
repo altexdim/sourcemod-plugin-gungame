@@ -1,0 +1,5 @@
+1) download and install http://www.python.org/ftp/python/2.6.2/python-2.6.2.msi
+2) copy your gg5 winners db file into some folder
+3) copy file "tools\convert_winners_esgg_5to3.py" from release to the same folder
+4) run script and you got gg3 winners file 
+5) put the gg3 file to "data/gungame/es_gg_winners_db.txt" and run gg_importdb
