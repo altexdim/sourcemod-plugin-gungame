@@ -352,6 +352,14 @@
         "RemoveBonusWeaponAmmo" "1"
         
         /**
+         * If remove additional ammo in bonus weapon on the nade level is enabled, then give that bullets count. 
+         *
+         * 0 - default clip size
+         * 1-N - number of bullets
+         */
+        "BonusWeaponAmmo" "50"
+
+        /**
          * This gives the player a weapon with 50 bullets on nade level.
          * Example:
          *     "NadeBonus" "glock"  - gives glock 

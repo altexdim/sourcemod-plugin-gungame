@@ -535,7 +535,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
         if ( !IsFakeClient(client) )
         {
-            UTIL_PlaySound(client, Welcome);
+            UTIL_PlaySoundDelayed(1.5, client, Welcome);
 
             /**
              * Show join message.

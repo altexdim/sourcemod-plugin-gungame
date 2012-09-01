@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.2.3.0:
+        * Added "BonusWeaponAmmo" config variable. Now you can increase number of bullets in one clip on nade level.
+        * [CS:GO] Fixed "IntroSound". Added delay for 1.5 seconds.
+
     1.2.2.0:
         * [CS:GO] Fixed colors for several phrases.
         * [CS:GO] Added "MultiplySoundVolume" config variable. You can increase the volume of the sounds.

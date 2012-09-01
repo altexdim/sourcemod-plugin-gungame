@@ -704,6 +704,33 @@ public Action:UTIL_DelayAmmoRemove(Handle:timer, Handle:data) {
     }
 }
 
+UTIL_PlaySoundDelayed(Float:delay, client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = false) {
+    new Handle:data = CreateDataPack();
+    WritePackCell(data, client);
+    WritePackCell(data, _:type);
+    WritePackCell(data, entity);
+    WritePackCell(data, _:stop);
+       
+    CreateTimer(delay, UTIL_Timer_PlaySound, data);
+}
+
+public Action:UTIL_Timer_PlaySound(Handle:timer, Handle:data) {
+    new client, Sounds:type, entity, bool:stop;
+
+    ResetPack(data);
+    client = ReadPackCell(data);
+    type = Sounds:ReadPackCell(data);
+    entity = ReadPackCell(data);
+    stop = bool:ReadPackCell(data);
+    CloseHandle(data);
+
+    if ( !IsClientInGame(client) || !IsPlayerAlive(client) ) {
+        return;
+    }
+
+    UTIL_PlaySound(client, type, entity, stop);
+}
+
 /*
 stock EmitSoundToAll(const String:sample[], 
                  entity = SOUND_FROM_PLAYER, 
@@ -731,7 +758,7 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
     if (!EventSounds[type][0]) {
         return;
     }
-    if (client && !IsClientInGame(client)) {
+    if (client && (!IsClientInGame(client) || IsFakeClient(client))) {
         return;
     }
 
@@ -1351,6 +1378,10 @@ UTIL_RemoveAmmo(client, weapon) {
 
     // REMOVE EXTRA CLIPS
     SetEntProp(weapon, Prop_Send, "m_iClip2", 0);
+
+    if (g_Cfg_BonusWeaponAmmo > 0) {
+        SetEntProp(weapon, Prop_Send, "m_iClip1", g_Cfg_BonusWeaponAmmo);
+    }
 }
 
 /**

@@ -30,7 +30,8 @@ L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRe
 3)+ цвета попортились, нужно вставлять байт нулевой длины
     https://www.sourcemod.net/showthread.php?t=193328
 
-4) Since your 1.2.x update glock on nade level doesn't give 50 bullets anymore.
+4)+ Since your 1.2.x update glock on nade level doesn't give 50 bullets anymore.
     "RemoveBonusWeaponAmmo" "0" = 120 bullets
     "RemoveBonusWeaponAmmo" "1" = 20 bullets (was 50)
 
+6)+ Also, I can't seem to get the IntroSound to work.

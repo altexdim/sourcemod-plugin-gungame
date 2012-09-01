@@ -233,8 +233,10 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
 [*][B]Q.[/B] Something does not work, what should i do?
-        [B]A.[/B] Start with posting your output of server commands "plugin_print; meta list; sm plugins list"
+        [B]A.[/B] Start with posting your output of server commands "version; meta version; sm version; plugin_print; meta list; sm exts list;sm plugins list"
         and content of the latest file [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
+[*][B]Q.[/B] I level up on two levels at once.
+        [B]A.[/B] Remove gungame.smx file from plugins folder.
 [/LIST]
         
 [anchor]Known Issues[/anchor][B]Issues[/B]
