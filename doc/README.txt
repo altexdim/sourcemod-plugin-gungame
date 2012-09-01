@@ -222,6 +222,9 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 
 [LIST]
+[*][COLOR=#009900][B]Q.[/B][CS:GO] What do I put for game_mode and game_type?[/color]
+         [COLOR=#FF0000][B]A.[/B][/color]+game_type 0 +game_mode 0
+
 [*][COLOR=#009900][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.[/color]
          [COLOR=#FF0000][B]A.[/B][/color] "TurboMode" "1" in gungame.config.txt.
 
