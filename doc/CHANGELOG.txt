@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.4.1:
+        * Updated check for startup errors. Improved detection of gungame files.
+
     1.2.4.0:
         * Added check for startup errors. If you have both gungame.smx and gungame_sdkhooks.smx, then you will see errors in your logs and gungame will not be loaded.
 

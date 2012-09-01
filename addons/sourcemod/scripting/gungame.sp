@@ -55,9 +55,9 @@ public Plugin:myinfo = {
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
     decl String:file[PLATFORM_MAX_PATH];
     #if defined WITH_SDKHOOKS
-    FormatEx(file, sizeof(file), "addons\\sourcemod\\plugins\\gungame.smx");
+    BuildPath(Path_SM, file, sizeof(file), "plugins/gungame.smx");
     #else
-    FormatEx(file, sizeof(file), "addons\\sourcemod\\plugins\\gungame_sdkhooks.smx");
+    BuildPath(Path_SM, file, sizeof(file), "plugins/gungame_sdkhooks.smx");
     #endif
     if (FileExists(file)) {
         SetFailState("ERROR: Check that you DONT have both gungame.smx and gungame_sdkhooks.smx in the plugins folder.");
