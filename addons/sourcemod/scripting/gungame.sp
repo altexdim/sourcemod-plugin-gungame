@@ -40,8 +40,7 @@
 #include "gungame/menu.sp"
 #include "gungame/commands.sp"
 
-public Plugin:myinfo =
-{
+public Plugin:myinfo = {
     #if defined WITH_SDKHOOKS
     name = "GunGame:SM (with SDK Hooks support)",
     #else
@@ -53,8 +52,18 @@ public Plugin:myinfo =
     url = GUNGAME_URL
 };
 
-public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
-{
+public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
+    decl String:file[PLATFORM_MAX_PATH];
+    #if defined WITH_SDKHOOKS
+    FormatEx(file, sizeof(file), "addons\\sourcemod\\plugins\\gungame.smx");
+    #else
+    FormatEx(file, sizeof(file), "addons\\sourcemod\\plugins\\gungame_sdkhooks.smx");
+    #endif
+    if (FileExists(file)) {
+        SetFailState("ERROR: Check that you DONT have both gungame.smx and gungame_sdkhooks.smx in the plugins folder.");
+        return APLRes_Failure;
+    }
+
     /*
     MarkNativeAsOptional("SDKHook");
     MarkNativeAsOptional("SDKUnhook");

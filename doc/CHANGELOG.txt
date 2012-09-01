@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.4.0:
+        * Added check for startup errors. If you have both gungame.smx and gungame_sdkhooks.smx, then you will see errors in your logs and gungame will not be loaded.
+
     1.2.3.0:
         * Added "BonusWeaponAmmo" config variable. Now you can increase number of bullets in one clip on nade level.
         * [CS:GO] Fixed "IntroSound". Added delay for 1.5 seconds.
