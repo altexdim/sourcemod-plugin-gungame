@@ -247,7 +247,13 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
 
 [*][COLOR=#009900][B]Q.[/B] I level up on two levels at once.[/color]
-        [COLOR=#FF0000][B]A.[/B][/color] Remove gungame.smx file from plugins folder.
+        [COLOR=#FF0000][B]A.[/B][/color] Double check that you have only gungame_sdhooks.smx OR gungame.smx in your plugin folder.
+        Not both of them. If you have both you have to delete one of them.
+
+[*][COLOR=#009900][B]Q.[/B] I have strange errors in my logs.[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] First of all read this error messages carefully. Sometimes log messages has recommendations how to fix
+        the issue. Double check that you have only gungame_sdhooks.smx OR gungame.smx in your plugin folder. Not both of them.
+        If you have both you have to delete one of them.
 
 [*][COLOR=#009900][B]Q.[/B] I have updated the plugin, and something does not work.[/color]
         [COLOR=#FF0000][B]A.[/B][/color] First of all update weaponinfo.txt.
