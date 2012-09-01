@@ -1,5 +1,7 @@
 [COLOR=#ff6600][SIZE=5][B]GunGame[/B][/SIZE][/COLOR]
 
+[COLOR=#009900][B]Tip of the day:[/B][/COLOR] [COLOR=#ff0000][B]Read all [goanchor=FAQ]FAQ[/goanchor] and [goanchor=Issues]Issues[/goanchor] section before asking any questions. This section is been updated often. And it would be better if you will read all the first post if you are new to this plugin administration.[/B][/COLOR]
+
 [B]Table of contents[/B]
 ----------------------------------------------------
 [LIST]
@@ -13,7 +15,7 @@
 [*] [goanchor=Changelog]Changelog[/goanchor]
 [*] [goanchor=TODO]TODO[/goanchor]
 [*] [goanchor=FAQ]FAQ[/goanchor]
-[*] [goanchor=Issues]Issues (updated on 15 Apr 2011)[/goanchor]
+[*] [goanchor=Issues]Issues[/goanchor]
 [*] [goanchor=3-rd party plugins]3-rd party plugins[/goanchor]
 [*] [goanchor=maps]My gungame maps[/goanchor]
 [*] [goanchor=download]Download[/goanchor]
@@ -32,10 +34,16 @@
 [anchor]Complementary plugins[/anchor][B]Complementary plugins[/B]
 ----------------------------------------------------
 [LIST]
-[*] deathmatch, elimination, spawn protection
-            [B]sm_ggdm[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=103242[/URL]
-[*] noblock
-            [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
+[*] [B]sm_ggdm[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=103242[/URL]
+    - deathmatch
+    - elimination
+    - spawn protection
+    - add custom spawn points
+[*] [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
+    - no block players
+[*] [B]stripper source[/B] - [URL]http://www.bailopan.net/stripper/[/URL]
+    - remove weapons from map
+    - add custom spawn points right on the map
 [/LIST]
 
 [anchor]Commands and Cvars[/anchor][B]Commands and Cvars[/B]
@@ -94,7 +102,7 @@ You need SDK Hooks if you want to set specific options in config
 [*] Install SourceMod.
 [*] (Optional, not required by default) Install SDK Hooks.
 [*] Upload the "addons", "sound", and "cfg" into your "cstrike" folder for CS:Source
-[*] Config "gungame.config.txt" and "gungame.equip.txt" to your liking in "cfg/gungame/"
+[*] Config "gungame.config.txt" and "gungame.equip.txt" to your liking in "cfg/gungame/<css|csgo>/"
 [*] (Optional, not required by default) If you installed SDK Hooks, remove "gungame.smx" from "plugins" folder
     and add "gungame_sdkhooks.smx" from "disabled" info "plugins" folder.
 [*] Restart your server.
@@ -214,37 +222,58 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 
 [LIST]
-[*][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.
-         [B]A.[/B] "TurboMode" "1" in gungame.config.txt.
-[*][B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):
-        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
-[*][B]Q.[/B] How to switch stats database from sqlite to mysql 
-        [B]A.[/B] [URL]http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865[/URL]
-[*][B]Q.[/B] Sound does not work.
-         [B]A.[/B] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
+[*][COLOR=#009900][B]Q.[/B] I want weapon to be changed after leveling up in the same round and not in the next round.[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] "TurboMode" "1" in gungame.config.txt.
+
+[*][COLOR=#009900][B]Q.[/B] How to enable/disable gungame depending on map prefixes (aka buyzone issue):[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] [URL]http://forums.alliedmods.net/showpost.php?p=1009813&postcount=389[/URL]
+
+[*][COLOR=#009900][B]Q.[/B] How to switch stats database from sqlite to mysql[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] [URL]http://forums.alliedmods.net/showpost.php?p=1075809&postcount=865[/URL]
+
+[*][COLOR=#009900][B]Q.[/B] Sound does not work.[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] Try to change all slashes ("/") in sound files paths to double-backslashes ("\\") 
          in gungame.config.txt and restart server and client.
-[*][B]Q.[/B] Sound still does not work.
-         [B]A.[/B] Good article for beginning [url]http://developer.valvesoftware.com/wiki/Pure_Servers[/url]
+
+[*][COLOR=#009900][B]Q.[/B] Sound still does not work.[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] Good article for beginning [url]http://developer.valvesoftware.com/wiki/Pure_Servers[/url]
          Post your question with the following info: output of the command on server "sv_pure",
          output of the command on client "sv_pure" or content of the file "cstrike/pure_server_whitelist.txt",
          output of the command "sv_downloadurl" on server or client.
-[*][B]Q.[/B] Weapons desapearing on level up and player spawn.
-         [B]A.[/B] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
+
+[*][COLOR=#009900][B]Q.[/B] Weapons desapearing on level up and player spawn.[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] If you are using DeathMatch:SM then set [b]sm_ggdm_removeweapons "0"[/b] in [b]server.cfg[/b] and
          set [b]"StripDeadPlayersWeapon" "1"[/b] in [b]gungame.config.txt[/b]. GunGame:SM weapon stripper is much cpu effective
          then DeathMatch:SM weapon stripper, don't use DeathMatch:SM weapon stripper with GunGame:SM, it was designed for non GunGame servers.
-[*][B]Q.[/B] Something does not work, what should i do?
-        [B]A.[/B] Start with posting your output of server commands "version; meta version; sm version; plugin_print; meta list; sm exts list;sm plugins list"
+
+[*][COLOR=#009900][B]Q.[/B] I level up on two levels at once.[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] Remove gungame.smx file from plugins folder.
+
+[*][COLOR=#009900][B]Q.[/B] I have updated the plugin, and something does not work.[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] First of all update weaponinfo.txt.
+        Notice, that since version 1.2.0.0 the cfg directory changed it's location from cfg/gungame/ to cfg/gungame/css/ (cfg/gungame/csgo/).
+        You can use your old gungame.config.txt and gungame.equip.txt, but you should update new weaponinfo.txt from the release zip file.
+
+[*][COLOR=#009900][B]Q.[/B] Server has been updated and gungame does not work.[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] If you have gungame version earlier then 1.2.0.0, you should update to the 1.2.0.0 version or later.
+        Notice, that since version 1.2.0.0 the cfg directory changed it's location from cfg/gungame/ to cfg/gungame/css/ (cfg/gungame/csgo/).
+        You can use your old gungame.config.txt and gungame.equip.txt, but you should update new weaponinfo.txt from the release zip file.
+
+[*][COLOR=#009900][B]Q.[/B] How do i enable feature X?[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] All config files are very good described and documented. Before asking such a question you should read 
+        commets in gungame.config.txt and gungame.equip.txt for all config variables.
+
+[*][COLOR=#009900][B]Q.[/B] Something does not work, what should i do?[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] Start with posting your output of server commands "version; meta version; sm version; plugin_print; meta list; sm exts list;sm plugins list"
         and content of the latest file [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
-[*][B]Q.[/B] I level up on two levels at once.
-        [B]A.[/B] Remove gungame.smx file from plugins folder.
 [/LIST]
         
 [anchor]Known Issues[/anchor][B]Issues[/B]
 ----------------------------------------------------
 
 [LIST]
-[*][B]Q.[/B] [CSGO] MOTD does not work.
-         [B]A.[/B] MOTD does not work in csgo version.
+[*][COLOR=#009900][B]Q.[/B] [CSGO] MOTD does not work.[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] MOTD does not work in csgo version.
 [/LIST]
         
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
