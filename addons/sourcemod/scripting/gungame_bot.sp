@@ -32,7 +32,7 @@ public Action:GG_OnClientDeath(Killer, Victim, WeaponId, bool:TeamKilled)
         return Plugin_Continue;
     }
 
-    if (WeaponId == GG_GetWeaponIdKnife()) {
+    if (GG_IsWeaponKnife(WeaponId)) {
         if ( g_Cfg_AllowUpByKnifeBot ) {
             return Plugin_Continue;
         }
