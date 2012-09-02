@@ -41,9 +41,6 @@
     - add custom spawn points
 [*] [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
     - no block players
-[*] [B]stripper source[/B] - [URL]http://www.bailopan.net/stripper/[/URL]
-    - remove weapons from map
-    - add custom spawn points right on the map
 [/LIST]
 
 [anchor]Commands and Cvars[/anchor][B]Commands and Cvars[/B]
