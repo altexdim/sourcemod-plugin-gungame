@@ -135,8 +135,8 @@ OnKeyValueStart()
             && g_WeaponIdFlashbang
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i]", 
-            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang, WeaponFile);
         SetFailState(Error);
     }
 
@@ -145,8 +145,8 @@ OnKeyValueStart()
             && g_WeaponAmmoTypeSmokegrenade
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found HE=[%i] FLASH=[%i] SMOKE=[%i]", 
-            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found HE=[%i] FLASH=[%i] SMOKE=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, WeaponFile);
         SetFailState(Error);
     }
 }
