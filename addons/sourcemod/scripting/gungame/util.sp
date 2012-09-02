@@ -968,8 +968,35 @@ stock UTIL_StringToUpper(String:Source[])
     return 1;
 }
 
-UTIL_GiveWarmUpWeapon(client)
+UTIL_GiveWarmUpWeaponDelayed(Float:delay, client, bool:remove = false) {
+    new Handle:data = CreateDataPack();
+    WritePackCell(data, client);
+    WritePackCell(data, _:remove);
+       
+    CreateTimer(delay, UTIL_Timer_GiveWarmUpWeapon, data);
+}
+
+public Action:UTIL_Timer_GiveWarmUpWeapon(Handle:timer, Handle:data) {
+    new client, bool:remove;
+
+    ResetPack(data);
+    client = ReadPackCell(data);
+    remove = bool:ReadPackCell(data);
+    CloseHandle(data);
+
+    if (!IsClientInGame(client) || !IsPlayerAlive(client)) {
+        return;
+    }
+
+    UTIL_GiveWarmUpWeapon(client, remove);
+}
+
+UTIL_GiveWarmUpWeapon(client, bool:remove = false)
 {
+    if (remove) {
+        UTIL_ForceDropAllWeapon(client, true, false);
+    }
+
     if ( WarmupRandomWeaponMode )
     {   
         if ( WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2 )

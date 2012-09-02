@@ -594,11 +594,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             CPrintToChat(client, "%t", "Warmup round is in progress");
         }
 
-        UTIL_GiveWarmUpWeapon(client);
+        UTIL_GiveWarmUpWeaponDelayed(0.3, client, true);
         return;
     }
 
-    UTIL_GiveNextWeapon(client, Level, false, false, 0.3, true);
+    UTIL_GiveNextWeapon(client, Level, true, false, 0.3, true);
 
     // spawn chat messages
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);

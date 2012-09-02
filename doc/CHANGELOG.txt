@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.4.4:
+        * Imploved weapon removement on spawn. Fixed for some maps that give you weapons (not only knife and pistol) on spawn.
+
     1.2.4.3:
         * Fixed "AllowLevelUpByKnifeBotIfNoHuman" when using "knifegg" weapon.
 
