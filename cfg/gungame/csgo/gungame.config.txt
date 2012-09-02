@@ -450,14 +450,8 @@
         "WarmupTimeLength" "60"
 
         /**
-         * Gives unlimited hegrenades to the player if warmup is enabled.
-         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
-         */
-        "WarmupNades" "1"
-
-        /**
          * Give random weapon on warmup.
-         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
+         * If you are using WarmupRandomWeaponMode, you can nou use WarmupNades or WarmupWeapon.
          *
          * 0 - Disable
          * 1 - Random weapon every map
@@ -467,8 +461,14 @@
         "WarmupRandomWeaponMode" "0"
 
         /**
+         * Gives unlimited hegrenades to the player if warmup is enabled.
+         * If you are using WarmupRandomWeaponMode, you can nou use WarmupNades or WarmupWeapon.
+         */
+        "WarmupNades" "1"
+
+        /**
          * Weapon for warmup.
-         * Use only one from list: WarmupNades, WarmupRandomWeaponMode, WarmupWeapon.
+         * If you are using WarmupRandomWeaponMode, you can nou use WarmupNades or WarmupWeapon.
          */
         "WarmupWeapon" ""
 

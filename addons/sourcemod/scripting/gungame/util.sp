@@ -991,40 +991,40 @@ public Action:UTIL_Timer_GiveWarmUpWeapon(Handle:timer, Handle:data) {
     UTIL_GiveWarmUpWeapon(client, remove);
 }
 
-UTIL_GiveWarmUpWeapon(client, bool:remove = false)
-{
+UTIL_GiveWarmUpWeapon(client, bool:remove = false) {
     if (remove) {
         UTIL_ForceDropAllWeapon(client, true, false);
     }
 
-    if ( WarmupRandomWeaponMode )
-    {   
-        if ( WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2 )
-        {
-            if ( WarmupRandomWeaponLevel == -1 )
-            {
+    if (WarmupRandomWeaponMode) {   
+        if (WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2) {
+            if (WarmupRandomWeaponLevel == -1) {
                 WarmupRandomWeaponLevel = UTIL_GetRandomInt(0, WeaponOrderCount-1);
             }
             UTIL_GiveNextWeapon(client, WarmupRandomWeaponLevel, false);
-        }
-        else if ( WarmupRandomWeaponMode == 3 )
-        {
+        } else if (WarmupRandomWeaponMode == 3) {
             UTIL_GiveNextWeapon(client, UTIL_GetRandomInt(0, WeaponOrderCount-1), false);
         }
         return;
     }
-    if ( WarmupNades ) {
+
+    new bool:nades = bool:WarmupNades;
+    new bool:wpn = g_Cfg_WarmupWeapon && !g_WeaponIsKnifeType[g_Cfg_WarmupWeapon];
+
+    if (nades) {
         GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade]);
-        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
-        return;
+        if (!wpn) {
+            FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
+        }
     }
-    if ( g_Cfg_WarmupWeapon && !g_WeaponIsKnifeType[g_Cfg_WarmupWeapon] )
-    {
+    if (wpn) {
         GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_WarmupWeapon]);
         FakeClientCommand(client, "use %s", g_WeaponName[g_Cfg_WarmupWeapon]);
-        return;
     }
-    FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
+
+    if (!nades && !wpn) {
+        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
+    }
 }
 
 UTIL_GetRandomInt(start, end)
