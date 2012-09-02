@@ -39,6 +39,7 @@
     - elimination
     - spawn protection
     - add custom spawn points
+    - remove included weapons from map
 [*] [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
     - no block players
 [/LIST]
