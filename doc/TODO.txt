@@ -2,7 +2,12 @@ TODO
 ==============================================================================
 
     ----====----==== High priority list ----====----====
-    
+
+    * Add feature: add multiple sounds    
+	Would it be possible to have more of the Sounds in the gungame.config separable by commas so they can rotate through the list?
+	Specifically, the Triple and IntroSound but the rest would be useful too.
+	This is the one thing I used in GG5 that I miss with SM:GG.
+
     * Сделать загрузку конфигов gungame_warmup_start.cfg и gungame_warmup_stop.cfg.
 
     * Сделать эффект для выигрыша
