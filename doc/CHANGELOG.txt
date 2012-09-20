@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.2.5.0:
+        * Added support for multiple sounds to all sounds types. Now they work like Winner sound, randomly choosing at the map start from the comma separated list.
+        * Fixed AutoFriendlyFire message.
+
     1.2.4.5:
         * Now you can use both "WarmupWeapon" and "WarmupNades" together in config.
 

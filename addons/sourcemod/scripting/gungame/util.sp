@@ -126,14 +126,14 @@ UTIL_ChangeFriendlyFire(bool:Status)
 {
     new flags = GetConVarFlags(mp_friendlyfire);
 
-    SetConVarFlags(mp_friendlyfire, flags &= ~FCVAR_SPONLY|FCVAR_NOTIFY);
-    SetConVarInt(mp_friendlyfire, Status ? 1 : 0);
+    SetConVarFlags(mp_friendlyfire, flags & ~FCVAR_SPONLY|FCVAR_NOTIFY);
+    SetConVarInt(mp_friendlyfire, Status? 1: 0);
     SetConVarFlags(mp_friendlyfire, flags);
 
-    if ( Status ) {
-        CPrintToChatAll("%t", "Friendly Fire has been disabled");
-    } else {
+    if (Status) {
         CPrintToChatAll("%t", "Friendly Fire has been enabled");
+    } else {
+        CPrintToChatAll("%t", "Friendly Fire has been disabled");
     }
 
     UTIL_PlaySound(0, AutoFF);

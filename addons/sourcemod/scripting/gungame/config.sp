@@ -312,45 +312,44 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         case CONFIG_STATE_SOUNDS:
         {
             if(strcmp(key, "IntroSound", false) == 0) {
-                strcopy(EventSounds[Welcome], sizeof(EventSounds[]), value);
+                ConfigSetSound(Welcome, value);
             } else if(strcmp(key, "KnifeLevel", false) == 0) {
-                strcopy(EventSounds[Knife], sizeof(EventSounds[]), value);
+                ConfigSetSound(Knife, value);
             } else if(strcmp(key, "NadeLevel", false) == 0) {
-                strcopy(EventSounds[Nade], sizeof(EventSounds[]), value);
+                ConfigSetSound(Nade, value);
             } else if(strcmp(key, "LevelSteal", false) == 0) {
-                strcopy(EventSounds[Steal], sizeof(EventSounds[]), value);
+                ConfigSetSound(Steal, value);
             } else if(strcmp(key, "LevelUp", false) == 0) {
-                strcopy(EventSounds[Up], sizeof(EventSounds[]), value);
+                ConfigSetSound(Up, value);
             } else if(strcmp(key, "LevelDown", false) == 0) {
-                strcopy(EventSounds[Down], sizeof(EventSounds[]), value);
+                ConfigSetSound(Down, value);
             } else if(strcmp(key, "Triple", false) == 0) {
-                strcopy(EventSounds[Triple], sizeof(EventSounds[]), value);
+                ConfigSetSound(Triple, value);
             } else if(strcmp(key, "Autoff", false) == 0) {
-                strcopy(EventSounds[AutoFF], sizeof(EventSounds[]), value);
+                ConfigSetSound(AutoFF, value);
             } else if(strcmp(key, "MultiKill", false) == 0) {
-                strcopy(EventSounds[MultiKill], sizeof(EventSounds[]), value);
+                ConfigSetSound(MultiKill, value);
             } else if(strcmp(key, "WarmupTimerSound", false) == 0) {
-                strcopy(EventSounds[WarmupTimerSound], sizeof(EventSounds[]), value);
+                ConfigSetSound(WarmupTimerSound, value);
             } else if(strcmp(key, "Winner", false) == 0) {
-                if (!StrEqual(value, "", false))
-                {
-                    new String:songs[64][64];
-                    new songsfound = ExplodeString(value, ",", songs, 64, 64);
-                    if ( songsfound > 1 )
-                    {
-                        strcopy(EventSounds[Winner], sizeof(EventSounds[]), songs[UTIL_GetRandomInt(0, songsfound-1)]);
-                    }
-                    else
-                    {
-                        strcopy(EventSounds[Winner], sizeof(EventSounds[]), value);
-                    }
-                }
-                else
-                {
-                    strcopy(EventSounds[Winner], sizeof(EventSounds[]), value);
-                }
+                ConfigSetSound(Winner, value);
             }
         }
+    }
+}
+
+ConfigSetSound(Sounds:type, const String:value[]) {
+    if (!StrEqual(value, "", false)) {
+        new String:songs[128][128];
+        new songsfound = ExplodeString(value, ",", songs, 128, 128);
+        if (songsfound > 1) {
+            strcopy(EventSounds[type], sizeof(EventSounds[]), songs[UTIL_GetRandomInt(0, songsfound-1)]);
+        } else {
+            strcopy(EventSounds[type], sizeof(EventSounds[]), value);
+        }
+        TrimString(EventSounds[type]);
+    } else {
+        EventSounds[type][0] = '\0';
     }
 }
 
