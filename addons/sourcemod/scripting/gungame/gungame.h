@@ -79,3 +79,4 @@ new g_WeaponAmmoTypeHegrenade       = 0;
 new g_WeaponAmmoTypeFlashbang       = 0;
 new g_WeaponAmmoTypeSmokegrenade    = 0;
 new g_WeaponAmmoTypeMolotov         = 0;
+new g_WeaponAmmoTypeTaser           = 0;

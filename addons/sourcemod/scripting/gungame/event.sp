@@ -67,9 +67,7 @@ public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast) {
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
     if (KnifeElite) {
         if (client && PlayerState[client] & KNIFE_ELITE) {
-            UTIL_ForceDropAllWeapon(client);
-            GivePlayerItem(client, g_WeaponName[g_WeaponIdKnife]);
-            FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
+            UTIL_ForceDropAllWeapon(client, false);
         }
     }
 }
@@ -303,7 +301,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         && g_WeaponIsKnifeType[WeaponIndex]
         && g_Cfg_ExtraTaserOnKnifeKill
     ) {
-        UTIL_GiveNextWeapon(Killer, level, true);
+        UTIL_GiveExtraTaser(Killer);
     }
 
     /* Give them another molotov if they killed another person with another weapon */
@@ -311,7 +309,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         && g_WeaponIsKnifeType[WeaponIndex]
         && g_Cfg_ExtraMolotovOnKnifeKill
     ) {
-        UTIL_GiveExtraMolotov(Killer, g_WeaponIsKnifeType[WeaponIndex], WeaponLevel);
+        UTIL_GiveExtraMolotov(Killer, WeaponLevel);
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
@@ -602,7 +600,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new Level = PlayerLevel[client];
-    UTIL_ForceDropAllWeapon(client);
+    UTIL_ForceDropAllWeapon(client, false);
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if ( GameWinner )
@@ -623,7 +621,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    UTIL_GiveNextWeapon(client, Level, false, 0.3);
+    UTIL_GiveNextWeapon(client, Level, false, 0.3, true);
 
     // spawn chat messages
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);

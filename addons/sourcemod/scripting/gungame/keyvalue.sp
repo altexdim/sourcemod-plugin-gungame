@@ -86,6 +86,7 @@ OnKeyValueStart()
     g_WeaponAmmoTypeFlashbang       = 0;
     g_WeaponAmmoTypeSmokegrenade    = 0;
     g_WeaponAmmoTypeMolotov         = 0;
+    g_WeaponAmmoTypeTaser           = 0;
 
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
@@ -127,6 +128,7 @@ OnKeyValueStart()
             g_WeaponAmmoTypeMolotov         = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_taser", 0)) {
             g_WeaponIdTaser                 = index;
+            g_WeaponAmmoTypeTaser           = KvGetNum(KvWeapon, "ammotype", 0);
         } 
 
         if ( !KvGotoNextKey(KvWeapon) ) {
@@ -153,10 +155,11 @@ OnKeyValueStart()
             && g_WeaponAmmoTypeFlashbang
             && g_WeaponAmmoTypeSmokegrenade
             && g_WeaponAmmoTypeMolotov
+            && g_WeaponAmmoTypeTaser
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found HE=[%i] FLASH=[%i] SMOKE=[%i] MOLOTOV=[%i]. You should update you %s and take it from the release zip file.", 
-            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, g_WeaponAmmoTypeMolotov, WeaponFile);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found HE=[%i] FLASH=[%i] SMOKE=[%i] MOLOTOV=[%i] TASER=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, g_WeaponAmmoTypeMolotov, g_WeaponAmmoTypeTaser, WeaponFile);
         SetFailState(Error);
     }
 }

@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.6.1:
+        * Refactoring. Performance improvement.
+
     1.2.6.0:
         * [CS:GO] Added support for "molotov", "incgrenade" and "taser" weapon level.
         * [CS:GO] Added config variables: "ExtraTaserOnKnifeKill", "ExtraMolotovOnKnifeKill", "MolotovBonusWeaponName", "MolotovBonusSmoke", "MolotovBonusFlash".
