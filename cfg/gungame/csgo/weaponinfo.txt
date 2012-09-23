@@ -17,6 +17,7 @@
         "index" "3"
         "slot"  "2"
         "is_taser"  "1"
+        "clipsize"  "1"
     }
     // Secondary Weapon
     "glock" {
