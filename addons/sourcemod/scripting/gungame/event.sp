@@ -59,20 +59,17 @@ StopSwitchHook() {
     }
 }
 
-public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast)
-{
-    if ( !IsActive )
-    {
+public _ItemPickup(Handle:event, const String:name[], bool:dontBroadcast) {
+    if (!IsActive){
         return;
     }
 
     new client = GetClientOfUserId(GetEventInt(event, "userid"));
-
-    if ( KnifeElite )
-    {
-        if ( client && PlayerState[client] & KNIFE_ELITE )
-        {
+    if (KnifeElite) {
+        if (client && PlayerState[client] & KNIFE_ELITE) {
             UTIL_ForceDropAllWeapon(client);
+            GivePlayerItem(client, g_WeaponName[g_WeaponIdKnife]);
+            FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
         }
     }
 }
@@ -294,10 +291,27 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     new level = PlayerLevel[Killer], WeaponLevel = WeaponOrderId[level];
 
     /* Give them another grenade if they killed another person with another weapon */
-    if ( (WeaponLevel == g_WeaponIdHegrenade) && (WeaponIndex != g_WeaponIdHegrenade) 
+    if ( (WeaponLevel == g_WeaponIdHegrenade) 
+        && (WeaponIndex != g_WeaponIdHegrenade) 
         && !( g_WeaponIsKnifeType[WeaponIndex] && KnifeProHE ) // TODO: Remove "&& !( g_WeaponIsKnifeType[WeaponIndex] && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
     ) {
         UTIL_GiveExtraNade(Killer, g_WeaponIsKnifeType[WeaponIndex]);
+    }
+
+    /* Give them another taser if they killed another person with another weapon */
+    if ( (WeaponLevel == g_WeaponIdTaser) 
+        && g_WeaponIsKnifeType[WeaponIndex]
+        && g_Cfg_ExtraTaserOnKnifeKill
+    ) {
+        UTIL_GiveNextWeapon(Killer, level, true);
+    }
+
+    /* Give them another molotov if they killed another person with another weapon */
+    if (g_WeaponIsMolotovType[WeaponLevel]
+        && g_WeaponIsKnifeType[WeaponIndex]
+        && g_Cfg_ExtraMolotovOnKnifeKill
+    ) {
+        UTIL_GiveExtraMolotov(Killer, g_WeaponIsKnifeType[WeaponIndex], WeaponLevel);
     }
 
     if ( MaxLevelPerRound && CurrentLevelPerRound[Killer] >= MaxLevelPerRound )
@@ -348,6 +362,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 return;
             }
 
+            if (WeaponLevel == g_WeaponIdTaser) {
+                return;
+            }
+
+            if (g_WeaponIsMolotovType[WeaponLevel]) {
+                return;
+            }
+
             new oldLevelKiller = level;
             level = UTIL_ChangeLevel(Killer, 1, true, Victim);
             if ( oldLevelKiller == level ) {
@@ -358,7 +380,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CurrentLevelPerRound[Killer]++;
                    
             if ( TurboMode ) {
-                UTIL_GiveNextWeapon(Killer, level, true, g_WeaponIsKnifeType[WeaponIndex]);
+                UTIL_GiveNextWeapon(Killer, level, g_WeaponIsKnifeType[WeaponIndex]);
             }
 
             CheckForTripleLevel(Killer);
@@ -370,7 +392,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     new LevelUpWithPhysics = false;
 
     /* They didn't kill with the weapon required */
-    if ( WeaponIndex != WeaponLevel ) {
+    if (!(
+        WeaponIndex == WeaponLevel 
+        || (g_WeaponIsMolotovType[WeaponIndex] && g_WeaponIsMolotovType[WeaponLevel])
+    )) {
         if ( WeaponIndex == g_WeaponIdHegrenade ) {
             // Killed with grenade made by map author
             if ( 
@@ -479,7 +504,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( TurboMode || KnifeElite )
     {
-        UTIL_GiveNextWeapon(Killer, level, true, g_WeaponIsKnifeType[WeaponIndex]);
+        UTIL_GiveNextWeapon(Killer, level, g_WeaponIsKnifeType[WeaponIndex]);
     }
 
     CheckForTripleLevel(Killer);
@@ -577,7 +602,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     }
 
     new Level = PlayerLevel[client];
-    UTIL_ForceDropAllWeapon(client, true, g_WeaponDropKnife[WeaponOrderId[Level]]);
+    UTIL_ForceDropAllWeapon(client);
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if ( GameWinner )
@@ -594,11 +619,11 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
             CPrintToChat(client, "%t", "Warmup round is in progress");
         }
 
-        UTIL_GiveWarmUpWeaponDelayed(0.3, client, true);
+        UTIL_GiveWarmUpWeaponDelayed(0.3, client);
         return;
     }
 
-    UTIL_GiveNextWeapon(client, Level, true, false, 0.3, true);
+    UTIL_GiveNextWeapon(client, Level, false, 0.3);
 
     // spawn chat messages
     new killsPerLevel = UTIL_GetCustomKillPerLevel(Level);

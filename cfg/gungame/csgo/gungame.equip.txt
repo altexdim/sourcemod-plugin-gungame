@@ -98,12 +98,6 @@ weapon_smokegrenade
 weapon_incgrenade
 weapon_molotov
 ======================
-PLUGIN LIMITATION
-
-Do not use while plugin in beta stage: molotov, incgrenade, taser, 
-Do not use at all: decoy, any of the gears
-
-======================
 
          */
 

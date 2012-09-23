@@ -1,5 +1,10 @@
 Changelog
 ---------
+    1.2.6.0:
+        * [CS:GO] Added support for "molotov", "incgrenade" and "taser" weapon level.
+        * [CS:GO] Added config variables: "ExtraTaserOnKnifeKill", "ExtraMolotovOnKnifeKill", "MolotovBonusWeaponName", "MolotovBonusSmoke", "MolotovBonusFlash".
+        * [CS:GO] The file "weaponinfo.txt" has been updated!
+
     1.2.5.0:
         * Added support for multiple sounds to all sounds types. Now they work like Winner sound, randomly choosing at the map start from the comma separated list.
         * Fixed AutoFriendlyFire message.

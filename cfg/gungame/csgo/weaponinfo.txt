@@ -16,6 +16,7 @@
     "taser" {
         "index" "3"
         "slot"  "2"
+        "is_taser"  "1"
     }
     // Secondary Weapon
     "glock" {
@@ -195,14 +196,24 @@
     "incgrenade" {
         "index" "37"
         "slot"  "3"
+        "is_molotov_type"   "1"
+        "ammotype"  "14"
     }
     "molotov" {
         "index" "38"
         "slot"  "3"
+        "is_molotov"        "1"
+        "is_molotov_type"   "1"
+        "ammotype"  "14"
     }
     // C4
     "c4" {
         "index" "39"
         "slot"  "4"
+    }
+    // Molotov fire
+    "inferno" {
+        "index" "40"
+        "is_molotov_type"   "1"
     }
 }

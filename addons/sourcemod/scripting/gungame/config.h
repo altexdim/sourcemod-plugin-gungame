@@ -102,3 +102,9 @@ new Handle:g_Cvar_Turbo;
 new Handle:g_Cvar_MultiLevelAmount;
 new g_Cfg_MultiplySoundVolume = 0;
 new g_Cfg_BonusWeaponAmmo = 0;
+new g_Cfg_ExtraTaserOnKnifeKill = 0;
+
+new g_Cfg_MolotovBonusFlash         = 0;
+new g_Cfg_MolotovBonusSmoke         = 0;
+new g_Cfg_MolotovBonusWeaponId      = 0;
+new g_Cfg_ExtraMolotovOnKnifeKill   = 0;

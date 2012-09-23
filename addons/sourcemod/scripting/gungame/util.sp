@@ -410,33 +410,36 @@ UTIL_ForceDropC4(client) {
  * @param DropBomb        Allow bomb drop. Will only work after event bomb_pickup is called.
  * @noreturn
  */
-UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, bool:DropBomb = false)
-{
-    for(new Slots:i = Slot_Primary, ent; i < Slot_None; i++)
-    {
-        if(i == Slot_Grenade)
-        {
-            UTIL_DropAllGrenades(client, remove);
+UTIL_ForceDropAllWeapon(client) {
+    for (new Slots:i = Slot_Primary, ent; i < Slot_None; i++) {
+        if (i == Slot_Grenade) {
+            UTIL_DropAllGrenades(client);
+            continue;
+        }
+
+        if (i == Slot_Knife) {
+            // Remove taser and knife
+            for (new j = 0, ent2; j < 2; j++) {
+                ent2 = GetPlayerWeaponSlot(client, _:Slot_Knife);
+                if (ent2 < 1) {
+                    break;
+                }
+
+                RemovePlayerItem(client, ent2);
+                RemoveEdict(ent2);
+            }
+            continue;
+        }
+
+        if (i == Slot_C4) {
+            UTIL_ForceDropC4(client);
             continue;
         }
 
         ent = GetPlayerWeaponSlot(client, _:i);
-        if ( ent > 0 )
-        {
-            if(i == Slot_Knife && !DropKnife || i == Slot_C4 && !DropBomb)
-            {
-                continue;
-            }
-
-            if ( remove )
-            {
-                RemovePlayerItem(client, ent);
-                RemoveEdict(ent);
-            }
-            else
-            {
-                CS_DropWeapon(client, ent, false, true);
-            }
+        if (ent > 0) {
+            RemovePlayerItem(client, ent);
+            RemoveEdict(ent);
         }
     }
 }
@@ -448,19 +451,15 @@ UTIL_ForceDropAllWeapon(client, bool:remove = false, bool:DropKnife = false, boo
  * @remove        Remove grenade on drop
  * @noreturn
  */
-UTIL_DropAllGrenades(client, bool:remove = false) {
+UTIL_DropAllGrenades(client) {
     for (new i = 0, ent; i < 5; i++) {
         ent = GetPlayerWeaponSlot(client, _:Slot_Grenade);
         if (ent < 1) {
             break;
         }
 
-        if (remove) {
-            RemovePlayerItem(client, ent);
-            RemoveEdict(ent);
-        } else {
-            CS_DropWeapon(client, ent, false, true);
-        }
+        RemovePlayerItem(client, ent);
+        RemoveEdict(ent);
     }
 }
 
@@ -578,48 +577,38 @@ UTIL_CheckForFriendlyFire(client, WeapId)
     }
 }
 
-UTIL_GiveNextWeapon(client, level, bool:drop = true, bool:knife = false, Float:delay = 0.1, bool:spawn = false) {
+UTIL_GiveNextWeapon(client, level, bool:knife = false, Float:delay = 0.1) {
     new Handle:data = CreateDataPack();
     WritePackCell(data, client);
     WritePackCell(data, level);
-    WritePackCell(data, _:drop);
     WritePackCell(data, _:knife);
-    WritePackCell(data, _:spawn);
        
     CreateTimer(delay, UTIL_Timer_GiveNextWeapon, data);
 }
 
 public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
-    new client, level, bool:drop, bool:knife, bool:spawn;
+    new client, level, bool:knife;
 
     ResetPack(data);
     client = ReadPackCell(data);
     level = ReadPackCell(data);
-    drop = bool:ReadPackCell(data);
     knife = bool:ReadPackCell(data);
-    spawn = bool:ReadPackCell(data);
     CloseHandle(data);
 
     if ( !IsClientInGame(client) || !IsPlayerAlive(client) ) {
         return;
     }
 
-    UTIL_GiveNextWeaponReal(client, level, drop, knife, spawn);
+    UTIL_GiveNextWeaponReal(client, level, knife);
 }
 
-UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, bool:spawn = false) {
+UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife = false) {
     new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
     new bool:dropKnife = g_WeaponDropKnife[WeapId];
-    new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && knife && !dropKnife;
+    new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && levelupWithKnife && !dropKnife;
 
     // A check to make sure player always has a knife 
     // because some maps do not give the knife.
-
-    if (!dropKnife) {
-        if ( spawn && GetPlayerWeaponSlot(client, _:Slot_Knife) == -1 ) {
-            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdKnife]);
-        }
-    }
 
     if (blockSwitch) {
         g_BlockSwitch[client] = true;
@@ -627,55 +616,85 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
 
     UTIL_CheckForFriendlyFire(client, WeapId);
 
-    if (drop) {
-        UTIL_ForceDropAllWeapon(client, true, dropKnife);
+    UTIL_ForceDropAllWeapon(client);
+    if (!dropKnife) {
+        GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdKnife]);
     }
 
     if (PlayerState[client] & KNIFE_ELITE) {
         if (blockSwitch) {
             g_BlockSwitch[client] = false;
-        } else {
-            FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
         }
+        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
         return;
     }
 
     if (slot == Slot_Grenade) {
-        if (NumberOfNades) {
-            g_NumberOfNades[client] = NumberOfNades - 1;
-        }
-        if (NadeBonusWeaponId) {
-            new ent = GivePlayerItemWrapper(client, g_WeaponName[NadeBonusWeaponId]);
-            // Remove bonus weapon ammo! So player can not reload weapon!
-            if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
-                new iAmmo = UTIL_GetAmmoType(ent); // TODO: not needed
-
-                if ((iAmmo != -1) && (ent != INVALID_ENT_REFERENCE)) {
-                    new Handle:Info = CreateDataPack();
-                    WritePackCell(Info, client);
-                    WritePackCell(Info, ent);
-                    ResetPack(Info);
-
-                    CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+        if (WeapId == g_WeaponIdHegrenade) {
+            if (NumberOfNades) {
+                g_NumberOfNades[client] = NumberOfNades - 1;
+            }
+            if (NadeBonusWeaponId) {
+                new ent = GivePlayerItemWrapper(client, g_WeaponName[NadeBonusWeaponId]);
+                // Remove bonus weapon ammo! So player can not reload weapon!
+                if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
+                    new iAmmo = UTIL_GetAmmoType(ent); // TODO: not needed
+    
+                    if ((iAmmo != -1) && (ent != INVALID_ENT_REFERENCE)) {
+                        new Handle:Info = CreateDataPack();
+                        WritePackCell(Info, client);
+                        WritePackCell(Info, ent);
+                        ResetPack(Info);
+    
+                        CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+                    }
                 }
             }
-        }
-        if (NadeSmoke) {
-            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
-        }
-        if (NadeFlash) {
-            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+            if (NadeSmoke) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
+            }
+            if (NadeFlash) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+            }
+        } else if (g_WeaponIsMolotovType[WeapId]) {
+            if (g_Cfg_MolotovBonusWeaponId) {
+                new ent = GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_MolotovBonusWeaponId]);
+                // Remove bonus weapon ammo! So player can not reload weapon!
+                if ( (ent != -1) && RemoveBonusWeaponAmmo ) {
+                    new iAmmo = UTIL_GetAmmoType(ent); // TODO: not needed
+    
+                    if ((iAmmo != -1) && (ent != INVALID_ENT_REFERENCE)) {
+                        new Handle:Info = CreateDataPack();
+                        WritePackCell(Info, client);
+                        WritePackCell(Info, ent);
+                        ResetPack(Info);
+    
+                        CreateTimer(0.1, UTIL_DelayAmmoRemove, Info, TIMER_HNDL_CLOSE);
+                    }
+                }
+            }
+            if (g_Cfg_MolotovBonusSmoke) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
+            }
+            if (g_Cfg_MolotovBonusFlash) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+            }
         }
     }
 
     if (slot == Slot_Knife) {
-        if (g_Cfg_KnifeSmoke) {
-            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
-        }
-        if (g_Cfg_KnifeFlash) {
-            GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
-        }
-        if (dropKnife) {
+        if (g_WeaponIsKnifeType[WeapId]) {
+            if (g_Cfg_KnifeSmoke) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
+            }
+            if (g_Cfg_KnifeFlash) {
+                GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
+            }
+            if (dropKnife) {
+                GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+            }
+        } else {
+            // this is, for example, TASER (csgo)
             GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
         }
     } else {
@@ -685,6 +704,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:drop = true, bool:knife = false, boo
 
     if (blockSwitch) {
         g_BlockSwitch[client] = false;
+        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
     } else {
         FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
     }
@@ -968,42 +988,38 @@ stock UTIL_StringToUpper(String:Source[])
     return 1;
 }
 
-UTIL_GiveWarmUpWeaponDelayed(Float:delay, client, bool:remove = false) {
+UTIL_GiveWarmUpWeaponDelayed(Float:delay, client) {
     new Handle:data = CreateDataPack();
     WritePackCell(data, client);
-    WritePackCell(data, _:remove);
        
     CreateTimer(delay, UTIL_Timer_GiveWarmUpWeapon, data);
 }
 
 public Action:UTIL_Timer_GiveWarmUpWeapon(Handle:timer, Handle:data) {
-    new client, bool:remove;
+    new client;
 
     ResetPack(data);
     client = ReadPackCell(data);
-    remove = bool:ReadPackCell(data);
     CloseHandle(data);
 
     if (!IsClientInGame(client) || !IsPlayerAlive(client)) {
         return;
     }
 
-    UTIL_GiveWarmUpWeapon(client, remove);
+    UTIL_GiveWarmUpWeapon(client);
 }
 
-UTIL_GiveWarmUpWeapon(client, bool:remove = false) {
-    if (remove) {
-        UTIL_ForceDropAllWeapon(client, true, false);
-    }
+UTIL_GiveWarmUpWeapon(client) {
+    UTIL_ForceDropAllWeapon(client);
 
     if (WarmupRandomWeaponMode) {   
         if (WarmupRandomWeaponMode == 1 || WarmupRandomWeaponMode == 2) {
             if (WarmupRandomWeaponLevel == -1) {
                 WarmupRandomWeaponLevel = UTIL_GetRandomInt(0, WeaponOrderCount-1);
             }
-            UTIL_GiveNextWeapon(client, WarmupRandomWeaponLevel, false);
+            UTIL_GiveNextWeapon(client, WarmupRandomWeaponLevel);
         } else if (WarmupRandomWeaponMode == 3) {
-            UTIL_GiveNextWeapon(client, UTIL_GetRandomInt(0, WeaponOrderCount-1), false);
+            UTIL_GiveNextWeapon(client, UTIL_GetRandomInt(0, WeaponOrderCount-1));
         }
         return;
     }
@@ -1027,27 +1043,41 @@ UTIL_GiveWarmUpWeapon(client, bool:remove = false) {
     }
 }
 
-UTIL_GetRandomInt(start, end)
-{
+UTIL_GetRandomInt(start, end) {
     new rand;
     // if sourcemod version >= 1.3.0
     rand = GetURandomInt();
     return ( rand % (1 + end - start) ) + start;
 }
 
-UTIL_GiveExtraNade(client, bool:knife) {
+UTIL_GiveExtraNade(client, bool:knifeKill) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
-    if ( g_Cfg_ExtraNade && ( knife || g_Cfg_ExtraNade == 1 ) ) {
+    if ( g_Cfg_ExtraNade && ( knifeKill || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
         if (!UTIL_HasClientHegrenade(client)) {
             GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
-                g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade )
+                g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade )
             );
-            if ( !( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knife || g_Cfg_BlockWeaponSwitchOnNade ) ) ) {
+            if ( !( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade ) ) ) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
             }
+        }
+    }
+}
+
+UTIL_GiveExtraMolotov(client, bool:knifeKill, WeaponId) {
+    /* Give them another molotov if they killed another person with another weapon*/
+    /* Do not give them another nade if they already have one */
+    if (!UTIL_HasClientMolotov(client)) {
+        GivePlayerItemWrapper(
+            client, 
+            g_WeaponName[WeaponId], 
+            g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade )
+        );
+        if ( !( g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade ) ) ) {
+            FakeClientCommand(client, "use %s", g_WeaponName[WeaponId]);
         }
     }
 }
@@ -1447,4 +1477,8 @@ stock UTIL_WeaponAmmoGetGrenadeCount(client, type) {
 
 stock bool:UTIL_HasClientHegrenade(client) {
     return UTIL_WeaponAmmoGetGrenadeCount(client, g_WeaponAmmoTypeHegrenade) > 0;
+}
+
+stock bool:UTIL_HasClientMolotov(client) {
+    return UTIL_WeaponAmmoGetGrenadeCount(client, g_WeaponAmmoTypeMolotov) > 0;
 }

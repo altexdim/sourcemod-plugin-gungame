@@ -341,6 +341,40 @@
         
         /* ----- [1.5. equip] ----- */
         
+        /**
+         * Give extra taser for the knife kill.
+         *
+         * Options:
+         * 0 - disabled
+         * 1 - enabled
+         */
+        "ExtraTaserOnKnifeKill" "1"
+
+        /**
+         * Give extra molotov for the knife kill.
+         *
+         * Options:
+         * 0 - disabled
+         * 1 - enabled
+         */
+        "ExtraMolotovOnKnifeKill" "1"
+
+        /**
+         * This gives the player a weapon with 50 bullets on molotov level.
+         *
+         * Example:
+         *     "MolotovBonusWeaponName" "glock"  - gives glock 
+         *     "MolotovBonusWeaponName" "deagle" - gives deagle
+         *     "MolotovBonusWeaponName" ""       - feature disabled
+         */
+        "MolotovBonusWeaponName" ""
+
+        /* Gives a smoke grenade on molotov level */
+        "MolotovBonusSmoke" "0"
+
+        /* Gives a Flash grenade on molotovlevel */
+        "MolotovBonusFlash" "0"
+
         /* Auto reload current level weapon on kill */
         "ReloadWeapon" "1"
         

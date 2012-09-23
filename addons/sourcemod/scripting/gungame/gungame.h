@@ -27,6 +27,7 @@ new Slots:g_WeaponSlot[MAX_WEAPONS_COUNT];
 new g_WeaponAmmo[MAX_WEAPONS_COUNT];
 new bool:g_WeaponDropKnife[MAX_WEAPONS_COUNT];
 new bool:g_WeaponIsKnifeType[MAX_WEAPONS_COUNT];
+new bool:g_WeaponIsMolotovType[MAX_WEAPONS_COUNT];
 
 new String:EventSounds[Sounds:MaxSounds][64];
 
@@ -72,7 +73,9 @@ new g_WeaponIdKnife         = 0;
 new g_WeaponIdHegrenade     = 0;
 new g_WeaponIdSmokegrenade  = 0;
 new g_WeaponIdFlashbang     = 0;
+new g_WeaponIdTaser         = 0;
 
 new g_WeaponAmmoTypeHegrenade       = 0;
 new g_WeaponAmmoTypeFlashbang       = 0;
 new g_WeaponAmmoTypeSmokegrenade    = 0;
+new g_WeaponAmmoTypeMolotov         = 0;

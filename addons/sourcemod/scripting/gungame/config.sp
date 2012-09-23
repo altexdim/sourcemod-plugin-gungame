@@ -32,6 +32,22 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
         {
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
+
+            } else if(strcmp("MolotovBonusFlash", key, false) == 0) {
+                g_Cfg_MolotovBonusFlash = StringToInt(value);
+            } else if(strcmp("MolotovBonusSmoke", key, false) == 0) {
+                g_Cfg_MolotovBonusSmoke = StringToInt(value);
+            } else if(strcmp("MolotovBonusWeaponName", key, false) == 0) {
+                if (!value[0]) {
+                    g_Cfg_MolotovBonusWeaponId = 0;
+                } else {
+                    g_Cfg_MolotovBonusWeaponId = UTIL_GetWeaponIndex(value);
+                }
+            } else if(strcmp("ExtraMolotovOnKnifeKill", key, false) == 0) {
+                g_Cfg_ExtraMolotovOnKnifeKill = StringToInt(value);
+
+            } else if(strcmp("ExtraTaserOnKnifeKill", key, false) == 0) {
+                g_Cfg_ExtraTaserOnKnifeKill = StringToInt(value);
             } else if(strcmp("BonusWeaponAmmo", key, false) == 0) {
                 g_Cfg_BonusWeaponAmmo = StringToInt(value);
             } else if(strcmp("MultiplySoundVolume", key, false) == 0) {

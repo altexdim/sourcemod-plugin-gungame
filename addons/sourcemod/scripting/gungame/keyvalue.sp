@@ -80,10 +80,12 @@ OnKeyValueStart()
     g_WeaponIdHegrenade     = 0;
     g_WeaponIdSmokegrenade  = 0;
     g_WeaponIdFlashbang     = 0;
+    g_WeaponIdTaser         = 0;
 
     g_WeaponAmmoTypeHegrenade       = 0;
     g_WeaponAmmoTypeFlashbang       = 0;
     g_WeaponAmmoTypeSmokegrenade    = 0;
+    g_WeaponAmmoTypeMolotov         = 0;
 
     for (;;) {
         if ( !KvGetSectionName(KvWeapon, name, sizeof(name)) ) {
@@ -100,13 +102,15 @@ OnKeyValueStart()
         // init weapons full names (to use in give commands)
         FormatEx(g_WeaponName[index], sizeof(g_WeaponName[]), "weapon_%s", name);
         // init weapons slots
-        g_WeaponSlot[index] = Slots:KvGetNum(KvWeapon, "slot");
+        g_WeaponSlot[index] = Slots:KvGetNum(KvWeapon, "slot", 0);
         // init weapons clip size
         g_WeaponAmmo[index] = KvGetNum(KvWeapon, "clipsize", 0);
         // init weapons that need drop knife
         g_WeaponDropKnife[index] = bool:KvGetNum(KvWeapon, "drop_knife", 0);
-        // init weapons that is like knife, but is not default knife
+        // init weapons that has knife type
         g_WeaponIsKnifeType[index] = bool:KvGetNum(KvWeapon, "is_knife_type", 0);
+        // init weapons that has molotov type
+        g_WeaponIsMolotovType[index] = bool:KvGetNum(KvWeapon, "is_molotov_type", 0);
 
         if (KvGetNum(KvWeapon, "is_knife_default", 0)) {
             g_WeaponIdKnife                 = index;
@@ -119,6 +123,10 @@ OnKeyValueStart()
         } else if (KvGetNum(KvWeapon, "is_flashbang", 0)) {
             g_WeaponIdFlashbang             = index;
             g_WeaponAmmoTypeFlashbang       = KvGetNum(KvWeapon, "ammotype", 0);
+        } else if (KvGetNum(KvWeapon, "is_molotov", 0)) {
+            g_WeaponAmmoTypeMolotov         = KvGetNum(KvWeapon, "ammotype", 0);
+        } else if (KvGetNum(KvWeapon, "is_taser", 0)) {
+            g_WeaponIdTaser                 = index;
         } 
 
         if ( !KvGotoNextKey(KvWeapon) ) {
@@ -133,20 +141,22 @@ OnKeyValueStart()
             && g_WeaponIdHegrenade
             && g_WeaponIdSmokegrenade
             && g_WeaponIdFlashbang
+            && g_WeaponIdTaser
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i]. You should update you %s and take it from the release zip file.", 
-            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang, WeaponFile);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i] TASER=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang, g_WeaponIdTaser, WeaponFile);
         SetFailState(Error);
     }
 
     if (!(  g_WeaponAmmoTypeHegrenade
             && g_WeaponAmmoTypeFlashbang
             && g_WeaponAmmoTypeSmokegrenade
+            && g_WeaponAmmoTypeMolotov
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapon types not found HE=[%i] FLASH=[%i] SMOKE=[%i]. You should update you %s and take it from the release zip file.", 
-            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, WeaponFile);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found HE=[%i] FLASH=[%i] SMOKE=[%i] MOLOTOV=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, g_WeaponAmmoTypeMolotov, WeaponFile);
         SetFailState(Error);
     }
 }
