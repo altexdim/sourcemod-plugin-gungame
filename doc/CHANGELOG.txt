@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.6.2:
+        * [CS:S] Fixed CSS version of plugin. It was completely broken after last plugin release with error in sourcemod error log file.
+
     1.2.6.1:
         * Refactoring. Performance improvement.
 

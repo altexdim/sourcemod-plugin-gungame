@@ -143,23 +143,39 @@ OnKeyValueStart()
             && g_WeaponIdHegrenade
             && g_WeaponIdSmokegrenade
             && g_WeaponIdFlashbang
-            && g_WeaponIdTaser
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i] TASER=[%i]. You should update you %s and take it from the release zip file.", 
-            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang, g_WeaponIdTaser, WeaponFile);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found MAXID=[%i] KNIFE=[%i] HE=[%i] SMOKE=[%i] FLASH=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponsMaxId, g_WeaponIdKnife, g_WeaponIdHegrenade, g_WeaponIdSmokegrenade, g_WeaponIdFlashbang, WeaponFile);
         SetFailState(Error);
     }
 
     if (!(  g_WeaponAmmoTypeHegrenade
             && g_WeaponAmmoTypeFlashbang
             && g_WeaponAmmoTypeSmokegrenade
-            && g_WeaponAmmoTypeMolotov
-            && g_WeaponAmmoTypeTaser
     )) {
         decl String:Error[1024];
-        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found HE=[%i] FLASH=[%i] SMOKE=[%i] MOLOTOV=[%i] TASER=[%i]. You should update you %s and take it from the release zip file.", 
-            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, g_WeaponAmmoTypeMolotov, g_WeaponAmmoTypeTaser, WeaponFile);
+        FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found HE=[%i] FLASH=[%i] SMOKE=[%i]. You should update you %s and take it from the release zip file.", 
+            g_WeaponAmmoTypeHegrenade, g_WeaponAmmoTypeFlashbang, g_WeaponAmmoTypeSmokegrenade, WeaponFile);
         SetFailState(Error);
+    }
+
+    if (g_GameName == GameName:Csgo) {
+        if (!(  g_WeaponIdTaser
+        )) {
+            decl String:Error[1024];
+            FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the weapons not found TASER=[%i]. You should update you %s and take it from the release zip file.", 
+                g_WeaponIdTaser, WeaponFile);
+            SetFailState(Error);
+        }
+    
+        if (!(  g_WeaponAmmoTypeMolotov
+                && g_WeaponAmmoTypeTaser
+        )) {
+            decl String:Error[1024];
+            FormatEx(Error, sizeof(Error), "FATAL ERROR: Some of the ammo types not found MOLOTOV=[%i] TASER=[%i]. You should update you %s and take it from the release zip file.", 
+                g_WeaponAmmoTypeMolotov, g_WeaponAmmoTypeTaser, WeaponFile);
+            SetFailState(Error);
+        }
     }
 }

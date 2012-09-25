@@ -1083,7 +1083,7 @@ UTIL_GiveExtraNade(client, bool:knifeKill) {
     if ( g_Cfg_ExtraNade && ( knifeKill || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
         if (!UTIL_HasClientHegrenade(client)) {
-            new blockWeapSwitch = g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade );
+            new bool:blockWeapSwitch = g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade );
             GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
@@ -1100,7 +1100,7 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
     /* Give them another molotov if they killed another person with another weapon*/
     /* Do not give them another nade if they already have one */
     if (!UTIL_HasClientMolotov(client)) {
-        new blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
+        new bool:blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
         GivePlayerItemWrapper(
             client, 
             g_WeaponName[WeaponId], 
@@ -1123,7 +1123,7 @@ UTIL_GiveExtraTaser(client) {
         return;
     }
 
-    new blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
+    new bool:blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
     GivePlayerItemWrapper(
         client, 
         g_WeaponName[g_WeaponIdTaser], 
