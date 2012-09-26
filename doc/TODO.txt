@@ -3,10 +3,29 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Add feature: add multiple sounds    
-	Would it be possible to have more of the Sounds in the gungame.config separable by commas so they can rotate through the list?
-	Specifically, the Triple and IntroSound but the rest would be useful too.
-	This is the one thing I used in GG5 that I miss with SM:GG.
+	*) [csgo] fix error
+		----
+		L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
+		L 08/21/2012 - 22:08:00: [SM] Displaying call stack trace for plugin "gungame.smx":
+		L 08/21/2012 - 22:08:00: [SM]   [0]  Line 1448, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_RemoveAmmoNew()
+		L 08/21/2012 - 22:08:00: [SM]   [1]  Line 62, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/hacks.sp::HACK_RemoveAmmo()
+		L 08/21/2012 - 22:08:00: [SM]   [2]  Line 769, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_DelayAmmoRemove()  
+
+		[PHP]L 08/25/2012 - 07:20:02: [SM] Native "GetEntProp" reported: Entity 161 (161) is invalid
+		L 08/25/2012 - 07:20:02: [SM] Displaying call stack trace for plugin "gungame.smx":
+		L 08/25/2012 - 07:20:02: [SM]   [0]  Line 1403, gungame/util.sp::UTIL_RemoveAmmo()
+		L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRemove()[/PHP]
+
+		Тут используется задержка в 0.1 секунды. За это время оружие может пропасть у игрока? Оружие даётся при спавне или при левелапе.
+		А может попробовать сразу у оружия обнулять патроны?
+		----
+
+	*) Нужно вернуть возможность выбрасывать оружие, при этом удалять оружие после фрагов.
+
+	*) If you only have gungame.smx in the folder and you compiled gungame.smx with SDKHooks the error will still occur.
+		I only have 1 file in my folder named gungame.smx, but it thinks there are 2 because my gungame.smx uses SDKHooks.
+
+	*) [csgo] попробовать сделать motd для csgo через js window.open()
 
     * Сделать загрузку конфигов gungame_warmup_start.cfg и gungame_warmup_stop.cfg.
 
