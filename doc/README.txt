@@ -273,6 +273,10 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*][COLOR=#009900][B]Q.[/B] Something does not work, what should i do?[/color]
         [COLOR=#FF0000][B]A.[/B][/color] Start with posting your output of server commands "version; meta version; sm version; plugin_print; meta list; sm exts list;sm plugins list"
         and content of the latest file [B]cstrike/addons/sourcemod/logs/errors_<date>.log[/B] in this topic.
+
+[*][COLOR=#009900][B]Q.[/B] Where is stats database is located?[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] If you did not configure any custom databases, you gungame stats is located in 
+        [B]addons\sourcemod\data\sqlite\sourcemod-local.sq3[/B].
 [/LIST]
         
 [anchor]Known Issues[/anchor][B]Issues[/B]
