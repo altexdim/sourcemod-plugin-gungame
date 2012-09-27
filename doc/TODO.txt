@@ -40,6 +40,12 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+	* Hi is it possible to add options: (game mode TP)
+		The whole team gets the level of the target maps
+		
+		/* Enables objective bonus game mode TP (Team player all give bonus) */
+		"ObjectiveBonusTP" "1"
+
 	* add feature
 		/**
 		*Disable Armor on spawn if a player is on nade level.
