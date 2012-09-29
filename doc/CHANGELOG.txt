@@ -2,7 +2,12 @@ Changelog
 ---------
     1.2.7.0:
         * [CS:GO] Fixed MOTD.
-        * Added files: "tools/README.txt" - description of tools files, "tools/csgo_window_open.php" - file to make MOTD works on csgo.
+          Config "cfg\gungame\csgo\gungame.config.txt" updated. 
+          Config variable "DisplayWinnerMotd" set to "1".
+          Config variable "DisplayWinnerUrl" set to "http://otstrel.ru/gg5_win_csgo.php?close=10".
+        * Added files:
+          "tools/README.txt" - description of tools files, 
+          "tools/csgo_window_open.php" - file to make MOTD works on csgo (if you wand to make you own web server only).
 
     1.2.6.2:
         * [CS:S] Fixed CSS version of plugin. It was completely broken after last plugin release with error in sourcemod error log file.
