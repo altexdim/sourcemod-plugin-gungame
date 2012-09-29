@@ -77,8 +77,12 @@ public GG_OnLoadRank()
         decl String:looserNameUrlEncoded[sizeof(g_looserName[])*3+1];
         url_encode(g_winnerName, sizeof(g_winnerName), winnerNameUrlEncoded, sizeof(winnerNameUrlEncoded));
         url_encode(g_looserName[g_winner], sizeof(g_looserName[]), looserNameUrlEncoded, sizeof(looserNameUrlEncoded));
-        Format(url, sizeof(url), "%s?winnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
+
+        new bool:urlHasParams = (StrContains(g_Cfg_DisplayWinnerUrl, "?", true) != -1);
+
+        Format(url, sizeof(url), "%s%swinnerName=%s&loserName=%s&wins=%i&place=%i&totalPlaces=%i", 
             g_Cfg_DisplayWinnerUrl, 
+            urlHasParams? "&": "?",
             winnerNameUrlEncoded, 
             looserNameUrlEncoded, 
             GG_GetClientWins(g_winner),         /* HINT: gungame_stats */

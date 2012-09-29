@@ -282,11 +282,8 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [anchor]Known Issues[/anchor][B]Issues[/B]
 ----------------------------------------------------
 
-[LIST]
-[*][COLOR=#009900][B]Q.[/B] [CSGO] MOTD does not work.[/color]
-         [COLOR=#FF0000][B]A.[/B][/color] MOTD does not work in csgo version.
-[/LIST]
-        
+No issues.
+
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
 ----------------------------------------------------
 [LIST]

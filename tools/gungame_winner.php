@@ -5,12 +5,15 @@
 
 header("Content-type: text/html; charset=utf-8");
 
-function show($varName)
-{
-    if ( isset($_GET[$varName]) )
-    {
-        echo mb_convert_encoding($_GET[$varName],"HTML-ENTITIES","UTF-8");
+function show($varName) {
+    if (isset($_GET[$varName])) {
+        echo htmlspecialchars($_GET[$varName], ENT_QUOTES, "UTF-8");
     }
+}
+
+$close = isset($_GET['close'])? intval($_GET['close']): 0;
+if ($close < 1 || $close > 60) {
+    $close = 0;
 }
 
 ?>
@@ -18,6 +21,11 @@ function show($varName)
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>GunGame Winner</title>
+        <?php if ($close) { ?>
+        <script type="text/javascript">
+            setTimeout('window.close()', <?php echo $close; ?>000);
+        </script>
+        <?php } ?>
     </head>
 <body>
     <b><?php show("winnerName"); ?></b> Won!<hr><br />

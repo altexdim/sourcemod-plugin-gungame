@@ -546,10 +546,16 @@
         /* ===== [5. GUNGAME DISPLAY WINNER CONFIG] ===== */
         
         /* Display winner in MOTD window. */
-        "DisplayWinnerMotd" "0"
+        "DisplayWinnerMotd" "1"
 
-        /* URL to display in MOTD window. */
-        "DisplayWinnerUrl" "http://otstrel.ru/gg5_win.php"
+        /**
+          * URL to display in MOTD window. 
+          *
+          * Default: http://otstrel.ru/gg5_win_csgo.php?close=10
+          *     URL Params: 
+          *         close=<int> - close popup window in that number of seconds. 0 = disabled. default = disabled.
+          */
+        "DisplayWinnerUrl" "http://otstrel.ru/gg5_win_csgo.php?close=10"
 
         /* Show player rank on win in chat */
         "ShowPlayerRankOnWin" "1"
