@@ -25,8 +25,6 @@ TODO
 	*) If you only have gungame.smx in the folder and you compiled gungame.smx with SDKHooks the error will still occur.
 		I only have 1 file in my folder named gungame.smx, but it thinks there are 2 because my gungame.smx uses SDKHooks.
 
-	*) [csgo] попробовать сделать motd для csgo через js window.open()
-
     * Сделать загрузку конфигов gungame_warmup_start.cfg и gungame_warmup_stop.cfg.
 
     * Сделать эффект для выигрыша
