@@ -20,11 +20,11 @@ TODO
 		А может попробовать сразу у оружия обнулять патроны?
 		----
 
-    ----====----==== Normal priority list ----====----====
-
 	* add ExtraTaser, BonusWeaponTaser, BlockWeaponSwitchOnExtraTaser
 		I think he means, he wishes for there to be an additional pistol (like is available for hegrenade level), and when you get a pistol kill on taser level, you receive an additional taser. Similarly for molotov level.
 		I think the taser level works best as it is right now, but I can see why people would want additional features to make it more consistent with the hegrenade level.
+
+    ----====----==== Normal priority list ----====----====
 
 	* Hi is it possible to add options: (game mode TP)
 		The whole team gets the level of the target maps

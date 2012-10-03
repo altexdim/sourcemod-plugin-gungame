@@ -7,7 +7,7 @@ Changelog
         * Added configs "gungame.warmupend.cfg" and "gungame.warmupstart.cfg" that executes on warmup start and end by plugin "gungame_warmup_configs.smx".
         * Added new option for config variable "StripDeadPlayersWeapon". If "StripDeadPlayersWeapon" set to "2", then alive players can drop weapons.
         * Added "WinnerEffect" config variable. If "1" then there will be funny winner effect after gungame winner. All players will fly into the sky and winner will be glowing.
-        * Added "EndGameDelay" config variable. You can set delay before end of multiplayer game is riggered after player win the gungame.
+        * Added "EndGameDelay" config variable. You can set delay before end of multiplayer game is triggered after player win the gungame.
         * Added new native into "gungame_config.smx" plugin: "GG_ConfigGetDir" - to get config directory (for example "gungame/csgo" is default for csgo if "sm_gg_cfgdirname" is not changed).
 
     1.2.7.0:
