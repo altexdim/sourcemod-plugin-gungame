@@ -522,7 +522,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     {
         return;
     }
-    
+
     if ( g_SkipSpawn[client] ) {
         g_SkipSpawn[client] = false;
         return;
@@ -603,10 +603,8 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     UTIL_ForceDropAllWeapon(client, false);
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
-    if ( GameWinner )
-    {
-        new flags = GetEntData(client, OffsetFlags) | FL_FROZEN;
-        SetEntData(client, OffsetFlags, flags);
+    if (GameWinner) {
+        WinnerEffectsStartOne(GameWinner, client);
     }
 
     if ( WarmupEnabled && !DisableWarmupOnRoundEnd )
@@ -877,6 +875,13 @@ public Action:Timer_RemoveDroppedWeapon(Handle:timer, any:data) {
     // weapon is not owned by someone
 
     if (IsClientInGame(client) && IsPlayerAlive(client)) {
+        if ((g_GameName == GameName:Csgo)
+            && UTIL_IsWeaponTaser(weapon)
+            && UTIL_IsTaserEmpty(weapon)
+        ) {
+            UTIL_Remove(weapon);
+        }
+
         // client, that dropped weapon, is alive
         return Plugin_Handled;
     }

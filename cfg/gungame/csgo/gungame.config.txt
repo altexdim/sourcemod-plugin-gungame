@@ -19,6 +19,15 @@
         "WinnerEffect" "0"
 
         /**
+         * Delay before end of multiplayer game after gungame win. 
+         *
+         * Options:
+         *      0 - Disabled.
+         *      1-N - Number of seconds.
+         */
+        "EndGameDelay" "0"
+
+        /**
          * Multiply sound effects volume.
          *
          * In CS:GO the volume is too low.

@@ -49,6 +49,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             } else if(strcmp("WinnerEffect", key, false) == 0) {
                 g_Cfg_WinnerEffect = StringToInt(value);
 
+            } else if(strcmp("EndGameDelay", key, false) == 0) {
+                g_Cfg_EndGameDelay = StringToFloat(value);
+
             } else if(strcmp("ExtraTaserOnKnifeKill", key, false) == 0) {
                 g_Cfg_ExtraTaserOnKnifeKill = StringToInt(value);
             } else if(strcmp("BonusWeaponAmmo", key, false) == 0) {
@@ -417,24 +420,9 @@ public OnConfigsExecuted()
 {
     if(IsActive)
     {
-        new Handle:Cvar_CfgDirName;
-        Cvar_CfgDirName = FindConVar("sm_gg_cfgdirname");
-
-        if ( Cvar_CfgDirName == INVALID_HANDLE ) {
-            LogError("Cvar sm_gg_cfgdirname not found. Does gungame_config.smx plugin loaded?");
-        } else {
-            decl String:ConfigDirName[PLATFORM_MAX_PATH];
-            GetConVarString(Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
-
-            decl String:ConfigDir[PLATFORM_MAX_PATH];
-            if (g_GameName == GameName:Css) {
-                FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\css", ConfigDirName);
-            } else if (g_GameName == GameName:Csgo) {
-                FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\csgo", ConfigDirName);
-            }
-
-            InsertServerCommand("exec \\%s\\gungame.mapconfig.cfg", ConfigDir);
-        }
+        decl String:ConfigGameDirName[PLATFORM_MAX_PATH];
+        GG_ConfigGetDir(ConfigGameDirName, sizeof(ConfigGameDirName));
+        InsertServerCommand("exec \\%s\\gungame.mapconfig.cfg", ConfigGameDirName);
     }
 }
 

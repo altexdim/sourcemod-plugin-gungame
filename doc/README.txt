@@ -154,7 +154,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
  
 [*] gungame_mapvoting.smx - Map voting
 [LIST]
-[*] Depends on gungame.smx
+[*] Depends on gungame.smx, gungame_config.smx
 [*] Optional plugin
 [*] Starts the map voting for the next map when someone reaches particular level
               by executing cfg/gungame/gungame.mapvote.cfg

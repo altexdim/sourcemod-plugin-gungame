@@ -42,11 +42,18 @@ new Handle:FwdConfigEnd = INVALID_HANDLE;
 new Handle:g_Cvar_CfgDirName = INVALID_HANDLE;
 
 new GameName:g_GameName = GameName:None;
+new String:ConfigGameDirName[PLATFORM_MAX_PATH];
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max)
 {
     RegPluginLibrary("gungame_cfg");
+    CreateNative("GG_ConfigGetDir", Native_GG_ConfigGetDir);
     return APLRes_Success;
+}
+
+public Native_GG_ConfigGetDir(Handle:plugin, numParams) {
+    SetNativeString(1, ConfigGameDirName, GetNativeCell(2));
+    return 1;
 }
 
 public OnPluginStart() {
@@ -62,8 +69,7 @@ public OnPluginStart() {
     g_Cvar_CfgDirName = CreateConVar("sm_gg_cfgdirname", "gungame", "Config directory for gungame (from cfg path)");
 }
 
-public OnMapStart()
-{
+public OnConfigsExecuted() {
     ReadConfig();
 }
 
@@ -82,12 +88,14 @@ ReadConfig()
     decl String:ConfigDirName[PLATFORM_MAX_PATH];
     GetConVarString(g_Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
 
-    decl String:ConfigDir[PLATFORM_MAX_PATH];
     if (g_GameName == GameName:Css) {
-        FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s\\css", ConfigDirName);
+        FormatEx(ConfigGameDirName, sizeof(ConfigGameDirName), "%s\\css", ConfigDirName);
     } else if (g_GameName == GameName:Csgo) {
-        FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s\\csgo", ConfigDirName);
+        FormatEx(ConfigGameDirName, sizeof(ConfigGameDirName), "%s\\csgo", ConfigDirName);
     }
+
+    decl String:ConfigDir[PLATFORM_MAX_PATH];
+    FormatEx(ConfigDir, sizeof(ConfigDir), "cfg\\%s", ConfigGameDirName);
 
     decl String:ConfigFile[PLATFORM_MAX_PATH], String:EquipFile[PLATFORM_MAX_PATH];
     decl String:Error[PLATFORM_MAX_PATH + 64];

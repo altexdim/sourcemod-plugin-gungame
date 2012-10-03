@@ -1,52 +1,79 @@
-/*
-    > Сделать эффект для выигрыша
-        человек выиграл какрту
-        1. выставляем каждому игроку гравитацию чтобы он мог при прыжке взлететь (медленно но высоко наверно - это нужно пробовать оптимальные значения)
-        2. слапаем всем 1 раз (ну чтобы он начал взлететь, но слапаем без сообщения об этом и без звука слапа, без дамажа само собой)
-        3. помечаем победителя (например каким то световым эффектом, чтобы его и из далека было видно в небе ))
-        4. посылаем команду конец карты (ну и вылазиет таблица победителей)
-
-        ну все это само собой очень быстро происходит, пока мы видим таблицу - мы летим в небо 
-*/
-
-WinnerEffect(winner) {
-    for (new i=1; i <= MaxClients; i++) {
-        if (IsClientInGame(i) && IsPlayerAlive(i)) {
-            SetPlayerWinnerEffectAll(i);
-        }
-    }
-
-    SetPlayerWinnerEffectWinner(winner);
-    //UTIL_CreateMultilevelEffect1(winner);
-    //UTIL_CreateMultilevelEffect2(winner);
-}
-
-SetPlayerWinnerEffectAll(client) {
-    // fly
-    SetEntityGravity(client, 0.1);
-    SlapPlayer(client, 0, false);
-}
-
-SetPlayerWinnerEffectWinner(client) {
-    // shine    
-    // TODO: maybe repeate each 0.1 seconds or attach effect to player
-    new Float:vec[3];
-    GetClientAbsOrigin(client, vec);
-    vec[2] += 10;
-
-    TE_SetupGlowSprite(vec, g_GlowSprite, 0.95, 1.5, 50);
-    TE_SendToAll();
-}
-
-OnMapStartEffects() {
-    //g_GlowSprite = PrecacheModel("sprites/blueglow2.vmt");
-    g_GlowSprite = PrecacheModel("materials/sprites/blueflare1.vmt");
-}
-
 WinnerEffectsStart(winner) {
     if (g_Cfg_WinnerEffect == 1) {
         WinnerEffect(winner);
     } else {
         UTIL_FreezeAllPlayer();
+    }
+}
+
+WinnerEffectsStartOne(winner, client) {
+    if (g_Cfg_WinnerEffect == 1) {
+        WinnerEffectOne(winner, client);
+    } else {
+        UTIL_FreezePlayer(client);
+    }
+}
+
+
+WinnerEffect(winner) {
+    for (new i=1; i <= MaxClients; i++) {
+        if (IsClientInGame(i) && IsPlayerAlive(i)) {
+            WinnerEffectOne(winner, i);
+        }
+    }
+}
+
+WinnerEffectOne(winner, client) {
+    SetPlayerWinnerEffectAll(client);
+    if (winner==client) {
+        SetPlayerWinnerEffectWinner(client);
+    }
+}
+
+SetPlayerWinnerEffectAll(client) {
+    // fly
+    SetEntityGravity(client, 0.001);
+
+    new Float:pos[3], Float:vel[3];
+    GetClientEyePosition(client, pos);
+
+    vel[0] = GetRandomFloat(-10.0, 10.0);
+    vel[1] = GetRandomFloat(-10.0, 10.0);
+    vel[2] = GetRandomFloat(70.0, 120.0);
+
+    TeleportEntity(client, pos, NULL_VECTOR, vel);
+}
+
+SetPlayerWinnerEffectWinner(client) {
+    SetPlayerWinnerEffectWinnerRepeate(client);
+}
+
+SetPlayerWinnerEffectWinnerRepeate(client) {
+    CreateTimer(0.1, Timer_SetPlayerWinnerEffectWinner, client, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
+}
+
+public Action:Timer_SetPlayerWinnerEffectWinner(Handle:timer, any:data) {
+    if (!IsClientInGame(data)||!IsPlayerAlive(data)) {
+        return Plugin_Stop;
+    }
+    SetPlayerWinnerEffectWinnerReal(data);
+    return Plugin_Continue;
+}
+
+SetPlayerWinnerEffectWinnerReal(client) {
+    // shine    
+    new Float:vec[3];
+    GetClientAbsOrigin(client, vec);
+    vec[2] += 35;
+
+    TE_SetupGlowSprite(vec, g_GlowSprite, 0.5, 4.0, 70);
+    TE_SendToAll();
+}
+
+OnMapStartEffects() {
+    if (g_GameName == GameName:Csgo) {
+        g_GlowSprite = PrecacheModel("sprites/ledglow.vmt");
+    } else {
+        g_GlowSprite = PrecacheModel("sprites/orangeglow1.vmt");
     }
 }

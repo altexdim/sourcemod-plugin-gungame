@@ -36,6 +36,15 @@ forward GG_ConfigParseEnd();
  */
 forward GG_ConfigEnd();
 
+/**
+ * Get cfg dir name;
+ *
+ * @param dirName        Dir name.
+ * @param dirNameSize    Dir name string size.
+ * @return          void.
+ */
+native GG_ConfigGetDir(String:dirName[], dirNameSize);
+
 /* Do not edit the code below. */
 public SharedPlugin:__pl_gungame_cfg =
 {

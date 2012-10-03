@@ -349,7 +349,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
         GameWinner = client;
 
         WinnerEffectsStart(client);
-        UTIL_EndMultiplayerGame();
+        UTIL_EndMultiplayerGameDelayed();
 
         new result;
         Call_StartForward(FwdSoundWinner);
@@ -378,12 +378,15 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
 }
 
 UTIL_FreezeAllPlayer() {
-    for (new i = 1, b; i <= MaxClients; i++) {
+    for (new i = 1; i <= MaxClients; i++) {
         if (IsClientInGame(i)) {
-            b = GetEntData(i, OffsetFlags)|FL_FROZEN;
-            SetEntData(i, OffsetFlags, b);
+            UTIL_FreezePlayer(i);
         }
     }
+}
+
+UTIL_FreezePlayer(client) {
+    SetEntData(client, OffsetFlags, GetEntData(client, OffsetFlags)|FL_FROZEN);
 }
 
 /**
@@ -420,11 +423,15 @@ UTIL_FindTaser(client) {
         if (ent2 <= MaxClients) {
             continue;
         }
-        if (g_WeaponAmmoTypeTaser == GetEntProp(ent2, Prop_Send, "m_iPrimaryAmmoType")) {
+        if (UTIL_IsWeaponTaser(ent2)) {
             return ent2;
         }
     }
     return -1;
+}
+
+UTIL_IsWeaponTaser(weapon) {
+    return g_WeaponAmmoTypeTaser == GetEntProp(weapon, Prop_Send, "m_iPrimaryAmmoType");
 }
 
 /**
@@ -1109,12 +1116,16 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
     }
 }
 
+UTIL_IsTaserEmpty(weapon) {
+    return GetEntProp(weapon, Prop_Send, "m_iClip1") == 0;
+}
+
 UTIL_GiveExtraTaser(client) {
     /* Give them another molotov if they killed another person with another weapon*/
     /* Do not give them another nade if they already have one */
     new ent = UTIL_FindTaser(client);
     if (ent != -1) {
-        if (!GetEntProp(ent, Prop_Send, "m_iClip1")) {
+        if (UTIL_IsTaserEmpty(ent)) {
             SetEntProp(ent, Prop_Send, "m_iClip1", 1); // taser has only one bullet
         }
         return;
@@ -1500,6 +1511,18 @@ UTIL_Remove(entity) {
     if (entity) {
         AcceptEntityInput(entity, "Kill");
     }
+}
+
+UTIL_EndMultiplayerGameDelayed() {
+    if (g_Cfg_EndGameDelay) {
+        CreateTimer(g_Cfg_EndGameDelay, UTIL_Timer_EndMultiplayerGame);
+    } else {
+        UTIL_EndMultiplayerGame();
+    }
+}
+
+public Action:UTIL_Timer_EndMultiplayerGame(Handle:timer, any:data) {
+    UTIL_EndMultiplayerGame();
 }
 
 /**

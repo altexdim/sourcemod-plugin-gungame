@@ -3,6 +3,7 @@
 #include <sourcemod>
 #include <gungame_const>
 #include <gungame>
+#include <gungame_config>
 #include "gungame/stock.sp"
 
 public Plugin:myinfo = {
@@ -13,38 +14,14 @@ public Plugin:myinfo = {
     url = GUNGAME_URL
 };
 
-new String:ConfigDir[PLATFORM_MAX_PATH];
-new GameName:g_GameName = GameName:None;
-
 public GG_OnWarmupEnd() {
-    InsertServerCommand("exec \\%s\\gungame.warmupend.cfg", ConfigDir);
+    decl String:ConfigGameDirName[PLATFORM_MAX_PATH];
+    GG_ConfigGetDir(ConfigGameDirName, sizeof(ConfigGameDirName));
+    InsertServerCommand("exec \\%s\\gungame.warmupend.cfg", ConfigGameDirName);
 }
 
 public GG_OnWarmupStart() {
-    InsertServerCommand("exec \\%s\\gungame.warmupstart.cfg", ConfigDir);
-}
-
-public OnConfigsExecuted() {
-    new Handle:Cvar_CfgDirName;
-    Cvar_CfgDirName = FindConVar("sm_gg_cfgdirname");
-
-    if ( Cvar_CfgDirName == INVALID_HANDLE ) {
-        LogError("Cvar sm_gg_cfgdirname not found. Does gungame_config.smx plugin loaded?");
-    } else {
-        decl String:ConfigDirName[PLATFORM_MAX_PATH];
-        GetConVarString(Cvar_CfgDirName, ConfigDirName, sizeof(ConfigDirName));
-
-        if (g_GameName == GameName:Css) {
-            FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\css", ConfigDirName);
-        } else if (g_GameName == GameName:Csgo) {
-            FormatEx(ConfigDir, sizeof(ConfigDir), "%s\\csgo", ConfigDirName);
-        }
-    }
-}
-
-public OnPluginStart() {
-    g_GameName = DetectGame();
-    if (g_GameName == GameName:None) {
-        SetFailState("ERROR: Unsupported game. Please contact the author.");
-    }
+    decl String:ConfigGameDirName[PLATFORM_MAX_PATH];
+    GG_ConfigGetDir(ConfigGameDirName, sizeof(ConfigGameDirName));
+    InsertServerCommand("exec \\%s\\gungame.warmupstart.cfg", ConfigGameDirName);
 }

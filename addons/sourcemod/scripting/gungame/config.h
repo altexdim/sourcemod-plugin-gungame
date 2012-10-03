@@ -110,3 +110,4 @@ new g_Cfg_MolotovBonusWeaponId      = 0;
 new g_Cfg_ExtraMolotovOnKnifeKill   = 0;
 
 new g_Cfg_WinnerEffect  = 0;
+new Float:g_Cfg_EndGameDelay = 0.0;
