@@ -10,6 +10,15 @@
         "Enabled" "1"
 
         /**
+         * Winner effects.
+         *
+         * Options:
+         *      0 - Freeze players.
+         *      1 - Make players fly.
+         */
+        "WinnerEffect" "0"
+
+        /**
          * Multiply sound effects volume.
          *
          * In CS:GO the volume is too low.

@@ -108,3 +108,5 @@ new g_Cfg_MolotovBonusFlash         = 0;
 new g_Cfg_MolotovBonusSmoke         = 0;
 new g_Cfg_MolotovBonusWeaponId      = 0;
 new g_Cfg_ExtraMolotovOnKnifeKill   = 0;
+
+new g_Cfg_WinnerEffect  = 0;

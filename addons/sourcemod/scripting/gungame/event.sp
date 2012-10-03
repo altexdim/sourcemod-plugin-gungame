@@ -149,7 +149,7 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
         if(GameWinner)
         {
             /* Lock all player since the winner was declare already if new round happened. */
-            UTIL_FreezeAllPlayer();
+            WinnerEffectsStart(GameWinner);
         }
 
         /* Round has Started. */

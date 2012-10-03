@@ -348,7 +348,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
 
         GameWinner = client;
 
-        UTIL_FreezeAllPlayer();
+        WinnerEffectsStart(client);
         UTIL_EndMultiplayerGame();
 
         new result;
@@ -377,12 +377,9 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
     return Level;
 }
 
-UTIL_FreezeAllPlayer()
-{
-    for(new i = 1, b; i <= MaxClients; i++)
-    {
-        if(IsClientInGame(i))
-        {
+UTIL_FreezeAllPlayer() {
+    for (new i = 1, b; i <= MaxClients; i++) {
+        if (IsClientInGame(i)) {
             b = GetEntData(i, OffsetFlags)|FL_FROZEN;
             SetEntData(i, OffsetFlags, b);
         }
