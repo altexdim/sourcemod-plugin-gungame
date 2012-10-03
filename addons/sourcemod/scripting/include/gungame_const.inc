@@ -42,7 +42,7 @@
 
 stock const String:GUNGAME_AUTHOR[] = "teame06-hat, Liam, Otstrel.ru Team";
 stock const String:GUNGAME_URL[] = "http://www.hat-city.net, http://otstrel.ru";
-stock const String:GUNGAME_VERSION[] = "1.2.7.0";
+stock const String:GUNGAME_VERSION[] = "1.2.8.0";
 stock const String:BLANK[] = "";
 stock const String:BLANK_SPACE[] = " ";
 

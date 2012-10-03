@@ -838,9 +838,52 @@ public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newV
 }
 
 public Action:CS_OnCSWeaponDrop(client, weapon) {
-    if (StripDeadPlayersWeapon) {
+    if (StripDeadPlayersWeapon == 1) {
+        // do not allow drop weapon
         return Plugin_Stop;
+    } else if (StripDeadPlayersWeapon == 2) {
+        new Handle:data = CreateDataPack();
+        WritePackCell(data, client);
+        WritePackCell(data, weapon);
+        
+        CreateTimer(0.1, Timer_RemoveDroppedWeapon, data);
+        // allow drop weapon
+        return Plugin_Continue;
     } else {
+        // allow drop weapon
         return Plugin_Continue;
     }
+}
+
+public Action:Timer_RemoveDroppedWeapon(Handle:timer, any:data) {
+    new client, weapon;
+
+    ResetPack(data);
+    client = ReadPackCell(data);
+    weapon = ReadPackCell(data);
+    CloseHandle(data);
+    
+    if (!IsValidEntity(weapon) || !IsValidEdict(weapon)) {
+        // entity is invalid
+        return Plugin_Handled;
+    }
+    // entity is valid
+
+    new parent = GetEntPropEnt(weapon, Prop_Send, "m_hOwnerEntity");
+    if (parent > 0) {
+        // weapon is owned by someone
+        return Plugin_Handled;
+    }
+    // weapon is not owned by someone
+
+    if (IsClientInGame(client) && IsPlayerAlive(client)) {
+        // client, that dropped weapon, is alive
+        return Plugin_Handled;
+    }
+    // client, that dropped weapon, is not alive or does not exist
+
+    // remove weapon
+    UTIL_Remove(weapon);
+
+    return Plugin_Handled;
 }

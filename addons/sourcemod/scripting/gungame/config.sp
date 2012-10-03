@@ -141,7 +141,7 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 WarmupRandomWeaponMode = bool:StringToInt(value);
                 WarmupRandomWeaponLevel = -1;
             } else if(strcmp("StripDeadPlayersWeapon", key, false) == 0) {
-                StripDeadPlayersWeapon = bool:StringToInt(value);
+                StripDeadPlayersWeapon = StringToInt(value);
             } else if(strcmp("MultiKillChat", key, false) == 0) {
                 MultiKillChat = bool:StringToInt(value);
             } else if(strcmp("JoinMessage", key, false) == 0) {

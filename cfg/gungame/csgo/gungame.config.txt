@@ -60,7 +60,14 @@
         /* Show leader's weapon name in chat with leading message */
         "ShowLeaderWeapon" "0"
         
-        /* Strip dead players weapon */
+        /**
+         * Strip dead players weapon
+         *
+         * Options:
+         *  0 - Disabled (default)
+         *  1 - Enabled for alive and dead players (alive players can not drop guns)
+         *  2 - Enabled for dead players only (alive players can drop guns)
+         */
         "StripDeadPlayersWeapon" "0"
         
         /* Show levels in scoreboard */
