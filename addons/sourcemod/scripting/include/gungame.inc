@@ -72,6 +72,13 @@ forward GG_OnTripleLevel(client);
 forward GG_OnWarmupEnd();
 
 /**
+ * Called when warmup has started.
+ *
+ * @noreturn
+ */
+forward GG_OnWarmupStart();
+
+/**
  * Called when the leader change player.
  *
  * @param client        Player index.

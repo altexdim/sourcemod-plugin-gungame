@@ -54,12 +54,18 @@ public Plugin:myinfo = {
 
 public APLRes:AskPluginLoad2(Handle:myself, bool:late, String:error[], err_max) {
     decl String:file[PLATFORM_MAX_PATH];
-    #if defined WITH_SDKHOOKS
+    new filesCount = 0;
+
     BuildPath(Path_SM, file, sizeof(file), "plugins/gungame.smx");
-    #else
-    BuildPath(Path_SM, file, sizeof(file), "plugins/gungame_sdkhooks.smx");
-    #endif
     if (FileExists(file)) {
+        filesCount++;
+    }
+    BuildPath(Path_SM, file, sizeof(file), "plugins/gungame_sdkhooks.smx");
+    if (FileExists(file)) {
+        filesCount++;
+    }
+
+    if (filesCount > 1) {
         SetFailState("ERROR: Check that you DONT have both gungame.smx and gungame_sdkhooks.smx in the plugins folder.");
         return APLRes_Failure;
     }
@@ -147,6 +153,7 @@ public OnPluginStart() {
     FwdSoundWinner = CreateGlobalForward("GG_OnSoundWinner", ET_Hook, Param_Cell);
     FwdTripleLevel = CreateGlobalForward("GG_OnTripleLevel", ET_Ignore, Param_Cell);
     FwdWarmupEnd = CreateGlobalForward("GG_OnWarmupEnd", ET_Ignore);
+    FwdWarmupStart = CreateGlobalForward("GG_OnWarmupStart", ET_Ignore);
     
     FwdVoteStart = CreateGlobalForward("GG_OnStartMapVote", ET_Ignore);
     FwdDisableRtv = CreateGlobalForward("GG_OnDisableRtv", ET_Ignore);
@@ -497,6 +504,9 @@ StartWarmupRound()
 
     /* Start Warmup round */
     WarmupTimer = CreateTimer(1.0, EndOfWarmup, _, TIMER_REPEAT);
+
+    Call_StartForward(FwdWarmupStart);
+    Call_Finish();
 }
 
 /* End of Warmup */

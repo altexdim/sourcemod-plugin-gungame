@@ -190,6 +190,13 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*] Does not allow players to win by killing a bot.
 [/LIST]
 
+[*] gungame_warmup_configs.smx - Warmup configs execution
+[LIST]
+[*] Depends on gungame.smx, gungame_config.smx
+[*] Optional plugin
+[*] Executes configs gungame.warmupend.cfg and gungame.warmupstart.cfg on warmup start and end.
+[/LIST]
+
 [/LIST]
             
 [anchor]Credits[/anchor][B]Credits[/B]

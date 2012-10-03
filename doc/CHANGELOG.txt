@@ -1,5 +1,10 @@
 Changelog
 ---------
+		* Improved detection of gungame.smx and gungame_sdkhooks.smx files. Now you can compile version with sdkhooks support with name gungame.smx.
+		* Added global forward: GG_OnWarmupStart.
+		* Added plugin gungame_warmup_configs.smx. 
+		* Added configs gungame.warmupend.cfg and gungame.warmupstart.cfg that executes on warmup start and end by plugin gungame_warmup_configs.smx.
+
     1.2.7.0:
         * [CS:GO] Fixed MOTD.
           Config "cfg\gungame\csgo\gungame.config.txt" updated. 

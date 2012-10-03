@@ -46,6 +46,7 @@ new Handle:gungame_enabled = INVALID_HANDLE;
 /* Status forwards */
 new Handle:FwdLevelChange = INVALID_HANDLE;
 new Handle:FwdWarmupEnd = INVALID_HANDLE;
+new Handle:FwdWarmupStart = INVALID_HANDLE;
 new Handle:FwdWinner = INVALID_HANDLE;
 new Handle:FwdSoundWinner = INVALID_HANDLE;
 new Handle:FwdTripleLevel = INVALID_HANDLE;

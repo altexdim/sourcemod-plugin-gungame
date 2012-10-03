@@ -29,6 +29,7 @@ copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SERVER_PLUGINS%
 %DIR_SERVER_SCRIPTING%\spcomp gungame_stats.sp              >> %LOG_COMPILE%
 %DIR_SERVER_SCRIPTING%\spcomp gungame_tk.sp                 >> %LOG_COMPILE%
 %DIR_SERVER_SCRIPTING%\spcomp gungame_bot.sp                >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame_warmup_configs.sp     >> %LOG_COMPILE%
 
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SOURCES_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_afk.smx                 %DIR_SOURCES_PLUGINS%\
@@ -39,6 +40,7 @@ copy %DIR_SERVER_SCRIPTING%\gungame_mapvoting.smx           %DIR_SOURCES_PLUGINS
 copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx               %DIR_SOURCES_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx                  %DIR_SOURCES_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_bot.smx                 %DIR_SOURCES_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_warmup_configs.smx      %DIR_SOURCES_PLUGINS%\
 
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SERVER_PLUGINS%\disabled\
 copy %DIR_SERVER_SCRIPTING%\gungame_afk.smx                 %DIR_SERVER_PLUGINS%\
@@ -49,5 +51,6 @@ copy %DIR_SERVER_SCRIPTING%\gungame_mapvoting.smx           %DIR_SERVER_PLUGINS%
 copy %DIR_SERVER_SCRIPTING%\gungame_stats.smx               %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_tk.smx                  %DIR_SERVER_PLUGINS%\
 copy %DIR_SERVER_SCRIPTING%\gungame_bot.smx                 %DIR_SERVER_PLUGINS%\
+copy %DIR_SERVER_SCRIPTING%\gungame_warmup_configs.smx      %DIR_SERVER_PLUGINS%\
 
 cd /d %DIR_SOURCES_SCRIPTING%
