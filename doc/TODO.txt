@@ -3,6 +3,8 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * check that freeze players works after gungame winner
+
     * [csgo] fix error
         ----
         L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
