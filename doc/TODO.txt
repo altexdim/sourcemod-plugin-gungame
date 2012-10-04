@@ -3,6 +3,11 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Improvement: Make removement buyzones on/off. So once gg is enabled than buyzones are
+      disabled, and when gg is disabled buyzones are enabled.
+      Maybe instead of removement buyzones just disable it to players on
+      spawn and when gg swithces enabled/disabled.
+
     >FIXED [csgo] can not close !rules window.
 
     >FIXED [csgo] reload tazer on multikill.
@@ -161,9 +166,5 @@ TODO
     ----====----==== Low priority list ----====----====
     
     + Feature: Implement !buylevel.
-    * Improvement: Make removement buyzones on/off. So once gg is enabled than buyzones are
-      disabled, and when gg is disabled buyzones are enabled.
-      Maybe instead of removement buyzones just disable it to players on
-      spawn and when gg swithces enabled/disabled.
     + Feature: Need features from es gg 5: Colorize knife-level player.
     + Feature: Need features from es gg 5: Random sounds?
