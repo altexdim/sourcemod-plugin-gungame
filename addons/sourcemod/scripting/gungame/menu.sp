@@ -402,7 +402,7 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
     {
         switch(param2)
         {
-            case 8:
+            case 7:
             {
                 if(--ClientOnPage[param1] < 0)
                 {
@@ -411,7 +411,7 @@ public WeaponMenuHandler(Handle:menu, MenuAction:action, param1, param2)
 
                 DisplayWeaponLevelPanel(param1);
             }
-            case 9:
+            case 8:
             {
                 if(++ClientOnPage[param1] >= WeaponLevelPages)
                 {
@@ -436,12 +436,12 @@ public RulesMenuHandler(Handle:menu, MenuAction:action, param1, param2)
     {
         switch(param2)
         {
-            case 8:
+            case 7:
             {
                 --ClientOnPage[param1];
                 DisplayRulesMenu(param1);
             }
-            case 9:
+            case 8:
             {
                 ++ClientOnPage[param1];
                 DisplayRulesMenu(param1);

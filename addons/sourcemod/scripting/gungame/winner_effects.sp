@@ -63,7 +63,7 @@ SetPlayerWinnerEffectWinnerReal(client) {
     // shine    
     new Float:vec[3];
     GetClientAbsOrigin(client, vec);
-    vec[2] += 35;
+    vec[2] += 50;
 
     TE_SetupGlowSprite(vec, g_GlowSprite, 0.5, 4.0, 70);
     TE_SendToAll();

@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.9.0:
+        * Fixed all the menus (like !rules). Now they are closing by number "9" instead of "0".
+        * Buyzones are now toggles on/off on gungame start/end. You dont need to restart map anymore if you are enable/disable gungame with gg_enable/gg_disable.
         * Added tools: "config_diff.php" - shows diff between two KeyValue configs. 
           For example between default gungame.config.txt and that one on your server to see what keys was added.
 

@@ -831,16 +831,18 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
     }
 }
 
-UTIL_RemoveBuyZones()
-{
+UTIL_DisableBuyZones() {
     new index = -1;
-    new found = -1;
-    while ( (index = FindEntityByClassname(index, "func_buyzone")) > 0 )
-    {
-        if ( found > 0 ) RemoveEdict(found);
-        found = index;
+    while ( (index = FindEntityByClassname(index, "func_buyzone")) > 0) {
+        AcceptEntityInput(index, "Disable");
     }
-    if ( found > 0 ) RemoveEdict(found);
+}
+
+UTIL_EnableBuyZones() {
+    new index = -1;
+    while ( (index = FindEntityByClassname(index, "func_buyzone")) > 0) {
+        AcceptEntityInput(index, "Enable");
+    }
 }
 
 UTIL_ReloadActiveWeapon(client, WeaponId) {

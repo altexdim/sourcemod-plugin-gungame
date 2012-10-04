@@ -327,7 +327,7 @@ public GG_OnStartup(bool:Command)
         return;
     }
 
-    UTIL_RemoveBuyZones();
+    UTIL_DisableBuyZones();
         
     if ( !WarmupInitialized && WarmupEnabled )
     {
@@ -398,6 +398,8 @@ public GG_OnShutdown(bool:Command)
     {
         return;
     }
+
+    UTIL_EnableBuyZones();
 
     IsActive = false;
     InternalIsActive = false;
