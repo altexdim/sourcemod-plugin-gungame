@@ -1,5 +1,8 @@
 Changelog
 ---------
+        * Added tools: "config_diff.php" - shows diff between two KeyValue configs. 
+          For example between default gungame.config.txt and that one on your server to see what keys was added.
+
     1.2.8.0:
         * Improved detection of "gungame.smx" and "gungame_sdkhooks.smx" files. Now you can compile version with sdkhooks support with name "gungame.smx".
         * Added global forward: "GG_OnWarmupStart".

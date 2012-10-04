@@ -9,3 +9,5 @@ Files:
     For css version you need only "gungame_winner.php".
 - README.txt
     This tile you are reading.
+- config_diff.php
+    Show diff between two KeyValue configs. For example between default gungame.config.txt and that one on your server to see what keys was added.
