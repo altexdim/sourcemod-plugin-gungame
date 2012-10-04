@@ -7,6 +7,15 @@ TODO
       disabled, and when gg is disabled buyzones are enabled.
       Maybe instead of removement buyzones just disable it to players on
       spawn and when gg swithces enabled/disabled.
+      
+        https://developer.valvesoftware.com/wiki/Func_buyzone
+        
+        # Disable Buyzones
+        es.server.queuecmd('es_xfire %s func_buyzone Disable' % userid)
+        
+        # Enable Buyzones
+        es.server.queuecmd('es_xfire %s func_buyzone Enable' % es.getuserid())
+      
 
     >FIXED [csgo] can not close !rules window.
 
