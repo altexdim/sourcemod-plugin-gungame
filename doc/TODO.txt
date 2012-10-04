@@ -3,52 +3,56 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-	* [csgo] fix error
-		----
-		L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
-		L 08/21/2012 - 22:08:00: [SM] Displaying call stack trace for plugin "gungame.smx":
-		L 08/21/2012 - 22:08:00: [SM]   [0]  Line 1448, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_RemoveAmmoNew()
-		L 08/21/2012 - 22:08:00: [SM]   [1]  Line 62, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/hacks.sp::HACK_RemoveAmmo()
-		L 08/21/2012 - 22:08:00: [SM]   [2]  Line 769, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_DelayAmmoRemove()  
+    * [csgo] can not close !rules window.
 
-		[PHP]L 08/25/2012 - 07:20:02: [SM] Native "GetEntProp" reported: Entity 161 (161) is invalid
-		L 08/25/2012 - 07:20:02: [SM] Displaying call stack trace for plugin "gungame.smx":
-		L 08/25/2012 - 07:20:02: [SM]   [0]  Line 1403, gungame/util.sp::UTIL_RemoveAmmo()
-		L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRemove()[/PHP]
+    * [csgo] reload tazer on multikill.
 
-		Тут используется задержка в 0.1 секунды. За это время оружие может пропасть у игрока? Оружие даётся при спавне или при левелапе.
-		А может попробовать сразу у оружия обнулять патроны?
-		----
+    * [csgo] fix error
+        ----
+        L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
+        L 08/21/2012 - 22:08:00: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 08/21/2012 - 22:08:00: [SM]   [0]  Line 1448, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_RemoveAmmoNew()
+        L 08/21/2012 - 22:08:00: [SM]   [1]  Line 62, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/hacks.sp::HACK_RemoveAmmo()
+        L 08/21/2012 - 22:08:00: [SM]   [2]  Line 769, E:\Downloads\sm_gungame-1.2.0.0.beta2-csgo\addons\sourcemod\scripting\gungame/util.sp::UTIL_DelayAmmoRemove()  
 
-	* add ExtraTaser, BonusWeaponTaser, BlockWeaponSwitchOnExtraTaser
-		I think he means, he wishes for there to be an additional pistol (like is available for hegrenade level), and when you get a pistol kill on taser level, you receive an additional taser. Similarly for molotov level.
-		I think the taser level works best as it is right now, but I can see why people would want additional features to make it more consistent with the hegrenade level.
+        [PHP]L 08/25/2012 - 07:20:02: [SM] Native "GetEntProp" reported: Entity 161 (161) is invalid
+        L 08/25/2012 - 07:20:02: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 08/25/2012 - 07:20:02: [SM]   [0]  Line 1403, gungame/util.sp::UTIL_RemoveAmmo()
+        L 08/25/2012 - 07:20:02: [SM]   [1]  Line 760, gungame/util.sp::UTIL_DelayAmmoRemove()[/PHP]
+
+        Тут используется задержка в 0.1 секунды. За это время оружие может пропасть у игрока? Оружие даётся при спавне или при левелапе.
+        А может попробовать сразу у оружия обнулять патроны?
+        ----
+
+    * add ExtraTaser, BonusWeaponTaser, BlockWeaponSwitchOnExtraTaser
+        I think he means, he wishes for there to be an additional pistol (like is available for hegrenade level), and when you get a pistol kill on taser level, you receive an additional taser. Similarly for molotov level.
+        I think the taser level works best as it is right now, but I can see why people would want additional features to make it more consistent with the hegrenade level.
 
     ----====----==== Normal priority list ----====----====
 
-	* Hi is it possible to add options: (game mode TP)
-		The whole team gets the level of the target maps
-		
-		/* Enables objective bonus game mode TP (Team player all give bonus) */
-		"ObjectiveBonusTP" "1"
+    * Hi is it possible to add options: (game mode TP)
+        The whole team gets the level of the target maps
+        
+        /* Enables objective bonus game mode TP (Team player all give bonus) */
+        "ObjectiveBonusTP" "1"
 
-	* add feature
-		/**
-		*Disable Armor on spawn if a player is on nade level.
-		*
-		*1 - Disables armor if someone is on nade level
-		*0 - Doesn't remove armor
-		*/
-		"DisableArmorOnNade" "1"
+    * add feature
+        /**
+        *Disable Armor on spawn if a player is on nade level.
+        *
+        *1 - Disables armor if someone is on nade level
+        *0 - Doesn't remove armor
+        */
+        "DisableArmorOnNade" "1"
 
-	* add feature
-		/**
-		* Disable level down on knifepro when killer is on nade level.
-		*
-		* 1 - Level down disabled on nade-level
-		* 0 - Level down enabled on nade-level
-		*/
-		"DisableLevelDownOnNadeLevel" "1"
+    * add feature
+        /**
+        * Disable level down on knifepro when killer is on nade level.
+        *
+        * 1 - Level down disabled on nade-level
+        * 0 - Level down enabled on nade-level
+        */
+        "DisableLevelDownOnNadeLevel" "1"
 
     * Add autoupdater.
 
@@ -121,8 +125,8 @@ TODO
 
         etc for each level?
     * Bug report: gungame does not work with cssdm.
-	    Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author. 
-    	2.1.1. CSSDM
+        Native "SetFailState" reported: Signature CSSPlayer::CSWeaponDrop Failed. Please contact the author. 
+        2.1.1. CSSDM
     + Feature: maybe its possible to implement a very simple achievement system (for 
             example "Owner of the Day with x.xxx Kills" or "Killing Machine with 
             xxx Kills") which is set to zero every day, so you dont need a big database.
