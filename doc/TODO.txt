@@ -5,7 +5,7 @@ TODO
 
     * [csgo] can not close !rules window.
 
-    * [csgo] reload tazer on multikill.
+    >FIXED [csgo] reload tazer on multikill.
 
     * [csgo] fix error
         ----

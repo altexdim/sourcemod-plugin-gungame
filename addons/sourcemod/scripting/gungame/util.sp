@@ -845,7 +845,10 @@ UTIL_RemoveBuyZones()
 
 UTIL_ReloadActiveWeapon(client, WeaponId) {
     new Slots:slot = g_WeaponSlot[WeaponId];
-    if ((slot == Slot_Primary || slot == Slot_Secondary)) {
+    if ((slot == Slot_Primary )
+        || (slot == Slot_Secondary)
+        || (WeaponId == g_WeaponIdTaser)
+    ) {
         new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
         if ((ent > -1) && g_WeaponAmmo[WeaponId]) {
             SetEntProp(ent, Prop_Send, "m_iClip1", g_WeaponAmmo[WeaponId] + (g_GameName==GameName:Csgo?1:0)); // "+1" is needed because ammo is refilling before last shot is counted

@@ -14,7 +14,6 @@ WinnerEffectsStartOne(winner, client) {
     }
 }
 
-
 WinnerEffect(winner) {
     for (new i=1; i <= MaxClients; i++) {
         if (IsClientInGame(i) && IsPlayerAlive(i)) {
