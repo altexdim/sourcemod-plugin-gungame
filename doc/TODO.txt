@@ -10,12 +10,81 @@ TODO
       
         https://developer.valvesoftware.com/wiki/Func_buyzone
         
+        ----------------------
+        
         # Disable Buyzones
         es.server.queuecmd('es_xfire %s func_buyzone Disable' % userid)
         
         # Enable Buyzones
         es.server.queuecmd('es_xfire %s func_buyzone Enable' % es.getuserid())
-      
+
+        ----------------------
+        #include <sourcemod>
+        #include <sdktools>
+        #include <cstrike>
+
+        public Plugin:myinfo =
+        {
+            name = "Disable func_buyzone",
+            author = "Bacardi",
+            description = "Disable func_buyzone",
+            version = "0.1",
+            url = "https://forums.alliedmods.net/showthread.php?t=161161"
+        }
+
+        public OnConfigsExecuted()
+        {
+            new ent = -1;
+            while((ent = FindEntityByClassname(ent, "func_buyzone")) != -1)
+            {
+                AcceptEntityInput(ent, "Disable");
+            }
+        } 
+        ----------------------
+        #include <sourcemod> 
+        #include <cstrike> 
+
+        new bool:BUY_ACCESS; 
+
+        public OnMapStart() 
+        { 
+             decl String:MapName[75]; GetCurrentMap(MapName, 75); 
+             if (StrEqual(MapName, "de_cbble") || StrEqual(MapName, "de_dust2")) BUY_ACCESS = false; 
+             else BUY_ACCESS = true; 
+        } 
+
+        public Action:CS_OnBuyCommand(client, const String:item[]) 
+        { 
+             if (!BUY_ACCESS) 
+             { 
+                 PrintToChat(client, "На этой карте покупать оружие нельзя"); 
+                 return Plugin_Handled; 
+             } 
+             return Plugin_Continue; 
+        }
+        ----------------------
+        #include <sourcemod> 
+
+        new R_zone; 
+
+        public OnMapStart() 
+        { 
+             decl String:Remove[65]; 
+             R_zone = GetMaxEntities(); 
+             for (new i = 64; i <= R_zone; i++) 
+             { 
+                 if(IsValidEdict(i) && IsValidEntity(i)) 
+                 { 
+                     GetEdictClassname(i, Remove, sizeof(Remove)); 
+                     if(StrEqual("func_buyzone", Remove)) 
+                     { 
+                         RemoveEdict(i); 
+                     } 
+                 } 
+             }  
+        } 
+        
+        ----------------------
 
     >FIXED [csgo] can not close !rules window.
 
