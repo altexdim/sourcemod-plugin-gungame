@@ -3,7 +3,7 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * [csgo] can not close !rules window.
+    >FIXED [csgo] can not close !rules window.
 
     >FIXED [csgo] reload tazer on multikill.
 

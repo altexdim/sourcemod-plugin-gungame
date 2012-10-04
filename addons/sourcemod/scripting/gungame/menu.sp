@@ -164,7 +164,7 @@ CreateLevelPanel(client)
     DrawPanelText(LevelPanel, text);
     
     DrawPanelItem(LevelPanel, BLANK, ITEMDRAW_SPACER|ITEMDRAW_RAWLINE);
-    SetPanelCurrentKey(LevelPanel, 10);
+    SetPanelCurrentKey(LevelPanel, 9);
     Format(text, sizeof(text), "%t", "Panel: Exit");
     DrawPanelItem(LevelPanel, text, ITEMDRAW_CONTROL);
 
@@ -349,7 +349,7 @@ ShowCommandPanel(client)
     DrawPanelItem(Ham, text);
     DrawPanelItem(Ham, BLANK, ITEMDRAW_SPACER);
 
-    SetPanelCurrentKey(Ham, 10);
+    SetPanelCurrentKey(Ham, 9);
     Format(text, sizeof(text), "%t", "Panel: Exit");
     DrawPanelItem(Ham, text);
 
@@ -383,7 +383,7 @@ DisplayWeaponLevelPanel(client)
     }
 
     DrawPanelText(Ham, BLANK_SPACE);
-    SetPanelCurrentKey(Ham, 8);
+    SetPanelCurrentKey(Ham, 7);
 
     Format(text, sizeof(text), "%t", "Panel: Back");
     DrawPanelItem(Ham, text, ITEMDRAW_CONTROL);
@@ -556,7 +556,7 @@ DisplayRulesMenu(client)
     }
     
     DrawPanelText(menu, BLANK_SPACE);
-    SetPanelCurrentKey(menu, 8);
+    SetPanelCurrentKey(menu, 7);
 
     Format(text, sizeof(text), "%t", "Panel: Back");
     DrawPanelItem(menu, text, ITEMDRAW_CONTROL);
