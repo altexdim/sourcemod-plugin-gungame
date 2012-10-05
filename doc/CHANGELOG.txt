@@ -1,5 +1,11 @@
 Changelog
 ---------
+    1.2.10.0:
+        * Improved glow for winner if "WinnerEffect" is enabled.
+        * Added config variable "WinnerFreezePlayers".
+        * Fixed freeze players after player win.
+        * Added separate plugin for winner effects: "gungame_winner_effects.smx". Moved winner effects functionality from "gungame.smx" into it.
+    
     1.2.9.0:
         * Fixed all the menus (like !rules). Now they are closing by number "9" instead of "0".
         * Buyzones are now toggles on/off on gungame start/end. You dont need to restart map anymore if you are enable/disable gungame with gg_enable/gg_disable.

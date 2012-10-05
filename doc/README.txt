@@ -157,7 +157,7 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*] Depends on gungame.smx, gungame_config.smx
 [*] Optional plugin
 [*] Starts the map voting for the next map when someone reaches particular level
-              by executing cfg/gungame/gungame.mapvote.cfg
+              by executing gungame.mapvote.cfg
 [/LIST]
  
 [*] gungame_logging.smx - Logging events
@@ -195,6 +195,13 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*] Depends on gungame.smx, gungame_config.smx
 [*] Optional plugin
 [*] Executes configs gungame.warmupend.cfg and gungame.warmupstart.cfg on warmup start and end.
+[/LIST]
+
+[*] gungame_winner_effects.smx - Winner effects after player win
+[LIST]
+[*] Depends on gungame.smx, gungame_config.smx
+[*] Optional plugin
+[*] Adds winner effect, configured in gungame.config.txt.
 [/LIST]
 
 [/LIST]
