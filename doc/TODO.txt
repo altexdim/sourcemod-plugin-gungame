@@ -45,6 +45,12 @@ TODO
         }    
     
     * add option - instant weapon switch
+
+        check issues:
+            - When you get a nade kill you still have a deagle or glock.  Whatever weapon you set with the nade level. 
+              When you die the weapon does go away and you have a knife only. 
+            - Other issues is when you level up with a knife it sets the next weapon on burst fire or scoped in 
+              depending on the next weapon you receive. Maybe it's a bit too fast so it causes these issues. 
     
         //init vars
         new g_Offset_PrimAttack = -1;
