@@ -24,7 +24,6 @@
 #include "gungame/event.h"
 #include "gungame/offset.h"
 #include "gungame/util.h"
-#include "gungame/winner_effects.h"
 
 #if defined GUNGAME_DEBUG
 #include "gungame/debug.h"
@@ -40,7 +39,6 @@
 #include "gungame/event.sp"
 #include "gungame/menu.sp"
 #include "gungame/commands.sp"
-#include "gungame/winner_effects.sp"
 
 public Plugin:myinfo = {
     #if defined WITH_SDKHOOKS
@@ -645,5 +643,4 @@ public GG_OnLoadPlayerWins(client)
 public OnMapStart() {
     PrecacheModel(MULTI_LEVEL_EFFECT2);
     PrecacheModel(MULTI_LEVEL_EFFECT1);
-    OnMapStartEffects();
 }

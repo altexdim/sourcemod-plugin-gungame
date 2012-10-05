@@ -3,82 +3,17 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    >TEST add option to disable freeze
+
+    >TEST check that freeze players works after gungame winner
+
+    >TEST make separate plugin - sm_gungame_winner_effects. move winner effects functionality into it.
+    
+    >TEST fix glow on client
+
     * add option - random multiple triplelevel sounds
         if enabled - plays random sound every time player triggers triplelevel
         if disabled - plays same sound every time player triggers triplelevel, but choose random sound every map start
-
-    * make separate plugin - sm_gungame_winner_effects. move winner effects functionality into it.
-    
-    * fix glow on client
-
-        Example:
-        
-        CreateLight(client) {
-            // TODO: set client name on client entity, so "targetname" on glow entity points to this name.
-        
-            new Float:clientposition[3];
-            GetClientAbsOrigin(client, clientposition);
-            clientposition[2] += 30.0;
-
-            new GLOW_ENTITY = CreateEntityByName("env_glow");
-            DispatchKeyValue(GLOW_ENTITY, "model", Item_Code[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]]);
-            DispatchKeyValue(GLOW_ENTITY, "rendermode", "3");
-            DispatchKeyValue(GLOW_ENTITY, "renderfx", "14");
-            DispatchKeyValue(GLOW_ENTITY, "scale", "1.0");
-            DispatchKeyValue(GLOW_ENTITY, "renderamt", "255");
-            Format(g_sFormatting, sizeof(g_sFormatting), "%d %d %d %d", 
-                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][0], 
-                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][1], 
-                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][2], 
-                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][3]);
-            DispatchKeyValue(GLOW_ENTITY, "rendercolor", g_sFormatting);
-            DispatchSpawn(GLOW_ENTITY);
-            AcceptEntityInput(GLOW_ENTITY, "ShowSprite");
-            TeleportEntity(GLOW_ENTITY, clientposition, NULL_VECTOR, NULL_VECTOR);
-
-            new String:steamid[21];
-            GetClientAuthString(client, steamid, 21);
-            DispatchKeyValue(client, "targetname", steamid);
-            SetVariantString(steamid);
-            AcceptEntityInput(GLOW_ENTITY, "SetParent");
-            AcceptEntityInput(GLOW_ENTITY, "TurnOn");
-        }    
-    
-    * add option - instant weapon switch
-
-        check issues:
-            - When you get a nade kill you still have a deagle or glock.  Whatever weapon you set with the nade level. 
-              When you die the weapon does go away and you have a knife only. 
-            - Other issues is when you level up with a knife it sets the next weapon on burst fire or scoped in 
-              depending on the next weapon you receive. Maybe it's a bit too fast so it causes these issues. 
-    
-        //init vars
-        new g_Offset_PrimAttack = -1;
-        new g_Offset_WepIdleTime = -1;
-        new g_Offset_NextAttack = -1;
-
-        //init offsets
-        g_Offset_PrimAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextPrimaryAttack");
-        if (g_Offset_PrimAttack == -1) {
-            SetFailState("Can't load primary attack offset. Exiting.");
-        }
-        g_Offset_WepIdleTime = FindSendPropOffs("CBaseCombatWeapon", "m_flTimeWeaponIdle");
-        if (g_Offset_WepIdleTime == -1) {
-            SetFailState("Can't load weapon idle time. Exiting.");
-        }
-        g_Offset_NextAttack = FindSendPropOffs("CBasePlayer", "m_flNextAttack");
-        if (g_Offset_NextAttack == -1) {
-            SetFailState("Can't load next attack time. Exiting.");
-        }        
-
-        //in give next level weapon
-        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId][0][0], false);
-        new Float:currtime = GetGameTime();
-        SetEntDataFloat(ent, g_Offset_PrimAttack, currtime, false);
-        SetEntDataFloat(ent, g_Offset_WepIdleTime, currtime, false);
-        SetEntDataFloat(client, g_Offset_NextAttack, currtime, false);
-    
-    * check that freeze players works after gungame winner
 
     * [csgo] fix error
         ----

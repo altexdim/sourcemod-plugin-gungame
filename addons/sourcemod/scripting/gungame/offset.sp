@@ -7,13 +7,6 @@ OnOffsetStart()
         SetFailState("FATAL ERROR: Offset \"CBasePlayer::m_iAmmo\" was not found.");
     }
 
-    OffsetFlags = FindSendPropOffs("CBasePlayer", "m_fFlags");
-    if(OffsetFlags == INVALID_OFFSET)
-    {
-        FormatEx(Error, sizeof(Error), "FATAL ERROR OffsetFlags [%d]. Please contact the author.", OffsetFlags);
-        SetFailState(Error);
-    }
-
     OffsetMovement = FindSendPropOffs("CBasePlayer", "m_flLaggedMovementValue");
     if(OffsetMovement == INVALID_OFFSET)
     {

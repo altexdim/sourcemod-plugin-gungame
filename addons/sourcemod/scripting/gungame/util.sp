@@ -348,7 +348,9 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
 
         GameWinner = client;
 
-        WinnerEffectsStart(client);
+        if (g_Cfg_WinnerFreezePlayers) {
+            UTIL_FreezeAllPlayers();
+        }
         UTIL_EndMultiplayerGameDelayed();
 
         new result;
@@ -377,7 +379,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
     return Level;
 }
 
-UTIL_FreezeAllPlayer() {
+UTIL_FreezeAllPlayers() {
     for (new i = 1; i <= MaxClients; i++) {
         if (IsClientInGame(i)) {
             UTIL_FreezePlayer(i);
@@ -386,7 +388,7 @@ UTIL_FreezeAllPlayer() {
 }
 
 UTIL_FreezePlayer(client) {
-    SetEntData(client, OffsetFlags, GetEntData(client, OffsetFlags)|FL_FROZEN);
+    SetEntityMoveType(client, MOVETYPE_NONE);
 }
 
 /**

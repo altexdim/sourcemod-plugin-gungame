@@ -146,10 +146,11 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
      */
     if(name[6] == 's')
     {
-        if(GameWinner)
-        {
+        if (GameWinner) {
             /* Lock all player since the winner was declare already if new round happened. */
-            WinnerEffectsStart(GameWinner);
+            if (g_Cfg_WinnerFreezePlayers) {
+                UTIL_FreezeAllPlayers();
+            }
         }
 
         /* Round has Started. */
@@ -604,7 +605,9 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
 
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if (GameWinner) {
-        WinnerEffectsStartOne(GameWinner, client);
+        if (g_Cfg_WinnerFreezePlayers) {
+            UTIL_FreezePlayers(client);
+        }
     }
 
     if ( WarmupEnabled && !DisableWarmupOnRoundEnd )

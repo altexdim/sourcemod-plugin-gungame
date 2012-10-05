@@ -33,6 +33,9 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
 
+            } else if(strcmp("WinnerFreezePlayers", key, false) == 0) {
+                g_Cfg_WinnerFreezePlayers = StringToInt(value);
+
             } else if(strcmp("MolotovBonusFlash", key, false) == 0) {
                 g_Cfg_MolotovBonusFlash = StringToInt(value);
             } else if(strcmp("MolotovBonusSmoke", key, false) == 0) {
@@ -45,9 +48,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 }
             } else if(strcmp("ExtraMolotovOnKnifeKill", key, false) == 0) {
                 g_Cfg_ExtraMolotovOnKnifeKill = StringToInt(value);
-
-            } else if(strcmp("WinnerEffect", key, false) == 0) {
-                g_Cfg_WinnerEffect = StringToInt(value);
 
             } else if(strcmp("EndGameDelay", key, false) == 0) {
                 g_Cfg_EndGameDelay = StringToFloat(value);

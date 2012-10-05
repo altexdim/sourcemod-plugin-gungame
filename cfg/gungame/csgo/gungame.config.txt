@@ -10,6 +10,15 @@
         "Enabled" "1"
 
         /**
+         * Freeze players after win.
+         *
+         * Options:
+         *      1 - Freeze players.
+         *      0 - Do not freeze players.
+         */
+        "WinnerFreezePlayers" "1"
+
+        /**
          * Winner effects.
          *
          * Options:

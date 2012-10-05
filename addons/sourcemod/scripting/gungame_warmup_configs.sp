@@ -4,7 +4,6 @@
 #include <gungame_const>
 #include <gungame>
 #include <gungame_config>
-#include "gungame/stock.sp"
 
 public Plugin:myinfo = {
     name = "GunGame:SM Warmup Configs Execution",
