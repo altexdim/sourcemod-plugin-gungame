@@ -3,11 +3,19 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * add option - random multiple triplelevel sounds
+        if enabled - plays random sound every time player triggers triplelevel
+        if disabled - plays same sound every time player triggers triplelevel, but choose random sound every map start
+
+    * make separate plugin - sm_gungame_winner_effects. move winner effects functionality into it.
+    
     * fix glow on client
 
         Example:
         
         CreateLight(client) {
+            // TODO: set client name on client entity, so "targetname" on glow entity points to this name.
+        
             new Float:clientposition[3];
             GetClientAbsOrigin(client, clientposition);
             clientposition[2] += 30.0;
