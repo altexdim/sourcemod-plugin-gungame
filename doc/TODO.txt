@@ -3,6 +3,67 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * fix glow on client
+
+        Example:
+        
+        CreateLight(client) {
+            new Float:clientposition[3];
+            GetClientAbsOrigin(client, clientposition);
+            clientposition[2] += 30.0;
+
+            new GLOW_ENTITY = CreateEntityByName("env_glow");
+            DispatchKeyValue(GLOW_ENTITY, "model", Item_Code[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]]);
+            DispatchKeyValue(GLOW_ENTITY, "rendermode", "3");
+            DispatchKeyValue(GLOW_ENTITY, "renderfx", "14");
+            DispatchKeyValue(GLOW_ENTITY, "scale", "1.0");
+            DispatchKeyValue(GLOW_ENTITY, "renderamt", "255");
+            Format(g_sFormatting, sizeof(g_sFormatting), "%d %d %d %d", 
+                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][0], 
+                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][1], 
+                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][2], 
+                Item_Colors[g_iEffectItemIndex[client][DB_ISPECIES_LIGHT]][3]);
+            DispatchKeyValue(GLOW_ENTITY, "rendercolor", g_sFormatting);
+            DispatchSpawn(GLOW_ENTITY);
+            AcceptEntityInput(GLOW_ENTITY, "ShowSprite");
+            TeleportEntity(GLOW_ENTITY, clientposition, NULL_VECTOR, NULL_VECTOR);
+
+            new String:steamid[21];
+            GetClientAuthString(client, steamid, 21);
+            DispatchKeyValue(client, "targetname", steamid);
+            SetVariantString(steamid);
+            AcceptEntityInput(GLOW_ENTITY, "SetParent");
+            AcceptEntityInput(GLOW_ENTITY, "TurnOn");
+        }    
+    
+    * add option - instant weapon switch
+    
+        //init vars
+        new g_Offset_PrimAttack = -1;
+        new g_Offset_WepIdleTime = -1;
+        new g_Offset_NextAttack = -1;
+
+        //init offsets
+        g_Offset_PrimAttack = FindSendPropOffs("CBaseCombatWeapon", "m_flNextPrimaryAttack");
+        if (g_Offset_PrimAttack == -1) {
+            SetFailState("Can't load primary attack offset. Exiting.");
+        }
+        g_Offset_WepIdleTime = FindSendPropOffs("CBaseCombatWeapon", "m_flTimeWeaponIdle");
+        if (g_Offset_WepIdleTime == -1) {
+            SetFailState("Can't load weapon idle time. Exiting.");
+        }
+        g_Offset_NextAttack = FindSendPropOffs("CBasePlayer", "m_flNextAttack");
+        if (g_Offset_NextAttack == -1) {
+            SetFailState("Can't load next attack time. Exiting.");
+        }        
+
+        //in give next level weapon
+        new ent = GivePlayerItemWrapper(client, WeaponName[WeapId][0][0], false);
+        new Float:currtime = GetGameTime();
+        SetEntDataFloat(ent, g_Offset_PrimAttack, currtime, false);
+        SetEntDataFloat(ent, g_Offset_WepIdleTime, currtime, false);
+        SetEntDataFloat(client, g_Offset_NextAttack, currtime, false);
+    
     * check that freeze players works after gungame winner
 
     * [csgo] fix error
