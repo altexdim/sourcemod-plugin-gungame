@@ -606,7 +606,7 @@ public _PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast)
     /* For deathmatch when they get respawn after round start freeze after game winner. */
     if (GameWinner) {
         if (g_Cfg_WinnerFreezePlayers) {
-            UTIL_FreezePlayers(client);
+            UTIL_FreezePlayer(client);
         }
     }
 

@@ -4,6 +4,7 @@
 | INÑLUDES                                                              |
 +----------------------------------------------------------------------*/
 #include <sourcemod>
+#include <sdktools>
 #include <gungame_const>
 #include <gungame_config>
 #include "gungame/stock.sp"
@@ -25,23 +26,23 @@ public Plugin:myinfo = {
 #define SPRITE_CSGO     "sprites/ledglow.vmt"
 #define SPRITE_CSS      "sprites/orangeglow1.vmt"
 
-new State:ConfigState   = CONFIG_STATE_NONE;
-new g_Cfg_WinnerEffect  = 0;
-new g_GlowSprite        = -1;
-new GameName:g_GameName = GameName:None;
-new winner              = 0;
+new State:g_ConfigState     = CONFIG_STATE_NONE;
+new g_Cfg_WinnerEffect      = 0;
+new g_GlowSprite            = -1;
+new GameName:g_GameName     = GameName:None;
+new g_winner                = 0;
 
 /*----------------------------------------------------------------------+
 | LOAD CONFIG                                                           |
 +----------------------------------------------------------------------*/
 public GG_ConfigNewSection(const String:NewSection[]) {
     if (strcmp(NewSection, "Config", false) == 0) {
-        ConfigState = CONFIG_STATE_CONFIG;
+        g_ConfigState = CONFIG_STATE_CONFIG;
     }
 }
 
-public GG_ConfigKeyValue(const String:Key[], const String:Value[]) {
-    if (ConfigState == CONFIG_STATE_CONFIG) {
+public GG_ConfigKeyValue(const String:key[], const String:value[]) {
+    if (g_ConfigState == CONFIG_STATE_CONFIG) {
         if  (strcmp("WinnerEffect", key, false) == 0) {
             g_Cfg_WinnerEffect = StringToInt(value);
         }
@@ -49,15 +50,17 @@ public GG_ConfigKeyValue(const String:Key[], const String:Value[]) {
 }
 
 public GG_ConfigParseEnd() {
-    ConfigState = CONFIG_STATE_NONE;
+    g_ConfigState = CONFIG_STATE_NONE;
 }
 
 /*----------------------------------------------------------------------+
 | PUBLIC EVENTS                                                         |
 +----------------------------------------------------------------------*/
 public OnMapStart() {
+    g_winner = 0;
+
     if (g_GameName == GameName:Csgo) {
-        g_GlowSprite = PrecacheModel(SPRITE_CSS);
+        g_GlowSprite = PrecacheModel(SPRITE_CSGO);
     } else {
         g_GlowSprite = PrecacheModel(SPRITE_CSS);
     }
@@ -77,7 +80,7 @@ public Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast) 
         return;
     }
 
-    if (!winner) {
+    if (!g_winner) {
         return;
     }
 
@@ -86,7 +89,7 @@ public Event_PlayerSpawn(Handle:event, const String:name[], bool:dontBroadcast) 
         return;
     }
 
-    WinnerEffectOne(winner, client);
+    WinnerEffectsStartOne(g_winner, client);
 }
 
 /*----------------------------------------------------------------------+
@@ -97,7 +100,7 @@ public GG_OnStartup(bool:Command) {
         return;
     }
 
-    winner = 0;
+    g_winner = 0;
 }
 
 public GG_OnWinner(client, const String:Weapon[], victim) {
@@ -105,7 +108,7 @@ public GG_OnWinner(client, const String:Weapon[], victim) {
         return;
     }
 
-    winner = client;
+    g_winner = client;
     WinnerEffectsStart(client);
 }
 
@@ -143,6 +146,8 @@ SetPlayerWinnerEffectAll(client) {
     // fly
     SetEntityGravity(client, 0.001);
 
+    SetEntProp(client, Prop_Data, "m_takedamage", 0, 1);
+
     new Float:pos[3], Float:vel[3];
     GetClientEyePosition(client, pos);
 
@@ -154,11 +159,10 @@ SetPlayerWinnerEffectAll(client) {
 }
 
 SetPlayerWinnerEffectWinner(client) {
-    CreateLight(client);
-    //SetPlayerWinnerEffectWinnerRepeate(client);
+    //CreateLight(client);
+    SetPlayerWinnerEffectWinnerRepeate(client);
 }
 
-/*
 SetPlayerWinnerEffectWinnerRepeate(client) {
     CreateTimer(0.1, Timer_SetPlayerWinnerEffectWinner, client, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
@@ -180,21 +184,25 @@ SetPlayerWinnerEffectWinnerReal(client) {
     TE_SetupGlowSprite(vec, g_GlowSprite, 0.5, 4.0, 70);
     TE_SendToAll();
 }
-*/
 
 // TODO: test it
-CreateLight(client) {
+stock CreateLight(client) {
     new Float:clientposition[3];
     GetClientAbsOrigin(client, clientposition);
     clientposition[2] += 40.0;
 
     new GLOW_ENTITY = CreateEntityByName("env_glow");
-    new String:model[100];
-    FormatEx(model, sizeof(model), "materials/%s", g_GameName == GameName:Csgo?SPRITE_CSGO:SPRITE_CSS);
-    DispatchKeyValue(GLOW_ENTITY, "model", model);
+
+    SetEntProp(GLOW_ENTITY, Prop_Data, "m_nBrightness", 70, 4);
+
+    //new String:model[100];
+    //FormatEx(model, sizeof(model), "materials/%s", g_GameName == GameName:Csgo?SPRITE_CSGO:SPRITE_CSS);
+    //DispatchKeyValue(GLOW_ENTITY, "model", model);
+    DispatchKeyValue(GLOW_ENTITY, "model", g_GameName == GameName:Csgo?SPRITE_CSGO:SPRITE_CSS);
+
     DispatchKeyValue(GLOW_ENTITY, "rendermode", "3");
     DispatchKeyValue(GLOW_ENTITY, "renderfx", "14");
-    DispatchKeyValue(GLOW_ENTITY, "scale", "1.0");
+    DispatchKeyValue(GLOW_ENTITY, "scale", "4.0");
     DispatchKeyValue(GLOW_ENTITY, "renderamt", "255");
     DispatchKeyValue(GLOW_ENTITY, "rendercolor", "255 255 255 255");
     DispatchSpawn(GLOW_ENTITY);

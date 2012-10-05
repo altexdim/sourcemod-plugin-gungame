@@ -3,31 +3,23 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    >TEST add option to disable freeze
-
-    >TEST check that freeze players works after gungame winner
-
-    >TEST make separate plugin - sm_gungame_winner_effects. move winner effects functionality into it.
-    
-    >TEST fix glow on client
-
     * add option for instant weapon switch
 
-        Quick forum search pointed be to these threads, but still do not understand what is the correct way
+        - Quick forum search pointed be to these threads, but still do not understand what is the correct way
+            * [url]https://forums.alliedmods.net/showpost.php?p=1344982&postcount=3[/url]
+            * [url]http://forums.alliedmods.net/showpost.php?p=1550257&postcount=36[/url]
+            * [url]https://forums.alliedmods.net/showthread.php?t=164725[/url]
+            * [url]https://forums.alliedmods.net/showpost.php?p=1308868&postcount=2[/url]
+            * [url]https://forums.alliedmods.net/showthread.php?t=87266[/url]
+            * [url]https://forums.alliedmods.net/showpost.php?p=786763&postcount=19[/url]
+            * Big tutorial [url]http://forums.alliedmods.net/showthread.php?t=41265&highlight=block+animation[/url]
+            * [url]http://forums.alliedmods.net/showthread.php?p=1135688[/url]
+            * [url]https://forums.alliedmods.net/showthread.php?t=149598[/url]
+            * [url]http://forums.alliedmods.net/showthread.php?t=120777[/url]
 
-                * [url]https://forums.alliedmods.net/showpost.php?p=1344982&postcount=3[/url]
-                * [url]http://forums.alliedmods.net/showpost.php?p=1550257&postcount=36[/url]
-                * [url]https://forums.alliedmods.net/showthread.php?t=164725[/url]
-                * [url]https://forums.alliedmods.net/showpost.php?p=1308868&postcount=2[/url]
-                * [url]https://forums.alliedmods.net/showthread.php?t=87266[/url]
-                * [url]https://forums.alliedmods.net/showpost.php?p=786763&postcount=19[/url]
-                * Big tutorial [url]http://forums.alliedmods.net/showthread.php?t=41265&highlight=block+animation[/url]
-                * [url]http://forums.alliedmods.net/showthread.php?p=1135688[/url]
-                * [url]https://forums.alliedmods.net/showthread.php?t=149598[/url]
-                * [url]http://forums.alliedmods.net/showthread.php?t=120777[/url]
+        - bl4nk - Try doing SetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon", iEnt) (where iEnt is the index of the weapon) to switch to it. You could then do SetEntPropFloat(iEnt, Prop_Send, "m_flNextPrimaryAttack", GetGameTime(), true) which should allow the weapon to shoot right away.
 
-
-        bl4nk - Try doing SetEntPropEnt(iClient, Prop_Send, "m_hActiveWeapon", iEnt) (where iEnt is the index of the weapon) to switch to it. You could then do SetEntPropFloat(iEnt, Prop_Send, "m_flNextPrimaryAttack", GetGameTime(), true) which should allow the weapon to shoot right away.
+        - sourcemod plugin http://forums.alliedmods.net/showthread.php?t=123015
 
     * add option - random multiple triplelevel sounds
         if enabled - plays random sound every time player triggers triplelevel
