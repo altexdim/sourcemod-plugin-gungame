@@ -640,6 +640,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
     new bool:dropKnife = g_WeaponDropKnife[WeapId];
     new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && levelupWithKnife && !dropKnife;
+    new newWeapon = 0;
 
     // A check to make sure player always has a knife 
     // because some maps do not give the knife.
@@ -658,13 +659,15 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     if (PlayerState[client] & KNIFE_ELITE) { // FIXME: when do we call UTIL_GiveNextWeapon with KNIFE_ELITE flag set in PlayerState?
         if (blockSwitch) {
             g_BlockSwitch[client] = false;
+        } else {
+            FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
         }
-        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
         return;
     }
 
     if (slot == Slot_Grenade) {
         if (WeapId == g_WeaponIdHegrenade) {
+            // BONUS WEAPONS FOR HEGRENADE
             if (NumberOfNades) {
                 g_NumberOfNades[client] = NumberOfNades - 1;
             }
@@ -691,6 +694,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
                 GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
             }
         } else if (g_WeaponIsMolotovType[WeapId]) {
+            // BONUS WEAPONS FOR MOLOTOV
             if (g_Cfg_MolotovBonusWeaponId) {
                 new ent = GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_MolotovBonusWeaponId]);
                 // Remove bonus weapon ammo! So player can not reload weapon!
@@ -718,6 +722,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
 
     if (slot == Slot_Knife) {
         if (g_WeaponIsKnifeType[WeapId]) {
+            // BONUS WEAPONS FOR KNIFE
             if (g_Cfg_KnifeSmoke) {
                 GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
             }
@@ -725,22 +730,28 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
                 GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
             }
             if (dropKnife) {
-                GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+                // LEVEL WEAPON KNIFEGG
+                newWeapon = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
             }
         } else {
+            // LEVEL WEAPON TASER
             // this is, for example, TASER (csgo)
-            GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+            newWeapon = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
         }
     } else {
+        // LEVEL WEAPON PRIMARY/SECONDARY
         /* Give new weapon */
-        GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
+        newWeapon = GivePlayerItemWrapper(client, g_WeaponName[WeapId]);
     }
 
     if (blockSwitch) {
         g_BlockSwitch[client] = false;
-        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdKnife]);
     } else {
         FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
+    }
+
+    if (!blockSwitch && g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
+        UTIL_InstantSwitch(client, newWeapon);
     }
 }
 
@@ -1095,13 +1106,16 @@ UTIL_GiveExtraNade(client, bool:knifeKill) {
         /* Do not give them another nade if they already have one */
         if (!UTIL_HasClientHegrenade(client)) {
             new bool:blockWeapSwitch = g_SdkHooksEnabled && ( g_Cfg_BlockWeaponSwitchIfKnife && knifeKill || g_Cfg_BlockWeaponSwitchOnNade );
-            GivePlayerItemWrapper(
+            new newWeapon = GivePlayerItemWrapper(
                 client, 
                 g_WeaponName[g_WeaponIdHegrenade], 
                 blockWeapSwitch
             );
             if (!blockWeapSwitch) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
+                if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
+                    UTIL_InstantSwitch(client, newWeapon);
+                }
             }
         }
     }
@@ -1112,13 +1126,16 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
     /* Do not give them another nade if they already have one */
     if (!UTIL_HasClientMolotov(client)) {
         new bool:blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
-        GivePlayerItemWrapper(
+        new newWeapon = GivePlayerItemWrapper(
             client, 
             g_WeaponName[WeaponId], 
             blockWeapSwitch
         );
         if (!blockWeapSwitch) {
             FakeClientCommand(client, "use %s", g_WeaponName[WeaponId]);
+            if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
+                UTIL_InstantSwitch(client, newWeapon);
+            }
         }
     }
 }
@@ -1139,13 +1156,16 @@ UTIL_GiveExtraTaser(client) {
     }
 
     new bool:blockWeapSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife;
-    GivePlayerItemWrapper(
+    new newWeapon = GivePlayerItemWrapper(
         client, 
         g_WeaponName[g_WeaponIdTaser], 
         blockWeapSwitch
     );
     if (!blockWeapSwitch) {
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdTaser]);
+        if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
+            UTIL_InstantSwitch(client, newWeapon);
+        }
     }
 }
 
@@ -1560,4 +1580,18 @@ stock bool:UTIL_HasClientHegrenade(client) {
 
 stock bool:UTIL_HasClientMolotov(client) {
     return UTIL_WeaponAmmoGetGrenadeCount(client, g_WeaponAmmoTypeMolotov) > 0;
+}
+
+
+UTIL_InstantSwitch(client, weapon, setActiveWeapon = 1) {
+    new Float:GameTime = GetGameTime();
+
+    if (setActiveWeapon) {
+        SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
+        SetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack", GameTime);
+    }
+
+    SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);
+    new ViewModel = GetEntPropEnt(client, Prop_Send, "m_hViewModel");
+    SetEntProp(ViewModel, Prop_Send, "m_nSequence", 0);
 }

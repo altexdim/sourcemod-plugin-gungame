@@ -33,6 +33,11 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
 
+            } else if(strcmp("InstantSwitchOnChangeWeapon", key, false) == 0) {
+                g_Cfg_InstantSwitchOnChangeWeapon = StringToInt(value);
+            } else if(strcmp("InstantSwitchOnLevelUp", key, false) == 0) {
+                g_Cfg_InstantSwitchOnLevelUp = StringToInt(value);
+
             } else if(strcmp("WinnerFreezePlayers", key, false) == 0) {
                 g_Cfg_WinnerFreezePlayers = StringToInt(value);
 

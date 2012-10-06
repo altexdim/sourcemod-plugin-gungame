@@ -10,6 +10,26 @@
         "Enabled" "1"
 
         /**
+         * Switch weapon without delays after level up.
+         *
+         * Options:
+         *      1 - Enabled.
+         *      0 - Disabled.
+         */
+        "InstantSwitchOnLevelUp" "0"
+
+        /**
+         * Switch weapon without delays when player changes weapon by himself.
+         *
+         * SDK Hooks (sdkhooks) is required to use this option.
+         *
+         * Options:
+         *      1 - Enabled.
+         *      0 - Disabled.
+         */
+        "InstantSwitchOnChangeWeapon" "0"
+
+        /**
          * Freeze players after win.
          *
          * Options:
