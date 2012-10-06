@@ -5,6 +5,10 @@ Changelog
         * Added config variable "WinnerFreezePlayers".
         * Fixed freeze players after player win.
         * Added separate plugin for winner effects: "gungame_winner_effects.smx". Moved winner effects functionality from "gungame.smx" into it.
+        * Added options for the fast weapon switch: "FastSwitchOnLevelUp" and "FastSwitchOnChangeWeapon". "FastSwitchOnChangeWeapon" requires SDKHooks.
+            Thanks for help to "bl4nk" in this thread http://forums.alliedmods.net/showthread.php?t=197634.
+            Credits to "blodia" for the plugin "[CSS] Weapon Mod" (http://forums.alliedmods.net/showthread.php?t=123015)
+            Fast weapon switch code, fixed weapon animation on fast switch code is ported from this plugin.
     
     1.2.9.0:
         * Fixed all the menus (like !rules). Now they are closing by number "9" instead of "0".

@@ -750,8 +750,8 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
         FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
     }
 
-    if (!blockSwitch && g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
-        UTIL_InstantSwitch(client, newWeapon);
+    if (!blockSwitch && g_Cfg_FastSwitchOnLevelUp && newWeapon) {
+        UTIL_FastSwitch(client, newWeapon);
     }
 }
 
@@ -1113,8 +1113,8 @@ UTIL_GiveExtraNade(client, bool:knifeKill) {
             );
             if (!blockWeapSwitch) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
-                if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
-                    UTIL_InstantSwitch(client, newWeapon);
+                if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
+                    UTIL_FastSwitch(client, newWeapon);
                 }
             }
         }
@@ -1133,8 +1133,8 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
         );
         if (!blockWeapSwitch) {
             FakeClientCommand(client, "use %s", g_WeaponName[WeaponId]);
-            if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
-                UTIL_InstantSwitch(client, newWeapon);
+            if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
+                UTIL_FastSwitch(client, newWeapon);
             }
         }
     }
@@ -1163,8 +1163,8 @@ UTIL_GiveExtraTaser(client) {
     );
     if (!blockWeapSwitch) {
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdTaser]);
-        if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
-            UTIL_InstantSwitch(client, newWeapon);
+        if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
+            UTIL_FastSwitch(client, newWeapon);
         }
     }
 }
@@ -1583,7 +1583,7 @@ stock bool:UTIL_HasClientMolotov(client) {
 }
 
 
-UTIL_InstantSwitch(client, weapon, setActiveWeapon = 1) {
+UTIL_FastSwitch(client, weapon, setActiveWeapon = 1) {
     new Float:GameTime = GetGameTime();
 
     if (setActiveWeapon) {

@@ -109,7 +109,7 @@ new g_Cfg_MolotovBonusSmoke         = 0;
 new g_Cfg_MolotovBonusWeaponId      = 0;
 new g_Cfg_ExtraMolotovOnKnifeKill   = 0;
 
-new Float:g_Cfg_EndGameDelay            = 0.0;
-new g_Cfg_WinnerFreezePlayers           = 0;
-new g_Cfg_InstantSwitchOnChangeWeapon   = 0;
-new g_Cfg_InstantSwitchOnLevelUp        = 0;
+new Float:g_Cfg_EndGameDelay        = 0.0;
+new g_Cfg_WinnerFreezePlayers       = 0;
+new g_Cfg_FastSwitchOnChangeWeapon  = 0;
+new g_Cfg_FastSwitchOnLevelUp       = 0;

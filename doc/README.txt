@@ -209,6 +209,8 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [anchor]Credits[/anchor][B]Credits[/B]
 ----------------------------------------------------
 [LIST]
+[*] Thanks to "blodia" for the plugin "[CSS] Weapon Mod" (http://forums.alliedmods.net/showthread.php?t=123015)
+    Fast weapon switch code, fixed weapon animation on fast switch code is ported from this plugin.
 [*] Thanks to psychonic! Actualy he made version for CSGO possible and i can not imagine this plugin without his support.
 [*] Thanks to Xilver266 for spanish translation.
 [*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from [url]http://www.war3source.com/[/url]

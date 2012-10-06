@@ -800,8 +800,8 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
             new newWeapon = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade], blockSwitch);
             if (!blockSwitch) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
-                if (g_Cfg_InstantSwitchOnLevelUp && newWeapon) {
-                    UTIL_InstantSwitch(client, newWeapon);
+                if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
+                    UTIL_FastSwitch(client, newWeapon);
                 }
             }
         }
@@ -811,27 +811,27 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
 public Action:OnWeaponSwitch(client, weapon) {
     if ( g_BlockSwitch[client] ) {
         return Plugin_Handled;
-    } else if (g_Cfg_InstantSwitchOnChangeWeapon) {
+    } else if (g_Cfg_FastSwitchOnChangeWeapon) {
         new Handle:data;
         data = CreateDataPack();
         WritePackCell(data, client);
         WritePackCell(data, weapon);
 
-        CreateTimer(0.1, Timer_InstantSwitch, data);
+        CreateTimer(0.1, Timer_FastSwitch, data);
 
         return Plugin_Continue;
     }
     return Plugin_Continue;
 }
 
-public Action:Timer_InstantSwitch(Handle:timer, any:data) {
+public Action:Timer_FastSwitch(Handle:timer, any:data) {
     ResetPack(data);
     new client = ReadPackCell(data);
     new weapon = ReadPackCell(data);
     CloseHandle(data);
 
     if (client && IsClientInGame(client) && IsPlayerAlive(client)) {
-        UTIL_InstantSwitch(client, weapon, 0);
+        UTIL_FastSwitch(client, weapon, 0);
     }
 }
 

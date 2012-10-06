@@ -16,7 +16,7 @@
          *      1 - Enabled.
          *      0 - Disabled.
          */
-        "InstantSwitchOnLevelUp" "0"
+        "FastSwitchOnLevelUp" "0"
 
         /**
          * Switch weapon without delays when player changes weapon by himself.
@@ -27,7 +27,7 @@
          *      1 - Enabled.
          *      0 - Disabled.
          */
-        "InstantSwitchOnChangeWeapon" "0"
+        "FastSwitchOnChangeWeapon" "0"
 
         /**
          * Freeze players after win.
