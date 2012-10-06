@@ -134,10 +134,6 @@ public Action:Timer_InstantSwitch(Handle:timer, any:data) {
 InstantSwitch(client, weapon, timer = 0) {
     new Float:GameTime = GetGameTime();
 
-    //SetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack", currtime);
-    //SetEntPropFloat(weapon, Prop_Send, "m_flTimeWeaponIdle", currtime);
-    //SetEntPropFloat(client, Prop_Send, "m_flNextAttack", currtime);
-
     if (!timer) {
         SetEntPropEnt(client, Prop_Send, "m_hActiveWeapon", weapon);
         SetEntPropFloat(weapon, Prop_Send, "m_flNextPrimaryAttack", GameTime);
