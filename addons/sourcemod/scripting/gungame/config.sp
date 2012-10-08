@@ -33,6 +33,29 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
 
+            } else if(strcmp("FastSwitchSkipWeapons", key, false) == 0) {
+                new i, weaponIndex;
+
+                for (i = 0; i < sizeof (g_Cfg_FastSwitchSkipWeapons); i++) {
+                    g_Cfg_FastSwitchSkipWeapons[i] = false;
+                }
+
+                new String:buffers[MAX_WEAPONS_COUNT][MAX_WEAPON_NAME_LEN];
+                ExplodeString(value, ",", buffers, sizeof(buffers), sizeof(buffers[]));
+                for (i = 0; i <= sizeof(buffers); i++) {
+                    TrimString(buffers[i]);
+                    if (!buffers[i][0]) {
+                        break;
+                    }
+
+                    weaponIndex = UTIL_GetWeaponIndex(buffers[i]);
+                    if (!weaponIndex) {
+                        continue;
+                    } else {
+                        g_Cfg_FastSwitchSkipWeapons[weaponIndex] = true;
+                    }
+                }
+
             } else if(strcmp("FastSwitchOnChangeWeapon", key, false) == 0) {
                 g_Cfg_FastSwitchOnChangeWeapon = StringToInt(value);
             } else if(strcmp("FastSwitchOnLevelUp", key, false) == 0) {

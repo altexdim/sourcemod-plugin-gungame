@@ -750,8 +750,8 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
         FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
     }
 
-    if (!blockSwitch && g_Cfg_FastSwitchOnLevelUp && newWeapon) {
-        UTIL_FastSwitch(client, newWeapon);
+    if (!blockSwitch) {
+        UTIL_FastSwitchWithCheck(client, newWeapon, true, WeapId);
     }
 }
 
@@ -872,13 +872,15 @@ UTIL_ReloadActiveWeapon(client, WeaponId) {
 }
 
 GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
-    if ( blockSwitch ) {
+    g_BlockFastSwitchOnChange[client] = true;
+    if (blockSwitch) {
         g_BlockSwitch[client] = true;
     }
     new ent = GivePlayerItem(client, item);
-    if ( blockSwitch ) {
+    if (blockSwitch) {
         g_BlockSwitch[client] = false;
     }
+    g_BlockFastSwitchOnChange[client] = false;
     return ent;
 }
 
@@ -1113,9 +1115,7 @@ UTIL_GiveExtraNade(client, bool:knifeKill) {
             );
             if (!blockWeapSwitch) {
                 FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
-                if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
-                    UTIL_FastSwitch(client, newWeapon);
-                }
+                UTIL_FastSwitchWithCheck(client, newWeapon, true, g_WeaponIdHegrenade);
             }
         }
     }
@@ -1133,9 +1133,7 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
         );
         if (!blockWeapSwitch) {
             FakeClientCommand(client, "use %s", g_WeaponName[WeaponId]);
-            if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
-                UTIL_FastSwitch(client, newWeapon);
-            }
+            UTIL_FastSwitchWithCheck(client, newWeapon, true, WeaponId);
         }
     }
 }
@@ -1163,9 +1161,7 @@ UTIL_GiveExtraTaser(client) {
     );
     if (!blockWeapSwitch) {
         FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdTaser]);
-        if (g_Cfg_FastSwitchOnLevelUp && newWeapon) {
-            UTIL_FastSwitch(client, newWeapon);
-        }
+        UTIL_FastSwitchWithCheck(client, newWeapon, true, g_WeaponIdTaser);
     }
 }
 
@@ -1583,7 +1579,7 @@ stock bool:UTIL_HasClientMolotov(client) {
 }
 
 
-UTIL_FastSwitch(client, weapon, setActiveWeapon = 1) {
+UTIL_FastSwitch(client, weapon, bool:setActiveWeapon) {
     new Float:GameTime = GetGameTime();
 
     if (setActiveWeapon) {
@@ -1594,4 +1590,10 @@ UTIL_FastSwitch(client, weapon, setActiveWeapon = 1) {
     SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);
     new ViewModel = GetEntPropEnt(client, Prop_Send, "m_hViewModel");
     SetEntProp(ViewModel, Prop_Send, "m_nSequence", 0);
+}
+
+UTIL_FastSwitchWithCheck(client, weapon, bool:setActiveWeapon, weaponId) {
+    if (g_Cfg_FastSwitchOnLevelUp && (!g_Cfg_FastSwitchSkipWeapons[weaponId]) && newWeapon) {
+        UTIL_FastSwitch(client, weapon, setActiveWeapon);
+    }
 }

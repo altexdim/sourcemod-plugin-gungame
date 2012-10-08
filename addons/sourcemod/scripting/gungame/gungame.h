@@ -81,3 +81,4 @@ new g_WeaponAmmoTypeFlashbang       = 0;
 new g_WeaponAmmoTypeSmokegrenade    = 0;
 new g_WeaponAmmoTypeMolotov         = 0;
 new g_WeaponAmmoTypeTaser           = 0;
+new bool:g_BlockFastSwitchOnChange[MAXPLAYERS+1]    = {false, ...};

@@ -10,6 +10,20 @@
         "Enabled" "1"
 
         /**
+         * Do not fast switch on level up for this weapons.
+         *
+         * Comma-separated list 
+         * of weapon names from gungame.equip.txt.
+         *
+         * Options:
+         *      "hegrenade"                             - Enabled for hegrenade
+         *      "hegrenade,taser"                       - Enabled for hegrenade and taser
+         *      "taser,hegrenade,molotov,incgrenade"    - Default value
+         *      ""                                      - Disabled
+         */
+        "FastSwitchSkipWeapons" "taser,hegrenade,molotov,incgrenade"
+        
+        /**
          * Switch weapon without delays after level up.
          *
          * Options:
