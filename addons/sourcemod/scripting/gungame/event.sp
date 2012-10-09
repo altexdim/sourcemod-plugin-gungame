@@ -799,7 +799,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
             new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchOnNade;
             new newWeapon = GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade], blockSwitch);
             if (!blockSwitch) {
-                FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
+                UTIL_UseWeapon(client, g_WeaponIdHegrenade);
                 UTIL_FastSwitchWithCheck(client, newWeapon, true, g_WeaponIdHegrenade);
             }
         }
@@ -831,7 +831,7 @@ public Action:Timer_FastSwitch(Handle:timer, any:data) {
     new weapon = ReadPackCell(data);
     CloseHandle(data);
 
-    if (client && IsClientInGame(client) && IsPlayerAlive(client) && weapon) {
+    if (client && IsClientInGame(client) && IsPlayerAlive(client) && weapon && IsValidEdict(weapon)) {
         UTIL_FastSwitch(client, weapon, false);
     }
 }

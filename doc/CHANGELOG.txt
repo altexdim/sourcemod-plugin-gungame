@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.11.0:
+        * Added config variable "FastSwitchSkipWeapons". Use if to skip fast switch on level up for the defined list of weapons.
+
     1.2.10.0:
         * Improved glow for winner if "WinnerEffect" is enabled.
         * Added config variable "WinnerFreezePlayers".

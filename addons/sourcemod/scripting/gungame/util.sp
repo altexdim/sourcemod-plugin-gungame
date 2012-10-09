@@ -747,10 +747,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     if (blockSwitch) {
         g_BlockSwitch[client] = false;
     } else {
-        FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
-    }
-
-    if (!blockSwitch) {
+        UTIL_UseWeapon(client, WeapId);
         UTIL_FastSwitchWithCheck(client, newWeapon, true, WeapId);
     }
 }
@@ -1114,7 +1111,7 @@ UTIL_GiveExtraNade(client, bool:knifeKill) {
                 blockWeapSwitch
             );
             if (!blockWeapSwitch) {
-                FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdHegrenade]);
+                UTIL_UseWeapon(client, g_WeaponIdHegrenade);
                 UTIL_FastSwitchWithCheck(client, newWeapon, true, g_WeaponIdHegrenade);
             }
         }
@@ -1132,7 +1129,7 @@ UTIL_GiveExtraMolotov(client, WeaponId) {
             blockWeapSwitch
         );
         if (!blockWeapSwitch) {
-            FakeClientCommand(client, "use %s", g_WeaponName[WeaponId]);
+            UTIL_UseWeapon(client, WeaponId);
             UTIL_FastSwitchWithCheck(client, newWeapon, true, WeaponId);
         }
     }
@@ -1160,7 +1157,7 @@ UTIL_GiveExtraTaser(client) {
         blockWeapSwitch
     );
     if (!blockWeapSwitch) {
-        FakeClientCommand(client, "use %s", g_WeaponName[g_WeaponIdTaser]);
+        UTIL_UseWeapon(client, g_WeaponIdTaser);
         UTIL_FastSwitchWithCheck(client, newWeapon, true, g_WeaponIdTaser);
     }
 }
@@ -1593,7 +1590,13 @@ UTIL_FastSwitch(client, weapon, bool:setActiveWeapon) {
 }
 
 UTIL_FastSwitchWithCheck(client, weapon, bool:setActiveWeapon, weaponId) {
-    if (g_Cfg_FastSwitchOnLevelUp && (!g_Cfg_FastSwitchSkipWeapons[weaponId]) && newWeapon) {
+    if (g_Cfg_FastSwitchOnLevelUp && (!g_Cfg_FastSwitchSkipWeapons[weaponId]) && weapon) {
         UTIL_FastSwitch(client, weapon, setActiveWeapon);
     }
+}
+
+UTIL_UseWeapon(client, WeapId) {
+    g_BlockFastSwitchOnChange[client] = true;
+    FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
+    g_BlockFastSwitchOnChange[client] = false;
 }
