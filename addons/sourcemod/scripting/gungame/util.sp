@@ -1600,3 +1600,13 @@ UTIL_UseWeapon(client, WeapId) {
     FakeClientCommand(client, "use %s", g_WeaponName[WeapId]);
     g_BlockFastSwitchOnChange[client] = false;
 }
+
+UTIL_RemoveEntityByClassName(const String:entityName[]) {
+    new ent = -1;
+    new prev = 0;
+    while ((ent = FindEntityByClassname(ent, entityName)) != -1) {
+        UTIL_Remove(prev);
+        prev = ent;
+    }
+    UTIL_Remove(prev);
+}

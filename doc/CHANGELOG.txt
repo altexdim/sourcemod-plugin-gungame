@@ -1,5 +1,8 @@
 Changelog
 ---------
+        * Improved removing of default map weapons that is been gived on player spawn. 
+            Now "game_player_equip" entity is been removed every round start.
+
     1.2.11.0:
         * Added config variable "FastSwitchSkipWeapons". Use it to skip fast switch on level up for the defined list of weapons.
 

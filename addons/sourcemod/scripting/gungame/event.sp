@@ -171,6 +171,8 @@ public _RoundState(Handle:event, const String:name[], bool:dontBroadcast)
             WarmupEnabled = false;
             DisableWarmupOnRoundEnd = false;
         }
+
+        UTIL_RemoveEntityByClassName("game_player_equip");
     } else {
         /* Round has ended. */
         RoundStarted = false;
