@@ -3,9 +3,8 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Add option FastSwitchSkipWeapons "taser,hegrenade,molotov,incgrenade".
-        Add array blockFastSwitch[client] and set it to 1 before give command, and set 0 after give command to skip FastSwitchOnChange for all newly gived weapons.
-
+    * SetEntProp(client, Prop_Send, "m_iAssists", 0)
+    
     * add option - random multiple triplelevel sounds
         if enabled - plays random sound every time player triggers triplelevel
         if disabled - plays same sound every time player triggers triplelevel, but choose random sound every map start
