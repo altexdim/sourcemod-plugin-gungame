@@ -32,6 +32,11 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * @Altex, any thought on adding unlimitedMolotovs "" to the gungame.equip.smx/.cfg? 
+        similar to the hegrenade level? It's very hard to get a kill with a molotov and 
+        with using pistol/knife kill for extra molotov it gives other players too much 
+        time to catch up to the molotov level.
+
     * Hi is it possible to add options: (game mode TP)
         The whole team gets the level of the target maps
         
