@@ -3,7 +3,25 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * SetEntProp(client, Prop_Send, "m_iAssists", 0)
+    * SetEntProp(client, Prop_Send, "m_iAssists", 0) does not work
+        mukunda (https://forums.alliedmods.net/showpost.php?p=1823872&postcount=9)
+
+        #define ASSISTS_OFFSET_FROM_FRAGS 4
+        #define SCORE_OFFSET_FROM_CONTROLLINGBOT -132
+        #define CASHSPENT_OFFSET_FROM_SCORE 20
+
+        Scores_SetPlayer( client, kills, assists, deaths, cashspent, score ) {
+            if( !IsClientConnected(client) ) return;
+            
+            new assists_offset = FindDataMapOffs( client, "m_iFrags" ) + ASSISTS_OFFSET_FROM_FRAGS;
+            
+            SetEntProp( client, Prop_Data, "m_iFrags", kills );
+            SetEntData( client, assists_offset, assists );
+            SetEntProp( client, Prop_Data, "m_iDeaths", deaths );
+            new score_offset = FindSendPropInfo( "CCSPlayer", "m_bIsControllingBot" ) + SCORE_OFFSET_FROM_CONTROLLINGBOT;
+            SetEntData( client, score_offset, score );
+            SetEntData( client, score_offset + CASHSPENT_OFFSET_FROM_SCORE, cashspent );
+        }
     
     * add option - random multiple triplelevel sounds
         if enabled - plays random sound every time player triggers triplelevel
