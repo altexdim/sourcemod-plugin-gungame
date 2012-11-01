@@ -2,6 +2,15 @@ TODO
 ==============================================================================
 
     ----====----==== High priority list ----====----====
+    
+    * error in logs
+        L 10/31/2012 - 13:48:28: [SM] Native "GetEntProp" reported: Property "m_iPrimaryAmmoType" not found (entity 138/cs_ragdoll)
+        L 10/31/2012 - 13:48:28: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 10/31/2012 - 13:48:28: [SM]   [0]  Line 436, gungame/util.sp::UTIL_IsWeaponTaser()
+        L 10/31/2012 - 13:48:28: [SM]   [1]  Line 428, gungame/util.sp::UTIL_FindTaser()
+        L 10/31/2012 - 13:48:28: [SM]   [2]  Line 454, gungame/util.sp::UTIL_ForceDropAllWeapon()
+        L 10/31/2012 - 13:48:28: [SM]   [3]  Line 654, gungame/util.sp::UTIL_GiveNextWeaponReal()
+        L 10/31/2012 - 13:48:28: [SM]   [4]  Line 636, gungame/util.sp::UTIL_Timer_GiveNextWeapon()
 
     * SetEntProp(client, Prop_Send, "m_iAssists", 0) does not work
         mukunda (https://forums.alliedmods.net/showpost.php?p=1823872&postcount=9)
