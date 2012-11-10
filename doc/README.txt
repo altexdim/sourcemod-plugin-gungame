@@ -307,7 +307,8 @@ No issues.
 [*]!give [URL]https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701[/URL]
 [*]!buylevel [URL]http://forums.alliedmods.net/showthread.php?t=134264[/URL]
 [*]!buylevel [URL]https://forums.alliedmods.net/showpost.php?p=1387759&postcount=2366[/URL]
-[*]MVP as level [URL]https://forums.alliedmods.net/showpost.php?p=1627823&postcount=3105[/URL]
+[*]MVP as level (Peacemaker) [URL]https://forums.alliedmods.net/showpost.php?p=1627823&postcount=3105[/URL]
+[*]MVP as level (Sheepdude) [URL]https://forums.alliedmods.net/showpost.php?p=1834974&postcount=3790[/URL]
 [/LIST]
 
 [anchor]maps[/anchor][B]My gungame maps[/B]
