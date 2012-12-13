@@ -3,6 +3,9 @@ TODO
 
     ----====----==== High priority list ----====----====
     
+    * Bug Report: If you triple level after you die (for instance, you get two kills, throw a grenade, and die, 
+        but your grenade kills the third enemy after you've died), the triple kill music and effect will still occur.
+
     * error in logs
         L 10/31/2012 - 13:48:28: [SM] Native "GetEntProp" reported: Property "m_iPrimaryAmmoType" not found (entity 138/cs_ragdoll)
         L 10/31/2012 - 13:48:28: [SM] Displaying call stack trace for plugin "gungame.smx":
