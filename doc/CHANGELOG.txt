@@ -1,5 +1,7 @@
 Changelog
 ---------
+    1.2.11.1:
+        * Fixed after new games update. Updated colors.inc.
         * Improved removing of default map weapons that is been gived on player spawn. 
             Now "game_player_equip" entity is been removed every round start.
 
