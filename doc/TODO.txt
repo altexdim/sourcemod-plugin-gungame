@@ -3,6 +3,8 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Replace old colors.inc with new colors.inc library - http://forums.alliedmods.net/showpost.php?p=1879039&postcount=142
+
     * Отличная идея    
         Сейчас человек, который играет несколько месяцев имеет много сотен побед. 
         Новому игроку так же придется играть несколько месяцев, чтобы хотя бы приблизиться к ТОПу. 
