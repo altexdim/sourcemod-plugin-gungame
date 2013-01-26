@@ -39,6 +39,7 @@ new bool:CSkipList[MAXPLAYERS+1] = {false,...};
 new bool:CProfile_Colors[] = {true, true, false, false, false, false};
 new CProfile_TeamIndex[] = {NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX, NO_INDEX};
 new bool:CProfile_SayText2 = false;
+new bool:IsGameCsgo = false;
 
 /**
  * Prints a message to a specific client in the chat area.
@@ -52,7 +53,6 @@ new bool:CProfile_SayText2 = false;
  */
 stock CPrintToChat(client, const String:szMessage[], any:...)
 {
-
     if (client <= 0 || client > MaxClients)
         ThrowError("Invalid client index %d", client);
     
@@ -61,14 +61,13 @@ stock CPrintToChat(client, const String:szMessage[], any:...)
     
     decl String:szBuffer[MAX_MESSAGE_LENGTH];
     decl String:szCMessage[MAX_MESSAGE_LENGTH];
-    decl String:szGameName[30];
-    
-    GetGameFolderName(szGameName, sizeof(szGameName));
     SetGlobalTransTarget(client);
-    Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
+    if (IsGameCsgo) {
+        Format(szBuffer, sizeof(szBuffer), "\x01\x0B%s", szMessage);
+    } else {
+        Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
+    }
     VFormat(szCMessage, sizeof(szCMessage), szBuffer, 3);
-    
-    if (StrEqual(szGameName, "csgo", false)) Format(szCMessage, sizeof(szCMessage), "\x01\x0B\x01%s", szCMessage);
     
     new index = CFormat(szCMessage, sizeof(szCMessage));
     if (index == NO_INDEX)
@@ -130,14 +129,13 @@ stock CPrintToChatEx(client, author, const String:szMessage[], any:...)
     
     decl String:szBuffer[MAX_MESSAGE_LENGTH];
     decl String:szCMessage[MAX_MESSAGE_LENGTH];
-    decl String:szGameName[30];
-    
-    GetGameFolderName(szGameName, sizeof(szGameName));
     SetGlobalTransTarget(client);
-    Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
+    if (IsGameCsgo) {
+        Format(szBuffer, sizeof(szBuffer), "\x01\x0B%s", szMessage);
+    } else {
+        Format(szBuffer, sizeof(szBuffer), "\x01%s", szMessage);
+    }
     VFormat(szCMessage, sizeof(szCMessage), szBuffer, 4);
-    
-    if (StrEqual(szGameName, "csgo", false)) Format(szCMessage, sizeof(szCMessage), "\x01\x0B\x01%s", szCMessage);
     
     new index = CFormat(szCMessage, sizeof(szCMessage), author);
     if (index == NO_INDEX)
@@ -388,6 +386,7 @@ stock CSetupProfile()
     
     if (StrEqual(szGameName, "cstrike", false) || StrEqual(szGameName, "csgo", false))
     {
+        IsGameCsgo = StrEqual(szGameName, "csgo", false);
         CProfile_Colors[Color_Lightgreen] = true;
         CProfile_Colors[Color_Red] = true;
         CProfile_Colors[Color_Blue] = true;
