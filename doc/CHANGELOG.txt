@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.11.2:
+        * Added check if protobuf is supported by sourcemod. It's needed by old sourcemod versions.
+
     1.2.11.1:
         * Fixed after new games update. Updated colors.inc.
         * Improved removing of default map weapons that is been gived on player spawn. 
