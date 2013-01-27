@@ -3,16 +3,15 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Replace old colors.inc with new colors.inc library - http://forums.alliedmods.net/showpost.php?p=1879039&postcount=142
-
-    * Отличная идея    
-        Сейчас человек, который играет несколько месяцев имеет много сотен побед. 
-        Новому игроку так же придется играть несколько месяцев, чтобы хотя бы приблизиться к ТОПу. 
-        Могли бы вы когда-то дописать статистику побед? 
-        Идея такова, что место в рейтинге рассчитывалось бы исходя из процента побед:
-        Количество выигранных игр деленное на Количество сыгранных игр умноженное на 100.
-        Сыгранной бы считалась игра, если игрок зашел на карту и поднялся хотя бы на 5-10 уровней 
-        (такой подход сильно увеличит объем базы? я в этом не силен).
+    * Нужно переделать систему звуковых оповещений
+        - добавить опцию в конфиг, чтобы можно было выбирать, как играть звуки
+            - EmitSound
+                - прекрасно работает в css
+                - для csgo обязательно нужно размещать файлы в папке music и выставлять music_volume > 0
+            - play command
+                - прекрасно работает в css и csgo
+                - не позволяет позиционировать звуки на карте, например TripleLevelSound будет играть
+                    не где находится игрок, а на всей карте одинаково
 
     * Bug Report: If you triple level after you die (for instance, you get two kills, throw a grenade, and die, 
         but your grenade kills the third enemy after you've died), the triple kill music and effect will still occur.
@@ -46,10 +45,6 @@ TODO
             SetEntData( client, score_offset + CASHSPENT_OFFSET_FROM_SCORE, cashspent );
         }
     
-    * add option - random multiple triplelevel sounds
-        if enabled - plays random sound every time player triggers triplelevel
-        if disabled - plays same sound every time player triggers triplelevel, but choose random sound every map start
-
     * [csgo] fix error
         ----
         L 08/21/2012 - 22:08:00: [SM] Native "GetEntProp" reported: Entity 151 (151) is invalid
@@ -67,11 +62,24 @@ TODO
         А может попробовать сразу у оружия обнулять патроны?
         ----
 
+    ----====----==== Normal priority list ----====----====
+
     * add ExtraTaser, BonusWeaponTaser, BlockWeaponSwitchOnExtraTaser
         I think he means, he wishes for there to be an additional pistol (like is available for hegrenade level), and when you get a pistol kill on taser level, you receive an additional taser. Similarly for molotov level.
         I think the taser level works best as it is right now, but I can see why people would want additional features to make it more consistent with the hegrenade level.
 
-    ----====----==== Normal priority list ----====----====
+    * add option - random multiple triplelevel sounds
+        if enabled - plays random sound every time player triggers triplelevel
+        if disabled - plays same sound every time player triggers triplelevel, but choose random sound every map start
+
+    * Отличная идея    
+        Сейчас человек, который играет несколько месяцев имеет много сотен побед. 
+        Новому игроку так же придется играть несколько месяцев, чтобы хотя бы приблизиться к ТОПу. 
+        Могли бы вы когда-то дописать статистику побед? 
+        Идея такова, что место в рейтинге рассчитывалось бы исходя из процента побед:
+        Количество выигранных игр деленное на Количество сыгранных игр умноженное на 100.
+        Сыгранной бы считалась игра, если игрок зашел на карту и поднялся хотя бы на 5-10 уровней 
+        (такой подход сильно увеличит объем базы? я в этом не силен).
 
     * @Altex, any thought on adding unlimitedMolotovs "" to the gungame.equip.smx/.cfg? 
         similar to the hegrenade level? It's very hard to get a kill with a molotov and 
@@ -201,10 +209,6 @@ TODO
     + Feature: create some options for gungame_stats like display rank to 
         all or to player only, show winner in chat etc.
         Pending because of i do not know what exactly features is needed.
-    * Waiting for ability to check sourcemod version in runtime and use function that
-        is not present in the previous versions. For example GetURandomInt was added
-        in sm 1.3.0. So it is needed to recompile this plugin for versions less then 1.3.0
-        without this function.
     
     ----====----==== Low priority list ----====----====
     
