@@ -1586,7 +1586,9 @@ UTIL_FastSwitch(client, weapon, bool:setActiveWeapon) {
 
     SetEntPropFloat(client, Prop_Send, "m_flNextAttack", GameTime);
     new ViewModel = GetEntPropEnt(client, Prop_Send, "m_hViewModel");
-    SetEntProp(ViewModel, Prop_Send, "m_nSequence", 0);
+    if (ViewModel != -1) {
+        SetEntProp(ViewModel, Prop_Send, "m_nSequence", 0);
+    }
 }
 
 UTIL_FastSwitchWithCheck(client, weapon, bool:setActiveWeapon, weaponId) {
