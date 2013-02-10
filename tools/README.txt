@@ -11,3 +11,5 @@ Files:
     This tile you are reading.
 - config_diff.php
     Show diff between two KeyValue configs. For example between default gungame.config.txt and that one on your server to see what keys was added.
+- convert_winners_esgg51_to_ggsm.php
+    Converts ES GG 5.1 winners sqlite database into SM GG winners sqlite database format.
