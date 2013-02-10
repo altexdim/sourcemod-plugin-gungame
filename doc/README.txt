@@ -293,6 +293,20 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*][COLOR=#009900][B]Q.[/B] Where the stats database is located?[/color]
         [COLOR=#FF0000][B]A.[/B][/color] If you did not configure any custom databases, you gungame stats is located in 
         [B]addons\sourcemod\data\sqlite\sourcemod-local.sq3[/B].
+
+[*][COLOR=#009900][B]Q.[/B] How to convert my ES GG 5.1 winners database file into SM GG database?[/color]
+        [COLOR=#FF0000][B]A.[/B][/color] 
+            1) Install php (from http://php.net) into [b]C:\programs\php[/b] folder.
+            2) Copy [b]C:\programs\php\php.ini-development[/b] into [b]C:\programs\php\php.ini[/b] file.
+            3) Uncomment 2 lines in [b]C:\programs\php\php.ini[/b]:
+            3.1) [b]extension_dir = "ext"[/b]
+            3.2) [b]extension=php_sqlite3.dll[/b]
+            4) Run [b]C:\programs\php\php.exe tools\convert_winners_esgg51_to_ggsm.php <input.db> <output.db>[/b]
+            where [b]input.db[/b] is your ES GG 5.1 sqlite winners database file, 
+            and [b]output.db[/b] is you SM GG  sqlite winners database file, that is usualy located in
+            [b]addons\sourcemod\data\sqlite\sourcemod-local.sq3[/b].
+
+
 [/LIST]
         
 [anchor]Known Issues[/anchor][B]Issues[/B]
