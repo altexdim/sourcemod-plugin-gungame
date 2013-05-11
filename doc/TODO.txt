@@ -3,6 +3,11 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * щас чето не работает режим мультбога, multilevelgodmode "1", т.е. бессмертие не работает. можешь 
+        плз починить. жалко что конфиг свой сюда вставить не могу. не вмещается в сообщение. на форуме 
+        в теме я писал что последняя версия соурсмода, метамода, гангейма и что используется данный 
+        адон в ксс'е
+
     * Fix bug
         Alright. So, we wanted gungame to be loaded on specific maps of the gungame-y kinda variety. 
         When playing gungame maps there is a setting in GG that the weapons are stripped from the 
