@@ -817,6 +817,9 @@ stock EmitSoundToAll(const String:sample[],
  * @return void
  */
 UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = false) {
+    if (g_SimpleSounds && stop) {
+        return;
+    }
     if (!EventSounds[type][0]) {
         return;
     }
@@ -824,18 +827,34 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
         return;
     }
 
-    if (g_Cfg_MultiplySoundVolume <= 1 || g_Cfg_MultiplySoundVolume > 5) {
+    new flags = SND_NOFLAGS;
+    if (stop) {
+        flags |= SND_STOPLOOPING;
+    }
+
+    if (g_Cfg_MultiplySoundVolume < 1) {
+        g_Cfg_MultiplySoundVolume = 1;
+    }
+    if (g_Cfg_MultiplySoundVolume > 5) {
+        g_Cfg_MultiplySoundVolume = 5;
+    }
+
+    for (new i=0; i<g_Cfg_MultiplySoundVolume; i++) {
         if (!client) {
-            EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
-        } else {
-            EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
-        }
-    } else {
-        for (new i=0; i<g_Cfg_MultiplySoundVolume; i++) {
-            if (!client) {
-                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
+            if (g_SimpleSounds) {
+                for (new j=1; j<=MaxClients; j++) {
+                    if (IsClientInGame(j) && !IsFakeClient(j)) {
+                        ClientCommand(j, "playgamesound *%s", EventSounds[type]);
+                    }
+                }
             } else {
-                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, stop?SND_STOPLOOPING:SND_NOFLAGS);
+                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
+            }
+        } else {
+            if (g_SimpleSounds) {
+                ClientCommand(client, "playgamesound *%s", EventSounds[type]);
+            } else {
+                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
             }
         }
     }

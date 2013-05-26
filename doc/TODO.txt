@@ -3,16 +3,6 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Нужно переделать систему звуковых оповещений
-        - добавить опцию в конфиг, чтобы можно было выбирать, как играть звуки
-            - EmitSound
-                - прекрасно работает в css
-                - для csgo обязательно нужно размещать файлы в папке music и выставлять music_volume > 0
-            - play command
-                - прекрасно работает в css и csgo
-                - не позволяет позиционировать звуки на карте, например TripleLevelSound будет играть
-                    не где находится игрок, а на всей карте одинаково
-
     * Bug Report: If you triple level after you die (for instance, you get two kills, throw a grenade, and die, 
         but your grenade kills the third enemy after you've died), the triple kill music and effect will still occur.
 

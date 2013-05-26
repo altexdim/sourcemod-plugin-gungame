@@ -114,3 +114,6 @@ new g_Cfg_WinnerFreezePlayers       = 0;
 new g_Cfg_FastSwitchOnChangeWeapon  = 0;
 new g_Cfg_FastSwitchOnLevelUp       = 0;
 new g_Cfg_FastSwitchSkipWeapons[MAX_WEAPONS_COUNT];
+
+// Replace all EmitSound with playgamesound
+new bool:g_SimpleSounds = false;
