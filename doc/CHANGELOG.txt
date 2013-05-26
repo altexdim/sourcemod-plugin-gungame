@@ -10,7 +10,7 @@ Changelog
         * Added another workaround to CSGO sound system. Now it's possible to play sounds not only 
             in sound/music folder, so snd_musicvolume does not affect it.
             But still there are some disadvantages, for example it's not possible to play more than one sound 
-            at once. So "TripleLevelBonus" music will be stoped after any other sond like "levelup".
+            at once. So "TripleLevelBonus" music will be stoped after any other sound like "levelup".
         * Sounds have been relocated. "sound/music/gungame" folder have been renamed to "sound/gungame".
     
     1.2.11.2:
