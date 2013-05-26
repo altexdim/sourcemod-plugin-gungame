@@ -817,9 +817,6 @@ stock EmitSoundToAll(const String:sample[],
  * @return void
  */
 UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = false) {
-    if (g_SimpleSounds && stop) {
-        return;
-    }
     if (!EventSounds[type][0]) {
         return;
     }
@@ -841,21 +838,9 @@ UTIL_PlaySound(client, Sounds:type, entity = SOUND_FROM_PLAYER, bool:stop = fals
 
     for (new i=0; i<g_Cfg_MultiplySoundVolume; i++) {
         if (!client) {
-            if (g_SimpleSounds) {
-                for (new j=1; j<=MaxClients; j++) {
-                    if (IsClientInGame(j) && !IsFakeClient(j)) {
-                        ClientCommand(j, "playgamesound *%s", EventSounds[type]);
-                    }
-                }
-            } else {
-                EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
-            }
+            EmitSoundToAll(EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
         } else {
-            if (g_SimpleSounds) {
-                ClientCommand(client, "playgamesound *%s", EventSounds[type]);
-            } else {
-                EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
-            }
+            EmitSoundToClient(client, EventSounds[type], entity, _, SNDLEVEL_RAIDSIREN, flags);
         }
     }
 }
@@ -1630,4 +1615,22 @@ UTIL_RemoveEntityByClassName(const String:entityName[]) {
         prev = ent;
     }
     UTIL_Remove(prev);
+}
+
+PrecacheSoundFixed(Sounds:soundType) {
+    new bool:useDiskStream = false;
+    if (g_GameName == GameName:Csgo) {
+        new const String:musicFolder[] = "music/";
+        decl String:tmpString[sizeof(musicFolder)];
+        strcopy(tmpString, sizeof(tmpString), EventSounds[soundType]);
+        useDiskStream = !StrEqual(musicFolder, tmpString, false);
+    }
+
+    if (useDiskStream) {
+        Format(EventSounds[soundType], sizeof(EventSounds[]), "*%s", EventSounds[soundType]);
+        // Fake precache
+        AddToStringTable(FindStringTable("soundprecache"), EventSounds[soundType]);
+    } else {
+        PrecacheSound(EventSounds[soundType]);
+    }
 }

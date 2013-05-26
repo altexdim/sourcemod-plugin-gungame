@@ -33,9 +33,6 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
             if ( strcmp("Enabled", key, false) == 0 ) {
                 InternalIsActive = bool:StringToInt(value);
 
-            } else if(strcmp("SimpleSounds", key, false) == 0) {
-                g_SimpleSounds = bool:StringToInt(value);
-
             } else if(strcmp("FastSwitchSkipWeapons", key, false) == 0) {
                 for (new i = 0; i < sizeof (g_Cfg_FastSwitchSkipWeapons); i++) {
                     g_Cfg_FastSwitchSkipWeapons[i] = false;

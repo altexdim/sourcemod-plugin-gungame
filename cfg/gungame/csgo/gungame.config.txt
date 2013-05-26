@@ -73,7 +73,7 @@
         /**
          * Multiply sound effects volume.
          *
-         * In CS:GO the volume is too low.
+         * In CS:GO the volume is too low if you use "sound/music" folder.
          * You can up the volume with this multiplier.
          *
          * Options:
@@ -81,24 +81,6 @@
          *     2-5 - Multiply by defined number of times
          */
         "MultiplySoundVolume" "0"
-
-        /**
-         * Use simple sounds.
-         *
-         * That does it mean exactly:
-         *     1) Use playgamesound client command instead of EmitSound server command.
-         *     2) It does not support stop function, so it will play until the sound file is finished.
-         *     3) It does not support overlaps, so only one sound can be played at one time.
-         *     4) It does not support positioning, so triplelevel sound plays everyware,
-         *        not only near the player that triggered bonus.
-         *     5) But it can play sounds in every sound folder, not only in sound/music folder.
-         *     6) And snd_musicvolume does not affect it.
-         *
-         * Options:
-         *     0 - Disabled
-         *     1 - Enabled
-         */
-        "SimpleSounds" "1"
 
         /**
          * Block weapon switch if killer leveled up with knife

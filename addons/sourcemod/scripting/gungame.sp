@@ -353,13 +353,11 @@ public GG_OnStartup(bool:Command)
     }
 
     decl String:Hi[PLATFORM_MAX_PATH];
-    for ( new Sounds:i = Welcome; i < MaxSounds; i++ )
-    {
-        if ( EventSounds[i][0] )
-        {
-            PrecacheSound(EventSounds[i]);
+    for (new Sounds:i = Welcome; i < MaxSounds; i++) {
+        if (EventSounds[i][0]) {
             Format(Hi, sizeof(Hi), "sound/%s", EventSounds[i]);
             AddFileToDownloadsTable(Hi);
+            PrecacheSoundFixed(i);
         }
     }
     

@@ -4,11 +4,13 @@ Changelog
         * Fixed bug. If gungame is disabled then players can drop weapons if StripDeadPlayersWeapon is enabled. 
             Before fix it was not possible to drop the gun even if gungame is disabled.
             But dont forget to set mp_death_drop_gun and mp_death_drop_grenade if you use CSGO.
+            So now you can use gg_enable/gg_disable to switch between gungame and normal game.
         * Fixed bug. If Prune = 0 in config then prune is disabled. 
             Before fix prune=0 was deleting all the players info.
-        * Added another workaround to CSGO sound system. Added config variable "SimpleSounds". If it's set to 1,
-            then it's possible to play sounds not only in sound/music folder, so snd_musicvolume does not affect it.
-            But still there are some disadvantages, you can read about it in the comments in config file.
+        * Added another workaround to CSGO sound system. Now it's possible to play sounds not only 
+            in sound/music folder, so snd_musicvolume does not affect it.
+            But still there are some disadvantages, for example it's not possible to play more than one sound 
+            at once. So "TripleLevelBonus" music will be stoped after any other sond like "levelup".
     
     1.2.11.2:
         * Added check if protobuf is supported by sourcemod. It's needed by old sourcemod versions.

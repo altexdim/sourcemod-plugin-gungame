@@ -29,7 +29,7 @@ new bool:g_WeaponDropKnife[MAX_WEAPONS_COUNT];
 new bool:g_WeaponIsKnifeType[MAX_WEAPONS_COUNT];
 new bool:g_WeaponIsMolotovType[MAX_WEAPONS_COUNT];
 
-new String:EventSounds[Sounds:MaxSounds][64];
+new String:EventSounds[Sounds:MaxSounds][PLATFORM_MAX_PATH];
 
 /* Default values for weapon order.*/
 new WeaponOrderId[GUNGAME_MAX_LEVEL];
