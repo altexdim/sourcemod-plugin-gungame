@@ -1,7 +1,10 @@
 Changelog
 ---------
     new version:
-        * Fixed bug. If gungame is disabled, then players can drop weapons if StripDeadPlayersWeapon is enabled.
+        * Fixed bug. If gungame is disabled then players can drop weapons if StripDeadPlayersWeapon is enabled. 
+            Before fix it was not possible to drop the gun even if gungame is disabled.
+        * Fixed bug. If Prune = 0 in config then prune is disabled. 
+            Before fix prune=0 was deleting all the players info.
     
     1.2.11.2:
         * Added check if protobuf is supported by sourcemod. It's needed by old sourcemod versions.

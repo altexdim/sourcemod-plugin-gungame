@@ -1,38 +1,6 @@
 /**
- * Ranking and Player Data.
+ * Reads gunagme system config file.
  */
-
-/**
- * How to store other player data rank/wins like this. How to do this so it fast?
- * Lookup fast so we can change the keyvalue wins. Have to search for any matching steamid.
- * If not then create a new entry.
- *
- * Pruning old data out? Config file with option NumberOfDays to prune or something like that.
- * By default 30 days since the player has enter the server. 60 * 60 * 24 * 30 = 2592000
- * new TimeStamp[2] GetTime(TimeStamp); I believe [0] is the 32 bit timestamp. (Need to check)
- *
- * new NumberOfDaysInSeconds = 86400 * DaysVariableFromConfig;
- * if(Player_TimeStamp <= (TimeStamp[0] - NumberOfDaysInSeconds)) { // Delete player from player data ranking }
- * They been away from the server for 30 days already. Clear out old information.
- *
- * To update the player TimeStamp? on PutInServer or join of team/class? Probably best on join after class.
- * Will this have alot of impact on the server? ie long list? will it cause lag?
- *
- * Player has to have aleast one win to be in the list.
- */
-
- /* keyvalues?. It would be faster if the news header was the rank so faster replace
- * or news header would be Authid for faster lookup instead of going rank->Authid? Which one would be better?
- *
- * We always read top10 into memory and read in OnPluginStart. No need to reload it every single map unless it changed.
- * Add a command in the top10/rank plugin to allow reloading of the top10 (ie admin need editing the top10 list).
- *
- * When a change has occur have a bool:var change to true. When OnMapEnd() is call write clear and write out the new top10
- * list otherwise don't do anything. I believe this is the best way so it doesn't have to reload every map change.
- */
-
-/* Have an option cvar to save on change if changed */
-
 OnKeyValueStart()
 {
     /* Make sure to use unique section name just incase someone else uses it */

@@ -3,9 +3,6 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * Fix prune
-        But you maybe should change information in cfg file because you have there, that 0 = never clean up stats.
-
     * Нужно переделать систему звуковых оповещений
         - добавить опцию в конфиг, чтобы можно было выбирать, как играть звуки
             - EmitSound

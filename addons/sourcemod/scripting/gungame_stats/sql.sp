@@ -255,6 +255,10 @@ public T_FastQueryResult(Handle:owner, Handle:result, const String:error[], any:
 // threaded
 SavePlayerDataInfo()
 {
+    if (!Prune) {
+        return;
+    }
+
     decl String:query[1024];
     if ( g_DbType == DbTypeSqlite ) {
         Format(query, sizeof(query), g_sql_prunePlayers[g_DbType], GetTime() - Prune*86400);
