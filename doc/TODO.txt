@@ -3,21 +3,6 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-    * щас чето не работает режим мультбога, multilevelgodmode "1", т.е. бессмертие не работает. можешь 
-        плз починить. жалко что конфиг свой сюда вставить не могу. не вмещается в сообщение. на форуме 
-        в теме я писал что последняя версия соурсмода, метамода, гангейма и что используется данный 
-        адон в ксс'е
-
-    * Fix bug
-        Alright. So, we wanted gungame to be loaded on specific maps of the gungame-y kinda variety. 
-        When playing gungame maps there is a setting in GG that the weapons are stripped from the 
-        dead players so that rest of the team doesn't pick them up (nothing is worse than picking 
-        up a dropped rifle while in a pistol fight). But when playing regular maps, despite the 
-        gungame.config disabling gungame, we were still losing the guns because the gungame plugin 
-        was still loaded and for whatever reason the weapon stripper was still active (it turns out 
-        that the gungame.enable variable doesn't truly over ride all of the mod settings like I had 
-        thought 0.o).
-
     * Fix prune
         But you maybe should change information in cfg file because you have there, that 0 = never clean up stats.
 

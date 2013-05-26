@@ -865,6 +865,9 @@ public Event_CvarChanged(Handle:cvar, const String:oldValue[], const String:newV
 }
 
 public Action:CS_OnCSWeaponDrop(client, weapon) {
+    if (!IsActive) {
+        return Plugin_Continue;
+    }
     if (StripDeadPlayersWeapon == 1) {
         // do not allow drop weapon
         return Plugin_Stop;
