@@ -336,4 +336,6 @@ No issues.
 ----------------------------------------------------
 Links below
 
+And alse i've got a github repo here: [url]https://github.com/altexdim/sourcemod-plugin-gungame[/url]
+
 [URL="http://otstrel.ru/forum/css/obmen_opytom/45996-last_updated_sourcemod_plugins.html#post853421"][color=#ff6600][u]My plugins[/u][/color][/URL] | [URL="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=TD6GHUK986RY2&lc=RU&item_name=Altex%2c%20thank%20you%20for%20your%20sourcemod%20plugins&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted"][color=#009900][u]Donations via PayPal[/u][/color][/URL]
