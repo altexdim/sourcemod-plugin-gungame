@@ -1,3 +1,22 @@
+[b]First one solution:[/b]
+(Example for csgo, but all the same is for css)
+
+[LIST=1]
+[*] Edit your cfg\gungame\csgo\gungame.config.txt, set "Enabled" "0"
+[*] Copy your cfg\gungame folder into cfg\gungame-disabled
+[*] Copy your cfg\gungame folder into cfg\gungame-enabled
+[*] Edit your cfg\gungame-enabled\csgo\gungame.config.txt, set "Enabled" "1"
+[*] Dont use map/prefix specific configs from cfg/gungame/csgo/maps for enabling gungame
+[*] Dont use map/prefix specific configs from maps/cfg for enabling gungame
+[*] Download and install MapConfigs plugin from [url=http://forums.alliedmods.net/showpost.php?p=1961467&postcount=85]here[/url]
+[*] Create some map/prefix specific configs in cfg\sourcemod\map-cfg for enabling gungame and other plugins
+[*] For example create cfg\sourcemod\map-cfg\gg_.cfg
+[*] Edit cfg\sourcemod\map-cfg\gg_.cfg and add "sm_gg_cfgdirname gungame-enabled" (without quotes) in it
+[*] Edit your cfg\server.cfg and add "sm_gg_cfgdirname gungame-disabled" (without quotes) in it
+[/LIST]
+
+[b]Second one solution:[/b]
+
 [quote=BDeep;1009714]I am really lost on this i guess. Lets just say for example that I dont use a plugin to excute configs. How EXACTLY do I do this with just gungame. WOuld I have to make a gg_config for all GG maps and all the other maps that I have? If so thats not really a very good setup becuase I have 100's of maps that would take forever.
 
 Now lets say that I have a plugin that executes a config if a map starts with gg_ and a different config if the map starts with cs_ or de_. If I use this plugin then the buyzones are still gone on cs_ and de_ maps.
@@ -24,3 +43,4 @@ And in that particular configs you should enable gungame
     }
 }
 [/code]
+
