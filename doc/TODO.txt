@@ -54,6 +54,14 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * add console command to reload all config files, usefull after changing sm_gungame_cfgdir
+        for changes to take effect immediately.
+
+    * add console command to quick change any config variables like cvars.
+        For example to turn turbo on we could exec "gungame_config TurboMode 1"
+        So "gungame_config TurboMode" is for dumping variable
+        So "gungame_config" is for dumping all config variables
+    
     * add ExtraTaser, BonusWeaponTaser, BlockWeaponSwitchOnExtraTaser
         I think he means, he wishes for there to be an additional pistol (like is available for hegrenade level), and when you get a pistol kill on taser level, you receive an additional taser. Similarly for molotov level.
         I think the taser level works best as it is right now, but I can see why people would want additional features to make it more consistent with the hegrenade level.
