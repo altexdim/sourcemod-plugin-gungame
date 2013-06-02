@@ -3,6 +3,10 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Altex, I am remembering when I first set GG up - this is for CS:S specifically - 
+        the problem I was having with having GG run alongside other gametypes is that 
+        the server browser was reading as GunGame, even when GunGame wasn't running.
+
     * Bug Report: If you triple level after you die (for instance, you get two kills, throw a grenade, and die, 
         but your grenade kills the third enemy after you've died), the triple kill music and effect will still occur.
 
