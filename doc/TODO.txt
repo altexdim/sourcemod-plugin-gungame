@@ -58,6 +58,11 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * add a functionality to execute any defined config when the leader reaches defined level.
+    * add a functionality to execute any defined config when the leader leaves defined level down.
+    * add a functionality to execute any defined config when there is a someone on a defined level.
+    * add a functionality to execute any defined config when there there is noone on a defined level.
+
     * add console command to reload all config files, usefull after changing sm_gungame_cfgdir
         for changes to take effect immediately.
 
