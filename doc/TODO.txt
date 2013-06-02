@@ -3,6 +3,9 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+    * Bugreport: When loading gungame.smx instead of gungame_sdkhooks.smx, I got this error in my console:
+        exec //*/cfg/\\gungame.mapconfig.cfg: invalid path.
+
     * Altex, I am remembering when I first set GG up - this is for CS:S specifically - 
         the problem I was having with having GG run alongside other gametypes is that 
         the server browser was reading as GunGame, even when GunGame wasn't running.
