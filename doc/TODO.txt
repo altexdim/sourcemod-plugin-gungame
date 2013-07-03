@@ -61,6 +61,12 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * add feature
+        I have a suggestion, you know how people is leading the game. Why not make the chat message 
+        of the person who is leading to Level 4 blah blah in hint box instead of chat to keep chat 
+        clean and spam-free for those people who talks on chat.
+        Atm, everything I have put on hint box, only one missing part is the leading message.
+
     * add functionality to execute any defined config when the leader reaches defined level.
         add functionality to execute any defined config when the leader leaves defined level down.
         add functionality to execute any defined config when there is a someone on a defined level.
