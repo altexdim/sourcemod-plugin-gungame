@@ -42,6 +42,8 @@
     - remove included weapons from map
 [*] [B]sm_noblock[/B] - [URL]http://forums.alliedmods.net/showthread.php?t=91617[/URL]
     - no block players
+[*] [B]TeamChange[/B] - [URL]https://forums.alliedmods.net/showthread.php?t=197780[/URL]
+    - change team by typing "/t" or "/ct" in chat
 [/LIST]
 
 [anchor]Commands and Cvars[/anchor][B]Commands and Cvars[/B]
