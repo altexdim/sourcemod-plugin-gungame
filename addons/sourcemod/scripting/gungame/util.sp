@@ -642,6 +642,10 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && levelupWithKnife && !dropKnife;
     new newWeapon = 0;
 
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] UTIL GIVE_WEAPON weaponName=%s weaponId=%d slotId=%d clientId=%d levelId=%d", g_WeaponName[WeapId], WeapId, slot, client, level);
+    #endif
+
     // A check to make sure player always has a knife 
     // because some maps do not give the knife.
 

@@ -1,0 +1,10 @@
+﻿1) Новые виды оружия
+    usp_silencer (эквивалент hpk2000)
+    usp_silencer_off (эквивалент hpk2000)
+    knife_default_ct (эквивалент knife)
+    knife_default_t (эквивалент knife)
+    m4a1_silencer (замена m4a1)
+    m4a1_silenceroff (замена m4a1)
+2) гранаты на вармапе не выдаются после взрыва
+3) give weapon_hpk2000 для кт выдаёт usp_silencer
+но give weapon_m4a1 для кт не выдаёт m4a1_silencer

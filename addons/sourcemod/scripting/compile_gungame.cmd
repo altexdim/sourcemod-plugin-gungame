@@ -1,10 +1,10 @@
 @echo off 
 
-set DIR_SERVER_SOURCEMOD=H:\games\csgo_ds\csgo\addons\sourcemod
+set DIR_SERVER_SOURCEMOD=D:\games\csgo_ds\csgo\addons\sourcemod
 set DIR_SERVER_SCRIPTING=%DIR_SERVER_SOURCEMOD%\scripting
 set DIR_SERVER_PLUGINS=%DIR_SERVER_SOURCEMOD%\plugins
 
-set DIR_SOURCES_SOURCEMOD=C:\home\altex\git\css_plugins\sm_gungame\addons\sourcemod
+set DIR_SOURCES_SOURCEMOD=C:\projects\sourcemod-plugin-gungame\addons\sourcemod
 set DIR_SOURCES_SCRIPTING=%DIR_SOURCES_SOURCEMOD%\scripting
 set DIR_SOURCES_PLUGINS=%DIR_SOURCES_SOURCEMOD%\plugins
 
@@ -16,7 +16,8 @@ cd /d %DIR_SERVER_SCRIPTING%
 
 echo %DATE% %TIME% > %LOG_COMPILE%
 
-%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1    >> %LOG_COMPILE%
+::%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 GUNGAME_DEBUG=1 >> %LOG_COMPILE%
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SOURCES_PLUGINS%\disabled\gungame_sdkhooks.smx
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SERVER_PLUGINS%\gungame_sdkhooks.smx
 

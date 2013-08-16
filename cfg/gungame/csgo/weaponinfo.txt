@@ -218,4 +218,36 @@
         "index" "40"
         "is_molotov_type"   "1"
     }
+
+    "knife_default_ct" {
+        "index" "41"
+        "slot"  "2"
+        "is_knife_type" "1"
+    }
+    "knife_default_t" {
+        "index" "42"
+        "slot"  "2"
+        "is_knife_type" "1"
+    }
+    "usp_silencer" {
+        "index" "43"
+        "slot"  "1"
+        "clipsize"  "12"
+    }
+    "usp_silencer_off" {
+        "index" "44"
+        "slot"  "1"
+        "clipsize"  "12"
+    }
+
+    "m4a1_silencer" {
+        "index" "45"
+        "slot"  "0"
+        "clipsize"  "30" // TODO: check
+    }
+    "m4a1_silencer_off" {
+        "index" "46"
+        "slot"  "0"
+        "clipsize"  "30" // TODO: check
+    }
 }

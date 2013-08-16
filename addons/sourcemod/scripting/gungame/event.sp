@@ -237,6 +237,10 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     GetClientName(Victim, vName, sizeof(vName));
     GetClientName(Killer, kName, sizeof(kName));
 
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] EVENT PLAYER_DEATH weapon=%s victim=%s killer=%s", Weapon, vName, kName);
+    #endif
+
     /* Kill self with world spawn */
     if ( Victim && !Killer )
     {

@@ -25,7 +25,7 @@ public Action:_CmdSetLevel(client, args)
     {
         Format(name, sizeof(name), "[Client#%d]", client);
     }
-    return name;
+
     PrintLeaderToChat(client, oldLevel, newLevel, name);
     
     return Plugin_Handled;
