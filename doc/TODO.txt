@@ -232,7 +232,3 @@ TODO
     + Feature: Implement !buylevel.
     + Feature: Need features from es gg 5: Colorize knife-level player.
     + Feature: Need features from es gg 5: Random sounds?
-
-    ----====----==== Known Bugs ----====----====
-    * [CSGO] No multichannel sounds. It's possible to play only one sound at a time, 
-        no overlaps of the sounds. Sounds couldn't be cached on a client.
