@@ -16,8 +16,8 @@ cd /d %DIR_SERVER_SCRIPTING%
 
 echo %DATE% %TIME% > %LOG_COMPILE%
 
-::%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 >> %LOG_COMPILE%
-%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 GUNGAME_DEBUG=1 >> %LOG_COMPILE%
+%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 >> %LOG_COMPILE%
+::%DIR_SERVER_SCRIPTING%\spcomp gungame.sp WITH_SDKHOOKS=1 GUNGAME_DEBUG=1 >> %LOG_COMPILE%
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SOURCES_PLUGINS%\disabled\gungame_sdkhooks.smx
 copy %DIR_SERVER_SCRIPTING%\gungame.smx                     %DIR_SERVER_PLUGINS%\gungame_sdkhooks.smx
 
