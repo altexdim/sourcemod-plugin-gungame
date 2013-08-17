@@ -21,7 +21,7 @@ melee
     all:    knife knifegg taser
 pistols
     all:    glock p250 fiveseven deagle elite
-    ct:     hkp2000
+    ct:     hkp2000 usp_silencer
     t:      tec9
 shotguns
     all:    nova xm1014
@@ -34,7 +34,7 @@ smgs
     ct:     mp9
     t:      mac10
 riffles
-    ct:     famas m4a1 aug
+    ct:     famas m4a1 m4a1_silencer aug
     t:      galilar ak47 sg556
 snipers
     all:    ssg08 awp

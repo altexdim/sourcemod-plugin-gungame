@@ -57,7 +57,6 @@
         "index" "9"
         "slot" "1"
         "clipsize" "13"
-        "index_group" "3"
         "level_index" "9"
     }
     "tec9" {
