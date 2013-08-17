@@ -883,6 +883,14 @@ GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
     }
 
     new ent = GivePlayerItem(client, item);
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] ... offset, client=%i item=%s ammotypesend=%i ammotypedata=%i", 
+            client, 
+            item, 
+            GetEntProp(ent, Prop_Send, "m_iPrimaryAmmoType"), 
+            GetEntData(ent, g_iOffs_iPrimaryAmmoType, 1)
+        );
+    #endif
 
     if (blockSwitch) {
         g_BlockSwitch[client] = false;

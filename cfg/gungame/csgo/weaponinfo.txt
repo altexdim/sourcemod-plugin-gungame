@@ -18,7 +18,7 @@
         "slot" "2"
         "is_taser" "1"
         "clipsize" "1"
-        "ammotype" "16"
+        "ammotype" "18"
         "level_index" "3"
     }
 
@@ -220,34 +220,34 @@
         "index" "34"
         "slot" "3"
         "is_flashbang" "1"
-        "ammotype" "12"
+        "ammotype" "14"
         "level_index" "34"
     }
     "hegrenade" {
         "index" "35"
         "slot" "3"
         "is_hegrenade" "1"
-        "ammotype" "11"
+        "ammotype" "13"
         "level_index" "35"
     }
     "smokegrenade" {
         "index" "36"
         "slot" "3"
         "is_smokegrenade" "1"
-        "ammotype" "13"
+        "ammotype" "15"
         "level_index" "36"
     }
     "incgrenade" {
         "index" "37"
         "slot" "3"
-        "ammotype" "14"
+        "ammotype" "16"
         "level_index" "37"
     }
     "molotov" {
         "index" "38"
         "slot" "3"
         "is_molotov" "1"
-        "ammotype" "14"
+        "ammotype" "16"
         "level_index" "37"
     }
 
@@ -291,13 +291,13 @@
     "m4a1_silencer" {
         "index" "45"
         "slot" "0"
-        "clipsize" "20" // TODO: check
+        "clipsize" "20"
         "level_index" "24"
     }
     "m4a1_silencer_off" {
         "index" "46"
         "slot" "0"
-        "clipsize" "20" // TODO: check
+        "clipsize" "20"
         "level_index" "24"
     }
 }
