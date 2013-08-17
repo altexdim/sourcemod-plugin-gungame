@@ -223,20 +223,16 @@ UTIL_RecalculateLeader(client, oldLevel, newLevel)
     UTIL_PlaySoundForLeaderLevel();
 }
 
-UTIL_PlaySoundForLeaderLevel()
-{
-    if ( !CurrentLeader )
-    {
+UTIL_PlaySoundForLeaderLevel() {
+    if (!CurrentLeader) {
         return;
     }
-    new WeapId = WeaponOrderId[PlayerLevel[CurrentLeader]];
-    if ( WeapId == g_WeaponIdHegrenade )
-    {
+    new WeapLevelId = g_WeaponLevelIndex[WeaponOrderId[PlayerLevel[CurrentLeader]]];
+    if (WeapLevelId == g_WeaponLevelIdHegrenade) {
         UTIL_PlaySound(0, Nade);
         return;
     }
-    if ( g_WeaponIsKnifeType[WeapId] )
-    {
+    if (WeapLevelId == g_WeaponLevelIdKnife) {
         UTIL_PlaySound(0, Knife);
         return;
     }
@@ -265,7 +261,7 @@ UTIL_ChangeLevel(client, difference, bool:KnifeSteal = false, victim = 0)
     Call_PushCell(difference);
     Call_PushCell(KnifeSteal);
     Call_PushCell(Level == (WeaponOrderCount - 1));
-    Call_PushCell(g_WeaponIsKnifeType[WeaponOrderId[Level]]);
+    Call_PushCell(g_WeaponLevelIndex[WeaponOrderId[Level]] == g_WeaponLevelIdKnife);
     Call_Finish(ret);
 
     if ( ret )
@@ -578,7 +574,7 @@ UTIL_CheckForFriendlyFire(client, WeapId)
         return;
     }
     new pState = PlayerState[client];
-    if ( (pState & GRENADE_LEVEL) && (WeapId != g_WeaponIdHegrenade) )
+    if ( (pState & GRENADE_LEVEL) && (g_WeaponLevelIndex[WeapId] != g_WeaponLevelIdHegrenade) )
     {
         PlayerState[client] &= ~GRENADE_LEVEL;
 
@@ -592,7 +588,7 @@ UTIL_CheckForFriendlyFire(client, WeapId)
         }
         return;
     }
-    if ( !(pState & GRENADE_LEVEL) && (WeapId == g_WeaponIdHegrenade) )
+    if ( !(pState & GRENADE_LEVEL) && (g_WeaponLevelIndex[WeapId] == g_WeaponLevelIdHegrenade) )
     {
         PlayerOnGrenade++;
         PlayerState[client] |= GRENADE_LEVEL;
@@ -637,7 +633,7 @@ public Action:UTIL_Timer_GiveNextWeapon(Handle:timer, Handle:data) {
 }
 
 UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
-    new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId];
+    new WeapId = WeaponOrderId[level], Slots:slot = g_WeaponSlot[WeapId], WeapLevelId = g_WeaponLevelIndex[WeapId];
     new bool:dropKnife = g_WeaponDropKnife[WeapId];
     new bool:blockSwitch = g_SdkHooksEnabled && g_Cfg_BlockWeaponSwitchIfKnife && levelupWithKnife && !dropKnife;
     new newWeapon = 0;
@@ -670,7 +666,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     }
 
     if (slot == Slot_Grenade) {
-        if (WeapId == g_WeaponIdHegrenade) {
+        if (WeapLevelId == g_WeaponLevelIdHegrenade) {
             // BONUS WEAPONS FOR HEGRENADE
             if (NumberOfNades) {
                 g_NumberOfNades[client] = NumberOfNades - 1;
@@ -697,7 +693,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
             if (NadeFlash) {
                 GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdFlashbang], !g_BlockSwitch[client]);
             }
-        } else if (g_WeaponIsMolotovType[WeapId]) {
+        } else if (WeapLevelId == g_WeaponLevelIdMolotov) {
             // BONUS WEAPONS FOR MOLOTOV
             if (g_Cfg_MolotovBonusWeaponId) {
                 new ent = GivePlayerItemWrapper(client, g_WeaponName[g_Cfg_MolotovBonusWeaponId]);
@@ -725,7 +721,7 @@ UTIL_GiveNextWeaponReal(client, level, bool:levelupWithKnife, bool:spawn) {
     }
 
     if (slot == Slot_Knife) {
-        if (g_WeaponIsKnifeType[WeapId]) {
+        if (WeapLevelId == g_WeaponLevelIdKnife) {
             // BONUS WEAPONS FOR KNIFE
             if (g_Cfg_KnifeSmoke) {
                 GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdSmokegrenade], !g_BlockSwitch[client]);
@@ -867,7 +863,7 @@ UTIL_ReloadActiveWeapon(client, WeaponId) {
     new Slots:slot = g_WeaponSlot[WeaponId];
     if ((slot == Slot_Primary )
         || (slot == Slot_Secondary)
-        || (WeaponId == g_WeaponIdTaser)
+        || (g_WeaponLevelIndex[WeaponId] == g_WeaponLevelIdTaser)
     ) {
         new ent = GetEntPropEnt(client, Prop_Send, "m_hActiveWeapon");
         if ((ent > -1) && g_WeaponAmmo[WeaponId]) {
@@ -1082,7 +1078,7 @@ UTIL_GiveWarmUpWeapon(client) {
     }
 
     new bool:nades = bool:WarmupNades;
-    new bool:wpn = g_Cfg_WarmupWeapon && !g_WeaponIsKnifeType[g_Cfg_WarmupWeapon];
+    new bool:wpn = g_Cfg_WarmupWeapon && !(g_WeaponLevelIndex[g_Cfg_WarmupWeapon] == g_WeaponLevelIdKnife);
 
     if (nades) {
         GivePlayerItemWrapper(client, g_WeaponName[g_WeaponIdHegrenade]);

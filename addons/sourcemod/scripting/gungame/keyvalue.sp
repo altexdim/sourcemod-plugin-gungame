@@ -76,15 +76,22 @@ OnKeyValueStart()
         g_WeaponAmmo[index] = KvGetNum(KvWeapon, "clipsize", 0);
         // init weapons that need drop knife
         g_WeaponDropKnife[index] = bool:KvGetNum(KvWeapon, "drop_knife", 0);
-        // init weapons that has knife type
-        g_WeaponIsKnifeType[index] = bool:KvGetNum(KvWeapon, "is_knife_type", 0);
-        // init weapons that has molotov type
-        g_WeaponIsMolotovType[index] = bool:KvGetNum(KvWeapon, "is_molotov_type", 0);
+        // level index (different weapons but the same level)
+        g_WeaponLevelIndex[index] = KvGetNum(KvWeapon, "level_index", 0);
 
-        if (KvGetNum(KvWeapon, "is_knife_default", 0)) {
+        if (!g_WeaponLevelIndex[index]) {
+            decl String:Error[1024];
+            FormatEx(Error, sizeof(Error), "FATAL ERROR: Level index should not be zero for %s. You should update you %s and take it from the release zip file.", 
+                name, WeaponFile);
+            SetFailState(Error);
+        }
+
+        if (KvGetNum(KvWeapon, "is_knife", 0)) {
             g_WeaponIdKnife                 = index;
+            g_WeaponLevelIdKnife            = g_WeaponLevelIndex[index];
         } else if (KvGetNum(KvWeapon, "is_hegrenade", 0)) {
             g_WeaponIdHegrenade             = index;
+            g_WeaponLevelIdHegrenade        = g_WeaponLevelIndex[index];
             g_WeaponAmmoTypeHegrenade       = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_smokegrenade", 0)) {
             g_WeaponIdSmokegrenade          = index;
@@ -93,9 +100,11 @@ OnKeyValueStart()
             g_WeaponIdFlashbang             = index;
             g_WeaponAmmoTypeFlashbang       = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_molotov", 0)) {
+            g_WeaponLevelIdMolotov          = g_WeaponLevelIndex[index];
             g_WeaponAmmoTypeMolotov         = KvGetNum(KvWeapon, "ammotype", 0);
         } else if (KvGetNum(KvWeapon, "is_taser", 0)) {
             g_WeaponIdTaser                 = index;
+            g_WeaponLevelIdTaser            = g_WeaponLevelIndex[index];
             g_WeaponAmmoTypeTaser           = KvGetNum(KvWeapon, "ammotype", 0);
         } 
 

@@ -264,7 +264,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     // Victim > 0 && Killer > 0
 
-    new WeaponIndex = UTIL_GetWeaponIndex(Weapon);
+    new WeaponIndex = UTIL_GetWeaponIndex(Weapon), WeaponLevelIndex = g_WeaponLevelIndex[WeaponIndex];
     new Action:ret;
 
     if ( WarmupEnabled )
@@ -293,27 +293,27 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         return;
     }
 
-    new level = PlayerLevel[Killer], WeaponLevel = WeaponOrderId[level];
+    new level = PlayerLevel[Killer], WeaponLevel = WeaponOrderId[level], PlayerLevelIndex = g_WeaponLevelIndex[WeaponLevel];
 
     /* Give them another grenade if they killed another person with another weapon */
-    if ( (WeaponLevel == g_WeaponIdHegrenade) 
-        && (WeaponIndex != g_WeaponIdHegrenade) 
-        && !( g_WeaponIsKnifeType[WeaponIndex] && KnifeProHE ) // TODO: Remove "&& !( g_WeaponIsKnifeType[WeaponIndex] && KnifeProHE )" and make check if killer not leveled up, than give extra nade.
+    if ( (PlayerLevelIndex == g_WeaponLevelIdHegrenade) 
+        && (WeaponLevelIndex != g_WeaponLevelIdHegrenade) 
+        && !( (WeaponLevelIndex == g_WeaponLevelIdKnife) && KnifeProHE ) // TODO: Remove this statement and make check if killer not leveled up, than give extra nade.
     ) {
-        UTIL_GiveExtraNade(Killer, g_WeaponIsKnifeType[WeaponIndex]);
+        UTIL_GiveExtraNade(Killer, (WeaponLevelIndex == g_WeaponLevelIdKnife));
     }
 
     /* Give them another taser if they killed another person with another weapon */
-    if ( (WeaponLevel == g_WeaponIdTaser) 
-        && g_WeaponIsKnifeType[WeaponIndex]
+    if ( (PlayerLevelIndex == g_WeaponLevelIdTaser) 
+        && (WeaponLevelIndex == g_WeaponLevelIdKnife)
         && g_Cfg_ExtraTaserOnKnifeKill
     ) {
         UTIL_GiveExtraTaser(Killer);
     }
 
     /* Give them another molotov if they killed another person with another weapon */
-    if (g_WeaponIsMolotovType[WeaponLevel]
-        && g_WeaponIsKnifeType[WeaponIndex]
+    if ((PlayerLevelIndex == g_WeaponLevelIdMolotov)
+        && (WeaponLevelIndex == g_WeaponLevelIdKnife)
         && g_Cfg_ExtraMolotovOnKnifeKill
     ) {
         UTIL_GiveExtraMolotov(Killer, WeaponLevel);
@@ -327,7 +327,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     /**
      * Steal level from other player.
      */
-    if ( KnifePro && g_WeaponIsKnifeType[WeaponIndex] )
+    if ( KnifePro && (WeaponLevelIndex == g_WeaponLevelIdKnife) )
     {
         for (;;)
         {
@@ -356,22 +356,22 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 }
             }
 
-            if ( g_WeaponIsKnifeType[WeaponLevel] )
+            if ( (PlayerLevelIndex == g_WeaponLevelIdKnife) )
             {
                 if ( UTIL_GetCustomKillPerLevel(level) > 1 ) {
                     break;
                 }
             }
 
-            if ( !KnifeProHE && WeaponLevel == g_WeaponIdHegrenade ) {
+            if ( !KnifeProHE && PlayerLevelIndex == g_WeaponLevelIdHegrenade ) {
                 return;
             }
 
-            if (WeaponLevel == g_WeaponIdTaser) {
+            if (PlayerLevelIndex == g_WeaponLevelIdTaser) {
                 return;
             }
 
-            if (g_WeaponIsMolotovType[WeaponLevel]) {
+            if (PlayerLevelIndex == g_WeaponLevelIdMolotov) {
                 return;
             }
 
@@ -385,7 +385,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
             CurrentLevelPerRound[Killer]++;
                    
             if ( TurboMode ) {
-                UTIL_GiveNextWeapon(Killer, level, g_WeaponIsKnifeType[WeaponIndex]);
+                UTIL_GiveNextWeapon(Killer, level, (WeaponLevelIndex == g_WeaponLevelIdKnife));
             }
 
             CheckForTripleLevel(Killer);
@@ -397,17 +397,14 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
     new LevelUpWithPhysics = false;
 
     /* They didn't kill with the weapon required */
-    if (!(
-        WeaponIndex == WeaponLevel 
-        || (g_WeaponIsMolotovType[WeaponIndex] && g_WeaponIsMolotovType[WeaponLevel])
-    )) {
-        if ( WeaponIndex == g_WeaponIdHegrenade ) {
+    if (WeaponLevelIndex != PlayerLevelIndex) {
+        if (WeaponLevelIndex == g_WeaponLevelIdHegrenade) {
             // Killed with grenade made by map author
             if ( 
                 g_Cfg_CanLevelUpWithMapNades
                 && ( 
                     g_Cfg_CanLevelUpWithNadeOnKnife
-                    || !g_WeaponIsKnifeType[WeaponLevel]
+                    || !(PlayerLevelIndex == g_WeaponLevelIdKnife)
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -420,9 +417,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 g_Cfg_CanLevelUpWithPhysics
                 && ( StrEqual(Weapon, "prop_physics") || StrEqual(Weapon, "prop_physics_multiplayer") ) 
                 && ( 
-                    ( ( WeaponLevel != g_WeaponIdHegrenade) && !g_WeaponIsKnifeType[WeaponLevel] )
-                    || ( g_Cfg_CanLevelUpWithPhysicsG && ( WeaponLevel == g_WeaponIdHegrenade ) )
-                    || ( g_Cfg_CanLevelUpWithPhysicsK && g_WeaponIsKnifeType[WeaponLevel] )
+                    ( ( PlayerLevelIndex != g_WeaponLevelIdHegrenade) && !(PlayerLevelIndex == g_WeaponLevelIdKnife) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsG && (PlayerLevelIndex == g_WeaponLevelIdHegrenade) )
+                    || ( g_Cfg_CanLevelUpWithPhysicsK && (PlayerLevelIndex == g_WeaponLevelIdKnife) )
                 )
             ) {
                 LevelUpWithPhysics = true;
@@ -509,7 +506,7 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
 
     if ( TurboMode || KnifeElite )
     {
-        UTIL_GiveNextWeapon(Killer, level, g_WeaponIsKnifeType[WeaponIndex]);
+        UTIL_GiveNextWeapon(Killer, level, (WeaponLevelIndex == g_WeaponLevelIdKnife));
     }
 
     CheckForTripleLevel(Killer);
@@ -792,7 +789,7 @@ public _HeExplode(Handle:event, const String:name[], bool:dontBroadcast) {
     }
 
     if ( ( WarmupNades && WarmupEnabled )
-         || ( WeaponOrderId[PlayerLevel[client]] == g_WeaponIdHegrenade
+         || ( g_WeaponLevelIndex[WeaponOrderId[PlayerLevel[client]]] == g_WeaponLevelIdHegrenade
             && ( UnlimitedNades 
                || ( NumberOfNades && g_NumberOfNades[client] ) ) ) )
     {

@@ -26,8 +26,7 @@ new String:g_WeaponName[MAX_WEAPONS_COUNT][MAX_WEAPON_NAME_LEN];
 new Slots:g_WeaponSlot[MAX_WEAPONS_COUNT];
 new g_WeaponAmmo[MAX_WEAPONS_COUNT];
 new bool:g_WeaponDropKnife[MAX_WEAPONS_COUNT];
-new bool:g_WeaponIsKnifeType[MAX_WEAPONS_COUNT];
-new bool:g_WeaponIsMolotovType[MAX_WEAPONS_COUNT];
+new g_WeaponLevelIndex[MAX_WEAPONS_COUNT];
 
 new String:EventSounds[Sounds:MaxSounds][PLATFORM_MAX_PATH];
 
@@ -69,12 +68,18 @@ new Handle:PlayerHandicapTimes = INVALID_HANDLE;
 new bool:g_SkipSpawn[MAXPLAYERS+1] = {false, ...};
 
 new GameName:g_GameName = GameName:None;
-new g_WeaponsMaxId          = 0;
-new g_WeaponIdKnife         = 0;
-new g_WeaponIdHegrenade     = 0;
-new g_WeaponIdSmokegrenade  = 0;
-new g_WeaponIdFlashbang     = 0;
-new g_WeaponIdTaser         = 0;
+new g_WeaponsMaxId              = 0;
+
+new g_WeaponIdKnife             = 0;
+new g_WeaponIdHegrenade         = 0;
+new g_WeaponIdSmokegrenade      = 0;
+new g_WeaponIdFlashbang         = 0;
+new g_WeaponIdTaser             = 0;
+
+new g_WeaponLevelIdKnife        = 0;
+new g_WeaponLevelIdHegrenade    = 0;
+new g_WeaponLevelIdTaser        = 0;
+new g_WeaponLevelIdMolotov      = 0;
 
 new g_WeaponAmmoTypeHegrenade       = 0;
 new g_WeaponAmmoTypeFlashbang       = 0;
