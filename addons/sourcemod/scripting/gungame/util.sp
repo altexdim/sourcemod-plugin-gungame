@@ -873,15 +873,22 @@ UTIL_ReloadActiveWeapon(client, WeaponId) {
 }
 
 GivePlayerItemWrapper(client, const String:item[], bool:blockSwitch = false) {
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] FUNC GivePlayerItemWrapper, client=%i item=%s", client, item);
+    #endif
+
     g_BlockFastSwitchOnChange[client] = true;
     if (blockSwitch) {
         g_BlockSwitch[client] = true;
     }
+
     new ent = GivePlayerItem(client, item);
+
     if (blockSwitch) {
         g_BlockSwitch[client] = false;
     }
     g_BlockFastSwitchOnChange[client] = false;
+
     return ent;
 }
 
@@ -1105,6 +1112,9 @@ UTIL_GetRandomInt(start, end) {
 
 UTIL_GiveExtraNade(client, bool:knifeKill) {
     /* Give them another grenade if they killed another person with another weapon or hegrenade with the option enabled*/
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] FUNC UTIL_GiveExtraNade, g_Cfg_ExtraNade=%i knifeKill=%i", g_Cfg_ExtraNade, knifeKill);
+    #endif
     if ( g_Cfg_ExtraNade && ( knifeKill || g_Cfg_ExtraNade == 1 ) ) {
         /* Do not give them another nade if they already have one */
         if (!UTIL_HasClientHegrenade(client)) {
@@ -1568,6 +1578,10 @@ UTIL_EndMultiplayerGame() {
  * @param type      The type of grenade.
  */
 stock UTIL_WeaponAmmoGetGrenadeCount(client, type) {
+    #if defined GUNGAME_DEBUG
+        LogError("[DEBUG-GUNGAME] FUNC UTIL_WeaponAmmoGetGrenadeCount, client=%i type=%i count=%i", client, type, GetEntData(client, g_iOffsetAmmo + (type * 4)));
+    #endif
+
     return GetEntData(client, g_iOffsetAmmo + (type * 4));
 }
 

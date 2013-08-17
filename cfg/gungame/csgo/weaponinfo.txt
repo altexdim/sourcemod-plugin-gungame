@@ -291,13 +291,13 @@
     "m4a1_silencer" {
         "index" "45"
         "slot" "0"
-        "clipsize" "30" // TODO: check
+        "clipsize" "20" // TODO: check
         "level_index" "24"
     }
     "m4a1_silencer_off" {
         "index" "46"
         "slot" "0"
-        "clipsize" "30" // TODO: check
+        "clipsize" "20" // TODO: check
         "level_index" "24"
     }
 }

@@ -300,6 +300,9 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         && (WeaponLevelIndex != g_WeaponLevelIdHegrenade) 
         && !( (WeaponLevelIndex == g_WeaponLevelIdKnife) && KnifeProHE ) // TODO: Remove this statement and make check if killer not leveled up, than give extra nade.
     ) {
+        #if defined GUNGAME_DEBUG
+            LogError("[DEBUG-GUNGAME] ... call UTIL_GiveExtraNade, killer=%i knife=%i", Killer, (WeaponLevelIndex == g_WeaponLevelIdKnife));
+        #endif
         UTIL_GiveExtraNade(Killer, (WeaponLevelIndex == g_WeaponLevelIdKnife));
     }
 
