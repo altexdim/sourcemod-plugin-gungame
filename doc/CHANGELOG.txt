@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.13.0:
+        * Fix for CSGO only after update on 15.08.2013.
+
     1.2.12.0:
         * Fixed bug. If gungame is disabled then players can drop weapons if StripDeadPlayersWeapon is enabled. 
             Before fix it was not possible to drop the gun even if gungame is disabled.
