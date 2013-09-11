@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.14.0:
+        * Fix for CSGO only after arms deal update update on 15.08.2013. Added support for super special cool knifes.
+
     1.2.13.0:
         * Fix for CSGO only after update on 15.08.2013.
 

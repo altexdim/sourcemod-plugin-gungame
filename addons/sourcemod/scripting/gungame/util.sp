@@ -91,23 +91,26 @@ UTIL_PrintToUpperLeft(r, g, b, const String:source[], any:...)
 }
 
 /* Weapon Index Lookup via Trie array */
-UTIL_GetWeaponIndex(const String:Weapon[])
-{
-    new len;
-
-    if ( strlen(Weapon) > 7 )
-    {
-        /* Only check truncated weapon names */
-        len = (Weapon[6] == '_') ? 7 : 0;
+UTIL_GetWeaponIndex(const String:Weapon[]) {
+    if (!WeaponOpen) {
+        // weaponinfo file not loaded
+        return 0;
     }
 
-    if ( WeaponOpen )
-    {
-        new index;
-        if ( GetTrieValue(TrieWeapon, Weapon[len], index) )
-        {
-            return index;
-        }
+    new len = 0;
+    if ((strlen(Weapon) > 7) && (StrContains(Weapon, "weapon_") == 0)) {
+        // truncate weapon name
+        len = 7;
+    }
+
+    new index;
+    if (GetTrieValue(TrieWeapon, Weapon[len], index)) {
+        return index;
+    }
+
+    if ((strlen(Weapon[len]) > 6) && (StrContains(Weapon[len], "knife_") == 0)) {
+        // the weapon is knife
+        return g_WeaponIdKnife;
     }
 
     return 0;
