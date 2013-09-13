@@ -79,12 +79,12 @@ public Action:GG_OnClientLevelChange(client, level, difference, bool:steal, bool
 
 LogEventToGame(const String:event[], client)
 {
-    decl String:Name[64], String:Auth[64];
+    new String:Auth[64];
 
-    GetClientName(client, Name, sizeof(Name));
-    GetClientAuthString(client, Auth, sizeof(Auth));
+    if(!GetClientAuthString(client, Auth, sizeof(Auth)))
+		strcopy(Auth, sizeof(Auth), "UNKNOWN");
 
     new team = GetClientTeam(client), UserId = GetClientUserId(client);
-    LogToGame("\"%s<%d><%s><%s>\" triggered \"%s\"", Name, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT", event);
+    LogToGame("\"%N<%d><%s><%s>\" triggered \"%s\"", client, UserId, Auth, (team == TEAM_T) ? "TERRORIST" : "CT", event);
 }
    
