@@ -1,5 +1,9 @@
 Changelog
 ---------
+    1.2.14.1:
+        * Fixed logging bot events with random player's steamid.
+            Thanks to peace-maker (https://github.com/peace-maker).
+
     1.2.14.0:
         * Fix for CSGO only after arms deal update update on 15.08.2013. Added support for super special cool knifes.
 
