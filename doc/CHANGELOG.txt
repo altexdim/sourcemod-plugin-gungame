@@ -1,5 +1,11 @@
 Changelog
 ---------
+    1.2.15.0:
+        * Added count for multiple level downs so that gg_leveldown will trigger for each level a player lost
+            (thanks to zeroibis).
+        * Added gg_lose to help tracking of the player who caused the game to end
+            (thanks to zeroibis).
+
     1.2.14.1:
         * Fixed logging bot events with random player's steamid.
             Thanks to peace-maker (https://github.com/peace-maker).
