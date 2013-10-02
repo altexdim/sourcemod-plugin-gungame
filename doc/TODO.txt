@@ -61,6 +61,12 @@ TODO
 
     ----====----==== Normal priority list ----====----====
 
+    * Bugfix request
+        Bomb is striped always at roundstart even if cvars are set right!
+
+    * Feature request
+        Could you add getting another molotov and taser with a gun kill too, just like regular grenade?
+
     * add feature
         I have a suggestion, you know how people is leading the game. Why not make the chat message 
         of the person who is leading to Level 4 blah blah in hint box instead of chat to keep chat 
