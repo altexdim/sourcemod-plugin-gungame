@@ -94,6 +94,8 @@ UTIL_PrintToUpperLeft(r, g, b, const String:source[], any:...)
 UTIL_GetWeaponIndex(const String:Weapon[]) {
     if (!WeaponOpen) {
         // weaponinfo file not loaded
+        LogError("[GunGame] WeaponInfo file not loaded.");
+
         return 0;
     }
 
@@ -105,13 +107,17 @@ UTIL_GetWeaponIndex(const String:Weapon[]) {
 
     new index;
     if (GetTrieValue(TrieWeapon, Weapon[len], index)) {
+
         return index;
     }
 
     if ((strlen(Weapon[len]) > 6) && (StrContains(Weapon[len], "knife_") == 0)) {
         // the weapon is knife
+
         return g_WeaponIdKnife;
     }
+
+    LogError("[GunGame] Weapon index for \"%s\" not found.", Weapon);
 
     return 0;
 }

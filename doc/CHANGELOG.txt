@@ -1,5 +1,8 @@
 Changelog
 ---------
+    1.2.15.1:
+        * [CSGO] Added new weapons support (weapon_bayonet).
+
     1.2.15.0:
         * Added count for multiple level downs so that gg_leveldown will trigger for each level a player lost
             (thanks to zeroibis).

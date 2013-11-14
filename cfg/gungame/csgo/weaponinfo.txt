@@ -264,39 +264,36 @@
     }
 
     // new weapons after update 15.08.2013
-    "knife_default_ct" {
-        "index" "41"
-        "slot" "2"
-        "level_index" "1"
-    }
-    "knife_default_t" {
-        "index" "42"
-        "slot" "2"
-        "level_index" "1"
-    }
     "usp_silencer" {
-        "index" "43"
+        "index" "41"
         "slot" "1"
         "clipsize" "12"
         "level_index" "9"
     }
     "usp_silencer_off" {
-        "index" "44"
+        "index" "42"
         "slot" "1"
         "clipsize" "12"
         "level_index" "9"
     }
 
     "m4a1_silencer" {
-        "index" "45"
+        "index" "43"
         "slot" "0"
         "clipsize" "20"
         "level_index" "24"
     }
     "m4a1_silencer_off" {
-        "index" "46"
+        "index" "44"
         "slot" "0"
         "clipsize" "20"
         "level_index" "24"
+    }
+
+    // new weapons update after 13.11.2013
+    "bayonet" {
+        "index" "45"
+        "slot" "2"
+        "level_index" "1"
     }
 }
