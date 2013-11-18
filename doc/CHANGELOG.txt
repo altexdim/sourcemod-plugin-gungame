@@ -1,5 +1,7 @@
 Changelog
 ---------
+        * Added polish translation. Thanks to PlasteR.
+
     1.2.15.1:
         * [CSGO] Added new weapons support (weapon_bayonet).
 

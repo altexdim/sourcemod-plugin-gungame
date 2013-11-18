@@ -7,6 +7,7 @@
         "de"     "{lightgreen}GunGame Stats sind ausgeschaltet"
         "pt"     "{lightgreen}Estatisticas de Gungame desligadas"
 		"es"     "{lightgreen}Estadísticas de GunGame desactivadas"
+		"pl"     "{lightgreen}Statystyki GunGame są wyłączone"
     }
     "Warmup round seconds left"
     {
@@ -16,6 +17,7 @@
         "ru"     "Разогрев :: {1}"
         "pt"     "Round de warmup :: {1}"
 		"es"     "Ronda de calentamiento :: {1}"
+		"pl"     "Rozgrzewka :: {1}"
     }
     "1>seconds left"
     {
@@ -25,6 +27,7 @@
         "ru"    "{1} секунда осталась"
         "pt"    "Falta {1} segundo"
 		"es"    "Falta {1} segundo"
+		"pl"    "pozostało {1} sekund"
     }
     "x1>seconds left"
     {
@@ -33,6 +36,7 @@
         "de"    "{1} Sekunden verbleibend"
         "ru"    "{1} секунда осталась"
         "es"    "Faltan {1} segundos"
+		"pl"    "pozostała {1} sekunda"
     }
     "x2-x4>seconds left"
     {
@@ -42,6 +46,7 @@
         "ru"    "{1} секунды осталось"
         "pt"    "Faltam {1} segundos"
 		"es"    "Faltan {1} segundos"
+		"pl"    "pozostało {1} sekund"
     }
     "x5-x20>seconds left"
     {
@@ -51,6 +56,7 @@
         "ru"    "{1} секунд осталось"
         "pt"    "Faltam {1} segundos"
 		"es"    "Faltan {1} segundos"
+		"pl"    "pozostało {1} sekund"
     }
     "Warmup round has ended"
     {
@@ -59,6 +65,7 @@
         "ru"     "{green}Разогрев закончен"
         "pt"     "{green}Round de warmup terminou"
 		"es"     "{green}La ronda de calentamiento ha terminado"
+		"pl"     "{green}Rozgrzewka została zakończona"
     }
     "You are levels behind leader"
     {
@@ -68,6 +75,7 @@
         "ru"     "{green}Вы на {1} отстаёте от лидера"
         "pt"     "{green}Estas {1} atraz do primeiro"
 		"es"     "{green}Estás {1} detrás del lider"
+		"pl"     "{green}Jesteś {1} za liderem"
     }
     "1>levels"
     {
@@ -77,6 +85,7 @@
         "ru"    "{default}{1} {green}уровень"
         "pt"    "{default}{1} {green}nivel"
 		"es"    "{default}{1} {green}nivel"
+		"pl"    "{default}{1} {green}poziom"
     }
     "x1>levels"
     {
@@ -86,6 +95,7 @@
         "ru"    "{default}{1} {green}уровень"
         "pt"    "{default}{1} {green}niveis"
 		"es"    "{default}{1} {green}niveles"
+		"pl"    "{default}{1} {green}poziomy"
     }
     "x2-x4>levels"
     {
@@ -95,6 +105,7 @@
         "ru"    "{default}{1} {green}уровня"
         "pt"    "{default}{1} {green}niveis"
 		"es"    "{default}{1} {green}niveles"
+		"pl"    "{default}{1} {green}poziomy"
     }
     "x5-x20>levels"
     {
@@ -104,6 +115,7 @@
         "ru"    "{default}{1} {green}уровней"
         "pt"    "{default}{1} {green}niveis"
 		"es"    "{default}{1} {green}niveles"
+		"pl"    "{default}{1} {green}poziomy"
     }
     "Is leading on level"
     {
@@ -113,6 +125,7 @@
         "ru"     "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green}"
         "pt"     "{teamcolor}{1} {green}está na frente no nivel {default}{2}{green}"
 		"es"     "{teamcolor}{1} {green}está liderando en el nivel {default}{2}{green}"
+		"pl" 	 "{teamcolor}{1} {green} prowadzi na poziomie {default} {2} {green}"
     }
     "Is leading on level weapon"
     {
@@ -122,6 +135,7 @@
         "ru"     "{teamcolor}{1} {green}лидирует на уровне {default}{2}{green} :: {default}{3}"
         "pt"     "{teamcolor}{1} {green}está na frente no nivel {default}{2}{green} :: {default}{3}"
 		"es"	 "{teamcolor}{1} {green}está liderando en el nivel {default}{2}{green} :: {default}{3}"
+		"pl"     "{teamcolor}{1} {green} prowadzi na poziomie {default} {2} {green} :: {default} {3}"
     }
     "Is tied with the leader on level"
     {
@@ -131,6 +145,7 @@
         "ru"     "{teamcolor}{1} {green}догнал лидера на уровне {default}{2}{green}"
         "pt"     "{teamcolor}{1} {green}está empatado com o primeiro no nivel {default}{2}{green}"
 		"es"     "{teamcolor}{1} {green}está empatado con el lider en el nivel {default}{2}{green}"
+		"pl"     "{teamcolor}{1} {green}remisuje z liderem na poziomie {default}{2}{green}"
     }
     "GunGame has been enabled"
     {
@@ -139,6 +154,7 @@
         "ru"     "{green}GunGame включен"
         "pt"     "{green}GunGame está ligado"
 		"es"     "{green}GunGame ha sido desactivado"
+		"pl"     "{green}GunGame został włączony"
     }
     "GunGame has been disabled"
     {
@@ -147,6 +163,7 @@
         "ru"     "{green}GunGame выключен"
         "pt"     "{green}GunGame está desligado"
 		"es"     "{green}GunGame ha sido desactivado"
+		"pl"     "{green}GunGame został wyłączony"
     }
     "Please view your console for more information"
     {
@@ -155,6 +172,7 @@
         "ru"     "{green}Дополнительная информация находится в консоле"
         "pt"     "{green}Vê a consola para mais informação"
 		"es"     "{green}Por favor, mira la consola para más información"
+		"pl" 	 "{green}Proszę zobaczyć w konsolę by uzyskać więcej informacji"
     }
     "Has won"
     {
@@ -164,6 +182,7 @@
         "ru"     "{1} выиграл"
         "pt"     "{1} ganhou"
 		"es"     "{1} ha ganado"
+		"pl"     "{1} wygrał"
     }
     "You need kills to advance to the next level"
     {
@@ -173,6 +192,7 @@
         "ru"     "{green}Вам нужно {1} до следующего уровня. Очки :: {default}{2}{green} /{default} {3}"
         "pt"     "{green}Precisas {1} para avançar para o nivel seguinte. Pontos :: {default}{2} {green}/ {default}{3}"
 		"es"     "{green}Necesitas {1} para avanzar al siguiente nivel. Puntos :: {default}{2} {green}/ {default}{3}"
+		"pl"     "{green}Potrzebujesz {1} by awansować. Stan :: {default}{2} {green}/ {default}{3}"
     }    
     "1>points"
     {
@@ -182,6 +202,7 @@
         "ru"    "{default}{1}{green} очко"
         "pt"    "{default}{1}{green} morte"
 		"es"    "{default}{1}{green} muerte"
+		"pl"    "{default}{1}{green} zabójstwo"
     }
     "x1>points"
     {
@@ -191,6 +212,7 @@
         "ru"    "{default}{1}{green} очко"
         "pt"    "{default}{1}{green} mortes"
 		"es"    "{default}{1}{green} muertes"
+		"pl"    "{default}{1}{green} zabójstwo"
     }
     "x2-x4>points"
     {
@@ -200,6 +222,7 @@
         "ru"    "{default}{1}{green} очка"
         "pt"    "{default}{1}{green} mortes"
 		"es"    "{default}{1}{green} muertes"
+		"pl"    "{default}{1}{green} zabójstw"
     }
     "x5-x20>points"
     {
@@ -209,6 +232,7 @@
         "ru"    "{default}{1}{green} очков"
         "pt"    "{default}{1}{green} mortes"
 		"es"    "{default}{1}{green} muertes"
+		"pl"    "{default}{1}{green} zabójstw"
     }
     "Warmup round has not started yet"
     {
@@ -217,6 +241,7 @@
         "ru"     "{green}Разогрев ещё не начинался"
         "pt"     "{green}Round de warmup ainda não começou"
 		"es"     "{green}La ronda de calentamiento aún no ha comenzado"
+		"pl"     "{green}Rozgrzewka jeszcze się nie rozpoczeła"
     }
     "Warmup round is in progress"
     {
@@ -225,6 +250,7 @@
         "ru"     "{green}Разогрев продолжается"
         "pt"     "{green}Round de warmup está a decorrer"
 		"es"     "{green}La ronda de calentamiento está en progreso"
+		"pl"     "{green}Rozgrzewka właśnie jest w toku"
     }
     "You are on level"
     {
@@ -234,6 +260,7 @@
         "ru"     "{green}Вы на уровне {default}{1} {green}:: {default}{2}"
         "pt"     "{green}Estas no nivel {default}{1} {green}:: {default}{2}"
 		"es"     "{green}Estás en el nivel {default}{1} {green}:: {default}{2}"
+		"pl"     "{green}Jesteś na poziomie {default}{1} {green}:: {default}{2}"
     }
     "Hint: Leader is on level"
     {
@@ -243,6 +270,7 @@
         "de"     "Der Führende ist auf Level {1} :: {2}"
         "pt"     "O lider está no nivel {1} :: {2}"
 		"es"     "El líder está en el nivel {1} :: {2}"
+		"pl"     "Lider jest na poziomie {1} :: {2}"
     }
     "Friendly Fire has been enabled"
     {
@@ -251,12 +279,14 @@
         "ru"     "{green}Включен режим Friendly Fire"
         "pt"     "{green}O Friendly Fire foi ligado"
 		"es"     "{green}El Fuego Amigo ha sido activado"
+		"pl"     "{green}Ogień sojuszniczy jest włączony"
     }
     "Friendly Fire has been disabled"
     {
         "en"     "{green}Friendly Fire has been disabled"
         "ru"     "{green}Выключен режим Friendly Fire"
 		"es"     "{green}El Fuego Amigo ha sido desactivado"
+		"pl"     "{green}Ogień sojuszniczy jest wyłączony"
     }
     "You gained level by planting the bomb"
     {
@@ -266,6 +296,7 @@
         "ru"     "{green}Вы получили {1} за установку бомбы"
         "pt"     "{green}Ganhaste {1} por pôr a bomba"
 		"es"     "{green}Ganaste {1} por plantar la bomba"
+		"pl"     "{green}Otrzymałeś {1} za podłożenie bomby"
     }
     "You gained level by exploding the bomb"
     {
@@ -275,6 +306,7 @@
         "ru"     "{green}Вы получили {1} за взрыв бомбы"
         "pt"     "{green}Ganhaste {1} por explodir a bomba"
 		"es"     "{green}Ganaste {1} por la explosión de la bomba"
+		"pl"     "{green}Otrzymujesz {1} za eksplozje bomby"
     }
     "You gained level by defusing the bomb"
     {
@@ -284,6 +316,7 @@
         "ru"     "{green}Вы получили {1} за разминирование бомбы"
         "pt"     "{green}Ganhaste {1} por desligar a bomba"
 		"es"     "{green}Ganaste {1} por desactivar la bomba"
+		"pl"     "{green}Otrzymujesz {1} za rozbrojenie ładunku C4"
     }
     "Has stolen a level from"
     {
@@ -293,6 +326,7 @@
         "ru"     "{teamcolor}{1}{green} украл уровень у {default}{2}"
         "pt"     "{teamcolor}{1}{green} roubou um nivel de {default}{2}"
 		"es"     "{teamcolor}{1}{green} ha robado un nivel a {default}{2}"
+		"pl" 	 "{teamcolor}{1}{green} ukradł poziom od {default} {2}"
     }
     "Player has leveled many times"
     {
@@ -302,6 +336,7 @@
         "ru"     "{teamcolor}{1} {green}прошёл {2}!!!"
         "pt"     "{teamcolor}{1} {green}subiu de nivel {2}!!!"
 		"es"     "{teamcolor}{1} {green}subio de nivel {2}!!!"
+		"pl"     "{teamcolor}{1} {green} {2}!!!"
     }
     "1>leveled times"
     {
@@ -311,6 +346,7 @@
         "ru"    "{default}{1} {green}уровень"
         "pt"    "{default}{1} {green}vez"
 		"es"    "{default}{1} {green}vez"
+		"pl"    "{default}{1} {green}szybki poziom"
     }
     "x1>leveled times"
     {
@@ -320,6 +356,7 @@
         "ru"    "{default}{1} {green}уровень"
         "pt"    "{default}{1} {green}vezes"
 		"es"    "{default}{1} {green}veces"
+		"pl"    "{default}{1} {green}szybki poziom"
     }
     "x2-x4>leveled times"
     {
@@ -329,6 +366,7 @@
         "ru"    "{default}{1} {green}уровня"
         "pt"    "{default}{1} {green}vezes"
 		"es"    "{default}{1} {green}veces"
+		"pl"    "{default}{1} {green}szybkie poziomy"
     }
     "x5-x20>leveled times"
     {
@@ -338,6 +376,7 @@
         "ru"    "{default}{1} {green}уровней"
         "pt"    "{default}{1} {green}vezes"
 		"es"    "{default}{1} {green}veces"
+		"pl"    "{default}{1} {green}szybkich poziomów"
     }
     "Is lower than the minimum knife stealing level"
     {
@@ -347,7 +386,9 @@
         "ru"     "{teamcolor}{1}{green} находится ниже уровня, который можно украсть. Он должен быть хотя бы на {default}{2}{green} уровне"
         "pt"     "{teamcolor}{1}{green} está mais baixo que o nivel minimo para roubar um nivel. Têm de estar pelo menos no {default}{2}{green} nivel antes de poderes roubar"
 		"es"     "{teamcolor}{1}{green} tiene menor nivel que el mínimo para robar un nivel. Ellos deben de estar en el nivel {default}{2}{green} antes de poder robar"
-    }
+		"pl"     "{teamcolor}{1}{green} posiadasz za wysoki poziom by móc ukraść nożem. Gracz musi posiadać conajmniej {default} {2} {green} poziom, zanim będzie można ukraść"
+	}
+	
     "Has lost a level by killing a hostage"
     {
         "#format"    "{1:s}"
@@ -356,6 +397,7 @@
         "ru"     "{teamcolor}{1}{green} потерял уровень за убийство заложника"
         "pt"     "{teamcolor}{1}{green} perdeu um nivel por ter morto um refem"
 		"es"     "{teamcolor}{1}{green} ha perdido un nivel por matar a un rehén"
+		"pl"     "{teamcolor}{1}{green} stracił poziom przez zabicie hosta"
     }
     "Has lost a level by suicided"
     {
@@ -365,6 +407,7 @@
         "ru"     "{teamcolor}{1}{green} самоликвидировался и потерял уровень"
         "pt"     "{teamcolor}{1}{green} perdeu um nivel por se ter suicidado"
 		"es"     "{teamcolor}{1}{green} ha perdido un nivel por suicidarse"
+		"pl"     "{teamcolor}{1}{green} stracił poziom przez samobójstwo"
     }
     "Has lost levels by suicided"
     {
@@ -374,6 +417,7 @@
         "ru"     "{teamcolor}{1}{green} самоликвидировался и потерял {2}"
         "pt"     "{teamcolor}{1}{green} perdeu {2} por se ter suicidado"
 		"es"     "{teamcolor}{1}{green} ha perdido {2} por suicidarse"
+		"pl"     "{teamcolor}{1}{green} stracił {2} przez samobójstwo"
     }
     "LevelPanel: Level Information"
     {
@@ -382,6 +426,7 @@
         "de"    "[GunGame] Level Information"
         "pt"    "[GunGame] Informação de nivel"
 		"es"    "[GunGame] Información del nivel"
+		"pl"    "[GunGame] Informacja"
     }
     "LevelPanel: Level"
     {
@@ -390,6 +435,7 @@
         "de"    "Level:"
         "pt"    "Nivel:"
 		"es"    "Nivel:"
+		"pl"    "Poziom:"
     }
     "LevelPanel: You are on level"
     {
@@ -399,6 +445,7 @@
         "de"    "Du bist auf Level {1} :: {2}\nDu hast {3} / {4} deiner benötigten kills."
         "pt"    "Estas no nivel {1} :: {2}\nFizeste {3} / {4} das mortes necessárias."
 		"es"    "Estás en el nivel {1} :: {2}\nHas hecho {3} / {4} de las muertes necesarias."
+		"pl"    "Jesteś na poziomie {1} :: {2}\nPosiadasz {3} / {4} z wymaganych zabójst."
     }
     "LevelPanel: You are currently the leader"
     {
@@ -407,6 +454,7 @@
         "de"    "Du bist aktuell Führender."
         "pt"    "És o lider actual."
 		"es"    "Eres actualmente el líder."
+		"pl"    "Jesteś aktualnie liderem."
     }
     "LevelPanel: Wins"
     {
@@ -415,6 +463,7 @@
         "de"    "Wins:"
         "pt"    "Vitórias:"
 		"es"    "Victorias:"
+		"pl"    "Zwycięstwa:"
     }
     "LevelPanel: You have won times"
     {
@@ -424,6 +473,7 @@
         "de"    "Du hast gewonnen {1}."
         "pt"    "Ganhaste {1}."
 		"es"    "Has ganado {1}."
+		"pl"    "Posiadasz {1} wygranych."
     }
     "1>times"
     {
@@ -433,6 +483,7 @@
         "de"    "{1} mal"
         "pt"    "{1} vez"
 		"es"    "{1} vez"
+		"pl"    "{1} "
     }
     "x1>times"
     {
@@ -442,6 +493,7 @@
         "de"    "{1} mal"
         "pt"    "{1} vezes"
 		"es"    "{1} veces"
+		"pl"    "{1} "
     }
     "x2-x4>times"
     {
@@ -451,6 +503,7 @@
         "de"    "{1} mal"
         "pt"    "{1} vezes"
 		"es"    "{1} veces"
+		"pl"    "{1} "
     }
     "x5-x20>times"
     {
@@ -460,6 +513,7 @@
         "de"    "{1} mal"
         "pt"    "{1} vezes"
 		"es"    "{1} veces"
+		"pl"    "{1} "
     }
     "LevelPanel: Leader"
     {
@@ -468,6 +522,7 @@
         "de"    "Führender:"
         "pt"    "Lider:"
 		"es"    "Líder:"
+		"pl"	"Lider:"
     }
     "LevelPanel: The current leader is on level"
     {
@@ -477,6 +532,7 @@
         "de"    "Der aktuell Führende ist {1} mit Level {2} :: {3}."
         "pt"    "O lider actual é {1} no nivel {2} :: {3}."
 		"es"    "El líder actual es {1} en el nivel {2} :: {3}."
+		"pl" 	"Obecnie liderem jest {1} na poziomie {2} :: {3}."
     }
     "LevelPanel: You have tied with the leader"
     {
@@ -485,6 +541,7 @@
         "de"    "Du bist nun mit dem Führenden gleich auf."
         "pt"    "Empataste com o lider."
 		"es"    "Empataste con el lider."
+		"pl"    "Remisujesz z liderem."
     }
     "LevelPanel: You are levels from the leader"
     {
@@ -494,6 +551,7 @@
         "de"    "Du bist {1} von dem Führenden."
         "pt"    "Estás a {1} do lider."
 		"es"    "Estás a {1} del líder."
+		"pl" 	"Jesteś {1} od lidera."
     }
     "LevelPanel: There is currently no leader"
     {
@@ -502,6 +560,7 @@
         "de"    "Es gibt aktuell keinen Führenden."
         "pt"    "Não há de momento um lider"
 		"es"    "No hay un líder de momento"
+		"pl"    "Nie ma obecnie lidera."
     }
     "LevelPanel: Scores"
     {
@@ -510,6 +569,7 @@
         "de"    "Punkte:"
         "pt"    "Pontuação:"
 		"es"    "Pontuaciones:"
+		"pl"	"Wynik:"
     }
     "LevelPanel: Press 4 to show scores"
     {
@@ -518,6 +578,7 @@
         "de"    "Drücke 4 um die Punkte zu zeigen."
         "pt"    "Carrega no 4 para mostrar a pontuação."
 		"es"    "Presiona 4 para mostrar las puntuaciones."
+		"pl" 	"Naciśnij przycisk 4, aby zobaczyć wyniki."
     }
     "Panel: Exit"
     {
@@ -526,6 +587,7 @@
         "de"    "Ausgang"
         "pt"    "Sair"
 		"es"    "Salir"
+		"pl"	"Wyjście"
     }
     "Panel: Back"
     {
@@ -534,6 +596,7 @@
         "de"    "Zurück"
         "pt"    "Atras"
 		"es"    "Volver"
+		"pl"    "Powrót"
     }
     "Panel: Next"
     {
@@ -542,6 +605,7 @@
         "de"    "Vor"
         "pt"    "Seguinte"
 		"es"    "Siguiente"
+		"pl"	"Następna"
     }
     "PlayersLevelPanel: Players level information"
     {
@@ -550,6 +614,7 @@
         "de"    "[GunGame] Spieler Level Information\n "
         "pt"    "[GunGame] Informação de niveis de jogadores\n "
 		"es"    "[GunGame] Información del nivel de los jugadores\n "
+		"pl"    "[GunGame] Informacje o poziomach graczy\n "
     }
     "PlayersLevelPanel: Level Name"
     {
@@ -559,6 +624,7 @@
         "de"    "Level {1} :: {3} :: {2}"
         "pt"    "Nivel {1} :: {3} :: {2}"
 		"es"    "Nivel {1} :: {3} :: {2}"
+		"pl"    "Poziom {1} :: {3} :: {2}"
     }
     "PlayersLevelPanel: Level Wins Name"
     {
@@ -568,6 +634,7 @@
         "de"    "Level {1} :: {4} :: {2} :: {3}"
         "pt"    "Nivel {1} :: {4} :: {2} :: {3}"
 		"es"    "Nivel {1} :: {4} :: {2} :: {3}"
+		"pl"    "Poziom {1} :: {4} :: {2} :: {3}"
     }
     "1>wins"
     {
@@ -577,6 +644,7 @@
         "de"    "{1} Win"
         "pt"    "{1} Vitoria"
 		"es"    "{1} Victoria"
+		"pl"    "{1} zwycięstw"
     }
     "x1>wins"
     {
@@ -586,6 +654,7 @@
         "de"    "{1} Wins"
         "pt"    "{1} Vitorias"
 		"es"    "{1} Victoris"
+		"pl"    "{1} zwycięstwo"
     }
     "x2-x4>wins"
     {
@@ -595,6 +664,7 @@
         "de"    "{1} Wins"
         "pt"    "{1} Vitorias"
 		"es"    "{1} Victoris"
+		"pl"    "{1} zwycięstwa"
     }
     "x5-x20>wins"
     {
@@ -604,6 +674,7 @@
         "de"    "{1} Wins"
         "pt"    "{1} Vitorias"
 		"es"    "{1} Victoris"
+		"pl"    "{1} zwycięstw"
     }
     "JoinPanel: This server is running the GunGame:SM"
     {
@@ -612,6 +683,7 @@
         "de"    "Auf diesem Server läuft GunGame:SM"
         "pt"    "Este servidor está a correr GunGame:SM"
 		"es"    "Este servidor está ejecutando GunGame:SM"
+		"pl"    "Na serwerze uruchumiony jest GunGame:SM"
     }
     "JoinPanel: Bots can win the game is ENABLED!!"
     {
@@ -620,6 +692,7 @@
         "de"    "Bots können Spiele gewinnen ist EINGESCHALTET!!"
         "pt"    "Bots poderem ganhar o jogo está LIGADO!!"
 		"es"    "Bots puede ganar el juego está ACTIVADO!!"
+		"pl"    "Boty mogą wygrać mecz (włączone!)"
     }
     "JoinPanel: Turbo Mode is ENABLED!!"
     {
@@ -628,6 +701,7 @@
         "de"    "Turbo Modus ist EINGESCHALTET!!"
         "pt"    "Modo Turbo está LIGADO!!"
 		"es"    "Modo Turbo está ACTIVADO!!"
+		"pl"    "Turbo Mode jest AKTYWNY!!"
     }
     "JoinPanel: Knife Pro is ENABLED!!"
     {
@@ -636,6 +710,7 @@
         "de"    "Knife Pro ist EINGESCHALTET!!"
         "pt"    "Knife Pro está LIGADO!!"
 		"es"    "Knife Pro está ACTIVADO!!"
+		"pl"    "Knife Pro jest AKTYWNY!!"
     }
     "JoinPanel: Knife Elite is ENABLED!!"
     {
@@ -644,6 +719,7 @@
         "de"    "Knife Elite ist EINGESCHALTET!!"
         "pt"    "Knife Elite está LIGADO!!"
 		"es"    "Knife Elite está ACTIVADO!!"
+		"pl"    "Knife Elite jest AKTYWNY!!"
     }
     "JoinPanel: Multikill Mode is ENABLED!!"
     {
@@ -652,6 +728,7 @@
         "de"    "Multikill Mode ist EINGESCHALTET!!"
         "pt"    "Modo Multikill está LIGADO!!"
 		"es"    "Modo Multikill está ACTIVADO!!"
+		"pl"    "Multikill Mode jest AKTYWNY!!"
     }
     "JoinPanel: Type !rules for instructions on how to play"
     {
@@ -660,6 +737,7 @@
         "de"    "Schreib !rules für eine Anleitung zu diesem Spiel"
         "pt"    "Escreve !rules para instruções de como jogar"
 		"es"    "Escribe !rules para ver las instrucciones de como jugar"
+		"pl"    "Wpisz !rules by poznać zasady trybu GunGame"
     }
     "JoinPanel: Type !level to get your level info and who is leading"
     {
@@ -668,6 +746,7 @@
         "de"    "Schreib !level für die Info, wer aktuell führt"
         "pt"    "Escreve !level para veres a informação do teu nivel e quem lidera"
 		"es"    "Escribe !level para ver información de tu nivel y del que está liderando"
+		"pl"    "Wpisz !level by uzyskać informacje o liderze meczu"
     }
     "JoinPanel: Type !score to get a list of all players scores and winnings"
     {
@@ -676,6 +755,7 @@
         "de"    "Schreib !score für eine Liste über die Punkte und Siege aller Spieler"
         "pt"    "Escreve !score para veres uma lista de todas as pontuações e vitórias"
 		"es"    "Escribe !score para ver una lista de todas las puntuaciones y victorias"
+		"pl" 	"Wpisz !score aby uzyskać listę wszystkich punktów i wygranych graczy"
     }
     "JoinPanel: Type !commands to get a full list of gungame commands"
     {
@@ -684,6 +764,7 @@
         "de"    "Schreib !commands für eine Liste der gungame commands"
         "pt"    "Escreve !commands para uma lista completa de comandos do gungame"
 		"es"    "Escribe !commands para ver una lista completa de los comandos gungame"
+		"pl"    "Wpisz !commands aby uzyskać pełną listę komend Gun Game"
     }
     "CommandPanel: [GunGame] Command list information"
     {
@@ -692,6 +773,7 @@
         "de"    "[GunGame] Command list Information"
         "pt"    "[GunGame] Lista de comandos"
 		"es"    "[GunGame] Lista de comandos"
+		"pl"    "[GunGame] Lista komend"
     }
     "CommandPanel: !level to see your current level and who is winning"
     {
@@ -700,6 +782,7 @@
         "de"    "!level um dein aktuelles Level zu sehen und wer aktuell gewinnt"
         "pt"    "!level para ver o teu nivel e quem lidera"
 		"es"    "!level para ver tu nivel y el del que está liderando"
+		"pl" 	"!level - zobacz swój aktualny poziom i kto wygrywa"
     }
     "CommandPanel: !weapons to see the weapon order"
     {
@@ -708,6 +791,7 @@
         "de"    "!weapons um die Waffenreihenfolge zu sehen"
         "pt"    "!weapons para ver a ordem das armas"
 		"es"    "!weapons para ver el orden de las armas"
+		"pl"    "!weapons - zobacz kolejność broni"
     }
     "CommandPanel: !score to see all player current scores"
     {
@@ -716,6 +800,7 @@
         "de"    "!score um die Punkte aller Spieler zu sehen"
         "pt"    "!score para ver todas as pontuações"
 		"es"    "!score para ver todas las puntuaciones"
+		"pl"    "!score - zobacz aktualne wyniki graczy"
     }
     "CommandPanel: !top to see the top winners on the server"
     {
@@ -724,6 +809,7 @@
         "de"    "!top um die Top Spieler dieses Servers zu sehen"
         "pt"    "!top para ver o top de vencedores do servidor"
 		"es"    "!top para ver el top de ganadores en el servidor"
+		"pl"    "!top - zobacz najlepsze zwycięzców na serwerze"
     }
     "CommandPanel: !leader to see current leaders"
     {
@@ -732,6 +818,7 @@
         "de"    "!leader um den aktuell Führenden anzuzeigen"
         "pt"    "!leader para mostrar o lider corrente"
 		"es"    "!leader para mostrar los líderes actuales"
+		"pl"    "!leader - zobacz lidera"
     }
     "CommandPanel: !rank to see your place in stats"
     {
@@ -740,6 +827,7 @@
         "de"    "!rank um deinen aktuellen Platz in den Stats anzuzeigen"
         "pt"    "!rank para ver a tua posição nos stats"
 		"es"    "!rank para ver tu lugar en las estadísticas"
+		"pl"    "!rank - zobacz swoje miejsce w statystykach"
     }
     "CommandPanel: !rules to see the rules and how to play"
     {
@@ -748,6 +836,7 @@
         "de"    "!rules um die Regeln zu sehen und wie man hier spielt"
         "pt"    "!rules para ver as regras e como jogar"
 		"es"    "!rules para ver las reglas de como jugar"
+		"pl"    "!rules - zobacz regulamin i jak grać"
     }
     "WeaponLevelPanel: [GunGame] Weapon Levels"
     {
@@ -756,6 +845,7 @@
         "de"    "[GunGame] Waffen Levels"
         "pt"    "[GunGame] Niveis de armas"
 		"es"    "[GunGame] Niveles de armas"
+		"pl"    "[GunGame] Poziomy broni"
     }
     "WeaponLevelPanel: Order Weapon Kills"
     {
@@ -765,6 +855,7 @@
         "de"    "{1}. {3}x {2}"
         "pt"    "{1}. {3}x {2}"
 		"es"    "{1}. {3}x {2}"
+		"pl"    "{1}. {3}x {2}"
     }
     "RulesPanel: [GunGame] Rules information"
     {
@@ -773,6 +864,7 @@
         "de"    "[GunGame] Regeln Information"
         "pt"    "[GunGame] Informação de regras"
 		"es"    "[GunGame] Información de las reglas"
+		"pl"    "[GunGame] Regulamin"
     }
     "RulesPanel: You must get kills with your current weapon to level up"
     {
@@ -782,6 +874,7 @@
         "de"    "Du musst {1} mit Deiner Waffe haben, um einen Level zu steigen."
         "pt"    "Tens de fazer {1} com a tua arma corrente para subires de nivel."
 		"es"    "Tienes que conseguir {1} con esta arma para subir de nivel."
+		"pl" 	"Musisz dostać {1} z aktualnej broni by awansować poziom wyżej."
     }
     "RulesPanel: If you get a kill with a weapon out of order. It does not count towards your level"
     {
@@ -790,6 +883,7 @@
         "de"    "Wenn Du mit der falschen Waffe killst, bekommst Du keinen Level dazu."
         "pt"    "Se fizeres uma morte com uma arma fora da ordem não conta para o teu nivel."
 		"es"    "Si consigues una muerte con una arma fuera del orden. Esta no contará para tu nivel"
+		"pl"    "Jeśli zabijesz z broni z poza kolejności, zabójstwo nie zostanie Ci zaliczone"
     }
     "RulesPanel: You can gain level by PLANTING or DEFUSING the bomb"
     {
@@ -799,6 +893,7 @@
         "de"    "Du kannst {1} gewinnen, in dem Du die Bombe legst bzw. entschärfst."
         "pt"    "Podes ganhar {1} por pôr ou desligar a bomba."
 		"es"    "Puedes ganar {1} por PLANTAR o DESACTIVAR la bomba."
+		"pl" 	"Możesz zdobyć {1} przez podłożenie lub rozbrojenie bomby."
     }
     "RulesPanel: You can gain level by EXPLODING or DEFUSING the bomb"
     {
@@ -808,6 +903,7 @@
         "de"    "Du kannst {1} bekommen, wenn die Bombe explodiert oder Du sie entschärfst."
         "pt"    "Podes ganhar {1} por explodir ou desligar a bomba."
 		"es"    "Puedes ganar {1} por la EXPLOSIÓN o DESACTIVACIÓN de la bomba."
+		"pl" 	"Możesz zdobyć {1} przez eksplozje lub rozbrojenie bomby."
     }
     "RulesPanel: Friendly Fire is automatically turned ON when someone reaches GRENADE level"
     {
@@ -816,6 +912,7 @@
         "de"    "Friendly Fire ist automatisch an, wenn jemand die Granate erreicht."
         "pt"    "Friendly Fire é ligado automaticamente quando algum chega ao nivel da granada."
 		"es"    "Fuego Amigo se activará automáticamente cuando alguien alcanze el nivel de GRANADA."
+		"pl"    "Ogień sojuszniczy jest automatycznie włączany, gdy ktoś osiąga poziom granatu."
     }
     "RulesPanel: You CAN gained more than one level per round"
     {
@@ -824,6 +921,7 @@
         "de"    "Du kannst mehr als EIN Level pr Runde machen."
         "pt"    "Podes ganhar mais de um nivel por turno."
 		"es"    "PUEDES ganar más de un nivel por ronda."
+		"pl" 	"Można uzyskać więcej niż jeden poziom na rundę."
     }
     "RulesPanel: You can steal a level from an opponent by knifing them"
     {
@@ -832,6 +930,7 @@
         "de"    "Du kannst einem Gegner einen Level stehlen, in dem Du ihn mit dem Messer killst."
         "pt"    "Podes roubar um nivel aos adversários se os matares com a faca."
 		"es"    "Puedes robar un nivel a un oponente matándole con el cuchillo."
+		"pl" 	"Można ukraść poziom od przeciwnika przez zabicie z noża."
     }
     "RulesPanel: After you levelup, you will only have a knife until the next round starts"
     {
@@ -840,6 +939,7 @@
         "de"    "Nach dem Du gelevelt hast, hast Du nächste Runde nur ein Messer als Waffe."
         "pt"    "Depois de subires de nivel so terás a faca até ao proximo turno."
 		"es"    "Después de subir de nivel. Solo tendrás un cuchillo hasta la próxima ronda"
+		"pl" 	"Po zdobyciu poziomu, będzie dostępny tylko nóż, aż do kolejna runda się zaczyna."
     }
     "RulesPanel: You will receive your next weapon immediately when you level up"
     {
@@ -848,6 +948,7 @@
         "de"    "Du bekommst Deine nächste Waffe erst, wenn Du im nächsten Level bist."
         "pt"    "Irás receber a proxima arma imediatamente depois de subir de nivel."
 		"es"    "Recibirás inmediatamente la siguiente arma cuando subas de nivel."
+		"pl"    "Otrzymasz kolejną broń natychmiast, kiedy zdobędziesz nowy poziom."
     }
     "RulesPanel: If you commit suicide you will lose levels"
     {
@@ -857,6 +958,7 @@
         "de"    "Wenn Du Dich selber tötest, verlierst Du ein {1}."
         "pt"    "Se te suicidares iras perder {1}."
 		"es"    "Si te suicidas, perderás {1}."
+		"pl" 	"Jeśli popełnisz samobójstwo tracisz {1}."
     }
     "RulesPanel: There is a grace period at the end of each round to allow players to switch teams"
     {
@@ -865,6 +967,7 @@
         "de"    "Da ist eine Frist an jedem Ende einer Runde die es Spielern erlaubt das Team zu wechseln."
         "pt"    "Há um periodo no fim de cada turno em que podes mudar de equipa."
 		"es"    "Hay un periodo de descanso al final de cada ronda para permitir a los jugadores cambiarse de equipo."
+		"pl" 	"Nie ma okresu karencji na koniec każdej rundy, aby umożliwić graczom na przełączanie zespołów."
     }
     "RulesPanel: Type !commands to see the list of gungame commands"
     {
@@ -873,6 +976,7 @@
         "de"    "Schrieb !commands für eine Liste aller gungame commands."
         "pt"    "Escreve !commands para ver a lista de comandos do gungame."
 		"es"    "Escribe !commands para ver la lista de comandos de gungame."
+		"pl"    "Wpisz !commands by wyświetlić listę komend trybu Gun-Game"
     }
     "RulesPanel: Page"
     {
@@ -882,6 +986,7 @@
         "de"    "Seite {1} / {2}"
         "pt"    "Pagina {1} / {2}"
 		"es"    "Página {1} / {2}"
+		"pl"    "Strona {1} / {2}"
     }
     "LeaderMenu: Leaders"
     {
@@ -890,6 +995,7 @@
         "de"    "[GunGame] Leaders\n "
         "pt"    "[GunGame] Lideres\n "
 		"es"    "[GunGame] Líderes\n "
+		"pl"    "[GunGame] Liderzy meczu\n "
     }
     "LeaderMenu: No leaders"
     {
@@ -898,6 +1004,7 @@
         "de"    "Es gibt aktuell keinen Führenden."
         "pt"    "Não há nenhum lider de momento."
 		"es"    "No hay ningún líder actualmente."
+		"pl" 	"Nie ma obecnie lidera."
     }
     "LeaderMenu: Leader level and weapon"
     {
@@ -907,6 +1014,7 @@
         "de"    "\naktuell Führender ist auf Level {1} :: {2}\n \nLeaders:"
         "pt"    "\nO lider corrente está no nivel {1} :: {2}\n \nLideres:"
 		"pt"    "\nO el líder actual está en el nivel {1} :: {2}\n \nLíderes:"
+		"pl"    "\nObecny lider jest na poziomie {1} :: {2}\n \nLiderzy:"
     }
     "Your level has been updated by handicap"
     {
@@ -915,6 +1023,7 @@
         "de"    "{green}Dein Level wurde vom Handycap upgedated"
         "pt"    "{green}O teu nivel foi actualizado pelo handicap"
 		"es"    "{green}Ti nivel ha sido actualizado a causa de la desventaja"
+		"pl"    "{green}Twój poziom został zaktualizowany przez HCP"
     }
     "You can not steal level from %s, your levels difference is more then %d"
     {
@@ -924,5 +1033,6 @@
         "ru"    "{green}Вы не можете украсть уровень у {teamcolor}{1}{green}, разница в уровнях больше {default}{2}"
         "pt"    "{green}Não podes roubar um nivel de {teamcolor}{1}{green}, a tua diferença de nivel é mais que {default}{2}"
 		"es"    "{green}No puedes robar el nivel de {teamcolor}{1}{green}, la diferencia de niveles es más de {default}{2}"
+		"pl" 	"{green}Nie można ukraść poziom od {teamcolor} {1} {green},ponieważ różnica poziomów jest większa niż {default} {2}"
     }
 }

@@ -214,12 +214,9 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*] Thanks to "blodia" for the plugin "[CSS] Weapon Mod" (http://forums.alliedmods.net/showthread.php?t=123015)
     Fast weapon switch code, fixed weapon animation on fast switch code is ported from this plugin.
 [*] Thanks to psychonic! Actualy he made version for CSGO possible and i can not imagine this plugin without his support.
-[*] Thanks to Xilver266 for spanish translation.
 [*] Thanks to Ted Theodore Logan & xDr.HaaaaaaaXx from [url]http://www.war3source.com/[/url]
     for cool visual effect from "War3Source - Addon - Display Particles on Level Up" plugin version 1.1
     used in multi level bonus effect in gungame plugin.
-[*] Thanks to VoGon for the translation to portuguese.
-[*] Thanks to tObIwAnKeNoBi for german translation.
 [*] Thanks to exvel for sourcemod library Colors 1.0.2
       [URL]http://forums.alliedmods.net/showthread.php?t=96831[/URL]
 [*] Thanks to bl4nk for GunGame Display Winner plugin.
@@ -228,6 +225,14 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*] Original Idea and concepts of Gun Game was made by cagemonkey
       [URL]http://www.cagemonkey.org[/URL]
 [*] Original SourceMod code by Teame06
+[/LIST]
+
+[B]Translations[/B]
+[LIST]
+[*] Thanks to PlasteR for the polish translation.
+[*] Thanks to Xilver266 for the spanish translation.
+[*] Thanks to VoGon for the portuguese translation.
+[*] Thanks to tObIwAnKeNoBi for the german translation.
 [/LIST]
 
 [anchor]Changelog[/anchor][B]Changelog[/B]
