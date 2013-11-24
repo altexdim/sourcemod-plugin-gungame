@@ -1,0 +1,2 @@
+﻿Read git access: git clone https://github.com/altexdim/sourcemod-plugin-gungame.git
+Read/write git ssh access: git remote set-url origin git@github.com:altexdim/sourcemod-plugin-gungame.git
