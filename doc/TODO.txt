@@ -3,6 +3,67 @@ TODO
 
     ----====----==== High priority list ----====----====
 
+	* Implement new config variable to change end-game behaviour, now the scoreboard is not been shown after match end, but 
+		the scoreboard should be visible to see weapon drops and to be able to vote for the next map if they enabled map voting with mp_endmatch_votenextmap. 
+		Admins should have ability to change this behaviour.
+		And there is an issue with this code: if map vote choose the same map, then server will not change a level, just restart map. after that players 
+		can not do anything, scoreboard is still visible.
+		-------------------------------------
+		/**
+		 * Forces multiplayer game to end so it can go threw intermission and map change.
+		 *
+		 * @noparam
+		 * @noreturn
+		 */
+		UTIL_EndMultiplayerGame() {
+			new Handle:timelimit = FindConVar("mp_timelimit"), Handle:fraglimit = FindConVar("mp_fraglimit"), Handle:maxrounds = FindConVar("mp_maxrounds"), Handle:winlimit = FindConVar("mp_winlimit"), Handle:ignore_conditions = FindConVar("mp_ignore_round_win_conditions");
+					
+			if (GetConVarInt(ignore_conditions) != 0) {
+				SetConVarInt(ignore_conditions, 0);
+				CloseHandle(ignore_conditions);
+			}
+			
+			if (GetConVarInt(timelimit) != 0) {
+				SetConVarInt(timelimit, 0);
+				CloseHandle(timelimit);
+			}    
+			
+			if (GetConVarInt(fraglimit) != 0) {
+				SetConVarInt(fraglimit, 0);
+				CloseHandle(fraglimit);
+			}    
+			
+			if (GetConVarInt(maxrounds) != 0) {
+				SetConVarInt(maxrounds, 0);
+				CloseHandle(maxrounds);
+			}
+
+			if (GetConVarInt(winlimit) != 0) {
+				SetConVarInt(winlimit, 0);
+				CloseHandle(winlimit);
+			}
+			
+			if(GetClientTeam(GameWinner) == 3)
+				CS_TerminateRound(0.1, CSRoundEnd_TerroristWin);
+			else if(GetClientTeam(GameWinner) == 4)
+				CS_TerminateRound(0.1, CSRoundEnd_CTWin);
+				
+			CreateTimer(float(GetConVarInt(FindConVar("mp_match_restart_delay"))+10), UTIL_DidMapChange); // +10 secs to make sure that timer will not be called before map will be changed by the server itself.
+		}
+
+		public Action:UTIL_DidMapChange(Handle:timer)
+		{
+			new Handle:timelimit = FindConVar("mp_timelimit"), String:SMNextMap[64];
+			
+			if (GetConVarInt(timelimit) == 0)
+			{
+				GetNextMap(SMNextMap, sizeof(SMNextMap));
+				ServerCommand("changelevel %s", SMNextMap);
+			}
+			CloseHandle(timelimit);
+		}  
+		-------------------------------------
+	
     * Bugreport: When loading gungame.smx instead of gungame_sdkhooks.smx, I got this error in my console:
         exec //*/cfg/\\gungame.mapconfig.cfg: invalid path.
 
