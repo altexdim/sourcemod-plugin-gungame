@@ -71,6 +71,15 @@
         "EndGameDelay" "0"
 
         /**
+         * Sets how to finish the game after someone has won.
+         *
+         * Options:
+         *      0 - Normal game end with scoreboard, vote next map valve menu and weapon drops.
+         *      1 - Silent game end.
+         */
+        "EndGameSilent" "0"
+
+        /**
          * Multiply sound effects volume.
          *
          * In CS:GO the volume is too low.

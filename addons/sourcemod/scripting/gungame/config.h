@@ -114,3 +114,5 @@ new g_Cfg_WinnerFreezePlayers       = 0;
 new g_Cfg_FastSwitchOnChangeWeapon  = 0;
 new g_Cfg_FastSwitchOnLevelUp       = 0;
 new g_Cfg_FastSwitchSkipWeapons[MAX_WEAPONS_COUNT];
+
+new g_Cfg_EndGameSilent = 0;

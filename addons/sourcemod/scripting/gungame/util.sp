@@ -1583,9 +1583,41 @@ public Action:UTIL_Timer_EndMultiplayerGame(Handle:timer, any:data) {
  * @noreturn
  */
 UTIL_EndMultiplayerGame() {
+    if (g_Cfg_EndGameSilent) {
+        UTIL_EndMultiplayerGameSilent();
+    } else {
+        UTIL_EndMultiplayerGameNormal();
+    }
+}
+
+UTIL_EndMultiplayerGameSilent() {
     new ent = CreateEntityByName("game_end");
     DispatchSpawn(ent);
     AcceptEntityInput(ent, "EndGame");
+}
+
+UTIL_EndMultiplayerGameNormal() {
+    new Handle:hTimelimit = FindConVar("mp_timelimit"), 
+        Handle:hFraglimit = FindConVar("mp_fraglimit"), 
+        Handle:hMaxrounds = FindConVar("mp_maxrounds"), 
+        Handle:hWinlimit = FindConVar("mp_winlimit");
+    SetConVarInt(hTimelimit, 0);
+    SetConVarInt(hFraglimit, 0);
+    SetConVarInt(hMaxrounds, 0);
+    SetConVarInt(hWinlimit, 0);
+
+    if (g_GameName == GameName:Csgo) {
+        new Handle:hIgnoreConditions = FindConVar("mp_ignore_round_win_conditions"),
+            Handle:hMatchEndChangelevel = FindConVar("mp_match_end_changelevel");
+        SetConVarInt(hIgnoreConditions, 0);
+        SetConVarInt(hMatchEndChangelevel, 1);
+	}
+    		
+    if (GetClientTeam(GameWinner) == CS_TEAM_T) {
+        CS_TerminateRound(0.1, CSRoundEnd_TerroristWin);
+    } else {
+        CS_TerminateRound(0.1, CSRoundEnd_CTWin);
+    }
 }
 
 /**

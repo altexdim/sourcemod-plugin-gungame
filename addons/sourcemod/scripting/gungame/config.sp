@@ -275,6 +275,8 @@ public GG_ConfigKeyValue(const String:key[], const String:value[])
                 g_Cfg_BlockWeaponSwitchOnNade = bool:StringToInt(value);
             } else if ( strcmp("BlockWeaponSwitchIfKnife", key, false) == 0 ) {
                 g_Cfg_BlockWeaponSwitchIfKnife = bool:StringToInt(value);
+            } else if ( strcmp("EndGameSilent", key, false) == 0 ) {
+                g_Cfg_EndGameSilent = StringToInt(value);
             }
         }
         

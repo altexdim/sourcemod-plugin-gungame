@@ -1,6 +1,9 @@
 Changelog
 ---------
+    1.2.16.0:
         * Added polish translation. Thanks to PlasteR.
+        * Added ability to show scoreboard after match end (see "EndGameSilent" in config). Added gungame config variable "EndGameSilent" (default set to "0") to set how to finish the game after someone has won.
+            Thanks to LambdaLambda for help in research.
 
     1.2.15.1:
         * [CSGO] Added new weapons support (weapon_bayonet).
