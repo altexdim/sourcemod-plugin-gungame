@@ -296,4 +296,14 @@
         "slot" "2"
         "level_index" "1"
     }
+
+    "prop_physics" {
+        "index" "46"
+        "level_index" "46"
+    }
+
+    "prop_physics_multiplayer" {
+        "index" "47"
+        "level_index" "47"
+    }
 }
