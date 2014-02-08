@@ -4,13 +4,6 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Bugreport: 
-        I have an error since update from 1.2.14.1 to 1.2.15.1.
-        Now running 1.2.16.0 an still same error:
-        Code:
-        L 12/02/2013 - 19:31:52: [gungame_sdkhooks.smx] [GunGame] Weapon index for "prop_physics_multiplayer" not found.
-        Game is CSS
-
-        Edit:
         Info: In CSS "EndGameSilent" "0" doesn't work. No mapchange and game freezes.
         "EndGameSilent" "1" works fine. Incl. scoreboard.
 
