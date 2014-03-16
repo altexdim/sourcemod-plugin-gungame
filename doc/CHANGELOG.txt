@@ -1,6 +1,7 @@
 Changelog
 ---------
         * Fixed '[GunGame] Weapon index for "prop_physics*" not found' message in sourcemod log files.
+        * [CSGO] Added new weapons after update in Feb 2014.
 
     1.2.16.0:
         * Added polish translation. Thanks to PlasteR.
