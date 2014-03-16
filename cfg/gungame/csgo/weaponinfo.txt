@@ -306,4 +306,12 @@
         "index" "47"
         "level_index" "47"
     }
+
+    // new weapons update after *.02.2014
+    "cz75a" {
+        "index" "48"
+        "slot" "1"
+        "clipsize" "12"
+        "level_index" "5"
+    }
 }
