@@ -3,8 +3,6 @@ TODO
 
     ----====----==== High priority list ----====----====
 
-	* New gun CZ75-Auto
-	
     * Bugreport: 
         Info: In CSS "EndGameSilent" "0" doesn't work. No mapchange and game freezes.
         "EndGameSilent" "1" works fine. Incl. scoreboard.
