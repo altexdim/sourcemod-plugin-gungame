@@ -4,6 +4,25 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Bugreport: 
+        L 03/14/2014 - 15:281: [SM] Native "GetClientTeam" reported: Client 2 is not in game
+        L 03/14/2014 - 15:281: [SM] Displaying call stack trace for plugin "gungame.smx":
+        L 03/14/2014 - 15:281: [SM] [0] Line 1616, gungame/util.sp::UTIL_EndMultiplayerGameNormal()
+        L 03/14/2014 - 15:281: [SM] [1] Line 1589, gungame/util.sp::UTIL_EndMultiplayerGame()
+        L 03/14/2014 - 15:281: [SM] [2] Line 1576, gungame/util.sp::UTIL_Timer_EndMultiplayerGame()
+
+    * Bugreport: 
+        Tried running gungame_sdkhooks.smx version and get following errors:
+        L 03/13/2014 - 01:11:42: [gungame_sdkhooks.smx] [GunGame] Weapon index for "world" not found.
+
+        L 03/13/2014 - 12:23:28: [SM] Native "GetEntPropEnt" reported: Property "m_hOwnerEntity" not found (entity 38/env_lightglow)
+        L 03/13/2014 - 12:23:28: [SM] Displaying call stack trace for plugin "gungame_sdkhooks.smx":
+        L 03/13/2014 - 12:23:28: [SM] [0] Line 906, gungame/event.sp::Timer_RemoveDroppedWeapon()
+
+        L 03/13/2014 - 19:05:09: [SM] Native "GetEntPropEnt" reported: Property "m_hOwnerEntity" not found (entity 153/water_lod_control)
+        L 03/13/2014 - 19:05:09: [SM] Displaying call stack trace for plugin "gungame_sdkhooks.smx":
+        L 03/13/2014 - 19:05:09: [SM] [0] Line 906, gungame/event.sp::Timer_RemoveDroppedWeapon()
+
+    * Bugreport: 
         Info: In CSS "EndGameSilent" "0" doesn't work. No mapchange and game freezes.
         "EndGameSilent" "1" works fine. Incl. scoreboard.
 
