@@ -1,6 +1,6 @@
 @echo off 
 
-set DIR_SERVER_SOURCEMOD=E:\games\csgo_ds\csgo\addons\sourcemod
+set DIR_SERVER_SOURCEMOD=c:\games\csgo_gungame_ds\csgo\addons\sourcemod
 set DIR_SERVER_SCRIPTING=%DIR_SERVER_SOURCEMOD%\scripting
 set DIR_SERVER_PLUGINS=%DIR_SERVER_SOURCEMOD%\plugins
 
