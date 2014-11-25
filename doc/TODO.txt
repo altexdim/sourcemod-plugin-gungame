@@ -4,6 +4,11 @@ TODO
     ----====----==== High priority list ----====----====
 
     * Bugreport: 
+        L 11/23/2014 - 21:06:48: [SM] Native "GG_IsWeaponKnife" reported: Weapon index out of range [0]
+        L 11/23/2014 - 21:06:48: [SM] Displaying call stack trace for plugin "gungame_bot.smx":
+        L 11/23/2014 - 21:06:48: [SM] [0] Line 35, gungame_bot.sp::GG_OnClientDeath()
+
+    * Bugreport: 
         L 03/14/2014 - 15:281: [SM] Native "GetClientTeam" reported: Client 2 is not in game
         L 03/14/2014 - 15:281: [SM] Displaying call stack trace for plugin "gungame.smx":
         L 03/14/2014 - 15:281: [SM] [0] Line 1616, gungame/util.sp::UTIL_EndMultiplayerGameNormal()
