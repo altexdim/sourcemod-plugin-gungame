@@ -324,7 +324,7 @@ No issues.
 [LIST]
 [*]Winners menu [URL]http://forums.alliedmods.net/showpost.php?p=949442&postcount=255[/URL]
 [*]!give [URL]https://forums.alliedmods.net/showpost.php?p=1055706&postcount=701[/URL]
-[*]!give with reload button[URL]https://forums.alliedmods.net/showpost.php?p=2227859&postcount=9[/URL]
+[*]!give with reload button [URL]https://forums.alliedmods.net/showpost.php?p=2227859&postcount=9[/URL]
 [*]!buylevel [URL]http://forums.alliedmods.net/showthread.php?t=134264[/URL]
 [*]!buylevel [URL]https://forums.alliedmods.net/showpost.php?p=1387759&postcount=2366[/URL]
 [*]MVP as level (Peacemaker) [URL]https://forums.alliedmods.net/showpost.php?p=1627823&postcount=3105[/URL]
