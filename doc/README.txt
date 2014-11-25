@@ -317,11 +317,13 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [anchor]Issues[/anchor][B]Issues[/B]
 ----------------------------------------------------
 
+[LIST]
 [*] [CSGO] No multichannel sounds. It's possible to play only one sound at a time, 
     no overlaps of the sounds. Sounds couldn't be cached on a client.
     http://wiki.alliedmods.net/CSGO_Quirks
 [*] [CSGO] Motd could not be shown as notmal motd. It's only possble to show 
     new window with javascript function window.open().
+[/LIST]
 
 [anchor]3-rd party plugins[/anchor][B]3-rd party plugins[/B]
 ----------------------------------------------------
