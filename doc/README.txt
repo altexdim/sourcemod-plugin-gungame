@@ -241,6 +241,26 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 ----------------------------------------------------
 
 [LIST]
+[*][COLOR=#009900][B]Q.[/B] The map does not change after player wins[/color]
+         [COLOR=#FF0000][B]A.[/B][/color] GunGame plugin doesn't change the map itself, it leaves that to whatever mapchanger you use.
+After player reaches one of the latest levels GunGame will attempt to run the command that is located in "gungame.mapvote.cfg" to start map voting.
+By default it tries SourceMod default plugin to start the vote (MapChooser) - "sm_mapvote", but you can change that by changing the file "gungame.mapvote.cfg". 
+
+See "VoteLevelLessWeaponCount" config variable in main gungame config file. By deafult it equals two.
+That means the voting begins after someone level up to the level that 2 levels below the maximum level.
+
+You need to configure your map voting/map changing plugin according to its documentation.
+For example SourceMod Map Management Plugins documentation is here [URL]https://wiki.alliedmods.net/Map_Management_Plugins_(SourceMod)[/URL].
+It uses some of the config files:
+"/maplist.txt"
+"/mapcycle.txt"
+"/cfg/sourcemod/mapchooser.cfg"
+"/cfg/sourcemod/mapvote.cfg"
+
+You can also try UltimateMapChooser plugin [URL]https://forums.alliedmods.net/showthread.php?t=134190[/URL]
+If you are having issues with CS:GO you can try workaround - "EndGameSilent" "1" in main gungame config file. 
+If you are running CS:GO, make sure to set the correct game mode (find in the FAQ).
+
 [*][COLOR=#009900][B]Q.[/B][CS:GO] What do I put for game_mode and game_type?[/color]
          [COLOR=#FF0000][B]A.[/B][/color]+game_type 0 +game_mode 0
 
