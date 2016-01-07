@@ -244,10 +244,12 @@ Don't use both gungame.smx and gungame_sdkhooks.smx.
 [*][COLOR=#009900][B]Q.[/B] The map does not change after player wins[/color]
          [COLOR=#FF0000][B]A.[/B][/color] GunGame plugin doesn't change the map itself, it leaves that to whatever mapchanger you use.
 After player reaches one of the latest levels GunGame will attempt to run the command that is located in "gungame.mapvote.cfg" to start map voting.
-By default it tries SourceMod default plugin to start the vote (MapChooser) - "sm_mapvote", but you can change that by changing the file "gungame.mapvote.cfg". 
+By default it tries SourceMod default plugin to start the vote (MapChooser) - "sm_mapvote", but you can change that by changing the file "gungame.mapvote.cfg".
 
 See "VoteLevelLessWeaponCount" config variable in main gungame config file. By deafult it equals two.
 That means the voting begins after someone level up to the level that 2 levels below the maximum level.
+
+After someone wins the game GunGame finishes map like it happens when "mp_timelimit" exceeded. Then your map changing plugin should change the map.
 
 You need to configure your map voting/map changing plugin according to its documentation.
 For example SourceMod Map Management Plugins documentation is here [URL]https://wiki.alliedmods.net/Map_Management_Plugins_(SourceMod)[/URL].
