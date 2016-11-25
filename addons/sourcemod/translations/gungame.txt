@@ -422,7 +422,7 @@
     "LevelPanel: Level Information"
     {
         "en"    "[GunGame] Level Information"
-        "ru"    "[GunGame] Информация об уровене"
+        "ru"    "[GunGame] Информация об уровне"
         "de"    "[GunGame] Level Information"
         "pt"    "[GunGame] Informação de nivel"
 		"es"    "[GunGame] Información del nivel"
