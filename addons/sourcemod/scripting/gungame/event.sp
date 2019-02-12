@@ -335,6 +335,8 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
         for (;;)
         {
             new VictimLevel = PlayerLevel[Victim];
+            new LevelDiff =  level - VictimLevel;
+            new BitMask;
 
             if ( VictimLevel < KnifeProMinLevel )
             {
@@ -342,7 +344,13 @@ public _PlayerDeath(Handle:event, const String:name[], bool:dontBroadcast)
                 break;
             }
 
-            if ( g_Cfg_KnifeProMaxDiff && ( g_Cfg_KnifeProMaxDiff < level - VictimLevel ) )
+            if ( g_Cfg_KnifeProMaxDiff && g_Cfg_KnifeProMaxDiffIsBi ) {
+                // Get absolute value
+                BitMask = LevelDiff >> 31;
+                LevelDiff = (BitMask ^ LevelDiff) - BitMask;
+            }
+
+            if ( g_Cfg_KnifeProMaxDiff && ( g_Cfg_KnifeProMaxDiff < LevelDiff ) )
             {
                 CPrintToChatEx(Killer, Victim, "%t", "You can not steal level from %s, your levels difference is more then %d", vName, g_Cfg_KnifeProMaxDiff);
                 break;
