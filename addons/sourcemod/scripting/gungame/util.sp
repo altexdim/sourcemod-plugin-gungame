@@ -469,7 +469,9 @@ UTIL_ForceDropAllWeapon(client, bool:dropKnife) {
                 }
             }
         } else if (i == Slot_C4) {
-            UTIL_ForceDropC4(client);
+            if (MapStatus & OBJECTIVE_BOMB && MapStatus & OBJECTIVE_REMOVE_BOMB) {
+                UTIL_ForceDropC4(client);
+            }
             continue;
         }
 

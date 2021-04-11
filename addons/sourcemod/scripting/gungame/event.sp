@@ -701,6 +701,11 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     {
         return;
     }
+
+    if ( MaxLevelPerRound && CurrentLevelPerRound[client] >= MaxLevelPerRound )
+    {
+        return;
+    }
     
     /* Give them a level if give level for objective */
     new oldLevel = PlayerLevel[client];
@@ -727,6 +732,14 @@ public _BombState(Handle:event, const String:name[], bool:dontBroadcast)
     {
         CPrintToChat(client, "%t", "You gained level by defusing the bomb", subtext);
     }
+
+    CurrentLevelPerRound[client]++;
+                   
+    if ( TurboMode ) {
+        UTIL_GiveNextWeapon(client, newLevel, false);
+    }
+
+    CheckForTripleLevel(client);
 }
 
 public _HostageKilled(Handle:event, const String:name[], bool:dontBroadcast)
